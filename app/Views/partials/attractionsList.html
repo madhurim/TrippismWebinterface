@@ -1,0 +1,35 @@
+﻿<div class="total-attractions-found-box slide-bottom">
+    <div class="btn-box">
+        <div class="atractions-nav-tabs">
+            <ul>
+                <li ng-class="isAttractions ? 'active' : ''">
+                    <a ng-click="loadAttractions('btn')" class="attr-btn">
+                        <span ng-class="isAttractionCollapsed ? '' : 'active'"
+                              class="toggle-btn total-attractions-btn padding-0 height-20">
+                            <i class="search-icon margin-0"></i>
+                        </span>
+                    </a>
+                </li>
+                <li ng-repeat="item in attractionsData" ng-class="item.isActive ? 'active' : ''">
+                    <a ng-click="loadAttractions(item.name)" title="{{item.displayName}}" class="{{item.htmlClass}}">
+                        <!--{{item.displayName}}-->
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="attractions-found" collapse="!isAttractionCollapsed">
+        <div id="examples">
+            <div class="content contentHorizontal">
+                <div ng-click="SelectPlace(item)" ng-repeat="item in attractionstoDisp" class="destinations-list">
+                    <h6>{{item.name}}</h6>
+                    <div class="placeaddress-list">
+                        <span ng-bind-html="item.Placeaddress"></span>
+                        <div ng-bind-html="item.raitingToAppend"></div>
+                    </div>
+                </div>                
+                <div ng-show="isAttractionFound == false" style="color: #ccc;">Sorry, we did not find anything in this category!</div>
+            </div>
+        </div>
+    </div>
+</div>

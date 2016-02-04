@@ -1,0 +1,4258 @@
+[ {
+    "request": {
+        "lang": "en",
+        "currency": "THB",
+        "time": 5,
+        "id": "6f5e9076-1284-4fcf-a740-5eb7e51a0f82",
+        "server": "a",
+        "pid": 3981,
+        "key": {
+            "api_key": "55543416-2aa0-4b75-8109-9a8c8ed31d32",
+            "type": "free",
+            "expired": null
+        },
+        "params": {
+            "lang": "en"
+        },
+        "client": {
+            "country_code": "IN",
+            "country": "India",
+            "city": "Surat",
+            "lat": 20.966700000000003,
+            "lng": 72.9,
+            "ip": "202.71.10.162"
+        }
+    },
+    "response": [
+        {
+            "code": "AD",
+            "code3": "AND",
+            "iso_numeric": 20,
+            "name": "Andorra",
+            "alternatenames": "Андорра,An đô ra,Andorra,อันดอร์รา,安道爾,Andorra,Andorra,Андорра,Ανδόρα,안도라,安道 尔,安道爾,アンドラ,Andorra,Andorra,Andorra,Andorre,Andorra,Andorra,Andora,Andorra,Andora,Andora,Andora,أندور,Andorra,安道尔,Андорра,Andorre,Andorra,Andorra,ประเทศอันดอร์รา",
+            "currency_code": "EUR",
+            "currency_name": "Euro",
+            "continent": "EU",
+            "languages": [
+                "ca"
+            ],
+            "fips_code": "AN",
+            "population": 84000
+        },
+        {
+            "code": "AE",
+            "code3": "ARE",
+            "iso_numeric": 784,
+            "name": "United Arab Emirates",
+            "alternatenames": "Verenigde Arabische Emiraten,阿拉伯聯合大公國,สหรัฐอาหรับเอมิเรตส์,Emiriah Arab Bersatu,Các Tiểu vương quốc Ả Rập Thống nhất,Förenade Arabemiraten,Emirados Árabes Unidos,ОАЭ,Ηνωμέν,United Arab Emirates,Vereinigte Arabische Emirate,阿联酋,ОАЭ,Birleşik Arap Emirlikleri,Emiratos Árabes Unidos,Émirats arabes unis,Emirati Arabi Uniti,สหรัฐอาหรับเอมิเรตส์",
+            "currency_code": "AED",
+            "currency_name": "Dirham",
+            "continent": "AS",
+            "languages": [
+                "ar-AE",
+                "fa",
+                "en",
+                "hi",
+                "ur"
+            ],
+            "fips_code": "AE",
+            "population": 4975593
+        },
+        {
+            "code": "AF",
+            "code3": "AFG",
+            "iso_numeric": 4,
+            "name": "Afghanistan",
+            "alternatenames": "Afghanistan,Afghanistan,阿富汗,Афганистан,Afganistan,Afganistán,Afghanistan,Afghanistan,ประเทศอัฟกานิสถาน",
+            "currency_code": "AFN",
+            "currency_name": "Afghani",
+            "continent": "AS",
+            "languages": [
+                "fa-AF",
+                "ps",
+                "uz-AF",
+                "tk"
+            ],
+            "fips_code": "AF",
+            "population": 29121286
+        },
+        {
+            "code": "AG",
+            "code3": "ATG",
+            "iso_numeric": 28,
+            "name": "Antigua and Barbuda",
+            "alternatenames": "Antigua and Barbuda,Antigua und Barbuda,安提瓜和巴布达,Антигуа и Барбуда,Antigua and Barbuda,Antigua y Barbuda,Antigua-et-Barbuda,Antigua e Barbuda,ประเทศแอนติกาและบาร์บูดา",
+            "currency_code": "XCD",
+            "currency_name": "Dollar",
+            "continent": "NA",
+            "languages": [
+                "en-AG"
+            ],
+            "fips_code": "AC",
+            "population": 86754
+        },
+        {
+            "code": "AI",
+            "code3": "AIA",
+            "iso_numeric": 660,
+            "name": "Anguilla",
+            "alternatenames": "AIA,Anguilla,安圭拉,Anguilla,Ангилья,Anguilla,Anguila,Anguilla,ประเทศแองกวิลลา",
+            "currency_code": "XCD",
+            "currency_name": "Dollar",
+            "continent": "NA",
+            "languages": [
+                "en-AI"
+            ],
+            "fips_code": "AV",
+            "population": 13254
+        },
+        {
+            "code": "AL",
+            "code3": "ALB",
+            "iso_numeric": 8,
+            "name": "Albania",
+            "alternatenames": "Албания,Albânia,Albania,阿爾巴尼亞,แอลเบเนีย,Albania,Albanië,アルバニア,Albanien,Albania,Albania,Albania,阿爾巴尼亞,阿尔巴尼亚,알바니아,Αλβανία,An ba ni,Albanien,Albānija,Albanija,Albaania,Алб,Albanien,Albania,阿尔巴尼亚,Albania,Албания,Albanie,Albania,Albania,ประเทศแอลเบเนีย",
+            "currency_code": "ALL",
+            "currency_name": "Lek",
+            "continent": "EU",
+            "languages": [
+                "sq",
+                "el"
+            ],
+            "fips_code": "AL",
+            "population": 2986952
+        },
+        {
+            "code": "AM",
+            "code3": "ARM",
+            "iso_numeric": 51,
+            "name": "Armenia",
+            "alternatenames": "أرمينيا,आर्मेनिया,Örményország,Armènia,Ermenistan,Arménie,Armenia,Armenia,Армения,Armenia,Armenija,ארמניה,Armėnija,Armēnija,Armenija,Armeenia,Вірменія,Arménie,Armenia,Armenia,亚美尼亚,亞美尼亞,,Armenien,Armenia,亚美尼亚,Ermenistan,Армения,Arménie,Armenia,Armenia,ประเทศอาร์เมเนีย",
+            "currency_code": "AMD",
+            "currency_name": "Dram",
+            "continent": "AS",
+            "languages": [
+                "hy"
+            ],
+            "fips_code": "AM",
+            "population": 2968000
+        },
+        {
+            "code": "AN",
+            "code3": "ANT",
+            "iso_numeric": 530,
+            "name": "Netherlands Antilles",
+            "alternatenames": null,
+            "currency_code": "ANG",
+            "currency_name": "Guilder",
+            "continent": "NA",
+            "languages": [
+                "nl-AN",
+                "en",
+                "es"
+            ],
+            "fips_code": "NT",
+            "population": 136197
+        },
+        {
+            "code": "AO",
+            "code3": "AGO",
+            "iso_numeric": 24,
+            "name": "Angola",
+            "alternatenames": "Angola,Angola,安哥拉,Angola,Ангола,Angola,Angola,Angola,ประเทศแองโกลา",
+            "currency_code": "AOA",
+            "currency_name": "Kwanza",
+            "continent": "AF",
+            "languages": [
+                "pt-AO"
+            ],
+            "fips_code": "AO",
+            "population": 13068161
+        },
+        {
+            "code": "AQ",
+            "code3": "ATA",
+            "iso_numeric": 10,
+            "name": "Antarctica",
+            "alternatenames": "Antarctica,南极洲,Антарктида,Antarctique,Antártida,Antartide,ประเทศแอนตาร์กติกา",
+            "currency_code": "",
+            "currency_name": "",
+            "continent": "AN",
+            "languages": [],
+            "fips_code": "AY",
+            "population": 0
+        },
+        {
+            "code": "AR",
+            "code3": "ARG",
+            "iso_numeric": 32,
+            "name": "Argentina",
+            "alternatenames": "Argentina,Аргентина,Argentina,Argentiina,Argentina,Arjantin,Argentina,Argentína,阿 根廷,अर्जेन्टीना,Аржентина,Argentina,ארגנטינה,الأرجنتين,Argentina,Argentīna,Argentina,Argentina,Argentina,Arge,Argentinien,Argentina,阿根廷,Arjantin,Аргентина,Argentine,Argentina,Argentina,ประเทศอาร์เจนตินา",
+            "currency_code": "ARS",
+            "currency_name": "Peso",
+            "continent": "SA",
+            "languages": [
+                "es-AR",
+                "en",
+                "it",
+                "de",
+                "fr",
+                "gn"
+            ],
+            "fips_code": "AR",
+            "population": 41343201
+        },
+        {
+            "code": "AS",
+            "code3": "ASM",
+            "iso_numeric": 16,
+            "name": "American Samoa",
+            "alternatenames": "Amerikanisch-Samoa,American Samoa,美属萨摩亚,Amerikan Samoası,Американское Самоа,Samoa américaines,Samoa Americana,Samoa Americane,ประเทศอเมริกันซามัว",
+            "currency_code": "USD",
+            "currency_name": "Dollar",
+            "continent": "OC",
+            "languages": [
+                "en-AS",
+                "sm",
+                "to"
+            ],
+            "fips_code": "AQ",
+            "population": 57881
+        },
+        {
+            "code": "AT",
+            "code3": "AUT",
+            "iso_numeric": 40,
+            "name": "Austria",
+            "alternatenames": "奧地利,ออสเตรีย,Austria,Áo,Österrike,Austria,Austrija,Oostenrijk,Áustria,Австрия,Αυστρία,오스트리아,奥地利,奧地利,Austria,Austria,Autriche,Østerrike,Østrig,النمسا,Austrija,Austrija,Austria,Австр,Österreich,Austria,奥地利,Avusturya,Австрия,Autriche,Austria,Austria,ประเทศออสเตรีย",
+            "currency_code": "EUR",
+            "currency_name": "Euro",
+            "continent": "EU",
+            "languages": [
+                "de-AT",
+                "hr",
+                "hu",
+                "sl"
+            ],
+            "fips_code": "AU",
+            "population": 8205000
+        },
+        {
+            "code": "AU",
+            "code3": "AUS",
+            "iso_numeric": 36,
+            "name": "Australia",
+            "alternatenames": "ऑस्ट्रेलिया,Austràlia,Ausztrália,Australia,Avustralya,Austrálie,Australia,Австралия,Avstralija,Australia,אוסטרליה,استراليا,Austrālija,Australija,Austraalia,Австралія,Australija,Australia,Αυστ,Australien,Australia,澳大利亚,Australia,Австралия,Australie,Australia,Australia,ประเทศออสเตรเลีย",
+            "currency_code": "AUD",
+            "currency_name": "Dollar",
+            "continent": "OC",
+            "languages": [
+                "en-AU"
+            ],
+            "fips_code": "AS",
+            "population": 21515754
+        },
+        {
+            "code": "AW",
+            "code3": "ABW",
+            "iso_numeric": 533,
+            "name": "Aruba",
+            "alternatenames": "Αρούμπα,Aruba,Aruba,Aruba,Aruba,Aruba,อารูบา,阿魯巴,Aruba,Aruba,Аруба,아루바,阿鲁巴 岛,阿魯巴,アルバ,Aruba,Aruba,Aruba,Аруба,Aruba,Aruba,Aruba,Aruba,Aruba,Aruba,أروبا,ארובה,Aruba,Aruba,Аруба,अ,ABW,Aruba,阿鲁巴,Aruba,Аруба,Aruba,Aruba,Aruba,ประเทศอารูบา",
+            "currency_code": "AWG",
+            "currency_name": "Guilder",
+            "continent": "NA",
+            "languages": [
+                "nl-AW",
+                "es",
+                "en"
+            ],
+            "fips_code": "AA",
+            "population": 71566
+        },
+        {
+            "code": "AX",
+            "code3": "ALA",
+            "iso_numeric": 248,
+            "name": "Aland Islands",
+            "alternatenames": "Aland Islands,Finnland,奥兰群岛,Эландские острова,Finland,Islas Åland,Îles Åland,Isole Aland,หมู่เกาะโอลันด์",
+            "currency_code": "EUR",
+            "currency_name": "Euro",
+            "continent": "EU",
+            "languages": [
+                "sv-AX"
+            ],
+            "fips_code": "",
+            "population": 26711
+        },
+        {
+            "code": "AZ",
+            "code3": "AZE",
+            "iso_numeric": 31,
+            "name": "Azerbaijan",
+            "alternatenames": "Azerbajdzjan,Aserbaidschan,Azerbaijan,Aserbajdsjan,Azerbejdżan,Azerbaijan,Azerbaijan,Azerbaijan,อาเซอร์ไบจาน,亞塞拜然,Azerbaidzjan,Azerbeijão,Азербайджан,Αζερμπαϊτζάν,아제르바이잔,阿塞拜疆,亞,Aserbaidschan,Azerbaijan,阿塞拜疆,Azerbaycan,Азербайджан,Azerbaïdjan,Azerbaiyán,Azerbaigian,ประเทศอาเซอร์ไบจาน",
+            "currency_code": "AZN",
+            "currency_name": "Manat",
+            "continent": "AS",
+            "languages": [
+                "az",
+                "ru",
+                "hy"
+            ],
+            "fips_code": "AJ",
+            "population": 8303512
+        },
+        {
+            "code": "BA",
+            "code3": "BIH",
+            "iso_numeric": 70,
+            "name": "Bosnia and Herzegovina",
+            "alternatenames": "बोस्निया हर्जेगोविना,Bosznia-Hercegovina,Bòsnia i Hercegovina,Bosna Hersek,Bosna a Hercegovina,Bosnia ja Hertsegovina,Bosnien-Hercegovina,Bosnia-Hercegovina,Босна и Херцеговина,Bosnia şi Herţegovin,Bosnien und Herzegovina,Bosnia and Herzegovina,波黑,Bosna-Hersek,Босния и Герцеговина,Bosnie-Herzégovine,Bosnia-Herzegovina,Bosnia Erzegovina,ประเทศบอสเนียและเฮอร์เซโกวีนา",
+            "currency_code": "BAM",
+            "currency_name": "Marka",
+            "continent": "EU",
+            "languages": [
+                "bs",
+                "hr-BA",
+                "sr-BA"
+            ],
+            "fips_code": "BK",
+            "population": 4590000
+        },
+        {
+            "code": "BB",
+            "code3": "BRB",
+            "iso_numeric": 52,
+            "name": "Barbados",
+            "alternatenames": "Barbados,Barbados,Barbados,Barbados,Barbados,บาร์เบโดส,巴巴多斯島,Barbados,Barbados,Барбадос,Μπαρμπάντος,巴巴多斯,巴巴多斯島,バルバドス,Barbados,Barbados,Barbados,Barbados,Barbade,Barbados,바베이,Barbados,Barbados,巴巴多斯,Барбадос,Barbados,Barbados,Barbade,Barbados,ประเทศบาร์เบโดส",
+            "currency_code": "BBD",
+            "currency_name": "Dollar",
+            "continent": "NA",
+            "languages": [
+                "en-BB"
+            ],
+            "fips_code": "BB",
+            "population": 285653
+        },
+        {
+            "code": "BD",
+            "code3": "BGD",
+            "iso_numeric": 50,
+            "name": "Bangladesh",
+            "alternatenames": "Bangladesh,Бангладеш,Bangladesh,Бангладеш,Bangladesch,Bangladesz,Bangladesh,Bangladesh,Bangladéš,Bangladeş,Bangla Desh,Banglades,बांग्लादेश,Бангладеш,Bangladesh,Bangladeš,בנגלדש,بنجلاديش,Ban,Bangladesch,Bangladesh,孟加拉,Bangladeş,Бангладеш,Bangladesh,Bangladesh,Bangladesh,ประเทศบังกลาเทศ",
+            "currency_code": "BDT",
+            "currency_name": "Taka",
+            "continent": "AS",
+            "languages": [
+                "bn-BD",
+                "en"
+            ],
+            "fips_code": "BG",
+            "population": 156118464
+        },
+        {
+            "code": "BE",
+            "code3": "BEL",
+            "iso_numeric": 56,
+            "name": "Belgium",
+            "alternatenames": "Belgia,Belgia,Belgium,ベルギー,比利時,Belgien,Belgia,Belgia,Belgien,Bỉ,Belgium,เบลเยียม,比利時,België,Bélgica,Бельгия,Βέλγιο,벨기에,比利时,Belgie,Belçika,Bèlgica,Belgique,Belgien,Belgio,Bélgica,Бель,Belgien,Belgium,比利时,Belçika,Бельгия,Belgique,Bélgica,Belgio,ประเทศเบลเยียม",
+            "currency_code": "EUR",
+            "currency_name": "Euro",
+            "continent": "EU",
+            "languages": [
+                "nl-BE",
+                "fr-BE",
+                "de-BE"
+            ],
+            "fips_code": "BE",
+            "population": 10403000
+        },
+        {
+            "code": "BF",
+            "code3": "BFA",
+            "iso_numeric": 854,
+            "name": "Burkina Faso",
+            "alternatenames": "Burkina Faso,Burkina Faso,布基纳法索,Burkina Faso,Буркина Фасо,Burkina Faso,Burkina Faso,Burkina Faso,ประเทศบูร์กินาฟาโซ",
+            "currency_code": "XOF",
+            "currency_name": "Franc",
+            "continent": "AF",
+            "languages": [
+                "fr-BF"
+            ],
+            "fips_code": "UV",
+            "population": 16241811
+        },
+        {
+            "code": "BG",
+            "code3": "BGR",
+            "iso_numeric": 100,
+            "name": "Bulgaria",
+            "alternatenames": "बुल्गारिया,Bulgária,Bulgària,Bulgaristan,Bulharsko,Bulgaria,Bulgarien,Bulgaria,България,Bulgaria,Bugarska,Bulgaaria,Bulgārija,Bulgaria,Bulgarija,بلغاريا,בולגריה,Bolgarija,Bułgaria,Βουλγαρία,Bulgarien,,Bulgarien,Bulgaria,保加利亚,Bulgaristan,Болгария,Bulgarie,Bulgaria,Bulgaria,ประเทศบัลแกเรีย",
+            "currency_code": "BGN",
+            "currency_name": "Lev",
+            "continent": "EU",
+            "languages": [
+                "bg",
+                "tr-BG"
+            ],
+            "fips_code": "BU",
+            "population": 7148785
+        },
+        {
+            "code": "BH",
+            "code3": "BHR",
+            "iso_numeric": 48,
+            "name": "Bahrain",
+            "alternatenames": "Bahrain,Бахрейн,Bahrein,Bahrajn,Bahrain,Bahrain,Bahrajn,Bahreyn,Bahrain,Bahrein,बहरीन,Бахрейн,Bahrein,Bahrajn,בחריין,البحرين,Bahreinas,Bahreina,Bahrein,Bahrain,Bahrain,Bahrain,Bahreïn,Bahrain,Bahrain,Bahréin,バー,Bahrein,Bahrain,巴林,Bahrain,Бахрейн,Bahreïn,Bahréin,Bahrein,ประเทศบาห์เรน",
+            "currency_code": "BHD",
+            "currency_name": "Dinar",
+            "continent": "AS",
+            "languages": [
+                "ar-BH",
+                "en",
+                "fa",
+                "ur"
+            ],
+            "fips_code": "BA",
+            "population": 738004
+        },
+        {
+            "code": "BI",
+            "code3": "BDI",
+            "iso_numeric": 108,
+            "name": "Burundi",
+            "alternatenames": "Burundi,Burundi,布隆迪,Burundi,Бурунди,Burundi,Burundi,Burundi,ประเทศบุรุนดี",
+            "currency_code": "BIF",
+            "currency_name": "Franc",
+            "continent": "AF",
+            "languages": [
+                "fr-BI",
+                "rn"
+            ],
+            "fips_code": "BY",
+            "population": 9863117
+        },
+        {
+            "code": "BJ",
+            "code3": "BEN",
+            "iso_numeric": 204,
+            "name": "Benin",
+            "alternatenames": "Benin,Benin,贝宁,Benin,Бенин,Bénin,Benín,Benin,ประเทศเบนิน",
+            "currency_code": "XOF",
+            "currency_name": "Franc",
+            "continent": "AF",
+            "languages": [
+                "fr-BJ"
+            ],
+            "fips_code": "BN",
+            "population": 9056010
+        },
+        {
+            "code": "BL",
+            "code3": "BLM",
+            "iso_numeric": 652,
+            "name": "Saint Barthelemy",
+            "alternatenames": "Saint Barthélemy,BLM,圣巴泰勒米岛,Сен-Бартельми,Guadeloupe,San Bartolomé,Saint-Barthélémy,San Bartolomeo,ประเทศเซนต์บาร์เธเลมี",
+            "currency_code": "EUR",
+            "currency_name": "Euro",
+            "continent": "NA",
+            "languages": [
+                "fr"
+            ],
+            "fips_code": "TB",
+            "population": 8450
+        },
+        {
+            "code": "BM",
+            "code3": "BMU",
+            "iso_numeric": 60,
+            "name": "Bermuda",
+            "alternatenames": "Bermuda,Bermuda,百慕大,Bermuda,Бермуды,Bermudes,Bermudas,Bermuda,ประเทศเบอร์มิวดา",
+            "currency_code": "BMD",
+            "currency_name": "Dollar",
+            "continent": "NA",
+            "languages": [
+                "en-BM",
+                "pt"
+            ],
+            "fips_code": "BD",
+            "population": 65365
+        },
+        {
+            "code": "BN",
+            "code3": "BRN",
+            "iso_numeric": 96,
+            "name": "Brunei",
+            "alternatenames": "文莱,브루나이,Μπρουνέι Νταρουσάλαμ,Бруней-Даруссалам,Brunei Darussalam,Brunei Darussalam,บรูไนดารุสซาลาม,Brunei Darussalam,汶莱,ブルネイ・ダルサラーム,汶莱,Бруней-,Brunei,Brunei,文莱,Brunei,Бруней,Brunéi Darussalam,Brunéi,Brunei,ประเทศบรูไน",
+            "currency_code": "BND",
+            "currency_name": "Dollar",
+            "continent": "AS",
+            "languages": [
+                "ms-BN",
+                "en-BN"
+            ],
+            "fips_code": "BX",
+            "population": 395027
+        },
+        {
+            "code": "BO",
+            "code3": "BOL",
+            "iso_numeric": 68,
+            "name": "Bolivia",
+            "alternatenames": "Bolívia,Bolivia,玻利維亞,โบลิเวีย,Bolivia,Bô li via,Bolivia,Боливия,Βολιβία,볼리비아,玻利维亚,玻利維亞,Bolivia,Bolivia,Bolivien,Bolivie,Bolivia,Boliwia,Boliivia,Bolivija,Bolīvija,Bolivija,בוליביה,Bol,Bolivien,Bolivia,玻利维亚,Bolivia,Боливия,Bolivie,Bolivia,Bolivia,ประเทศโบลิเวีย",
+            "currency_code": "BOB",
+            "currency_name": "Boliviano",
+            "continent": "SA",
+            "languages": [
+                "es-BO",
+                "qu",
+                "ay"
+            ],
+            "fips_code": "BL",
+            "population": 9947418
+        },
+        {
+            "code": "BQ",
+            "code3": "BES",
+            "iso_numeric": 535,
+            "name": "Bonaire, Saint Eustatius and Saba ",
+            "alternatenames": "Bonaire Sint Eustatius and Saba,Bonaire Sint Eustatius and Saba,Bonaire Sint Eustatius and Saba,Bonaire Sint Eustatius and Saba,Bonaire Sint Eustatius and Saba,Bonaire Sint Eustatius and Saba,Bonaire Sint Eustatius and Saba,بونير سنت أوستات,BES,Bonaire, Saint Eustatius and Saba ,荷兰加勒比区,Hollanda Antilleri,Бонайре, Саба и Синт-Эстатиус,Pays-Bas caribéens,Caribe neerlandés,Caraibi Olandesi",
+            "currency_code": "USD",
+            "currency_name": "Dollar",
+            "continent": "NA",
+            "languages": [
+                "nl",
+                "pap",
+                "en"
+            ],
+            "fips_code": "",
+            "population": 18012
+        },
+        {
+            "code": "BR",
+            "code3": "BRA",
+            "iso_numeric": 76,
+            "name": "Brazil",
+            "alternatenames": "Βραζιλία,Бразилия,Brasil,บราซิล,巴西,Brazilië,브라질,巴西,巴西,ブラジル,Brasile,Brasilien,Brésil,Brazil,Brazil,Brasil,Brasilien,Brasil,Brazilia,Brazilija,ברזיל,Brazilija,Brazīlija,Brazil,Brasiilia,Браз,Brasilien,Brazil,巴西,Brazil,Бразилия,Brésil,Brasil,Brasile,ประเทศบราซิล",
+            "currency_code": "BRL",
+            "currency_name": "Real",
+            "continent": "SA",
+            "languages": [
+                "pt-BR",
+                "es",
+                "en",
+                "fr"
+            ],
+            "fips_code": "BR",
+            "population": 201103330
+        },
+        {
+            "code": "BS",
+            "code3": "BHS",
+            "iso_numeric": 44,
+            "name": "Bahamas",
+            "alternatenames": "Bahamas,Бахамски острови,बहामास,Bahama-szigetek,Bahames,Bahamalar,Bahamy,Bahama,Bahamas,Bahami,איי הבהאמה,الباهاما,Bahamos,Bahamu salas,Bahami,Bahama,Багами,Bahamas,Bahamas,Bahamas,Bahamy,巴哈马,巴哈,Bahamas,Bahamas,巴哈马,Bahamalar,Багамы,Bahamas,Bahamas,Bahamas,ประเทศบาฮามาส",
+            "currency_code": "BSD",
+            "currency_name": "Dollar",
+            "continent": "NA",
+            "languages": [
+                "en-BS"
+            ],
+            "fips_code": "BF",
+            "population": 301790
+        },
+        {
+            "code": "BT",
+            "code3": "BTN",
+            "iso_numeric": 64,
+            "name": "Bhutan",
+            "alternatenames": "Bhutan,भूटान,Bhután,Bhutan,Bhutan,Bhútán,Bhutan,Bhutan,Butan,בהוטן,بوتان,Butanas,Butāna,Kraljevina Butan,Bhutan,Бутан,Бутан,Bhutan,Bhutan,Bhutan,不丹,ブータン,Bután,Bhutan,Bhutan,Bhoutan,Bhutan,부탄,不丹,Bu tan,Bhutan,Bhutan,不丹,Bhutan,Бутан,Bhoutan,Bután,Bhutan,ประเทศภูฏาน",
+            "currency_code": "BTN",
+            "currency_name": "Ngultrum",
+            "continent": "AS",
+            "languages": [
+                "dz"
+            ],
+            "fips_code": "BT",
+            "population": 699847
+        },
+        {
+            "code": "BV",
+            "code3": "BVT",
+            "iso_numeric": 74,
+            "name": "Bouvet Island",
+            "alternatenames": "Bouvet Island,布韦岛,Остров Буве,Isla Bouvet,Île Bouvet,Isola Bouvet,เกาะบูเวต",
+            "currency_code": "NOK",
+            "currency_name": "Krone",
+            "continent": "AN",
+            "languages": [],
+            "fips_code": "BV",
+            "population": 0
+        },
+        {
+            "code": "BW",
+            "code3": "BWA",
+            "iso_numeric": 72,
+            "name": "Botswana",
+            "alternatenames": "Botswana,Botswana,博茨瓦纳,Ботсвана,Botsvana,Botsuana,Botswana,Botswana,ประเทศบอตสวานา",
+            "currency_code": "BWP",
+            "currency_name": "Pula",
+            "continent": "AF",
+            "languages": [
+                "en-BW",
+                "tn-BW"
+            ],
+            "fips_code": "BC",
+            "population": 2029307
+        },
+        {
+            "code": "BY",
+            "code3": "BLR",
+            "iso_numeric": 112,
+            "name": "Belarus",
+            "alternatenames": "Weißrußland,Belarus,白俄罗斯,Beyaz Rusya,Беларусь,Bélarus,Bielorrusia,Bielorussia,ประเทศเบลารุส",
+            "currency_code": "BYR",
+            "currency_name": "Ruble",
+            "continent": "EU",
+            "languages": [
+                "be",
+                "ru"
+            ],
+            "fips_code": "BO",
+            "population": 9685000
+        },
+        {
+            "code": "BZ",
+            "code3": "BLZ",
+            "iso_numeric": 84,
+            "name": "Belize",
+            "alternatenames": "Belize,Belize,伯利兹,Belize,Белиз,Belize,Belice,Belize,ประเทศเบลีซ",
+            "currency_code": "BZD",
+            "currency_name": "Dollar",
+            "continent": "NA",
+            "languages": [
+                "en-BZ",
+                "es"
+            ],
+            "fips_code": "BH",
+            "population": 314522
+        },
+        {
+            "code": "CA",
+            "code3": "CAN",
+            "iso_numeric": 124,
+            "name": "Canada",
+            "alternatenames": "Canadà,Kanada,Kanada,Canada,Canada,Kanada,Kanada,Kanada,Канада,Canada,Kanada,קנדה,كندا,Kanada,Kanāda,Kanada,Kanada,Kanada,Kanada,Ca na đa,कनाडा,Canada,Canada,Kanada,Canada,Canadá,カナダ,加拿大,加拿大,캐나다,Κανα,Kanada,Canada,加拿大,Canada,Канада,Canada,Canadá,Canada,ประเทศแคนาดา",
+            "currency_code": "CAD",
+            "currency_name": "Dollar",
+            "continent": "NA",
+            "languages": [
+                "en-CA",
+                "fr-CA",
+                "iu"
+            ],
+            "fips_code": "CA",
+            "population": 33679000
+        },
+        {
+            "code": "CC",
+            "code3": "CCK",
+            "iso_numeric": 166,
+            "name": "Cocos Islands",
+            "alternatenames": "Cocos Islands,Cocos (Keeling) Islands,科科斯群岛,Кокосовые (Килинг) острова,Cocos (Keeling) Islands,Islas Cocos,Îles Cocos,Isole Cocos,หมู่เกาะโคโคส",
+            "currency_code": "AUD",
+            "currency_name": "Dollar",
+            "continent": "AS",
+            "languages": [
+                "ms-CC",
+                "en"
+            ],
+            "fips_code": "CK",
+            "population": 628
+        },
+        {
+            "code": "CD",
+            "code3": "COD",
+            "iso_numeric": 180,
+            "name": "Democratic Republic of the Congo",
+            "alternatenames": "Kongo Demokratische Republik,Democratic Republic of the Congo,刚果（金）,Demokratik Kongo Cumhuriyeti,Конго, Демократическая Республика,Congo (RDC),República Democrática del Congo,Congo - RDC,ประเทศคองโก [สาธารณรัฐประชาธิปไตย]",
+            "currency_code": "CDF",
+            "currency_name": "Franc",
+            "continent": "AF",
+            "languages": [
+                "fr-CD",
+                "ln",
+                "kg"
+            ],
+            "fips_code": "CG",
+            "population": 70916439
+        },
+        {
+            "code": "CF",
+            "code3": "CAF",
+            "iso_numeric": 140,
+            "name": "Central African Republic",
+            "alternatenames": "Central African Republic,Zentralafrikanische Republik,中非,ЦАР,Central African Republic,República Centroafricana,République centrafricaine,Repubblica Centrafricana,สาธารณรัฐแอฟริกากลาง",
+            "currency_code": "XAF",
+            "currency_name": "Franc",
+            "continent": "AF",
+            "languages": [
+                "fr-CF",
+                "sg",
+                "ln",
+                "kg"
+            ],
+            "fips_code": "CT",
+            "population": 4844927
+        },
+        {
+            "code": "CG",
+            "code3": "COG",
+            "iso_numeric": 178,
+            "name": "Republic of the Congo",
+            "alternatenames": "Republic of the Congo,Kongo,刚果（布）,Конго,Kongo Cumhuriyeti,República del Congo,République du Congo,Repubblica del Congo,สาธารณรัฐคองโก",
+            "currency_code": "XAF",
+            "currency_name": "Franc",
+            "continent": "AF",
+            "languages": [
+                "fr-CG",
+                "kg",
+                "ln-CG"
+            ],
+            "fips_code": "CF",
+            "population": 3039126
+        },
+        {
+            "code": "CH",
+            "code3": "CHE",
+            "iso_numeric": 756,
+            "name": "Switzerland",
+            "alternatenames": "Швейцарія,Schweiz,Thụy Sỹ,Switzerland,สวิตเซอร์แลนด์,瑞士,Zwitserland,Suíça,Швейцария,Ελβετία,스위스,瑞士,瑞士,スイス,Suiza,Svizzera,Swiss,Szwajcaria,Sveits,Šveits,Švicarska,Šveice,,Schweiz,Switzerland,瑞士,İsviçre,Швейцария,Suisse,Suiza,Svizzera,ประเทศสวิตเซอร์แลนด์",
+            "currency_code": "CHF",
+            "currency_name": "Franc",
+            "continent": "EU",
+            "languages": [
+                "de-CH",
+                "fr-CH",
+                "it-CH",
+                "rm"
+            ],
+            "fips_code": "SZ",
+            "population": 7581000
+        },
+        {
+            "code": "CI",
+            "code3": "CIV",
+            "iso_numeric": 384,
+            "name": "Ivory Coast",
+            "alternatenames": "Côte d'Ivoire,Ivory Coast,科特迪瓦,Fildişi Sahili,Кот д'Ивуар,Côte d’Ivoire,Costa de Marfil,Costa d'Avorio,ประเทศไอวอรี่โคสต์",
+            "currency_code": "XOF",
+            "currency_name": "Franc",
+            "continent": "AF",
+            "languages": [
+                "fr-CI"
+            ],
+            "fips_code": "IV",
+            "population": 21058798
+        },
+        {
+            "code": "CK",
+            "code3": "COK",
+            "iso_numeric": 184,
+            "name": "Cook Islands",
+            "alternatenames": "Острова Кука,Ilhas Cook,Cook-eilanden,庫克群島,หมู่เกาะคุก,Kepulauan Cook,Cooki saared,Νησιά Κουκ,库克群岛,庫克群島,クック諸島,Islas Cook,Isole Cook,Cook-Inseln,Îles Cook,Cook Islands,Quần đ,Cook Islands,Cookinseln,库克群岛,Острова Кука,Cook Adaları,Islas Cook,Îles Cook,Isole Cook,หมู่เกาะคุก",
+            "currency_code": "NZD",
+            "currency_name": "Dollar",
+            "continent": "OC",
+            "languages": [
+                "en-CK",
+                "mi"
+            ],
+            "fips_code": "CW",
+            "population": 21388
+        },
+        {
+            "code": "CL",
+            "code3": "CHL",
+            "iso_numeric": 152,
+            "name": "Chile",
+            "alternatenames": "Chile,Чили,चिली,Chile,Xile,Şili,Chile,Chile,Čile,צ'ילה,Chile,Chili,Чилі,Tšiili,Čile,Čīle,Čilė,شيلي,Cile,Chile,Чили,Χιλή,칠레,智利,智利,チリ,Chile,Chile,Chile,Chili,Chile,Cile,Chile,Chi lê,Chile,ชิลี,Chile,Chile,智利,Şili,Чили,Chili,Chile,Cile,ประเทศชิลี",
+            "currency_code": "CLP",
+            "currency_name": "Peso",
+            "continent": "SA",
+            "languages": [
+                "es-CL"
+            ],
+            "fips_code": "CI",
+            "population": 16746491
+        },
+        {
+            "code": "CM",
+            "code3": "CMR",
+            "iso_numeric": 120,
+            "name": "Cameroon",
+            "alternatenames": "Kameroen,卡麥隆,แคเมอรูน,Cameroon,Ca mơ run,Kamerun,Camarões,Καμερούν,카메룬,喀麦隆,喀麥隆,カメルーン,Kamerun,Camerun,Kamerun,Cameroun,Camerún,Kamerun,Kamerun,Cameroon,Kamerun,Kamerūna,Kamerūnas,الكامير,Kamerun,Cameroon,喀麦隆,Kamerun,Камерун,Cameroun,Camerún,Camerun,ประเทศแคเมอรูน",
+            "currency_code": "XAF",
+            "currency_name": "Franc",
+            "continent": "AF",
+            "languages": [
+                "en-CM",
+                "fr-CM"
+            ],
+            "fips_code": "CM",
+            "population": 19294149
+        },
+        {
+            "code": "CN",
+            "code3": "CHN",
+            "iso_numeric": 156,
+            "name": "China",
+            "alternatenames": "China,China,中國,จีน,China,Trung Quốc,Kina,Китай,Κίνα,China,China,China,Chine,Cina, 中国,中國,中国,중국,Cina,Kiina,الصين,Ķīna,Китай,Kinija,Hiina,סין,Kitajska,China,Китай,Kina,चीन,Chiny,Kina,Kina,Čína,,China,China,中国,Çin Halk Cumhuriyeti,Китай,Chine,China,Cina,ประเทศจีน",
+            "currency_code": "CNY",
+            "currency_name": "Yuan Renminbi",
+            "continent": "AS",
+            "languages": [
+                "zh-CN",
+                "yue",
+                "wuu",
+                "dta",
+                "ug",
+                "za"
+            ],
+            "fips_code": "CH",
+            "population": 1330044000
+        },
+        {
+            "code": "CO",
+            "code3": "COL",
+            "iso_numeric": 170,
+            "name": "Colombia",
+            "alternatenames": "Κολομβία,Колумбия,Colômbia,Colombia,哥倫比亞,โคลอมเบีย,콜롬비아,哥伦比亚,哥倫比亞,Colombia,Колумбія,Colombia,Colombie,Kolumbien,Colombia,Colombia,コロンビア,Cô lôm bia,Colombia,Kolumbija,ק,Kolumbien,Colombia,哥伦比亚,Colombia,Колумбия,Colombie,Colombia,Colombia,ประเทศโคลอมเบีย",
+            "currency_code": "COP",
+            "currency_name": "Peso",
+            "continent": "SA",
+            "languages": [
+                "es-CO"
+            ],
+            "fips_code": "CO",
+            "population": 44205293
+        },
+        {
+            "code": "CR",
+            "code3": "CRI",
+            "iso_numeric": 188,
+            "name": "Costa Rica",
+            "alternatenames": "Costa Rica,Коста Ріка,Costa Rica,Costa Rica,Kosta Rika,Kostarika,Costa Rica,Costa Rica,Costa Rica,Kostaryka,कोस्टा रिका,Коста Рика,Costa Rica,Costa Rica,Kostarika,Kosta Rika,كوستاريكا,קוסטה ריקה,Kost,Costa Rica,Costa Rica,哥斯达黎加,Costa Rica,Коста Рика,Costa Rica,Costa Rica,Costa Rica,ประเทศคอสตาริกา",
+            "currency_code": "CRC",
+            "currency_name": "Colon",
+            "continent": "NA",
+            "languages": [
+                "es-CR",
+                "en"
+            ],
+            "fips_code": "CS",
+            "population": 4516220
+        },
+        {
+            "code": "CS",
+            "code3": "SCG",
+            "iso_numeric": 891,
+            "name": "Serbia and Montenegro",
+            "alternatenames": null,
+            "currency_code": "RSD",
+            "currency_name": "Dinar",
+            "continent": "EU",
+            "languages": [
+                "cu",
+                "hu",
+                "sq",
+                "sr"
+            ],
+            "fips_code": "YI",
+            "population": 10829175
+        },
+        {
+            "code": "CU",
+            "code3": "CUB",
+            "iso_numeric": 192,
+            "name": "Cuba",
+            "alternatenames": "Kuba,Cuba,古巴,Cuba,Куба,Cuba,Cuba,Cuba,ประเทศคิวบา",
+            "currency_code": "CUP",
+            "currency_name": "Peso",
+            "continent": "NA",
+            "languages": [
+                "es-CU"
+            ],
+            "fips_code": "CU",
+            "population": 11423000
+        },
+        {
+            "code": "CV",
+            "code3": "CPV",
+            "iso_numeric": 132,
+            "name": "Cape Verde",
+            "alternatenames": "Kap Verde,Cape Verde,佛得角,Yeşil Burun Adaları,Кабо-Верде,Cap-Vert,Cabo Verde,Capo Verde,ประเทศเคปเวิร์ด",
+            "currency_code": "CVE",
+            "currency_name": "Escudo",
+            "continent": "AF",
+            "languages": [
+                "pt-CV"
+            ],
+            "fips_code": "CV",
+            "population": 508659
+        },
+        {
+            "code": "CW",
+            "code3": "CUW",
+            "iso_numeric": 531,
+            "name": "Curacao",
+            "alternatenames": "Curacao,Curacao,Curacao,Curacao,Curacao,Curacao,Curacao,キュラソー,Curacao,Curacao,Curacao,Curacao,庫拉索,Curacao,Curacao,Кюрасао,Curacao,쿠라코,库拉索,庫拉索,Curacao,Curacao,Curacao,Curacao,Curacao,Curacao,Curacao,كوراساو,C,Curaçao,Curaçao,库拉索,Hollanda Antilleri,Кюрасао,Curaçao,Curazao,Curaçao",
+            "currency_code": "ANG",
+            "currency_name": "Guilder",
+            "continent": "NA",
+            "languages": [
+                "nl",
+                "pap"
+            ],
+            "fips_code": "UC",
+            "population": 141766
+        },
+        {
+            "code": "CX",
+            "code3": "CXR",
+            "iso_numeric": 162,
+            "name": "Christmas Island",
+            "alternatenames": "Christmas Island,Christmas Island,圣诞岛,Остров Рождества,Christmas Adası,Isla Christmas,Île Christmas,Isola di Christmas,เกาะคริสต์มาส",
+            "currency_code": "AUD",
+            "currency_name": "Dollar",
+            "continent": "AS",
+            "languages": [
+                "en",
+                "zh",
+                "ms-CC"
+            ],
+            "fips_code": "KT",
+            "population": 1500
+        },
+        {
+            "code": "CY",
+            "code3": "CYP",
+            "iso_numeric": 196,
+            "name": "Cyprus",
+            "alternatenames": "Ciprus,Cypr,Siprus,Cyprus,Síp,Cyprus,ไซปรัส,塞普勒斯,Kipra,Kypros,Кіпр,Küpros,Cipar,Xipre,Kypr,Kypros,Cypern,साइप्रस,Кипър,Chipre,Zypern,Chypre,Cyprus,Kıbrıs,Cipru,Kipras,قبرص,קפריסין,Cipro,Chipre,Ки,Kıbrıs,Cyprus,塞浦路斯,Кипр,Chypre,Chipre,Cipro,ประเทศไซปรัส",
+            "currency_code": "EUR",
+            "currency_name": "Euro",
+            "continent": "EU",
+            "languages": [
+                "el-CY",
+                "tr-CY",
+                "en"
+            ],
+            "fips_code": "CY",
+            "population": 1102677
+        },
+        {
+            "code": "CZ",
+            "code3": "CZE",
+            "iso_numeric": 203,
+            "name": "Czech Republic",
+            "alternatenames": "Tšehhi,Чеська Республіка,Republik Ceko,Tjeckien,Cộng hòa Séc,Republik Czech,สาธารณรัฐเช็ก,捷克,Tsjechië,Чехия,Δημοκρατία της Τσεχίας,체코,捷克,チェコ共和国,República Che,Czech Republic,Tschechische Republik,捷克,Чехия,Çek Cumhuriyeti,República Checa,République tchèque,Repubblica Ceca,สาธารณรัฐเช็ก",
+            "currency_code": "CZK",
+            "currency_name": "Koruna",
+            "continent": "EU",
+            "languages": [
+                "cs",
+                "sk"
+            ],
+            "fips_code": "EZ",
+            "population": 10476000
+        },
+        {
+            "code": "DE",
+            "code3": "DEU",
+            "iso_numeric": 276,
+            "name": "Germany",
+            "alternatenames": "Allemagne,德國,Duitsland,Alemanha,Германия,Γερμανία,독일,Đức,Saksamaa,德國,Німеччина,ドイツ,Alemania,Germany,德国,Germania,เยอรมนี,Jerman,Tyskland,जर्मनी,Германия,Vācija,Vokietija,,Deutschland,Germany,德国,Almanya,Германия,Allemagne,Alemania,Germania,ประเทศเยอรมนี",
+            "currency_code": "EUR",
+            "currency_name": "Euro",
+            "continent": "EU",
+            "languages": [
+                "de"
+            ],
+            "fips_code": "GM",
+            "population": 81802257
+        },
+        {
+            "code": "DJ",
+            "code3": "DJI",
+            "iso_numeric": 262,
+            "name": "Djibouti",
+            "alternatenames": "Джібуті,Djibouti,Džibutija,Djibouti,Cibuti,Džibutsko,Djibouti,Djibouti,Dżibuti,Djibouti,Djibouti,जिबूती,Džibutis,Džibuti,Djibouti,Djibouti,جيبوتي,Djibouti,ג'יבוטי,Džibuti,Djibouti,Dzsibuti,지부티,Dschibuti,Yibuti,,Dschibuti,Djibouti,吉布提,Cibuti,Джибути,Djibouti,Yibuti,Gibuti,ประเทศจิบูตี",
+            "currency_code": "DJF",
+            "currency_name": "Franc",
+            "continent": "AF",
+            "languages": [
+                "fr-DJ",
+                "ar",
+                "so-DJ",
+                "aa"
+            ],
+            "fips_code": "DJ",
+            "population": 740528
+        },
+        {
+            "code": "DK",
+            "code3": "DNK",
+            "iso_numeric": 208,
+            "name": "Denmark",
+            "alternatenames": "Denmark,Danemarca,Đan Mạch,Dänemark,Dinamarca,Taani,Danmark,Tanska,Dánsko,Danimarka,Dánia,डेनमार्क,Дания,Данія,Danska,דנמרק,الدنمارك,Danija,Dānija,Danska,Danmark,Dania,Denmark,Danemark,Danimarca,Dinamarca,デ,Dänemark,Denmark,丹麦,Danimarka,Дания,Danemark,Dinamarca,Danimarca,ประเทศเดนมาร์ก",
+            "currency_code": "DKK",
+            "currency_name": "Krone",
+            "continent": "EU",
+            "languages": [
+                "da-DK",
+                "en",
+                "fo",
+                "de-DK"
+            ],
+            "fips_code": "DA",
+            "population": 5484000
+        },
+        {
+            "code": "DM",
+            "code3": "DMA",
+            "iso_numeric": 212,
+            "name": "Dominica",
+            "alternatenames": "Dominica,Dominica,多米尼克,Доминика,Dominika,Dominica,Dominique,Dominica,ประเทศโดมินิกา",
+            "currency_code": "XCD",
+            "currency_name": "Dollar",
+            "continent": "NA",
+            "languages": [
+                "en-DM"
+            ],
+            "fips_code": "DO",
+            "population": 72813
+        },
+        {
+            "code": "DO",
+            "code3": "DOM",
+            "iso_numeric": 214,
+            "name": "Dominican Republic",
+            "alternatenames": "Δομινικανή δημοκρατία,Доминиканская Республика,República Dominicana,Dominicaanse Republiek,多米尼加共和國,สาธารณรัฐโดมินิกัน,Republik Dominika,도미니카 공화국,,Dominican Republic,Dominikanische Republik,多米尼加,Доминиканская Республика,Dominican Republic,República Dominicana,République dominicaine,Repubblica Dominicana,สาธารณรัฐโดมินิกัน",
+            "currency_code": "DOP",
+            "currency_name": "Peso",
+            "continent": "NA",
+            "languages": [
+                "es-DO"
+            ],
+            "fips_code": "DR",
+            "population": 9823821
+        },
+        {
+            "code": "DZ",
+            "code3": "DZA",
+            "iso_numeric": 12,
+            "name": "Algeria",
+            "alternatenames": "알제리아,Αλγερία,Алжир,Argélia,Algerije,阿爾及利亞,แอลจีเรีย,阿尔及利亚,阿爾及利亞,Argelia,Algeria,Algerien,Algérie,Алжир,Algeria,Algeria,Algeria,An giê ri,Algeriet,Алжир,Alžirija,אלג'יר,Algerien,Algeria,阿尔及利亚,Cezayir,Алжир,Algérie,Argelia,Algeria,ประเทศแอลจีเรีย",
+            "currency_code": "DZD",
+            "currency_name": "Dinar",
+            "continent": "AF",
+            "languages": [
+                "ar-DZ"
+            ],
+            "fips_code": "AG",
+            "population": 34586184
+        },
+        {
+            "code": "EC",
+            "code3": "ECU",
+            "iso_numeric": 218,
+            "name": "Ecuador",
+            "alternatenames": "Ισημερινός,Эквадор,Equador,Ecuador,厄瓜多爾,เอกวาดอร์,Ecuador,Ê cua đo,에쿠아도르,厄瓜多尔,Ekvadoras,Ecuador,Équateur,Ekuador,Ecuador,Ecuador,エクアドル,厄瓜多爾,Ecuador,Ekuador,Ekwador,Еква,Ecuador,Ecuador,厄瓜多尔,Ecuador,Эквадор,Équateur,Ecuador,Ecuador,ประเทศเอกวาดอร์",
+            "currency_code": "USD",
+            "currency_name": "Dollar",
+            "continent": "SA",
+            "languages": [
+                "es-EC"
+            ],
+            "fips_code": "EC",
+            "population": 14790608
+        },
+        {
+            "code": "EE",
+            "code3": "EST",
+            "iso_numeric": 233,
+            "name": "Estonia",
+            "alternatenames": "Эстония,Estônia,Estland,愛沙尼亞,เอสโตเนีย,Estonia,Estonia,Estonia,Εσθονία,에스토니 아,爱沙尼亚,Estland,Estonia,Estland,Estonie,Estonia,Estonia,エストニア,愛沙尼亞,Estonia,Estland,Естонія,Eesti,Estland,Estonia,爱沙尼亚,Estonya,Эстония,Estonie,Estonia,Estonia,ประเทศเอสโตเนีย",
+            "currency_code": "EUR",
+            "currency_name": "Euro",
+            "continent": "EU",
+            "languages": [
+                "et",
+                "ru"
+            ],
+            "fips_code": "EN",
+            "population": 1291170
+        },
+        {
+            "code": "EG",
+            "code3": "EGY",
+            "iso_numeric": 818,
+            "name": "Egypt",
+            "alternatenames": "Egipt,Egypten,Egypti,Egypt,Egipte,Egyiptom,मिस्र,Egypt,Египет,Egipt,Egiptus,Egipat,Ēģipte,Єгипет,Egiptas,مصر,מצרים,Egipt,Mesir,Egypten,埃及,埃及,エジプト,Egipto,Ägypten,Égypte,Egitto,Egypt,Mısır,이집트,Ai C,Ägypten,Egypt,埃及,Mısır,Египет,Égypte,Egipto,Egitto,ประเทศอียิปต์",
+            "currency_code": "EGP",
+            "currency_name": "Pound",
+            "continent": "AF",
+            "languages": [
+                "ar-EG",
+                "en",
+                "fr"
+            ],
+            "fips_code": "EG",
+            "population": 80471869
+        },
+        {
+            "code": "EH",
+            "code3": "ESH",
+            "iso_numeric": 732,
+            "name": "Western Sahara",
+            "alternatenames": "Western Sahara,西撒哈拉,Западная Сахара,Sahara occidental,Sáhara Occidental,Sahara Occidentale,ประเทศซาฮาราตะวันตก",
+            "currency_code": "MAD",
+            "currency_name": "Dirham",
+            "continent": "AF",
+            "languages": [
+                "ar",
+                "mey"
+            ],
+            "fips_code": "WI",
+            "population": 273008
+        },
+        {
+            "code": "ER",
+            "code3": "ERI",
+            "iso_numeric": 232,
+            "name": "Eritrea",
+            "alternatenames": "Eritrea,Eritrea,厄立特里亚,Eritre,Эритрея,Érythrée,Eritrea,Eritrea,ประเทศเอริเทรีย",
+            "currency_code": "ERN",
+            "currency_name": "Nakfa",
+            "continent": "AF",
+            "languages": [
+                "aa-ER",
+                "ar",
+                "tig",
+                "kun",
+                "ti-ER"
+            ],
+            "fips_code": "ER",
+            "population": 5792984
+        },
+        {
+            "code": "ES",
+            "code3": "ESP",
+            "iso_numeric": 724,
+            "name": "Spain",
+            "alternatenames": "Spania,Espagne,Spania,Spanien,Espanja,Španělsko,İspanya,Espanya,Spanyolország,Spain,स्पेन,Испания,Španija,ספרד,اسبانيا,Іспанія,Ispanija,Spānija,Španjolska,Hiszpania,Spanyol,Ισπανία,España,스페인,西班,Spanien,Spain,西班牙,İspanya,Испания,Espagne,España,Spagna,ประเทศสเปน",
+            "currency_code": "EUR",
+            "currency_name": "Euro",
+            "continent": "EU",
+            "languages": [
+                "es-ES",
+                "ca",
+                "gl",
+                "eu",
+                "oc"
+            ],
+            "fips_code": "SP",
+            "population": 46505963
+        },
+        {
+            "code": "ET",
+            "code3": "ETH",
+            "iso_numeric": 231,
+            "name": "Ethiopia",
+            "alternatenames": "इथियोपिया,埃塞俄比亞,Etiòpia,Ефіопія,Ethiopia,Etiopia,Etiopia,Etiopien,Etiopia,Etiopie,埃塞俄比亚,Etiyopya,Etiópia,Етиопия,Etiopia,Etiopija,אתיופיה,إثيوبيا,Etiopija,Etiopien,Ê thi ô pia,Habsyah,E,Äthiopien,Ethiopia,埃塞俄比亚,Etiyopya,Эфиопия,Éthiopie,Etiopía,Etiopia,ประเทศเอธิโอเปีย",
+            "currency_code": "ETB",
+            "currency_name": "Birr",
+            "continent": "AF",
+            "languages": [
+                "am",
+                "en-ET",
+                "om-ET",
+                "ti-ET",
+                "so-ET",
+                "sid"
+            ],
+            "fips_code": "ET",
+            "population": 88013491
+        },
+        {
+            "code": "FI",
+            "code3": "FIN",
+            "iso_numeric": 246,
+            "name": "Finland",
+            "alternatenames": "Finlandia,Finland,芬蘭,ฟินแลนด์,Phần Lan,Finland,Finlandia,Finlandia,Finland,Finlândia,Финляндия,Finlandia,Finnland,Finlande,Finland,フィンランド,芬蘭,芬兰,핀란드,Finland,Suomi,Фінляндія,Soome,Finska,Som,Finnland,Finland,芬兰,Finlandiya,Финляндия,Finlande,Finlandia,Finlandia,ประเทศฟินแลนด์",
+            "currency_code": "EUR",
+            "currency_name": "Euro",
+            "continent": "EU",
+            "languages": [
+                "fi-FI",
+                "sv-FI",
+                "smn"
+            ],
+            "fips_code": "FI",
+            "population": 5244000
+        },
+        {
+            "code": "FJ",
+            "code3": "FJI",
+            "iso_numeric": 242,
+            "name": "Fiji",
+            "alternatenames": "Fiji,Fidži,Фіджі,Fidži,Fiji,Fiji,Fiji,ฟิจิ,斐濟,Fiji,Фиджи,Φίτζι,피지,斐济,斐濟,フィ ジー,Fiyi,Figi,Fidschi,Fidji,Fiji,Fidżi,Fidži,Fidžis,فيجي,פיג'י,Fidži,Fiji,Фиджи,फिजी,Fidzsi-szigetek,Fiji,F,Fidschi,Fiji,斐济群岛,Fiji,Фиджи,Fidji,Fiyi,Figi,ประเทศฟิจิ",
+            "currency_code": "FJD",
+            "currency_name": "Dollar",
+            "continent": "OC",
+            "languages": [
+                "en-FJ",
+                "fj"
+            ],
+            "fips_code": "FJ",
+            "population": 875983
+        },
+        {
+            "code": "FK",
+            "code3": "FLK",
+            "iso_numeric": 238,
+            "name": "Falkland Islands",
+            "alternatenames": "Falkland Islands,Falklandinseln,马尔维纳斯群岛（福克兰）,Фолклендские острова (Мальвинские),Falkland Adaları,Islas Malvinas,Îles Malouines,Isole Falkland,หมู่เกาะฟอล์กแลนด์",
+            "currency_code": "FKP",
+            "currency_name": "Pound",
+            "continent": "SA",
+            "languages": [
+                "en-FK"
+            ],
+            "fips_code": "FK",
+            "population": 2638
+        },
+        {
+            "code": "FM",
+            "code3": "FSM",
+            "iso_numeric": 583,
+            "name": "Micronesia",
+            "alternatenames": "माइक्रोनेशिया,Mikronézia,Micronèsia,Mikronezya,Mikronésie,Mikronesia,Mikronesien,Mikronesia,Микронезия,Micronezia,Мікронезія,Mikroneesia,Mikronezija,Mikronēzija,Mikronezija,ميكرونيزيا,מיקרו,FSM,Micronesia,密克罗尼西亚联邦,Micronesia,Микронезия,États fédérés de Micronésie,Micronesia,Micronesia,ประเทศไมโครนีเซีย",
+            "currency_code": "USD",
+            "currency_name": "Dollar",
+            "continent": "OC",
+            "languages": [
+                "en-FM",
+                "chk",
+                "pon",
+                "yap",
+                "kos",
+                "uli",
+                "woe",
+                "nkr",
+                "kpg"
+            ],
+            "fips_code": "FM",
+            "population": 107708
+        },
+        {
+            "code": "FO",
+            "code3": "FRO",
+            "iso_numeric": 234,
+            "name": "Faroe Islands",
+            "alternatenames": "Faroe Islands,Faroerinseln,法罗群岛,Фарерские острова,Faroe Adaları,Islas Feroe,Îles Féroé,Isole Faroe,หมู่เกาะแฟโร",
+            "currency_code": "DKK",
+            "currency_name": "Krone",
+            "continent": "EU",
+            "languages": [
+                "fo",
+                "da-FO"
+            ],
+            "fips_code": "FO",
+            "population": 48228
+        },
+        {
+            "code": "FR",
+            "code3": "FRA",
+            "iso_numeric": 250,
+            "name": "France",
+            "alternatenames": "France,France,Prancis,Frankrike,Pháp,Perancis,ฝรั่งเศส,法國,Frankrijk,França,Франция,Γαλλία,프랑스,法国,法國,フランス,Francia,Francia,Frankreich,Francja,Frankrike,Frankrig,Francie,Prancūzija,Франція,Pran,Frankreich,France,法国,France,Франция,France,Francia,Francia,ประเทศฝรั่งเศส",
+            "currency_code": "EUR",
+            "currency_name": "Euro",
+            "continent": "EU",
+            "languages": [
+                "fr-FR",
+                "frp",
+                "br",
+                "co",
+                "ca",
+                "eu",
+                "oc"
+            ],
+            "fips_code": "FR",
+            "population": 64768389
+        },
+        {
+            "code": "GA",
+            "code3": "GAB",
+            "iso_numeric": 266,
+            "name": "Gabon",
+            "alternatenames": "Gabun,Gabon,加蓬,Gabon,Габон,Gabon,Gabón,Gabon,ประเทศกาบอง",
+            "currency_code": "XAF",
+            "currency_name": "Franc",
+            "continent": "AF",
+            "languages": [
+                "fr-GA"
+            ],
+            "fips_code": "GB",
+            "population": 1545255
+        },
+        {
+            "code": "GB",
+            "code3": "GBR",
+            "iso_numeric": 826,
+            "name": "United Kingdom",
+            "alternatenames": "Regne Unit,İngiltere,Velká Británie,Iso-Britannia,Storbritannien,Storbritannia,Wielka Brytania,Egyesült Királyság,यूनाइटेड किंगडम,Великобритания,Regatul Unit,Velika Britanija,אנגליה,المملكة ال,United Kingdom,Großbritannien,英国,Великобритания,Birleşik Krallık,Reino Unido,Royaume-Uni,Regno Unito,สหราชอาณาจักร",
+            "currency_code": "GBP",
+            "currency_name": "Pound",
+            "continent": "EU",
+            "languages": [
+                "en-GB",
+                "cy-GB",
+                "gd"
+            ],
+            "fips_code": "UK",
+            "population": 62348447
+        },
+        {
+            "code": "GD",
+            "code3": "GRD",
+            "iso_numeric": 308,
+            "name": "Grenada",
+            "alternatenames": "Grenada,Grenada,格林纳达,Grenada,Гренада,Grenade,Granada,Grenada,ประเทศเกรเนดา",
+            "currency_code": "XCD",
+            "currency_name": "Dollar",
+            "continent": "NA",
+            "languages": [
+                "en-GD"
+            ],
+            "fips_code": "GJ",
+            "population": 107818
+        },
+        {
+            "code": "GE",
+            "code3": "GEO",
+            "iso_numeric": 268,
+            "name": "Georgia",
+            "alternatenames": "Грузії,Georgia,Georgien,Gruzie,Gürcistan,Geòrgia,Grúzia,जॉर्जिया,Грузия,Georgia,Gruzija,גאורגיה,جورجيا,Gruzija,Gruzija,Gruzija,Gruusia,Gruzja,Georgia,Georgien,喬治亞,グルジア,Georgia,Georgia,Georgien,Géo,Georgien,Georgia,格鲁吉亚,Gürcistan,Грузия,Géorgie,Georgia,Georgia,ประเทศจอร์เจีย",
+            "currency_code": "GEL",
+            "currency_name": "Lari",
+            "continent": "AS",
+            "languages": [
+                "ka",
+                "ru",
+                "hy",
+                "az"
+            ],
+            "fips_code": "GG",
+            "population": 4630000
+        },
+        {
+            "code": "GF",
+            "code3": "GUF",
+            "iso_numeric": 254,
+            "name": "French Guiana",
+            "alternatenames": "Französisch-Guayana,French Guiana,法属圭亚那,Fransız Guyanası,Французская Гвиана,Guyane française,Guayana Francesa,Guiana Francese,ประเทศเฟรนช์เกียนา",
+            "currency_code": "EUR",
+            "currency_name": "Euro",
+            "continent": "SA",
+            "languages": [
+                "fr-GF"
+            ],
+            "fips_code": "FG",
+            "population": 195506
+        },
+        {
+            "code": "GG",
+            "code3": "GGY",
+            "iso_numeric": 831,
+            "name": "Guernsey",
+            "alternatenames": "Guernsey,Großbritannien,根西岛,Гернси,Birleşik Krallık,Guernsey,Guernesey,Guernsey,ประเทศเกิร์นซีย์",
+            "currency_code": "GBP",
+            "currency_name": "Pound",
+            "continent": "EU",
+            "languages": [
+                "en",
+                "fr"
+            ],
+            "fips_code": "GK",
+            "population": 65228
+        },
+        {
+            "code": "GH",
+            "code3": "GHA",
+            "iso_numeric": 288,
+            "name": "Ghana",
+            "alternatenames": "घाना,Ghána,Ghana,Gana,Ghana,Ghana,Ghana,Гана,Ghana,Gana,גאנה,غانا,Gana,Gana,Ghana,Гана,Ghana,Ghana,Ghana,Ghana,加纳,迦納,ガーナ,Ghana,Ghana,Ghana,Gana,Ghana,가나,Γκάνα,Ghana,Ghana,กานา,迦納,Ghana,Ghana,Га,Ghana,Ghana,加纳,Ghana,Гана,Ghana,Ghana,Ghana,ประเทศกานา",
+            "currency_code": "GHS",
+            "currency_name": "Cedi",
+            "continent": "AF",
+            "languages": [
+                "en-GH",
+                "ak",
+                "ee",
+                "tw"
+            ],
+            "fips_code": "GH",
+            "population": 24339838
+        },
+        {
+            "code": "GI",
+            "code3": "GIB",
+            "iso_numeric": 292,
+            "name": "Gibraltar",
+            "alternatenames": "Gibraltar,Gibraltar,直布罗陀,Гибралтар,Cebelitarık,Gibraltar,Gibraltar,Gibilterra,ยิบรอลตาร์",
+            "currency_code": "GIP",
+            "currency_name": "Pound",
+            "continent": "EU",
+            "languages": [
+                "en-GI",
+                "es",
+                "it",
+                "pt"
+            ],
+            "fips_code": "GI",
+            "population": 27884
+        },
+        {
+            "code": "GL",
+            "code3": "GRL",
+            "iso_numeric": 304,
+            "name": "Greenland",
+            "alternatenames": "Greenland,Grönland,格陵兰,Гренландия,Grönland,Groenlandia,Groenland,Groenlandia,ประเทศกรีนแลนด์",
+            "currency_code": "DKK",
+            "currency_name": "Krone",
+            "continent": "NA",
+            "languages": [
+                "kl",
+                "da-GL",
+                "en"
+            ],
+            "fips_code": "GL",
+            "population": 56375
+        },
+        {
+            "code": "GM",
+            "code3": "GMB",
+            "iso_numeric": 270,
+            "name": "Gambia",
+            "alternatenames": "Gambia,Gambia,冈比亚,Gambia,Гамбия,Gambie,Gambia,Gambia,ประเทศแกมเบีย",
+            "currency_code": "GMD",
+            "currency_name": "Dalasi",
+            "continent": "AF",
+            "languages": [
+                "en-GM",
+                "mnk",
+                "wof",
+                "wo",
+                "ff"
+            ],
+            "fips_code": "GA",
+            "population": 1593256
+        },
+        {
+            "code": "GN",
+            "code3": "GIN",
+            "iso_numeric": 324,
+            "name": "Guinea",
+            "alternatenames": "Guinea,Guinea,几内亚,Gine,Гвинея,Guinée,Guinea,Guinea,ประเทศกินี",
+            "currency_code": "GNF",
+            "currency_name": "Franc",
+            "continent": "AF",
+            "languages": [
+                "fr-GN"
+            ],
+            "fips_code": "GV",
+            "population": 10324025
+        },
+        {
+            "code": "GP",
+            "code3": "GLP",
+            "iso_numeric": 312,
+            "name": "Guadeloupe",
+            "alternatenames": "Guadeloupe,Guadeloupe,瓜德罗普,Guadeloupe,Гваделупа,Guadeloupe,Guadalupe,Guadalupa,ประเทศกวาเดอลูป",
+            "currency_code": "EUR",
+            "currency_name": "Euro",
+            "continent": "NA",
+            "languages": [
+                "fr-GP"
+            ],
+            "fips_code": "GP",
+            "population": 443000
+        },
+        {
+            "code": "GQ",
+            "code3": "GNQ",
+            "iso_numeric": 226,
+            "name": "Equatorial Guinea",
+            "alternatenames": "Äquatorialguinea,Equatorial Guinea,赤道几内亚,Ekvator Ginesi,Экваториальная Гвинея,Guinée équatoriale,Guinea Ecuatorial,Guinea Equatoriale,ประเทศอิเควทอเรียลกินี",
+            "currency_code": "XAF",
+            "currency_name": "Franc",
+            "continent": "AF",
+            "languages": [
+                "es-GQ",
+                "fr"
+            ],
+            "fips_code": "EK",
+            "population": 1014999
+        },
+        {
+            "code": "GR",
+            "code3": "GRC",
+            "iso_numeric": 300,
+            "name": "Greece",
+            "alternatenames": "Řecko,Yunanistan,Kreikka,Görögország,ग्रीस,Гърция,Grecia,Grècia,Grčija,יוון,اليونان,Graikija,Grčka,Kreeka,Греція,Ελλάδα,Grækenland,Hellas,Grecja,Grèce,Griechenland,Grecia,Grecia,ギリシャ,希臘,希腊,,Greece,Griechenland,希腊,Греция,Yunanistan,Grecia,Grèce,Grecia,ประเทศกรีซ",
+            "currency_code": "EUR",
+            "currency_name": "Euro",
+            "continent": "EU",
+            "languages": [
+                "el-GR",
+                "en",
+                "fr"
+            ],
+            "fips_code": "GR",
+            "population": 11000000
+        },
+        {
+            "code": "GS",
+            "code3": "SGS",
+            "iso_numeric": 239,
+            "name": "South Georgia and the South Sandwich Islands",
+            "alternatenames": "South Georgia and the South Sandwich Islands,南乔治亚岛和南桑威奇群岛,Южная Джорджия и Южные Сандвичевы острова,Islas Georgia del Sur y Sandwich del Sur,Géorgie du Sud et les Îles Sandwich du Sud,Georgia del Sud e Isole Sandwich del Sud,เกาะเซาท์จอร์เจียและหมู่เกาะเซาท์แซนด์วิช",
+            "currency_code": "GBP",
+            "currency_name": "Pound",
+            "continent": "AN",
+            "languages": [
+                "en"
+            ],
+            "fips_code": "SX",
+            "population": 30
+        },
+        {
+            "code": "GT",
+            "code3": "GTM",
+            "iso_numeric": 320,
+            "name": "Guatemala",
+            "alternatenames": "Guatemala,Guatemala,危地马拉,Гватемала,Guatemala,Guatemala,Guatemala,Guatemala,ประเทศกัวเตมาลา",
+            "currency_code": "GTQ",
+            "currency_name": "Quetzal",
+            "continent": "NA",
+            "languages": [
+                "es-GT"
+            ],
+            "fips_code": "GT",
+            "population": 13550440
+        },
+        {
+            "code": "GU",
+            "code3": "GUM",
+            "iso_numeric": 316,
+            "name": "Guam",
+            "alternatenames": "Гуам,गुआम,Guam,Guam,Guam,Guam,Guam,Guam,גואם,กวม,Guam,Гуам,Guam,Guam,Guama,Guamas,جوام,Guam,Guam,Guam,关岛,關島,グアム,Guam,Guam,Guam,Guam,Guam,괌,Γκουάμ,Гуам,Guam,Guam,Guam,關島,Guam,Guam,Guam,Guam,Guam,关岛,Guam,Гуам,Guam,Guam,Guam,ประเทศกวม",
+            "currency_code": "USD",
+            "currency_name": "Dollar",
+            "continent": "OC",
+            "languages": [
+                "en-GU",
+                "ch-GU"
+            ],
+            "fips_code": "GQ",
+            "population": 159358
+        },
+        {
+            "code": "GW",
+            "code3": "GNB",
+            "iso_numeric": 624,
+            "name": "Guinea-Bissau",
+            "alternatenames": "Guinea-Bissau,Guinea-Bissau,几内亚比绍,Gine-Bissau,Гвинея-Биссау,Guinée-Bissau,Guinea-Bissau,Guinea-Bissau,ประเทศกินี-บิสเซา",
+            "currency_code": "XOF",
+            "currency_name": "Franc",
+            "continent": "AF",
+            "languages": [
+                "pt-GW",
+                "pov"
+            ],
+            "fips_code": "PU",
+            "population": 1565126
+        },
+        {
+            "code": "GY",
+            "code3": "GUY",
+            "iso_numeric": 328,
+            "name": "Guyana",
+            "alternatenames": "Guyana,Guyana,圭亚那,Guyana,Гайана,Guyana,Guyana,Guyana,ประเทศกายอานา",
+            "currency_code": "GYD",
+            "currency_name": "Dollar",
+            "continent": "SA",
+            "languages": [
+                "en-GY"
+            ],
+            "fips_code": "GY",
+            "population": 748486
+        },
+        {
+            "code": "HK",
+            "code3": "HKG",
+            "iso_numeric": 344,
+            "name": "Hong Kong",
+            "alternatenames": "हाँग काँग,Hongkong,Hong Kong,Hong Kong,Hong Kong,Hongkong,Hongkong,Хонконг,Hong Kong,Hong Kong,Hong Kong,Гонконг,Hongkong,Hong Kong,Honkonga,Honkongas,هونج كونج,הונג קונג,Hongkong,Hongkong,Hong Kong,Hong Kong,,Hong Kong,Hong Kong,香港,Hong Kong,Гонконг,Hong Kong,Hong Kong,Hong-Kong,ประเทศฮ่องกง",
+            "currency_code": "HKD",
+            "currency_name": "Dollar",
+            "continent": "AS",
+            "languages": [
+                "zh-HK",
+                "yue",
+                "zh",
+                "en"
+            ],
+            "fips_code": "HK",
+            "population": 6898686
+        },
+        {
+            "code": "HM",
+            "code3": "HMD",
+            "iso_numeric": 334,
+            "name": "Heard Island and McDonald Islands",
+            "alternatenames": "Heard Island and McDonald Islands,赫德岛和麦克唐纳群岛,Остров Херд и острова Макдональд,Islas Heard y McDonald,Îles Heard et MacDonald,Isole Heard ed Isole McDonald,เกาะเฮิร์ดและหมู่เกาะแมกดอนัลด์",
+            "currency_code": "AUD",
+            "currency_name": "Dollar",
+            "continent": "AN",
+            "languages": [],
+            "fips_code": "HM",
+            "population": 0
+        },
+        {
+            "code": "HN",
+            "code3": "HND",
+            "iso_numeric": 340,
+            "name": "Honduras",
+            "alternatenames": "Honduras,Honduras,洪都拉斯,Honduras,Гондурас,Honduras,Honduras,Honduras,ประเทศฮอนดูรัส",
+            "currency_code": "HNL",
+            "currency_name": "Lempira",
+            "continent": "NA",
+            "languages": [
+                "es-HN"
+            ],
+            "fips_code": "HO",
+            "population": 7989415
+        },
+        {
+            "code": "HR",
+            "code3": "HRV",
+            "iso_numeric": 191,
+            "name": "Croatia",
+            "alternatenames": "Kroatië,Kroatia,Kroatia,Chorvatsko,Hırvatistan,Croàcia,Horvátország,क्रोएशिया,Хърватия,Croaţia,Hrvaška,קרואטיה,كرواتيا,Kroatija,Horvātija,Hrvatska,Horvaatia,Хорватія,Chorwacja,Kroasia,Kroatien,克罗,Kroatien,Croatia,克罗地亚,Hırvatistan,Хорватия,Croatie,Croacia,Croazia,ประเทศโครเอเชีย",
+            "currency_code": "HRK",
+            "currency_name": "Kuna",
+            "continent": "EU",
+            "languages": [
+                "hr-HR",
+                "sr"
+            ],
+            "fips_code": "HR",
+            "population": 4491000
+        },
+        {
+            "code": "HT",
+            "code3": "HTI",
+            "iso_numeric": 332,
+            "name": "Haiti",
+            "alternatenames": "Haiti,Haiti,海地,Haiti,Гаити,Haïti,Haití,Haiti,ประเทศเฮติ",
+            "currency_code": "HTG",
+            "currency_name": "Gourde",
+            "continent": "NA",
+            "languages": [
+                "ht",
+                "fr-HT"
+            ],
+            "fips_code": "HA",
+            "population": 9648924
+        },
+        {
+            "code": "HU",
+            "code3": "HUN",
+            "iso_numeric": 348,
+            "name": "Hungary",
+            "alternatenames": "Hongarije,匈牙利,ฮังการี,Hungary,Hung ga ry,Ungern,Węgry,Hongaria,Hungria,Венгрия,Hungary,Ungarn,Hungría,ハンガリー,匈牙利,匈牙利,헝가리,Ουγγαρία,Ungheria,Ungarn,المجر,Vengrija,Ungārija,Mađarska,Ungar,Hungary,Ungarn,匈牙利,Венгрия,Macaristan,Hungría,Hongrie,Ungheria,ประเทศฮังการี",
+            "currency_code": "HUF",
+            "currency_name": "Forint",
+            "continent": "EU",
+            "languages": [
+                "hu-HU"
+            ],
+            "fips_code": "HU",
+            "population": 9982000
+        },
+        {
+            "code": "ID",
+            "code3": "IDN",
+            "iso_numeric": 360,
+            "name": "Indonesia",
+            "alternatenames": "Индонезия,इंडोनेशिया,Indonézia,Indonèsia,Endonezya,Indonésie,Indonesia,Indonezia,Indonezija,Indonesien,Індонезія,Indoneesia,Indonezija,Indonēzija,Indonezija,أندونيسيا,Indonesië,אינדונזיה,Indones,Indonesien,Indonesia,印尼,Endonezya,Индонезия,Indonésie,Indonesia,Indonesia,ประเทศอินโดนีเซีย",
+            "currency_code": "IDR",
+            "currency_name": "Rupiah",
+            "continent": "AS",
+            "languages": [
+                "id",
+                "en",
+                "nl",
+                "jv"
+            ],
+            "fips_code": "ID",
+            "population": 242968342
+        },
+        {
+            "code": "IE",
+            "code3": "IRL",
+            "iso_numeric": 372,
+            "name": "Ireland",
+            "alternatenames": "Irska,Irlanda,Ирландия,आयरलैंड,Írország,Irlanda,İrlanda,Irland,أيرلندا,Airija,Īrija,Irska,Ірландія,Irlande,Irlanda,Irlandia,Ireland,Iirimaa,Irsko,Irlanti,アイルランド,愛爾蘭,爱尔兰,아일랜드,Ιρλα,Irland,Ireland,爱尔兰,İrlanda,Ирландия,Irlande,Irlanda,Irlanda,ประเทศไอร์แลนด์",
+            "currency_code": "EUR",
+            "currency_name": "Euro",
+            "continent": "EU",
+            "languages": [
+                "en-IE",
+                "ga-IE"
+            ],
+            "fips_code": "EI",
+            "population": 4622917
+        },
+        {
+            "code": "IL",
+            "code3": "ISR",
+            "iso_numeric": 376,
+            "name": "Israel",
+            "alternatenames": "Israel,Israel,Israel,Izrael,Israel,Israel,Izrael,İsrail,Israel,Izrael,इज़राइल,Израел,Israel,Izraēla,Israel,อิสราเอล,Israël,Iisrael,이스라엘,Izrael,Israel,Israël,Israel,Israele,Israel,イスラエル,以色列,,Israel,Israel,以色列,Israel,Израиль,Israël,Israel,Israele,ประเทศอิสราเอล",
+            "currency_code": "ILS",
+            "currency_name": "Shekel",
+            "continent": "AS",
+            "languages": [
+                "he",
+                "ar-IL",
+                "en-IL",
+                ""
+            ],
+            "fips_code": "IS",
+            "population": 7353985
+        },
+        {
+            "code": "IM",
+            "code3": "IMN",
+            "iso_numeric": 833,
+            "name": "Isle of Man",
+            "alternatenames": "Isle of Man,Großbritannien,马恩岛,Остров Мэн,Birleşik Krallık,Isla de Man,Île de Man,Isola di Man,เกาะแมน",
+            "currency_code": "GBP",
+            "currency_name": "Pound",
+            "continent": "EU",
+            "languages": [
+                "en",
+                "gv"
+            ],
+            "fips_code": "IM",
+            "population": 75049
+        },
+        {
+            "code": "IN",
+            "code3": "IND",
+            "iso_numeric": 356,
+            "name": "India",
+            "alternatenames": "Индия,भारत,India,India,Índia,Indien,Indija,הודו,الهند,Indija,Індія,Indija,Indie,Indija,India,Hindistan,Indie,Índia,Ινδία,인도,印度,印度,Indien,India,India,India,印度,Intia,India,India,Indien,Ấn Độ,India,Ин,Indien,India,印度,Hindistan,Индия,Inde,India,India,ประเทศอินเดีย",
+            "currency_code": "INR",
+            "currency_name": "Rupee",
+            "continent": "AS",
+            "languages": [
+                "en-IN",
+                "hi",
+                "bn",
+                "te",
+                "mr",
+                "ta",
+                "ur",
+                "gu",
+                "kn",
+                "ml",
+                "or",
+                "pa",
+                "as",
+                "bh",
+                "sat",
+                "ks",
+                "ne",
+                "sd",
+                "kok",
+                "doi",
+                "mni",
+                "sit",
+                "sa",
+                "fr",
+                "lus",
+                "inc"
+            ],
+            "fips_code": "IN",
+            "population": 1173108018
+        },
+        {
+            "code": "IO",
+            "code3": "IOT",
+            "iso_numeric": 86,
+            "name": "British Indian Ocean Territory",
+            "alternatenames": "British Indian Ocean Territory,英属印度洋领地,Британская территория в Индийском океане,Territorio Británico del Océano Índico,Territoire britannique de l'océan Indien,Territorio Britannico dell’Oceano Indiano,บริติชอินเดียนโอเชียนเทร์ริทอรี",
+            "currency_code": "USD",
+            "currency_name": "Dollar",
+            "continent": "AS",
+            "languages": [
+                "en-IO"
+            ],
+            "fips_code": "IO",
+            "population": 4000
+        },
+        {
+            "code": "IQ",
+            "code3": "IRQ",
+            "iso_numeric": 368,
+            "name": "Iraq",
+            "alternatenames": "Irak,Iraq,伊拉克,Irak,Ирак,Irak,Iraq,Iraq,ประเทศอิรัก",
+            "currency_code": "IQD",
+            "currency_name": "Dinar",
+            "continent": "AS",
+            "languages": [
+                "ar-IQ",
+                "ku",
+                "hy"
+            ],
+            "fips_code": "IZ",
+            "population": 29671605
+        },
+        {
+            "code": "IR",
+            "code3": "IRN",
+            "iso_numeric": 364,
+            "name": "Iran",
+            "alternatenames": "Iran,Iran,伊朗,İran,Иран,Iran,Irán,Iran,ประเทศอิหร่าน",
+            "currency_code": "IRR",
+            "currency_name": "Rial",
+            "continent": "AS",
+            "languages": [
+                "fa-IR",
+                "ku"
+            ],
+            "fips_code": "IR",
+            "population": 76923300
+        },
+        {
+            "code": "IS",
+            "code3": "ISL",
+            "iso_numeric": 352,
+            "name": "Iceland",
+            "alternatenames": "आइसलैंड,Izland,Islàndia,İzlanda,Island,Islanti,Island,Island,Исландия,Islanda,Ісландія,Island,Island,Islande,Islandija,أيسلندا,איסלנד,Islandija,Islandia,Islandia,冰岛,冰島,アイスランド,Islandia,Island,Island,Iceland,冰岛,İzlanda,Исландия,Islande,Islandia,Islanda,ประเทศไอซ์แลนด์",
+            "currency_code": "ISK",
+            "currency_name": "Krona",
+            "continent": "EU",
+            "languages": [
+                "is",
+                "en",
+                "de",
+                "da",
+                "sv",
+                "no"
+            ],
+            "fips_code": "IC",
+            "population": 308910
+        },
+        {
+            "code": "IT",
+            "code3": "ITA",
+            "iso_numeric": 380,
+            "name": "Italy",
+            "alternatenames": "Italy,Itaalia,Італія,Włochy,Italia,Italien,Italia,Itálie,İtalya,Itàlia,Olaszország,इटली,Италия,Italia,Italija,איטליה,ايطاليا,Italija,Itālija,Italija,Italia,イタリア,Itália,Italie,Italien,Italia,Italia,意大利,,Italien,Italy,意大利,İtalya,Италия,Italie,Italia,Italia,ประเทศอิตาลี",
+            "currency_code": "EUR",
+            "currency_name": "Euro",
+            "continent": "EU",
+            "languages": [
+                "it-IT",
+                "de-IT",
+                "fr-IT",
+                "sc",
+                "ca",
+                "co",
+                "sl"
+            ],
+            "fips_code": "IT",
+            "population": 60340328
+        },
+        {
+            "code": "JE",
+            "code3": "JEY",
+            "iso_numeric": 832,
+            "name": "Jersey",
+            "alternatenames": "Großbritannien,Jersey,泽西岛,Jersey,Джерси,Jersey,Jersey,Jersey,ประเทศเจอร์ซีย์",
+            "currency_code": "GBP",
+            "currency_name": "Pound",
+            "continent": "EU",
+            "languages": [
+                "en",
+                "pt"
+            ],
+            "fips_code": "JE",
+            "population": 90812
+        },
+        {
+            "code": "JM",
+            "code3": "JAM",
+            "iso_numeric": 388,
+            "name": "Jamaica",
+            "alternatenames": "जमैका,Jamaica,Ямайка,Jamaica,Jamaika,Jamajka,Jamaïque,Jamaika,Jamaica,Jamajka,ג'מייקה,جامايكا,Jamaika,Jamaika,Jamajka,Jamaica,Ямайка,牙買加,Jamaica,牙買加,자메이카,牙买加,Jamaica,ジャマイカ,Jamaica,Gia,Jamaika,Jamaica,牙买加,Jamaica,Ямайка,Jamaïque,Jamaica,Giamaica,ประเทศจาเมกา",
+            "currency_code": "JMD",
+            "currency_name": "Dollar",
+            "continent": "NA",
+            "languages": [
+                "en-JM"
+            ],
+            "fips_code": "JM",
+            "population": 2847232
+        },
+        {
+            "code": "JO",
+            "code3": "JOR",
+            "iso_numeric": 400,
+            "name": "Jordan",
+            "alternatenames": "Jordánia,Jordània,Ürdün,Jordan,Jordánsko,Jordania,Jordania,जॉर्डन,Йордания,Jordaania,Jordan,Jordānija,Jordanija,الاردن,ירדן,Jordanija,Iordania,Yordania,Jordanien,Jordan,Jordan,Jordânia,Jordania,Йорданія,Jordani,Jordanien,Jordan,约旦,Jordan,Иордания,Jordanie,Jordania,Giordania,ประเทศจอร์แดน",
+            "currency_code": "JOD",
+            "currency_name": "Dinar",
+            "continent": "AS",
+            "languages": [
+                "ar-JO",
+                "en"
+            ],
+            "fips_code": "JO",
+            "population": 6407085
+        },
+        {
+            "code": "JP",
+            "code3": "JPN",
+            "iso_numeric": 392,
+            "name": "Japan",
+            "alternatenames": "יפן,Japó,Japonya,Japonsko,Japani,Japan,Japan,Japonia,Jepang,Japán,जापान,Jaapan,Японія,Japan,Japāna,Japonija,اليابان,Japonska,Japonia,Japan,Nhật Bản,日本,Japón,Giappone,Japan,Japon,Japan,Япония,Jepun,日本,日本,,Japan,Japan,日本,Japan,Япония,Japon,Japón,Giappone,ประเทศญี่ปุ่น",
+            "currency_code": "JPY",
+            "currency_name": "Yen",
+            "continent": "AS",
+            "languages": [
+                "ja"
+            ],
+            "fips_code": "JA",
+            "population": 127288000
+        },
+        {
+            "code": "KE",
+            "code3": "KEN",
+            "iso_numeric": 404,
+            "name": "Kenya",
+            "alternatenames": "Kenia,肯亞,Kenya,เคนยา,Kenya,Kê nya,Kenya,Kenya,Quênia,Kenya,Kenya,Kenia,Kenia,ケニア,肯亞,肯尼亚,케냐,Κένυα,Kenia,Kenya,Кения,Kenya,Кенія,Kenya,Kenija,Kenija,Kenija,كينيا,Kenija,Kenya,Кения,केन्य,Kenia,Kenya,肯尼亚,Kenya,Кения,Kenya,Kenia,Kenya,ประเทศเคนยา",
+            "currency_code": "KES",
+            "currency_name": "Shilling",
+            "continent": "AF",
+            "languages": [
+                "en-KE",
+                "sw-KE"
+            ],
+            "fips_code": "KE",
+            "population": 40046566
+        },
+        {
+            "code": "KG",
+            "code3": "KGZ",
+            "iso_numeric": 417,
+            "name": "Kyrgyzstan",
+            "alternatenames": "Kirgisistan,Kyrgyzstan,吉尔吉斯斯坦,Kırgızistan,Киргизия,Kirghizistan,Kirguistán,Kirghizistan,ประเทศคีร์กีซสถาน",
+            "currency_code": "KGS",
+            "currency_name": "Som",
+            "continent": "AS",
+            "languages": [
+                "ky",
+                "uz",
+                "ru"
+            ],
+            "fips_code": "KG",
+            "population": 5508626
+        },
+        {
+            "code": "KH",
+            "code3": "KHM",
+            "iso_numeric": 116,
+            "name": "Cambodia",
+            "alternatenames": "Cambodia,Kamboja,Kambodja,Cam pu chia,กัมพูชา,柬埔寨,Cambodja,Camboja,Камбоджа,Καμπότζη,캄보디아,柬埔寨,柬埔寨,カンボジア,Camboya,Cambogia,Kambodscha,Cambodge,Kambodża,Cambodja,Kambodža,كامبوديا,Ka,Kambodscha,Cambodia,柬埔寨,Kamboçya,Камбоджа,Cambodge,Camboya,Cambogia,ประเทศกัมพูชา",
+            "currency_code": "KHR",
+            "currency_name": "Riels",
+            "continent": "AS",
+            "languages": [
+                "km",
+                "fr",
+                "en"
+            ],
+            "fips_code": "CB",
+            "population": 14453680
+        },
+        {
+            "code": "KI",
+            "code3": "KIR",
+            "iso_numeric": 296,
+            "name": "Kiribati",
+            "alternatenames": "Kiribati,Kiribati,基里巴斯,Kiribati,Кирибати,Kiribati,Kiribati,Kiribati,ประเทศคิริบาส",
+            "currency_code": "AUD",
+            "currency_name": "Dollar",
+            "continent": "OC",
+            "languages": [
+                "en-KI",
+                "gil"
+            ],
+            "fips_code": "KR",
+            "population": 92533
+        },
+        {
+            "code": "KM",
+            "code3": "COM",
+            "iso_numeric": 174,
+            "name": "Comoros",
+            "alternatenames": "Komoren,Comoros,科摩罗,Komorlar,Коморы,Comores,Comoras,Comore,ประเทศคอโมโรส",
+            "currency_code": "KMF",
+            "currency_name": "Franc",
+            "continent": "AF",
+            "languages": [
+                "ar",
+                "fr-KM"
+            ],
+            "fips_code": "CN",
+            "population": 773407
+        },
+        {
+            "code": "KN",
+            "code3": "KNA",
+            "iso_numeric": 659,
+            "name": "Saint Kitts and Nevis",
+            "alternatenames": "Saint Kitts und Nevis,Saint Kitts and Nevis,圣基茨和尼维斯,Saint Kitts ve Nevis,Сент-Китс и Невис,Saint-Kitts-et-Nevis,San Cristóbal y Nieves,Saint Kitts e Nevis,ประเทศเซนต์คิตส์และเนวิส",
+            "currency_code": "XCD",
+            "currency_name": "Dollar",
+            "continent": "NA",
+            "languages": [
+                "en-KN"
+            ],
+            "fips_code": "SC",
+            "population": 49898
+        },
+        {
+            "code": "KP",
+            "code3": "PRK",
+            "iso_numeric": 408,
+            "name": "North Korea",
+            "alternatenames": "North Korea,Nordkorea,朝鲜,Северная Корея,Kuzey Kore,Corée du Nord,Corea del Norte,Corea del Nord,ประเทศเกาหลีเหนือ",
+            "currency_code": "KPW",
+            "currency_name": "Won",
+            "continent": "AS",
+            "languages": [
+                "ko-KP"
+            ],
+            "fips_code": "KN",
+            "population": 22912177
+        },
+        {
+            "code": "KR",
+            "code3": "KOR",
+            "iso_numeric": 410,
+            "name": "South Korea",
+            "alternatenames": "Южная Корея,Νότια Κορέα,Hàn Quốc,Coréia do Sul,Zuid-Korea,韓國,Korea Selatan,한국, 韩国,เกาหลีใต้,South Korea,Corée du Sud,Südkorea,Corea del Sud,Corea del Sur,韓国,韓國,Sydkorea,Korea Selatan,Južna K,Südkorea,South Korea,韩国,Güney Kore,Южная Корея,Corée du Sud,Corea del Sur,Corea del Sud,ประเทศเกาหลีใต้",
+            "currency_code": "KRW",
+            "currency_name": "Won",
+            "continent": "AS",
+            "languages": [
+                "ko-KR",
+                "en"
+            ],
+            "fips_code": "KS",
+            "population": 48422644
+        },
+        {
+            "code": "KW",
+            "code3": "KWT",
+            "iso_numeric": 414,
+            "name": "Kuwait",
+            "alternatenames": "科威特,科威特,쿠웨이트,Кувейт,Kuwait,Koeweit,クウェート,Kuwait,Kuwait,Kuwait,Koweït,Kuwait,Кувейт,Kuvajt,Kuwait,Κουβέιτ,科威特,คูเวต,Kuwait,Kuveitas,الكويت,כווית,Kuvajt,Kuweit,Кувейт,कु,Kuwait,Kuwait,科威特,Kuveyt,Кувейт,Koweït,Kuwait,Kuwait,ประเทศคูเวต",
+            "currency_code": "KWD",
+            "currency_name": "Dinar",
+            "continent": "AS",
+            "languages": [
+                "ar-KW",
+                "en"
+            ],
+            "fips_code": "KU",
+            "population": 2789132
+        },
+        {
+            "code": "KY",
+            "code3": "CYM",
+            "iso_numeric": 136,
+            "name": "Cayman Islands",
+            "alternatenames": "Cayman Islands,Kaimaninseln,开曼群岛,Каймановы острова,Cayman Adaları,Islas Caimán,Îles Caïmans,Isole Cayman,หมู่เกาะเคย์แมน",
+            "currency_code": "KYD",
+            "currency_name": "Dollar",
+            "continent": "NA",
+            "languages": [
+                "en-KY"
+            ],
+            "fips_code": "CJ",
+            "population": 44270
+        },
+        {
+            "code": "KZ",
+            "code3": "KAZ",
+            "iso_numeric": 398,
+            "name": "Kazakhstan",
+            "alternatenames": "Kazakhstan,Kazakstan,Kazakhstan,Kazakhstan,คาซัคสถาน,哈薩克,Казахстан,Καζακστάν,카자흐스탄,哈萨克斯坦,哈薩克,カザフスタン,Kazajstán,Kazakhstan,Kazachstan,Kasakhstan,Kasakhstan,Казахстан,K,Kasachstan,Kazakhstan,哈萨克斯坦,Kazakistan,Казахстан,Kazakhstan,Kazajistán,Kazakistan,ประเทศคาซัคสถาน",
+            "currency_code": "KZT",
+            "currency_name": "Tenge",
+            "continent": "AS",
+            "languages": [
+                "kk",
+                "ru"
+            ],
+            "fips_code": "KZ",
+            "population": 15340000
+        },
+        {
+            "code": "LA",
+            "code3": "LAO",
+            "iso_numeric": 418,
+            "name": "Laos",
+            "alternatenames": "라오스,Лаос,Λάος,Laos,Laos,寮國,Laos,老撾,Laos,ラオス,老挝,Laos,Laos,Laos,Laos,Laos,Laos,ลาว,Laos,Laos,Laos,Laosz,Лаос,Лаос,Laosa,لاوس,לאוס,Laos,Laos,Lào,Laos,Laos,Laos,Laos,Laos,लाओस,Laosas,Laos,Laos,Laos,老挝,Lao Demokratik Halk Cumhuriyeti,Лаос,Laos,Laos,Laos,ประเทศลาว",
+            "currency_code": "LAK",
+            "currency_name": "Kip",
+            "continent": "AS",
+            "languages": [
+                "lo",
+                "fr",
+                "en"
+            ],
+            "fips_code": "LA",
+            "population": 6368162
+        },
+        {
+            "code": "LB",
+            "code3": "LBN",
+            "iso_numeric": 422,
+            "name": "Lebanon",
+            "alternatenames": "黎巴嫩,Ливан,Liibanon,Libanon,Libanon,Libanon,Libanon,Lübnan,Líban,Libanon,लेबनान,Ливан,Liban,Libanon,לבנון,لبنان,Libanas,Libāna,Libanon,Liban,Lebanon,Libanon,Ліван,Lebanon,Liban,Libanon,Libano,Líbano,レバノ,Libanon,Lebanon,黎巴嫩,Lebanon,Ливан,Liban,Líbano,Libano,ประเทศเลบานอน",
+            "currency_code": "LBP",
+            "currency_name": "Pound",
+            "continent": "AS",
+            "languages": [
+                "ar-LB",
+                "fr-LB",
+                "en",
+                "hy"
+            ],
+            "fips_code": "LE",
+            "population": 4125247
+        },
+        {
+            "code": "LC",
+            "code3": "LCA",
+            "iso_numeric": 662,
+            "name": "Saint Lucia",
+            "alternatenames": "St. Lucia,Saint Lucia,圣卢西亚,Saint Lucia,Сент-Люсия,Sainte-Lucie,Santa Lucía,Saint Lucia,ประเทศเซนต์ลูเซีย",
+            "currency_code": "XCD",
+            "currency_name": "Dollar",
+            "continent": "NA",
+            "languages": [
+                "en-LC"
+            ],
+            "fips_code": "ST",
+            "population": 160922
+        },
+        {
+            "code": "LI",
+            "code3": "LIE",
+            "iso_numeric": 438,
+            "name": "Liechtenstein",
+            "alternatenames": "Liechtenstein,列支敦士登,Лихтенштейн,Liechtenstein,Liechtenstein,Liechtenstein,ประเทศลิกเตนสไตน์",
+            "currency_code": "CHF",
+            "currency_name": "Franc",
+            "continent": "EU",
+            "languages": [
+                "de-LI"
+            ],
+            "fips_code": "LS",
+            "population": 35000
+        },
+        {
+            "code": "LK",
+            "code3": "LKA",
+            "iso_numeric": 144,
+            "name": "Sri Lanka",
+            "alternatenames": "Srí Lanka,Sri Lanka,Sri Lanka,Srí Lanka,Sri Lanka,Sri Lanka,Sri Lanka,Sri Lanka,श्रीलंका,Sri Lanka,Шрі-Ланка,Sri Lanka,Šri Lanka,Šrilanka,Šri Lanka,سريلانكا,סרי לנקה,Šrilanka,Sri Lanka,Sri Lanka,斯里兰卡,,Sri Lanka,Sri Lanka,斯里兰卡,Sri Lanka,Шри-Ланка,Sri Lanka,Sri Lanka,Sri Lanka,ประเทศศรีลังกา",
+            "currency_code": "LKR",
+            "currency_name": "Rupee",
+            "continent": "AS",
+            "languages": [
+                "si",
+                "ta",
+                "en"
+            ],
+            "fips_code": "CE",
+            "population": 21513990
+        },
+        {
+            "code": "LR",
+            "code3": "LBR",
+            "iso_numeric": 430,
+            "name": "Liberia",
+            "alternatenames": "Liberia,Liberia,利比里亚,Liberya,Либерия,Libéria,Liberia,Liberia,ประเทศไลบีเรีย",
+            "currency_code": "LRD",
+            "currency_name": "Dollar",
+            "continent": "AF",
+            "languages": [
+                "en-LR"
+            ],
+            "fips_code": "LI",
+            "population": 3685076
+        },
+        {
+            "code": "LS",
+            "code3": "LSO",
+            "iso_numeric": 426,
+            "name": "Lesotho",
+            "alternatenames": "Λεσόθο,Лесото,Lesotho,Lesotho,賴索托,เลโซโท,Lesotho,Lê sô thô,Lesotho,莱索托,레소토,Lesotho,Lesotho,Lesotho,Lesoto,Lesoto,レソト,賴索托,Lesotho,Lesotho,Lesoto,לסוטו,ليسوتو,Lesotas,Lesoto,Lesoto,Lesotho,,Lesotho,Lesotho,莱索托,Лесото,Lesotho,Lesoto,Lesotho,Lesotho,ประเทศเลโซโท",
+            "currency_code": "LSL",
+            "currency_name": "Loti",
+            "continent": "AF",
+            "languages": [
+                "en-LS",
+                "st",
+                "zu",
+                "xh"
+            ],
+            "fips_code": "LT",
+            "population": 1919552
+        },
+        {
+            "code": "LT",
+            "code3": "LTU",
+            "iso_numeric": 440,
+            "name": "Lithuania",
+            "alternatenames": "Литва,Lituânia,Litouwen,立陶宛,ลิทัวเนีย,Lithuania,Lithuania,Litauen,Λιθουανία,리투아 니아,Lithuania,Lituanie,Litauen,Lituania,Lituania,リトアニア,立陶宛,立陶宛,Lituania,Litwa,Litauen,Литва,Leedu,Li,Litauen,Lithuania,立陶宛,Litvanya,Литва,Lituanie,Lituania,Lituania,ประเทศลิทัวเนีย",
+            "currency_code": "LTL",
+            "currency_name": "Litas",
+            "continent": "EU",
+            "languages": [
+                "lt",
+                "ru",
+                "pl"
+            ],
+            "fips_code": "LH",
+            "population": 3565000
+        },
+        {
+            "code": "LU",
+            "code3": "LUX",
+            "iso_numeric": 442,
+            "name": "Luxembourg",
+            "alternatenames": "룩셈부르크,Λουξεμβούργο,Luxemburgo,Luxemburg,盧森堡,ลักเซมเบิร์ก,Luxembourg,Lúc xăm bua,盧森堡,ルクセンブルク,卢森堡,Люксембург,Люксембург,Luxembourg,Luxembourg,Luxemburg,Lusse,Luxemburg,Luxembourg,卢森堡,Lüksemburg,Люксембург,Luxembourg,Luxemburgo,Lussemburgo,ประเทศลักเซมเบิร์ก",
+            "currency_code": "EUR",
+            "currency_name": "Euro",
+            "continent": "EU",
+            "languages": [
+                "lb",
+                "de-LU",
+                "fr-LU"
+            ],
+            "fips_code": "LU",
+            "population": 497538
+        },
+        {
+            "code": "LV",
+            "code3": "LVA",
+            "iso_numeric": 428,
+            "name": "Latvia",
+            "alternatenames": "Латвія,Lettország,Letònia,Letonya,Lotyšsko,Latvia,Letland,Latvia,Łotwa,लातविया,Läti,Latvija,Latvija,Lát via,Latvija,لاتفيا,לטביה,Latvija,Letonia,Lettland,Latvia,拉脱维亚,拉脫維亞,ラトビア,Letonia,Lettonia,L,Lettland,Latvia,拉脱维亚,Letonya,Латвия,Lettonie,Letonia,Lettonia,ประเทศลัตเวีย",
+            "currency_code": "LVL",
+            "currency_name": "Lat",
+            "continent": "EU",
+            "languages": [
+                "lv",
+                "ru",
+                "lt"
+            ],
+            "fips_code": "LG",
+            "population": 2217969
+        },
+        {
+            "code": "LY",
+            "code3": "LBY",
+            "iso_numeric": 434,
+            "name": "Libya",
+            "alternatenames": "Libyen,Libya,利比亚,Libya,Ливия,Libye,Libia,Libia,ประเทศลิเบีย",
+            "currency_code": "LYD",
+            "currency_name": "Dinar",
+            "continent": "AF",
+            "languages": [
+                "ar-LY",
+                "it",
+                "en"
+            ],
+            "fips_code": "LY",
+            "population": 6461454
+        },
+        {
+            "code": "MA",
+            "code3": "MAR",
+            "iso_numeric": 504,
+            "name": "Morocco",
+            "alternatenames": "Мароко,Maroko,Marokko,Maroko,Marocko,Ma rốc,Maghribi,โมร็อกโก,摩洛哥,Marrocos,Марокко,Μαρόκο,Morocco,摩洛哥,摩洛哥,モロッコ,Marruecos,Marocco,Marokko,Maroc,Maroko,Marokko,Marokas,모로코,Марокко,M,Marokko,Morocco,摩洛哥,Fas,Марокко,Maroc,Marruecos,Marocco,ประเทศโมร็อกโก",
+            "currency_code": "MAD",
+            "currency_name": "Dirham",
+            "continent": "AF",
+            "languages": [
+                "ar-MA",
+                "fr"
+            ],
+            "fips_code": "MO",
+            "population": 31627428
+        },
+        {
+            "code": "MC",
+            "code3": "MCO",
+            "iso_numeric": 492,
+            "name": "Monaco",
+            "alternatenames": "Monaco,Монако,Mónaco,摩納哥,โมนาโก,Monaco,Mô na cô,Monaco,Monaco,Μονακό,모나코,Monako,Monaco,Monaco,Principato di Monaco,Mónaco,モナコ,摩納哥,摩纳哥,Monako,Monako,Monako,מונאקו,موناكو,Monakas,Monako,M,Monaco,摩纳哥,Monaco,Монако,Monaco,Mónaco,Monaco,ประเทศโมนาโก",
+            "currency_code": "EUR",
+            "currency_name": "Euro",
+            "continent": "EU",
+            "languages": [
+                "fr-MC",
+                "en",
+                "it"
+            ],
+            "fips_code": "MN",
+            "population": 32965
+        },
+        {
+            "code": "MD",
+            "code3": "MDA",
+            "iso_numeric": 498,
+            "name": "Moldova",
+            "alternatenames": "Moldova,Moldàvia,Moldova,Moldavsko,Moldova,Moldova,Moldova,Mołdawia,माल्डोवा,Молдова,Moldavien,Moldova,Moldovos,Moldavija,مولدوفا,מולדובה,Moldavija,Moldova,Moldova,Moldova,Moldawien,Moldavia,Moldavia,モルドバ,摩,Moldawien,Moldova,摩尔多瓦,Moldova,Молдавия,Moldavie,Moldavia,Moldavia,ประเทศมอลโดวา",
+            "currency_code": "MDL",
+            "currency_name": "Leu",
+            "continent": "EU",
+            "languages": [
+                "ro",
+                "ru",
+                "gag",
+                "tr"
+            ],
+            "fips_code": "MD",
+            "population": 4324000
+        },
+        {
+            "code": "ME",
+            "code3": "MNE",
+            "iso_numeric": 499,
+            "name": "Montenegro",
+            "alternatenames": "黑山,Montenegro,Černá Hora,Karadağ,Montenegro,Montenegró,मोंटेनेग्रो,Черна гора,Monténégro,Muntenegru,Črna Gora,מונטנגרו,الجبل الأسود,Juodkalnija,Melnkalne,Crna Gora,Montenegro,Чорногорі,Montenegro,Montenegro,黑山,Karadağ,Черногория,Monténégro,Montenegro,Montenegro,ประเทศมอนเตเนโกร",
+            "currency_code": "EUR",
+            "currency_name": "Euro",
+            "continent": "EU",
+            "languages": [
+                "sr",
+                "hu",
+                "bs",
+                "sq",
+                "hr",
+                "rom"
+            ],
+            "fips_code": "MJ",
+            "population": 666730
+        },
+        {
+            "code": "MF",
+            "code3": "MAF",
+            "iso_numeric": 663,
+            "name": "Saint Martin",
+            "alternatenames": "Saint Martin,Saint Martin,法属圣马丁,Сен-Мартен,Saint Martin,San Martín,Saint-Martin (partie française),Saint Martin,เกาะเซนต์มาติน",
+            "currency_code": "EUR",
+            "currency_name": "Euro",
+            "continent": "NA",
+            "languages": [
+                "fr"
+            ],
+            "fips_code": "RN",
+            "population": 35925
+        },
+        {
+            "code": "MG",
+            "code3": "MDG",
+            "iso_numeric": 450,
+            "name": "Madagascar",
+            "alternatenames": "Madagascar,Мадагаскар,Madagaskar,Madagaskar,Мадагаскар,Madagaszkár,मेडागास्कर,마다가 스카르,Madagascar,מדגסקר,مدغشقر,Madagaskaras,Madagaskar,Madagaskar,马达加斯加,馬達加斯加,マダガス,Madagascar,Madagaskar,马达加斯加,Мадагаскар,Madagaskar,Madagascar,Madagascar,Madagascar,ประเทศมาดากัสการ์",
+            "currency_code": "MGA",
+            "currency_name": "Ariary",
+            "continent": "AF",
+            "languages": [
+                "fr-MG",
+                "mg"
+            ],
+            "fips_code": "MA",
+            "population": 21281844
+        },
+        {
+            "code": "MH",
+            "code3": "MHL",
+            "iso_numeric": 584,
+            "name": "Marshall Islands",
+            "alternatenames": "Marshall Islands,Marshallinseln,马绍尔群岛,Маршалловы острова,Marshall Adaları,Islas Marshall,Îles Marshall,Isole Marshall,สาธารณรัฐหมู่เกาะมาร์แชลล์",
+            "currency_code": "USD",
+            "currency_name": "Dollar",
+            "continent": "OC",
+            "languages": [
+                "mh",
+                "en-MH"
+            ],
+            "fips_code": "RM",
+            "population": 65859
+        },
+        {
+            "code": "MK",
+            "code3": "MKD",
+            "iso_numeric": 807,
+            "name": "Macedonia",
+            "alternatenames": "Makedonia,Makedonia,Macedonia,Makedonya,Macedònia,Macedónia,मैसेडोनिया,Македония,Macedonia,מקדוניה,مقدونيا,Makedonija,Maķedonija,Macedonia,Makedonia,Makedonien,Macedonia,Mazedonien,マケドニア,Macédoine,,Mazedonien,Macedonia,马其顿,Fyrom,Македония,Macédoine,Macedonia,Repubblica ex Jugoslava di Macedonia,ประเทศมาซิโดเนีย",
+            "currency_code": "MKD",
+            "currency_name": "Denar",
+            "continent": "EU",
+            "languages": [
+                "mk",
+                "sq",
+                "tr",
+                "rmm",
+                "sr"
+            ],
+            "fips_code": "MK",
+            "population": 2061000
+        },
+        {
+            "code": "ML",
+            "code3": "MLI",
+            "iso_numeric": 466,
+            "name": "Mali",
+            "alternatenames": "Mali,Mali,马里,Mali,Мали,Mali,Mali,Mali,ประเทศมาลี",
+            "currency_code": "XOF",
+            "currency_name": "Franc",
+            "continent": "AF",
+            "languages": [
+                "fr-ML",
+                "bm"
+            ],
+            "fips_code": "ML",
+            "population": 13796354
+        },
+        {
+            "code": "MM",
+            "code3": "MMR",
+            "iso_numeric": 104,
+            "name": "Myanmar",
+            "alternatenames": "Myanmar,Myanmar,Mianmar,म्यांमार,Мианмар,Myanmar,Myanmar,Mjanmar,מיאנמר,ميانمار,Mianmaras,Mjanma,Mjanmar,М'янми,Мьянма,Birma (Myanmar),Myanmar,Myanmar,Myanmar,Myanmar,Myanmar,ミャンマー,緬甸,缅甸,미,Myanmar,Myanmar,缅甸,Мьянма,Myanmar,Myanmar,Myanmar,Myanmar,ประเทศพม่า",
+            "currency_code": "MMK",
+            "currency_name": "Kyat",
+            "continent": "AS",
+            "languages": [
+                "my"
+            ],
+            "fips_code": "BM",
+            "population": 53414374
+        },
+        {
+            "code": "MN",
+            "code3": "MNG",
+            "iso_numeric": 496,
+            "name": "Mongolia",
+            "alternatenames": "Mongolia,Монголия,मंगोलिया,Mongólia,Mongòlia,Moğolistan,Mongolsko,מונגוליה,منغوليا,Mongolia,Mongolija,Монголія,Mongolie,Mongoolia,Mongolija,Mongolija,Mongolija,Mongolia,Mongoliet,Mongolia,Μογγολία,,Mongolei,Mongolia,蒙古,Moğolistan,Монголия,Mongolie,Mongolia,Mongolia,ประเทศมองโกเลีย",
+            "currency_code": "MNT",
+            "currency_name": "Tugrik",
+            "continent": "AS",
+            "languages": [
+                "mn",
+                "ru"
+            ],
+            "fips_code": "MG",
+            "population": 3086918
+        },
+        {
+            "code": "MO",
+            "code3": "MAC",
+            "iso_numeric": 446,
+            "name": "Macao",
+            "alternatenames": "Macao,Makau,Makau,Macao,Ma Cao,Macau,มาเก๊า,澳門,Macao,Macau,Macau,マカオ,Макао,Μακάο,마카오,澳门,Macao,Macao,Macao,Macao,Macao,Macao,Макао,Makao,Makao,Makao,ماكاو,מקאו,Macao,Macau,Макао,मकाऊ,Maka,Macao,Macao,澳门,Макао,China,Macao,Macao,Macao,เขตบริหารพิเศษมาเก๊า",
+            "currency_code": "MOP",
+            "currency_name": "Pataca",
+            "continent": "AS",
+            "languages": [
+                "zh",
+                "zh-MO",
+                "pt"
+            ],
+            "fips_code": "MC",
+            "population": 449198
+        },
+        {
+            "code": "MP",
+            "code3": "MNP",
+            "iso_numeric": 580,
+            "name": "Northern Mariana Islands",
+            "alternatenames": "Kepulauan Mariana Utara,Ilhas Marianas do Norte,Noorderlijke Marianen,北馬里亞納群 島,หมู่เกาะนอร์เทิร์นมาเรียนา,Kepulauan Mariana Utara,Quần đảo Bắc Mariana,Марианские остро,Northern Mariana Islands,MNP,北马里亚纳群岛,Северные Марианские острова,Kuzey Mariana Adaları,Islas Marianas del Norte,Îles Mariannes du Nord,Isole Marianne Settentrionali,หมู่เกาะนอร์เทิร์นมาเรียนา",
+            "currency_code": "USD",
+            "currency_name": "Dollar",
+            "continent": "OC",
+            "languages": [
+                "fil",
+                "tl",
+                "zh",
+                "ch-MP",
+                "en-MP"
+            ],
+            "fips_code": "CQ",
+            "population": 53883
+        },
+        {
+            "code": "MQ",
+            "code3": "MTQ",
+            "iso_numeric": 474,
+            "name": "Martinique",
+            "alternatenames": "Martinique,Martinique,马提尼克,Martinik,Мартиника,Martinique,Martinica,Martinica,ประเทศมาร์ตินีก",
+            "currency_code": "EUR",
+            "currency_name": "Euro",
+            "continent": "NA",
+            "languages": [
+                "fr-MQ"
+            ],
+            "fips_code": "MB",
+            "population": 432900
+        },
+        {
+            "code": "MR",
+            "code3": "MRT",
+            "iso_numeric": 478,
+            "name": "Mauritania",
+            "alternatenames": "Mauritanien,Mauritania,毛里塔尼亚,Moritanya,Мавритания,Mauritanie,Mauritania,Mauritania,ประเทศมอริเตเนีย",
+            "currency_code": "MRO",
+            "currency_name": "Ouguiya",
+            "continent": "AF",
+            "languages": [
+                "ar-MR",
+                "fuc",
+                "snk",
+                "fr",
+                "mey",
+                "wo"
+            ],
+            "fips_code": "MR",
+            "population": 3205060
+        },
+        {
+            "code": "MS",
+            "code3": "MSR",
+            "iso_numeric": 500,
+            "name": "Montserrat",
+            "alternatenames": "Montserrat,Montserrat,蒙塞拉特岛,Montserrat,Монтсеррат,Montserrat,Montserrat,Montserrat,ประเทศมอนต์เซอร์รัต",
+            "currency_code": "XCD",
+            "currency_name": "Dollar",
+            "continent": "NA",
+            "languages": [
+                "en-MS"
+            ],
+            "fips_code": "MH",
+            "population": 9341
+        },
+        {
+            "code": "MT",
+            "code3": "MLT",
+            "iso_numeric": 470,
+            "name": "Malta",
+            "alternatenames": "Мальта,Malta,Malta,มอลตา,Malta,Malta,Malta,Μάλτα,Malta,몰타,马耳他,馬爾他,マルタ,Malta,Malta,Malta,Malte,馬爾他,Malta,Малта,Malta,מלטה,مالطة,Malta,Malta,Malta,Malta,माल्टा,Malta,Málta,Malta,Mal,Malta,Malta,马耳他,Malta,Мальта,Malte,Malta,Malta,ประเทศมอลตา",
+            "currency_code": "EUR",
+            "currency_name": "Euro",
+            "continent": "EU",
+            "languages": [
+                "mt",
+                "en-MT"
+            ],
+            "fips_code": "MT",
+            "population": 403000
+        },
+        {
+            "code": "MU",
+            "code3": "MUS",
+            "iso_numeric": 480,
+            "name": "Mauritius",
+            "alternatenames": "Μαυρίκιος,Mauritius,Mauritius,Mauritius,Mauritius,Mauritius,Mauritius,Mauritius,Mauritius,Mauritius,Mavricij,מאוריטניה,ماوريتوس,Mauricijus,Maurīcija,Mauritius,Mauritius,Mauritius,Mauritius,Mauritius,Mauritius,Ile Maurice,Mauriti,Mauritius,Mauritius,毛里求斯,Mauritius Adası,Маврикий,Maurice,Mauricio,Mauritius,ประเทศมอริเชียส",
+            "currency_code": "MUR",
+            "currency_name": "Rupee",
+            "continent": "AF",
+            "languages": [
+                "en-MU",
+                "bho",
+                "fr"
+            ],
+            "fips_code": "MP",
+            "population": 1294104
+        },
+        {
+            "code": "MV",
+            "code3": "MDV",
+            "iso_numeric": 462,
+            "name": "Maldives",
+            "alternatenames": "Maldives,Maldív-szigetek,Maldives,Maldivler,Maledivy,Malediivit,Maldiverne,Малдиви,मालदीव,Maldive,Maldivi,האיים המלדיביים,جزر المالديف,Maldyvai,Maldīvija,Maldivi,Maldiivid,Maldivene,Malediwy,Maladewa,Маль,Malediven,Maldives,马尔代夫,Maldivler,Мальдивы,Maldives,Maldivas,Maldive,ประเทศมัลดีฟส์",
+            "currency_code": "MVR",
+            "currency_name": "Rufiyaa",
+            "continent": "AS",
+            "languages": [
+                "dv",
+                "en"
+            ],
+            "fips_code": "MV",
+            "population": 395650
+        },
+        {
+            "code": "MW",
+            "code3": "MWI",
+            "iso_numeric": 454,
+            "name": "Malawi",
+            "alternatenames": "Malawi,Malawi,马拉维,Malawi,Малави,Malawi,Malaui,Malawi,ประเทศมาลาวี",
+            "currency_code": "MWK",
+            "currency_name": "Kwacha",
+            "continent": "AF",
+            "languages": [
+                "ny",
+                "yao",
+                "tum",
+                "swk"
+            ],
+            "fips_code": "MI",
+            "population": 15447500
+        },
+        {
+            "code": "MX",
+            "code3": "MEX",
+            "iso_numeric": 484,
+            "name": "Mexico",
+            "alternatenames": "Mexique,Meksiko,Mexiko,Mêhicô,Mexico,เม็กซิโก,墨西哥,Mexico,México,Мексика,Μεξικό,멕 시코,墨西哥,墨西哥,México,Messico,Mexiko,Mexico,Meksyk,Mexico,Mehhiko,Meksiko,Мексика,Meksika,Meksika,المكسيك,,Mexiko,Mexico,墨西哥,Meksika,Мексика,Mexique,México,Messico,ประเทศเม็กซิโก",
+            "currency_code": "MXN",
+            "currency_name": "Peso",
+            "continent": "NA",
+            "languages": [
+                "es-MX"
+            ],
+            "fips_code": "MX",
+            "population": 112468855
+        },
+        {
+            "code": "MY",
+            "code3": "MYS",
+            "iso_numeric": 458,
+            "name": "Malaysia",
+            "alternatenames": "Malaysia,Malàisia,Малайзія,Malaysia,Malaysia,Malaysia,มาเลเซีย,馬來西亞,Malásia,Малайзия,Μαλαισία,말레이시아,马来西亚,馬來西亞,マレーシア,Malasia,Malesia,Malaysia,Malezja,Malaysia,Malaisia,Ma,Malaysia,Malaysia,马来西亚,Malezya,Малайзия,Malaisie,Malasia,Malesia,ประเทศมาเลเซีย",
+            "currency_code": "MYR",
+            "currency_name": "Ringgit",
+            "continent": "AS",
+            "languages": [
+                "ms-MY",
+                "en",
+                "zh",
+                "ta",
+                "te",
+                "ml",
+                "pa",
+                "th"
+            ],
+            "fips_code": "MY",
+            "population": 28274729
+        },
+        {
+            "code": "MZ",
+            "code3": "MOZ",
+            "iso_numeric": 508,
+            "name": "Mozambique",
+            "alternatenames": "Мозамбик,मोज़ाम्बिक,Mozambique,Mozambik,Moçambic,Mosambik,Mozambik,Mozambic,מוזמביק,موزمبيق,Mozambikas,Mozambika,Mozambik,Mosambiik,Мозамбік,Mozambik,Mosambik,Mozambico,Mosambik,Mozambique,モザンビー,Mosambik,Mozambique,莫桑比克,Mozambik,Мозамбик,Mozambique,Mozambique,Mozambico,ประเทศโมซัมบิก",
+            "currency_code": "MZN",
+            "currency_name": "Metical",
+            "continent": "AF",
+            "languages": [
+                "pt-MZ",
+                "vmw"
+            ],
+            "fips_code": "MZ",
+            "population": 22061451
+        },
+        {
+            "code": "NA",
+            "code3": "NAM",
+            "iso_numeric": 516,
+            "name": "Namibia",
+            "alternatenames": "Namibië,納米比亞,นามิเบีย,Namibia,Namibia,Namibia,Namibia,Namibia,Namíbia,Намибия,Namibia,Namibia,Namibia,ナミビア,納米比亞,纳米比亚,나미비아,Ναμίμπια,Namibia,Namibia,נמיביה,ناميبيا,Namibij,Namibia,Namibia,纳米比亚,Намибия,Namibia,Namibia,Namibie,Namibia,ประเทศนามิเบีย",
+            "currency_code": "NAD",
+            "currency_name": "Dollar",
+            "continent": "AF",
+            "languages": [
+                "en-NA",
+                "af",
+                "de",
+                "hz",
+                "naq"
+            ],
+            "fips_code": "WA",
+            "population": 2128471
+        },
+        {
+            "code": "NC",
+            "code3": "NCL",
+            "iso_numeric": 540,
+            "name": "New Caledonia",
+            "alternatenames": "Új-Kaledónia,Nova Caledònia,Yeni Kaledonya,Nová Kaledonie,Uusi-Kaledonia,Ny Kaledonien,Ny-Caledonia,न्यू कैलेडोनिया,Нова Каледония,Uus-Kaledoonia,Nova Kaledonija,Jaunkaledonija,Naujoji Kaledonija,קלדוניה,Neukaledonien,New Caledonia,新喀里多尼亚,Yeni Kaledonya,Новая Каледония,Nouvelle-Calédonie,Nueva Caledonia,Nuova Caledonia,ประเทศนิวแคลิโดเนีย",
+            "currency_code": "XPF",
+            "currency_name": "Franc",
+            "continent": "OC",
+            "languages": [
+                "fr-NC"
+            ],
+            "fips_code": "NC",
+            "population": 216494
+        },
+        {
+            "code": "NE",
+            "code3": "NER",
+            "iso_numeric": 562,
+            "name": "Niger",
+            "alternatenames": "Niger,Niger,尼日尔,Niger,Нигер,Niger,Níger,Niger,ประเทศไนเจอร์",
+            "currency_code": "XOF",
+            "currency_name": "Franc",
+            "continent": "AF",
+            "languages": [
+                "fr-NE",
+                "ha",
+                "kr",
+                "dje"
+            ],
+            "fips_code": "NG",
+            "population": 15878271
+        },
+        {
+            "code": "NF",
+            "code3": "NFK",
+            "iso_numeric": 574,
+            "name": "Norfolk Island",
+            "alternatenames": "Norfolkeiland,諾福克島,เกาะนอร์ฟอล์ก,Pulau Norfolk,Norfolk Island,Norfolkön,Kepulauan Norfolk,Wyspa Norfolk,Ilha de Norfolk,Остров Норфолк,Isola Norfolk,Norfolk (isla),Norfolk-Inseln,ノーフォーク島,諾福,Norfolk Island,Norfolk-Insel,诺福克岛,Остров Норфолк,Norfolk Adası,Isla Norfolk,Île Norfolk,Isola Norfolk,เกาะนอร์ฟอล์ก",
+            "currency_code": "AUD",
+            "currency_name": "Dollar",
+            "continent": "OC",
+            "languages": [
+                "en-NF"
+            ],
+            "fips_code": "NF",
+            "population": 1828
+        },
+        {
+            "code": "NG",
+            "code3": "NGA",
+            "iso_numeric": 566,
+            "name": "Nigeria",
+            "alternatenames": "Nigeria,ไนจีเรีย,Nigeria,나이지리아,Ni giê ria,Nigeria,Nigéria,Нигерия,Νιγηρία,尼日利亚,奈及利亞,ナイジェリア,Nigeria,Nigeria,Nigeria,奈及利亞,Nigeria,Nigeria,Нігерія,Nigeeria,Nigerija,Nigērij,Nigeria,Nigeria,尼日利亚,Nijerya,Нигерия,Nigéria,Nigeria,Nigeria,ประเทศไนจีเรีย",
+            "currency_code": "NGN",
+            "currency_name": "Naira",
+            "continent": "AF",
+            "languages": [
+                "en-NG",
+                "ha",
+                "yo",
+                "ig",
+                "ff"
+            ],
+            "fips_code": "NI",
+            "population": 154000000
+        },
+        {
+            "code": "NI",
+            "code3": "NIC",
+            "iso_numeric": 558,
+            "name": "Nicaragua",
+            "alternatenames": "Nicaragua,尼加拉瓜,Nicaragua,Nicaragua,Nikaragua,Nikaragua,Nicaragua,Nicaragua,निकारागुआ,Никарагуа,Nicaragua,Nikaragva,Nikaragva,Nikaragva,ניקרגואה,نيكاراجوا,Nikaragva,Nicaragua,Nicaragua,Nikaragua,Nikaragua,Nicaragua,Nicaragua,尼加拉瓜,Nicaragua,Никарагуа,Nicaragua,Nicaragua,Nicaragua,ประเทศนิการากัว",
+            "currency_code": "NIO",
+            "currency_name": "Cordoba",
+            "continent": "NA",
+            "languages": [
+                "es-NI",
+                "en"
+            ],
+            "fips_code": "NU",
+            "population": 5995928
+        },
+        {
+            "code": "NL",
+            "code3": "NLD",
+            "iso_numeric": 528,
+            "name": "Netherlands",
+            "alternatenames": "Pays-Bas,Holland,Alankomaat,Hollanda,Països Baixos,Hollandia,नीदरलैंड,Холандия,Olanda,Nizozemska,הולנד,هولندا,Nyderlandai,Nīderlande,Nizozemska,Holland,Нідерланди,Netherlands,Nederland,Holandia,Ολλανδί,Niederlande,Netherlands,荷兰,Hollanda,Нидерланды,Pays-Bas,Países Bajos,Paesi Bassi,ประเทศเนเธอร์แลนด์",
+            "currency_code": "EUR",
+            "currency_name": "Euro",
+            "continent": "EU",
+            "languages": [
+                "nl-NL",
+                "fy-NL"
+            ],
+            "fips_code": "NL",
+            "population": 16645000
+        },
+        {
+            "code": "NO",
+            "code3": "NOR",
+            "iso_numeric": 578,
+            "name": "Norway",
+            "alternatenames": "Νορβηγία,Норвегия,Noruega,Noorwegen,挪威,นอร์เวย์,Na Uy,Norway,노르웨이,挪威,挪威,Noruega,ノルウェー,Norwegen,Norvège,Norway,Norvegia,Norge,Norwegia,Norwegia,נורווגיה,النرويج,Norvegija,Norvē,Norwegen,Norway,挪威,Norveç,Норвегия,Norvège,Noruega,Norvegia,ประเทศนอร์เวย์",
+            "currency_code": "NOK",
+            "currency_name": "Krone",
+            "continent": "EU",
+            "languages": [
+                "no",
+                "nb",
+                "nn",
+                "se",
+                "fi"
+            ],
+            "fips_code": "NO",
+            "population": 5009150
+        },
+        {
+            "code": "NP",
+            "code3": "NPL",
+            "iso_numeric": 524,
+            "name": "Nepal",
+            "alternatenames": "नेपाल,Nepál,Nepal,Nepal,Nepál,Nepal,Nepal,Непал,Nepal,Nepal,نيبال,Nepalas,Nepāla,Nepal,Nepal,Непал,Nepal,נפאל,Nepal,Nepal,尼泊尔,尼泊爾,ネパール,Nepal,Nepal,Nepal,Népal,Nepal,네팔,Νεπάλ,Nepal,Nê pan,Nepal,Nepal,Nepal,尼泊尔,Nepal,Непал,Népal,Nepal,Nepal,ประเทศเนปาล",
+            "currency_code": "NPR",
+            "currency_name": "Rupee",
+            "continent": "AS",
+            "languages": [
+                "ne",
+                "en"
+            ],
+            "fips_code": "NP",
+            "population": 28951852
+        },
+        {
+            "code": "NR",
+            "code3": "NRU",
+            "iso_numeric": 520,
+            "name": "Nauru",
+            "alternatenames": "Nauru,Nauru,瑙鲁,Nauru,Науру,Nauru,Nauru,Nauru,ประเทศนาอูรู",
+            "currency_code": "AUD",
+            "currency_name": "Dollar",
+            "continent": "OC",
+            "languages": [
+                "na",
+                "en-NR"
+            ],
+            "fips_code": "NR",
+            "population": 10065
+        },
+        {
+            "code": "NU",
+            "code3": "NIU",
+            "iso_numeric": 570,
+            "name": "Niue",
+            "alternatenames": "Ниуэ,Niue,Niue,紐埃,นีอูเอ,Niue,Niue,Niue,니우에,纽埃,Niue,Niue,Niue,Niue,Niue,Niue, ニウエ,紐埃,Niue,Niue,Niue,Niue,Niue,Niue,Niue,Niue,Niue,Niue,Niue,Niue,Niue,Niue,Niue,Niue,Niue,Niue,Niue,Niue,Niue,Niue,纽埃,Niue,Ниуэ,Niue,Isla Niue,Niue,ประเทศนีอูเอ",
+            "currency_code": "NZD",
+            "currency_name": "Dollar",
+            "continent": "OC",
+            "languages": [
+                "niu",
+                "en-NU"
+            ],
+            "fips_code": "NE",
+            "population": 2166
+        },
+        {
+            "code": "NZ",
+            "code3": "NZL",
+            "iso_numeric": 554,
+            "name": "New Zealand",
+            "alternatenames": "Nova Zelândia,Nieuw-Zeeland,紐西蘭,นิวซีแลนด์,New Zealand,Nya Zeeland,New Zealand,Новая Зеландия,Νέα Ζηλανδία,Uusi-Seelanti,Nouvelle-Zélande,Neuseeland,Nuova Zelanda,Nueva Zelanda,ニュージーランド,,Neuseeland,New Zealand,新西兰,Yeni Zelanda,Новая Зеландия,Nouvelle-Zélande,Nueva Zelanda,Nuova Zelanda,ประเทศนิวซีแลนด์",
+            "currency_code": "NZD",
+            "currency_name": "Dollar",
+            "continent": "OC",
+            "languages": [
+                "en-NZ",
+                "mi"
+            ],
+            "fips_code": "NZ",
+            "population": 4252277
+        },
+        {
+            "code": "OM",
+            "code3": "OMN",
+            "iso_numeric": 512,
+            "name": "Oman",
+            "alternatenames": "Oman,Oman,Oman,Ô man,Oman,โอมาน,阿曼,Oman,Omã,Оман,Ομάν,오만,阿曼,阿曼,オマーン,Omán,Oman,Oman,Oman,Oman,Oman,Оман,Oman,Оман,Omaan,Oman,Omāna,Omanas,سلطنة عمان,עומן,Oman,Oman,Umman,Oman,Omán,Omán,,Oman,Oman,阿曼,Oman,Оман,Oman,Omán,Oman,ประเทศโอมาน",
+            "currency_code": "OMR",
+            "currency_name": "Rial",
+            "continent": "AS",
+            "languages": [
+                "ar-OM",
+                "en",
+                "bal",
+                "ur"
+            ],
+            "fips_code": "MU",
+            "population": 2967717
+        },
+        {
+            "code": "PA",
+            "code3": "PAN",
+            "iso_numeric": 591,
+            "name": "Panama",
+            "alternatenames": "पनामा,Panama,Panamà,Panama,Panama,Panama,Panama,Panama,Panama,Panama,Панама,Панама,Panama,Panama,Panama,Panama,بنما,פנמה,Panama,Panama,巴拿马,巴拿馬,パナマ,Panamá,Panamá,Panama,Panama,Panama,파나마,Παναμά,Panama,Panama,巴拿马,Panama,Панама,Panama,Panamá,Panama,ประเทศปานามา",
+            "currency_code": "PAB",
+            "currency_name": "Balboa",
+            "continent": "NA",
+            "languages": [
+                "es-PA",
+                "en"
+            ],
+            "fips_code": "PM",
+            "population": 3410676
+        },
+        {
+            "code": "PE",
+            "code3": "PER",
+            "iso_numeric": 604,
+            "name": "Peru",
+            "alternatenames": "Peru,पेरू,Peru,Peru,Peru,Perú,Peru,Peru,Перу,Peru,Перу,Peruu,Peru,Peru,Peru,بيرو,פרו,Peru,Peru,Peru,Peru,Peru,Perù,Perú,ペルー,秘魯,秘鲁,페루,Περού,Перу,Peru,Peru,秘魯,เปรู,Peru,Pê ru,Peru,Pérou,Peru,Peru,秘鲁,Peru,Перу,Pérou,Perú,Perù,ประเทศเปรู",
+            "currency_code": "PEN",
+            "currency_name": "Sol",
+            "continent": "SA",
+            "languages": [
+                "es-PE",
+                "qu",
+                "ay"
+            ],
+            "fips_code": "PE",
+            "population": 29907003
+        },
+        {
+            "code": "PF",
+            "code3": "PYF",
+            "iso_numeric": 258,
+            "name": "French Polynesia",
+            "alternatenames": "Prancūzijos Polinezija,เฟรนช์โปลินีเซีย,法屬波利尼西亞,Frans Polynesië,Polinésia Francesa,Французская Полинезия,Francuska Polinezija,프랑스령 폴리네시아,Prantsuse Polüneesia,法屬波,French Polynesia,Französisch-Polynesien,法属波利尼西亚,Французская Полинезия,Fransız Polinezyası,Polinesia Francesa,Polynésie française,Polinesia Francese,ประเทศเฟรนช์โปลินีเซีย",
+            "currency_code": "XPF",
+            "currency_name": "Franc",
+            "continent": "OC",
+            "languages": [
+                "fr-PF",
+                "ty"
+            ],
+            "fips_code": "FP",
+            "population": 270485
+        },
+        {
+            "code": "PG",
+            "code3": "PNG",
+            "iso_numeric": 598,
+            "name": "Papua New Guinea",
+            "alternatenames": "Papua-Nová Guinea,Papua-Uusi-Guinea,Papua Yeni Gine,Pápua Új-Guinea,Papua Ny Guinea,Papua Nova Guinea,पापुआ न्यू गिनी,Папуа-Нова Гвинея,Papua Noua Guinee,Papua Nova Gvineja,פפואה גינאה החדשה,با,Papua-Neuguinea,Papua New Guinea,巴布亚新几内亚,Papua Yeni Gine,Папуа Новая Гвинея,Papouasie-Nouvelle-Guinée,Papúa Nueva Guinea,Papua Nuova Guinea,ประเทศปาปัวนิวกินี",
+            "currency_code": "PGK",
+            "currency_name": "Kina",
+            "continent": "OC",
+            "languages": [
+                "en-PG",
+                "ho",
+                "meu",
+                "tpi"
+            ],
+            "fips_code": "PP",
+            "population": 6064515
+        },
+        {
+            "code": "PH",
+            "code3": "PHL",
+            "iso_numeric": 608,
+            "name": "Philippines",
+            "alternatenames": "菲律賓,Filippinerne,Filippiinit,Filipíny,Filipinler,Filipines,Fülöp-szigetek,फिलिपींस,Филипини,Filipine,Filippinene,הפיליפינים,الفلبين,Filipinai,Filipīnas,Filipini,Filipiinid,Філіппіни,Filipini,Phil,Philippinen,Philippines,菲律宾,Filipinler,Филиппины,Philippines,Filipinas,Filippine,ประเทศฟิลิปปินส์",
+            "currency_code": "PHP",
+            "currency_name": "Peso",
+            "continent": "AS",
+            "languages": [
+                "tl",
+                "en-PH",
+                "fil"
+            ],
+            "fips_code": "RP",
+            "population": 99900177
+        },
+        {
+            "code": "PK",
+            "code3": "PAK",
+            "iso_numeric": 586,
+            "name": "Pakistan",
+            "alternatenames": "Paquistão,Pakistan,巴基斯坦,ปากีสถาน,Pakistan,Pakistan,Pakistan,Pakistan,Пакистан,Πακιστάν,Pakistan,Pakistan,Pakistan,Pakistán,パキスタン,巴基斯坦,巴基斯坦,파키스탄,Pakistan,Pakistan,Пакистан,,Pakistan,Pakistan,巴基斯坦,Pakistan,Пакистан,Pakistan,Pakistán,Pakistan,ประเทศปากีสถาน",
+            "currency_code": "PKR",
+            "currency_name": "Rupee",
+            "continent": "AS",
+            "languages": [
+                "ur-PK",
+                "en-PK",
+                "pa",
+                "sd",
+                "ps",
+                "brh"
+            ],
+            "fips_code": "PK",
+            "population": 184404791
+        },
+        {
+            "code": "PL",
+            "code3": "POL",
+            "iso_numeric": 616,
+            "name": "Poland",
+            "alternatenames": "Πολωνία,Полша,Polska,Polen,Puola,Polsko,Polonya,Polònia,Lengyelország,पोलैंड,Polonia,Poljska,פולין,بولندا,Lenkija,Polija,Poljska,Poola,Polandia,Polen,Ba Lan,Poland,Pologne,Polen,Polonia,Polonia,ポーランド,波蘭,,Polen,Poland,波兰,Polonya,Польша,Pologne,Polonia,Polonia,ประเทศโปแลนด์",
+            "currency_code": "PLN",
+            "currency_name": "Zloty",
+            "continent": "EU",
+            "languages": [
+                "pl"
+            ],
+            "fips_code": "PL",
+            "population": 38500000
+        },
+        {
+            "code": "PM",
+            "code3": "SPM",
+            "iso_numeric": 666,
+            "name": "Saint Pierre and Miquelon",
+            "alternatenames": "Saint Pierre and Miquelon,St. Pierre und Miquelon,圣皮埃尔和密克隆,Сент-Пьер и Микелон,Pierre ve Miquelon,San Pedro y Miquelón,Saint-Pierre-et-Miquelon,Saint Pierre e Miquelon,เกาะแซงปีแยร์และกาะมีเกอลง",
+            "currency_code": "EUR",
+            "currency_name": "Euro",
+            "continent": "NA",
+            "languages": [
+                "fr-PM"
+            ],
+            "fips_code": "SB",
+            "population": 7012
+        },
+        {
+            "code": "PN",
+            "code3": "PCN",
+            "iso_numeric": 612,
+            "name": "Pitcairn",
+            "alternatenames": "Pitcairn,皮特凯恩群岛,Питкерн,Islas Pitcairn,Pitcairn,Pitcairn,หมู่เกาะพิตแคร์น",
+            "currency_code": "NZD",
+            "currency_name": "Dollar",
+            "continent": "OC",
+            "languages": [
+                "en-PN"
+            ],
+            "fips_code": "PC",
+            "population": 46
+        },
+        {
+            "code": "PR",
+            "code3": "PRI",
+            "iso_numeric": 630,
+            "name": "Puerto Rico",
+            "alternatenames": "Puerto Rico,Puerto Rico,Пуерто-Ріко,Puerto Rico,Puerto Rico,Puerto Rico,Porto Riko,Portoriko,Puerto Rico,पोर्टो रीको,Пуерто Рико,Puerto Rico,Portoriko,פורטו ריקו,بورتو ريكو,Puerto Rikas,Puertoriko,,Puerto Rico,Puerto Rico,波多黎各,Пуэрто-Рико,Porto Riko,Puerto Rico,Porto Rico,Portorico,เครือรัฐเปอร์โตริโก",
+            "currency_code": "USD",
+            "currency_name": "Dollar",
+            "continent": "NA",
+            "languages": [
+                "en-PR",
+                "es-PR"
+            ],
+            "fips_code": "RQ",
+            "population": 3916632
+        },
+        {
+            "code": "PS",
+            "code3": "PSE",
+            "iso_numeric": 275,
+            "name": "Palestinian Territory",
+            "alternatenames": "Palestinian Territory,Palestinian Territory,Palestinian Territory,Palestinian Territory,Palestinian Territory,Palestinian Territory,Palestinian Territory,Palestinian Territory,Palestinian Territory,Palestinian Territory,Palestinian Territory,Palestinian T,Palästina,Palestinian Territory,巴勒斯坦,Палестинские территории,Palestine,Palestina,Palestina,ประเทศปาเลสไตน์",
+            "currency_code": "ILS",
+            "currency_name": "Shekel",
+            "continent": "AS",
+            "languages": [
+                "ar-PS"
+            ],
+            "fips_code": "WE",
+            "population": 3800000
+        },
+        {
+            "code": "PT",
+            "code3": "PRT",
+            "iso_numeric": 620,
+            "name": "Portugal",
+            "alternatenames": "Portugal,Portugal,Portugali,Portugalsko,Portekiz,Portugal,Portugália,पुर्तगाल,Portugalia,Portugalska,פורטוגל,البرتغال,Portugalija,Portugāle,Portugal,Portugal,Portugal,Portugalia,Portugal,Portugal,Portugal,Portogallo,Portug,Portugal,Portugal,葡萄牙,Portekiz,Португалия,Portugal,Portugal,Portogallo,ประเทศโปรตุเกส",
+            "currency_code": "EUR",
+            "currency_name": "Euro",
+            "continent": "EU",
+            "languages": [
+                "pt-PT",
+                "mwl"
+            ],
+            "fips_code": "PO",
+            "population": 10676000
+        },
+        {
+            "code": "PW",
+            "code3": "PLW",
+            "iso_numeric": 585,
+            "name": "Palau",
+            "alternatenames": "Palau,Palau,帕劳,Palau,Палау,Palaos,Palau,Palau,ประเทศปาเลา",
+            "currency_code": "USD",
+            "currency_name": "Dollar",
+            "continent": "OC",
+            "languages": [
+                "pau",
+                "sov",
+                "en-PW",
+                "tox",
+                "ja",
+                "fil",
+                "zh"
+            ],
+            "fips_code": "PS",
+            "population": 19907
+        },
+        {
+            "code": "PY",
+            "code3": "PRY",
+            "iso_numeric": 600,
+            "name": "Paraguay",
+            "alternatenames": "Paraguay,Paraguay,巴拉圭,Paraguay,Парагвай,Paraguay,Paraguay,Paraguay,ประเทศปารากวัย",
+            "currency_code": "PYG",
+            "currency_name": "Guarani",
+            "continent": "SA",
+            "languages": [
+                "es-PY",
+                "gn"
+            ],
+            "fips_code": "PA",
+            "population": 6375830
+        },
+        {
+            "code": "QA",
+            "code3": "QAT",
+            "iso_numeric": 634,
+            "name": "Qatar",
+            "alternatenames": "Katar,Катар,Katar,Katar,कतर,Qatar,Qatar,Катар,Qatar,Katar,קטאר,قطر,Kataras,Katara,Katar,Katar,Qatar,Qatar,Katar,Qatar,Katar,Qatar,Qatar,カタール,卡達,卡塔尔,Κατάρ,Катар,카타르,Quatar,Qatar,卡達,กาตา,Katar,Qatar,卡塔尔,Katar,Катар,Qatar,Qatar,Qatar,ประเทศกาตาร์",
+            "currency_code": "QAR",
+            "currency_name": "Rial",
+            "continent": "AS",
+            "languages": [
+                "ar-QA",
+                "es"
+            ],
+            "fips_code": "QA",
+            "population": 840926
+        },
+        {
+            "code": "RE",
+            "code3": "REU",
+            "iso_numeric": 638,
+            "name": "Reunion",
+            "alternatenames": "Réunion,Reunion-sziget,Illa Reunion,Reunion Adası,Reunion Island,Réunion-saari,Reunion Island,Reunion-øya,Insula Reunion,रीयूनियन द्वीप,Реюньйон,Réunion,Reinjona,Reunjonas,جزيرة ريونيون,ראוניון,Oto,Réunion,Reunion,留尼汪,Réunion,Реюньон,Réunion,Reunión,Réunion,ประเทศเรอูนียง",
+            "currency_code": "EUR",
+            "currency_name": "Euro",
+            "continent": "AF",
+            "languages": [
+                "fr-RE"
+            ],
+            "fips_code": "RE",
+            "population": 776948
+        },
+        {
+            "code": "RO",
+            "code3": "ROU",
+            "iso_numeric": 642,
+            "name": "Romania",
+            "alternatenames": "루마니아,Румъния,Румунія,Romania,Rumänien,Rumani,Romania,โรมาเนีย,羅馬尼亞,Roemenië,Румыния,Ρουμανία,罗马尼亚,羅馬尼亞,ルーマニア,Rumanía,Romania,Rumänien,Rumania,Rumunia,Romania,Rumeen,Rumänien,Romania,罗马尼亚,Romania,Румыния,Roumanie,Rumanía,Romania,ประเทศโรมาเนีย",
+            "currency_code": "RON",
+            "currency_name": "Leu",
+            "continent": "EU",
+            "languages": [
+                "ro",
+                "hu",
+                "rom"
+            ],
+            "fips_code": "RO",
+            "population": 21959278
+        },
+        {
+            "code": "RS",
+            "code3": "SRB",
+            "iso_numeric": 688,
+            "name": "Serbia",
+            "alternatenames": "सर्बिया,Szerbia,Sèrbia,Sırbistan,Srbsko,Serbia,Serbien,Serbia,Сърбия,Serbia,Сербія,Serbia,Srbija,Serbija,Serbija,صربيا,סרביה,Srbija,Serbia,Serbia,Serbien,Serbia,Serbie,Serbien,Serbia,Serbia,セルビア,塞爾維亞,,Serbien,Serbia,塞尔维亚,Suudi Arabistan,Сербия,Serbie,Serbia,Serbia,ประเทศเซอร์เบีย",
+            "currency_code": "RSD",
+            "currency_name": "Dinar",
+            "continent": "EU",
+            "languages": [
+                "sr",
+                "hu",
+                "bs",
+                "rom"
+            ],
+            "fips_code": "RI",
+            "population": 7344847
+        },
+        {
+            "code": "RU",
+            "code3": "RUS",
+            "iso_numeric": 643,
+            "name": "Russia",
+            "alternatenames": "रूस,Rusija,Oroszország,Rússia,Rusya,Venäjä,Rusland,Russland,Русия,Rusia,Російська Федерація,Rusko,Venemaa,Rusija,Krievija,روسيا,רוסיה,Rusija,Rusia,Ryssland,俄羅斯,ロシア,Rusia,Russia,Russland,Russie,Russia,,Russia,Russland,俄罗斯,Россия,Rusya,Rusia,Russie,Federazione Russa,ประเทศรัสเซีย",
+            "currency_code": "RUB",
+            "currency_name": "Ruble",
+            "continent": "EU",
+            "languages": [
+                "ru",
+                "tt",
+                "xal",
+                "cau",
+                "ady",
+                "kv",
+                "ce",
+                "tyv",
+                "cv",
+                "udm",
+                "tut",
+                "mns",
+                "bua",
+                "myv",
+                "mdf",
+                "chm",
+                "ba",
+                "inh",
+                "tut",
+                "kbd",
+                "krc",
+                "ava",
+                "sah",
+                "nog"
+            ],
+            "fips_code": "RS",
+            "population": 140702000
+        },
+        {
+            "code": "RW",
+            "code3": "RWA",
+            "iso_numeric": 646,
+            "name": "Rwanda",
+            "alternatenames": "Rwanda,Ruanda,卢旺达,Руанда,Ruanda,Ruanda,Rwanda,Ruanda,ประเทศรวันดา",
+            "currency_code": "RWF",
+            "currency_name": "Franc",
+            "continent": "AF",
+            "languages": [
+                "rw",
+                "en-RW",
+                "fr-RW",
+                "sw"
+            ],
+            "fips_code": "RW",
+            "population": 11055976
+        },
+        {
+            "code": "SA",
+            "code3": "SAU",
+            "iso_numeric": 682,
+            "name": "Saudi Arabia",
+            "alternatenames": "Саудовская Аравия,Arábia Saudita,Saoedi-Arabië,沙烏地阿拉伯,ซาอุดีอาระเบีย,Saudi Arabia,Arab Saudi,Ả Rập Saudi,Σαουδική Αραβία,사우디아라비아,Saudi Arabia,Arabie Saoudite,Saudi A,Saudi-Arabien,Saudi Arabia,沙特阿拉伯,Саудовская Аравия,Arabie saoudite,Arabia Saudí,Arabia Saudita,ประเทศซาอุดีอาระเบีย",
+            "currency_code": "SAR",
+            "currency_name": "Rial",
+            "continent": "AS",
+            "languages": [
+                "ar-SA"
+            ],
+            "fips_code": "SA",
+            "population": 25731776
+        },
+        {
+            "code": "SB",
+            "code3": "SLB",
+            "iso_numeric": 90,
+            "name": "Solomon Islands",
+            "alternatenames": "Solomon Islands,Salomonen,所罗门群岛,Соломоновы острова,Soloman Islands,Islas Salomón,Îles Salomon,Isole Solomon,หมู่เกาะโซโลมอน",
+            "currency_code": "SBD",
+            "currency_name": "Dollar",
+            "continent": "OC",
+            "languages": [
+                "en-SB",
+                "tpi"
+            ],
+            "fips_code": "BP",
+            "population": 559198
+        },
+        {
+            "code": "SC",
+            "code3": "SYC",
+            "iso_numeric": 690,
+            "name": "Seychelles",
+            "alternatenames": "Seychellerne,Seychellit,Seychely,Seychelles,Seychelle-szigetek,सेशल्स,Сейшелски острови,Seychelles,איי סיישל,Seyşeller,Seychelles,Сейшельські острови,Seišellid,Sejšeli,Seišeļu salas,Seišeliai,س,Seychelles,Seychellen,塞舌尔,Сейшелы,Seychelles,Seychelles,Seychelles,Seychelles,ประเทศเซเชลส์",
+            "currency_code": "SCR",
+            "currency_name": "Rupee",
+            "continent": "AF",
+            "languages": [
+                "en-SC",
+                "fr-SC"
+            ],
+            "fips_code": "SE",
+            "population": 88340
+        },
+        {
+            "code": "SD",
+            "code3": "SDN",
+            "iso_numeric": 729,
+            "name": "Sudan",
+            "alternatenames": "Sudan,Sudan,苏丹,Sudan,Судан,Soudan,Sudán,Sudan,ประเทศซูดาน",
+            "currency_code": "SDG",
+            "currency_name": "Pound",
+            "continent": "AF",
+            "languages": [
+                "ar-SD",
+                "en",
+                "fia"
+            ],
+            "fips_code": "SU",
+            "population": 35000000
+        },
+        {
+            "code": "SE",
+            "code3": "SWE",
+            "iso_numeric": 752,
+            "name": "Sweden",
+            "alternatenames": "Svédország,Suècia,İsveç,Švédsko,Ruotsi,Sverige,Sverige,Rootsi,स्वीडन,Швеция,Suedia,Švedska,שבדיה,السويد,Švedija,Zviedrija,Švedska,Швеція,Szwecja,Swedia,Suède,Schweden,Svezia,Suecia,スウェーデン,瑞典,,Schweden,Sweden,瑞典,İsveç,Швеция,Suède,Suecia,Svezia,ประเทศสวีเดน",
+            "currency_code": "SEK",
+            "currency_name": "Krona",
+            "continent": "EU",
+            "languages": [
+                "sv-SE",
+                "se",
+                "sma",
+                "fi-SE"
+            ],
+            "fips_code": "SW",
+            "population": 9555893
+        },
+        {
+            "code": "SG",
+            "code3": "SGP",
+            "iso_numeric": 702,
+            "name": "Singapore",
+            "alternatenames": "Singapore,Singapur,Сінгапур,Singapura,สิงคโปร์,新加坡,Singapore,Singapura,סינגפור,Сингапур,Σιγκαπούρη,싱가포르,新加坡,新加坡,シンガポール,Singapur,Singapore,Singapur,Singapour,Sing ga po,,Singapur,Singapore,新加坡,Singapur,Сингапур,Singapour,Singapur,Singapore,ประเทศสิงคโปร์",
+            "currency_code": "SGD",
+            "currency_name": "Dollar",
+            "continent": "AS",
+            "languages": [
+                "cmn",
+                "en-SG",
+                "ms-SG",
+                "ta-SG",
+                "zh-SG"
+            ],
+            "fips_code": "SN",
+            "population": 4701069
+        },
+        {
+            "code": "SH",
+            "code3": "SHN",
+            "iso_numeric": 654,
+            "name": "Saint Helena",
+            "alternatenames": "St. Helena,Saint Helena,圣赫勒拿,Святая Елена, Остров вознесения, Тристан-да-Кунья,Sainte-Hélène,Santa Elena,Sant’Elena,ประเทศเซนต์เฮเลนา",
+            "currency_code": "SHP",
+            "currency_name": "Pound",
+            "continent": "AF",
+            "languages": [
+                "en-SH"
+            ],
+            "fips_code": "SH",
+            "population": 7460
+        },
+        {
+            "code": "SI",
+            "code3": "SVN",
+            "iso_numeric": 705,
+            "name": "Slovenia",
+            "alternatenames": "स्लोवेनिया,Slovenia,Slovénie,Словенія,Slovenia,Slovenien,Slovenia,Slovinsko,Slovenya,Eslovènia,Szlovénia,Словения,Slovenia,Slovenija,סלובניה,سلوفينيا,Slovėnija,Slovēnija,Slovenija,Sloveenia,Slovenia,,Slowenien,Slovenia,斯洛文尼亚,Slovenia,Словения,Slovénie,Eslovenia,Slovenia,ประเทศสโลวีเนีย",
+            "currency_code": "EUR",
+            "currency_name": "Euro",
+            "continent": "EU",
+            "languages": [
+                "sl",
+                "sh"
+            ],
+            "fips_code": "SI",
+            "population": 2007000
+        },
+        {
+            "code": "SJ",
+            "code3": "SJM",
+            "iso_numeric": 744,
+            "name": "Svalbard and Jan Mayen",
+            "alternatenames": "Svalbard and Jan Mayen,Svalbard und Jan-Mayen-Inseln,斯瓦尔巴群岛和扬马延岛,Шпицберген и Ян Майен,Svalbard & Jan Mayen Island,Svalbard y Jan Mayen,Svalbard et Île Jan Mayen,Svalbard e Jan Mayen,หมู่เกาะสฟาลบาร์และยานไมเอน",
+            "currency_code": "NOK",
+            "currency_name": "Krone",
+            "continent": "EU",
+            "languages": [
+                "no",
+                "ru"
+            ],
+            "fips_code": "SV",
+            "population": 2550
+        },
+        {
+            "code": "SK",
+            "code3": "SVK",
+            "iso_numeric": 703,
+            "name": "Slovakia",
+            "alternatenames": "Slowakia,Slowakei,Slovakia,Slovakia,Slovačka,Slovaquie,Slovensko,Slovakia,Slovakya,Eslovàquia,Szlovákia,स्लोवाकिया,Словакия,Slovacia,Slovaška,סלובקיה,سلوفاكيا,Slovākija,Slovakkia,Словакія,Słowacja,S,Slowakei,Slovakia,斯洛伐克,Slovakya,Словакия,Slovaquie,Eslovaquia,Slovacchia,ประเทศสโลวะเกีย",
+            "currency_code": "EUR",
+            "currency_name": "Euro",
+            "continent": "EU",
+            "languages": [
+                "sk",
+                "hu"
+            ],
+            "fips_code": "LO",
+            "population": 5455000
+        },
+        {
+            "code": "SL",
+            "code3": "SLE",
+            "iso_numeric": 694,
+            "name": "Sierra Leone",
+            "alternatenames": "Sierra Leone,Sierra Leone,塞拉利昂,Sierra Leone,Сьерра Леоне,Sierra Leone,Sierra Leona,Sierra Leone,ประเทศเซียร์ราลีโอน",
+            "currency_code": "SLL",
+            "currency_name": "Leone",
+            "continent": "AF",
+            "languages": [
+                "en-SL",
+                "men",
+                "tem"
+            ],
+            "fips_code": "SL",
+            "population": 5245695
+        },
+        {
+            "code": "SM",
+            "code3": "SMR",
+            "iso_numeric": 674,
+            "name": "San Marino",
+            "alternatenames": "San Marino,San Marino,Сан Марино,Άγιος Μαρίνος,산마리노,San Marino,San Marino,ซาน มาริโน,聖馬利諾,San Marino,São Marinho,Сан-Марино,سان مارينو,San Marinas,圣马利诺,サンマリノ,San M,San Marino,圣马力诺,Сан Марино,San Marino,Saint-Marin,San Marino,ประเทศซานมารีโน",
+            "currency_code": "EUR",
+            "currency_name": "Euro",
+            "continent": "EU",
+            "languages": [
+                "it-SM"
+            ],
+            "fips_code": "SM",
+            "population": 31477
+        },
+        {
+            "code": "SN",
+            "code3": "SEN",
+            "iso_numeric": 686,
+            "name": "Senegal",
+            "alternatenames": "Senegal,Senegal,Senegal,Senegal,Сенегал,Senegal,塞內加爾,เซเนกัล,Senegal,Sê nê gan,Senegal,סנגל,Senegal,Senegal,Senegal,Senegal,Senegal,Senegal,Szenegál,सेनेगल,Сенегал,Senegal,Senegal,Senegal,Senegal,Sene,Senegal,Senegal,塞内加尔,Senegal,Сенегал,Sénégal,Senegal,Senegal,ประเทศเซเนกัล",
+            "currency_code": "XOF",
+            "currency_name": "Franc",
+            "continent": "AF",
+            "languages": [
+                "fr-SN",
+                "wo",
+                "fuc",
+                "mnk"
+            ],
+            "fips_code": "SG",
+            "population": 12323252
+        },
+        {
+            "code": "SO",
+            "code3": "SOM",
+            "iso_numeric": 706,
+            "name": "Somalia",
+            "alternatenames": "Somalia,Somalia,索马里,Somali,Сомали,Somalie,Somalia,Somalia,ประเทศโซมาเลีย",
+            "currency_code": "SOS",
+            "currency_name": "Shilling",
+            "continent": "AF",
+            "languages": [
+                "so-SO",
+                "ar-SO",
+                "it",
+                "en-SO"
+            ],
+            "fips_code": "SO",
+            "population": 10112453
+        },
+        {
+            "code": "SR",
+            "code3": "SUR",
+            "iso_numeric": 740,
+            "name": "Suriname",
+            "alternatenames": "Suriname,Suriname,苏里南,Surinam,Суринам,Suriname,Surinam,Suriname,ประเทศซูรินาเม",
+            "currency_code": "SRD",
+            "currency_name": "Dollar",
+            "continent": "SA",
+            "languages": [
+                "nl-SR",
+                "en",
+                "srn",
+                "hns",
+                "jv"
+            ],
+            "fips_code": "NS",
+            "population": 492829
+        },
+        {
+            "code": "SS",
+            "code3": "SSD",
+            "iso_numeric": 728,
+            "name": "South Sudan",
+            "alternatenames": "South Sudan,Sudan,Южный Судан,Sudan,Sudán del Sur,Soudan du Sud,Sudan del Sud",
+            "currency_code": "SSP",
+            "currency_name": "Pound",
+            "continent": "AF",
+            "languages": [
+                "en"
+            ],
+            "fips_code": "OD",
+            "population": 8260490
+        },
+        {
+            "code": "ST",
+            "code3": "STP",
+            "iso_numeric": 678,
+            "name": "Sao Tome and Principe",
+            "alternatenames": "São Tomé und Príncipe,Sao Tome and Principe,圣多美和普林西比,Sao Tome and Principe,Сан-Томе и Принсипи,Sao Tomé-et-Príncipe,Santo Tomé y Príncipe,Sao Tomé e Príncipe,ประเทศเซาตูเมและปรินซิปี",
+            "currency_code": "STD",
+            "currency_name": "Dobra",
+            "continent": "AF",
+            "languages": [
+                "pt-ST"
+            ],
+            "fips_code": "TP",
+            "population": 175808
+        },
+        {
+            "code": "SV",
+            "code3": "SLV",
+            "iso_numeric": 222,
+            "name": "El Salvador",
+            "alternatenames": "El Salvador,El Salvador,萨尔瓦多,El Salvador,Сальвадор,El Salvador,El Salvador,El Salvador,ประเทศเอลซัลวาดอร์",
+            "currency_code": "USD",
+            "currency_name": "Dollar",
+            "continent": "NA",
+            "languages": [
+                "es-SV"
+            ],
+            "fips_code": "ES",
+            "population": 6052064
+        },
+        {
+            "code": "SX",
+            "code3": "SXM",
+            "iso_numeric": 534,
+            "name": "Sint Maarten",
+            "alternatenames": "Sint Maarten (Netherlands),Sint Maarten (Netherlands),Sint Maarten (Netherlands),Sint Maarten (Netherlands),Sint Maarten (Netherlands),Sint Maarten (Netherlands),Sint Maarten (Netherlands),Sint Maarten (Netherlands),Sint Maarten (Netherlands),Sint Maarten,Sint Maarten,Sint Maarten,荷属圣马丁,Hollanda Antilleri,Синт-Мартен,Saint-Martin (partie néerlandaise),Sint Maarten,Sint Maarten",
+            "currency_code": "ANG",
+            "currency_name": "Guilder",
+            "continent": "NA",
+            "languages": [
+                "nl",
+                "en"
+            ],
+            "fips_code": "NN",
+            "population": 37429
+        },
+        {
+            "code": "SY",
+            "code3": "SYR",
+            "iso_numeric": 760,
+            "name": "Syria",
+            "alternatenames": "Syrien,Syria,叙利亚,Syria,Сирия,Syrie,Siria,Siria,ประเทศซีเรีย",
+            "currency_code": "SYP",
+            "currency_name": "Pound",
+            "continent": "AS",
+            "languages": [
+                "ar-SY",
+                "ku",
+                "hy",
+                "arc",
+                "fr",
+                "en"
+            ],
+            "fips_code": "SY",
+            "population": 22198110
+        },
+        {
+            "code": "SZ",
+            "code3": "SWZ",
+            "iso_numeric": 748,
+            "name": "Swaziland",
+            "alternatenames": "Suazilândia,Swaziland,斯威士蘭,สวาซิแลนด์,Swaziland,Swaziland,Swaziland,Свазиленд,Σουαζιλάνδη,스와질랜드,斯威士兰,斯威士蘭,スワジランド,Suazilandia,Swaziland,Swasiland,Swaziland,Suazi,Svaasim,Swasiland,Swaziland,斯威士兰,Swaziland,Свазиленд,Swaziland,Suazilandia,Swaziland,ประเทศสวาซิแลนด์",
+            "currency_code": "SZL",
+            "currency_name": "Lilangeni",
+            "continent": "AF",
+            "languages": [
+                "en-SZ",
+                "ss-SZ"
+            ],
+            "fips_code": "WZ",
+            "population": 1354051
+        },
+        {
+            "code": "TC",
+            "code3": "TCA",
+            "iso_numeric": 796,
+            "name": "Turks and Caicos Islands",
+            "alternatenames": "Turks and Caicos Islands,Turks- und Caicosinseln,特克斯和凯科斯群岛,Теркс и Кайкос,Turks ve Caicos Adaları,Islas Turcas y Caicos,Îles Turks et Caïques,Isole Turks e Caicos,หมู่เกาะเติกส์และหมู่เกาะเคคอส",
+            "currency_code": "USD",
+            "currency_name": "Dollar",
+            "continent": "NA",
+            "languages": [
+                "en-TC"
+            ],
+            "fips_code": "TK",
+            "population": 20556
+        },
+        {
+            "code": "TD",
+            "code3": "TCD",
+            "iso_numeric": 148,
+            "name": "Chad",
+            "alternatenames": "Čad,Tchad,Tšad,Čad,Çad,Txad,Csád,चाड,Τσαντ,Чад,Чад,Ciad,Čad,צ'אד,تشاد,Čadas,Čada,Chade,Czad,查德,チャド,Chad,Tsjad,Tšaad,Chad,Tchad,Tschad,查德,차드,Tsjaad,Tchad,Chad,Tsjaad,ชาด,查德,Tsjaad,Чад,Ciad,Tschad,Chad,乍得,Çad,Чад,Tchad,Chad,Ciad,ประเทศชาด",
+            "currency_code": "XAF",
+            "currency_name": "Franc",
+            "continent": "AF",
+            "languages": [
+                "fr-TD",
+                "ar-TD",
+                "sre"
+            ],
+            "fips_code": "CD",
+            "population": 10543464
+        },
+        {
+            "code": "TF",
+            "code3": "ATF",
+            "iso_numeric": 260,
+            "name": "French Southern Territories",
+            "alternatenames": "French Southern Territories,法属南部领地,Французские Южные территории,Territorios Australes Franceses,Terres australes françaises,Territori australi francesi,เฟรนช์เซาเทิร์นเทร์ริทอรีส์",
+            "currency_code": "EUR",
+            "currency_name": "Euro",
+            "continent": "AN",
+            "languages": [
+                "fr"
+            ],
+            "fips_code": "FS",
+            "population": 140
+        },
+        {
+            "code": "TG",
+            "code3": "TGO",
+            "iso_numeric": 768,
+            "name": "Togo",
+            "alternatenames": "Togo,Togo,多哥,Togo,Того,Togo,Togo,Togo,ประเทศโตโก",
+            "currency_code": "XOF",
+            "currency_name": "Franc",
+            "continent": "AF",
+            "languages": [
+                "fr-TG",
+                "ee",
+                "hna",
+                "kbp",
+                "dag",
+                "ha"
+            ],
+            "fips_code": "TO",
+            "population": 6587239
+        },
+        {
+            "code": "TH",
+            "code3": "THA",
+            "iso_numeric": 764,
+            "name": "Thailand",
+            "alternatenames": "Thailand,Thailand,Thailand,Thaimaa,Thajsko,Tayland,Tailàndia,Thaiföld,थाईलैंड,Тайланд,Thailanda,Tajska,תאילנד,تايلاند,Taizeme,Tajland,Tai,Таїланд,Tajlandia,Thailand,泰国,泰國,タイ,Tailandia,Thailandia,Thail,Thailand,Thailand,泰国,Tayland,Таиланд,Thaïlande,Tailandia,Tailandia,ประเทศไทย",
+            "currency_code": "THB",
+            "currency_name": "Baht",
+            "continent": "AS",
+            "languages": [
+                "th",
+                "en"
+            ],
+            "fips_code": "TH",
+            "population": 67089500
+        },
+        {
+            "code": "TJ",
+            "code3": "TJK",
+            "iso_numeric": 762,
+            "name": "Tajikistan",
+            "alternatenames": "Tadschikistan,Tajikistan,塔吉克斯坦,Tacikistan,Таджикистан,Tadjikistan,Tayikistán,Tagikistan,ประเทศทาจิกิสถาน",
+            "currency_code": "TJS",
+            "currency_name": "Somoni",
+            "continent": "AS",
+            "languages": [
+                "tg",
+                "ru"
+            ],
+            "fips_code": "TI",
+            "population": 7487489
+        },
+        {
+            "code": "TK",
+            "code3": "TKL",
+            "iso_numeric": 772,
+            "name": "Tokelau",
+            "alternatenames": "Tokelau,托克劳,Токелау,Tokelau,Tokelau,Tokelau,ประเทศโตเกเลา",
+            "currency_code": "NZD",
+            "currency_name": "Dollar",
+            "continent": "OC",
+            "languages": [
+                "tkl",
+                "en-TK"
+            ],
+            "fips_code": "TL",
+            "population": 1466
+        },
+        {
+            "code": "TL",
+            "code3": "TLS",
+            "iso_numeric": 626,
+            "name": "East Timor",
+            "alternatenames": "Osttimor,East Timor,东帝汶,Doğu Timor,Тимор-Лесте,Timor oriental,Timor Oriental,Timor Est,ประเทศติมอร์ตะวันออก",
+            "currency_code": "USD",
+            "currency_name": "Dollar",
+            "continent": "OC",
+            "languages": [
+                "tet",
+                "pt-TL",
+                "id",
+                "en"
+            ],
+            "fips_code": "TT",
+            "population": 1154625
+        },
+        {
+            "code": "TM",
+            "code3": "TKM",
+            "iso_numeric": 795,
+            "name": "Turkmenistan",
+            "alternatenames": "Turkmenistan,Turkmenistan,土库曼斯坦,Turkmenistan,Туркменистан,Turkménistan,Turkmenistán,Turkmenistan,ประเทศเติร์กเมนิสถาน",
+            "currency_code": "TMT",
+            "currency_name": "Manat",
+            "continent": "AS",
+            "languages": [
+                "tk",
+                "ru",
+                "uz"
+            ],
+            "fips_code": "TX",
+            "population": 4940916
+        },
+        {
+            "code": "TN",
+            "code3": "TUN",
+            "iso_numeric": 788,
+            "name": "Tunisia",
+            "alternatenames": "Tunisia,Tunézia,Tunísia,Tunus,Tunisko,Tunisia,Tunesien,ट्यूनीशिया,Tunisia,Tunizija,תוניסיה,تونس,Tunisas,Tunisija,Tunis,Tuneesia,Туніс,Tunezja,Tunisia,Tunisie,Tunesien,Tunisia,Túnez,チュニジア,突尼西亞,突尼,Tunesien,Tunisia,突尼斯,Tunisia,Тунис,Tunisie,Túnez,Tunisia,ประเทศตูนิเซีย",
+            "currency_code": "TND",
+            "currency_name": "Dinar",
+            "continent": "AF",
+            "languages": [
+                "ar-TN",
+                "fr"
+            ],
+            "fips_code": "TS",
+            "population": 10589025
+        },
+        {
+            "code": "TO",
+            "code3": "TON",
+            "iso_numeric": 776,
+            "name": "Tonga",
+            "alternatenames": "Tonga,Tông ga,Tonga,ตองกา,湯加群島,Tonga,Tonga,Tonga,Тонга,Tonga,통가,汤加群岛,湯加群島,トンガ,Tonga,Tonga,Tonga,Τόνγκα,Tonga,Tonga,Tonga,Tonga,טונגה,تونجا,Tonga,Tonga,Tonga,Tonga,Тонга,टोंगा,Tonga,Tonga,汤加,Tonga,Тонга,Tonga,Tonga,Tonga,ประเทศตองกา",
+            "currency_code": "TOP",
+            "currency_name": "Pa'anga",
+            "continent": "OC",
+            "languages": [
+                "to",
+                "en-TO"
+            ],
+            "fips_code": "TN",
+            "population": 122580
+        },
+        {
+            "code": "TR",
+            "code3": "TUR",
+            "iso_numeric": 792,
+            "name": "Turkey",
+            "alternatenames": "Türkiye,Turquía,Türkei,Turecko,Turquia,Törökország,तुर्की,Турция,Turcia,Turčija,تركيا,Turkija,Turcija,Turska,Türgi,Туреччина,Turquie,Turkki,Tyrkiet,トルコ,土耳其,土耳其,터키,Τουρκία,Турция,Tu,Türkei,Turkey,土耳其,Türkiye,Турция,Turquie,Turquía,Turchia,ประเทศตุรกี",
+            "currency_code": "TRY",
+            "currency_name": "Lira",
+            "continent": "AS",
+            "languages": [
+                "tr-TR",
+                "ku",
+                "diq",
+                "az",
+                "av"
+            ],
+            "fips_code": "TU",
+            "population": 77804122
+        },
+        {
+            "code": "TT",
+            "code3": "TTO",
+            "iso_numeric": 780,
+            "name": "Trinidad and Tobago",
+            "alternatenames": "Trinidad und Tobago,Trinidad and Tobago,特立尼达和多巴哥,Trinidad and Tobago,Тринидад и Тобаго,Trinité-et-Tobago,Trinidad y Tobago,Trinidad e Tobago,ประเทศตรินิแดดและโตเบโก",
+            "currency_code": "TTD",
+            "currency_name": "Dollar",
+            "continent": "NA",
+            "languages": [
+                "en-TT",
+                "hns",
+                "fr",
+                "es",
+                "zh"
+            ],
+            "fips_code": "TD",
+            "population": 1228691
+        },
+        {
+            "code": "TV",
+            "code3": "TUV",
+            "iso_numeric": 798,
+            "name": "Tuvalu",
+            "alternatenames": "Tuvalu,Tuvalu,图瓦卢,Tuvalu,Тувалу,Tuvalu,Tuvalu,Tuvalu,ประเทศตูวาลู",
+            "currency_code": "AUD",
+            "currency_name": "Dollar",
+            "continent": "OC",
+            "languages": [
+                "tvl",
+                "en",
+                "sm",
+                "gil"
+            ],
+            "fips_code": "TV",
+            "population": 10472
+        },
+        {
+            "code": "TW",
+            "code3": "TWN",
+            "iso_numeric": 158,
+            "name": "Taiwan",
+            "alternatenames": "Tajvan,Taiwan,Tayvan,Tchaj-wan,Taiwan,Taiwan,Taïwan,ताइवान,Тайван,Taiwan,Tajvan,טייוואן,تايوان,Taivanas,Taivāna,Tajwan,Taiwan,Taiwan,Taiwan,Taiwán,台湾,台灣,台湾,Ταϊβάν,대만,Тайвань,Taiwan,Taiwan,台,Taiwan,Taiwan,台湾,Taiwan,Тайвань,Taïwan,Taiwán,Taiwan,ประเทศไต้หวัน",
+            "currency_code": "TWD",
+            "currency_name": "Dollar",
+            "continent": "AS",
+            "languages": [
+                "zh-TW",
+                "zh",
+                "nan",
+                "hak"
+            ],
+            "fips_code": "TW",
+            "population": 22894384
+        },
+        {
+            "code": "TZ",
+            "code3": "TZA",
+            "iso_numeric": 834,
+            "name": "Tanzania",
+            "alternatenames": "Tanzania,Tanzanya,Tanzània,Tanzánia,तंजानिया,Танзания,Tanzania,Tanzanija,טנזניה,تنزانيا,Tanzanija,Tanzānija,Tanzanija,Tansaania,Танзанія,Tanzanie,Tanzania,Tanzanie,Tansania,タンザニア,坦桑尼亞,坦,Tansania,Tanzania,坦桑尼亚,Tanzania,Танзания,Tanzanie,Tanzania,Tanzania,ประเทศแทนซาเนีย",
+            "currency_code": "TZS",
+            "currency_name": "Shilling",
+            "continent": "AF",
+            "languages": [
+                "sw-TZ",
+                "en",
+                "ar"
+            ],
+            "fips_code": "TZ",
+            "population": 41892895
+        },
+        {
+            "code": "UA",
+            "code3": "UKR",
+            "iso_numeric": 804,
+            "name": "Ukraine",
+            "alternatenames": "Україна,Ucraïna,Ukrayna,Ukrajina,Ukraina,Ukraine,Ukraina,Ukraina,Ukrajna,यूक्रेन,Украина,Ukraina,Ukraina,أوكرانيا,אוקראינה,Ukrajina,Ucraina,Украйна,Ukraina,Ukraina,Ukraina,Ukraine,Ukraine,Ukraine,Ucraina,Ukraine,Ukraine,乌克兰,Ukraine,Украина,Ukraine,Ucrania,Ucraina,ประเทศยูเครน",
+            "currency_code": "UAH",
+            "currency_name": "Hryvnia",
+            "continent": "EU",
+            "languages": [
+                "uk",
+                "ru-UA",
+                "rom",
+                "pl",
+                "hu"
+            ],
+            "fips_code": "UP",
+            "population": 45415596
+        },
+        {
+            "code": "UG",
+            "code3": "UGA",
+            "iso_numeric": 800,
+            "name": "Uganda",
+            "alternatenames": "Ouganda,Uganda,Uganda,Uganda,ยูกันดา,烏干達,Uganda,Uganda,Уганда,Ουγκάντα,우간다,乌干达,烏干達,ウガンダ,Uganda,Uganda,Uganda,Uganda,Uganda,Uganda,Uganda,Uganda,Uganda,Uganda,أوغندة,Уганда,אוגנד,Uganda,Uganda,乌干达,Uganda,Уганда,Ouganda,Uganda,Uganda,ประเทศยูกันดา",
+            "currency_code": "UGX",
+            "currency_name": "Shilling",
+            "continent": "AF",
+            "languages": [
+                "en-UG",
+                "lg",
+                "sw",
+                "ar"
+            ],
+            "fips_code": "UG",
+            "population": 33398682
+        },
+        {
+            "code": "UM",
+            "code3": "UMI",
+            "iso_numeric": 581,
+            "name": "United States Minor Outlying Islands",
+            "alternatenames": "United States Minor Outlying Islands,USA,美国本土外小岛屿,Малые Тихоокеанские отдаленные острова Соединенных Штатов,ABD Küçük Dış Adaları,Islas menores alejadas de los Estados Unidos,Îles éloignées des États-Unis,Isole periferiche agli USA,หมู่เกาะสหรัฐไมเนอร์เอาต์ไลอิง",
+            "currency_code": "USD",
+            "currency_name": "Dollar",
+            "continent": "OC",
+            "languages": [
+                "en-UM"
+            ],
+            "fips_code": "",
+            "population": 0
+        },
+        {
+            "code": "US",
+            "code3": "USA",
+            "iso_numeric": 840,
+            "name": "United States",
+            "alternatenames": "Estados Unidos da América,Verenigde Staten,美國,สหรัฐอเมริกา,Amerika Syarikat,Hoa Kỳ,USA,Amerika Serikat,Соединенные Штаты,Ηνωμένες Πολιτείες,United States,USA,Stati Uniti,Estados Unidos,アメ,United States,Vereinigte Staaten,美国,США,Amerika Birleşik Devletleri,EE. UU.,É-U,Stati Uniti,สหรัฐอเมริกา",
+            "currency_code": "USD",
+            "currency_name": "Dollar",
+            "continent": "NA",
+            "languages": [
+                "en-US",
+                "es-US",
+                "haw",
+                "fr"
+            ],
+            "fips_code": "US",
+            "population": 310232863
+        },
+        {
+            "code": "UY",
+            "code3": "URY",
+            "iso_numeric": 858,
+            "name": "Uruguay",
+            "alternatenames": "Уругвай,Uruguai,Uruguay,烏拉圭,อุรุกวัย,Uruguay,Uruguay,Uruguay,Ουρουγουάη,우루과이,Uruguay,Уругвай,Uruguay,Uruguay,Uruguay,ウルグアイ,烏拉圭,乌拉圭,Uruguay,Urugwaj,Uruguay,Urugvaj,Urugvaja,Urugvaj,Uruguay,Uruguay,乌拉圭,Uruguay,Уругвай,Uruguay,Uruguay,Uruguay,ประเทศอุรุกวัย",
+            "currency_code": "UYU",
+            "currency_name": "Peso",
+            "continent": "SA",
+            "languages": [
+                "es-UY"
+            ],
+            "fips_code": "UY",
+            "population": 3477000
+        },
+        {
+            "code": "UZ",
+            "code3": "UZB",
+            "iso_numeric": 860,
+            "name": "Uzbekistan",
+            "alternatenames": "Ouzbékistan,Usbekistan,Uzbekistan,Uzbekistán,Uzbekistan,Üzbegisztán,उज़्बेकिस्तान,Узбекистан,Uzbekistan,Uzbekistan,אוזבקיסטן,أوزباكستان,Uzbekistanas,Uzbekistāna,Uzbekistan,Usbekistan,Узбеки,Usbekistan,Uzbekistan,乌兹别克斯坦,Özbekistan,Узбекистан,Ouzbékistan,Uzbekistán,Uzbekistan,ประเทศอุซเบกิสถาน",
+            "currency_code": "UZS",
+            "currency_name": "Som",
+            "continent": "AS",
+            "languages": [
+                "uz",
+                "ru",
+                "tg"
+            ],
+            "fips_code": "UZ",
+            "population": 27865738
+        },
+        {
+            "code": "VA",
+            "code3": "VAT",
+            "iso_numeric": 336,
+            "name": "Vatican",
+            "alternatenames": "Vatican,梵蒂冈,Ватикан,Ciudad del Vaticano,État de la Cité du Vatican,Città del Vaticano,นครรัฐวาติกัน",
+            "currency_code": "EUR",
+            "currency_name": "Euro",
+            "continent": "EU",
+            "languages": [
+                "la",
+                "it",
+                "fr"
+            ],
+            "fips_code": "VT",
+            "population": 921
+        },
+        {
+            "code": "VC",
+            "code3": "VCT",
+            "iso_numeric": 670,
+            "name": "Saint Vincent and the Grenadines",
+            "alternatenames": "St. Vincent und die Grenadinen,Saint Vincent and the Grenadines,圣文森特和格林纳丁斯,Saint Vincent and the Grenadines,Сент-Винсент и Гренадины,Saint-Vincent-et-les Grenadines,San Vicente y las Granadinas,Saint Vincent e Grenadines,ประเทศเซนต์วินเซนต์และเกรนาดีนส์",
+            "currency_code": "XCD",
+            "currency_name": "Dollar",
+            "continent": "NA",
+            "languages": [
+                "en-VC",
+                "fr"
+            ],
+            "fips_code": "VC",
+            "population": 104217
+        },
+        {
+            "code": "VE",
+            "code3": "VEN",
+            "iso_numeric": 862,
+            "name": "Venezuela",
+            "alternatenames": "Wenezuela,Venezuela,Venezuela,委內瑞拉,เวเนซุเอลา,Venezuela,Venezuela,Venezuela,Венесуэла,Βενεζουέλα,베네수엘라,委内瑞拉,委內瑞拉,Venezuela,Venezuela,Venezuela,Venezuela,ベネズエラ,Venezuela,Ven,Venezuela,Venezuela,委内瑞拉,Venezuela,Венесуэла,Venezuela,Venezuela,Venezuela,ประเทศเวเนซุเอลา",
+            "currency_code": "VEF",
+            "currency_name": "Bolivar",
+            "continent": "SA",
+            "languages": [
+                "es-VE"
+            ],
+            "fips_code": "VE",
+            "population": 27223228
+        },
+        {
+            "code": "VG",
+            "code3": "VGB",
+            "iso_numeric": 92,
+            "name": "British Virgin Islands",
+            "alternatenames": "British Virgin Islands,Britische Jungferninseln,英属维尔京群岛,Виргинские острова, Британские,İngiliz Virgin Adaları,Islas Vírgenes Británicas,Îles Vierges britanniques,Isole Vergini Britanniche,หมู่เกาะบริติชเวอร์จิน",
+            "currency_code": "USD",
+            "currency_name": "Dollar",
+            "continent": "NA",
+            "languages": [
+                "en-VG"
+            ],
+            "fips_code": "VI",
+            "population": 21730
+        },
+        {
+            "code": "VI",
+            "code3": "VIR",
+            "iso_numeric": 850,
+            "name": "U.S. Virgin Islands",
+            "alternatenames": "Ilhas Virgens (E.U.A.),Maagdeneilanden(VS),維京群島(美國),Quần đảo Virgin thuộc Mỹ,Kepulauan Virgin Amerika Serikat,Amerikanska Jungfruöarna,Виргинские острова (США),Παρθένοι Νήσοι (ΗΠΑ),Kepulauan Virgin,U.S. Virgin Islands,Amerikanische Jungferninseln,美属维尔京群岛,Виргинские острова,ABD Virgin Adaları,Islas Vírgenes de los Estados Unidos,Îles Vierges des États-Unis,Isole Vergini Americane,หมู่เกาะเวอร์จินของสหรัฐอเมริกา",
+            "currency_code": "USD",
+            "currency_name": "Dollar",
+            "continent": "NA",
+            "languages": [
+                "en-VI"
+            ],
+            "fips_code": "VQ",
+            "population": 108708
+        },
+        {
+            "code": "VN",
+            "code3": "VNM",
+            "iso_numeric": 704,
+            "name": "Vietnam",
+            "alternatenames": "Vietnam,Vietnam,Việt Nam,Vietnam,เวียดนาม,越南,Vietnam,Vietnam,Вьетнам,Βιετνάμ,베트 남,越南,越南,ベトナム,Vietnam,Vietnam,Vietnam,Viêt Nam,Vietnam,Wietnam,Vietnam,В'єтнам,Vietnam,Vijetnam,Vjetnama,Vietna,Vietnam,Vietnam,越南,Vietnam,Вьетнам,Viêt Nam,Vietnam,Vietnam,ประเทศเวียดนาม",
+            "currency_code": "VND",
+            "currency_name": "Dong",
+            "continent": "AS",
+            "languages": [
+                "vi",
+                "en",
+                "fr",
+                "zh",
+                "km"
+            ],
+            "fips_code": "VM",
+            "population": 89571130
+        },
+        {
+            "code": "VU",
+            "code3": "VUT",
+            "iso_numeric": 548,
+            "name": "Vanuatu",
+            "alternatenames": "Vanuatu,Vanuatu,Vanuatu,Vanuatu,Vanuatu,Vanuatu,Vanuatu,Vanuatu,Vanuatu,वानुअतु,Вануату,Vanuatu,Vanuatu,ונואטו,فانواتو,Vanuatu,Vanuatu,Vanuatu,Vanuatu,Vanuatu,Vanuatu,Vanuatu,Vanuatu,Vanuatu,Vanuatu,バヌアツ,瓦努阿,Vanuatu,Vanuatu,瓦努阿图,Vanuatu,Вануату,Vanuatu,Vanuatu,Vanuatu,ประเทศวานูอาตู",
+            "currency_code": "VUV",
+            "currency_name": "Vatu",
+            "continent": "OC",
+            "languages": [
+                "bi",
+                "en-VU",
+                "fr-VU"
+            ],
+            "fips_code": "NH",
+            "population": 221552
+        },
+        {
+            "code": "WF",
+            "code3": "WLF",
+            "iso_numeric": 876,
+            "name": "Wallis and Futuna",
+            "alternatenames": "Wallis and Futuna,Wallis und Futuna,瓦利斯和富图纳,Уоллис и Футуна,Wallis ve Futuna Adaları,Wallis y Futuna,Wallis-et-Futuna,Wallis e Futuna,หมู่เกาะวาลลิสและหมู่เกาะฟุตูนา",
+            "currency_code": "XPF",
+            "currency_name": "Franc",
+            "continent": "OC",
+            "languages": [
+                "wls",
+                "fud",
+                "fr-WF"
+            ],
+            "fips_code": "WF",
+            "population": 16025
+        },
+        {
+            "code": "WS",
+            "code3": "WSM",
+            "iso_numeric": 882,
+            "name": "Samoa",
+            "alternatenames": "Szamoa,Samoa,Samoa,Samoa,Samoa,Samoa,Samoa,Samoa,समोआ,Самоа,Samoa,Самоа,Samoa,Samoa,Samoa,Samoa,ساموا,סמואה,Samoa,Samoa,Samoa,Samoa,Samoa,Samoa,Samoa,サモア,薩摩亞,萨摩亚,사모아,Σαμόα,Самоа,Samoa,Samoa,ซ,Samoa,Samoa,萨摩亚,Batı Samoa,Самоа,Samoa,Samoa,Samoa,ประเทศซามัว",
+            "currency_code": "WST",
+            "currency_name": "Tala",
+            "continent": "OC",
+            "languages": [
+                "sm",
+                "en-WS"
+            ],
+            "fips_code": "WS",
+            "population": 192001
+        },
+        {
+            "code": "XK",
+            "code3": "XKX",
+            "iso_numeric": 0,
+            "name": "Kosovo",
+            "alternatenames": "Kosovo,科索沃,Косово",
+            "currency_code": "EUR",
+            "currency_name": "Euro",
+            "continent": "EU",
+            "languages": [
+                "sq",
+                "sr"
+            ],
+            "fips_code": "KV",
+            "population": 1800000
+        },
+        {
+            "code": "YE",
+            "code3": "YEM",
+            "iso_numeric": 887,
+            "name": "Yemen",
+            "alternatenames": "Jemen,Yemen,也门,Yemen,Йемен,Yémen,Yemen,Yemen,ประเทศเยเมน",
+            "currency_code": "YER",
+            "currency_name": "Rial",
+            "continent": "AS",
+            "languages": [
+                "ar-YE"
+            ],
+            "fips_code": "YM",
+            "population": 23495361
+        },
+        {
+            "code": "YT",
+            "code3": "MYT",
+            "iso_numeric": 175,
+            "name": "Mayotte",
+            "alternatenames": "Mayotte,Mayotte,马约特,Майотта,Mayotte,Mayotte,Mayotte,Mayotte,มายอต",
+            "currency_code": "EUR",
+            "currency_name": "Euro",
+            "continent": "AF",
+            "languages": [
+                "fr-YT"
+            ],
+            "fips_code": "MF",
+            "population": 159042
+        },
+        {
+            "code": "ZA",
+            "code3": "ZAF",
+            "iso_numeric": 710,
+            "name": "South Africa",
+            "alternatenames": "Etelä-Afrikka,Republika Południowej Afryki,Південна Африка,Sør-Afrika,Sydafrika,Jihoafrická republika,Güney Afrika,Sud-Àfrica,Dél-Afrika,दक्षिण अफ्रीका,Южна Африка,Africa de Sud,Južna Afrika,דרו,Südafrika,South Africa,南非,Güney Afrika,ЮАР,Afrique du Sud,Sudáfrica,Sudafrica,ประเทศแอฟริกาใต้",
+            "currency_code": "ZAR",
+            "currency_name": "Rand",
+            "continent": "AF",
+            "languages": [
+                "zu",
+                "xh",
+                "af",
+                "nso",
+                "en-ZA",
+                "tn",
+                "st",
+                "ts",
+                "ss",
+                "ve",
+                "nr"
+            ],
+            "fips_code": "SF",
+            "population": 49000000
+        },
+        {
+            "code": "ZM",
+            "code3": "ZMB",
+            "iso_numeric": 894,
+            "name": "Zambia",
+            "alternatenames": "Ζάμπια,Замбия,Zâmbia,Zambia,尚比亞,แซมเบีย,Zambia,Zăm bia,잠비아,赞比亚,Zambia,Zambia,Zambie,Sambia,Zambia,Zambia,ザンビア,尚比亞,Zambia,Zambia,Zambija,Sambia,Zambija,Zambija,زامبيا,זמביה,Zambija,Zamb,Zambia,Sambia,赞比亚,Замбия,Zambia,Zambia,Zambie,Zambia,ประเทศแซมเบีย",
+            "currency_code": "ZMK",
+            "currency_name": "Kwacha",
+            "continent": "AF",
+            "languages": [
+                "en-ZM",
+                "bem",
+                "loz",
+                "lun",
+                "lue",
+                "ny",
+                "toi"
+            ],
+            "fips_code": "ZA",
+            "population": 13460305
+        },
+        {
+            "code": "ZW",
+            "code3": "ZWE",
+            "iso_numeric": 716,
+            "name": "Zimbabwe",
+            "alternatenames": "Zimbabwe,辛巴威,ซิมบับเว,Zimbabwe,Zim ba buê,Zimbabwe,Zimbabwe,Zimbabwe,Zimbabwe,Zimbábue,Зимбабве,Ζιμπάμπουε,짐바브웨,辛巴威,Zimbabue,Zimbabwe,Simbabwe,Zimbabwe,津巴布韦,Zimbabwe,ジンバブエ,Зімб,Simbabwe,Zimbabwe,津巴布韦,Zimbabve,Зимбабве,Zimbabwe,Zimbabue,Zimbabwe,ประเทศซิมบับเว",
+            "currency_code": "ZWL",
+            "currency_name": "Dollar",
+            "continent": "AF",
+            "languages": [
+                "en-ZW",
+                "sn",
+                "nr",
+                "nd"
+            ],
+            "fips_code": "ZI",
+            "population": 11651858
+        }
+    ]
+}]

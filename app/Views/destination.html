@@ -1,0 +1,513 @@
+﻿<div ng-controller="DestinationController">
+    <!-- [S] HEADER -->
+    <div report-my-height param="ShowDestinationView" paramtab="tabManager" isshowsearchicon="isShowSearchIcon">
+        <div class="header">
+            <div class="header-box">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-2 col-sm-2 col-xs-7">
+                            <div class="logo">
+                                <a ng-click="ViewDestination();"> <img src="images/trippism-logo.png" alt="" /></a>
+                            </div>
+                        </div>
+                        <div class="col-md-1 col-sm-2 col-xs-2 pull-right top-10">
+                            <ul class="nav-home">
+                                <li class="dropdown">
+                                    <a href="" class="dropdown-toggle padding-0" data-toggle="dropdown">
+                                        <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="" ng-click="feedback()">Feedback</a></li>
+                                        <li><a href="" ng-click="aboutUs()">About Us</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div ng-controller="TabManagerController">
+                            <div class="tabs-wp" ng-if="tabManager.tabItems.length > 0">
+                                <div tabs>
+                                    <div ng-show="tabInfo.TabcontentView" ng-repeat="tabInfo in tabManager.tabItems" pane title="{{ tabInfo.title | limit:10 }}">
+                                        <attraction-tab tabs-loading="loadingTab" attraction-params="tabInfo.parametersData" home-fn="ViewDestination()"></attraction-tab>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-show="isSearchCollapsed && ShowDestinationView">
+            <div ng-show="ShowDestinationView " ng-hide="isSearching">
+                <div class="refine-your-destination-box">
+                    <div class="your-searched-content">
+                        <h5 class="search-detail" ng-show="IscalledFromIknowMyDest == false">
+                            <span ng-show="refineSearchValues && refineSearchValues.OrigintoDisp">{{refineSearchValues.OrigintoDisp}} </span>
+                            <span ng-show="refineSearchValues && refineSearchValues.FromDate">{{refineSearchValues.FromDate | date:'MMM-dd-yyyy'}} </span>
+                            <span ng-show="refineSearchValues && refineSearchValues.ToDate">To {{refineSearchValues.ToDate | date:'MMM-dd-yyyy'}}</span>
+                            <span ng-show="refineSearchValues && refineSearchValues.Minfare > 0">{{fareCurrencySymbol}} {{refineSearchValues.Minfare}}</span>
+                            <span ng-show="refineSearchValues && refineSearchValues.Maxfare > 0"> To {{fareCurrencySymbol}} {{refineSearchValues.Maxfare}}</span>
+                            <span ng-show="refineSearchValues && refineSearchValues.Theme"> {{refineSearchValues.Theme}}</span>
+                            <span ng-show="refineSearchValues && refineSearchValues.Region"> {{refineSearchValues.Region}} </span>
+                        </h5>
+                    </div>
+                    <div class="refine-btn-group" style="z-index:9999">
+                        <a class="btn btn-danger " ng-click="isModified=!isModified;isRefineSeachCollapsed=false;"> Modify </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- [E] HEADER -->
+    <!-- [S] MAP -->
+    <div class="map-box" id="mainmap">
+        <div class="" style="height:100%;width:auto;" cg-busy="{promise:mappromise,message:cgBuzyMessage}">
+            <div id="wrapper" cg-busy="{promise:destinationmappromise,message:'Please wait...'}">
+                <div google-map id="map_canvas" ng-show="isShowSearchIcon || ShowDestinationView" origin="refineSearchValues.OrigintoDisp" btntext="buttontext" destinations="destinationlist" airlinejsondata="airlineJsonData" airportlist="AvailableAirports" defaultlat="20" defaultlng="0" class="map"></div>
+                <div class="map" ng-show="!isShowSearchIcon && destinationlist.length == 0"><img src="images/Mainpagebg2.jpg" alt="" style="position: fixed;left: 0;right: 0;top: 0;bottom: 0;" /></div>
+            </div>
+        </div>
+    </div>
+    <!-- [E] MAP -->
+    <!-- [S] SEARCHCENTER -->
+    <div class="destination-boxwrap" ng-show="(ShowDestinationView && !isShowSearchIcon) || isModified">
+        <div class="destination-box-popup" ng-class="isModified ? 'destination-popup' :'' ">
+            <div class="container">
+                <div class="row" ng-hide="isModified">
+                    <div class="col-md-12 text-center">
+                        <h3 class="destination-title">Let us help you find vacation destinations!</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <span class="destination-popup-close" ng-click="isModified=!isModified;isRefineSeachCollapsed=!isRefineSeachCollapsed;hasError = false;" ng-show="isModified">x</span>
+                        <div class="destination-boxwrap-nav-tabs">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" ng-class="{'active' : selectedform == 'SuggestDestination'}" class="active"><a ng-click="selectedform = 'SuggestDestination'; hasError = false;" aria-controls="suggest-destinations" role="tab" data-toggle="tab">Suggest Destinations</a></li>
+                                <li role="presentation" ng-class="{'active' : selectedform == 'KnowMyDestination'}"><a ng-click="selectedform = 'KnowMyDestination'; hasError = false" aria-controls="i-know-my-destination" role="tab" data-toggle="tab">I Know My Destination</a></li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="suggest-destination">
+                                    <form class="destination-form" name="frmdestfinder">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon"><img src="images/destination.png" alt="" /></div>
+                                                    <div class="form-group dropdown-box">
+                                                        <input ng-model="Origin"
+                                                               typeahead-min-length="2"
+                                                               required
+                                                               typeahead-input-formatter="formatInput($model)"
+                                                               typeahead-editable="true"
+                                                               typeahead-on-select="onSelect($item, $model, $label)"
+                                                               typeahead-template-url="airportDropdownTemplate.html"
+                                                               name="Origin"
+                                                               tabindex="1"
+                                                               placeholder="Enter Origin City or Airport Code"
+                                                               typeahead="state as state for AvailableCodes in airportsAutocomplete($viewValue)"
+                                                               type="text"
+                                                               class="input-control input-novalidate airport-dropdown"
+                                                               ng-class="hasError && frmdestfinder.$invalid  && frmdestfinder.Origin.$error.required ? 'Errorbox' :''"
+                                                               autocomplete="off" />
+                                                    </div>
+                                                </div>
+                                                <!--<div class="alert alert-danger" role="alert" ng-show="hasError && frmdestfinder.$invalid && frmdestfinder.Origin.$error.required">
+                                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                                    <span class="sr-only">Error:</span>
+                                                    Enter City name or airport code Ex: London or LON.
+                                                </div>-->
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12" ng-show="selectedform == 'KnowMyDestination'">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon"><img src="images/destination.png" alt="" /></div>
+                                                    <div class="form-group dropdown-box">
+                                                        <input type="text"
+                                                               ng-model="KnownDestinationAirport"
+                                                               typeahead-min-length="2"
+                                                               ng-required="selectedform == 'KnowMyDestination'"
+                                                               typeahead-input-formatter="formatInput($model)"
+                                                               typeahead-editable="true"
+                                                               typeahead-on-select="onKnowDestinationSelect($item, $model, $label)"
+                                                               typeahead-template-url="airportDropdownTemplate.html"
+                                                               name="KnownDestinationAirport"
+                                                               tabindex="2"
+                                                               placeholder="Enter Destination City or Airport Code"
+                                                               typeahead="state as state for AvailableCodes in airportsAutocomplete($viewValue)"
+                                                               class="input-control input-novalidate airport-dropdown"
+                                                               ng-class="hasError && frmdestfinder.$invalid  && frmdestfinder.KnownDestinationAirport.$error.required ? 'Errorbox' :''"
+                                                               autocomplete="off">
+                                                    </div>
+                                                </div>
+                                                <!--<div class="alert alert-danger" role="alert" ng-show="hasError && frmdestfinder.$invalid && frmdestfinder.KnownDestinationAirport.$error.required">
+                                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                                    <span class="sr-only">Error:</span>
+                                                    Enter City name or airport code Ex: London or LON.
+                                                </div>-->
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon"><img src="images/calendar.png" alt="#" ng-click="openFromDate($event)" /></div>
+                                                    <div class="form-group calendar-size" ng-class="isModified ? '' :'calendar-position' ">
+                                                        <input type="text"
+                                                               id="txtFromDate"
+                                                               ng-click="openFromDate($event)"
+                                                               class="input-control input-novalidate"
+                                                               ng-model="FromDate"
+                                                               datepicker-popup="{{format}}"
+                                                               ng-disabled="false"
+                                                               min-date="minTodayDate"
+                                                               max-date="MaximumFromDate"
+                                                               name="FromDate"
+                                                               is-open="openedFromDate"
+                                                               datepicker-options="dateOptions"
+                                                               ng-required="!LenghtOfStay || ToDate"
+                                                               close-text="Close"
+                                                               placeholder="Start date"
+                                                               tabindex="3"
+                                                               maxlength="10"
+                                                               allow-only-date-inputs
+                                                               autocomplete="off"
+                                                               ng-blur="SetFromDate()"
+                                                               ng-class="hasError && isSearchbuttonClicked  && frmdestfinder.FromDate.$error.required ? 'Errorbox' :''" />
+                                                        <!--<i ng-click="openFromDate($event)" class="icon-box calendar"></i>-->
+                                                    </div>
+                                                </div>
+                                                <span class="dateDisplay">{{FromDateDisplay}}</span>
+                                                <!--<div class="alert alert-danger" role="alert" ng-show="frmdestfinder.FromDate.$error.required && isSearchbuttonClicked">
+                                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                                    <span class="sr-only">Error:</span>
+                                                    Select From date.
+                                                </div>-->
+                                                <div class="alert alert-danger" role="alert" ng-show="!isSearchbuttonClicked"></div>
+                                            </div>
+
+                                            <div class="col-xs-6">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon"><img src="images/calendar.png" alt="#" ng-click="openToDate($event)" /></div>
+                                                    <div class="form-group calendar-size" ng-class="isModified ? '' :'calendar-position'">
+                                                        <input type="text"
+                                                               id="txtToDate"
+                                                               ng-click="openToDate($event)"
+                                                               class="input-control input-novalidate"
+                                                               datepicker-popup="{{format}}"
+                                                               min-date="minFromDate"
+                                                               max-date="MaximumToDate"
+                                                               ng-model="ToDate"
+                                                               name="ToDate"
+                                                               is-open="opened"
+                                                               datepicker-options="dateOptions"
+                                                               ng-required="!LenghtOfStay || FromDate" close-text="Close"
+                                                               placeholder="End date "
+                                                               ng-disabled="false"
+                                                               tabindex="4"
+                                                               maxlength="10"
+                                                               allow-only-date-inputs
+                                                               autocomplete="off"
+                                                               ng-blur="SetToDate()"
+                                                               ng-class="hasError && isSearchbuttonClicked && frmdestfinder.ToDate.$error.required ? 'Errorbox' :''" />
+                                                    </div>
+                                                </div>
+                                                <span class="dateDisplay">{{ToDateDisplay}}</span>
+                                                <!--<div class="alert alert-danger" role="alert" ng-show="frmdestfinder.ToDate.$error.required && isSearchbuttonClicked">
+                                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                                    <span class="sr-only">Error:</span>
+                                                    Select Return date.
+                                                </div>-->
+                                                <!--<div class="alert alert-danger" role="alert" ng-show="(frmdestfinder.ToDate.$invalid || invalidToDate) && !frmdestfinder.ToDate.$error.required">
+                                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                                    <span class="sr-only">Error:</span>
+                                                    Select Return date or type in MM/DD/YYYY.
+                                                </div>-->
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 text-center" ng-if="selectedform == 'SuggestDestination'">
+                                                <button type="submit"
+                                                        ng-click="IscalledFromIknowMyDest= false; GetDestinationClick()"
+                                                        ng-disabled="SearchbuttonIsLoading"
+                                                        class="btn btn-danger btn-search"
+                                                        tabindex="6">
+                                                    <i ng-if="SearchbuttonIsLoading" style="margin-right:5px;" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>{{SearchbuttonText}}
+                                                </button>
+                                            </div>
+                                            <div class="col-md-12 text-center" ng-if="selectedform == 'KnowMyDestination'">
+                                                <button type="submit"
+                                                        ng-click="GetDestinationClick()"
+                                                        ng-disabled="KnowSearchbuttonIsLoading"
+                                                        class="btn btn-danger btn-search"
+                                                        tabindex="7">
+                                                    <i ng-if="KnowSearchbuttonIsLoading" style="margin-right:5px;" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>{{KnowSearchbuttonText}}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="my-destination">...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- New Search End-->
+    <!-- [E] SEARCHCENTER -->
+    <!-- [S] REFINE-YOUR-SEARCH-BOX -->
+    <div ng-show="ShowDestinationView && IsRefineSearchShow">
+        <div ng-hide="isSearching" ng-show="ShowDestinationView">
+            <div class="popular-destinations" ng-class="!isRefineSeachCollapsed && ShowDestinationView ? 'popular-destinations-colleps' : 'active'">
+                <a ng-click="isRefineSeachCollapsed = !isRefineSeachCollapsed;isSearchCollapsed= true;isModified=false;" class="toggle-btn destinations-btn red-bg"><i class="destinations-icon"></i>Refine your search</a>
+                <div class="col-md-12 col-md-12 col-sm-12 col-xs-12" style="background-color: rgba(255,255,255,0.9);width: 317px;">
+                    <div class="row rs-row">
+                        <div class="rs-wrapper">
+                            <div class="rs-lbl-left">{{priceSliderValues.originalRange.min}}</div>
+                            <div class="rs-lbl-midd">Air Fare/Person</div>
+                            <div class="rs-lbl-right">{{priceSliderValues.originalRange.max}}</div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="range-slider" range-slider on-handle-up="handleUp()" min="priceSliderValues.range.min" max="priceSliderValues.range.max" model-min="priceSliderValues.values.min" model-max="priceSliderValues.values.max" show-values="true" attach-handle-values="true" disabled="priceSliderValues.values.max == 0 && priceSliderValues.values.min == 0"></div>
+                    </div>
+                </div>
+                <div id="examples" class="destinations-details refine-search">
+                    <div class="content contentVertical">
+
+                        <div class="col-md-12 col-sm-12 col-xs-12 padding-0">
+                            <div class="selector-box cc-selector">
+                                <h3>
+                                    <img src="images/help-icon.png" class="tool-tips" data-placement="top" data-toggle="tooltip" popover-placement="right" popover="Click on any theme icon to select a theme. Filters results by selected theme." popover-trigger="mouseenter" />Theme : {{Theme}}
+                                </h3>
+                                <ul>
+                                    <li ng-click="displayTheme('BEACH');">
+                                        <div class="radio-all">
+                                            <input id="BEACH" type="radio" ng-model="Theme" name="Theme" value="BEACH" />
+                                            <!--<label for="BEACH" title="BEACH">-->
+                                            <label title="BEACH">
+                                                <img src="images/themes/palm-tree-icon.png" alt="BEACH" />
+                                                <span>Beach</span>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li ng-click="displayTheme('DISNEY');">
+                                        <div class="radio-all">
+                                            <input type="radio" id="DISNEY" ng-model="Theme" name="Theme" value="DISNEY" />
+                                            <!--<label for="DISNEY" title="DISNEY">-->
+                                            <label title="DISNEY">
+                                                <img src="images/themes/paris-icon.png" alt="DISNEY" />
+                                                <span>Disney</span>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li ng-click="displayTheme('GAMBLING');">
+                                        <div class="radio-all">
+                                            <input type="radio" id="GAMBLING" ng-model="Theme" name="Theme" value="GAMBLING" />
+                                            <!--<label for="GAMBLING" title="GAMBLING">-->
+                                            <label title="GAMBLING">
+                                                <img src="images/themes/dice-icon.png" alt="GAMBLING" />
+                                                <span>Gambling</span>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li ng-click="displayTheme('HISTORIC');">
+                                        <div class="radio-all">
+                                            <input type="radio" id="HISTORIC" ng-model="Theme" name="Theme" value="HISTORIC" />
+                                            <!--<label for="HISTORIC" title="HISTORIC">-->
+                                            <label title="HISTORIC">
+                                                <img src="images/themes/bank-icon.png" alt="HISTORIC" />
+                                                <span>Historic</span>
+                                            </label>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li ng-click="displayTheme('MOUNTAINS');">
+                                        <div class="radio-all">
+                                            <input type="radio" id="MOUNTAINS" ng-model="Theme" name="Theme" value="MOUNTAINS" />
+                                            <!--<label for="MOUNTAINS" title="MOUNTAINS">-->
+                                            <label title="MOUNTAINS">
+                                                <img src="images/themes/camera-icon.png" alt="MOUNTAINS" />
+                                                <span>Mountains</span>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li ng-click="displayTheme('NATIONAL-PARKS');">
+                                        <div class="radio-all">
+                                            <input type="radio" id="NATIONAL-PARKS" name="Theme" ng-model="Theme" value="NATIONAL-PARKS" />
+                                            <!--<label for="NATIONAL-PARKS" title="NATIONAL PARKS">-->
+                                            <label title="NATIONAL PARKS">
+                                                <img src="images/themes/park-icon.png" alt="NATIONAL-PARKS" />
+                                                <span>National Parks</span>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li ng-click="displayTheme('OUTDOORS');">
+                                        <div class="radio-all">
+                                            <input type="radio" id="OUTDOORS" name="Theme" ng-model="Theme" value="OUTDOORS" />
+                                            <!--<label for="OUTDOORS" title="OUTDOORS">-->
+                                            <label title="OUTDOORS">
+                                                <img src="images/themes/climbing-icon.png" alt="OUTDOORS" />
+                                                <span>Outdoors</span>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li ng-click="displayTheme('ROMANTIC');">
+                                        <div class="radio-all">
+                                            <input type="radio" id="ROMANTIC" name="Theme" ng-model="Theme" value="ROMANTIC" />
+                                            <!--<label for="ROMANTIC" title="ROMANTIC">-->
+                                            <label title="ROMANTIC">
+                                                <img src="images/themes/hearts-icon.png" alt="ROMANTIC" />
+                                                <span>Romantic</span>
+                                            </label>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li ng-click="displayTheme('SHOPPING');">
+                                        <div class="radio-all">
+                                            <input type="radio" id="SHOPPING" name="Theme" ng-model="Theme" value="SHOPPING" />
+                                            <!--<label for="SHOPPING" title="SHOPPING">-->
+                                            <label title="SHOPPING">
+                                                <img src="images/themes/full-icon.png" alt="SHOPPING" />
+                                                <span>Shopping</span>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li ng-click="displayTheme('THEME-PARK');">
+                                        <div class="radio-all">
+                                            <input type="radio" id="THEME-PARK" name="Theme" ng-model="Theme" value="THEME-PARK" />
+                                            <!--<label for="THEME-PARK" title="THEME PARK">-->
+                                            <label title="THEME PARK">
+                                                <img src="images/themes/cruise-icon.png" alt="THEME-PARK" />
+                                                <span>Theme Park</span>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li ng-click="displayTheme('SKIING');">
+                                        <div class="radio-all">
+                                            <input type="radio" id="SKIING" name="Theme" ng-model="Theme" value="SKIING" />
+                                            <!--<label for="SKIING" title="SKIING">-->
+                                            <label title="SKIING">
+                                                <img src="images/themes/sport-icon.png" alt="SKIING" />
+                                                <span>Skiing</span>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li ng-click="displayTheme('CARIBBEAN');">
+                                        <div class="radio-all">
+                                            <input type="radio" id="CARIBBEAN" name="Theme" ng-model="Theme" value="CARIBBEAN" />
+                                            <!--<label for="CARIBBEAN" title="CARIBBEAN">-->
+                                            <label title="CARIBBEAN">
+                                                <img src="images/themes/holidays-icon.png" alt="CARIBBEAN" />
+                                                <span>Caribbean</span>
+                                            </label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 padding-0">
+                            <div class="selector-box region-box cc-selector">
+                                <h3>
+                                    <img src="images/help-icon.png" class="tool-tips" data-placement="top" data-toggle="tooltip" popover-placement="right"
+                                         popover="Click on any region icon to select a region. Filters results by selected region." popover-trigger="mouseenter" />Region : {{Region}}
+                                </h3>
+                                <ul>
+                                    <li ng-click="displayRegion('Africa')">
+                                        <div class="radio-all">
+                                            <input id="Africa" type="radio" ng-model="Region" name="Region" value="Africa" />
+                                            <!--<label for="Africa" title="Africa">-->
+                                            <label title="Africa">
+                                                <img src="images/regions/africa-icon.png" alt="Africa" />
+                                                <span>Africa</span>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li ng-click="displayRegion('Europe')">
+                                        <div class="radio-all">
+                                            <input id="Europe" type="radio" ng-model="Region" name="Region" value="Europe" />
+                                            <!--<label for="Europe" title="Europe">-->
+                                            <label title="Europe">
+                                                <img src="images/regions/europe-icon.png" alt="Europe" />
+                                                <span>Europe</span>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li ng-click="displayRegion('South America')">
+                                        <div class="radio-all">
+                                            <input id="SouthAmerica" type="radio" ng-model="Region" name="Region" value="South America" />
+                                            <!--<label for="LatinAmerica" title="Latin America">-->
+                                            <label title="South America">
+                                                <img src="images/regions/south-america.png" alt="South America" />
+                                                <span>South America</span>
+                                            </label>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li ng-click="displayRegion('North America')">
+                                        <div class="radio-all">
+                                            <input id="NorthAmerica" type="radio" ng-model="Region" name="Region" value="North America" />
+                                            <!--<label for="NorthAmerica" title="North America">-->
+                                            <label title="North America">
+                                                <img src="images/regions/north-america-icon.png" alt="North America" />
+                                                <span>North America</span>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li ng-click="displayRegion('Middle East')">
+                                        <div class="radio-all">
+                                            <input id="MiddleEast" type="radio" ng-model="Region" name="Region" value="Middle East" />
+                                            <!--<label for="MiddleEast" title="Middle East">-->
+                                            <label title="Middle East">
+                                                <img src="images/regions/icon-middle-east-icon.png" alt="Middle East" />
+                                                <span>Middle East</span>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li ng-click="displayRegion('Asia Pacific')">
+                                        <div class="radio-all">
+                                            <input id="AsiaPacific" type="radio" ng-model="Region" name="Region" value="Asia Pacific" />
+                                            <!--<label for="AsiaPacific" title="Asia Pacific">-->
+                                            <label title="Asia Pacific">
+                                                <img src="images/regions/asia-icon.png" alt="Asia Pacific" />
+                                                <span>Asia Pacific</span>
+                                            </label>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- [E] REFINE-YOUR-SEARCH-BOX -->
+    <!-- [S] POPULAR-DESTINATIONS -->
+    <!--<div ng-show="isSearchCollapsed">
+        <div class="refine-your-search-box slide-bottom" ng-hide="isSearching" ng-show="ShowDestinationView">
+            <div class="btn-box">
+                <a ng-click="isPopDestCollapsed = !isPopDestCollapsed" ng-class="!isPopDestCollapsed ? 'active' : ''" ng-show="topdestinationlist.length > 0 && IscalledFromIknowMyDest == false" class="toggle-btn your-search-btn red-bg">
+                    <i class="search-icon">
+                    </i>Top Popular Destinations
+                </a>
+            </div>
+            <div collapse="!isPopDestCollapsed" class="advanced-search">
+                <div class="advanced-content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <topdestination-popup destinations-params="topdestinationlist" destinations="destinationlist" airlinejsondata="airlineJsonData" airportlist="AvailableAirports"></topdestination-popup>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>-->
+    <!-- [E] POPULAR-DESTINATIONS -->
+</div>

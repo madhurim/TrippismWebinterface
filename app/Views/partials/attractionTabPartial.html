@@ -1,0 +1,40 @@
+﻿ <div class="row" title="">
+     <div class="tab-content-wp">
+         <attractiontab-fare-forecast attraction-params="attractionParams" home-fn="homeFn()"></attractiontab-fare-forecast>
+         <div class=" col-md-9 col-sm-12 col-xs-12">
+            <googleattraction-info googleattraction-params="attractionParams" is-open="openaccordiondata" class="googleattraction" style="clear:both;"></googleattraction-info>
+ <!--            <div class="row">
+                 <weatherwidget-info weather-params="attractionParams"></weatherwidget-info>
+                 <seasonalityfarerangewidget-info widget-params="attractionParams"></seasonalityfarerangewidget-info>
+             </div>-->   
+            <!--<div style="margin-top: 330px;"></div>-->
+          
+            <div class="" reset-dimentions >
+                <div class="row outerDiv" id="outerDiv">
+                    <div class="col-md-5 col-sm-5 col-xs-12 paddingr-0 bg-white column-1" ng-hide="attractionParams.WeatherInfoNoDataFound">
+                        <weatherwidget-info weather-params="attractionParams" ></weatherwidget-info>
+                        <weather-info weather-params="attractionParams"></weather-info> <!--WeatherPartial.html-->
+                    </div>
+                    <div class="col-md-7 col-sm-7 col-xs-12  bg-white column-2">
+                        <seasonalityfarerangewidget-info widget-params="attractionParams"></seasonalityfarerangewidget-info>
+                        <farerange-info farerange-params="attractionParams" style="clear:both;"></farerange-info>
+                    </div>
+                </div>
+            </div>
+
+<!--            <div class="newouterDiv" ng-if="attractionParams.WeatherInfoNoDataFound" ng-style="{'border':'none'}">
+                No Widget Data
+            </div>-->
+         
+            <!--<div class="col-md-12 col-sm-12 col-xs-12 padlr0" style="clear:both;">-->
+             <!--<div class="col-md-12 col-sm-12 col-xs-12 lastDiv" id="lastDiv" style="clear:both;" ng-show="!attractionParams.loadingSeasonality">-->
+             <div class="col-md-12 col-sm-12 col-xs-12 lastDiv" id="lastDiv" style="clear:both;" ng-show="!attractionParams.loadingSeasonality">
+                 <seasonality-info seasonality-params="attractionParams"></seasonality-info>
+             </div>
+           
+        </div>
+        <div class="col-md-3 col-sm-12 col-xs-12 padleft0">
+            <youtube-info youtube-params="attractionParams"></youtube-info>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+﻿<script type="text/ng-template" id="airportDropdownTemplate.html">
+    <a style="padding-left:10px;" tabindex="-1" class="row-even1">
+        <div>
+            <i ng-class="match.model.airport_IsMAC  ? 'glyphicon-send' :'glyphicon-plane'" class="glyphicon "></i>
+            <span ng-show="match.model.searchby == 'C'" ng-bind-html="match.model.airport_Code | typeaheadHighlight:query"></span>
+            <span ng-show="(match.model.searchby == 'CN' || match.model.searchby == 'ALL')" ng-bind-html="match.model.airport_Code | typeaheadHighlight"></span>,
+            <!--<span ng-show="match.model.searchby == 'ALL' " ng-bind-html="match.model.airport_FullName | typeaheadHighlight:query">{{match.model.airport_FullName.toLowerCase().indexOf("airport") >= 0 ? "" : "" + " Airport"}}</span>
+            <span ng-show="match.model.searchby != 'ALL' " ng-bind-html="match.model.airport_FullName | typeaheadHighlight">{{match.model.airport_FullName.toLowerCase().indexOf("airport") >= 0 ? "" : "" + " Airport"}}</span>,-->
+            <span ng-show="match.model.searchby == 'CN' " ng-bind-html="match.model.airport_CityName | typeaheadHighlight:query"></span>
+            <span ng-show="match.model.searchby != 'CN' " ng-bind-html="match.model.airport_CityName | typeaheadHighlight"></span>,
+            <span ng-show="match.model.searchby == 'ALL' " ng-bind-html="match.model.airport_CountryName | typeaheadHighlight:query"></span>
+            <span ng-show="match.model.searchby != 'ALL' " ng-bind-html="match.model.airport_CountryName | typeaheadHighlight"></span>
+            <!--<span style="color:red;">{{match.model.rank}}</span>-->
+        </div>
+    </a>
+</script>

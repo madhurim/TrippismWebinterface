@@ -1,0 +1,17 @@
+﻿<div class="row">
+    <div ng-if="!loadingSeasonality" class="col-md-12">
+        <div class="popup-box">
+            <div class="popup-header">     
+                <h5 class="widget-popup-title">Historical Traffic Seasonality detail [ {{seasonalityParams.DestinationairportName.airport_FullName}} , {{seasonalityParams.DestinationairportName.airport_CityName}} ]</h5>
+            </div> 
+            <div class="popup-content">  
+                
+                <p>
+                    Traffic volume booked to the requested destination airport for each of the previous 52 weeks. It’s the booked traffic for each week to each of the other previous 51 weeks, and rated accordingly
+                </p>
+                <div class="chart-box"></div>
+            </div>
+        </div>
+    </div>
+</div>
+

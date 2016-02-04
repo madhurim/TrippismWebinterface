@@ -1,0 +1,45 @@
+﻿<div ng-controller="YouTubeController">
+    <div class="right-sidebar">
+        <div class="news-wp">
+            <div class="news-title popup-header">
+                <h6 class="widget-popup-title">  {{youtubeParams.DestinationairportName.airport_CityName}} attraction videos in 30 Miles radius</h6>
+            </div>
+            <div class="news-list">
+                <div class="news-pagination" ng-show="isDataLoadedFirstTime">
+                    <nav>
+                        <ul class="pager">
+                            <li class="previous"><a style="cursor:pointer;" ng-disabled="curPage == 0" ng-click="loadyoutubeInfo(null,prevToken)"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Previous</a></li>
+                            <li class="next"><a style="cursor:pointer;" ng-disabled="isdisabled == 0" ng-click="loadyoutubeInfo(nextToken,null)">Next<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div id="examples" class="news-block">
+                    <div class="content contentVertical">
+                        <ul>
+                            <li ng-repeat="data in youtubeData.items | limitTo: pageSize ">
+                                <div class="news-img-block">
+                                    <a ng-click="open(data.id.videoId)" style="cursor:pointer;">
+                                        <span class="play"><img src="/images/play-icon.png" alt="" /></span>
+                                        <img ng-src="{{data.snippet.thumbnails.default.url}}" alt="" />
+                                    </a>
+                                </div>
+                                <div class="news-content-block">
+                                    <p>{{data.snippet.title}}</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/ng-template" id="YoutubePlayerPartial.html">
+    <div class="modal-header head" style="padding-bottom: 24px !important;">
+        <button class="close closebutton" ng-click="cancel()" type="button">×</button>
+    </div>
+    <div class="modal-body" cg-busy="{promise:youtubeplayerpromise,message:'Loading video'}" style="padding-top: 0px !important;">
+        <iframe width="100%" height="375" ng-src="{{videoID}}" frameborder="0" allowfullscreen></iframe>
+    </div>
+</script>

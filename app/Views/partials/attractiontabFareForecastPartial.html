@@ -1,0 +1,114 @@
+﻿<div class="ibox-wp">
+    <div class="ibox-title">
+        <h4>
+            {{attractionParams.DestinationairportName.airport_FullName + ', ' + attractionParams.DestinationairportName.airport_CityName + ', ' + attractionParams.DestinationairportName.airport_CountryName}}
+        </h4>
+        <div class="share-link blink_me">
+            <a ng-click="homeFn()">See All Destinations</a>
+        </div>
+        <!--   <div class="share-btn">
+               <a title="Share via email" ng-click="SendEmailToUser()" class="icons red-bg"><img src="/images/share-icon.png" alt="" /></a>
+           </div>-->
+    </div>
+
+    <div class="ibox-content">
+        <div class="row">
+            <div class="col-md-2 col-sm-3 col-xs-6" ng-if="attractionParams.mapOptions.LowestNonStopFare && attractionParams.mapOptions.LowestNonStopFare.Fare != 'N/A' && attractionParams.mapOptions.LowestNonStopFare.Fare != 0">
+                <div class="ibox-box">
+                    <h4><span class="cursor-help" data-toggle="tooltip" popover="{{attractionParams.mapOptions.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(attractionParams.mapOptions.CurrencyCode)}}</span> {{attractionParams.mapOptions.LowestNonStopFare.Fare | number : 2}}</h4>
+                    <p>Lowest Non Stop Fare</p>
+                    <p class="hover-line">
+                        <a href="" ng-click="InstaFlightSearch(attractionParams.mapOptions.LowestNonStopFare.AirlineCodes, attractionParams.mapOptions.LowestNonStopFare.Fare,0,0);">
+                            <!--  <span ng-if="attractionParams.mapOptions.LowestNonStopFare.AirlineCodes.length == 1">
+                                  Airline : {{attractionParams.mapOptions.LowestNonStopFare.AirlineCodes.join(', ')}}
+                              </span>
+                              <span ng-if="attractionParams.mapOptions.LowestNonStopFare.AirlineCodes.length > 1">
+                                  Airlines : {{attractionParams.mapOptions.LowestNonStopFare.AirlineCodes.join(', ')}}
+                              </span>-->
+                            <span class="book-link"> Book Now! </span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-2 col-sm-3 col-xs-6" ng-if="(!attractionParams.mapOptions.LowestNonStopFare || attractionParams.mapOptions.LowestNonStopFare.Fare == 'N/A' || attractionParams.mapOptions.LowestNonStopFare.Fare == 0) && attractionParams.mapOptions.LowestFare && attractionParams.mapOptions.LowestFare.Fare != 'N/A' &&  attractionParams.mapOptions.LowestFare.Fare != 0">
+                <div class="ibox-box">
+                    <h4><span class="cursor-help" data-toggle="tooltip" popover="{{attractionParams.mapOptions.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(attractionParams.mapOptions.CurrencyCode)}}</span> {{attractionParams.mapOptions.LowestFare.Fare | number : 2}}</h4>
+                    <p>Lowest Non Stop Fare</p>
+                    <p class="hover-line">
+                        <a href="" ng-click="InstaFlightSearch(attractionParams.mapOptions.LowestFare.AirlineCodes, attractionParams.mapOptions.LowestFare.Fare);">
+                            <!-- <span ng-if="attractionParams.mapOptions.LowestFare.AirlineCodes.length == 1">
+                                 Airline : {{attractionParams.mapOptions.LowestFare.AirlineCodes.join(', ')}}
+                             </span>
+                             <span ng-if="attractionParams.mapOptions.LowestFare.AirlineCodes.length > 1">
+                                 Airlines : {{attractionParams.mapOptions.LowestFare.AirlineCodes.join(', ')}}
+                             </span>-->
+                            <span class="book-link"> Book Now! </span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-3 col-xs-6" ng-show="FareNoDataFound && FareApiLoaded" ng-if="attractionParams.mapOptions.LowestFare && attractionParams.mapOptions.LowestFare.Fare != 'N/A' &&  attractionParams.mapOptions.LowestFare.Fare != 0">
+                <div class="ibox-box">
+                    <h4><span class="cursor-help" data-toggle="tooltip" popover="{{attractionParams.mapOptions.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(attractionParams.mapOptions.CurrencyCode)}}</span> {{attractionParams.mapOptions.LowestFare.Fare | number : 2}}</h4>
+                    <p>Lowest Fare</p>
+                    <p class="hover-line">
+                        <a href="" ng-click="InstaFlightSearch(attractionParams.mapOptions.LowestFare.AirlineCodes, attractionParams.mapOptions.LowestFare.Fare);">
+                            <!--  <span ng-if="attractionParams.mapOptions.LowestFare.AirlineCodes.length == 1">
+                                  Airline : {{attractionParams.mapOptions.LowestFare.AirlineCodes.join(', ')}}
+                              </span>
+                              <span ng-if="attractionParams.mapOptions.LowestFare.AirlineCodes.length > 1">
+                                  Airlines : {{attractionParams.mapOptions.LowestFare.AirlineCodes.join(', ')}}
+                              </span>-->
+                            <span class="book-link"> Book Now! </span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-3 col-xs-6" ng-show="!FareNoDataFound" ng-if="FareforecastData.LowestFare != 'N/A' &&  FareforecastData.LowestFare != 0">
+                <div class="ibox-box">
+                    <h4><span class="cursor-help" data-toggle="tooltip" popover="{{attractionParams.mapOptions.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(attractionParams.mapOptions.CurrencyCode)}}</span> {{attractionParams.mapOptions.LowestFare.Fare | number : 2}}</h4>
+                    <p>Lowest Fare</p>
+                    <p class="hover-line">
+                        <a href="" ng-click="InstaFlightSearch(attractionParams.mapOptions.LowestFare.AirlineCodes, attractionParams.mapOptions.LowestFare.Fare);">
+                            <!-- <span ng-if="attractionParams.mapOptions.LowestFare.AirlineCodes.length == 1">
+                                 Airline : {{attractionParams.mapOptions.LowestFare.AirlineCodes.join(', ')}}
+                             </span>
+                             <span ng-if="attractionParams.mapOptions.LowestFare.AirlineCodes.length > 1">
+                                 Airlines : {{attractionParams.mapOptions.LowestFare.AirlineCodes.join(', ')}}
+                             </span>-->
+                            <span class="book-link"> Book Now! </span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-2 col-sm-3 col-xs-6" ng-show="!FareNoDataFound" ng-if="FareforecastData.Forecast.LowestPredictedFare != 'N/A' && FareforecastData.Forecast.LowestPredictedFare != 0">
+                <div title="Forecasted price for next week for the same origin-destination pair and date combination selected" class="ibox-box"><h4><span class="cursor-help" data-toggle="tooltip" popover="{{FareforecastData.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(FareforecastData.CurrencyCode)}}</span> {{FareforecastData.Forecast.LowestPredictedFare | number : 2 }}</h4><p>Lowest Predicted Fare for Next Week</p></div>
+            </div>
+
+            <div class="col-md-2 col-sm-3 col-xs-6" ng-if="!FareNoDataFound && IsRequestCompleted" ng-hide="FareforecastData.Recommendation == 'unknown'">
+                <div class="ibox-box" ng-show="!FareNoDataFound">
+                    <img ng-if="FareforecastData.Recommendation == 'buy'" title="Go ahead, Buy!" src="/images/like-icon.png" />
+                    <img ng-if="FareforecastData.Recommendation == 'wait'" title="Wait, price may drop!" src="/images/wait-icon.png" />
+                    <p>Recommendation</p>
+                </div>
+            </div>
+            <!--<div class="col-md-4 col-sm-12 col-xs-12 searched-box">-->
+            <div class="col-md-3 col-sm-12 col-xs-12 searched-box">
+                <div class="ibox-box searched">
+                    <h4>You Searched </h4>
+                    <p>
+                        <span ng-show="attractionParams.SearchCriteria.OrigintoDisp">{{attractionParams.SearchCriteria.OrigintoDisp}} </span>
+                        <span ng-show="attractionParams.SearchCriteria.FromDate">{{attractionParams.SearchCriteria.FromDate | date:'MM/dd/yyyy'}} </span>
+                        <span ng-show="attractionParams.SearchCriteria.ToDate">To {{attractionParams.SearchCriteria.ToDate |date:'MM/dd/yyyy'}}</span>
+                        <span ng-show="attractionParams.SearchCriteria.Minfare > 0"><br />{{attractionParams.SearchCriteria.fareCurrencySymbol}} {{attractionParams.SearchCriteria.Minfare}}</span>
+                        <span ng-show="attractionParams.SearchCriteria.Maxfare > 0"> To {{attractionParams.SearchCriteria.fareCurrencySymbol}} {{attractionParams.SearchCriteria.Maxfare}}</span>
+                        <span ng-show="attractionParams.SearchCriteria.Region "> {{attractionParams.SearchCriteria.Region}}</span>
+                        <span ng-show="attractionParams.SearchCriteria.Theme"> {{attractionParams.SearchCriteria.Theme}}</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

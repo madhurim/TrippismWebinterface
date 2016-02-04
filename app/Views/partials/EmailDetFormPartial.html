@@ -1,0 +1,40 @@
+﻿<div style="padding: 20px;">
+    <div cg-busy="{promise:sendmailPromise,message:'Sending email...'}">
+        <div class="button-right col-lg-12">
+            <a class="close-panel-button pull-right" ng-click="dismiss()" role="button" id="close_destination_panel" tabindex="0">X</a>
+        </div>
+        <div style="clear:both;" ng-show="hasError">
+            <div class="alert alert-danger triperror" role="alert" ng-show="isValidFromEmail == false">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                Please enter valid from email address.
+            </div>
+            <div class="alert alert-danger triperror" role="alert" ng-show="FormGetEmailDet.toEmail.$error.required">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                Please enter to email address.
+            </div>
+            <div class="alert alert-danger triperror" role="alert" ng-show="!FormGetEmailDet.toEmail.$error.required && isValidToEmail == false">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                Please enter valid to email address.
+            </div>
+            <div class="alert alert-danger triperror" role="alert" ng-show="FormGetEmailDet.Subject.$error.required">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                Please enter subject.
+            </div>
+        </div>
+        <form name="FormGetEmailDet" novalidate="novalidate" class="sharenow-form">
+            <div class="form-group">
+                <label for="fromEmail">From email address</label>
+                <input type="text" ng-model="fromEmail" class="form-control" style="color:black !important;" id="fromEmail" name="fromEmail" placeholder="Enter email" autocomplete="off" />
+            </div>
+            <div class="form-group">
+                <label for="toEmail">To email address</label>
+                <input type="text" ng-model="toEmail" class="form-control" id="toEmail" style="color:black !important;" name="toEmail" placeholder="Enter email" required autocomplete="off" />
+            </div>
+            <div class="form-group">
+                <label for="Subject">Subject</label>
+                <input type="text" ng-model="Subject" class="form-control" id="Subject" style="color:black !important;" name="Subject" placeholder="Subject" required autocomplete="off" />
+            </div>
+            <button type="submit" class="btn btn-danger btn-sm" ng-click="submitModal()">Share Now</button>
+        </form>
+    </div>
+</div>

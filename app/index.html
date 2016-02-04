@@ -1,0 +1,174 @@
+﻿<!doctype html>
+<html ng-app="TrippismUIApp" lang="en" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Trippism</title>
+    <link rel="shortcut icon" href="/images/trippism-logo.ico" />
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/angular-block-ui/dist/angular-block-ui.css" />
+    <link rel="stylesheet" href="bower_components/angular-busy/dist/angular-busy.css" />
+    <link rel="stylesheet" href="bower_components/angular-rangeslider/angular.rangeSlider.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link href="styles/bootstrap.css" rel="stylesheet">
+    <link href="styles/fonts.css" rel="stylesheet">
+    <link href="styles/jquery.mCustomScrollbar.css" rel="stylesheet">
+    <link href="styles/style-custom.css" rel="stylesheet" />
+    <link href="styles/Style.css" rel="stylesheet" />
+    <link href="styles/alertify.min.css" rel="stylesheet" />
+    <!--Use Awesome css for Attraction rating-->
+    <link href="styles/font-awesome.css" rel="stylesheet" />
+    <!-- endbuild -->
+</head>
+<body ng-controller="BaseController">
+    <div class="header">
+        <div class="header-box">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-2 col-sm-2 col-xs-7">
+                        <div class="logo">
+                            <a> <img src="images/trippism-logo.png" alt="" /></a>
+                        </div>
+                    </div>
+                    <div class="col-md-1 col-sm-2 col-xs-2 pull-right top-10">
+                        <ul class="nav-home">
+                            <li class="dropdown">
+                                <a href="" class="dropdown-toggle padding-0" data-toggle="dropdown">
+                                    <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="" ng-click="feedback()">Feedback</a></li>
+                                    <li><a href="" ng-click="aboutUs()">About Us</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ui-view class="content-wrapper"></div>
+    <footer>
+        <div class="footer-box">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6 col-sm-7 col-xs-12">
+                        <div class="footer-menu">
+                            <ul>
+                                <li><a>Powered By</a></li>
+                                <li> <a class="partners-image sabre-img"></a></li>
+                                <li> <a class="partners-image google-img"></a></li>
+                                <li> <a class="partners-image underground-img"></a></li>
+                                <!--<li> <a class="partners-image triveni-img" href="http://www.trivenitechnologies.com/" target="_blank"></a></li>
+                                <li> <a class="partners-image highchart-img"> </a></li>-->
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-5 col-xs-12">
+                        <p class="copyright">© 2015 - Trippism All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/angular-ui-scroll/dist/ui-scroll.js"></script>
+    <script src="bower_components/angular-ui-scrollpoint/dist/scrollpoint.js"></script>
+    <script src="bower_components/angular-ui-event/dist/event.js"></script>
+    <script src="bower_components/angular-ui-mask/dist/mask.js"></script>
+    <script src="bower_components/angular-ui-validate/dist/validate.js"></script>
+    <script src="bower_components/angular-ui-indeterminate/dist/indeterminate.js"></script>
+    <script src="bower_components/angular-ui-uploader/dist/uploader.js"></script>
+    <script src="bower_components/angular-ui-utils/index.js"></script>
+    <script src="bower_components/angular-ui-map/ui-map.js"></script>
+    <script src="bower_components/angular-block-ui/dist/angular-block-ui.js"></script>
+    <script src="bower_components/angular-busy/dist/angular-busy.js"></script>
+    <script src="bower_components/highcharts/highcharts.js"></script>
+    <script src="bower_components/highcharts/highcharts-more.js"></script>
+    <script src="bower_components/highcharts/modules/exporting.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-rangeslider/angular.rangeSlider.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!--Google Maps-->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=geometry,places"></script>
+    <script src="http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerwithlabel/1.1.9/markerwithlabel/src/markerwithlabel.js"></script>
+
+    <!--<script src="scripts/Constants/airports.json"></script>
+    <script src="scripts/Constants/cities.json"></script>
+    <script src="scripts/Constants/countries.json"></script>
+    <script src="scripts/Constants/iataairports.json"></script>
+    <script src="scripts/Constants/State.json"></script>-->
+    <!-- build:js({.tmp,app}) scripts/scripts.js -->
+    <script src="scripts/app.js"></script>
+    <script src="scripts/libs/Loader.js"></script>
+    <script src="scripts/libs/alertify.js"></script>
+    <script src="scripts/libs/exporting.js"></script>
+    <script src="scripts/libs/underscore.js"></script>
+    <script src="scripts/libs/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="scripts/libs/script.js"></script>
+    <script src="scripts/libs/Utility.js"></script>
+    <script src="scripts/libs/angular-youtube-embed.js"></script>
+    <script src="scripts/libs/markerclusterer.js"></script>
+
+    <script src="scripts/Factory/DestinationFactory.js"></script>
+    <script src="scripts/Factory/FareforecastFactory.js"></script>
+    <script src="scripts/Factory/UtilFactory.js"></script>
+    <script src="scripts/Factory/FareRangeFactory.js"></script>
+    <script src="scripts/Factory/SeasonalityFactory.js"></script>
+    <script src="scripts/Factory/WeatherFactory.js"></script>
+    <script src="scripts/Factory/GoogleAttractionFactory.js"></script>
+    <script src="scripts/Factory/YouTubeFactory.js"></script>
+    <script src="scripts/Factory/GoogleGeoReverseLookupFactory.js"></script>
+    <script src="scripts/Factory/EmailForDestinationDetFactory.js"></script>
+    <script src="scripts/Factory/InstaFlightSearchFactory.js"></script>
+    <script src="scripts/Factory/FeedbackFactory.js"></script>
+    <script src="scripts/routers/routes.js"></script>
+
+    <script src="scripts/Controllers/BaseController.js"></script>
+    <script src="scripts/Controllers/HomeController.js"></script>
+    
+    <script src="scripts/Controllers/DestinationController.js"></script>
+    <script src="scripts/Controllers/TabManagerController.js"></script>
+    <script src="scripts/Controllers/YouTubeController.js"></script>
+    <script src="scripts/Controllers/EmailForDestinationDetController.js"></script>
+    <script src="scripts/Controllers/InstaFlightSearchController.js"></script>
+    <script src="scripts/Controllers/FeedbackController.js"></script>
+
+    <script src="scripts/Directives/GoogleMap.directive.js"></script>
+    <script src="scripts/Directives/SeasonalityDirective.js"></script>
+    <script src="scripts/Directives/FareRangeDirective.js"></script>
+    <script src="scripts/Directives/WetherApiDirective.js"></script>
+    <script src="scripts/Directives/GoogleAttractionDirective.js"></script>
+    <script src="scripts/Directives/YoutubeDirective.js"></script>
+    <script src="scripts/Directives/AverageStarRatingDirective.js"></script>
+    <script src="scripts/Directives/AttractionTabDirective.js"></script>
+    <script src="scripts/Directives/attractiontabFareForecastDirective.js"></script>
+    <script src="scripts/Directives/TopDestinationsDirective.js"></script>
+    <script src="scripts/Directives/attractionsListDirective.js"></script>
+    <script src="scripts/Directives/WeatherWidgetDirective.js"></script>
+    <script src="scripts/Directives/SeasonalityFarerangeWidgetDirective.js"></script>
+    <script src="scripts/Directives/BackButtonHandlerDirective.js"></script>
+    <script src="scripts/Directives/ResetDimentionsDirective.js"></script>
+    <script src="scripts/Directives/AirportDropdownDirective.js"></script>
+    <!-- endbuild -->
+
+</body>
+</html>

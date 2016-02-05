@@ -5,6 +5,7 @@
 
     function UtilFactory($http, $location, $anchorScroll, $rootScope, $filter) {
         // Define the functions and properties to reveal.
+        var AirportJsonData = [];
         var service = {
             ReadAirportJson: ReadAirportJson,
             getIpinfo: getIpinfo,
@@ -16,10 +17,13 @@
             AirportCodeLog: AirportCodeLog,
             currencySymbol: { currencySymbolsList: [], currencySymbolsListCache: [] },
             GetLowFareForMap: GetLowFareForMap,
-            updateQueryStringParameter: updateQueryStringParameter
+            updateQueryStringParameter: updateQueryStringParameter,
+            AirportData: AirportData
         };
         return service;
-
+        function AirportData() {
+            return AirportJsonData;
+        }
         function ReadStateJson() {
             var States = [];
             return $http.get('scripts/Constants/State.json').then(function (_states) {
@@ -82,6 +86,8 @@
                         }
                     }
                 }
+
+                AirportJsonData = AvailableCodes;
                 return AvailableCodes;
             });
         }

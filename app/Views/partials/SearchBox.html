@@ -95,7 +95,6 @@
                                                            autocomplete="off"
                                                            ng-blur="SetFromDate()"
                                                            ng-class="hasError && isSearchbuttonClicked  && frmdestfinder.FromDate.$error.required ? 'Errorbox' :''" />
-                                                    <!--<i ng-click="openFromDate($event)" class="icon-box calendar"></i>-->
                                                 </div>
                                             </div>
                                             <span class="dateDisplay">{{FromDateDisplay}}</span>
@@ -133,18 +132,19 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 text-center" ng-if="selectedform == 'SuggestDestination'">
+                                            <!--ng-click="IscalledFromIknowMyDest= false; GetDestinationClick()"
+                                                 ng-disabled="SearchbuttonIsLoading"-->
+
                                             <button type="submit"
-                                                    ng-click="IscalledFromIknowMyDest= false; GetDestinationClick()"
-                                                    ng-disabled="SearchbuttonIsLoading"
                                                     class="btn btn-danger btn-search"
                                                     tabindex="6">
                                                 <i ng-if="SearchbuttonIsLoading" style="margin-right:5px;" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>{{SearchbuttonText}}
                                             </button>
                                         </div>
                                         <div class="col-md-12 text-center" ng-if="selectedform == 'KnowMyDestination'">
+                                            <!--ng-click="GetDestinationClick()"
+                                            ng-disabled="KnowSearchbuttonIsLoading"-->
                                             <button type="submit"
-                                                    ng-click="GetDestinationClick()"
-                                                    ng-disabled="KnowSearchbuttonIsLoading"
                                                     class="btn btn-danger btn-search"
                                                     tabindex="7">
                                                 <i ng-if="KnowSearchbuttonIsLoading" style="margin-right:5px;" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>{{KnowSearchbuttonText}}

@@ -19,8 +19,8 @@ TrippismUIApp.config(['$stateProvider', '$urlRouterProvider', function ($statePr
             templateUrl:'Views/Home.html'
         })
         .state('destinations', {
-            url: '/destinations',
-            templateUrl: 'Views/destination.html'
+            url: '/destinations/*path',
+            templateUrl: 'Views/destinations.html'
         })
         .state('destination', {
              url: '/destination/*path',

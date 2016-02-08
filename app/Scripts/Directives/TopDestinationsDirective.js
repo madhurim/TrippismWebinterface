@@ -1,4 +1,5 @@
-﻿angular.module('TrippismUIApp').directive('topdestinationPopup', ['$rootScope', '$compile', '$filter', 'UtilFactory', function ($rootScope, $compile, $filter, UtilFactory) {
+﻿//Not In used
+angular.module('TrippismUIApp').directive('topdestinationPopup', ['$rootScope', '$compile', '$filter', 'UtilFactory', function ($rootScope, $compile, $filter, UtilFactory) {
     return {
         restrict: 'E',
         scope: {

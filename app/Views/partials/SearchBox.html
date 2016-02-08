@@ -137,6 +137,7 @@
 
                                             <button type="submit"
                                                     class="btn btn-danger btn-search"
+                                                    ng-click="GetDestinationClick('/destinations')"
                                                     tabindex="6">
                                                 <i ng-if="SearchbuttonIsLoading" style="margin-right:5px;" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>{{SearchbuttonText}}
                                             </button>
@@ -146,6 +147,7 @@
                                             ng-disabled="KnowSearchbuttonIsLoading"-->
                                             <button type="submit"
                                                     class="btn btn-danger btn-search"
+                                                    ng-click="GetDestinationClick('/destination')"
                                                     tabindex="7">
                                                 <i ng-if="KnowSearchbuttonIsLoading" style="margin-right:5px;" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>{{KnowSearchbuttonText}}
                                             </button>

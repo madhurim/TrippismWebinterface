@@ -1,48 +1,14 @@
 ﻿<div ng-controller="DestinationsController">
     <!-- [S] HEADER -->
     <!--<div report-my-height param="ShowDestinationView" paramtab="tabManager" isshowsearchicon="isShowSearchIcon">-->
-        <!--<div class="header">
-            <div class="header-box">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-2 col-sm-2 col-xs-7">
-                            <div class="logo">
-                                <a ng-click="ViewDestination();"> <img src="images/trippism-logo.png" alt="" /></a>
-                            </div>
-                        </div>
-                        <div class="col-md-1 col-sm-2 col-xs-2 pull-right top-10">
-                            <ul class="nav-home">
-                                <li class="dropdown">
-                                    <a href="" class="dropdown-toggle padding-0" data-toggle="dropdown">
-                                        <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a href="" ng-click="feedback()">Feedback</a></li>
-                                        <li><a href="" ng-click="aboutUs()">About Us</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                        <div ng-controller="TabManagerController">
-                            <div class="tabs-wp" ng-if="tabManager.tabItems.length > 0">
-                                <div tabs>
-                                    <div ng-show="tabInfo.TabcontentView" ng-repeat="tabInfo in tabManager.tabItems" pane title="{{ tabInfo.title | limit:10 }}">
-                                        <attraction-tab tabs-loading="loadingTab" attraction-params="tabInfo.parametersData" home-fn="ViewDestination()"></attraction-tab>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>-->
-        <div ng-show="isSearchCollapsed && ShowDestinationView">
-            <div ng-show="ShowDestinationView " ng-hide="isSearching">
+   
+      <div ><!--ng-show="isSearchCollapsed && ShowDestinationView"-->
+            <div> <!--ng-show="ShowDestinationView " ng-hide="isSearching"-->
                 <div class="refine-your-destination-box">
                     <div class="your-searched-content">
-                        <h5 class="search-detail" ng-show="IscalledFromIknowMyDest == false">
-                            <span ng-show="refineSearchValues && refineSearchValues.OrigintoDisp">{{refineSearchValues.OrigintoDisp}} </span>
-                            <span ng-show="refineSearchValues && refineSearchValues.FromDate">{{refineSearchValues.FromDate | date:'MMM-dd-yyyy'}} </span>
+                        <h5 class="search-detail" ><!--ng-show="IscalledFromIknowMyDest == false"-->
+                            <span ng-show="refineSearchValues && refineSearchValues.OrigintoDisp">{{refineSearchValues.OrigintoDisp}} </span><!--ng-show="refineSearchValues && refineSearchValues.OrigintoDisp"-->
+                            <span ng-show="refineSearchValues && refineSearchValues.FromDate">{{refineSearchValues.FromDate | date:'MMM-dd-yyyy'}} </span> <!--ng-show="refineSearchValues && refineSearchValues.FromDate"-->
                             <span ng-show="refineSearchValues && refineSearchValues.ToDate">To {{refineSearchValues.ToDate | date:'MMM-dd-yyyy'}}</span>
                             <span ng-show="refineSearchValues && refineSearchValues.Minfare > 0">{{fareCurrencySymbol}} {{refineSearchValues.Minfare}}</span>
                             <span ng-show="refineSearchValues && refineSearchValues.Maxfare > 0"> To {{fareCurrencySymbol}} {{refineSearchValues.Maxfare}}</span>
@@ -62,7 +28,7 @@
     <div class="map-box" id="mainmap">
         <div class="" style="height:100%;width:auto;" cg-busy="{promise:mappromise,message:cgBuzyMessage}">
             <div id="wrapper" cg-busy="{promise:destinationmappromise,message:'Please wait...'}">
-                <div google-map id="map_canvas" ng-show="isShowSearchIcon || ShowDestinationView" origin="refineSearchValues.OrigintoDisp" btntext="buttontext" destinations="destinationlist" airlinejsondata="airlineJsonData" airportlist="AvailableAirports" defaultlat="20" defaultlng="0" class="map"></div>
+                <div google-map id="map_canvas" ng-show="isShowSearchIcon || ShowDestinationView" origin="refineSearchValues.OrigintoDisp" destinations="destinationlist" airlinejsondata="airlineJsonData" airportlist="AvailableAirports" defaultlat="20" defaultlng="0" class="map"></div>
             </div>
         </div>
     </div>
@@ -70,7 +36,7 @@
     <!-- [S] REFINE-YOUR-SEARCH-BOX -->
     <div ><!--ng-show="ShowDestinationView && IsRefineSearchShow"-->
         <div ><!--ng-hide="isSearching" ng-show="ShowDestinationView"-->
-            <div class="popular-destinations active">
+            <div class="popular-destinations" ng-class="!isRefineSeachCollapsed ? 'popular-destinations-colleps':'active' ">
                 <!--ng-class="!isRefineSeachCollapsed && ShowDestinationView ? 'popular-destinations-colleps' : 'active'-->
                 <a class="toggle-btn destinations-btn red-bg" ng-click="isRefineSeachCollapsed = !isRefineSeachCollapsed;">
                     <!--<ng-click="isRefineSeachCollapsed = !isRefineSeachCollapsed;isSearchCollapsed= true;isModified=false;"-->
@@ -322,4 +288,8 @@
         </div>
     </div>-->
     <!-- [E] POPULAR-DESTINATIONS -->
+
+    <!--<search-box></search-box>-->  
+    
+  
 </div>

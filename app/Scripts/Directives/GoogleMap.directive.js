@@ -7,7 +7,6 @@ angular.module('TrippismUIApp')
           directive.templateUrl = '/Views/GoogleMap.html',
           directive.scope = {
               origin: "=",
-              btntext: "=btntext",
               destinations: "=destinations",
               airportlist: "=airportlist",
               airlineJsonData: "=airlinejsondata",
@@ -15,7 +14,8 @@ angular.module('TrippismUIApp')
               defaultlng: "@"
           }
 
-          directive.controller = ['$scope', '$q', '$compile', '$filter', '$timeout', '$rootScope', '$http', 'TrippismConstants', 'UtilFactory', function ($scope, $q, $compile, $filter, $timeout, $rootScope, $http, TrippismConstants, UtilFactory) {
+          directive.controller = ['$scope', '$q', '$compile', '$filter', '$timeout', '$rootScope', '$http', '$location', 'TrippismConstants', 'UtilFactory',
+              function ($scope, $q, $compile, $filter, $timeout, $rootScope, $http,$location, TrippismConstants, UtilFactory) {
               $scope.destinationMap = undefined;
               $scope.faresList = [];
               $scope.destinationMarkers = [];
@@ -60,29 +60,32 @@ angular.module('TrippismUIApp')
               };
 
               $scope.destinationpopupClick = function (item) {
-                  var OriginairportName = _.find($scope.airportlist, function (airport) {
-                      return airport.airport_Code == $scope.origin.toUpperCase()
-                  });
-                  var DestinationairportName = _.find($scope.airportlist, function (airport) {
-                      return airport.airport_Code == item.CustomMarkerInfo.DestinationLocation
-                  });
-                  var dataForecast = {
-                      "Origin": $scope.origin.toUpperCase(),
-                      "DepartureDate": $filter('date')(item.CustomMarkerInfo.DepartureDateTime, 'yyyy-MM-dd'),
-                      "ReturnDate": $filter('date')(item.CustomMarkerInfo.ReturnDateTime, 'yyyy-MM-dd'),
-                      "Destination": item.CustomMarkerInfo.DestinationLocation
-                  };
-                  $rootScope.$broadcast('EmptyFareForcastInfo', {
-                      Origin: OriginairportName.airport_CityName,
-                      Destinatrion: DestinationairportName.airport_Code,
-                      Fareforecastdata: dataForecast,
-                      mapOptions: item.CustomMarkerInfo,
-                      OriginairportName: OriginairportName,
-                      DestinationairportName: DestinationairportName,
-                      DestinationList: $scope.destinations,
-                      AvailableAirports: $scope.airportlist,
-                      AvailableAirline: $scope.airlineJsonData
-                  });
+
+                  $location.path('destination/f=' + $scope.origin.toUpperCase() + ';t=' + item.CustomMarkerInfo.DestinationLocation + ';d=' + ConvertToRequiredDate(item.CustomMarkerInfo.DepartureDateTime, 'API') + ';r=' + ConvertToRequiredDate(item.CustomMarkerInfo.ReturnDateTime, 'API'));
+
+                  //var OriginairportName = _.find($scope.airportlist, function (airport) {
+                  //    return airport.airport_Code == $scope.origin.toUpperCase()
+                  //});
+                  //var DestinationairportName = _.find($scope.airportlist, function (airport) {
+                  //    return airport.airport_Code == item.CustomMarkerInfo.DestinationLocation
+                  //});
+                  //var dataForecast = {
+                  //    "Origin": $scope.origin.toUpperCase(),
+                  //    "DepartureDate": $filter('date')(item.CustomMarkerInfo.DepartureDateTime, 'yyyy-MM-dd'),
+                  //    "ReturnDate": $filter('date')(item.CustomMarkerInfo.ReturnDateTime, 'yyyy-MM-dd'),
+                  //    "Destination": item.CustomMarkerInfo.DestinationLocation
+                  //};
+                  //$rootScope.$broadcast('EmptyFareForcastInfo', {
+                  //    Origin: OriginairportName.airport_CityName,
+                  //    Destinatrion: DestinationairportName.airport_Code,
+                  //    Fareforecastdata: dataForecast,
+                  //    mapOptions: item.CustomMarkerInfo,
+                  //    OriginairportName: OriginairportName,
+                  //    DestinationairportName: DestinationairportName,
+                  //    DestinationList: $scope.destinations,
+                  //    AvailableAirports: $scope.airportlist,
+                  //    AvailableAirline: $scope.airlineJsonData
+                  //});
               };
 
               var infowindow = new google.maps.InfoWindow();
@@ -210,7 +213,7 @@ angular.module('TrippismUIApp')
                   }.bind(this));
               }
 
-              $scope.displayDestinations = function (buttnText, destinations) {
+              $scope.displayDestinations = function (destinations) {
                   $scope.faresList = [];
                   $scope.faresList = angular.copy(destinations);
                   $scope.showPosition(_.uniq($scope.faresList, function (destination) { return destination.DestinationLocation; }))
@@ -358,7 +361,7 @@ angular.module('TrippismUIApp')
                       scope.clusterFlag = false;    // flag for solving cluster issue if theme/region multiple time clicked
                       scope.resetMarker();
                       if (scope.destinations != undefined && scope.destinations.length > 0) {
-                          scope.displayDestinations(scope.btntext, scope.destinations);
+                          scope.displayDestinations(scope.destinations);
                           scope.setMarkerCluster();
                       }
                       else

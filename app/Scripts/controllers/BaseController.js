@@ -33,9 +33,8 @@
         }
 
         function LoadJsonFileData() {
-            UtilFactory.ReadAirportJson().then(function (data) {
-                $scope.AvailableAirports = data;
-
+            UtilFactory.ReadAirportJson(function (callback) {
+                $scope.AvailableAirports = callback;
             });
         }
         LoadJsonFileData();

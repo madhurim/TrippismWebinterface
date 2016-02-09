@@ -8,7 +8,7 @@
             '$rootScope',
             '$timeout',
             '$filter',
-            '$window',
+            '$window','$stateParams','$state',
             'DestinationFactory',
             'UtilFactory',
             'FareforecastFactory',
@@ -51,128 +51,132 @@
         $rootScope,
         $timeout,
         $filter,
-        $window,
+        $window,$stateParams,$state,
         DestinationFactory,
         UtilFactory,
         FareforecastFactory,
         SeasonalityFactory,
         TrippismConstants
         ) {
-        function LoadAirlineJson() {
-            UtilFactory.ReadAirlinesJson().then(function (data) {
-                $scope.airlineJsonData = data;
-                findDestinations();
-            });
-        }
+
         function activate() {
+            debugger;
+            if ($stateParams.path != undefined) {
+                var params = $stateParams.path.split(";");
+                // split destination and origin to compare with tab title
+                angular.forEach(params, function (item) {
+                    var para = item.split("=");
+                    if (para[0].trim() === "f")
+                        $scope.Origin = para[1].trim();
+                    if (para[0].trim() === "t")
+                        $scope.KnownDestinationAirport = para[1].trim();
+                    if (para[0].trim() === "d")
+                    {
+                        $scope.FromDate = ConvertToRequiredDate(params[1].trim(), 'UI');
+                        $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
+                    }
+                    if (para[0].trim() === "r")
+                    {
+                        $scope.ToDate = ConvertToRequiredDate(params[1].trim(), 'UI');;
+                        $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
+                    }
 
-            $scope.Origin = 'NYC';
-            $scope.FromDate = ConvertToRequiredDate('02/08/2016', 'UI');
-            $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
-            $scope.ToDate = ConvertToRequiredDate('02/15/2016', 'UI');;
-            $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
-           
-
-             LoadAirlineJson();
+                })
+              
+                $scope.IsairportJSONLoading = true;
+                UtilFactory.ReadAirportJson(function (callback) {
+                    $scope.IsairportJSONLoading = false;
+                    $scope.AvailableAirports = callback;
+                    if ($scope.Origin != undefined && $scope.Origin != "") {
+                        $scope.LastSelectedOrigin = $scope.Origin;
+                        //$scope.KnownDestinationAirport = dest;
+                        updateSearchCriteria();
+                        findDestinations();
+                        //$scope.getDestinationDetails()
+                    }
+                });
+            }
+        }
+    $scope.ShowDestinationView = DestinationFactory.ShowDestinationView; // true;
+    $scope.isSearching = true;
+    $scope.MailMarkerSeasonalityInfo = {};
+    $scope.MailFareRangeData = {};
+    $scope.hasError = false;
+    $scope.formats = Dateformat();
+    $scope.format = $scope.formats[5];
+    $scope.activate = activate;
+    $scope.findDestinations = findDestinations;
+    $scope.OriginCityName = '';
+    $scope.Destination = '';
+    $scope.AvailableAirports = [];
+    var destinationlistOriginal = '';   // used for filtering data on refine search click
+    $scope.destinationlist = "";
+    $scope.AvailableThemes = AvailableTheme();
+    $scope.AvailableRegions = AvailableRegions();
+    $scope.LoadingText = "Loading..";
+    $scope.oneAtATime = true;
+    $scope.isPopDestCollapsed = true;
+    $scope.PointOfsalesCountry;
+    var correctAirportNames = function () {
+        var origin;
+        var knownDestination;
+        if ($scope.Origin.split(',').length >= 1) {
+            origin = $scope.Origin.split(',')[0].trim().toUpperCase();
+            //$scope.Origin = $scope.Origin.split(',')[0].trim().toUpperCase();
+            if (origin.length > 3) {
+                var matchingArray = GetArrayforCompareforCityName(origin.toLowerCase());
+                if (matchingArray.length > 0) {
+                    matchingArray.forEach(function (arprt) {
+                        if (arprt.airport_FullName.toLowerCase().indexOf("all airport") != -1) {
+                            matchingArray[0] = arprt;
+                        }
+                    });
+                    $scope.Origin = matchingArray[0].airport_Code;
+                    $scope.OriginCityName = matchingArray[0].airport_CityName;
+                }
+            }
+            else
+                $scope.Origin = origin;
+        }
+        if ($scope.KnownDestinationAirport && $scope.KnownDestinationAirport.split(',').length >= 1) {
+            knownDestination = $scope.KnownDestinationAirport.split(',')[0].trim().toUpperCase();
+            //$scope.KnownDestinationAirport = $scope.KnownDestinationAirport.split(',')[0].trim().toUpperCase();
+            if (knownDestination.length > 3) {
+                var matchingArray = GetArrayforCompareforCityName(knownDestination.toLowerCase());
+                if (matchingArray.length > 0) {
+                    matchingArray.forEach(function (arprt) {
+                        if (arprt.airport_FullName.toLowerCase().indexOf("all airport") != -1) {
+                            matchingArray[0] = arprt;
+                        }
+                    });
+                    $scope.KnownDestinationAirport = matchingArray[0].airport_Code;
+                }
+            }
+            else
+                $scope.KnownDestinationAirport = knownDestination;
+        }
+    }
+    initFareSliderValues();
             
-            //var search = $location.search();
-            //var orgdest = search.Origin;
-            //var org;
-            //var dest;
-            //if (orgdest != undefined && orgdest != "") {
-            //    org = orgdest.split("-")[0].trim();
-            //    dest = orgdest.split("-")[1].trim();
-            //    if (dest != undefined && dest != "") {
-            //        $scope.selectedform = "KnowMyDestination";
-            //    }
-            //}
-            //var _qFromDate = search.DepartureDate;
-            //var _qToDate = search.ReturnDate;
-            //$scope.IsairportJSONLoading = true;
-            //UtilFactory.ReadAirportJson().then(function (data) {
-            //    $scope.IsairportJSONLoading = false;
-            //    $scope.AvailableAirports = data;
-            //    if (org != undefined && org != "") {
-            //        $scope.Origin = org;
-            //        $scope.LastSelectedOrigin = org;
-            //        $scope.KnownDestinationAirport = dest;
-            //        if (_qFromDate != undefined && _qFromDate != '') {
-            //            $scope.FromDate = ConvertToRequiredDate(_qFromDate, 'UI');
-            //            $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
-            //        }
-            //        if (_qToDate != undefined && _qToDate != '') {
-            //            $scope.ToDate = ConvertToRequiredDate(_qToDate, 'UI');;
-            //            $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
-            //        }
-            //        updateSearchCriteria();
-            //        $scope.getDestinationDetails()
-            //    }
-            //});
-        }
-        $scope.ShowDestinationView = DestinationFactory.ShowDestinationView; // true;
-        $scope.isSearching = true;
-        $scope.MailMarkerSeasonalityInfo = {};
-        $scope.MailFareRangeData = {};
-        $scope.hasError = false;
-        $scope.formats = Dateformat();
-        $scope.format = $scope.formats[5];
-        $scope.activate = activate;
-        $scope.findDestinations = findDestinations;
-        $scope.OriginCityName = '';
-        $scope.Destination = '';
-        $scope.AvailableAirports = [];
-        var destinationlistOriginal = '';   // used for filtering data on refine search click
-        $scope.destinationlist = "";
-        $scope.AvailableThemes = AvailableTheme();
-        $scope.AvailableRegions = AvailableRegions();
-        $scope.LoadingText = "Loading..";
-        $scope.oneAtATime = true;
-        $scope.isPopDestCollapsed = true;
-        $scope.PointOfsalesCountry;
-        var correctAirportNames = function () {
-            var origin;
-            var knownDestination;
-            if ($scope.Origin.split(',').length >= 1) {
-                origin = $scope.Origin.split(',')[0].trim().toUpperCase();
-                //$scope.Origin = $scope.Origin.split(',')[0].trim().toUpperCase();
-                if (origin.length > 3) {
-                    var matchingArray = GetArrayforCompareforCityName(origin.toLowerCase());
-                    if (matchingArray.length > 0) {
-                        matchingArray.forEach(function (arprt) {
-                            if (arprt.airport_FullName.toLowerCase().indexOf("all airport") != -1) {
-                                matchingArray[0] = arprt;
-                            }
-                        });
-                        $scope.Origin = matchingArray[0].airport_Code;
-                        $scope.OriginCityName = matchingArray[0].airport_CityName;
-                    }
-                }
-                else
-                    $scope.Origin = origin;
-            }
-            if ($scope.KnownDestinationAirport && $scope.KnownDestinationAirport.split(',').length >= 1) {
-                knownDestination = $scope.KnownDestinationAirport.split(',')[0].trim().toUpperCase();
-                //$scope.KnownDestinationAirport = $scope.KnownDestinationAirport.split(',')[0].trim().toUpperCase();
-                if (knownDestination.length > 3) {
-                    var matchingArray = GetArrayforCompareforCityName(knownDestination.toLowerCase());
-                    if (matchingArray.length > 0) {
-                        matchingArray.forEach(function (arprt) {
-                            if (arprt.airport_FullName.toLowerCase().indexOf("all airport") != -1) {
-                                matchingArray[0] = arprt;
-                            }
-                        });
-                        $scope.KnownDestinationAirport = matchingArray[0].airport_Code;
-                    }
-                }
-                else
-                    $scope.KnownDestinationAirport = knownDestination;
-            }
-        }
-        activate();
-        $scope.isModified = false;
+           
+            $scope.isModified = false;
 
-       
-       // GetCurrencySymbols();
+            function LoadAirlineJson() {
+                UtilFactory.ReadAirlinesJson().then(function (data) {
+                    $scope.airlineJsonData = data;
+                });
+            }
+            LoadAirlineJson();
+            GetCurrencySymbols();
+            function CallOnLoad() {
+                if ($scope.Origin != undefined && $scope.Origin != "") {
+                    $scope.LastSelectedOrigin = $scope.Origin;
+                    //$scope.KnownDestinationAirport = dest;
+                    updateSearchCriteria();
+                    findDestinations();
+                    //$scope.getDestinationDetails()
+                }
+            }
 
         function FilterDestinations(destinations) {
             var destinationstodisp = [];
@@ -311,9 +315,7 @@
                 $timeout(function () { $scope.destinationlist = arr; }, 0, true);
             }
         }
-        //function findDestinations(buttnText) {
-     
-
+       
         function findDestinations() {
             // for showing info message to wait until airport data fetched to dropdown            
             $scope.isSearchbuttonClicked = true;
@@ -330,7 +332,7 @@
             $scope.isSearching = true;
             correctAirportNames();
             //$scope.refineSearchValues.OrigintoDisp = $scope.Origin;
-           // updateSearchCriteria();
+            updateSearchCriteria();
             var data = CreateSearchCriteria();
             $scope.inProgress = true;
             $scope.cgBuzyMessage = 'Please wait...';
@@ -397,7 +399,17 @@
             loadScrollbars();
         }
 
-  
+        function updateSearchCriteria() {
+            $scope.refineSearchValues = {
+                OrigintoDisp: $scope.Origin,
+                Minfare: $scope.priceSliderValues.values.min,
+                Maxfare: $scope.priceSliderValues.values.max,
+                Region: $scope.Region,
+                Theme: $scope.Theme,
+                FromDate: (typeof $scope.FromDate == 'string') ? new Date($scope.FromDate) : $scope.FromDate,
+                ToDate: (typeof $scope.ToDate == 'string') ? new Date($scope.ToDate) : $scope.ToDate
+            };
+        }
 
         function clearRefineSearchSelection() {
             initFareSliderValues();
@@ -525,5 +537,6 @@
         $scope.GetCurrencySymbol = function (code) {
             return UtilFactory.GetCurrencySymbol(code);
         }
+        activate();
     }
 })();

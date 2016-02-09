@@ -32,14 +32,13 @@ function($location,$modal,$rootScope,$timeout,$filter,$window,DestinationFactory
             $scope.minTodayDate = new Date();
             $scope.minFromDate = new Date();
             $scope.minFromDate = $scope.minFromDate.setDate($scope.minFromDate.getDate() + 1);
+            //$scope.$watch(function () { return UtilFactory.AirportData() }, function (newVal, oldVal) {
+            //    if (typeof newVal !== 'undefined') {
+            //        $scope.AvailableAirports = newVal;
+            //    }
+            //});
         },
         link: function ($scope, elem, attrs) {
-           
-            $scope.$watch(function () { return UtilFactory.AirportData() }, function (newVal, oldVal) {
-                if (typeof newVal !== 'undefined') {
-                    $scope.AvailableAirports = newVal;
-                }
-            });
          
             $scope.onSelect = function ($item, $model, $label) {
                 $scope.Origin = $item.airport_Code;
@@ -304,7 +303,7 @@ function($location,$modal,$rootScope,$timeout,$filter,$window,DestinationFactory
             );
 
             $scope.GetDestinationClick = function (path) {
-
+                debugger;
                 if ($scope.frmdestfinder.$invalid) {
                     $scope.hasError = true;
                     return;
@@ -319,9 +318,9 @@ function($location,$modal,$rootScope,$timeout,$filter,$window,DestinationFactory
             $scope.CallDestiantionsview = function (path)
             {
                 if ($scope.selectedform == "SuggestDestination")
-                    $location.path(path + '/' + $scope.Origin + '/' + ConvertToRequiredDate($scope.FromDate, 'API') + '/' + ConvertToRequiredDate($scope.ToDate, 'API'));
+                    $location.path(path + '/f=' + $scope.Origin + ';d=' + ConvertToRequiredDate($scope.FromDate, 'API') + ';r=' + ConvertToRequiredDate($scope.ToDate, 'API'));
                   else
-                    $location.path(path + '/' + $scope.Origin + '/' + $scope.Destination + '/' + ConvertToRequiredDate($scope.FromDate, 'API') + '/' + ConvertToRequiredDate($scope.ToDate, 'API'));
+                    $location.path(path + '/f=' + $scope.Origin + ';t=' + $scope.Destination + ';d=' + ConvertToRequiredDate($scope.FromDate, 'API') + ';r=' + ConvertToRequiredDate($scope.ToDate, 'API'));
             }
         }
     }

@@ -14,7 +14,7 @@
             'FareforecastFactory',
             'SeasonalityFactory',
             'TrippismConstants',
-             DestinationController]);
+             DestinationsController]);
     angular.module('TrippismUIApp').directive('allowOnlyDateInputs', function () {
         return {
             restrict: 'A',

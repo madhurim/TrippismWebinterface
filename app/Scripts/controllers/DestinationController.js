@@ -29,7 +29,7 @@
         SeasonalityFactory,
         TrippismConstants) {
 
-        $scope.PageName = "Tab Page";
+        $scope.PageName = "Destination Page";
     }
 
 })();

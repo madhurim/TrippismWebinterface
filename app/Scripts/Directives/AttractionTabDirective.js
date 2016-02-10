@@ -1,4 +1,5 @@
-﻿angular.module('TrippismUIApp').directive('attractionTab', ['$compile', '$filter', 'WeatherFactory', function ($compile, $filter, WeatherFactory) {
+﻿//Not in Use -Create separat Directive for same DestinationAttractionDirective
+angular.module('TrippismUIApp').directive('attractionTab', ['$compile', '$filter', 'WeatherFactory', function ($compile, $filter, WeatherFactory) {
     return {
         restrict: 'E',
         scope: {

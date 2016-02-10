@@ -11,7 +11,8 @@
             findTopDestinations: findTopDestinations,
             findDestinationsDetails: findDestinationsDetails,
             findInstFlightDestination: findInstFlightDestination,
-            ShowDestinationView : true
+            ShowDestinationView: true,
+            GetDestinationFareInfo: GetDestinationFareInfo
         };
         return service;
 
@@ -47,6 +48,13 @@
                     return e;
                 });
             }
+        }
+        function GetDestinationFareInfo(paramdata) {
+            if (DestinationsData == undefined)
+                return null;
+                var result = $filter('filter')(DestinationsData, { Criteria: paramdata.Origin + paramdata.DepartureDate + paramdata.ReturnDate })[0];
+                var fareInfo = $filter('filter')(result.data.FareInfo, { DestinationLocation: paramdata.Destination })[0];
+                return fareInfo;
         }
 
         function findInstFlightDestination(data) {

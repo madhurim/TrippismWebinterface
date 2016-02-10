@@ -28,8 +28,58 @@
         FareforecastFactory,
         SeasonalityFactory,
         TrippismConstants) {
+        
+        init();
+
+        function init()
+        {
+            if ($stateParams.path != undefined) {
+                debugger;
+                var params = $stateParams.path.split(";");
+                // split destination and origin to compare with tab title
+                angular.forEach(params, function (item) {
+                    var para = item.split("=");
+                    if (para[0].trim() === "f")
+                        $scope.Origin = para[1].trim();
+                    if (para[0].trim() === "t")
+                        $scope.DestinationLocation = para[1].trim();
+                    if (para[0].trim() === "d") {
+                        $scope.FromDate = ConvertToRequiredDate(para[1].trim(), 'UI');
+                        $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
+                    }
+                    if (para[0].trim() === "r") {
+                        $scope.ToDate = ConvertToRequiredDate(para[1].trim(), 'UI');;
+                        $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
+                    }
+
+                });
+                var param = {
+                        "Origin": $scope.Origin,
+                        "DepartureDate": ($scope.FromDate == '' || $scope.FromDate == undefined) ? null : ConvertToRequiredDate($scope.FromDate, 'API'),
+                        "ReturnDate": ($scope.ToDate == '' || $scope.ToDate == undefined) ? null : ConvertToRequiredDate($scope.ToDate, 'API'),
+                        "Destination": $scope.DestinationLocation
+                };
+                $scope.FareInfo = DestinationFactory.GetDestinationFareInfo(param);
+                $scope.OriginairportName = _.find($rootScope.AvailableAirports, function (airport) {
+                    return airport.airport_Code == $scope.Origin.toUpperCase()
+                });
+                $scope.DestinationairportName = _.find($rootScope.AvailableAirports, function (airport) {
+                    return airport.airport_Code == $scope.DestinationLocation
+                });
+
+                $scope.fareParams = {
+                    OriginairportName: $scope.OriginairportName,
+                    DestinationairportName: $scope.DestinationairportName,
+                    FareInfo: $scope.FareInfo,
+                    Fareforecastdata: param
+                }
+
+        }
 
         $scope.PageName = "Destination Page";
+     
+
+        }
     }
 
 })();

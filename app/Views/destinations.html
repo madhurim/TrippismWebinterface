@@ -1,27 +1,30 @@
 ﻿<div ng-controller="DestinationsController">
     <!-- [S] HEADER -->
     <!--<div report-my-height param="ShowDestinationView" paramtab="tabManager" isshowsearchicon="isShowSearchIcon">-->
-   
-      <div ><!--ng-show="isSearchCollapsed && ShowDestinationView"-->
-            <div> <!--ng-show="ShowDestinationView " ng-hide="isSearching"-->
-                <div class="refine-your-destination-box">
-                    <div class="your-searched-content">
-                        <h5 class="search-detail" ><!--ng-show="IscalledFromIknowMyDest == false"-->
-                            <span ng-show="refineSearchValues && refineSearchValues.OrigintoDisp">{{refineSearchValues.OrigintoDisp}} </span><!--ng-show="refineSearchValues && refineSearchValues.OrigintoDisp"-->
-                            <span ng-show="refineSearchValues && refineSearchValues.FromDate">{{refineSearchValues.FromDate | date:'MMM-dd-yyyy'}} </span> <!--ng-show="refineSearchValues && refineSearchValues.FromDate"-->
-                            <span ng-show="refineSearchValues && refineSearchValues.ToDate">To {{refineSearchValues.ToDate | date:'MMM-dd-yyyy'}}</span>
-                            <span ng-show="refineSearchValues && refineSearchValues.Minfare > 0">{{fareCurrencySymbol}} {{refineSearchValues.Minfare}}</span>
-                            <span ng-show="refineSearchValues && refineSearchValues.Maxfare > 0"> To {{fareCurrencySymbol}} {{refineSearchValues.Maxfare}}</span>
-                            <span ng-show="refineSearchValues && refineSearchValues.Theme"> {{refineSearchValues.Theme}}</span>
-                            <span ng-show="refineSearchValues && refineSearchValues.Region"> {{refineSearchValues.Region}} </span>
-                        </h5>
-                    </div>
-                    <div class="refine-btn-group" style="z-index:9999">
-                        <a class="btn btn-danger " ng-click="isModified=!isModified;isRefineSeachCollapsed=false;"> Modify </a>
-                    </div>
+
+    <div>
+        <!--ng-show="isSearchCollapsed && ShowDestinationView"-->
+        <div>
+            <!--ng-show="ShowDestinationView " ng-hide="isSearching"-->
+            <div class="refine-your-destination-box">
+                <div class="your-searched-content">
+                    <h5 class="search-detail">
+                        <!--ng-show="IscalledFromIknowMyDest == false"-->
+                        <span ng-show="refineSearchValues && refineSearchValues.OrigintoDisp">{{refineSearchValues.OrigintoDisp}} </span><!--ng-show="refineSearchValues && refineSearchValues.OrigintoDisp"-->
+                        <span ng-show="refineSearchValues && refineSearchValues.FromDate">{{refineSearchValues.FromDate | date:'MMM-dd-yyyy'}} </span> <!--ng-show="refineSearchValues && refineSearchValues.FromDate"-->
+                        <span ng-show="refineSearchValues && refineSearchValues.ToDate">To {{refineSearchValues.ToDate | date:'MMM-dd-yyyy'}}</span>
+                        <span ng-show="refineSearchValues && refineSearchValues.Minfare > 0">{{fareCurrencySymbol}} {{refineSearchValues.Minfare}}</span>
+                        <span ng-show="refineSearchValues && refineSearchValues.Maxfare > 0"> To {{fareCurrencySymbol}} {{refineSearchValues.Maxfare}}</span>
+                        <span ng-show="refineSearchValues && refineSearchValues.Theme"> {{refineSearchValues.Theme}}</span>
+                        <span ng-show="refineSearchValues && refineSearchValues.Region"> {{refineSearchValues.Region}} </span>
+                    </h5>
+                </div>
+                <div class="refine-btn-group" style="z-index:9999">
+                    <a class="btn btn-danger " ng-click="isModified=!isModified;isRefineSeachCollapsed=false;"> Modify </a>
                 </div>
             </div>
         </div>
+    </div>
     <!--</div>-->
     <!-- [E] HEADER -->
     <!-- [S] MAP -->
@@ -34,8 +37,10 @@
     </div>
     <!-- [E] MAP -->
     <!-- [S] REFINE-YOUR-SEARCH-BOX -->
-    <div ><!--ng-show="ShowDestinationView && IsRefineSearchShow"-->
-        <div ><!--ng-hide="isSearching" ng-show="ShowDestinationView"-->
+    <div>
+        <!--ng-show="ShowDestinationView && IsRefineSearchShow"-->
+        <div>
+            <!--ng-hide="isSearching" ng-show="ShowDestinationView"-->
             <div class="popular-destinations" ng-class="!isRefineSeachCollapsed ? 'popular-destinations-colleps':'active' ">
                 <!--ng-class="!isRefineSeachCollapsed && ShowDestinationView ? 'popular-destinations-colleps' : 'active'-->
                 <a class="toggle-btn destinations-btn red-bg" ng-click="isRefineSeachCollapsed = !isRefineSeachCollapsed;">
@@ -288,8 +293,9 @@
         </div>
     </div>-->
     <!-- [E] POPULAR-DESTINATIONS -->
-
-    <!--<search-box></search-box>-->  
-    
-  
+    <!--<search-box>-->
+    <div ng-show="isModified">
+        <search-box is-popup="isModified"></search-box>
+    </div>
+    <!--</search-box>-->
 </div>

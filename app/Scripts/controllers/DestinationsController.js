@@ -71,12 +71,12 @@
                         $scope.KnownDestinationAirport = para[1].trim();
                     if (para[0].trim() === "d")
                     {
-                        $scope.FromDate = ConvertToRequiredDate(params[1].trim(), 'UI');
+                        $scope.FromDate = ConvertToRequiredDate(para[1].trim(), 'UI');
                         $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
                     }
                     if (para[0].trim() === "r")
                     {
-                        $scope.ToDate = ConvertToRequiredDate(params[1].trim(), 'UI');;
+                        $scope.ToDate = ConvertToRequiredDate(para[1].trim(), 'UI');;
                         $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
                     }
 
@@ -323,8 +323,7 @@
             $scope.inProgress = true;
             $scope.cgBuzyMessage = 'Please wait...';
             $scope.mappromise = DestinationFactory.findDestinations(paramdata,function (callBack)
-                {
-                    debugger;
+                {                    
                     var data = callBack;
                     $scope.isSearching = false;
                     $scope.SearchbuttonText = "Suggest Destinations";
@@ -383,8 +382,7 @@
                     loadScrollbars();
 
                 });
-            //$scope.mappromise = DestinationFactory.findDestinations(paramdata).then(function (data) {
-            //    debugger;
+            //$scope.mappromise = DestinationFactory.findDestinations(paramdata).then(function (data) {            
             //    $scope.isSearching = false;
             //    $scope.SearchbuttonText = "Suggest Destinations";
             //    $scope.SearchbuttonCheapestText = "Top 10 Cheapest";

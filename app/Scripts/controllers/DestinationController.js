@@ -33,53 +33,69 @@
 
         function init()
         {
-            if ($stateParams.path != undefined) {
-                debugger;
-                var params = $stateParams.path.split(";");
-                // split destination and origin to compare with tab title
-                angular.forEach(params, function (item) {
-                    var para = item.split("=");
-                    if (para[0].trim() === "f")
-                        $scope.Origin = para[1].trim();
-                    if (para[0].trim() === "t")
-                        $scope.DestinationLocation = para[1].trim();
-                    if (para[0].trim() === "d") {
-                        $scope.FromDate = ConvertToRequiredDate(para[1].trim(), 'UI');
-                        $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
-                    }
-                    if (para[0].trim() === "r") {
-                        $scope.ToDate = ConvertToRequiredDate(para[1].trim(), 'UI');;
-                        $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
-                    }
+            UtilFactory.ReadAirportJson(function (response) {
+                $scope.AvailableAirports = response;
 
-                });
+                if ($stateParams.path != undefined) {
+                    var params = $stateParams.path.split(";");
+                    // split destination and origin to compare with tab title
+                    angular.forEach(params, function (item) {
+                        var para = item.split("=");
+                        if (para[0].trim() === "f")
+                            $scope.Origin = para[1].trim();
+                        if (para[0].trim() === "t")
+                            $scope.DestinationLocation = para[1].trim();
+                        if (para[0].trim() === "d") {
+                            $scope.FromDate = ConvertToRequiredDate(para[1].trim(), 'UI');
+                            $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
+                        }
+                        if (para[0].trim() === "r") {
+                            $scope.ToDate = ConvertToRequiredDate(para[1].trim(), 'UI');;
+                            $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
+                        }
+                        if (para[0].trim() === "t")
+                            $scope.Theme = para[1].trim();
+                        if (para[0].trim() === "a")
+                            $scope.Region = para[1].trim();
+                        if (para[0].trim() === "lf")
+                            $scope.Minfare = para[1].trim();
+                        if (para[0].trim() === "hf")
+                            $scope.Maxfare = para[1].trim();
+                    });
+                    $scope.OriginairportName = _.find($scope.AvailableAirports, function (airport) {
+                        return airport.airport_Code == $scope.Origin.toUpperCase()
+                    });
+                    $scope.DestinationairportName = _.find($scope.AvailableAirports, function (airport) {
+                        return airport.airport_Code == $scope.DestinationLocation
+                    });
+                }
                 var param = {
-                        "Origin": $scope.Origin,
-                        "DepartureDate": ($scope.FromDate == '' || $scope.FromDate == undefined) ? null : ConvertToRequiredDate($scope.FromDate, 'API'),
-                        "ReturnDate": ($scope.ToDate == '' || $scope.ToDate == undefined) ? null : ConvertToRequiredDate($scope.ToDate, 'API'),
-                        "Destination": $scope.DestinationLocation
+                    "Origin": $scope.Origin,
+                    "DepartureDate": ($scope.FromDate == '' || $scope.FromDate == undefined) ? null : ConvertToRequiredDate($scope.FromDate, 'API'),
+                    "ReturnDate": ($scope.ToDate == '' || $scope.ToDate == undefined) ? null : ConvertToRequiredDate($scope.ToDate, 'API'),
+                    "Destination": $scope.DestinationLocation
                 };
                 $scope.FareInfo = DestinationFactory.GetDestinationFareInfo(param);
-                $scope.OriginairportName = _.find($rootScope.AvailableAirports, function (airport) {
-                    return airport.airport_Code == $scope.Origin.toUpperCase()
-                });
-                $scope.DestinationairportName = _.find($rootScope.AvailableAirports, function (airport) {
-                    return airport.airport_Code == $scope.DestinationLocation
-                });
 
                 $scope.fareParams = {
                     OriginairportName: $scope.OriginairportName,
                     DestinationairportName: $scope.DestinationairportName,
                     FareInfo: $scope.FareInfo,
-                    Fareforecastdata: param
+                    Fareforecastdata: param,
+                    SearchCriteria: {
+                        Origin: $scope.Origin,
+                        DestinationLocation: $scope.DestinationLocation,
+                        FromDate:$scope.FromDate,
+                        ToDate : $scope.ToDate,
+                        Theme :$scope.Theme ,
+                        Region :$scope.Region,
+                        Minfare :$scope.Minfare,
+                        Maxfare :$scope.Maxfare
+                    }
                 }
-
+            });
         }
-
         $scope.PageName = "Destination Page";
-     
-
-        }
     }
 
 })();

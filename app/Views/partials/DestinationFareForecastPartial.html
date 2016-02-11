@@ -34,8 +34,8 @@
                     </p>
                 </div>
             </div>
-            <!--ng-show="FareNoDataFound && FareApiLoaded"-->       
-            <div class="col-md-2 col-sm-3 col-xs-6"  ng-if="fareParams.FareInfo.LowestFare && fareParams.FareInfo.LowestFare.Fare != 'N/A' &&  fareParams.FareInfo.LowestFare.Fare != 0">
+            <!---->       
+            <div class="col-md-2 col-sm-3 col-xs-6" ng-show="FareNoDataFound && FareApiLoaded" ng-if="fareParams.FareInfo.LowestFare && fareParams.FareInfo.LowestFare.Fare != 'N/A' &&  fareParams.FareInfo.LowestFare.Fare != 0">
                 <div class="ibox-box">
                     <h4><span class="cursor-help" data-toggle="tooltip" popover="{{fareParams.FareInfo.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(fareParams.FareInfo.CurrencyCode)}}</span> {{fareParams.FareInfo.LowestFare.Fare | number : 2}}</h4>
                     <p>Lowest Fare</p>
@@ -69,20 +69,20 @@
                     <p>Recommendation</p>
                 </div>
             </div>
-            <!--<div class="col-md-3 col-sm-12 col-xs-12 searched-box">
+            <div class="col-md-3 col-sm-12 col-xs-12 searched-box">
                 <div class="ibox-box searched">
                     <h4>You Searched </h4>
                     <p>
-                        <span ng-show="attractionParams.SearchCriteria.OrigintoDisp">{{attractionParams.SearchCriteria.OrigintoDisp}} </span>
-                        <span ng-show="attractionParams.SearchCriteria.FromDate">{{attractionParams.SearchCriteria.FromDate | date:'MM/dd/yyyy'}} </span>
-                        <span ng-show="attractionParams.SearchCriteria.ToDate">To {{attractionParams.SearchCriteria.ToDate |date:'MM/dd/yyyy'}}</span>
-                        <span ng-show="attractionParams.SearchCriteria.Minfare > 0"><br />{{attractionParams.SearchCriteria.fareCurrencySymbol}} {{attractionParams.SearchCriteria.Minfare}}</span>
-                        <span ng-show="attractionParams.SearchCriteria.Maxfare > 0"> To {{attractionParams.SearchCriteria.fareCurrencySymbol}} {{attractionParams.SearchCriteria.Maxfare}}</span>
-                        <span ng-show="attractionParams.SearchCriteria.Region "> {{attractionParams.SearchCriteria.Region}}</span>
-                        <span ng-show="attractionParams.SearchCriteria.Theme"> {{attractionParams.SearchCriteria.Theme}}</span>
+                        <span ng-show="fareParams.SearchCriteria.OrigintoDisp">{{fareParams.SearchCriteria.OrigintoDisp}} </span>
+                        <span ng-show="fareParams.SearchCriteria.FromDate">{{fareParams.SearchCriteria.FromDate | date:'MM/dd/yyyy'}} </span>
+                        <span ng-show="fareParams.SearchCriteria.ToDate">To {{fareParams.SearchCriteria.ToDate |date:'MM/dd/yyyy'}}</span>
+                        <span ng-show="fareParams.SearchCriteria.Minfare > 0"><br />{{fareParams.SearchCriteria.fareCurrencySymbol}} {{fareParams.SearchCriteria.Minfare}}</span>
+                        <span ng-show="fareParams.SearchCriteria.Maxfare > 0"> To {{fareParams.SearchCriteria.fareCurrencySymbol}} {{fareParams.SearchCriteria.Maxfare}}</span>
+                        <span ng-show="fareParams.SearchCriteria.Region "> {{fareParams.SearchCriteria.Region}}</span>
+                        <span ng-show="fareParams.SearchCriteria.Theme"> {{fareParams.SearchCriteria.Theme}}</span>
                     </p>
                 </div>
-            </div>-->
+            </div>
         </div>
     </div>
 </div>

@@ -53,6 +53,8 @@
             if (DestinationsData == undefined)
                 return null;
                 var result = $filter('filter')(DestinationsData, { Criteria: paramdata.Origin + paramdata.DepartureDate + paramdata.ReturnDate })[0];
+                if (result == undefined)
+                    return null;
                 var fareInfo = $filter('filter')(result.data.FareInfo, { DestinationLocation: paramdata.Destination })[0];
                 return fareInfo;
         }

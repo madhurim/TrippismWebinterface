@@ -14,38 +14,28 @@
             },
             templateUrl: '/Views/Partials/SeasonalityPartial.html',
             link: function (scope, elem, attrs) {
-                scope.formats = Dateformat();
-                scope.format = scope.formats[5];
-                scope.Isviewmoredisplayed = false;
-                scope.ChartLoaded = false;
 
-                scope.$on('ontabClicked', function (event, args) {
-                    if (scope.ChartLoaded) {
-                        $timeout(function () { $(window).resize(); }, 100, false);
-                    }
+                scope.$watch('seasonalityParams', function (newValue, oldValue) {
+                    if (newValue != undefined)
+                        initseasonalityData();
                 });
 
+                function initseasonalityData()
+                {
+                    scope.formats = Dateformat();
+                    scope.format = scope.formats[5];
+                    scope.Isviewmoredisplayed = false;
+                    scope.ChartLoaded = false;
 
-                scope.SeasonalityDisplay = function () {
-                    scope.MarkerSeasonalityInfo.Seasonality = scope.SeasonalityData;
-                    scope.mailmarkereasonalityInfo.Seasonality = scope.SeasonalityData;
-                    scope.Isviewmoredisplayed = true;
-                };
+                    scope.DepartDate = $filter('date')(scope.seasonalityParams.Fareforecastdata.DepartureDate, scope.format, null);
+                    scope.ReturnDate = $filter('date')(scope.seasonalityParams.Fareforecastdata.ReturnDate, scope.format, null);
+                    scope.chartHeight = 300;
+                    scope.divID = "seasonality"; // + scope.seasonalityParams.tabIndex
+                    var mapHTML = "<div id='" + scope.divID + "'></div>";
+                    elem.append($compile(mapHTML)(scope));
+                    scope.loadSeasonalityInfo();
 
-                scope.$parent.divSeasonality = false;
-                scope.loadingSeasonality = true;
-                scope.$watch('loadSeasonalityInfoLoaded',
-                  function (newValue) {
-                      scope.loadingSeasonality = angular.copy(!newValue);
-                      scope.seasonalityParams.loadingSeasonality = scope.loadingSeasonality;
-                      scope.$parent.divSeasonality = newValue;
-                      //if (newValue == true) {
-                      //    angular.element("#lastDiv").removeClass("no-border");
-                      //} else {
-                      //    angular.element("#lastDiv").addClass("no-border");
-                      //}
-                  }
-                );
+                }
 
                 scope.loadSeasonalityInfo = function () {
                     scope.MarkerSeasonalityInfo = "";
@@ -55,21 +45,17 @@
                         if (scope.loadSeasonalityInfoLoaded == false) {
                             if (scope.MarkerSeasonalityInfo == "") {
                                 var Seasonalitydata = {
-                                    "Destination": scope.seasonalityParams.Destinatrion, // JFK
+                                    "Destination": scope.seasonalityParams.DestinationairportName.airport_Code, // scope.seasonalityParams.Destinatrion, // JFK
                                 };
-
                                 $timeout(function () {
                                     scope.inProgressSeasonalityinfo = true;
                                     scope.seasonalitypromise = SeasonalityFactory.Seasonality(Seasonalitydata).then(function (data) {
 
                                         if (data.status == 404) {
                                             scope.SeasonalityNoDataFound = true;
-                                            scope.seasonalityParams.SeasonalityData = "";
                                             return;
                                         }
                                         scope.SeasonalityData = data.Seasonality;
-                                        scope.seasonalityParams.SeasonalityData = data.Seasonality;
-
                                         var defaultSeasonality = data.Seasonality;
                                         var now = new Date();
                                         var NextDate = addDays(now, 30);
@@ -99,24 +85,24 @@
 
                     }
                 };
-                scope.$watchGroup(['seasonalityParams'], function (newValue, oldValue, scope) {
-                    //Add Scope For Chart
-                    if (scope.seasonalityParams != undefined) {
-                        scope.DepartDate = $filter('date')(scope.seasonalityParams.Fareforecastdata.DepartureDate, scope.format, null);
-                        scope.ReturnDate = $filter('date')(scope.seasonalityParams.Fareforecastdata.ReturnDate, scope.format, null);
-                        scope.chartHeight = 300;
-                        scope.TabIndex = "seasonality" + scope.seasonalityParams.tabIndex;
-                        var mapHTML = "<div id='" + scope.TabIndex + "'></div>";
-                        elem.append($compile(mapHTML)(scope));
-                    }
-                    scope.loadSeasonalityInfo();
 
-                });
+                scope.SeasonalityDisplay = function () {
+                    scope.MarkerSeasonalityInfo.Seasonality = scope.SeasonalityData;
+                    scope.mailmarkereasonalityInfo.Seasonality = scope.SeasonalityData;
+                    scope.Isviewmoredisplayed = true;
+                };
+
+                scope.loadingSeasonality = true;
+                scope.$watch('loadSeasonalityInfoLoaded',
+                  function (newValue) {
+                      scope.loadingSeasonality = angular.copy(!newValue);
+                      scope.seasonalityParams.loadingSeasonality = scope.loadingSeasonality;
+                      scope.$parent.divSeasonality = newValue;
+                  }
+                );
                 scope.$watch('SeasonalityData', function (newValue, oldValue) {
                     DisplayChart();
                 })
-
-
                 scope.Chart = [];
                 function DisplayChart() {
                     var chartDataLow = [];
@@ -124,11 +110,8 @@
                     var chartDataHigh = [];
                     var rec = 1;
                     var startdate;
-
                     if (scope.SeasonalityData != undefined && scope.SeasonalityData != "") {
-
                         var chartrec = _.sortBy(scope.SeasonalityData, 'WeekStartDate');
-
                         for (i = 0; i < chartrec.length; i++) {
                             var WeekStartDate = new Date(chartrec[i].WeekStartDate.split('T')[0].replace(/-/g, "/"));
                             var WeekEndDate = new Date(chartrec[i].WeekEndDate.split('T')[0].replace(/-/g, "/"));
@@ -172,14 +155,12 @@
                             rec++;
 
                         }
-                        //   }
-
                         var PrevDate = "";
                         var options = {
                             chart: {
                                 height: scope.chartHeight,
                                 type: 'bubble',
-                                renderTo: scope.TabIndex,
+                                renderTo: scope.divID,
                             },
                             title: {
                                 text: ''
@@ -205,22 +186,6 @@
 
                                         var d = new Date(this.value);
                                         return result += Highcharts.dateFormat(TrippismConstants.HighChartDateFormat, this.value) + '</span><b>';
-
-                                        //var result = "";
-                                        //var startdaterange = new Date($filter('date')(this.value, scope.format, null));
-                                        //var enddaterange = new Date($filter('date')(this.value, scope.format, null));
-                                        //enddaterange = enddaterange.setDate(startdaterange.getDate() + 13);
-                                        //startdaterange = $filter('date')(startdaterange, scope.format, null);
-                                        //enddaterange = $filter('date')(enddaterange, scope.format, null);
-
-                                        //if ((scope.DepartDate >= startdaterange && scope.DepartDate <= enddaterange) ||
-                                        //   (scope.ReturnDate >= startdaterange && scope.ReturnDate <= enddaterange))
-                                        //    result = '<span style="font-weight: bold; font-size:12px">'
-                                        //else
-                                        //    result = '<span>'
-
-                                        //var d = new Date(this.value);
-                                        //return result += Highcharts.dateFormat(TrippismConstants.HighChartDateFormat, this.value) + '</span><b>';
                                     },
                                     rotation: -45
                                 },
@@ -277,22 +242,10 @@
 
                                     else
                                         yresult = '<span> ' + '' + ' </span>';
-
-                                    //var zresult = '';
-                                    //if (this.point.z == 12000)
-                                    //    zresult = '<span> ' + '> 10000' + ' </span>';
-
-                                    //else if (this.point.z == 8000)
-                                    //    zresult = '<span> ' + '< 10000' + ' </span>';
-
-                                    //else if (this.point.z == 800)
-                                    //    zresult = '<span> ' + '< 1000' + ' </span>';
-
-                                    //else
-                                    //    zresult = '<span> ' + '' + ' </span>';
+                                    
                                     return '<span style="color:#87ceeb">Year Week :</span> <b> [#' + this.point.YearWeekNumber + ' of ' + Highcharts.dateFormat('%Y', new Date(this.point.startdate)) + '], [ ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.x)) + ' / ' + Highcharts.dateFormat(TrippismConstants.HighChartDateFormat, new Date(this.point.enddate)) + ' ] </b><br>' +
-                                        '<span style="color:#87ceeb">Volume :</span> <b> ' + yresult + '</b>'; //+
-                                    //'<span style="color:#87ceeb">Booking Quantities :</span> <b>' + zresult + '</b>';
+                                        '<span style="color:#87ceeb">Volume :</span> <b> ' + yresult + '</b>'; 
+
                                 }
                             },
                             series: [{

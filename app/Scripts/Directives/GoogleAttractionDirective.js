@@ -17,8 +17,8 @@
                 //$scope.DisplayattractionsInfo = false;
                 $scope.DisplayattractionsInfo = true;
 
-                $scope.googleMapId = "googleMapId_" + $scope.googleattractionParams.tabIndex;
-                $scope.gMapId = "gMapId_" + $scope.googleattractionParams.tabIndex;
+                $scope.googleMapId = "googleMapId_"; //+$scope.googleattractionParams.tabIndex
+                $scope.gMapId = "gMapId_";// +$scope.googleattractionParams.tabIndex
 
                 $scope.RenderMap = RenderMap;
                 $scope.setAirportMarkerOnMap = setAirportMarkerOnMap;
@@ -31,7 +31,7 @@
                 var attractionsData = GoogleAttractionFactory.getAttractionList();
 
                 $scope.$on('ontabClicked', function (event, args) {
-                    if (args == $scope.googleattractionParams.tabIndex) {
+                   // if (args == $scope.googleattractionParams.tabIndex) {
                         if ($scope.MapLoaded) {
                             $timeout(function () {
                                 if ($scope.InfoWindow) $scope.InfoWindow.close();
@@ -44,12 +44,12 @@
                             if (defaultAttractionTab)
                                 $scope.loadgoogleattractionInfo(defaultAttractionTab.name);
                         }
-                    }
+                  //  }
                 });
 
 
                 $scope.$on('onMarkerPopup', function (event, args) {
-                    if (args.tabIndex == $scope.googleattractionParams.tabIndex)
+                    //if (args.tabIndex == $scope.googleattractionParams.tabIndex)
                         SetMarkerSlider(args.place)
                 });
 

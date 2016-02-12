@@ -108,25 +108,18 @@
                 scope.$watch('widgetParams.FareRangeData', function (newValue, oldval) {
                     if (newValue != undefined) {
                         scope.loadfareRangeInfo();
-                       
                     }
                 });
-
                 scope.$watch('widgetParams.SeasonalityData', function (newValue, oldval) {
                     if (newValue != undefined){
-                      //  console.log('in season widget' + new Date());
                             scope.loadSeasonalityInfo();
-//                            alert(scope.SeasonalityWidgetDataFound)
                             if(!isVisibilityRecorded){
                                 isVisibilityRecorded = true;
                                 isVisible = (scope.FareRangeWidgetDataFound || scope.SeasonalityWidgetDataFound ) && scope.IsWidgetClosed;
                                 scope.$emit('widgetLoaded', {name : "seasonalityfarerangewidgetInfo", isVisible : isVisible });
                                 console.log("seasonalityfarerangewidgetInfo data sent..");
                         }
-                            
                     }
-                    
-                    
                 });
                 scope.$watchGroup(['widgetParams'], function (newValue, oldValue, scope) {
                     if (scope.widgetParams != undefined) {

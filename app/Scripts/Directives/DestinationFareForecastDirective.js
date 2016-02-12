@@ -1,4 +1,4 @@
-﻿angular.module('TrippismUIApp').directive('attractiontabFareForecast', ['$rootScope','$compile', '$modal','FareforecastFactory', 'UtilFactory', '$stateParams', '$state',
+﻿angular.module('TrippismUIApp').directive('destinationFareForecast', ['$rootScope','$compile', '$modal','FareforecastFactory', 'UtilFactory', '$stateParams', '$state',
     function ($rootScope,$compile, $modal, FareforecastFactory, UtilFactory, $stateParams,$state) {
         return {
             restrict: 'E',

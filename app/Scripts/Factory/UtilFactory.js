@@ -1,9 +1,9 @@
 ﻿(function () {
     'use strict';
     var serviceId = 'UtilFactory';
-    angular.module('TrippismUIApp').factory(serviceId, ['$http', '$timeout','$location', '$anchorScroll', '$rootScope', '$filter', UtilFactory]);
+    angular.module('TrippismUIApp').factory(serviceId, ['$http', '$timeout', '$location', '$anchorScroll', '$rootScope', '$filter', UtilFactory]);
 
-    function UtilFactory($http,$timeout, $location, $anchorScroll, $rootScope, $filter) {
+    function UtilFactory($http, $timeout, $location, $anchorScroll, $rootScope, $filter) {
         // Define the functions and properties to reveal.
         var AirportJsonData = [];
         var service = {
@@ -20,7 +20,7 @@
             updateQueryStringParameter: updateQueryStringParameter,
         };
         return service;
-    
+
         function ReadStateJson() {
             var States = [];
             return $http.get('scripts/Constants/State.json').then(function (_states) {
@@ -91,8 +91,7 @@
                 });
             }
         }
-        //function ReadAirportJson() {
-        //    debugger;
+        //function ReadAirportJson() {        
         //        var AvailableCodes = [];
         //       return  $http.get($rootScope.apiURLForConstant + '/GetAirports').then(function (_arrairports) {
         //            if (_arrairports.status == 200) {
@@ -141,7 +140,7 @@
         //             //AirportJsonData = AvailableCodes;
         //            return AvailableCodes;
         //         });
-                
+
         //}
 
         function AirportCodeLog(AirportCode) {

@@ -71,8 +71,7 @@
         }
 
         function findDestinationsDetails(data) {
-
-            debugger;
+            
             var dataURL = 'instaflight/search?' + serialize(data);
             var RequestedURL = $rootScope.apiURL + dataURL;
             return $http.get(RequestedURL)

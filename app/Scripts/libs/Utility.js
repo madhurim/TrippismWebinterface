@@ -1,6 +1,7 @@
 ﻿
 function ConvertToRequiredDate(dt, calledFrom) {
     dt = new Date(dt);
+    if (dt == 'Invalid Date') return null;
     var curr_date = ('0' + dt.getDate()).slice(-2);
     var curr_month = ('0' + (dt.getMonth() + 1)).slice(-2);
     var curr_year = dt.getFullYear();

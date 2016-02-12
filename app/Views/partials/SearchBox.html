@@ -1,14 +1,14 @@
 ﻿<div class="destination-boxwrap">
-    <div class="destination-box-popup" > <!--ng-class="isModified ? 'destination-popup' :'' "-->
+    <div class="destination-box-popup" ng-class="isPopup ? 'destination-popup' :''">
         <div class="container">
-            <div class="row">
+            <div class="row" ng-hide="isPopup">
                 <div class="col-md-12 text-center">
                     <h3 class="destination-title">Let us help you find vacation destinations!</h3>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <!--<span class="destination-popup-close" ng-click="isModified=!isModified;isRefineSeachCollapsed=!isRefineSeachCollapsed;hasError = false;" ng-show="isModified">x</span>-->
+                    <span class="destination-popup-close" ng-click="isPopup=!isPopup;isRefineSeachCollapsed=!isRefineSeachCollapsed;hasError = false;" ng-show="isPopup">x</span>
                     <div class="destination-boxwrap-nav-tabs">
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">
@@ -70,10 +70,10 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-xs-6">
+                                        <div class="col-xs-6 pr7px">
                                             <div class="input-group">
                                                 <div class="input-group-addon"><img src="images/calendar.png" alt="#" ng-click="openFromDate($event)" /></div>
-                                                <div class="form-group calendar-size" ng-class="isModified ? '' :'calendar-position' ">
+                                                <div class="form-group calendar-size form-fromDate" ng-class="isPopup ? '' :'calendar-position' ">
                                                     <input type="text"
                                                            id="txtFromDate"
                                                            ng-click="openFromDate($event)"
@@ -101,10 +101,10 @@
                                             <div class="alert alert-danger" role="alert" ng-show="!isSearchbuttonClicked"></div>
                                         </div>
 
-                                        <div class="col-xs-6">
+                                        <div class="col-xs-6 pl7px">
                                             <div class="input-group">
                                                 <div class="input-group-addon"><img src="images/calendar.png" alt="#" ng-click="openToDate($event)" /></div>
-                                                <div class="form-group calendar-size" ng-class="isModified ? '' :'calendar-position'">
+                                                <div class="form-group calendar-size form-toDate" ng-class="isPopup ? '' :'calendar-position'">
                                                     <input type="text"
                                                            id="txtToDate"
                                                            ng-click="openToDate($event)"

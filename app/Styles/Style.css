@@ -1673,7 +1673,8 @@ i.calendar.active, .input-box:hover i.calendar {
     .destination-form .input-control {
         font-size: 16px;
         height: 45px;
-        padding: 8px 8px 8px 15px;
+        /*padding: 8px 8px 8px 15px;*/
+        padding: 7px 7px 7px 7px;
     }
 
     .destination-form .input-group-addon > img {
@@ -2130,14 +2131,22 @@ i.calendar.active, .input-box:hover i.calendar {
     .refine-your-destination-box .your-searched p {
         padding: 20px 15px;
     }
+
+    .pr7px {
+        padding-right: 7px;
+    }
+
+    .pl7px {
+        padding-left: 7px;
+    }
 }
 
 @media only screen and (max-width: 767px) {
-    //lastDiv added .lastDiv {
+    .lastDiv {
         margin-bottom: 0px;
     }
 
-    //lastDiv added .slide-bottom {
+    .slide-bottom {
         margin-bottom: 71px;
     }
 

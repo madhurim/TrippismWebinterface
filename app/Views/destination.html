@@ -5,18 +5,18 @@
             <destination-fare-forecast fare-params="fareParams"></destination-fare-forecast>
             <div class=" col-md-9 col-sm-12 col-xs-12">
                 <googleattraction-info googleattraction-params="fareParams"  class="googleattraction" style="clear:both;"></googleattraction-info> <!--is-open="openaccordiondata"-->
-                <!--<div class="" reset-dimentions>-->
+                <div class="" reset-dimentions>
                     <div class="row outerDiv" id="outerDiv">
                         <div class="col-md-5 col-sm-5 col-xs-12 paddingr-0 bg-white column-1" > <!--ng-hide="attractionParams.WeatherInfoNoDataFound"-->
-                            <weatherwidget-info weather-params="fareParams"></weatherwidget-info>
+                            <weather-info weather-params="fareParams"></weather-info>
                             <!--<weather-info weather-params="fareParams"></weather-info>--> 
                         </div>
-                        <!--<div class="col-md-7 col-sm-7 col-xs-12  bg-white column-2">
-                            <seasonalityfarerangewidget-info widget-params="attractionParams"></seasonalityfarerangewidget-info>
-                            <farerange-info farerange-params="attractionParams" style="clear:both;"></farerange-info>
-                        </div>-->
+                        <div class="col-md-7 col-sm-7 col-xs-12  bg-white column-2">
+                            <seasonalityfarerangewidget-info widget-params="fareParams"></seasonalityfarerangewidget-info>
+                            <!--<farerange-info farerange-params="attractionParams" style="clear:both;"></farerange-info>-->
+                        </div>
                     </div>
-                <!--</div>-->
+                </div>
                 <div class="col-md-12 col-sm-12 col-xs-12 lastDiv" id="lastDiv" style="clear:both;"> <!--ng-show="!attractionParams.loadingSeasonality"-->
                     <seasonality-info seasonality-params="fareParams"></seasonality-info>
                 </div>

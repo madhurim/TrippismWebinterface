@@ -11,7 +11,6 @@
             controller: function ($scope) {
             },
             link: function ($scope, elem, attrs) {
-                debugger;
                 $scope.$watch('fareParams', function (newValue, oldValue) {
                     if (newValue != undefined)
                         activate();

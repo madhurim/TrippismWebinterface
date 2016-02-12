@@ -82,6 +82,7 @@
                     DestinationairportName: $scope.DestinationairportName,
                     FareInfo: $scope.FareInfo,
                     Fareforecastdata: param,
+                    AvailableAirports : $scope.AvailableAirports,
                     SearchCriteria: {
                         Origin: $scope.Origin,
                         DestinationLocation: $scope.DestinationLocation,
@@ -93,6 +94,34 @@
                         Maxfare :$scope.Maxfare
                     }
                 }
+
+                var seasonalityfarerangewidgetInfo, WeatherData; //farerangeInfo,weatherwidgetInfo;
+    
+                $scope.$on('widgetLoaded', function (event, data) {
+                    debugger;
+                    if (data.name === 'seasonalityfarerangewidgetInfo') {
+                        seasonalityfarerangewidgetInfo = data;
+                    }  else if (data.name === 'WeatherData') {
+                        WeatherData = data;
+                    }
+                    //else if (data.name === 'farerangeInfo') {
+                    //    farerangeInfo = data;
+                    //} else if (data.name === 'weatherwidgetInfo') {
+                    //    weatherwidgetInfo = data;
+                    //}
+
+                    if (seasonalityfarerangewidgetInfo && WeatherData ) //&& farerangeInfo && weatherwidgetInfo
+                    {
+                        var columnData = {
+                            seasonalityfarerangewidgetInfo: seasonalityfarerangewidgetInfo,
+                            //farerangeInfo: farerangeInfo,
+                            //weatherwidgetInfo: weatherwidgetInfo,
+                            WeatherData: WeatherData
+                        };
+                        $scope.$broadcast("columnLayoutChanged", { columnData: columnData });
+                    }
+                });
+
             });
         }
         $scope.PageName = "Destination Page";

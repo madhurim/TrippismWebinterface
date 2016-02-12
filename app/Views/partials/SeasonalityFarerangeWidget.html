@@ -1,5 +1,5 @@
 <!--<div class="col-md-6 col-sm-6 col-xs-12" ng-if="(FareRangeWidgetDataFound || SeasonalityWidgetDataFound ) && IsWidgetClosed ">-->
-<div class="" ng-if="(FareRangeWidgetDataFound || SeasonalityWidgetDataFound ) && IsWidgetClosed ">
+<div class="" ng-if="(FareRangeWidgetDataFound ) && IsWidgetClosed ">
     <div class="popup-box">
         <!--<div class="popup-header red-bg">
             <div ng-if="SeasonalityWidgetDataFound && FareRangeWidgetDataFound"><h6 class="widget-popup-title">Traffic Seasonality and Fares recently paid</h6></div>
@@ -10,9 +10,9 @@
         <div class="popup-content">
             <!--added header under content-->
             <div class="popup-header">
-                <div ng-if="SeasonalityWidgetDataFound && FareRangeWidgetDataFound"><h6 class="widget-popup-title">Traffic Seasonality and Fares recently paid</h6></div>
-                <div ng-if="SeasonalityWidgetDataFound && !FareRangeWidgetDataFound"><h6 class="widget-popup-title">Traffic Seasonality Summary</h6></div>
-                <div ng-if="!SeasonalityWidgetDataFound && FareRangeWidgetDataFound">
+                <!--<div ng-if="SeasonalityWidgetDataFound && FareRangeWidgetDataFound"><h6 class="widget-popup-title">Traffic Seasonality and Fares recently paid</h6></div>
+                <div ng-if="SeasonalityWidgetDataFound && !FareRangeWidgetDataFound"><h6 class="widget-popup-title">Traffic Seasonality Summary</h6></div>-->
+                <div ng-if="FareRangeWidgetDataFound">
                     <h6 class="widget-popup-title">
                         Fares recently paid
                     </h6>
@@ -21,32 +21,7 @@
             <div class="overview-weather-box">
                 <ul class="gird-line">
                     <li>
-                        <div class="overview-weather-content" ng-if="SeasonalityWidgetDataFound">
-                            <!--<h6> [ {{DepartDate}} To {{ReturnDate}} ]</h6>-->
-                            <p>Traffic Seasonality</p>
-                            <ul>
-                                <li>
-                                    <img title="High" ng-if="SeasonalityWidgetData.NoofIcons == 3" src="/images/User-12.png" alt="" />
-                                    <img title="High" ng-if="SeasonalityWidgetData.NoofIcons != 3" src="/images/User-12grey.png" alt="" />
-                                    <p ng-if="SeasonalityWidgetData.NoofIcons == 3" class="redbold-font"> Very Crowded</p>
-                                    <p ng-if="SeasonalityWidgetData.NoofIcons != 3"> Very Crowded</p>
-                                </li>
-                                <li>
-                                    <img title="Medium" ng-if="SeasonalityWidgetData.NoofIcons == 2" src="/images/User-5.png" alt="" />
-                                    <img title="Medium" ng-if="SeasonalityWidgetData.NoofIcons != 2" src="/images/User-5grey.png" alt="" />
-                                    <p ng-if="SeasonalityWidgetData.NoofIcons == 2" class="redbold-font"> Crowded</p>
-                                    <p ng-if="SeasonalityWidgetData.NoofIcons != 2"> Crowded</p>
-
-                                </li>
-                                <li>
-                                    <img title="Low" ng-if="SeasonalityWidgetData.NoofIcons == 1" src="/images/User-3.png" alt="" />
-                                    <img title="Low" ng-if="SeasonalityWidgetData.NoofIcons != 1" src="/images/User-3grey.png" alt="" />
-                                    <p ng-if="SeasonalityWidgetData.NoofIcons == 1" class="redbold-font"> Less Crowded</p>
-                                    <p ng-if="SeasonalityWidgetData.NoofIcons != 1">Less Crowded</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="overview-weather-farerange" ng-if="FareRangeWidgetDataFound" ng-style="!SeasonalityWidgetDataFound && {'border-left':'none'}">
+                        <div class="overview-weather-farerange" ng-if="FareRangeWidgetDataFound" ><!--ng-style="!SeasonalityWidgetDataFound && {'border-left':'none'}"-->
                             <p>
                                 Fares recently paid
                                 <span ng-if="widgetParams.FareRangeData.IsMacOrigin">from ({{widgetParams.FareRangeData.OriginLocation}})</span>

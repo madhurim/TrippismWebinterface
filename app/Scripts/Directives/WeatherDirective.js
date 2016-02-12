@@ -1,11 +1,11 @@
-﻿angular.module('TrippismUIApp').directive('weatherwidgetInfo', ['$compile', '$filter', '$timeout', '$rootScope', 'WeatherFactory', 'UtilFactory', 'TrippismConstants',
+﻿angular.module('TrippismUIApp').directive('weatherInfo', ['$compile', '$filter', '$timeout', '$rootScope', 'WeatherFactory', 'UtilFactory', 'TrippismConstants',
     function ($compile, $filter, $timeout, $rootScope, WeatherFactory, UtilFactory, TrippismConstants) {
         return {
             restrict: 'E',
             scope: {
                 weatherParams: '=',
             },
-            templateUrl: '/Views/Partials/WeatherWidgetPartial.html',
+            templateUrl: '/Views/Partials/WeatherPartial.html',
             link: function (scope, elem, attrs) {
 
                 scope.$watch('weatherParams', function (newValue, oldValue) {
@@ -21,11 +21,9 @@
                     scope.$watchGroup(['weatherParams'], function (newValue, oldValue, scope) {
                         scope.WeatherData = undefined;
                         if (scope.weatherParams != undefined)
-                            //&& scope.weatherParams.tabIndex != undefined
                         {
                             scope.DepartDate = $filter('date')(scope.weatherParams.Fareforecastdata.DepartureDate, scope.format, null);
                             scope.ReturnDate = $filter('date')(scope.weatherParams.Fareforecastdata.ReturnDate, scope.format, null);
-                            // scope.TabIndex = "weatherwidget" + scope.weatherParams.tabIndex;
                             var mapHTML = "<div id='weatherwidget'></div>";
                             elem.append($compile(mapHTML)(scope));
                             scope.WeatherRangeInfo();
@@ -85,7 +83,7 @@
                                     scope.WeatherInfoLoaded = false;
                                     if (data == "" || data.status == 404 || data.WeatherChances == undefined || data.WeatherChances.length == 0) {
                                         scope.WeatherInfoLoaded = false;
-                                        //scope.$emit('widgetLoaded', { name: "weatherwidgetInfo", isVisible: scope.WeatherInfoLoaded });
+                                        scope.$emit('widgetLoaded', { name: "WeatherData", isVisible: scope.WeatherInfoLoaded });
                                         return;
                                     }
                                     scope.WeatherInfoLoaded = true;
@@ -98,7 +96,7 @@
                                     scope.WeatherInfoLoaded = true;
                                 }
                                 else {
-                                    //scope.$emit('widgetLoaded', { name: "weatherwidgetInfo", isVisible: scope.WeatherInfoLoaded });
+                                    scope.$emit('widgetLoaded', { name: "WeatherData", isVisible: scope.WeatherInfoLoaded });
                                 }
                             }
                         }
@@ -111,7 +109,7 @@
                                 scope.WeatherwidgetData = scope.WeatherData;
 
                             if (scope.WeatherwidgetData != undefined && scope.WeatherwidgetData != "") {
-                                scope.$emit('widgetLoaded', { name: "weatherwidgetInfo", isVisible: scope.WeatherInfoLoaded });
+                                scope.$emit('widgetLoaded', { name: "WeatherData", isVisible: scope.WeatherInfoLoaded });
                                 console.log("weatherwidgetInfo data sent..");
                                 angular.element("#outerDiv").addClass("outerDiv");
                                 scope.WeatherInfoLoaded = true;

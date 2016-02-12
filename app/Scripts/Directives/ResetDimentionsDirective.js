@@ -7,12 +7,12 @@
             scope.$on("columnLayoutChanged", function(e,d){
                 console.log(d.columnData);
                 var seasonalityfarerangewidgetInfo = d.columnData.seasonalityfarerangewidgetInfo;
-                var farerangeInfo = d.columnData.farerangeInfo;
+                //var farerangeInfo = d.columnData.farerangeInfo;
                 var WeatherData = d.columnData.WeatherData;
-                var weatherwidgetInfo = d.columnData.weatherwidgetInfo;
+                //var weatherwidgetInfo = d.columnData.weatherwidgetInfo;
                 
-                var isCol2Visible = (seasonalityfarerangewidgetInfo.isVisible || farerangeInfo.isVisible);
-                var isCol1Visible = (weatherwidgetInfo.isVisible || WeatherData.isVisible);
+                var isCol2Visible = (seasonalityfarerangewidgetInfo.isVisible); //|| farerangeInfo.isVisible
+                var isCol1Visible = (WeatherData.isVisible); //weatherwidgetInfo.isVisible || 
               //  console.log("isCol2Visible  " + isCol2Visible);
               //  console.log("isCol1Visible  " + isCol1Visible);
                 var delay = 2000;

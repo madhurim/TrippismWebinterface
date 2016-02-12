@@ -8,125 +8,176 @@
             },
             templateUrl: '/Views/Partials/SeasonalityFarerangeWidget.html',
             link: function (scope, elem, attrs) {
-                
-                var isVisible = false; // this determines the widget visibility according to different arameters
-                var isVisibilityRecorded = false;
-                scope.IsWidgetClosed = true;
-                scope.formats = Dateformat();
-                scope.format = scope.formats[5];
-                scope.closeWidget = function () {
-                    scope.IsWidgetClosed = false;
+
+                scope.$watch('widgetParams', function (newValue, oldValue) {
+                    if (newValue != undefined)
+                        initFarerangeSummary();
+                });
+                function initFarerangeSummary()
+                {
+                    debugger;
+                    var isVisible = false; // this determines the widget visibility according to different parameters
+                    var isVisibilityRecorded = false;
+                    scope.IsWidgetClosed = true;
+                    scope.formats = Dateformat();
+                    scope.format = scope.formats[5];
+                    scope.closeWidget = function () {
+                        scope.IsWidgetClosed = false;
+                    }
+                    scope.FareRangeWidgetDataFound = false;
+                    scope.DepartDate = $filter('date')(scope.widgetParams.Fareforecastdata.DepartureDate, scope.format, null);
+                    scope.ReturnDate = $filter('date')(scope.widgetParams.Fareforecastdata.ReturnDate, scope.format, null);
+                    var frdt = new Date(scope.widgetParams.Fareforecastdata.DepartureDate);
+                    var todt = new Date(scope.widgetParams.Fareforecastdata.ReturnDate);
+                    var timeDiff = Math.abs(todt.getTime() - frdt.getTime());
+                    scope.staydaylength = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                    scope.LatestDepartureDate = new Date(scope.widgetParams.Fareforecastdata.ReturnDate); //.split('T')[0].replace(/-/g, "/"))
+                    scope.LatestDepartureDate.setDate(scope.LatestDepartureDate.getDate() + 5);
+
+                    var daydiff = getLengthOfStay(scope.widgetParams.Fareforecastdata.DepartureDate, scope.LatestDepartureDate);
+                    if (daydiff > 15) {
+                        scope.LatestDepartureDate = new Date(scope.widgetParams.Fareforecastdata.DepartureDate);//.split('T')[0].replace(/-/g, "/"))
+                        scope.LatestDepartureDate.setDate(LatestDepartureDate.getDate() + 14);
+                    }
+                    scope.LatestDepartureDate = $filter('date')(scope.LatestDepartureDate, 'yyyy-MM-dd')
+                    scope.loadfareRangeInfo();
                 }
-
-                scope.SeasonalityWidgetData = undefined;
-                scope.SeasonalityWidgetDataFound = false;
-
-                scope.loadSeasonalityInfo = function () {
-                    scope.SeasonalityWidgetDataFound = false;
+                scope.loadfareRangeInfo = function () {
+                    scope.fareRangeInfoLoaded = false;
+                    scope.FareRangeWidgetDataFound = false;
                     if (scope.widgetParams != undefined) {
-                        scope.SeasonalityData = scope.widgetParams.SeasonalityData;
-                        if (scope.SeasonalityData != undefined && scope.SeasonalityData != "")
-                            setSeasonalityData();
-                    }
-                };
+                        scope.fareRangeData = "";
+                        var data = {
+                            "Origin": scope.widgetParams.Fareforecastdata.Origin.toUpperCase(),
+                            "Destination": scope.widgetParams.Fareforecastdata.Destination,
+                            "EarliestDepartureDate": scope.widgetParams.Fareforecastdata.DepartureDate,
+                            "LatestDepartureDate": scope.LatestDepartureDate,
+                            "Lengthofstay": scope.staydaylength  //TrippismConstants.DefaultLenghtOfStay
+                        };
+                        if (scope.fareRangeInfoLoaded == false && scope.fareRangeData == "") {
+                            scope.farerangepromise = FareRangeFactory.fareRange(data).then(function (data) {
+                                if (data.status == 404 || data.status == 400) {
+                                    scope.fareRangeInfoNoDataFound = true;
+                                    ////No Data Found then return 
+                                    scope.$emit('widgetLoaded', { name: "farerangeInfo", isVisible: false });
+                                    //console.log("farerangeInfo data sent..");
+                                    return;
+                                }
+                                var originairport = _.find(scope.widgetParams.AvailableAirports, function (airport) { return airport.airport_Code == scope.widgetParams.Fareforecastdata.Origin });
+                                var destinationairport = _.find(scope.widgetParams.AvailableAirports, function (airport) { return airport.airport_Code == scope.widgetParams.Fareforecastdata.Destination });
 
-                function setSeasonalityData() {
-                    // replace(/-/g, "/") used because of safari date convert problem
-                    var FrmDate = new Date(scope.widgetParams.Fareforecastdata.DepartureDate.split('T')[0].replace(/-/g, "/"));
-                    var Todate = new Date(scope.widgetParams.Fareforecastdata.ReturnDate.split('T')[0].replace(/-/g, "/"))
-                    var Frmmonth = FrmDate.getMonth() + 1;
-                    var Tomonth = Todate.getMonth() + 1;
-                    var Fromweeks = _.filter(scope.SeasonalityData, function (dt) {
-                        return (new Date(dt.WeekStartDate.split('T')[0].replace(/-/g, "/")).getMonth() + 1) == Frmmonth;
-                    });
-                    Fromweeks = Fromweeks.concat(_.filter(scope.SeasonalityData, function (dt) {
-                        return (new Date(dt.WeekStartDate.split('T')[0].replace(/-/g, "/")).getMonth() + 1) == (Frmmonth - 1) == 0 ? 12 : Frmmonth - 1;
-                    }));
+                                // Done this code where citycode and airport code is same
+                                var originList = _.where(scope.widgetParams.AvailableAirports, { airport_CityCode: scope.widgetParams.Fareforecastdata.Origin });
+                                var originairportObj = _.find(originList, function (airport) { return airport.airport_IsMAC == true });
+                                if (originairportObj != undefined) originairport.airport_IsMAC = true;
+                                else originairport.airport_IsMAC = false;
 
-                    if (Frmmonth != Tomonth) {
-                        var ToWeeks = _.filter(scope.SeasonalityData, function (dt) {
-                            return (new Date(dt.WeekStartDate.split('T')[0].replace(/-/g, "/")).getMonth() + 1) == Tomonth;
-                        });
-                        Fromweeks = Fromweeks.concat(ToWeeks);
-                    }
-                    var chartrec = _.sortBy(Fromweeks, 'WeekStartDate');
-                    for (i = 0; i < chartrec.length; i++) {
-                        // replace(/-/g, "/") used because of safari date convert problem
-                        var WeekStartDate = new Date(chartrec[i].WeekStartDate.split('T')[0].replace(/-/g, "/"));
-                        var WeekEndDate = new Date(chartrec[i].WeekEndDate.split('T')[0].replace(/-/g, "/"));
-                        //if (WeekStartDate.getMonth() + 1 >= FrmDate.getMonth() + 1) {
-                            //if (WeekStartDate >= FrmDate && WeekStartDate <= Todate) // this condition commented becase sabre first week adjust like first week on 2016 is (29-12-2015 to 10-01-2016)
-                        if (FrmDate >= WeekStartDate && FrmDate <= WeekEndDate)
-                            //  if (FrmDate.getDate() >= WeekStartDate.getDate() && (FrmDate.getDate() <= WeekEndDate.getDate() || FrmDate.getMonth() + 1 < WeekEndDate.getMonth() + 1)) 
-                        {
-                            var SeasonalityIndicator = "";
-                            if (chartrec[i].SeasonalityIndicator == "High")
-                                NumberOfObervations = 3;
-                            if (chartrec[i].SeasonalityIndicator == "Medium")
-                                NumberOfObervations = 2;
-                            if (chartrec[i].SeasonalityIndicator == "Low")
-                                NumberOfObervations = 1;
-                            scope.SeasonalityWidgetData = {
-                                NoofIcons: NumberOfObervations
-                            };
-                            scope.SeasonalityWidgetDataFound = true;
-                            return;
+                                var desList = _.where(scope.widgetParams.AvailableAirports, { airport_CityCode: scope.widgetParams.Fareforecastdata.Destination });
+                                var destinationairportObj = _.find(desList, function (airport) { return airport.airport_IsMAC == true });
+                                if (destinationairportObj != undefined) destinationairport.airport_IsMAC = true;
+                                else destinationairport.airport_IsMAC = false;
+
+                                if (originairport != undefined && destinationairport != undefined) {
+                                    // If both airports are not MAC
+                                    if (!originairport.airport_IsMAC && !destinationairport.airport_IsMAC) {
+                                        scope.IsMacOrigin = false;
+                                        data.IsMacOrigin = false
+                                        scope.fareRangeData = data;
+                                    }
+                                        // If Origin airport is MAC and Destination is not
+                                    else if ((originairport.airport_IsMAC && !destinationairport.airport_IsMAC) || (originairport.airport_IsMAC && destinationairport.airport_IsMAC)) {
+                                        scope.IsMacOrigin = true;
+                                        var origins = _.groupBy(data.FareData, 'OriginLocation');
+                                        if (origins != undefined) {
+                                            var MinimumLocation = [];
+                                            _.each(origins, function (org) {
+                                                MinimumLocation.push(_.min(org, function (loc) { return loc.MinimumFare; }));
+                                            });
+                                            var MinSelectedLocation = _.min(MinimumLocation, function (loc) { return loc.MinimumFare; });
+
+                                            var locationairport = _.find(scope.farerangeParams.AvailableAirports, function (airport) { return airport.airport_Code == MinSelectedLocation.OriginLocation.toUpperCase() });
+                                            if (locationairport != undefined)
+                                                scope.SelectedLocation = MinSelectedLocation.OriginLocation + ', ' + locationairport.airport_FullName + ", " + locationairport.airport_CityName;
+
+                                            var faredata = {
+                                                DestinationLocation: MinSelectedLocation.DestinationLocation,
+                                                OriginLocation: MinSelectedLocation.OriginLocation,
+                                                IsMacOrigin: true,
+                                                SelectedLocation: scope.SelectedLocation,
+                                                FareData: origins[MinSelectedLocation.OriginLocation]
+                                            };
+                                            scope.fareRangeData = faredata;
+                                        }
+                                    }
+                                        // If Destination airport is MAC and Origin  is not
+                                    else if (!originairport.airport_IsMAC && destinationairport.airport_IsMAC) {
+                                        scope.IsMacDestination = true;
+                                        var destinations = _.groupBy(data.FareData, 'DestinationLocation');
+                                        if (destinations != undefined) {
+                                            var MinimumLocation = [];
+                                            _.each(destinations, function (org) {
+                                                MinimumLocation.push(_.min(org, function (loc) { return loc.MinimumFare; }));
+                                            });
+                                            var MinSelectedLocation = _.min(MinimumLocation, function (loc) { return loc.MinimumFare; });
+
+                                            var locationairport = _.find(scope.farerangeParams.AvailableAirports, function (airport) { return airport.airport_Code == MinSelectedLocation.DestinationLocation.toUpperCase() });
+                                            if (locationairport != undefined)
+                                                scope.SelectedDestinationLocation = MinSelectedLocation.DestinationLocation + ', ' + locationairport.airport_FullName + ", " + locationairport.airport_CityName;
+
+                                            var faredata = {
+                                                DestinationLocation: MinSelectedLocation.DestinationLocation,
+                                                OriginLocation: MinSelectedLocation.OriginLocation,
+                                                IsMacOrigin: false,
+                                                IsMacDestination: true,
+                                                SelectedLocation: '',
+                                                SelectedDestinationLocation: scope.SelectedDestinationLocation,
+                                                FareData: destinations[MinSelectedLocation.DestinationLocation]
+                                            };
+                                            scope.fareRangeData = faredata;
+                                        }
+                                    }
+                                    else if (data.FareData != undefined && data.FareData[0].OriginLocation == undefined) {
+                                        scope.fareRangeData = data;
+                                    }
+
+                                    //scope.farerangeParams.FareRangeData = scope.fareRangeData;
+                                }
+                                scope.fareRangeInfoLoaded = true;
+                            });
+
                         }
                     }
                 }
-                scope.FareRangeWidgetDataFound = false;
-                scope.loadfareRangeInfo = function () {
-                    scope.FareRangeWidgetDataFound = false;
-                    if (scope.widgetParams != undefined) {
-                        scope.fareRangeData = scope.widgetParams.FareRangeData;
-                        if (scope.fareRangeData != undefined && scope.fareRangeData != "") {
-                            // replace(/-/g, "/") used because of safari date convert problem
-                            var FrmDate = new Date(scope.widgetParams.Fareforecastdata.DepartureDate.split('T')[0].replace(/-/g, "/"));
-                            var Todate = new Date(scope.widgetParams.Fareforecastdata.ReturnDate.split('T')[0].replace(/-/g, "/"));
-                            for (i = 0; i < scope.fareRangeData.FareData.length; i++) {
-                                var WeekStartDate = new Date(scope.fareRangeData.FareData[i].DepartureDateTime.split('T')[0].replace(/-/g, "/"));
-                                if (WeekStartDate >= FrmDate && WeekStartDate <= Todate) {
-                                    scope.FareRangeWidgetData = {
-                                        MinimumFare: scope.fareRangeData.FareData[i].MinimumFare,
-                                        MaximumFare: scope.fareRangeData.FareData[i].MaximumFare,
-                                        MedianFare: scope.fareRangeData.FareData[i].MedianFare,
-                                        CurrencyCode: UtilFactory.GetCurrencySymbol(scope.fareRangeData.FareData[i].CurrencyCode)
-                                    };
-                                    scope.FareRangeWidgetDataFound = true;
-                                    break;
-                                }
+
+                scope.$watch('fareRangeData', function (newValue, oldValue) {
+                    if (newValue != oldValue) {
+                        var isVisible = !scope.loadingFareRange;
+                        scope.$emit('widgetLoaded', { name: "seasonalityfarerangewidgetInfo", isVisible: isVisible });
+                        PreparHtmldata();
+                    }
+                })
+                function PreparHtmldata()
+                {
+                    if (scope.fareRangeData != undefined && scope.fareRangeData != "") {
+                        // replace(/-/g, "/") used because of safari date convert problem
+                        var FrmDate = new Date(scope.widgetParams.Fareforecastdata.DepartureDate.split('T')[0].replace(/-/g, "/"));
+                        var Todate = new Date(scope.widgetParams.Fareforecastdata.ReturnDate.split('T')[0].replace(/-/g, "/"));
+                        for (i = 0; i < scope.fareRangeData.FareData.length; i++) {
+                            var WeekStartDate = new Date(scope.fareRangeData.FareData[i].DepartureDateTime.split('T')[0].replace(/-/g, "/"));
+                            if (WeekStartDate >= FrmDate && WeekStartDate <= Todate) {
+                                scope.FareRangeWidgetData = {
+                                    MinimumFare: scope.fareRangeData.FareData[i].MinimumFare,
+                                    MaximumFare: scope.fareRangeData.FareData[i].MaximumFare,
+                                    MedianFare: scope.fareRangeData.FareData[i].MedianFare,
+                                    CurrencyCode: UtilFactory.GetCurrencySymbol(scope.fareRangeData.FareData[i].CurrencyCode)
+                                };
+                                scope.FareRangeWidgetDataFound = true;
+                                break;
                             }
                         }
                     }
-                    if (scope.FareRangeWidgetDataFound == false) {
-                        angular.element('.fareDiv').addClass('fareDiv1');
-                    } else {
-                        angular.element('.fareDiv').removeClass('fareDiv1');
-                    }
-                };
 
-                scope.$watch('widgetParams.FareRangeData', function (newValue, oldval) {
-                    if (newValue != undefined) {
-                        scope.loadfareRangeInfo();
-                    }
-                });
-                scope.$watch('widgetParams.SeasonalityData', function (newValue, oldval) {
-                    if (newValue != undefined){
-                            scope.loadSeasonalityInfo();
-                            if(!isVisibilityRecorded){
-                                isVisibilityRecorded = true;
-                                isVisible = (scope.FareRangeWidgetDataFound || scope.SeasonalityWidgetDataFound ) && scope.IsWidgetClosed;
-                                scope.$emit('widgetLoaded', {name : "seasonalityfarerangewidgetInfo", isVisible : isVisible });
-                                console.log("seasonalityfarerangewidgetInfo data sent..");
-                        }
-                    }
-                });
-                scope.$watchGroup(['widgetParams'], function (newValue, oldValue, scope) {
-                    if (scope.widgetParams != undefined) {
-                        scope.DepartDate = $filter('date')(scope.widgetParams.Fareforecastdata.DepartureDate, scope.format, null);
-                        scope.ReturnDate = $filter('date')(scope.widgetParams.Fareforecastdata.ReturnDate, scope.format, null);
-                    }
-                });
+                }
             }
         }
     }]);

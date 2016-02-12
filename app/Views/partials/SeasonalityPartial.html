@@ -8,6 +8,37 @@
                 <p>
                     Traffic volume booked to the requested destination airport for each of the previous 52 weeks. It’s the booked traffic for each week to each of the other previous 51 weeks, and rated accordingly
                 </p>
+                <div class="overview-weather-box">
+                    <ul class="gird-line">
+                        <li>
+                            <div class="overview-weather-content" ng-if="!loadingSeasonality">
+                                <!--<h6> [ {{DepartDate}} To {{ReturnDate}} ]</h6>-->
+                                <p>Traffic Seasonality</p>
+                                <ul>
+                                    <li>
+                                        <img title="High" ng-if="SeasonalityWidgetData.NoofIcons == 3" src="/images/User-12.png" alt="" />
+                                        <img title="High" ng-if="SeasonalityWidgetData.NoofIcons != 3" src="/images/User-12grey.png" alt="" />
+                                        <p ng-if="SeasonalityWidgetData.NoofIcons == 3" class="redbold-font"> Very Crowded</p>
+                                        <p ng-if="SeasonalityWidgetData.NoofIcons != 3"> Very Crowded</p>
+                                    </li>
+                                    <li>
+                                        <img title="Medium" ng-if="SeasonalityWidgetData.NoofIcons == 2" src="/images/User-5.png" alt="" />
+                                        <img title="Medium" ng-if="SeasonalityWidgetData.NoofIcons != 2" src="/images/User-5grey.png" alt="" />
+                                        <p ng-if="SeasonalityWidgetData.NoofIcons == 2" class="redbold-font"> Crowded</p>
+                                        <p ng-if="SeasonalityWidgetData.NoofIcons != 2"> Crowded</p>
+
+                                    </li>
+                                    <li>
+                                        <img title="Low" ng-if="SeasonalityWidgetData.NoofIcons == 1" src="/images/User-3.png" alt="" />
+                                        <img title="Low" ng-if="SeasonalityWidgetData.NoofIcons != 1" src="/images/User-3grey.png" alt="" />
+                                        <p ng-if="SeasonalityWidgetData.NoofIcons == 1" class="redbold-font"> Less Crowded</p>
+                                        <p ng-if="SeasonalityWidgetData.NoofIcons != 1">Less Crowded</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
                 <div class="chart-box"></div>
             </div>
         </div>

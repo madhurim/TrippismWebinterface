@@ -95,7 +95,7 @@
                                             });
                                             var MinSelectedLocation = _.min(MinimumLocation, function (loc) { return loc.MinimumFare; });
 
-                                            var locationairport = _.find(scope.farerangeParams.AvailableAirports, function (airport) { return airport.airport_Code == MinSelectedLocation.OriginLocation.toUpperCase() });
+                                            var locationairport = _.find(scope.widgetParams.AvailableAirports, function (airport) { return airport.airport_Code == MinSelectedLocation.OriginLocation.toUpperCase() });
                                             if (locationairport != undefined)
                                                 scope.SelectedLocation = MinSelectedLocation.OriginLocation + ', ' + locationairport.airport_FullName + ", " + locationairport.airport_CityName;
 
@@ -120,7 +120,7 @@
                                             });
                                             var MinSelectedLocation = _.min(MinimumLocation, function (loc) { return loc.MinimumFare; });
 
-                                            var locationairport = _.find(scope.farerangeParams.AvailableAirports, function (airport) { return airport.airport_Code == MinSelectedLocation.DestinationLocation.toUpperCase() });
+                                            var locationairport = _.find(scope.widgetParams.AvailableAirports, function (airport) { return airport.airport_Code == MinSelectedLocation.DestinationLocation.toUpperCase() });
                                             if (locationairport != undefined)
                                                 scope.SelectedDestinationLocation = MinSelectedLocation.DestinationLocation + ', ' + locationairport.airport_FullName + ", " + locationairport.airport_CityName;
 

@@ -5,6 +5,7 @@
 
     function DestinationFactory($http, $rootScope, $filter,$timeout) {
         var DestinationsData = [];
+        var InstaflightData = [];
         // Define the functions and properties to reveal.
         var service = {
             findDestinations: findDestinations,
@@ -12,7 +13,8 @@
             findDestinationsDetails: findDestinationsDetails,
             findInstFlightDestination: findInstFlightDestination,
             ShowDestinationView: true,
-            GetDestinationFareInfo: GetDestinationFareInfo
+            GetDestinationFareInfo: GetDestinationFareInfo,
+
         };
         return service;
 
@@ -26,10 +28,10 @@
                 }
             return str.join("&");
         }
-        function findDestinations(paramdata, callBack) {
+        function findDestinations(paramdata, response) {
             var resultdata = $filter('filter')(DestinationsData, { Criteria: paramdata.Origin + paramdata.DepartureDate + paramdata.ReturnDate })[0];
             if (resultdata != undefined && resultdata != "") {
-                $timeout(function () { callBack(resultdata.data); }, 0);
+                $timeout(function () { response(resultdata.data); }, 0);
             }
             else {
                 var result = {
@@ -42,10 +44,12 @@
                 .then(function (data) {
                     result.data = data.data;
                     DestinationsData.push(result);
-                    callBack(data.data);
+
+                    response(data.data);
                     //return data.data;
                 }, function (e) {
-                    return e;
+                    response(e);
+                    //return e;
                 });
             }
         }
@@ -59,15 +63,37 @@
                 return fareInfo;
         }
 
-        function findInstFlightDestination(data) {
-            var dataURL = '?' + serialize(data);
-            var RequestedURL = $rootScope.apiURLForInstaFlightSearch + '/GetDestination' + dataURL;
-            return $http.get(RequestedURL)
-            .then(function (data) {
-                return data.data;
-            }, function (e) {
-                return e;
-            });
+        function findInstFlightDestination(paramdata, response) {
+            var resultdata = $filter('filter')(DestinationsData, { Criteria: paramdata.Origin + paramdata.Destination + paramdata.DepartureDate + paramdata.ReturnDate })[0];
+            if (resultdata != undefined && resultdata != "") {
+                $timeout(function () { response(resultdata.data); }, 0);
+            }
+            else {
+                var result = {
+                    Criteria: paramdata.Origin + paramdata.Destination + paramdata.DepartureDate + paramdata.ReturnDate,
+                    data: null
+                }
+                var dataURL = '?' + serialize(paramdata);
+                var RequestedURL = $rootScope.apiURLForInstaFlightSearch + '/GetDestination' + dataURL;
+                $http.get(RequestedURL)
+               .then(function (data) {
+                   result.data = data.data;
+                   InstaflightData.push(resultdata)
+                   response(data.data);
+                   //return data.data;
+               }, function (e) {
+                   response(e);
+                   //return e;
+               });
+            }
+            //var dataURL = '?' + serialize(data);
+            //var RequestedURL = $rootScope.apiURLForInstaFlightSearch + '/GetDestination' + dataURL;
+            //return $http.get(RequestedURL)
+            //.then(function (data) {
+            //    return data.data;
+            //}, function (e) {
+            //    return e;
+            //});
         }
 
         function findDestinationsDetails(data) {

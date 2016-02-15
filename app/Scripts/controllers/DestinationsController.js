@@ -88,17 +88,7 @@
                     
 
                 })
-                var paramdata = {
-                    Origin: $scope.Origin,
-                    DestinationLocation: $scope.KnownDestinationAirport,
-                    FromDate: $scope.FromDate,
-                    ToDate: $scope.ToDate,
-                    Theme: $scope.Theme,
-                    Region: $scope.Region,
-                    Minfare: $scope.Minfare,
-                    Maxfare: $scope.Maxfare
-                }
-                UtilFactory.SetLastSearchval(paramdata)
+               
                 $scope.IsairportJSONLoading = true;
                 $scope.mappromise = UtilFactory.ReadAirportJson().then(function (data) {
                     $scope.IsairportJSONLoading = false;
@@ -180,6 +170,7 @@
     }
     LoadAirlineJson();
     GetCurrencySymbols();
+    
         function FilterDestinations(destinations) {
             var destinationstodisp = [];
             for (var x = 0; x < destinations.length; x++) {
@@ -467,6 +458,18 @@
                 FromDate: (typeof $scope.FromDate == 'string') ? new Date($scope.FromDate) : $scope.FromDate,
                 ToDate: (typeof $scope.ToDate == 'string') ? new Date($scope.ToDate) : $scope.ToDate
             };
+            //Maintain data in service for SharableUrl 
+            var paramdata = {
+                Origin: $scope.Origin,
+                DestinationLocation: $scope.KnownDestinationAirport,
+                FromDate: $scope.FromDate,
+                ToDate: $scope.ToDate,
+                Theme: $scope.Theme,
+                Region: $scope.Region,
+                Minfare: $scope.Minfare,
+                Maxfare: $scope.Maxfare
+            }
+            UtilFactory.SetLastSearchval(paramdata)
         }
 
         function clearRefineSearchSelection() {

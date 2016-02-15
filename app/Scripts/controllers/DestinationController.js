@@ -52,7 +52,7 @@
                             $scope.ToDate = ConvertToRequiredDate(para[1].trim(), 'UI');;
                             $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
                         }
-                        if (para[0].trim() === "t")
+                        if (para[0].trim() === "th")
                             $scope.Theme = para[1].trim();
                         if (para[0].trim() === "a")
                             $scope.Region = para[1].trim();

@@ -60,32 +60,17 @@ angular.module('TrippismUIApp')
                   };
 
                   $scope.destinationpopupClick = function (item) {
-
-                      $location.path('destination/f=' + $scope.origin.toUpperCase() + ';t=' + item.CustomMarkerInfo.DestinationLocation + ';d=' + ConvertToRequiredDate(item.CustomMarkerInfo.DepartureDateTime, 'API') + ';r=' + ConvertToRequiredDate(item.CustomMarkerInfo.ReturnDateTime, 'API'));
-
-                      //var OriginairportName = _.find($scope.airportlist, function (airport) {
-                      //    return airport.airport_Code == $scope.origin.toUpperCase()
-                      //});
-                      //var DestinationairportName = _.find($scope.airportlist, function (airport) {
-                      //    return airport.airport_Code == item.CustomMarkerInfo.DestinationLocation
-                      //});
-                      //var dataForecast = {
-                      //    "Origin": $scope.origin.toUpperCase(),
-                      //    "DepartureDate": $filter('date')(item.CustomMarkerInfo.DepartureDateTime, 'yyyy-MM-dd'),
-                      //    "ReturnDate": $filter('date')(item.CustomMarkerInfo.ReturnDateTime, 'yyyy-MM-dd'),
-                      //    "Destination": item.CustomMarkerInfo.DestinationLocation
-                      //};
-                      //$rootScope.$broadcast('EmptyFareForcastInfo', {
-                      //    Origin: OriginairportName.airport_CityName,
-                      //    Destinatrion: DestinationairportName.airport_Code,
-                      //    Fareforecastdata: dataForecast,
-                      //    mapOptions: item.CustomMarkerInfo,
-                      //    OriginairportName: OriginairportName,
-                      //    DestinationairportName: DestinationairportName,
-                      //    DestinationList: $scope.destinations,
-                      //    AvailableAirports: $scope.airportlist,
-                      //    AvailableAirline: $scope.airlineJsonData
-                      //});
+                      var result = UtilFactory.GetLastSearch();
+                      var finalpath = 'destination/f=' + $scope.origin.toUpperCase() + ';t=' + item.CustomMarkerInfo.DestinationLocation + ';d=' + ConvertToRequiredDate(item.CustomMarkerInfo.DepartureDateTime, 'API') + ';r=' + ConvertToRequiredDate(item.CustomMarkerInfo.ReturnDateTime, 'API');
+                      if (result.Theme != undefined)
+                          finalpath += ';th=' + result.Theme;
+                      if (result.Region != undefined)
+                          finalpath += ';a=' + result.Region;
+                      if (result.Minfare != undefined)
+                          finalpath += ';lf=' + result.Minfare;
+                      if (result.Maxfare != undefined)
+                        finalpath += ';hf=' + result.Maxfare;
+                      $location.path(finalpath);
                   };
 
                   var infowindow = new google.maps.InfoWindow();

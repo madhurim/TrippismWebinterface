@@ -131,10 +131,7 @@
                             // replace(/-/g, "/") used because of safari date convert problem
                             var WeekStartDate = new Date(chartrec[i].WeekStartDate.split('T')[0].replace(/-/g, "/"));
                             var WeekEndDate = new Date(chartrec[i].WeekEndDate.split('T')[0].replace(/-/g, "/"));
-                            //if (WeekStartDate.getMonth() + 1 >= FrmDate.getMonth() + 1) {
-                            //if (WeekStartDate >= FrmDate && WeekStartDate <= Todate) // this condition commented becase sabre first week adjust like first week on 2016 is (29-12-2015 to 10-01-2016)
                             if (FrmDate >= WeekStartDate && FrmDate <= WeekEndDate)
-                                //  if (FrmDate.getDate() >= WeekStartDate.getDate() && (FrmDate.getDate() <= WeekEndDate.getDate() || FrmDate.getMonth() + 1 < WeekEndDate.getMonth() + 1)) 
                             {
                                 var SeasonalityIndicator = "";
                                 if (chartrec[i].SeasonalityIndicator == "High")

@@ -1,10 +1,11 @@
 ﻿(function () {
     'use strict';
     var serviceId = 'SeasonalityFactory';
-    angular.module('TrippismUIApp').factory(serviceId, ['$http', '$rootScope', SeasonalityFactory]);
+    angular.module('TrippismUIApp').factory(serviceId, ['$http', '$rootScope','$filter', '$q',SeasonalityFactory]);
 
-    function SeasonalityFactory($http, $rootScope) {
+    function SeasonalityFactory($http, $rootScope, $filter,$q) {
         // Define the functions and properties to reveal.
+        var SeasonalityData = [];
         var service = {
             Seasonality: Seasonality,
         };
@@ -22,14 +23,28 @@
         }
 
         function Seasonality(data) {
-            var dataURL = 'Seasonality?' + serialize(data);
-            var url = $rootScope.apiURL + dataURL;
-            return $http.get(url)
-                .then(function (data) {
-                    return data.data;
-                }, function (e) {
-                    return e;
-                });
+            var resultdata = $filter('filter')(SeasonalityData, { Criteria: data.Destination })[0];
+            if (resultdata != undefined && resultdata != "") {
+                var d = $q.defer();
+                d.resolve(angular.copy(resultdata.data));//angular.copy used because at directive side we manipulate into data so second time when we call data method then return original result which was return from api
+                return d.promise;
+            }
+            else {
+                var result = {
+                    Criteria: data.Destination,
+                    data: null
+                }
+                var dataURL = 'Seasonality?' + serialize(data);
+                var url = $rootScope.apiURL + dataURL;
+                return $http.get(url)
+                    .then(function (data) {
+                        result.data = angular.copy(data.data);
+                        SeasonalityData.push(result);
+                        return data.data;
+                    }, function (e) {
+                        return e;
+                    });
+            }
         }
     }
 })();

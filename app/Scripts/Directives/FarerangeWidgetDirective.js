@@ -1,12 +1,12 @@
-﻿angular.module('TrippismUIApp').directive('seasonalityfarerangewidgetInfo',
-                ['$compile', 'SeasonalityFactory', 'FareRangeFactory', '$filter', '$timeout', '$rootScope', 'UtilFactory', 'TrippismConstants',
-    function ($compile, SeasonalityFactory, FareRangeFactory, $filter, $timeout, $rootScope, UtilFactory, TrippismConstants) {
+﻿angular.module('TrippismUIApp').directive('farerangewidgetInfo',
+                ['$compile',  'FareRangeFactory', '$filter', '$timeout', '$rootScope', 'UtilFactory', 'TrippismConstants',
+    function ($compile, FareRangeFactory, $filter, $timeout, $rootScope, UtilFactory, TrippismConstants) {
         return {
             restrict: 'E',
             scope: {
                 widgetParams: '=',
             },
-            templateUrl: '/Views/Partials/SeasonalityFarerangeWidget.html',
+            templateUrl: '/Views/Partials/FarerangeWidget.html',
             link: function (scope, elem, attrs) {
 
                 scope.$watch('widgetParams', function (newValue, oldValue) {

@@ -36,9 +36,16 @@
             UtilFactory.ReadAirportJson(function (callback) {
                 $rootScope.AvailableAirports = callback;
             });
+
+
         }
         LoadJsonFileData();
         
+        $scope.ViewDestinations = function () {
+            debugger;
+            var result = UtilFactory.GetLastSearch()
+            $location.path('destinations/f=' + result.Origin.toUpperCase() + ';d=' + ConvertToRequiredDate(result.FromDate, 'API') + ';r=' + ConvertToRequiredDate(result.ToDate, 'API'));
+        }
         $scope.getClass = function (path) {
             if ($location.path().substr(0, path.length) == path) {
                 return "active"

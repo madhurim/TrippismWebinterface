@@ -79,16 +79,34 @@
                         $scope.ToDate = ConvertToRequiredDate(para[1].trim(), 'UI');;
                         $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
                     }
+                    if (para[0].trim() === "t")
+                        $scope.Theme = para[1].trim();
+                    if (para[0].trim() === "a")
+                        $scope.Region = para[1].trim();
+                    if (para[0].trim() === "lf")
+                        $scope.Minfare = para[1].trim();
+                    if (para[0].trim() === "hf")
+                        $scope.Maxfare = para[1].trim();
+                    
 
                 })
-              
+                var paramdata = {
+                    Origin: $scope.Origin,
+                    DestinationLocation: $scope.KnownDestinationAirport,
+                    FromDate: $scope.FromDate,
+                    ToDate: $scope.ToDate,
+                    Theme: $scope.Theme,
+                    Region: $scope.Region,
+                    Minfare: $scope.Minfare,
+                    Maxfare: $scope.Maxfare
+                }
+                UtilFactory.SetLastSearchval(paramdata)
                 $scope.IsairportJSONLoading = true;
                 UtilFactory.ReadAirportJson(function (callback) {
                     $scope.IsairportJSONLoading = false;
                     $scope.AvailableAirports = callback;
                     if ($scope.Origin != undefined && $scope.Origin != "") {
                         $scope.LastSelectedOrigin = $scope.Origin;
-                        //$scope.KnownDestinationAirport = dest;
                         updateSearchCriteria();
                         findDestinations();
                         //$scope.getDestinationDetails()
@@ -139,7 +157,6 @@
         }
         if ($scope.KnownDestinationAirport && $scope.KnownDestinationAirport.split(',').length >= 1) {
             knownDestination = $scope.KnownDestinationAirport.split(',')[0].trim().toUpperCase();
-            //$scope.KnownDestinationAirport = $scope.KnownDestinationAirport.split(',')[0].trim().toUpperCase();
             if (knownDestination.length > 3) {
                 var matchingArray = GetArrayforCompareforCityName(knownDestination.toLowerCase());
                 if (matchingArray.length > 0) {

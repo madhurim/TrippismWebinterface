@@ -68,6 +68,17 @@
                     $scope.DestinationairportName = _.find($scope.AvailableAirports, function (airport) {
                         return airport.airport_Code == $scope.DestinationLocation
                     });
+                    var paramdata = {
+                        Origin: $scope.Origin,
+                        DestinationLocation: $scope.KnownDestinationAirport,
+                        FromDate: $scope.FromDate,
+                        ToDate: $scope.ToDate,
+                        Theme: $scope.Theme,
+                        Region: $scope.Region,
+                        Minfare: $scope.Minfare,
+                        Maxfare: $scope.Maxfare
+                    }
+                    UtilFactory.SetLastSearchval(paramdata)
                 }
                 var param = {
                     "Origin": $scope.Origin,

@@ -223,6 +223,7 @@
             });
         }
         $scope.PageName = "Destination Page";
+        $scope.$emit('bodyClass', 'tabpage');
     }
 
 })();

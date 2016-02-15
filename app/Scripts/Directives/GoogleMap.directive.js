@@ -35,7 +35,7 @@ angular.module('TrippismUIApp')
                       setZoomOnClick: 8,
                       styles: [{
                           height: 47,
-                          url: imageurl + '/images/icon-gps40x40.png',
+                          url: imageurl + '/images/icon-gps40x401.png',
                           textColor: "black",
                           textSize: 12,
                           width: 40,

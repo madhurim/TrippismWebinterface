@@ -22,5 +22,7 @@
        TrippismConstants
        ) {
         $scope.Name = "Home Page";
+
+        $scope.$emit('bodyClass', 'homepage');
     }
 })();

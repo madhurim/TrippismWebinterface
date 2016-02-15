@@ -579,5 +579,6 @@
             return UtilFactory.GetCurrencySymbol(code);
         }
         activate();
+        $scope.$emit('bodyClass', 'mappage');
     }
 })();

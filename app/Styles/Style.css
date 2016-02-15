@@ -761,9 +761,12 @@ i.calendar.active, .input-box:hover i.calendar {
     width: 100%;
 }
 
+.mappage .footer-box {
+    position:fixed;
+}
 
 .footer-box {
-    position: fixed;
+    position: relative;
     left: 0;
     right: 0;
     bottom: 0;
@@ -1544,13 +1547,16 @@ i.calendar.active, .input-box:hover i.calendar {
     width: 100%;
 }
 /*Main page Popup CSS start */
+.destination-boxwrap {
+    position:relative;
+}
 .destination-box-popup {
     font-family: "Roboto",sans-serif;
     left: 0;
     margin: auto;
     position: absolute;
     right: 0;
-    bottom: 40px;
+    bottom: 0px;
     z-index: 999;
 }
 
@@ -2915,3 +2921,6 @@ em.ng-binding {
 /*iPhone 6 Plus in portrait & landscape ends*/
 /*@media queries ends*/
 
+.tabpage .content-wrapper {
+    background-color:#f5f5f5;
+}

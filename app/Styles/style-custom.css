@@ -810,6 +810,72 @@ ul .stop-line {
     color: #b90005;
 }
 
+/* #region home-bottom */
+
+.map-box-img {
+    height: 540px;
+    overflow: hidden;
+}
+
+    .map-box-img img {
+        width: 100%;
+        margin: 0 auto;
+        display: table;
+    }
+
+.service_box {
+    padding: 50px 0;
+}
+
+.service_title {
+    color: #292524;
+    font-size: 32px;
+    font-weight: 300;
+}
+
+.service_content {
+    position: relative;
+    padding: 0 15px;
+}
+
+    .service_content:before {
+        content: "";
+        width: 1px;
+        position: absolute;
+        left: -15px;
+        top: 0;
+        background-color: #e8e8e8;
+        bottom: 0;
+        height: 100%;
+    }
+
+.service_box .col-sm-4:first-child .service_content:before {
+    content: normal;
+}
+
+.service_content img {
+    padding: 55px 15px;
+}
+
+.service_content p {
+    font-size: 16px;
+}
+
+/* #endregion home-bottom */
+@media only screen and (max-width: 1050px) {
+    .map-box-img img {
+        width: auto;
+        max-width: inherit;
+        position: relative;
+        left: 50%;
+        -moz-transform: translateX(-60%);
+        -webkit-transform: translateX(-60%);
+        -o-transform: translateX(-60%);
+        -ms-transform: translateX(-60%);
+        transform: translateX(-60%);
+    }
+}
+
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {
         text-align: center;

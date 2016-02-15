@@ -2030,6 +2030,76 @@ i.calendar.active, .input-box:hover i.calendar {
 }
 
 @media only screen and (max-width: 768px) {
+    .service_title {
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .service_content img {
+        padding: 10px 0;
+    }
+
+    .service_box {
+        padding: 10px 0;
+    }
+
+    .service_inner {
+        margin: 15px 0;
+        padding: 15px 0;
+        position: relative;
+    }
+
+    .service_content {
+        position: static;
+    }
+
+        .service_content:before {
+            content: "";
+            width: 100%;
+            left: 0;
+            top: 0;
+            height: 1px;
+        }
+
+    .refine-search .content {
+        height: 172px;
+    }
+
+    .mappage .map-box {
+        padding-bottom: 0;
+    }
+
+    .pr7px {
+        padding-right: 7px;
+    }
+
+    .pl7px {
+        padding-left: 7px;
+    }
+
+    .destination-form .col-xs-6, .destination-popup .destination-form .input-group {
+        position: static;
+    }
+
+    .destination-form .input-group .calendar-size .dropdown-menu {
+        top: 50% !important;
+        left: 0 !important;
+        right: 0 !important;
+        margin: auto;
+        width: 280px;
+        -moz-transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+
+    .destination-form .input-group .dropdown-menu:before {
+        content: normal;
+    }
+}
+
+@media only screen and (max-width: 768px) {
     .header-box {
         padding: 5px 0;
     }
@@ -2130,14 +2200,6 @@ i.calendar.active, .input-box:hover i.calendar {
 
     .refine-your-destination-box .your-searched p {
         padding: 20px 15px;
-    }
-
-    .pr7px {
-        padding-right: 7px;
-    }
-
-    .pl7px {
-        padding-left: 7px;
     }
 }
 

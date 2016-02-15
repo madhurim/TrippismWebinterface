@@ -28,12 +28,12 @@
         FareforecastFactory,
         SeasonalityFactory,
         TrippismConstants) {
-        
+
         init();
 
-        function init()
-        {
-            UtilFactory.ReadAirportJson(function (response) {
+        function init() {
+            debugger;
+            $scope.mappromise = UtilFactory.ReadAirportJson().then(function (response) {
                 $scope.AvailableAirports = response;
 
                 if ($stateParams.path != undefined) {
@@ -90,17 +90,16 @@
                         "Maxfare": $scope.Maxfare == 0 ? null : $scope.Maxfare,
                         "Destination": $scope.DestinationLocation
                     }
-                    DestinationFactory.findInstFlightDestination(apiparam,function(response){
-                        debugger;
+                    DestinationFactory.findInstFlightDestination(apiparam).then(function (response) {
                         if (response.FareInfo != null) {
                             $scope.destinationlist = FilterDestinations(response.FareInfo);
-                           // destinationlistOriginal = $scope.destinationlist;
+                            // destinationlistOriginal = $scope.destinationlist;
                             var DestinationairportName = _.find($scope.AvailableAirports, function (airport) { return airport.airport_Code == $scope.DestinationLocation.toUpperCase() });
 
                             var objDestinationairport = $scope.destinationlist[0];
                             if (objDestinationairport != undefined) {
-                                
-                               
+
+
                                 objDestinationairport.objDestinationairport = $scope.DestinationLocation.toUpperCase();
                                 $scope.destinationlist.forEach(function (item) { item.DestinationLocation = item.objDestinationairport; });
                                 $scope.FareInfo = response.FareInfo[0];
@@ -149,11 +148,8 @@
                             alertify.alert('No suggestions are available from your Origin. We recomend trying other nearby major airports.').set('onok', function (closeEvent) { });
                         }
                     });
-
-                    
                 }
                 else {
-
                     readyfareParams()
                 }
 
@@ -178,8 +174,7 @@
                     return destinationstodisp;
                 }
 
-               function readyfareParams()
-                {
+                function readyfareParams() {
                     $scope.fareParams = {
                         OriginairportName: $scope.OriginairportName,
                         DestinationairportName: $scope.DestinationairportName,
@@ -198,14 +193,14 @@
                         }
                     }
                 }
-                
+
 
                 var seasonalityfarerangewidgetInfo, WeatherData; //farerangeInfo,weatherwidgetInfo;
-    
+
                 $scope.$on('widgetLoaded', function (event, data) {
                     if (data.name === 'seasonalityfarerangewidgetInfo') {
                         seasonalityfarerangewidgetInfo = data;
-                    }  else if (data.name === 'WeatherData') {
+                    } else if (data.name === 'WeatherData') {
                         WeatherData = data;
                     }
                     //else if (data.name === 'farerangeInfo') {
@@ -214,7 +209,7 @@
                     //    weatherwidgetInfo = data;
                     //}
 
-                    if (seasonalityfarerangewidgetInfo && WeatherData ) //&& farerangeInfo && weatherwidgetInfo
+                    if (seasonalityfarerangewidgetInfo && WeatherData) //&& farerangeInfo && weatherwidgetInfo
                     {
                         var columnData = {
                             seasonalityfarerangewidgetInfo: seasonalityfarerangewidgetInfo,

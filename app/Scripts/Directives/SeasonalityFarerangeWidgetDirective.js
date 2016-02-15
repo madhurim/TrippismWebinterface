@@ -13,9 +13,7 @@
                     if (newValue != undefined)
                         initFarerangeSummary();
                 });
-                function initFarerangeSummary()
-                {
-                    debugger;
+                function initFarerangeSummary() {
                     var isVisible = false; // this determines the widget visibility according to different parameters
                     var isVisibilityRecorded = false;
                     scope.IsWidgetClosed = true;
@@ -156,8 +154,7 @@
                         PreparHtmldata();
                     }
                 })
-                function PreparHtmldata()
-                {
+                function PreparHtmldata() {
                     if (scope.fareRangeData != undefined && scope.fareRangeData != "") {
                         // replace(/-/g, "/") used because of safari date convert problem
                         var FrmDate = new Date(scope.widgetParams.Fareforecastdata.DepartureDate.split('T')[0].replace(/-/g, "/"));

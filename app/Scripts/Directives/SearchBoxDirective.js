@@ -47,7 +47,7 @@ function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParam
 
             $scope.urlParam = {};
             function activate() {
-                UtilFactory.ReadAirportJson(function (data) {
+                UtilFactory.ReadAirportJson().then(function (data) {
                     $scope.AvailableAirports = data;
                     if ($stateParams.path != undefined) {
                         var params = $stateParams.path.split(";");

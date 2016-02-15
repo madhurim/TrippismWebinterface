@@ -1,9 +1,9 @@
 ﻿(function () {
     'use strict';
     var serviceId = 'UtilFactory';
-    angular.module('TrippismUIApp').factory(serviceId, ['$http', '$timeout', '$location', '$anchorScroll', '$rootScope', '$filter', UtilFactory]);
+    angular.module('TrippismUIApp').factory(serviceId, ['$http', '$location', '$anchorScroll', '$rootScope', '$filter', '$q', UtilFactory]);
 
-    function UtilFactory($http, $timeout, $location, $anchorScroll, $rootScope, $filter) {
+    function UtilFactory($http, $location, $anchorScroll, $rootScope, $filter, $q) {
         // Define the functions and properties to reveal.
         var AirportJsonData = [];
         var LastSearch;
@@ -65,13 +65,15 @@
                 return uri + separator + key + "=" + value;
             }
         }
-        function ReadAirportJson(callBack) {
+        function ReadAirportJson() {
             if (AirportJsonData.length > 0) {
-                $timeout(function () { callBack(AirportJsonData); }, 0);
+                var d = $q.defer();
+                d.resolve(AirportJsonData);
+                return d.promise;
             }
             else {
                 var AvailableCodes = [];
-                $http.get($rootScope.apiURLForConstant + '/GetAirports').then(function (_arrairports) {
+                return $http.get($rootScope.apiURLForConstant + '/GetAirports').then(function (_arrairports) {
                     if (_arrairports.status == 200) {
                         _arrairports = _arrairports.data;
                         for (var i = 0; i < _arrairports.length; i++) {
@@ -115,61 +117,10 @@
                         }
                     }
                     AirportJsonData = AvailableCodes;
-                    callBack(AvailableCodes);
+                    return AvailableCodes;
                 });
             }
         }
-        //function ReadAirportJson() {        
-        //        var AvailableCodes = [];
-        //       return  $http.get($rootScope.apiURLForConstant + '/GetAirports').then(function (_arrairports) {
-        //            if (_arrairports.status == 200) {
-        //                _arrairports = _arrairports.data;
-        //                for (var i = 0; i < _arrairports.length; i++) {
-        //                    if (_arrairports[i].isMAC == true) {
-        //                        var objtopush = {};
-        //                        objtopush['airport_CityCode'] = _arrairports[i].cCode;
-        //                        objtopush['airport_CityName'] = _arrairports[i].cName;
-        //                        objtopush['airport_CountryCode'] = _arrairports[i].coCode;
-        //                        objtopush['airport_CountryName'] = _arrairports[i].coName;
-
-        //                        objtopush['airport_Code'] = _arrairports[i].cCode;
-        //                        objtopush['airport_FullName'] = _arrairports[i].cName + ", All Airports";
-        //                        objtopush['airport_Lat'] = _arrairports[i].Airports[0].lat;
-        //                        objtopush['airport_Lng'] = _arrairports[i].Airports[0].lng;
-        //                        objtopush['region'] = _arrairports[i].region;
-        //                        objtopush['airport_IsMAC'] = true;
-        //                        objtopush['themes'] = [];
-        //                        objtopush['rank'] = _arrairports[i].rank;
-        //                        AvailableCodes.push(objtopush);
-        //                    }
-        //                    if (_arrairports[i].Airports != undefined) {
-        //                        for (var cntAirport = 0; cntAirport < _arrairports[i].Airports.length ; cntAirport++) {
-        //                            var objtopush = {};
-        //                            objtopush['airport_CityCode'] = _arrairports[i].cCode;
-        //                            objtopush['airport_CityName'] = _arrairports[i].cName;
-        //                            objtopush['airport_CountryCode'] = _arrairports[i].coCode;
-        //                            objtopush['airport_CountryName'] = _arrairports[i].coName;
-
-        //                            objtopush['airport_Code'] = _arrairports[i].Airports[cntAirport].code;
-        //                            objtopush['airport_FullName'] = _arrairports[i].Airports[cntAirport].name;
-        //                            objtopush['airport_Lat'] = _arrairports[i].Airports[cntAirport].lat;
-        //                            objtopush['airport_Lng'] = _arrairports[i].Airports[cntAirport].lng;
-        //                            objtopush['region'] = _arrairports[i].region;
-        //                            objtopush['airport_IsMAC'] = false;
-        //                            objtopush['alternatenames'] = _arrairports[i].Airports[cntAirport].names;
-        //                            objtopush['themes'] = _arrairports[i].Airports[cntAirport].themes;
-        //                            objtopush['rank'] = _arrairports[i].Airports[cntAirport].rank;
-        //                            AvailableCodes.push(objtopush);
-        //                        }
-        //                    }
-        //                }
-        //            }
-
-        //             //AirportJsonData = AvailableCodes;
-        //            return AvailableCodes;
-        //         });
-
-        //}
 
         function AirportCodeLog(AirportCode) {
             var dataURL = 'MissingAirportLog?Airportcode=' + AirportCode;

@@ -32,14 +32,7 @@
             $rootScope.apiURLForConstant = 'http://' + $location.host() + '/api/Constants/';
         }
 
-        function LoadJsonFileData() {
-            UtilFactory.ReadAirportJson(function (callback) {
-                $rootScope.AvailableAirports = callback;
-            });
 
-
-        }
-        LoadJsonFileData();
         
         $scope.ViewDestinations = function () {
             debugger;

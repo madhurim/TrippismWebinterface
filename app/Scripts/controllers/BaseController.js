@@ -32,14 +32,6 @@
             $rootScope.apiURLForConstant = 'http://' + $location.host() + '/api/Constants/';
         }
 
-        function LoadJsonFileData() {
-            debugger;
-            UtilFactory.ReadAirportJson().then(function (data) {
-                $rootScope.AvailableAirports = data;
-            });
-        }
-        LoadJsonFileData();
-
         $scope.getClass = function (path) {
             if ($location.path().substr(0, path.length) == path) {
                 return "active"

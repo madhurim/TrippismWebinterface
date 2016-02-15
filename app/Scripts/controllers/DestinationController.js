@@ -32,7 +32,6 @@
         init();
 
         function init() {
-            debugger;
             $scope.mappromise = UtilFactory.ReadAirportJson().then(function (response) {
                 $scope.AvailableAirports = response;
 

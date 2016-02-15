@@ -81,7 +81,6 @@
                 })
 
                 $scope.IsairportJSONLoading = true;
-                debugger;
                 $scope.mappromise = UtilFactory.ReadAirportJson().then(function (data) {
                     $scope.IsairportJSONLoading = false;
                     $scope.AvailableAirports = data;

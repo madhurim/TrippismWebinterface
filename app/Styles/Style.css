@@ -286,7 +286,7 @@ input.form-control[type="number"] {
     left: 0;
     position: absolute;
     right: 0;
-    top: 0;
+    top: 75px;
     overflow: hidden;
 }
 
@@ -2830,6 +2830,9 @@ em.ng-binding {
 @media only screen and (min-device-width : 414px) and (max-device-width : 736px) and (orientation : landscape) {
     .overview-weather-content p {
         font-size: 12px;
+    }
+    .map-box {
+        top:75px;
     }
 
     .lastDiv {

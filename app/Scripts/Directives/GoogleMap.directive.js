@@ -368,6 +368,23 @@ angular.module('TrippismUIApp')
                           scope.clusterFlag = true;    // flag for solving cluster issue if theme/region multiple time clicked
                   }
               });
+
+              function setAirportMarkerOnMap() {
+                  var airportLoc = new google.maps.LatLng($scope.googleattractionParams.DestinationairportName.airport_Lat, $scope.googleattractionParams.DestinationairportName.airport_Lng);
+                  var marker = new MarkerWithLabel({
+                      position: airportLoc,
+                      map: $scope.googleattractionsMap,
+                      title: $scope.googleattractionParams.DestinationairportName.airport_FullName,
+                      labelAnchor: new google.maps.Point(12, 35),
+                      labelInBackground: false,
+                      visible: true,
+                      animation: google.maps.Animation.DROP,
+                      labelStyle: { opacity: 0.75 },
+                      icon: 'images/attraction-marker/airport-marker.png'
+                  });
+
+                  $scope.bounds.extend(airportLoc);
+              }
           }
           return directive;
       }]);

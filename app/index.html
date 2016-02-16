@@ -17,14 +17,16 @@
     <link href="styles/bootstrap.css" rel="stylesheet">
     <link href="styles/fonts.css" rel="stylesheet">
     <link href="styles/jquery.mCustomScrollbar.css" rel="stylesheet">
-    <link href="styles/style-custom.css" rel="stylesheet" />
     <link href="styles/Style.css" rel="stylesheet" />
+    <link href="styles/style-custom.css" rel="stylesheet" />
     <link href="styles/alertify.min.css" rel="stylesheet" />
     <!--Use Awesome css for Attraction rating-->
     <link href="styles/font-awesome.css" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,900italic,900,700italic,700,500italic,500,400italic,300italic,300,100italic,100' rel='stylesheet' type='text/css'>
+
     <!-- endbuild -->
 </head>
-<body ng-controller="BaseController">
+<body ng-controller="BaseController" class="{{bodyClass}}">
     <div class="header">
         <div class="header-box">
             <div class="container-fluid">
@@ -39,7 +41,7 @@
                             <li class="dropdown">
                                 <a href="" class="dropdown-toggle padding-0" data-toggle="dropdown">
                                     <!--<span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>-->
-                                    <span class="fa fa-bars" aria-hidden="true" style="font-size:21px"></span>
+                                    <span class="fa fa-bars" aria-hidden="true" style="font-size: 21px"></span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a href="" ng-click="feedback()">Feedback</a></li>
@@ -61,9 +63,9 @@
                         <div class="footer-menu">
                             <ul>
                                 <li><a>Powered By</a></li>
-                                <li> <a class="partners-image sabre-img"></a></li>
-                                <li> <a class="partners-image google-img"></a></li>
-                                <li> <a class="partners-image underground-img"></a></li>
+                                <li><a class="partners-image sabre-img"></a></li>
+                                <li><a class="partners-image google-img"></a></li>
+                                <li><a class="partners-image underground-img"></a></li>
                                 <!--<li> <a class="partners-image triveni-img" href="http://www.trivenitechnologies.com/" target="_blank"></a></li>
                                 <li> <a class="partners-image highchart-img"> </a></li>-->
 
@@ -160,9 +162,9 @@
     <script src="scripts/Directives/GoogleAttractionDirective.js"></script>
     <script src="scripts/Directives/YoutubeDirective.js"></script>
     <script src="scripts/Directives/AverageStarRatingDirective.js"></script>
-    
+
     <script src="scripts/Directives/AttractionTabDirective.js"></script>
-    
+
     <script src="scripts/Directives/DestinationFareForecastDirective.js"></script>
     <script src="scripts/Directives/TopDestinationsDirective.js"></script>
     <script src="scripts/Directives/AttractionsListDirective.js"></script>

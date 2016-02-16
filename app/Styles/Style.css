@@ -5,7 +5,8 @@ html, body, #map_canvas {
 }
 
 body {
-    font-family: 'Conv_gotham-book';
+    /*font-family: 'Conv_gotham-book';*/
+    font-family: "Roboto",sans-serif;
     background-color: transparent;
     overflow-x: hidden;
     position: relative;
@@ -303,7 +304,7 @@ input.form-control[type="number"] {
     background-color: #f5f5f5;
     padding: 15px 0;
     position: relative;
-    z-index: 2;
+    z-index: 1000;
 }
 /*
 .home-btn, .user-btn {
@@ -761,9 +762,12 @@ i.calendar.active, .input-box:hover i.calendar {
     width: 100%;
 }
 
+.mappage .footer-box {
+    position: fixed;
+}
 
 .footer-box {
-    position: fixed;
+    position: relative;
     left: 0;
     right: 0;
     bottom: 0;
@@ -1544,13 +1548,17 @@ i.calendar.active, .input-box:hover i.calendar {
     width: 100%;
 }
 /*Main page Popup CSS start */
+.destination-boxwrap {
+    position: relative;
+}
+
 .destination-box-popup {
     font-family: "Roboto",sans-serif;
     left: 0;
     margin: auto;
     position: absolute;
     right: 0;
-    bottom: 40px;
+    bottom: 0px;
     z-index: 999;
 }
 
@@ -2030,6 +2038,77 @@ i.calendar.active, .input-box:hover i.calendar {
 }
 
 @media only screen and (max-width: 768px) {
+    .service_title {
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .service_content img {
+        padding: 10px 0;
+    }
+
+    .service_box {
+        padding: 10px 0;
+    }
+
+    .service_inner {
+        margin: 0;
+        padding: 0;
+        position: relative;
+    }
+
+    .service_content {
+        position: static;
+    }
+
+        .service_content:before {
+            content: "";
+            width: 100%;
+            left: 0;
+            top: 0;
+            height: 1px;
+        }
+
+    .refine-search .content {
+        height: 172px;
+    }
+
+    .mappage .map-box {
+        padding-bottom: 0;
+    }
+
+    .pr7px {
+        padding-right: 7px;
+    }
+
+    .pl7px {
+        padding-left: 7px;
+    }
+
+    .destination-form .col-xs-6, .destination-form .col-xs-6 .input-group, .destination-popup .destination-form .input-group {
+        position: static;
+    }
+
+    .destination-form .input-group .calendar-size .dropdown-menu {
+        top: 50% !important;
+        left: 0 !important;
+        right: 0 !important;
+        margin: auto;
+        width: 240px;
+        -moz-transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+        bottom: auto !important;
+    }
+
+    .destination-form .input-group .dropdown-menu:before {
+        content: normal;
+    }
+}
+
+@media only screen and (max-width: 768px) {
     .header-box {
         padding: 5px 0;
     }
@@ -2130,14 +2209,6 @@ i.calendar.active, .input-box:hover i.calendar {
 
     .refine-your-destination-box .your-searched p {
         padding: 20px 15px;
-    }
-
-    .pr7px {
-        padding-right: 7px;
-    }
-
-    .pl7px {
-        padding-left: 7px;
     }
 }
 
@@ -2330,6 +2401,14 @@ i.calendar.active, .input-box:hover i.calendar {
 
     .destination-form .dateDisplay {
         font-size: 12px;
+    }
+
+    .map-box-img {
+        height: 365px !important;
+    }
+
+    .service_content img {
+        padding: 8px 15px !important;
     }
 }
 
@@ -2856,3 +2935,6 @@ em.ng-binding {
 /*iPhone 6 Plus in portrait & landscape ends*/
 /*@media queries ends*/
 
+.tabpage .content-wrapper {
+    background-color: #f5f5f5;
+}

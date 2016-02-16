@@ -1,4 +1,4 @@
-﻿var selected;
+var selected;
 'use strict';
 angular.module('TrippismUIApp')
   .directive('googleMap', ['$timeout', 'UtilFactory',
@@ -34,12 +34,13 @@ angular.module('TrippismUIApp')
                       minimumClusterSize: 1,
                       setZoomOnClick: 8,
                       styles: [{
-                          height: 47,
-                          url: imageurl + '/images/icon-gps40x40.png',
+                          height: 36,
+                          url: imageurl + '/images/icon-gps40x401.png',
                           textColor: "black",
                           textSize: 12,
-                          width: 40,
-                          anchor: [7, 43]
+                          width: 29,
+                          anchor: [7, 37],
+                          zIndex: 1000
                       }]
                   };
 
@@ -69,7 +70,7 @@ angular.module('TrippismUIApp')
                       if (result.Minfare != undefined)
                           finalpath += ';lf=' + result.Minfare;
                       if (result.Maxfare != undefined)
-                        finalpath += ';hf=' + result.Maxfare;
+                          finalpath += ';hf=' + result.Maxfare;
                       $location.path(finalpath);
                   };
 

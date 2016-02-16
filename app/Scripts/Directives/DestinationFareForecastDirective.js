@@ -3,7 +3,6 @@
         return {
             restrict: 'E',
             scope: {
-                //attractionParams: '=',
                 //homeFn: '&'
                 fareParams :'='
             },
@@ -12,22 +11,24 @@
             },
             link: function ($scope, elem, attrs) {
                 $scope.$watch('fareParams', function (newValue, oldValue) {
-                    if (newValue != undefined)
+                    if (newValue != undefined) {
+                        $scope.fareParams.dataforEmail = {};
                         activate();
+                    }
                 });
 
-                //scope.SendEmailToUser = SendEmailToUser;
-                //function SendEmailToUser() {
-                //    var GetEmailDetPopupInstance = $modal.open({
-                //        templateUrl: '/Views/Partials/EmailDetFormPartial.html',
-                //        controller: 'EmailForDestinationDet',
-                //        scope: scope,
-                //        resolve: {
-                //            eMailData: function () { return scope.attractionParams; },
-                //            eMailDataFareForeCast: function () { return scope.attractionParams.dataforEmail.FareForecastDataForEmail }
-                //        }
-                //    });
-                //}
+                $scope.SendEmailToUser = SendEmailToUser;
+                function SendEmailToUser() {
+                    var GetEmailDetPopupInstance = $modal.open({
+                        templateUrl: '/Views/Partials/EmailDetFormPartial.html',
+                        controller: 'EmailForDestinationDet',
+                        scope: $scope,
+                        resolve: {
+                            eMailData: function () { return $scope.fareParams; },
+                            eMailDataFareForeCast: function () { return $scope.fareParams.dataforEmail.FareForecastDataForEmail }
+                        }
+                    });
+                }
 
                 function activate() {
                     $scope.FareNoDataFound = true;
@@ -46,8 +47,8 @@
                         $scope.FareNoDataFound = false;
                         $scope.FareforecastData = data;
                         // Setting up fare data for email
-                        //$scope.attractionParams.dataforEmail.FareForecastDataForEmail = {};
-                        //$scope.attractionParams.dataforEmail.FareForecastDataForEmail = data;
+                        $scope.fareParams.dataforEmail.FareForecastDataForEmail = {};
+                        $scope.fareParams.dataforEmail.FareForecastDataForEmail = data;
 
                     });
                 };

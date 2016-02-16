@@ -4,9 +4,9 @@
             {{fareParams.DestinationairportName.airport_FullName + ', ' + fareParams.DestinationairportName.airport_CityName + ', ' + fareParams.DestinationairportName.airport_CountryName}}
             <!--{{attractionParams.DestinationairportName.airport_FullName + ', ' + attractionParams.DestinationairportName.airport_CityName + ', ' + attractionParams.DestinationairportName.airport_CountryName}}-->
         </h4>
-        <!--<div class="share-link blink_me">
-            <a ng-click="homeFn()">See All Destinations</a>
-        </div>-->
+        <div class="share-btn">
+            <a title="Share via email" ng-click="SendEmailToUser()" class="icons red-bg"><img src="/images/share-icon.png" alt="" /></a>
+        </div>
     </div>
 
     <div class="ibox-content">

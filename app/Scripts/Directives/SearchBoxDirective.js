@@ -109,7 +109,7 @@ function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParam
 
             $scope.formatInput = function ($model) {
                 if ($model == "" || $model == undefined) return "";
-                var originairport = _.find($scope.AvailableAirports, function (airport) { return airport.airport_Code == $model });
+                var originairport = _.find($scope.AvailableAirports, function (airport) { return airport.airport_Code == $model.toUpperCase() });
                 //var airportname = (originairport.airport_FullName.toLowerCase().indexOf("airport") > 0) ? originairport.airport_FullName : originairport.airport_FullName + " Airport";
                 var CountryName = (originairport.airport_CountryName != undefined) ? originairport.airport_CountryName : "";
                 //return originairport.airport_Code + ", " + airportname + ", " + originairport.airport_CityName + ", " + CountryName;

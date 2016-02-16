@@ -1,8 +1,8 @@
 ﻿var selected;
 'use strict';
 angular.module('TrippismUIApp')
-  .directive('googleMap', [
-      function () {
+  .directive('googleMap', ['$timeout', 'UtilFactory',
+      function ($timeout, UtilFactory) {
           var directive = {};
           directive.templateUrl = '/Views/GoogleMap.html',
           directive.scope = {
@@ -14,8 +14,8 @@ angular.module('TrippismUIApp')
               defaultlng: "@"
           }
 
-          directive.controller = ['$scope', '$q', '$compile', '$filter', '$timeout', '$rootScope', '$http', '$location', 'TrippismConstants', 'UtilFactory',
-              function ($scope, $q, $compile, $filter, $timeout, $rootScope, $http, $location, TrippismConstants, UtilFactory) {
+          directive.controller = ['$scope', '$q', '$compile', '$filter', '$rootScope', '$http', '$location', 'TrippismConstants',
+              function ($scope, $q, $compile, $filter, $rootScope, $http, $location, TrippismConstants) {
                   $scope.destinationMap = undefined;
                   $scope.faresList = [];
                   $scope.destinationMarkers = [];
@@ -56,7 +56,7 @@ angular.module('TrippismUIApp')
                       backgroundColor: "#BCCFDE",
                       styles: mapStyle,
                       mapTypeId: google.maps.MapTypeId.ROADMAP,
-                      center: new google.maps.LatLng($scope.defaultlat, $scope.defaultlng)
+                      //center: new google.maps.LatLng($scope.defaultlat, $scope.defaultlng)        // commented because we want Origin airport marker as a center of map
                   };
 
                   $scope.destinationpopupClick = function (item) {
@@ -206,8 +206,7 @@ angular.module('TrippismUIApp')
 
                   var RenderMap = function (maps) {
                       $scope.InfoWindow;
-                      var bounds = new google.maps.LatLngBounds();
-                      $scope.bounds = bounds;
+                      $scope.bounds = new google.maps.LatLngBounds();
                       selected = maps;
                       $scope.destinationMarkers = [];
                       for (var x = 0; x < maps.length; x++) {
@@ -234,8 +233,9 @@ angular.module('TrippismUIApp')
                                   labelStyle: { opacity: 1 },
                                   icon: '/images/mapicon.png'
                               });
-                              bounds.extend(marker.position);
-                              $scope.bounds.extend(marker.position);
+                              // commented because we want Origin airport marker as a center of map
+                              // if we extend bounds then map will be resized and centered as per all bounds automatically
+                              //$scope.bounds.extend(marker.position); 
 
 
                               var contentString = '<div style="min-width:100px;padding-top:5px;" id="content">' +
@@ -313,8 +313,9 @@ angular.module('TrippismUIApp')
                   $scope.resetMarker = function () {
                       $timeout(function () {
                           $scope.destinationMap.setZoom(2);
-                          var latlng = new google.maps.LatLng($scope.defaultlat, $scope.defaultlng);
-                          $scope.destinationMap.panTo(latlng);
+                          // commented because we want Origin airport marker as a center of map
+                          //var latlng = new google.maps.LatLng($scope.defaultlat, $scope.defaultlng);
+                          //$scope.destinationMap.panTo(latlng);
                       }, 0, false);
 
                       $timeout(function () {
@@ -327,20 +328,10 @@ angular.module('TrippismUIApp')
                           }
                       }, 0, true);
                   }
-
-                  function serialize(obj) {
-                      var str = [];
-                      for (var p in obj)
-                          if (obj.hasOwnProperty(p)) {
-                              var propval = encodeURIComponent(obj[p]);
-                              if (propval != "undefined" && propval != "null" && propval != '')
-                                  str.push(encodeURIComponent(p) + "=" + propval);
-                          }
-                      return str.join("&");
-                  }
               }];
 
           directive.link = function (scope, elm, attrs) {
+              setAirportMarkerOnMap();
               scope.$watchGroup(['destinations', 'airportlist'], function (newValues, oldValues, scope) {
                   if (scope.clusterFlag) {
                       scope.clusterFlag = false;    // flag for solving cluster issue if theme/region multiple time clicked
@@ -353,6 +344,31 @@ angular.module('TrippismUIApp')
                           scope.clusterFlag = true;    // flag for solving cluster issue if theme/region multiple time clicked
                   }
               });
+
+              function setAirportMarkerOnMap() {
+                  UtilFactory.ReadAirportJson().then(function (data) {
+                      var originAirport = _.find(data, function (airport) {
+                          return airport.airport_Code == scope.origin.toUpperCase()
+                      });
+                      if (!originAirport) return;
+                      var airportLoc = new google.maps.LatLng(originAirport.airport_Lat, originAirport.airport_Lng);
+                      var marker = new MarkerWithLabel({
+                          position: airportLoc,
+                          map: scope.destinationMap,
+                          title: originAirport.airport_FullName,
+                          labelAnchor: new google.maps.Point(12, 35),
+                          labelInBackground: false,
+                          visible: true,
+                          animation: google.maps.Animation.DROP,
+                          labelStyle: { opacity: 0.75 },
+                          icon: 'images/attraction-marker/airport-marker.png'
+                      });
+
+                      $timeout(function () {
+                          scope.destinationMap.panTo(airportLoc);
+                      }, 0, false);
+                  });
+              }
           }
           return directive;
       }]);

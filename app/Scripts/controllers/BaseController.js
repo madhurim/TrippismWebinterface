@@ -64,6 +64,10 @@
                 scope: $scope,
             });
         }
+
+        $scope.$on('bodyClass', function (event, args) {
+            $scope.bodyClass = args;
+        });
     }
 })();
 

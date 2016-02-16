@@ -862,6 +862,20 @@ ul .stop-line {
     font-size: 16px;
 }
 
+.homepage .header {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+
+.homepage .header-box {
+    background-color: transparent;
+}
+
+.homepage .map-box-img {
+    height: 615px;
+}
 /* #endregion home-bottom */
 @media only screen and (max-width: 1050px) {
     .map-box-img img {

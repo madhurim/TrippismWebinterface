@@ -21,7 +21,7 @@
             <div class="overview-weather-box">
                 <ul class="gird-line">
                     <li>
-                        <div class="overview-weather-farerange" ng-if="FareRangeWidgetDataFound" ><!--ng-style="!SeasonalityWidgetDataFound && {'border-left':'none'}"-->
+                        <div  ng-if="FareRangeWidgetDataFound" ><!-- class="overview-weather-farerange" ng-style="!SeasonalityWidgetDataFound && {'border-left':'none'}"-->
                             <p>
                                 Fares recently paid
                                 <span ng-if="widgetParams.FareRangeData.IsMacOrigin">from ({{widgetParams.FareRangeData.OriginLocation}})</span>

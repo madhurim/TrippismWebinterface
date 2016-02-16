@@ -14,12 +14,17 @@
             scope: { googleattractionParams: '=', isOpen: '=' },
             templateUrl: '/Views/Partials/GoogleAttractionPartial.html',
             controller: function ($scope) {
-                //$scope.DisplayattractionsInfo = false;
-                $scope.DisplayattractionsInfo = true;
+                $scope.$watch('googleattractionParams', function (newValue, oldValue) {
+                    if (newValue != undefined) {
+                        var defaultAttractionTab = _.find(attractionsData, function (item) { return item.isDefault == true; });
+                        if (defaultAttractionTab)
+                            $scope.loadgoogleattractionInfo(defaultAttractionTab.name);
+                    }
+                });
 
+                $scope.DisplayattractionsInfo = true;
                 $scope.googleMapId = "googleMapId_"; //+$scope.googleattractionParams.tabIndex
                 $scope.gMapId = "gMapId_";// +$scope.googleattractionParams.tabIndex
-
                 $scope.RenderMap = RenderMap;
                 $scope.setAirportMarkerOnMap = setAirportMarkerOnMap;
                 $scope.googleattractionsMap = undefined;
@@ -29,14 +34,12 @@
 
                 // get attraction object from factory
                 var attractionsData = GoogleAttractionFactory.getAttractionList();
-
                 $scope.$on('ontabClicked', function (event, args) {
-                   // if (args == $scope.googleattractionParams.tabIndex) {
                         if ($scope.MapLoaded) {
                             $timeout(function () {
                                 if ($scope.InfoWindow) $scope.InfoWindow.close();
                                 $scope.FittoScreen();
-                                $scope.FittoScreen(); // Added due to back button issue
+                                //$scope.FittoScreen(); // Added due to back button issue
                             }, 100, false);
                         }
                         else {
@@ -44,15 +47,11 @@
                             if (defaultAttractionTab)
                                 $scope.loadgoogleattractionInfo(defaultAttractionTab.name);
                         }
-                  //  }
                 });
-
 
                 $scope.$on('onMarkerPopup', function (event, args) {
-                    //if (args.tabIndex == $scope.googleattractionParams.tabIndex)
                         SetMarkerSlider(args.place)
                 });
-
 
                 function SetMarkerSlider(MapDet) {
                     $scope.slides = [];
@@ -134,6 +133,7 @@
                 var mapStyle = TrippismConstants.attractionTabMapStyle;
                 // setting map option, used into view
                 $scope.attractionmapOptions = {
+                 
                     center: new google.maps.LatLng(0, 0),
                     zoom: 11,
                     minZoom: 4,
@@ -145,7 +145,6 @@
                     styles: mapStyle,
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
-
                 var mapid = angular.element(document.querySelector('.map-canvas'));
 
                 if ($rootScope.mapHeight == undefined) {
@@ -164,13 +163,14 @@
                 $scope.GoogleAttractionDisplay = function () {
                     $scope.quantity = 20;
                 };
-                $scope.$watchGroup(['googleattractionParams', 'isOpen'], function (newValue, oldValue, $scope) {
-                    if ($scope.googleattractionsMap != undefined) {
-                        $timeout(function () {
-                            $scope.FittoScreen();
-                        }, 1000, false);
-                    }
-                });
+                //$scope.$watchGroup(['googleattractionParams', 'isOpen'], function (newValue, oldValue, $scope) {
+                //    debugger;
+                //    if ($scope.googleattractionsMap != undefined) {
+                //        $timeout(function () {
+                //            //$scope.FittoScreen();
+                //        }, 1000, false);
+                //    }
+                //});
 
                 // get attractions from API
                 $scope.loadgoogleattractionInfo = function (type) {
@@ -299,10 +299,6 @@
                     if (maps != undefined && maps.length > 0) {
                         $scope.InfoWindow;
                         selected = maps;
-                        // used for clearing all markers
-                        //$scope.AttractionMarkers.forEach(function (marker) {
-                        //    marker.setMap(null);
-                        //});                        
                         $scope.AttractionMarkers = [];
                         for (var x = 0; x < maps.length; x++) {
                             var iconlatlng = new google.maps.LatLng(maps[x].geometry.location.lat, maps[x].geometry.location.lng);
@@ -357,10 +353,6 @@
                     if (attraction)
                         return attraction.markerImage;
                 }
-                //Added code for sharableUrl time rendata food tab attraction detail
-                var defaultAttractionTab = _.find(attractionsData, function (item) { return item.isDefault == true; });
-                if (defaultAttractionTab)
-                    $scope.loadgoogleattractionInfo(defaultAttractionTab.name);
             }
         }
     }]);

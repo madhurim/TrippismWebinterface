@@ -762,7 +762,7 @@ i.calendar.active, .input-box:hover i.calendar {
 }
 
 .mappage .footer-box {
-    position:fixed;
+    position: fixed;
 }
 
 .footer-box {
@@ -1548,8 +1548,9 @@ i.calendar.active, .input-box:hover i.calendar {
 }
 /*Main page Popup CSS start */
 .destination-boxwrap {
-    position:relative;
+    position: relative;
 }
+
 .destination-box-popup {
     font-family: "Roboto",sans-serif;
     left: 0;
@@ -2083,7 +2084,7 @@ i.calendar.active, .input-box:hover i.calendar {
         padding-left: 7px;
     }
 
-    .destination-form .col-xs-6, .destination-popup .destination-form .input-group {
+    .destination-form .col-xs-6, .destination-form .col-xs-6 .input-group, .destination-popup .destination-form .input-group {
         position: static;
     }
 
@@ -2092,12 +2093,13 @@ i.calendar.active, .input-box:hover i.calendar {
         left: 0 !important;
         right: 0 !important;
         margin: auto;
-        width: 280px;
+        width: 240px;
         -moz-transform: translateY(-50%);
         -webkit-transform: translateY(-50%);
         -o-transform: translateY(-50%);
         -ms-transform: translateY(-50%);
         transform: translateY(-50%);
+        bottom: auto !important;
     }
 
     .destination-form .input-group .dropdown-menu:before {
@@ -2398,6 +2400,10 @@ i.calendar.active, .input-box:hover i.calendar {
 
     .destination-form .dateDisplay {
         font-size: 12px;
+    }
+
+    .map-box-img {
+        height: 325px !important;
     }
 }
 
@@ -2922,5 +2928,5 @@ em.ng-binding {
 /*@media queries ends*/
 
 .tabpage .content-wrapper {
-    background-color:#f5f5f5;
+    background-color: #f5f5f5;
 }

@@ -824,7 +824,8 @@ ul .stop-line {
     }
 
 .service_box {
-    padding: 50px 0;
+    /*padding: 50px 0;*/
+    padding: 10px 0;
 }
 
 .service_title {

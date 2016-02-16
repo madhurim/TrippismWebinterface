@@ -65,8 +65,9 @@
                 // split destination and origin to compare with tab title
                 angular.forEach(params, function (item) {
                     var para = item.split("=");
-                    if (para[0].trim() === "f")
+                    if (para[0].trim() === "f") {
                         $scope.Origin = para[1].trim();
+                    }
                     if (para[0].trim() === "t")
                         $scope.KnownDestinationAirport = para[1].trim();
                     if (para[0].trim() === "d") {
@@ -85,8 +86,6 @@
                         $scope.Minfare = para[1].trim();
                     if (para[0].trim() === "hf")
                         $scope.Maxfare = para[1].trim();
-
-
                 })
                 var paramdata = {
                     Origin: $scope.Origin,

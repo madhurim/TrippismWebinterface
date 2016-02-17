@@ -5,6 +5,7 @@
             scope: {
                 weatherParams: '=',
             },
+            templateUrl: '/Views/Partials/WeatherPartial.html',
             controller: ['$scope',function ($scope)
             {
                 $scope.initWeatherSummary = function () {
@@ -91,7 +92,6 @@
                     
                 }
             }],
-            templateUrl: '/Views/Partials/WeatherPartial.html',
             link: function (scope, elem, attrs) {
 
                 scope.$watch('weatherParams', function (newValue, oldValue) {

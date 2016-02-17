@@ -1,42 +1,17 @@
 ﻿angular.module('TrippismUIApp').directive('seasonalityInfo', [
                                                     '$compile',
-                                                    '$rootScope',
                                                     '$timeout',
                                                     '$filter',
                                                     'SeasonalityFactory',
                                                     'TrippismConstants',
-    function ($compile, $rootScope, $timeout, $filter, SeasonalityFactory, TrippismConstants) {
+    function ($compile, $timeout, $filter, SeasonalityFactory, TrippismConstants) {
         return {
             restrict: 'E',
-
             scope: {
                 seasonalityParams: '=',
             },
             templateUrl: '/Views/Partials/SeasonalityPartial.html',
-            link: function (scope, elem, attrs) {
-
-                scope.$watch('seasonalityParams', function (newValue, oldValue) {
-                    if (newValue != undefined)
-                        initseasonalityData();
-                });
-
-                function initseasonalityData()
-                {
-                    scope.formats = Dateformat();
-                    scope.format = scope.formats[5];
-                    scope.Isviewmoredisplayed = false;
-                    scope.ChartLoaded = false;
-
-                    scope.DepartDate = $filter('date')(scope.seasonalityParams.Fareforecastdata.DepartureDate, scope.format, null);
-                    scope.ReturnDate = $filter('date')(scope.seasonalityParams.Fareforecastdata.ReturnDate, scope.format, null);
-                    scope.chartHeight = 300;
-                    scope.divID = "seasonality"; // + scope.seasonalityParams.tabIndex
-                    var mapHTML = "<div id='" + scope.divID + "'></div>";
-                    elem.append($compile(mapHTML)(scope));
-                    scope.loadSeasonalityInfo();
-
-                }
-
+            controller: ['$scope', function (scope) {
                 scope.loadSeasonalityInfo = function () {
                     scope.MarkerSeasonalityInfo = "";
                     scope.loadSeasonalityInfoLoaded = false;
@@ -85,12 +60,33 @@
 
                     }
                 };
+            }],
+            link: function (scope, elem, attrs) {
+                scope.$watch('seasonalityParams', function (newValue, oldValue) {
+                    if (newValue != undefined)
+                        initseasonalityData();
+                });
+                function initseasonalityData()
+                {
+                    scope.formats = Dateformat();
+                    scope.format = scope.formats[5];
+                    scope.Isviewmoredisplayed = false;
+                    scope.ChartLoaded = false;
 
-                scope.SeasonalityDisplay = function () {
-                    scope.MarkerSeasonalityInfo.Seasonality = scope.SeasonalityData;
-                    scope.mailmarkereasonalityInfo.Seasonality = scope.SeasonalityData;
-                    scope.Isviewmoredisplayed = true;
-                };
+                    scope.DepartDate = $filter('date')(scope.seasonalityParams.Fareforecastdata.DepartureDate, scope.format, null);
+                    scope.ReturnDate = $filter('date')(scope.seasonalityParams.Fareforecastdata.ReturnDate, scope.format, null);
+                    scope.chartHeight = 300;
+                    scope.divID = "seasonality"; // + scope.seasonalityParams.tabIndex
+                    var mapHTML = "<div id='" + scope.divID + "'></div>";
+                    elem.append($compile(mapHTML)(scope));
+                    scope.loadSeasonalityInfo();
+                }
+                //SeasonalityData for Mail
+                //scope.SeasonalityDisplay = function () {
+                //    scope.MarkerSeasonalityInfo.Seasonality = scope.SeasonalityData;
+                //    scope.mailmarkereasonalityInfo.Seasonality = scope.SeasonalityData;
+                //    scope.Isviewmoredisplayed = true;
+                //};
 
                 scope.loadingSeasonality = true;
                 scope.$watch('loadSeasonalityInfoLoaded',

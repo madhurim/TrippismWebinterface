@@ -31,10 +31,10 @@
                     //If response with okay status but data not found then no required to save that data
                     if (data.data != "" && data.data.WeatherChances.length != 0) {
                         var finaldata = {
-                            tabindex: paramdata.tabindex,
+                            WeatherFor: paramdata.WeatherFor,
                             data: data.data
                         }
-                        var finddata = $filter('filter')(storedata, { tabindex: paramdata.tabindex })[0];
+                        var finddata = $filter('filter')(storedata, { WeatherFor: paramdata.WeatherFor })[0];
                         if (finddata == undefined)
                             storedata.push(finaldata);
 
@@ -45,11 +45,11 @@
                     return e;
                 });
         }
-        function ResultData(tabindex)
+        function ResultData(WeatherFor)
         {
             if (storedata == undefined)
                 return null;
-            var data = $filter('filter')(storedata, { tabindex: tabindex })[0];
+            var data = $filter('filter')(storedata, { WeatherFor: WeatherFor })[0];
             return data;
         }
     }

@@ -164,7 +164,6 @@
                     $scope.quantity = 20;
                 };
                 //$scope.$watchGroup(['googleattractionParams', 'isOpen'], function (newValue, oldValue, $scope) {
-                //    debugger;
                 //    if ($scope.googleattractionsMap != undefined) {
                 //        $timeout(function () {
                 //            //$scope.FittoScreen();

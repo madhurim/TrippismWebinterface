@@ -131,11 +131,6 @@ angular.module('TrippismUIApp')
                                   //InfoWindow when open at that time we disabled mapzoom functionlity and close time again enabled map zoom functility
                                   map.setOptions({ zoomControl: true, scrollwheel: true, disableDoubleClickZoom: false });
                               });
-                              //google.maps.event.addListener($scope.markerCluster, "mouseover", function (cluster) {
-                              //});
-                              /*google.maps.event.addListener($scope.markerCluster, "mouseout", function (cluster) {                              
-                                });*/
-
                               google.maps.event.addListener($scope.markerCluster, 'clusterclick', function (cluster) {
                                   if (infowindow) {
                                       infowindow.close();
@@ -252,36 +247,19 @@ angular.module('TrippismUIApp')
 
                               google.maps.event.addListener(marker, 'click', (function (marker, contentString, infowindow) {
                                   return function () {
-                                      var OriginairportName = _.find($scope.airportlist, function (airport) {
-                                          return airport.airport_Code == $scope.origin.toUpperCase()
-                                      });
-                                      var DestinationairportName = _.find($scope.airportlist, function (airport) {
-                                          return airport.airport_Code == marker.CustomMarkerInfo.DestinationLocation
-                                      });
-
-                                      var dataForecast = {
-                                          "Origin": $scope.origin.toUpperCase(),
-                                          "DepartureDate": $filter('date')(marker.CustomMarkerInfo.DepartureDateTime, 'yyyy-MM-dd'),
-                                          "ReturnDate": $filter('date')(marker.CustomMarkerInfo.ReturnDateTime, 'yyyy-MM-dd'),
-                                          "Destination": marker.CustomMarkerInfo.DestinationLocation
-                                      };
-
-                                      $rootScope.$broadcast('EmptyFareForcastInfo', {
-                                          Origin: OriginairportName.airport_CityName,
-                                          Destinatrion: DestinationairportName.airport_Code,
-                                          Fareforecastdata: dataForecast,
-                                          mapOptions: marker.CustomMarkerInfo, //mapsdetails,
-                                          OriginairportName: OriginairportName,
-                                          DestinationairportName: DestinationairportName,
-                                          DestinationList: $scope.destinations,
-                                          AvailableAirports: $scope.airportlist,
-                                          AvailableAirline: $scope.airlineJsonData
-                                      });
-                                      google.maps.event.trigger($scope.destinationMap, 'resize');
+                                      var result = UtilFactory.GetLastSearch();
+                                      var finalpath = 'destination/f=' + $scope.origin.toUpperCase() + ';t=' + marker.CustomMarkerInfo.DestinationLocation + ';d=' + ConvertToRequiredDate(marker.CustomMarkerInfo.DepartureDateTime, 'API') + ';r=' + ConvertToRequiredDate(marker.CustomMarkerInfo.ReturnDateTime, 'API');
+                                      if (result.Theme != undefined)
+                                          finalpath += ';th=' + result.Theme;
+                                      if (result.Region != undefined)
+                                          finalpath += ';a=' + result.Region;
+                                      if (result.Minfare != undefined)
+                                          finalpath += ';lf=' + result.Minfare;
+                                      if (result.Maxfare != undefined)
+                                          finalpath += ';hf=' + result.Maxfare;
+                                      $location.path(finalpath);
                                   };
                               })(marker, contentString, $scope.InfoWindow));
-
-
                           }
                       }
                   };

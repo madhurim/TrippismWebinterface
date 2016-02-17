@@ -14,7 +14,6 @@
                     $scope.format = $scope.formats[5];
                     $scope.DepartDate = $filter('date')($scope.weatherParams.Fareforecastdata.DepartureDate, $scope.format, null);
                     $scope.ReturnDate = $filter('date')($scope.weatherParams.Fareforecastdata.ReturnDate, $scope.format, null);
-                    debugger;
                     $scope.WeatherFor = $scope.weatherParams.DestinationairportName.airport_CityName + "_" + $filter('date')($scope.weatherParams.Fareforecastdata.DepartureDate, $scope.format, null);
                     $scope.WeatherInfoNoDataFound = true;
                     $scope.getWeatherInformation = function (data) {
@@ -100,7 +99,6 @@
                 });
                 scope.$watch('WeatherData', function (newValue, oldValue) {
                     if (newValue != oldValue || scope.WeatherDataFound == true) {
-                        debugger;
                         if (scope.WeatherData.WeatherFor != undefined)
                             scope.WeatherwidgetData = scope.WeatherData.data
                         else

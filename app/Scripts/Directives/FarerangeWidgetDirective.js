@@ -6,7 +6,7 @@
             scope: {
                 widgetParams: '=',
             },
-            templateUrl: '/Views/Partials/FarerangeWidget.html',
+            templateUrl: '/Views/Partials/FarerangePartial.html',
             link: function (scope, elem, attrs) {
 
                 scope.$watch('widgetParams', function (newValue, oldValue) {

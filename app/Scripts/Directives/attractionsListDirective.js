@@ -9,7 +9,7 @@ angular.module('TrippismUIApp').directive('attractionList', ['$compile', '$sce',
             loadMoreAttractionInfo: "&",
             loadAttractionInfo: "&"
         },
-        templateUrl: '/Views/Partials/AttractionsList.html',
+        templateUrl: '/Views/Partials/AttractionsListPartial.html',
         link: function (scope, elem, attrs) {
             scope.attractionsData = [];
             var attractionsData = GoogleAttractionFactory.getAttractionList();

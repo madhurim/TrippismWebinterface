@@ -719,7 +719,7 @@ ul .stop-line {
 /* ends */
 .nav-home {
     position: relative;
-    z-index:11;
+    z-index: 11;
 }
 
     .nav-home .dropdown {
@@ -818,7 +818,7 @@ ul .stop-line {
 /* #region home-bottom */
 
 .map-box-img {
-    height: 540px;
+    /*height: 540px;*/
     overflow: hidden;
 }
 

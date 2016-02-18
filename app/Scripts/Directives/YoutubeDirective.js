@@ -1,6 +1,6 @@
 ﻿
-angular.module('TrippismUIApp').directive('youtubeInfo', ['$compile', '$timeout', 'YouTubeFactory', '$sce', '$log',
-    function ($compile, $timeout, YouTubeFactory, $sce, $log) {
+angular.module('TrippismUIApp').directive('youtubeInfo', [  'YouTubeFactory', 
+    function (  YouTubeFactory) {
         return {
             restrict: 'E',
             scope: {

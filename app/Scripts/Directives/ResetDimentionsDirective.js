@@ -1,7 +1,8 @@
 ﻿angular.module('TrippismUIApp').directive('resetDimentions', ['$rootScope', '$timeout', function ($rootScope, $timeout) {
     return {
         restrict: 'EA',
-         
+        controller: function () {
+        },
         link: function (scope, elem, attrs) {
           console.log("calling reset directive"+ new Date());
             scope.$on("columnLayoutChanged", function(e,d){
@@ -13,8 +14,6 @@
                 
                 var isCol2Visible = (seasonalityfarerangewidgetInfo.isVisible); //|| farerangeInfo.isVisible
                 var isCol1Visible = (WeatherData.isVisible); //weatherwidgetInfo.isVisible || 
-              //  console.log("isCol2Visible  " + isCol2Visible);
-              //  console.log("isCol1Visible  " + isCol1Visible);
                 var delay = 2000;
                  $(elem).show();
                  var totalWidth = $(elem).width();
@@ -41,12 +40,6 @@
                             $(elem).find('.popup-box').css({ width: "95%" });
                             console.log("isCol1Visible  " + isCol1Visible + "  width > 1360");
                         }
-                        //else if (windowWidth > 600 && windowWidth < 1360) {
-                        //    $(elem).css({ width: "600px" });
-                        //    $(elem).find(".column-2").removeClass("col-md-7 col-sm-7").addClass("col-md-12 col-sm-12");
-                        //    $(elem).find('.popup-box').css({ width: "525px" });
-                        //    console.log("isCol1Visible  " + isCol1Visible + "  between width 600 and 1360 ");
-                        //}
                     }, 0, true);
                 }
                 else if(isCol2Visible && isCol1Visible){

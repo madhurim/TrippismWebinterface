@@ -7,6 +7,9 @@ angular.module('TrippismUIApp').directive('scroll', function () {
         scope: {
             scrollCallback: "&"
         },
+        controller: function () {
+
+        },
         link: function (scope, element, attrs) {
             var raw = element[0];
             element.bind('scroll', function () {

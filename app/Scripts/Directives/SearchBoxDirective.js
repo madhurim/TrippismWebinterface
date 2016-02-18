@@ -50,11 +50,11 @@ function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParam
                         angular.forEach(params, function (item) {
                             var para = item.split("=");
                             if (para[0].trim() === "f") {
-                                $scope.Origin = para[1].trim();
+                                $scope.Origin = para[1].trim().toUpperCase();
                                 $scope.urlParam.Origin = $scope.Origin;
                             }
                             if (para[0].trim() === "t") {
-                                $scope.KnownDestinationAirport = para[1].trim();
+                                $scope.KnownDestinationAirport = para[1].trim().toUpperCase();
                                 $scope.urlParam.KnownDestinationAirport = $scope.KnownDestinationAirport;
                             }
                             if (para[0].trim() === "d") {

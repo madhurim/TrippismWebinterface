@@ -69,8 +69,10 @@ angular.module('TrippismUIApp').directive('youtubeInfo', [  'YouTubeFactory',
 
                 scope.youtubeInfoDataFound = false;
                 scope.$watchGroup(['youtubeParams'], function (newValue, oldValue, scope) {
-                    scope.youtubeData = "";
-                    scope.loadyoutubeInfo();
+                    if (newValue != undefined) {
+                        scope.youtubeData = "";
+                        scope.loadyoutubeInfo();
+                    }
                 });
 
               

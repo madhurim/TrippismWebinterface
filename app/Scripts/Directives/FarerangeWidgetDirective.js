@@ -9,7 +9,7 @@
             templateUrl: '/Views/Partials/FarerangePartial.html',
             controller : function($scope)
             {
-                $scope.initFarerangeSummary = function() {
+                $scope.initFarerangeSummary = function () {
                     var isVisible = false; // this determines the widget visibility according to different parameters
                     var isVisibilityRecorded = false;
                     $scope.IsWidgetClosed = true;
@@ -146,8 +146,9 @@
             link: function (scope, elem, attrs) {
 
                 scope.$watch('widgetParams', function (newValue, oldValue) {
-                    if (newValue != undefined)
+                    if (newValue != undefined) {
                         scope.initFarerangeSummary();
+                    }
                 });
                 
                 scope.$watch('fareRangeData', function (newValue, oldValue) {

@@ -66,9 +66,9 @@
                 angular.forEach(params, function (item) {
                     var para = item.split("=");
                     if (para[0].trim() === "f")
-                        $scope.Origin = para[1].trim();
+                        $scope.Origin = para[1].trim().toUpperCase();
                     if (para[0].trim() === "t")
-                        $scope.KnownDestinationAirport = para[1].trim();
+                        $scope.KnownDestinationAirport = para[1].trim().toUpperCase();
                     if (para[0].trim() === "d") {
                         $scope.FromDate = ConvertToRequiredDate(para[1].trim(), 'UI');
                         $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);

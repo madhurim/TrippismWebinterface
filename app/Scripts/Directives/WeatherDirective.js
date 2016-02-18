@@ -94,8 +94,9 @@
             link: function (scope, elem, attrs) {
 
                 scope.$watch('weatherParams', function (newValue, oldValue) {
-                    if (newValue != undefined)
+                    if (newValue != undefined) {
                         scope.initWeatherSummary();
+                    }
                 });
                 scope.$watch('WeatherData', function (newValue, oldValue) {
                     if (newValue != oldValue || scope.WeatherDataFound == true) {

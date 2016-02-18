@@ -93,6 +93,11 @@
                   function (newValue) {
                       scope.loadingSeasonality = angular.copy(!newValue);
                       scope.$parent.divSeasonality = newValue;
+                      if (newValue == true) {
+                          angular.element("#lastDiv").removeClass("no-border");
+                      } else {
+                          angular.element("#lastDiv").addClass("no-border");
+                      }
                   }
                 );
                 scope.$watch('SeasonalityData', function (newValue, oldValue) {

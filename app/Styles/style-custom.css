@@ -830,7 +830,8 @@ ul .stop-line {
 
 .service_title {
     color: #292524;
-    font-size: 32px;
+    /*font-size: 32px;*/
+    font-size: 28px;
     font-weight: 300;
 }
 
@@ -855,7 +856,8 @@ ul .stop-line {
 }
 
 .service_content img {
-    padding: 55px 15px;
+    padding: 15px 15px;
+    width: 120px;
 }
 
 .service_content p {
@@ -1021,5 +1023,9 @@ ul .stop-line {
 @media only screen and (max-width:480px) {
     .clustermarkerpopup {
         width: 100%;
+    }
+
+    .refine-search .content {
+        height: 235px;
     }
 }

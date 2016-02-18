@@ -1994,16 +1994,27 @@ i.calendar.active, .input-box:hover i.calendar {
 
     .destination-boxwrap-nav-tabs .tab-content {
         padding: 30px 30px 50px;
-        min-height: 570px;
+        /*min-height: 570px;*/
     }
 
     .destination-box-popup .destination-title {
         font-size: 32px;
         padding: 25px 15px;
     }
+
 }
 
-
+@media only screen and (min-width:1300px) and (max-width:5000px) {
+        .service_box {
+    background-color: #fff;
+    margin-top: -75px;
+    padding: 5px 0;
+    position: relative;
+}
+    .destination-box-popup {
+        bottom:75px;
+    }
+}
 
 
 @media only screen and (max-width: 991px) {

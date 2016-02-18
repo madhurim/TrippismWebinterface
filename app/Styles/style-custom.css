@@ -717,22 +717,27 @@ ul .stop-line {
 /* ends */
 
 /* ends */
-.nav-home .dropdown {
-    float: right;
+.nav-home {
+    position: relative;
+    z-index:11;
 }
 
-    .nav-home .dropdown .dropdown-menu {
-        left: auto;
-        right: 0;
-        min-width: 200px;
-        margin-top: 0;
+    .nav-home .dropdown {
+        float: right;
     }
 
-        .nav-home .dropdown .dropdown-menu::before {
+        .nav-home .dropdown .dropdown-menu {
             left: auto;
-            right: 15px;
-            content: normal;
+            right: 0;
+            min-width: 200px;
+            margin-top: 0;
         }
+
+            .nav-home .dropdown .dropdown-menu::before {
+                left: auto;
+                right: 15px;
+                content: normal;
+            }
 
 .top-10 {
     top: 10px;

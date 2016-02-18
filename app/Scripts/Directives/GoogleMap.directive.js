@@ -340,7 +340,9 @@ angular.module('TrippismUIApp')
                           visible: true,
                           animation: google.maps.Animation.DROP,
                           labelStyle: { opacity: 0.75 },
-                          icon: 'images/attraction-marker/airport-marker.png'
+                          icon: 'images/attraction-marker/airport-marker.png',
+                          options :
+                              {zIndex:0}
                       });
 
                       $timeout(function () {

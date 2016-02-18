@@ -7,11 +7,7 @@
             '$window',
             '$stateParams',
             'UtilFactory',
-            //'DestinationFactory',
-            //'FareforecastFactory',
-            //'SeasonalityFactory',
-            //'TrippismConstants',
-function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParams, UtilFactory/*,DestinationFactory, FareforecastFactory, SeasonalityFactory, TrippismConstants*/) {
+function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParams, UtilFactory) {
     return {
         restrict: 'E',
         scope: {

@@ -2002,7 +2002,7 @@ i.calendar.active, .input-box:hover i.calendar {
     }
 
     .homepage .map-box-img {
-        height: 800px;
+        height: 800px !important;
     }
 }
 

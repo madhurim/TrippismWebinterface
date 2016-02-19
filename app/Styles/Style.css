@@ -103,7 +103,6 @@ a, a:hover, a:focus, label, form-control, .form-control:focus, .btn, button, .po
 
 .destination-form .input-group {
     box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.44);
-    border-radius: 4px;
     /*overflow: hidden;*/
 }
 
@@ -1090,7 +1089,7 @@ i.calendar.active, .input-box:hover i.calendar {
 }
 
     .atractions-nav-tabs ul {
-        letter-spacing: -4px;
+        letter-spacing: -3px;
     }
 
         .atractions-nav-tabs ul li {
@@ -1619,10 +1618,11 @@ i.calendar.active, .input-box:hover i.calendar {
     font-weight: 300;
     padding-left: 25px;
     border: 0 none;
-    /*border-radius: 0 4px 4px 0;*/
+    border-radius: 0 4px 4px 0;
     background-color: #fff;
     width: 100%;
     padding: 10px 10px 10px 25px;
+
 }
 
 .destination-form .input-group-addon {
@@ -2003,19 +2003,6 @@ i.calendar.active, .input-box:hover i.calendar {
 
     .homepage .map-box-img {
         height: 800px !important;
-    }
-}
-
-@media only screen and (min-width:1300px) and (max-width:5000px) {
-    .service_box {
-        background-color: #fff;
-        margin-top: -75px;
-        padding: 5px 0;
-        position: relative;
-    }
-
-    .destination-box-popup {
-        bottom: 75px;
     }
 }
 
@@ -2418,12 +2405,22 @@ i.calendar.active, .input-box:hover i.calendar {
         font-size: 12px;
     }
 
-    .map-box-img {
-        height: 365px !important;
-    }
 
     .service_content img {
         padding: 8px 15px !important;
+    }
+
+    .homepage .destination-boxwrap {
+    height: 330px !important;   
+}
+    .h50px {
+        height:0 !important;
+    }
+    .service_box {
+    margin-top: 0px !important;
+}
+    .service_content {
+        min-height:inherit !important;
     }
 }
 
@@ -2828,6 +2825,8 @@ em.ng-binding {
     /*                               .destination-boxwrap-nav-tabs .tab-content{
                                        min-height: 400px; 
                     }*/
+
+
 
     .newouterDiv {
         width: 100% !important;

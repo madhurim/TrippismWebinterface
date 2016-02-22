@@ -1,4 +1,7 @@
-﻿/* #region trippismapp.css */
+﻿@charset "utf-8";
+/* CSS Document */
+
+/* #region trippismapp.css */
 img {
     max-width: 100%;
 }
@@ -430,6 +433,7 @@ a {
     margin: 0 6px;
 }*/
 
+
 .font-15 {
     font-size: 15px;
 }
@@ -817,20 +821,12 @@ ul .stop-line {
 
 /* #region home-bottom */
 
-.map-box-img {
-    /*height: 540px;*/
-    overflow: hidden;
-}
 
-    .map-box-img img {
-        width: 100%;
-        margin: 0 auto;
-        display: table;
-    }
 
 .service_box {
     /*padding: 50px 0;*/
     padding: 10px 0;
+    margin-top:-70px;
 }
 
 .service_title {
@@ -843,6 +839,7 @@ ul .stop-line {
 .service_content {
     position: relative;
     padding: 0 15px;
+    min-height:180px;
 }
 
     .service_content:before {
@@ -861,7 +858,7 @@ ul .stop-line {
 }
 
 .service_content img {
-    padding: 15px 15px;
+    padding: 25px 15px;
     width: 120px;
 }
 
@@ -880,23 +877,7 @@ ul .stop-line {
     background-color: transparent;
 }
 
-.homepage .map-box-img {
-    height: 615px;
-}
-/* #endregion home-bottom */
-@media only screen and (max-width: 1050px) {
-    .map-box-img img {
-        width: auto;
-        max-width: inherit;
-        position: relative;
-        left: 50%;
-        -moz-transform: translateX(-60%);
-        -webkit-transform: translateX(-60%);
-        -o-transform: translateX(-60%);
-        -ms-transform: translateX(-60%);
-        transform: translateX(-60%);
-    }
-}
+
 
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {
@@ -922,7 +903,11 @@ ul .stop-line {
         top: 15px;
     }
 }
-
+@media only screen and (max-width:1199px) {
+    .service_content {
+    min-height:230px;
+}
+}
 @media only screen and (max-width:769px) {
     .menu-btn {
         top: 10px;
@@ -994,7 +979,12 @@ ul .stop-line {
     }
 }
 
+@media only screen and (max-width:767px) {
+    .service_content {
+    min-height: 250px;
 
+}
+}
 @media only screen and (min-width:481px) and (max-width:736px) {
     .destination-form .col-xs-6, .destination-form .col-xs-6 .input-group, .destination-popup .destination-form .input-group {
         position: static;
@@ -1033,4 +1023,20 @@ ul .stop-line {
     .refine-search .content {
         height: 235px;
     }
+}
+
+
+
+.homepage .destination-boxwrap {
+    background-image:url("../images/Mainpagebg2.jpg");
+    background-position: 60% top;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.h50px {
+    height:70px;
+    display:inline-block;
+    width:100%;
 }

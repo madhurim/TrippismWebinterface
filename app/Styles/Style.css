@@ -2346,7 +2346,7 @@ i.calendar.active, .input-box:hover i.calendar {
 
     .destination-boxwrap-nav-tabs .tab-content {
         padding: 10px 20px;
-        min-height: 205px;
+        min-height: 225px;
     }
 
     .destination-form .input-group {
@@ -2410,7 +2410,7 @@ i.calendar.active, .input-box:hover i.calendar {
     }
 
     .homepage .destination-boxwrap {
-        height: 330px !important;
+        height: 365px !important;
     }
 
     .h50px {

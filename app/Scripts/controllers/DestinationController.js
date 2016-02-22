@@ -68,6 +68,10 @@
                     $scope.DestinationairportName = _.find($scope.AvailableAirports, function (airport) {
                         return airport.airport_Code == $scope.DestinationLocation
                     });
+                    if ($scope.OriginairportName != undefined)
+                        $scope.PointOfsalesCountry = $scope.OriginairportName.airport_CountryCode;
+                    else
+                        $scope.PointOfsalesCountry = undefined;
                     var paramdata = {
                         Origin: $scope.Origin,
                         DestinationLocation: $scope.KnownDestinationAirport,
@@ -201,6 +205,15 @@
                             Region: $scope.Region,
                             Minfare: $scope.Minfare,
                             Maxfare: $scope.Maxfare
+                        },
+                        instaFlightSearchData: {
+                            OriginAirportName: $scope.Origin,
+                            DestinationaArportName: $scope.DestinationLocation,
+                            FromDate: $scope.FromDate,
+                            ToDate: $scope.ToDate,
+                            Minfare: $scope.Minfare,
+                            Maxfare: $scope.Maxfare,
+                            PointOfSaleCountry: $scope.PointOfsalesCountry
                         }
                     }
                 }

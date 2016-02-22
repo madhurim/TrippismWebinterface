@@ -102,7 +102,7 @@
             if (cacheValue)
                 return cacheValue.airportName;
 
-            var airportData = $filter('filter')($scope.$parent.attractionParams.AvailableAirports, { airport_Code: airportCode });
+            var airportData = $filter('filter')($scope.$parent.fareParams.AvailableAirports, { airport_Code: airportCode });
             if (airportData) {
                 if (angular.isArray(airportData)) {
                     var airportDataFiltered = $filter('filter')(airportData, { airport_IsMAC: false })[0];
@@ -139,8 +139,8 @@
             var cacheValue = $filter('filter')(airlinesNameCache, { code: airlineCode })[0];
             if (cacheValue)
                 return cacheValue.name;
-            if ($scope.$parent.attractionParams.AvailableAirline) {
-                var data = $filter('filter')($scope.$parent.attractionParams.AvailableAirline, { code: airlineCode });
+            if ($scope.$parent.fareParams.AvailableAirline) {
+                var data = $filter('filter')($scope.$parent.fareParams.AvailableAirline, { code: airlineCode });
                 if (data.length == 1) {
                     airlinesNameCache.push({ code: airlineCode, name: data[0].name });
                     return data[0].name;
@@ -158,7 +158,7 @@
             if (pricingInfo && pricingInfo.TotalFare && pricingInfo.TotalFare.CurrencyCode)
                 return pricingInfo.TotalFare.CurrencyCode;
             else
-                return $scope.$parent.attractionParams.mapOptions.CurrencyCode;
+                return $scope.$parent.fareParams.mapOptions.CurrencyCode;
         }
         $scope.GetCurrencySymbol = function (code) {
             return UtilFactory.GetCurrencySymbol(code);

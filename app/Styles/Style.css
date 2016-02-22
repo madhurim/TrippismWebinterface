@@ -1622,7 +1622,6 @@ i.calendar.active, .input-box:hover i.calendar {
     background-color: #fff;
     width: 100%;
     padding: 10px 10px 10px 25px;
-
 }
 
 .destination-form .input-group-addon {
@@ -1956,7 +1955,7 @@ i.calendar.active, .input-box:hover i.calendar {
     }
 
     .destination-boxwrap-nav-tabs .nav.nav-tabs > li.active > a, .destination-boxwrap-nav-tabs .nav.nav-tabs > li.active > a:focus, .destination-boxwrap-nav-tabs .nav.nav-tabs > li.active > a:hover {
-        border-width: 0 0 6px;
+        border-width: 0 0 4px;
     }
 
     .destination-form .input-group {
@@ -1992,8 +1991,8 @@ i.calendar.active, .input-box:hover i.calendar {
     }
 
     .destination-boxwrap-nav-tabs .tab-content {
-        padding: 30px 30px 50px;
-        /*min-height: 570px;*/
+        min-height: 550px;
+        padding: 30px 30px 25px;
     }
 
     .destination-box-popup .destination-title {
@@ -2347,7 +2346,7 @@ i.calendar.active, .input-box:hover i.calendar {
 
     .destination-boxwrap-nav-tabs .tab-content {
         padding: 10px 20px;
-        min-height: 200px;
+        min-height: 205px;
     }
 
     .destination-form .input-group {
@@ -2411,16 +2410,19 @@ i.calendar.active, .input-box:hover i.calendar {
     }
 
     .homepage .destination-boxwrap {
-    height: 330px !important;   
-}
-    .h50px {
-        height:0 !important;
+        height: 330px !important;
     }
+
+    .h50px {
+        height: 0 !important;
+    }
+
     .service_box {
-    margin-top: 0px !important;
-}
+        margin-top: 0px !important;
+    }
+
     .service_content {
-        min-height:inherit !important;
+        min-height: inherit !important;
     }
 }
 

@@ -72,7 +72,7 @@
                                     <div class="col-xs-6 pr7px">
                                         <div class="input-group">
                                             <div class="input-group-addon"><img src="images/calendar.png" alt="#" ng-click="openFromDate($event)" /></div>
-                                            <div class="form-group calendar-size form-fromDate" ng-class="calendar-position">
+                                            <div class="form-group calendar-size form-fromDate" ng-class="isPopup ? '' :'calendar-position'">
                                                 <input type="text"
                                                        id="txtFromDate"
                                                        ng-click="openFromDate($event)"
@@ -103,7 +103,7 @@
                                     <div class="col-xs-6 pl7px">
                                         <div class="input-group">
                                             <div class="input-group-addon"><img src="images/calendar.png" alt="#" ng-click="openToDate($event)" /></div>
-                                            <div class="form-group calendar-size form-toDate" ng-class="calendar-position">
+                                            <div class="form-group calendar-size form-toDate" ng-class="isPopup ? '' :'calendar-position'">
                                                 <input type="text"
                                                        id="txtToDate"
                                                        ng-click="openToDate($event)"

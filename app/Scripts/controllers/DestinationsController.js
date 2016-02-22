@@ -77,7 +77,7 @@
                         $scope.ToDate = ConvertToRequiredDate(para[1].trim(), 'UI');;
                         $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
                     }
-                    if (para[0].trim() === "t") {
+                    if (para[0].trim() === "th") {
                         $scope.Theme = para[1].trim();
                     }
                     if (para[0].trim() === "a")
@@ -96,7 +96,8 @@
                         $scope.LastSelectedOrigin = $scope.Origin;
                         updateSearchCriteria();
                         findDestinations();
-                        //$scope.getDestinationDetails()
+                        
+                       
                     }
                 });
 
@@ -196,21 +197,13 @@
 
         $scope.Destinationfortab = "";
 
-        $scope.ViewDestination = function () {
+        //$scope.ViewDestination = function () {
 
-            $timeout(function () {
-                //$scope.isSearching = false;
-                //$scope.ShowDestinationView = true;
-                DestinationFactory.ShowDestinationView = true;
-                //$scope.isPopDestCollapsed = true;
-                //$scope.IscalledFromIknowMyDest = false;
-                // $scope.tabManager.resetSelected();
-                // $scope.TabcontentView = false;
-                $rootScope.$broadcast('eventDestinationMapresize');
-            }, 0, true);
-            //$location.url('/destinations', false);
-
-        };
+        //    $timeout(function () {
+        //          DestinationFactory.ShowDestinationView = true;
+        //        $rootScope.$broadcast('eventDestinationMapresize');
+        //    }, 0, true);
+        //};
         $scope.$watch(function () { return DestinationFactory.ShowDestinationView }, function (newVal, oldVal) {
             if (typeof newVal !== 'undefined') {
                 $scope.ShowDestinationView = newVal;
@@ -382,7 +375,9 @@
 
                 $scope.inProgress = false;
                 loadScrollbars();
-                $scope.handleUp();
+                $timeout(function () {
+                    $scope.handleUp();
+                }, 1000, true);
             });
             //$scope.mappromise = DestinationFactory.findDestinations(paramdata).then(function (data) {            
             //    $scope.isSearching = false;
@@ -517,14 +512,29 @@
                 "Lengthofstay": $scope.LenghtOfStay,
                 "Earliestdeparturedate": ($scope.Earliestdeparturedate == '' || $scope.Earliestdeparturedate == undefined) ? null : ConvertToRequiredDate($scope.Earliestdeparturedate, 'API'),
                 "Latestdeparturedate": ($scope.Latestdeparturedate == '' || $scope.Latestdeparturedate == undefined) ? null : ConvertToRequiredDate($scope.Latestdeparturedate, 'API'),
-                "Theme": $scope.Theme,
+                "Theme": null,//$scope.Theme
                 "Location": $scope.Location,
-                "Minfare": $scope.Minfare == 0 ? null : $scope.Minfare,
-                "Maxfare": $scope.Maxfare == 0 ? null : $scope.Maxfare,
+                "Minfare": null,//$scope.Minfare == 0 ? null : $scope.Minfare
+                "Maxfare": null,//$scope.Maxfare == 0 ? null : $scope.Maxfare
                 "PointOfSaleCountry": $scope.PointOfsalesCountry,
-                "Region": $scope.Region,
+                "Region": null,//$scope.Region
                 "Destination": $scope.KnownDestinationAirport
             };
+            //var data = {
+            //    "Origin": $scope.Origin,
+            //    "DepartureDate": ($scope.FromDate == '' || $scope.FromDate == undefined) ? null : ConvertToRequiredDate($scope.FromDate, 'API'),
+            //    "ReturnDate": ($scope.ToDate == '' || $scope.ToDate == undefined) ? null : ConvertToRequiredDate($scope.ToDate, 'API'),
+            //    "Lengthofstay": $scope.LenghtOfStay,
+            //    "Earliestdeparturedate": ($scope.Earliestdeparturedate == '' || $scope.Earliestdeparturedate == undefined) ? null : ConvertToRequiredDate($scope.Earliestdeparturedate, 'API'),
+            //    "Latestdeparturedate": ($scope.Latestdeparturedate == '' || $scope.Latestdeparturedate == undefined) ? null : ConvertToRequiredDate($scope.Latestdeparturedate, 'API'),
+            //    "Theme": $scope.Theme,
+            //    "Location": $scope.Location,
+            //    "Minfare": $scope.Minfare == 0 ? null : $scope.Minfare,
+            //    "Maxfare": $scope.Maxfare == 0 ? null : $scope.Maxfare,
+            //    "PointOfSaleCountry": $scope.PointOfsalesCountry,
+            //    "Region": $scope.Region,
+            //    "Destination": $scope.KnownDestinationAirport
+            //};
             return data;
         }
 

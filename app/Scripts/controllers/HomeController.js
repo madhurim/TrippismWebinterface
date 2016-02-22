@@ -3,26 +3,27 @@
     var controllerId = 'HomeController';
     angular.module('TrippismUIApp').controller(controllerId,
          ['$scope',
-            '$location',
-            '$modal',
-            '$rootScope',
-            '$timeout',
-            '$filter',
             '$window',
-            'TrippismConstants',
              HomeController]);
     function HomeController(
        $scope,
-       $location,
-       $modal,
-       $rootScope,
-       $timeout,
-       $filter,
-       $window,
-       TrippismConstants
+       $window
        ) {
         $scope.Name = "Home Page";
-
         $scope.$emit('bodyClass', 'homepage');
+
+        // set page height based on window's height
+        var w = angular.element($window);
+        function setPageHeight() {
+            var boxwrap = angular.element("#destination-boxwrap");
+            var h50px = angular.element("#h50px");
+            boxwrap.height(w.height() - h50px.height());
+        }
+
+        setPageHeight();
+        w.bind('resize', function () {
+            setPageHeight();
+        });
+        // --- Ends----
     }
 })();

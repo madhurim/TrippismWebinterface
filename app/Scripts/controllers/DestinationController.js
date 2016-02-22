@@ -30,9 +30,15 @@
         TrippismConstants) {
 
         init();
+        function LoadAirlineJson() {
+            UtilFactory.ReadAirlinesJson().then(function (data) {
+                $scope.airlineJsonData = data;
+            });
+        }
 
         function init() {
             UtilFactory.GetCurrencySymbols();
+            LoadAirlineJson();
             $scope.mappromise = UtilFactory.ReadAirportJson().then(function (response) {
                 $scope.AvailableAirports = response;
 
@@ -214,7 +220,8 @@
                             Minfare: $scope.Minfare,
                             Maxfare: $scope.Maxfare,
                             PointOfSaleCountry: $scope.PointOfsalesCountry
-                        }
+                        },
+                        AvailableAirline: $scope.airlineJsonData
                     }
                 }
 

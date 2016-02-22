@@ -296,7 +296,12 @@
                     }
                 }
                 updateSearchCriteria();
-                $timeout(function () { $scope.destinationlist = arr; }, 0, true);
+                $timeout(function () {
+                    $scope.destinationlist = arr;
+                    $rootScope.$broadcast('setMarkeronMap', {
+                        destinationlist: $scope.destinationlist
+                    });
+                }, 0, true);
             }
         }
 
@@ -375,9 +380,7 @@
 
                 $scope.inProgress = false;
                 loadScrollbars();
-                $timeout(function () {
-                    $scope.handleUp();
-                }, 1000, true);
+                $scope.handleUp();
             });
             //$scope.mappromise = DestinationFactory.findDestinations(paramdata).then(function (data) {            
             //    $scope.isSearching = false;

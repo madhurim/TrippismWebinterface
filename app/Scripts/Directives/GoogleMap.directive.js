@@ -8,11 +8,9 @@
               directive.templateUrl = '/Views/GoogleMap.html',
               directive.scope = {
                   origin: "=",
-                  destinations: "=destinations",
+                //  destinations: "=destinations",
                   airportlist: "=airportlist",
                   airlineJsonData: "=airlinejsondata",
-                  defaultlat: "@",
-                  defaultlng: "@"
               }
 
               directive.controller = ['$scope', '$q', '$compile', '$filter', '$rootScope', '$http', '$location', 'TrippismConstants',
@@ -326,18 +324,30 @@
                   }
 
                   setAirportMarkerOnMap();
-                  scope.$watchGroup(['destinations', 'airportlist'], function (newValues, oldValues, scope) {
-                      if (scope.clusterFlag) {
-                          scope.clusterFlag = false;    // flag for solving cluster issue if theme/region multiple time clicked
-                          scope.resetMarker();
-                          if (scope.destinations != undefined && scope.destinations.length > 0) {
-                              scope.displayDestinations(scope.destinations);
-                              scope.setMarkerCluster();
-                          }
-                          else
-                              scope.clusterFlag = true;    // flag for solving cluster issue if theme/region multiple time clicked
+                  //Convert watch code into brodcast method 
+
+                  scope.$on('setMarkeronMap', function (event, args) {
+                      scope.destinations = args.destinationlist;
+                      scope.resetMarker();
+                      if (scope.destinations != undefined && scope.destinations.length > 0) {
+                          scope.displayDestinations(scope.destinations);
+                          scope.setMarkerCluster();
                       }
                   });
+                  //scope.$watchGroup(['destinations', 'airportlist'], function (newValues, oldValues, scope) {
+                  //    if (scope.clusterFlag) {
+                  //        scope.clusterFlag = false;    // flag for solving cluster issue if theme/region multiple time clicked
+                  //        scope.resetMarker();
+                  //        if (scope.destinations != undefined && scope.destinations.length > 0) {
+                  //            scope.displayDestinations(scope.destinations);
+                  //            scope.setMarkerCluster();
+                  //        }
+                  //        else
+                  //            scope.clusterFlag = true;    // flag for solving cluster issue if theme/region multiple time clicked
+                  //    }
+                  //});
+
+
 
                   function setAirportMarkerOnMap() {
                       UtilFactory.ReadAirportJson().then(function (data) {

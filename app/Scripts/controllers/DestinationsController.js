@@ -77,8 +77,9 @@
                         $scope.ToDate = ConvertToRequiredDate(para[1].trim(), 'UI');;
                         $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
                     }
-                    if (para[0].trim() === "t")
+                    if (para[0].trim() === "t") {
                         $scope.Theme = para[1].trim();
+                    }
                     if (para[0].trim() === "a")
                         $scope.Region = para[1].trim();
                     if (para[0].trim() === "lf")
@@ -381,6 +382,7 @@
 
                 $scope.inProgress = false;
                 loadScrollbars();
+                $scope.handleUp();
             });
             //$scope.mappromise = DestinationFactory.findDestinations(paramdata).then(function (data) {            
             //    $scope.isSearching = false;

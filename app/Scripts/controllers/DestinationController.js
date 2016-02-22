@@ -32,6 +32,7 @@
         init();
 
         function init() {
+            UtilFactory.GetCurrencySymbols();
             $scope.mappromise = UtilFactory.ReadAirportJson().then(function (response) {
                 $scope.AvailableAirports = response;
 

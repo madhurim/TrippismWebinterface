@@ -30,15 +30,8 @@
         TrippismConstants) {
 
         init();
-        function LoadAirlineJson() {
-            UtilFactory.ReadAirlinesJson().then(function (data) {
-                $scope.airlineJsonData = data;
-            });
-        }
-
         function init() {
             UtilFactory.GetCurrencySymbols();
-            LoadAirlineJson();
             $scope.mappromise = UtilFactory.ReadAirportJson().then(function (response) {
                 $scope.AvailableAirports = response;
 
@@ -138,6 +131,10 @@
                                 //    SearchCriteria: SearchCriteria
                                 //});
                                 UtilFactory.MapscrollTo('wrapper');
+                                UtilFactory.ReadAirlinesJson().then(function (data) {
+                                    $scope.airlineJsonData = data;
+                                    readyfareParams();
+                                });
                             }
                             else {
                                 alertify.alert("Destination Finder", "");
@@ -171,7 +168,10 @@
                     });
                 }
                 else {
-                    readyfareParams()
+                    UtilFactory.ReadAirlinesJson().then(function (data) {
+                        $scope.airlineJsonData = data;
+                        readyfareParams();
+                    });
                 }
 
                 function FilterDestinations(destinations) {

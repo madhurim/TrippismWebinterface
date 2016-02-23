@@ -1,7 +1,6 @@
 ﻿
 function ConvertToRequiredDate(dtval, calledFrom) {
     dt = new Date(dtval);
-    debugger;
    
     //if (typeof dtval == 'string') {
     //    dtval = dtval.replace("T00:00:00", "").replace(/\//g,"-");

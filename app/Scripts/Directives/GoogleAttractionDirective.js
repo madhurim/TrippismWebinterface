@@ -31,26 +31,27 @@
                 $scope.AttractionMarkers = [];
                 $scope.bounds = new google.maps.LatLngBounds();
                 $scope.MapLoaded = false;
-
+                var airportMarkerLatLog;    //for storing airport marker's lat/lon
                 // get attraction object from factory
                 var attractionsData = GoogleAttractionFactory.getAttractionList();
+                var markerList = [];
                 $scope.$on('ontabClicked', function (event, args) {
-                        if ($scope.MapLoaded) {
-                            $timeout(function () {
-                                if ($scope.InfoWindow) $scope.InfoWindow.close();
-                                $scope.FittoScreen();
-                                //$scope.FittoScreen(); // Added due to back button issue
-                            }, 100, false);
-                        }
-                        else {
-                            var defaultAttractionTab = _.find(attractionsData, function (item) { return item.isDefault == true; });
-                            if (defaultAttractionTab)
-                                $scope.loadgoogleattractionInfo(defaultAttractionTab.name);
-                        }
+                    if ($scope.MapLoaded) {
+                        $timeout(function () {
+                            // if ($scope.InfoWindow) $scope.InfoWindow.close();
+                            $scope.FittoScreen();
+                            //$scope.FittoScreen(); // Added due to back button issue
+                        }, 100, false);
+                    }
+                    else {
+                        var defaultAttractionTab = _.find(attractionsData, function (item) { return item.isDefault == true; });
+                        if (defaultAttractionTab)
+                            $scope.loadgoogleattractionInfo(defaultAttractionTab.name);
+                    }
                 });
 
                 $scope.$on('onMarkerPopup', function (event, args) {
-                        SetMarkerSlider(args.place)
+                    SetMarkerSlider(args.place)
                 });
 
                 function SetMarkerSlider(MapDet) {
@@ -133,7 +134,7 @@
                 var mapStyle = TrippismConstants.attractionTabMapStyle;
                 // setting map option, used into view
                 $scope.attractionmapOptions = {
-                 
+
                     center: new google.maps.LatLng(0, 0),
                     zoom: 11,
                     minZoom: 4,
@@ -181,6 +182,11 @@
                             "Longitude": $scope.googleattractionParams.DestinationairportName.airport_Lng, //$scope.googleattractionParams.airport_Lng,
                         };
 
+                        var markerObj = _(markerList).find(function (item) { return item.type == type });
+                        if (markerObj) {
+                            RenderMap(markerObj.results, type);
+                            return;
+                        }
                         var attractionDetail = _.find(attractionsData, function (item) { return type === item.name; });
                         if (attractionDetail) {
                             // setting parameters for requested attraction 
@@ -205,7 +211,8 @@
                                 if (data.status == 404) {
                                     return;
                                 }
-
+                                if (data.results && data.results.length > 0)
+                                    markerList.push({ results: data.results, type: type });
                                 RenderMap(data.results, type);
                                 $scope.MapLoaded = true;
                                 $scope.attractionsplaces = { type: type, next_page_token: data.next_page_token, results: data.results };
@@ -278,9 +285,9 @@
                 // set airport marker on map
                 function setAirportMarkerOnMap() {
                     createMapLabelControl();
-                    var airportLoc = new google.maps.LatLng($scope.googleattractionParams.DestinationairportName.airport_Lat, $scope.googleattractionParams.DestinationairportName.airport_Lng);
+                    airportMarkerLatLog = new google.maps.LatLng($scope.googleattractionParams.DestinationairportName.airport_Lat, $scope.googleattractionParams.DestinationairportName.airport_Lng);
                     var marker = new MarkerWithLabel({
-                        position: airportLoc,
+                        position: airportMarkerLatLog,
                         map: $scope.googleattractionsMap,
                         title: $scope.googleattractionParams.DestinationairportName.airport_FullName,
                         labelAnchor: new google.maps.Point(12, 35),
@@ -291,14 +298,23 @@
                         icon: 'images/attraction-marker/airport-marker.png'
                     });
 
-                    $scope.bounds.extend(airportLoc);
+                    $scope.bounds.extend(airportMarkerLatLog);
                 }
                 // set markers
                 function RenderMap(maps, type) {
+                    $scope.AttractionMarkers.forEach(function (marker) {
+                        marker.setMap(null);
+                    });
                     if (maps != undefined && maps.length > 0) {
-                        $scope.InfoWindow;
+                        //  $scope.InfoWindow;
                         selected = maps;
+
+                        $scope.bounds = new google.maps.LatLngBounds();
+                        if (airportMarkerLatLog)
+                            $scope.bounds.extend(airportMarkerLatLog);
+
                         $scope.AttractionMarkers = [];
+                        // used for clearing all markers                        
                         for (var x = 0; x < maps.length; x++) {
                             var iconlatlng = new google.maps.LatLng(maps[x].geometry.location.lat, maps[x].geometry.location.lng);
                             var marker = new MarkerWithLabel({
@@ -316,7 +332,7 @@
 
                             $scope.bounds.extend(marker.position);
                             var contentString = "";
-                            $scope.InfoWindow = new google.maps.InfoWindow();
+                            //$scope.InfoWindow = new google.maps.InfoWindow();
                             var MapDet = maps[x];
                             google.maps.event.addListener(marker, 'click', (function (MapDet) {
                                 return function () {

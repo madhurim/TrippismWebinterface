@@ -1,16 +1,16 @@
 ﻿
 function ConvertToRequiredDate(dtval, calledFrom) {
-    //dt = new Date(dtval);
+    dt = new Date(dtval);
     debugger;
    
-    if (typeof dtval == 'string') {
-        dtval = dtval.replace("T00:00:00", "").replace(/\//g,"-");
-        var datearray = dtval.split('-');
-        dt = new Date(datearray[0], parseInt(datearray[1]) - 1, datearray[2]);
-    }
-    else {
-        dt = new Date(dtval);
-    }
+    //if (typeof dtval == 'string') {
+    //    dtval = dtval.replace("T00:00:00", "").replace(/\//g,"-");
+    //    var datearray = dtval.split('-');
+    //    dt = new Date(datearray[0], parseInt(datearray[1]) - 1, datearray[2]);
+    //}
+    //else {
+    //    dt = new Date(dtval);
+    //}
     if (dt == 'Invalid Date') return null;
     var curr_date = ('0' + dt.getDate()).slice(-2);
     var curr_month = ('0' + (dt.getMonth() + 1)).slice(-2);

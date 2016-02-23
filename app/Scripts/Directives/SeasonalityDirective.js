@@ -66,8 +66,7 @@
                     if (newValue != undefined)
                         initseasonalityData();
                 });
-                function initseasonalityData()
-                {
+                function initseasonalityData() {
                     scope.formats = Dateformat();
                     scope.format = scope.formats[5];
                     scope.Isviewmoredisplayed = false;
@@ -132,8 +131,7 @@
                             // replace(/-/g, "/") used because of safari date convert problem
                             var WeekStartDate = new Date(chartrec[i].WeekStartDate.split('T')[0].replace(/-/g, "/"));
                             var WeekEndDate = new Date(chartrec[i].WeekEndDate.split('T')[0].replace(/-/g, "/"));
-                            if (FrmDate >= WeekStartDate && FrmDate <= WeekEndDate)
-                            {
+                            if (FrmDate >= WeekStartDate && FrmDate <= WeekEndDate) {
                                 var SeasonalityIndicator = "";
                                 if (chartrec[i].SeasonalityIndicator == "High")
                                     NumberOfObervations = 3;
@@ -240,7 +238,7 @@
                                 tickInterval: 336 * 3600 * 1000,
                                 minTickInterval: 336 * 3600 * 1000,
                                 title: {
-                                    text: 'Historical Traffic Seasonality for [' + scope.seasonalityParams.DestinationairportName.airport_FullName + ' , ' + scope.seasonalityParams.DestinationairportName.airport_CityName + ']'
+                                    text: 'Historical Traffic Seasonality for ' + scope.seasonalityParams.DestinationairportName.airport_CityName
                                 }
                             },
                             yAxis: {
@@ -290,9 +288,9 @@
 
                                     else
                                         yresult = '<span> ' + '' + ' </span>';
-                                    
+
                                     return '<span style="color:#87ceeb">Year Week :</span> <b> [#' + this.point.YearWeekNumber + ' of ' + Highcharts.dateFormat('%Y', new Date(this.point.startdate)) + '], [ ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.x)) + ' / ' + Highcharts.dateFormat(TrippismConstants.HighChartDateFormat, new Date(this.point.enddate)) + ' ] </b><br>' +
-                                        '<span style="color:#87ceeb">Volume :</span> <b> ' + yresult + '</b>'; 
+                                        '<span style="color:#87ceeb">Volume :</span> <b> ' + yresult + '</b>';
 
                                 }
                             },

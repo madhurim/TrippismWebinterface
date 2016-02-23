@@ -74,8 +74,8 @@
                     <h4>You Searched </h4>
                     <p>
                         <span ng-show="fareParams.SearchCriteria.OrigintoDisp">{{fareParams.SearchCriteria.OrigintoDisp}} </span>
-                        <span ng-show="fareParams.SearchCriteria.FromDate">{{fareParams.SearchCriteria.FromDate | date:'MM/dd/yyyy'}} </span>
-                        <span ng-show="fareParams.SearchCriteria.ToDate">To {{fareParams.SearchCriteria.ToDate |date:'MM/dd/yyyy'}}</span>
+                        <span ng-show="fareParams.SearchCriteria.FromDate">{{fareParams.SearchCriteria.FromDate | date:'MMM-dd-yyyy'}} </span>
+                        <span ng-show="fareParams.SearchCriteria.ToDate">To {{fareParams.SearchCriteria.ToDate | date:'MMM-dd-yyyy'}}</span>
                         <span ng-show="fareParams.SearchCriteria.Minfare > 0"><br />{{fareParams.SearchCriteria.fareCurrencySymbol}} {{fareParams.SearchCriteria.Minfare}}</span>
                         <span ng-show="fareParams.SearchCriteria.Maxfare > 0"> To {{fareParams.SearchCriteria.fareCurrencySymbol}} {{fareParams.SearchCriteria.Maxfare}}</span>
                         <span ng-show="fareParams.SearchCriteria.Region "> {{fareParams.SearchCriteria.Region}}</span>

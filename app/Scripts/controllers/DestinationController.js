@@ -117,7 +117,10 @@
                                 objDestinationairport.objDestinationairport = $scope.DestinationLocation.toUpperCase();
                                 $scope.destinationlist.forEach(function (item) { item.DestinationLocation = item.objDestinationairport; });
                                 $scope.FareInfo = response.FareInfo[0];
-                                readyfareParams();
+                                UtilFactory.ReadAirlinesJson().then(function (data) {
+                                    $scope.airlineJsonData = data;
+                                    readyfareParams();
+                                }); 
                                 //$rootScope.$broadcast('EmptyFareForcastInfo', {
                                 //    Origin: originairport.airport_CityName,
                                 //    Destinatrion: DestinationairportName.airport_Code,
@@ -131,10 +134,7 @@
                                 //    SearchCriteria: SearchCriteria
                                 //});
                                 UtilFactory.MapscrollTo('wrapper');
-                                UtilFactory.ReadAirlinesJson().then(function (data) {
-                                    $scope.airlineJsonData = data;
-                                    readyfareParams();
-                                });
+                               
                             }
                             else {
                                 alertify.alert("Destination Finder", "");

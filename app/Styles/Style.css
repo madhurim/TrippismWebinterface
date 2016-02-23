@@ -1015,7 +1015,7 @@ i.calendar.active, .input-box:hover i.calendar {
     margin-bottom: 0;
     text-transform: uppercase;
     color: #585858;
-    font-size: 12px;
+    font-size: 14px;
 }
 /*
 .middle-content-bar {
@@ -1191,7 +1191,7 @@ i.calendar.active, .input-box:hover i.calendar {
 }
 
 .widget-popup-title {
-    font-size: 15px;
+    font-size: 17px;
     color: #b90005 !important;
     margin: 0;
     text-align: left;
@@ -1329,7 +1329,7 @@ i.calendar.active, .input-box:hover i.calendar {
 }
 
     .news-wp .news-title h6 {
-        font-size: 15px;
+        font-size: 17px;
         color: #fff;
         margin: 0;
     }

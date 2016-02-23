@@ -10,7 +10,7 @@
             </div>
             <div ng-show="IsMapPopupLoading" class="sqrloadclass" style="padding-top:10px;padding-bottom:0px;">
             </div>
-            <div class="modal-body" style="padding-top:0px;" ng-show="!IsMapPopupLoading">
+            <div class="modal-body" style="padding:0px;" ng-show="!IsMapPopupLoading">
                 <div class="col-md-12" ng-class="attractionReviews.length > 0 ? '' : 'padding-0'">
                     <div ng-class="attractionReviews.length > 0 ? 'col-md-8' : 'col-md-12 padding-0'">
                         <div style="height:400px;overflow:auto;" ng-if="slides.length == 0">
@@ -32,19 +32,22 @@
                             <div ng-bind-html="raitingToAppend"></div>
                         </div>
                     </div>
-                    <div class="col-md-4 contentVertical review">
-                        <div ng-if="attractionReviews.length > 0">
-                            <div class="col-md-12 review-inner" ng-repeat="item in attractionReviews">
-                                <p class="margin-bottom-0 p-text-align">{{item.text}}</p>
-                                <div class="review-repeat">
-                                    <span>Overall rating :</span>
-                                    <div ng-bind-html="item.rating"></div>
+                    <div class="col-md-4 review-wrapper">
+                        <div class="attr-title" ng-if="attractionReviews.length > 0">Google+ reviews</div>
+                        <div class="contentVertical review">
+                            <div ng-if="attractionReviews.length > 0">
+                                <div class="col-md-12 review-inner" ng-repeat="item in attractionReviews">
+                                    <p class="margin-bottom-0 p-text-align">{{item.text}}</p>
+                                    <div class="review-repeat">
+                                        <span>Overall rating :</span>
+                                        <div ng-bind-html="item.rating"></div>
+                                    </div>
+                                    <p class="review-author">- {{item.author_name}}</p>
                                 </div>
-                                <p class="review-author">- {{item.author_name}}</p>
                             </div>
                         </div>
+                        <div class="clear"></div>
                     </div>
-                    <div class="clear"></div>
                 </div>
                 <div class="clear"></div>
             </div>

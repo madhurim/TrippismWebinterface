@@ -22,8 +22,8 @@
                 <ul class="gird-line">
                     <li>
                         <div  ng-if="FareRangeWidgetDataFound" ><!-- class="overview-weather-farerange" ng-style="!SeasonalityWidgetDataFound && {'border-left':'none'}"-->
-                            <p>
-                                Fares recently paid
+                        <p>Fares that were paid in the last 4 weeks for the same / similar search combination</p>    
+                        <p>
                                 <span ng-if="widgetParams.FareRangeData.IsMacOrigin">from ({{widgetParams.FareRangeData.OriginLocation}})</span>
                                 <span ng-if="widgetParams.FareRangeData.IsMacDestination">to ({{widgetParams.FareRangeData.DestinationLocation}})</span>
                             </p>

@@ -2,7 +2,7 @@
     <div ng-if="!loadingSeasonality" class="col-md-12">
         <div class="popup-box">
             <div class="popup-header">     
-                <h5 class="widget-popup-title">Historical Traffic Seasonality detail [ {{seasonalityParams.DestinationairportName.airport_FullName}} , {{seasonalityParams.DestinationairportName.airport_CityName}} ]</h5>
+                <h5 class="widget-popup-title">Historical Visitor Traffic detail {{seasonalityParams.DestinationairportName.airport_CityName}}</h5>
             </div> 
             <div class="popup-content">  
                 <!--<p>
@@ -13,7 +13,6 @@
                         <li>
                             <div class="overview-weather-content" ng-if="!loadingSeasonality">
                                 <!--<h6> [ {{DepartDate}} To {{ReturnDate}} ]</h6>-->
-                                <p>Traffic Seasonality</p>
                                 <ul>
                                     <li>
                                         <img title="High" ng-if="SeasonalityWidgetData.NoofIcons == 3" src="/images/User-12.png" alt="" />

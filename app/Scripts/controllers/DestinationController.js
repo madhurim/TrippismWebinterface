@@ -205,8 +205,8 @@
                         SearchCriteria: {
                             Origin: $scope.Origin,
                             DestinationLocation: $scope.DestinationLocation,
-                            FromDate: $scope.FromDate,
-                            ToDate: $scope.ToDate,
+                            FromDate: (typeof $scope.FromDate == 'string') ? new Date($scope.FromDate) : $scope.FromDate,
+                            ToDate: (typeof $scope.FromDate == 'string') ? new Date($scope.FromDate) : $scope.FromDate,
                             Theme: $scope.Theme,
                             Region: $scope.Region,
                             Minfare: $scope.Minfare,

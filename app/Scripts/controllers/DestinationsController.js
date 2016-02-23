@@ -299,7 +299,8 @@
                 $timeout(function () {
                     $scope.destinationlist = arr;
                     $rootScope.$broadcast('setMarkeronMap', {
-                        destinationlist: $scope.destinationlist
+                        destinationlist: $scope.destinationlist,
+                        Region: $scope.Region
                     });
                 }, 0, true);
             }

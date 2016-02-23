@@ -8,7 +8,7 @@
               directive.templateUrl = '/Views/GoogleMap.html',
               directive.scope = {
                   origin: "=",
-                //  destinations: "=destinations",
+                  //  destinations: "=destinations",
                   airportlist: "=airportlist",
                   airlineJsonData: "=airlinejsondata",
               }
@@ -335,45 +335,29 @@
                           var originairport = _.find(scope.airportlist, function (airport) {
                               return airport.airport_Code == scope.origin.toUpperCase()
                           });
-
-                        
-
-                          var airportLoc;
-                          // lat lon information taken from http://www.mapsofworld.com/
-                          if (args.Region == "Africa")
-                              airportLoc = new google.maps.LatLng(7.1881, 21.0936);
-                          else if (args.Region == "Europe")
-                              airportLoc = new google.maps.LatLng(53.0000, 9.0000);
-                          else if (args.Region == "South America")
-                              airportLoc = new google.maps.LatLng(-14.6048, -59.0625);
-                          else if (args.Region == "North America")
-                              airportLoc = new google.maps.LatLng(48.1667, -100.1667);
-                          else if (args.Region == "Middle East")
-                              airportLoc = new google.maps.LatLng(31.268205, 29.995368);
-                          else if (args.Region == "Asia Pacific")
-                              airportLoc = new google.maps.LatLng(49.8380, 105.8203);
-                          else
-                              airportLoc = new google.maps.LatLng(originairport.airport_Lat, originairport.airport_Lng);
-
-                          $timeout(function () {
-                              scope.destinationMap.panTo(airportLoc);
-                          }, 0, false);
                       }
+
+                      var airportLoc;
+                      // lat lon information taken from http://www.mapsofworld.com/
+                      if (args.Region == "Africa")
+                          airportLoc = new google.maps.LatLng(7.1881, 21.0936);
+                      else if (args.Region == "Europe")
+                          airportLoc = new google.maps.LatLng(53.0000, 9.0000);
+                      else if (args.Region == "South America")
+                          airportLoc = new google.maps.LatLng(-14.6048, -59.0625);
+                      else if (args.Region == "North America")
+                          airportLoc = new google.maps.LatLng(48.1667, -100.1667);
+                      else if (args.Region == "Middle East")
+                          airportLoc = new google.maps.LatLng(31.268205, 29.995368);
+                      else if (args.Region == "Asia Pacific")
+                          airportLoc = new google.maps.LatLng(49.8380, 105.8203);
+                      else
+                          airportLoc = new google.maps.LatLng(originairport.airport_Lat, originairport.airport_Lng);
+
+                      $timeout(function () {
+                          scope.destinationMap.panTo(airportLoc);
+                      }, 0, false);
                   });
-                  //scope.$watchGroup(['destinations', 'airportlist'], function (newValues, oldValues, scope) {
-                  //    if (scope.clusterFlag) {
-                  //        scope.clusterFlag = false;    // flag for solving cluster issue if theme/region multiple time clicked
-                  //        scope.resetMarker();
-                  //        if (scope.destinations != undefined && scope.destinations.length > 0) {
-                  //            scope.displayDestinations(scope.destinations);
-                  //            scope.setMarkerCluster();
-                  //        }
-                  //        else
-                  //            scope.clusterFlag = true;    // flag for solving cluster issue if theme/region multiple time clicked
-                  //    }
-                  //});
-
-
 
                   function setAirportMarkerOnMap() {
                       UtilFactory.ReadAirportJson().then(function (data) {
@@ -393,8 +377,8 @@
                               labelStyle: { opacity: 0.75 },
                               icon: 'images/attraction-marker/airport-marker.png',
                               options:
-                                  {zIndex: 0 }
-                              
+                                  { zIndex: 0 }
+
                           });
 
                           $timeout(function () {

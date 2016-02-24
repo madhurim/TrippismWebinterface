@@ -888,36 +888,6 @@ i.calendar.active, .input-box:hover i.calendar {
     width: 30px;
 }
 
-.ibox-box {
-    padding: 5px 15px 0;
-    text-align: center;
-    min-height: 5px;
-    margin-top: 10px;
-}
-
-.searched {
-    text-align: left;
-}
-
-.ibox-box h4 {
-    margin-top: 0;
-    margin-bottom: 8px;
-    font-family: 'Conv_gotham-bold';
-    color: #585858;
-    font-size: 15px;
-}
-
-.ibox-box img {
-    margin-bottom: 10px;
-}
-
-.ibox-box p {
-    margin-bottom: 0;
-    text-transform: uppercase;
-    color: #585858;
-    font-size: 12px;
-}
-
 .middle-content-bar {
     position: relative;
 }
@@ -993,6 +963,7 @@ i.calendar.active, .input-box:hover i.calendar {
     text-align: center;
     min-height: 5px;
     margin-top: 10px;
+    padding-right: 0px;
 }
 
 .searched {
@@ -1001,7 +972,7 @@ i.calendar.active, .input-box:hover i.calendar {
 
 .ibox-box h4 {
     margin-top: 0;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     font-family: 'Conv_gotham-bold';
     color: #585858;
     font-size: 15px;

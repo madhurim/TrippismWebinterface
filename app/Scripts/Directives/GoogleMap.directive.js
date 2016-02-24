@@ -15,6 +15,7 @@
 
               directive.controller = ['$scope', '$q', '$compile', '$filter', '$rootScope', '$http', '$location', 'TrippismConstants',
                   function ($scope, $q, $compile, $filter, $rootScope, $http, $location, TrippismConstants) {
+                      $scope.highRankedAirportlist = [];
                       $scope.destinationMap = undefined;
                       $scope.faresList = [];
                       $scope.destinationMarkers = [];
@@ -265,7 +266,7 @@
 
                       var getMapUrlData = function (airportCode) {
                           var d = $q.defer();
-                          var originairport = _.find($scope.airportlist, function (airport) {
+                          var originairport = _.find($scope.highRankedAirportlist, function (airport) {
                               return airport.airport_Code == airportCode.DestinationLocation
                           });
 
@@ -330,13 +331,16 @@
                       scope.destinations = args.destinationlist;
                       scope.resetMarker();
                       if (scope.destinations != undefined && scope.destinations.length > 0) {
-                          scope.displayDestinations(scope.destinations);
-                          scope.setMarkerCluster();
-                          var originairport = _.find(scope.airportlist, function (airport) {
-                              return airport.airport_Code == scope.origin.toUpperCase()
+                          UtilFactory.ReadHighRankedAirportsJson().then(function (data) {
+                              scope.highRankedAirportlist = data;
+                              scope.displayDestinations(scope.destinations);
+                              scope.setMarkerCluster();
                           });
                       }
 
+                      var originairport = _.find(scope.airportlist, function (airport) {
+                          return airport.airport_Code == scope.origin.toUpperCase()
+                      });
                       var airportLoc;
                       // lat lon information taken from http://www.mapsofworld.com/
                       if (args.Region == "Africa")

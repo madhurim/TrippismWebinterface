@@ -34,7 +34,7 @@
                     </p>
                 </div>
             </div>
-            <!---->       
+            <!---->
             <div class="col-md-2 col-sm-3 col-xs-6" ng-show="FareNoDataFound && FareApiLoaded" ng-if="fareParams.FareInfo.LowestFare && fareParams.FareInfo.LowestFare.Fare != 'N/A' &&  fareParams.FareInfo.LowestFare.Fare != 0">
                 <div class="ibox-box">
                     <h4><span class="cursor-help" data-toggle="tooltip" popover="{{fareParams.FareInfo.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(fareParams.FareInfo.CurrencyCode)}}</span> {{fareParams.FareInfo.LowestFare.Fare | number : 2}}</h4>
@@ -76,8 +76,8 @@
                         <span ng-show="fareParams.SearchCriteria.OrigintoDisp">{{fareParams.SearchCriteria.OrigintoDisp}} </span>
                         <span ng-show="fareParams.SearchCriteria.FromDate">{{fareParams.SearchCriteria.FromDate | date:'MMM-dd-yyyy'}} </span>
                         <span ng-show="fareParams.SearchCriteria.ToDate">To {{fareParams.SearchCriteria.ToDate | date:'MMM-dd-yyyy'}}</span>
-                        <span ng-show="fareParams.SearchCriteria.Minfare > 0"><br />{{fareParams.SearchCriteria.fareCurrencySymbol}} {{fareParams.SearchCriteria.Minfare}}</span>
-                        <span ng-show="fareParams.SearchCriteria.Maxfare > 0"> To {{fareParams.SearchCriteria.fareCurrencySymbol}} {{fareParams.SearchCriteria.Maxfare}}</span>
+                        <span ng-show="fareParams.SearchCriteria.Minfare > 0"><br />{{fareCurrencySymbol}} {{fareParams.SearchCriteria.Minfare}}</span>
+                        <span ng-show="fareParams.SearchCriteria.Maxfare > 0"> To {{fareCurrencySymbol}} {{fareParams.SearchCriteria.Maxfare}}</span>
                         <span ng-show="fareParams.SearchCriteria.Region "> {{fareParams.SearchCriteria.Region}}</span>
                         <span ng-show="fareParams.SearchCriteria.Theme"> {{fareParams.SearchCriteria.Theme}}</span>
                     </p>

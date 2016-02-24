@@ -58,7 +58,7 @@
         SeasonalityFactory,
         TrippismConstants
         ) {
-
+        $scope.$emit('bodyClass', 'mappage');   // for changing <body> class
         function activate() {
             if ($stateParams.path != undefined) {
                 var params = $stateParams.path.split(";");
@@ -87,7 +87,7 @@
                     if (para[0].trim() === "hf")
                         $scope.Maxfare = para[1].trim();
                 })
-               
+
                 $scope.IsairportJSONLoading = true;
                 $scope.mappromise = UtilFactory.ReadAirportJson().then(function (data) {
                     $scope.IsairportJSONLoading = false;
@@ -96,8 +96,8 @@
                         $scope.LastSelectedOrigin = $scope.Origin;
                         updateSearchCriteria();
                         findDestinations();
-                        
-                       
+
+
                     }
                 });
 
@@ -612,6 +612,5 @@
             return UtilFactory.GetCurrencySymbol(code);
         }
         activate();
-        $scope.$emit('bodyClass', 'mappage');
     }
 })();

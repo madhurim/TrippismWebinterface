@@ -28,7 +28,7 @@
         FareforecastFactory,
         SeasonalityFactory,
         TrippismConstants) {
-
+        $scope.$emit('bodyClass', 'tabpage');
         init();
         function init() {
             UtilFactory.GetCurrencySymbols();
@@ -120,7 +120,7 @@
                                 UtilFactory.ReadAirlinesJson().then(function (data) {
                                     $scope.airlineJsonData = data;
                                     readyfareParams();
-                                }); 
+                                });
                                 //$rootScope.$broadcast('EmptyFareForcastInfo', {
                                 //    Origin: originairport.airport_CityName,
                                 //    Destinatrion: DestinationairportName.airport_Code,
@@ -134,7 +134,7 @@
                                 //    SearchCriteria: SearchCriteria
                                 //});
                                 UtilFactory.MapscrollTo('wrapper');
-                               
+
                             }
                             else {
                                 UtilFactory.ReadAirlinesJson().then(function (data) {
@@ -263,7 +263,6 @@
             });
         }
         $scope.PageName = "Destination Page";
-        $scope.$emit('bodyClass', 'tabpage');
     }
 
 })();

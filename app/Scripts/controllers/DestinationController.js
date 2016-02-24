@@ -137,8 +137,12 @@
                                
                             }
                             else {
-                                alertify.alert("Destination Finder", "");
-                                alertify.alert('We could not find details of the destination you are looking for, however we found other destinations that you can explore.').set('onok', function (closeEvent) { });
+                                UtilFactory.ReadAirlinesJson().then(function (data) {
+                                    $scope.airlineJsonData = data;
+                                    readyfareParams();
+                                });
+                                //alertify.alert("Destination Finder", "");
+                                //alertify.alert('We could not find details of the destination you are looking for, however we found other destinations that you can explore.').set('onok', function (closeEvent) { });
                             }
                         }
                         else if (response != null && typeof response == 'string') {
@@ -162,8 +166,12 @@
                             alertify.alert(CList).set('onok', function (closeEvent) { });
                         }
                         else {
-                            alertify.alert("Destination Finder", "");
-                            alertify.alert('No suggestions are available from your Origin. We recomend trying other nearby major airports.').set('onok', function (closeEvent) { });
+                            UtilFactory.ReadAirlinesJson().then(function (data) {
+                                $scope.airlineJsonData = data;
+                                readyfareParams();
+                            });
+                            //alertify.alert("Destination Finder", "");
+                            //alertify.alert('No suggestions are available from your Origin. We recomend trying other nearby major airports.').set('onok', function (closeEvent) { });
                         }
                     });
                 }

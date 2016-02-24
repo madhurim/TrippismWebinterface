@@ -826,7 +826,7 @@ ul .stop-line {
 .service_box {
     /*padding: 50px 0;*/
     padding: 10px 0;
-    margin-top:-70px;
+    margin-top: -70px;
 }
 
 .service_title {
@@ -839,7 +839,7 @@ ul .stop-line {
 .service_content {
     position: relative;
     padding: 0 15px;
-    min-height:180px;
+    min-height: 180px;
 }
 
     .service_content:before {
@@ -877,8 +877,35 @@ ul .stop-line {
     background-color: transparent;
 }
 
+.homepage .destination-boxwrap {
+    background-image: url("../images/Mainpagebg2.jpg");
+    background-position: 60% top;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+}
 
+.h50px {
+    height: 70px;
+    display: inline-block;
+    width: 100%;
+}
 
+.attr-title {
+    font-size: 13px;
+    text-align: center;
+    background: #eee;
+    margin-bottom: 6px;
+    color: black;
+    margin-top: 2px;
+    margin-right: 10px;
+}
+
+.review-wrapper {
+    padding: 0px;
+}
+
+/*#region Media queries */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {
         text-align: center;
@@ -903,11 +930,13 @@ ul .stop-line {
         top: 15px;
     }
 }
+
 @media only screen and (max-width:1199px) {
     .service_content {
-    min-height:230px;
+        min-height: 230px;
+    }
 }
-}
+
 @media only screen and (max-width:769px) {
     .menu-btn {
         top: 10px;
@@ -981,10 +1010,10 @@ ul .stop-line {
 
 @media only screen and (max-width:767px) {
     .service_content {
-    min-height: 250px;
+        min-height: 250px;
+    }
+}
 
-}
-}
 @media only screen and (min-width:481px) and (max-width:736px) {
     .destination-form .col-xs-6, .destination-form .col-xs-6 .input-group, .destination-popup .destination-form .input-group {
         position: static;
@@ -1024,19 +1053,4 @@ ul .stop-line {
         height: 235px;
     }
 }
-
-
-
-.homepage .destination-boxwrap {
-    background-image:url("../images/Mainpagebg2.jpg");
-    background-position: 60% top;
-    background-size: cover;
-    height: 100%;
-    width: 100%;
-}
-
-.h50px {
-    height:70px;
-    display:inline-block;
-    width:100%;
-}
+/*#endregion Media queries */

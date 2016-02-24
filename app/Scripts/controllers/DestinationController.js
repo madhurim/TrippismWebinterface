@@ -206,7 +206,7 @@
                             Origin: $scope.Origin,
                             DestinationLocation: $scope.DestinationLocation,
                             FromDate: (typeof $scope.FromDate == 'string') ? new Date($scope.FromDate) : $scope.FromDate,
-                            ToDate: (typeof $scope.FromDate == 'string') ? new Date($scope.FromDate) : $scope.FromDate,
+                            ToDate: (typeof $scope.ToDate == 'string') ? new Date($scope.ToDate) : $scope.ToDate,
                             Theme: $scope.Theme,
                             Region: $scope.Region,
                             Minfare: $scope.Minfare,

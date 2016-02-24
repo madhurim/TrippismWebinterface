@@ -132,12 +132,13 @@ angular.module('TrippismUIApp').directive('attractionList', ['$compile', '$sce',
                                     // if attraction with same type found in attractionData then set it as active tab.
                                     item.isActive = true;
                                     // if it contains data then fetch it else request from API.
-                                    if (item.data) {
+                                    if (item.data) {                                        
                                         scope.isAttractionFound = true;
                                         scope.attractionstoDisp = attraction.data;
                                         $timeout(function () {
                                             updateScrollbars(); // update horizontal scroll bar
                                         }, 0, false);
+                                        scope.loadAttractionInfo({ type: type });
                                     }
                                     else {
                                         scope.attractionstoDisp = [];

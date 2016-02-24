@@ -1,13 +1,16 @@
-﻿angular.module('TrippismUIApp').directive('destinationFareForecast', ['$rootScope','$compile', '$modal','FareforecastFactory', 'UtilFactory', '$stateParams', '$state',
-    function ($rootScope,$compile, $modal, FareforecastFactory, UtilFactory, $stateParams,$state) {
+﻿angular.module('TrippismUIApp').directive('destinationFareForecast', ['$rootScope', '$compile', '$modal', 'FareforecastFactory', 'UtilFactory', '$stateParams', '$state',
+    function ($rootScope, $compile, $modal, FareforecastFactory, UtilFactory, $stateParams, $state) {
         return {
             restrict: 'E',
             scope: {
                 //homeFn: '&'
-                fareParams :'='
+                fareParams: '='
             },
             templateUrl: '/Views/Partials/DestinationFareForecastPartial.html',
             controller: function ($scope) {
+                $scope.GetCurrencySymbol = function (code) {
+                    return UtilFactory.GetCurrencySymbol(code);
+                }
             },
             link: function ($scope, elem, attrs) {
                 $scope.$watch('fareParams', function (newValue, oldValue) {
@@ -31,9 +34,12 @@
                 }
 
                 function activate() {
+                    debugger;
                     $scope.FareNoDataFound = true;
                     $scope.FareforecastData = "";
                     $scope.IsRequestCompleted = false;
+                    if ($scope.fareParams.FareInfo)
+                        $scope.fareCurrencySymbol = $scope.GetCurrencySymbol($scope.fareParams.FareInfo.CurrencyCode);
 
                     $scope.fareinfopromise = FareforecastFactory.fareforecast($scope.fareParams.Fareforecastdata).then(function (data) {
                         $scope.IsRequestCompleted = true;
@@ -67,10 +73,6 @@
                         }
                     });
                 };
-
-                $scope.GetCurrencySymbol = function (code) {
-                    return UtilFactory.GetCurrencySymbol(code);
-                }
             }
         }
     }]);

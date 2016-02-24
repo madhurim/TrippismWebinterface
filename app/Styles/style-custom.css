@@ -905,6 +905,27 @@ ul .stop-line {
     padding: 0px;
 }
 
+.fare-box {
+    text-align: left;
+}
+
+    .fare-box .pull-left h4 {
+        margin-top: 3px;
+    }
+
+.book-wrapper {
+    margin-left: 10px;
+}
+
+    .book-wrapper a {
+        padding: 3px 5px;
+        font-size: 11px;
+    }
+
+        .book-wrapper a span {
+            color: white;
+        }
+
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {

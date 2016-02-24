@@ -1,6 +1,6 @@
 ﻿angular.module('TrippismUIApp').directive('farerangewidgetInfo',
-                ['$compile',  'FareRangeFactory', '$filter', '$timeout', '$rootScope', 'UtilFactory', 'TrippismConstants',
-    function ($compile, FareRangeFactory, $filter, $timeout, $rootScope, UtilFactory, TrippismConstants) {
+                ['$compile', 'FareRangeFactory', '$filter', '$timeout', '$rootScope', 'UtilFactory', 'FareforecastFactory', 'TrippismConstants',
+    function ($compile, FareRangeFactory, $filter, $timeout, $rootScope, UtilFactory,FareforecastFactory, TrippismConstants) {
         return {
             restrict: 'E',
             scope: {
@@ -35,7 +35,25 @@
                     }
                     $scope.LatestDepartureDate = $filter('date')($scope.LatestDepartureDate, 'yyyy-MM-dd')
                     $scope.loadfareRangeInfo();
+
+                    //Coding for get fareforcast data
+                    $scope.fareinfopromise = FareforecastFactory.fareforecast($scope.widgetParams.Fareforecastdata).then(function (data) {
+                        $scope.IsRequestCompleted = true;
+                        $scope.inProgressFareinfo = false;
+                        if (data.status == 404 || data.status == 400) {
+                            $scope.FareApiLoaded = true;
+                            $scope.FareNoDataFound = true;
+                            return;
+                        }
+                        $scope.FareNoDataFound = false;
+                        $scope.FareforecastData = data;
+                        // Setting up fare data for email
+                        $scope.widgetParams.dataforEmail.FareForecastDataForEmail = {};
+                        $scope.widgetParams.dataforEmail.FareForecastDataForEmail = data;
+
+                    });
                 }
+              
                 $scope.loadfareRangeInfo = function () {
                     $scope.fareRangeInfoLoaded = false;
                     $scope.FareRangeWidgetDataFound = false;
@@ -150,7 +168,10 @@
                         scope.initFarerangeSummary();
                     }
                 });
-                
+
+                scope.GetCurrencySymbol = function (code) {
+                    return UtilFactory.GetCurrencySymbol(code);
+                }
                 scope.$watch('fareRangeData', function (newValue, oldValue) {
                     if (newValue != oldValue && newValue != "" && newValue != undefined) {
                         var isVisible = !scope.loadingFareRange;

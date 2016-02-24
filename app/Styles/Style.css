@@ -1226,7 +1226,7 @@ i.calendar.active, .input-box:hover i.calendar {
 
 .overview-weather-content {
     float: left;
-    width: 50%;
+    width: 100%;
 }
 
     .overview-weather-content p.redbold-font {

@@ -9,10 +9,8 @@
         </div>-->
         <div class="popup-content">
             <!--added header under content-->
-            <div class="popup-header">
-                <!--<div ng-if="SeasonalityWidgetDataFound && FareRangeWidgetDataFound"><h6 class="widget-popup-title">Traffic Seasonality and Fares recently paid</h6></div>
-                <div ng-if="SeasonalityWidgetDataFound && !FareRangeWidgetDataFound"><h6 class="widget-popup-title">Traffic Seasonality Summary</h6></div>-->
-                <div ng-if="FareRangeWidgetDataFound">
+            <div class="popup-header" ng-show="!FareNoDataFound">
+                <div>
                     <h6 class="widget-popup-title">
                         Fares Recommendation
                     </h6>

@@ -59,7 +59,7 @@
                     <div class="clear"></div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6 col-xs-6 col-fare" ng-show="!FareNoDataFound" ng-if="FareforecastData.LowestFare != 'N/A' &&  FareforecastData.LowestFare != 0">
+            <div class="col-md-4 col-sm-6 col-xs-6 col-fare" ng-show="!FareNoDataFound && FareforecastData != null" ng-if="FareforecastData.LowestFare != 'N/A' &&  FareforecastData.LowestFare != 0">
                 <div class="ibox-box fare-box">
                     <div class="pull-left">
                         <p class="hover-line book-wrapper">
@@ -70,7 +70,7 @@
                     </div>
                     <div class="pull-left">
                         <h4><span class="cursor-help" data-toggle="tooltip" popover="{{fareParams.FareInfo.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(fareParams.FareInfo.CurrencyCode)}}</span> {{fareParams.FareInfo.LowestFare.Fare | number : 2}}</h4>
-                        <p>Lowest Fare</p>
+                        <p>Lowest Fare 2</p>
                     </div>
                     <div class="clear"></div>
                 </div>

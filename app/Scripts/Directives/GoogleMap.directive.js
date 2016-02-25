@@ -329,13 +329,14 @@
 
                   scope.$on('setMarkeronMap', function (event, args) {
                       scope.destinations = args.destinationlist;
+                      scope.highRankedAirportlist = args.highRankedAirportlist;
                       scope.resetMarker();
                       if (scope.destinations != undefined && scope.destinations.length > 0) {
-                          UtilFactory.ReadHighRankedAirportsJson().then(function (data) {
-                              scope.highRankedAirportlist = data;
+                        //  UtilFactory.ReadHighRankedAirportsJson().then(function (data) {
+                              //scope.highRankedAirportlist = data;
                               scope.displayDestinations(scope.destinations);
                               scope.setMarkerCluster();
-                          });
+                        //  });
                       }
 
                       var originairport = _.find(scope.airportlist, function (airport) {

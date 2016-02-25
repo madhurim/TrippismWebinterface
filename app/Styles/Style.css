@@ -33,6 +33,11 @@ a, a:hover, a:focus, label, form-control, .form-control:focus, .btn, button, .po
 
 
 /*Marker round css*/
+
+.ibox-box.ibox-box-detail {
+    padding-top:0;
+    margin-top:0;
+}
 .rimg {
     border: 2px solid #fff;
     border-radius: 150px;

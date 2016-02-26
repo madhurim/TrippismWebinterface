@@ -298,7 +298,7 @@
                 updateSearchCriteria();
                 $timeout(function () {
                     $scope.destinationlist = arr;
-                    UtilFactory.ReadHighRankedAirportsJson().then(function (data) {
+                    $scope.mappromise = UtilFactory.ReadHighRankedAirportsJson().then(function (data) {
                         //scope.highRankedAirportlist = data;
                         //scope.displayDestinations(scope.destinations);
                         //scope.setMarkerCluster();

@@ -105,6 +105,7 @@ function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParam
 
             $scope.formatInput = function ($model) {
                 if ($model == "" || $model == undefined) return "";
+                if (!$scope.AvailableAirports) return $model;
                 var originairport = _.find($scope.AvailableAirports, function (airport) { return airport.airport_Code == $model.toUpperCase() });
                 //var airportname = (originairport.airport_FullName.toLowerCase().indexOf("airport") > 0) ? originairport.airport_FullName : originairport.airport_FullName + " Airport";
                 var CountryName = (originairport.airport_CountryName != undefined) ? originairport.airport_CountryName : "";
@@ -114,6 +115,12 @@ function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParam
 
             $scope.$watch('KnownDestinationAirport', function (newValue, oldval) {
                 if (newValue != undefined && newValue != "") {
+
+                    if (!$scope.AvailableAirports) {
+                        $scope.KnownDestinationAirport = newValue;
+                        return;
+                    }
+
                     var airportCode = newValue.split(',')[0];
                     if (airportCode && oldval && oldval.toUpperCase().indexOf(airportCode.toUpperCase()) == 0) return;
                     newValue = newValue.toLowerCase();
@@ -143,12 +150,20 @@ function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParam
             });
 
             $scope.$watch('Origin', function (newValue, oldval) {
+
                 // return if new value same as url's origin.
                 // fix for FromDate and ToDate do not get null value because of $scope.setSearchCriteria()
                 if (oldval == '' && newValue == $scope.urlParam.Origin)
                     return;
 
                 if (newValue != undefined && newValue != "") {
+
+                    if (!$scope.AvailableAirports) {
+                        $scope.Origin = newValue;
+                        $scope.OriginCityName = newValue;
+                        return;
+                    }
+
                     var airportCode = newValue.split(',')[0];
                     if (airportCode && oldval && oldval.toUpperCase().indexOf(airportCode.toUpperCase()) == 0) {
                         return;

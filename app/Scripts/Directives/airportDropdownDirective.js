@@ -8,6 +8,9 @@
                 var orderby = ['rank', 'airport_Code'];
                 $scope.airportsAutocomplete = function (keyedinValue) {
                     var matchingAirports = [];
+                    if (!$scope.AvailableAirports)
+                        return matchingAirports;
+
                     keyedinValue = keyedinValue.toLowerCase();
                     var displayCount = 10;  // airports to be displayed in list
                     if (keyedinValue.length == 2) {   // match with airport code only

@@ -924,6 +924,11 @@ ul .stop-line {
     max-width: 260px;
 }
 
+.date-title {
+    font-size: 14px;
+    margin: 0px 0px 15px 0px;
+}
+
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {

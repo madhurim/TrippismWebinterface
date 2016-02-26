@@ -298,10 +298,17 @@
                 updateSearchCriteria();
                 $timeout(function () {
                     $scope.destinationlist = arr;
+                     UtilFactory.ReadHighRankedAirportsJson().then(function (data) {
+                    //scope.highRankedAirportlist = data;
+                    //scope.displayDestinations(scope.destinations);
+                    //scope.setMarkerCluster();
                     $rootScope.$broadcast('setMarkeronMap', {
                         destinationlist: $scope.destinationlist,
-                        Region: $scope.Region
+                        Region: $scope.Region,
+                        highRankedAirportlist : data
                     });
+                     });
+                    
                 }, 0, true);
             }
         }

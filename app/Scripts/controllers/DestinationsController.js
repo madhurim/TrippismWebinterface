@@ -123,44 +123,44 @@
         $scope.oneAtATime = true;
         // $scope.isPopDestCollapsed = true;
         $scope.PointOfsalesCountry;
-        var correctAirportNames = function () {
-            var origin;
-            var knownDestination;
-            if ($scope.Origin.split(',').length >= 1) {
-                origin = $scope.Origin.split(',')[0].trim().toUpperCase();
-                //$scope.Origin = $scope.Origin.split(',')[0].trim().toUpperCase();
-                if (origin.length > 3) {
-                    var matchingArray = GetArrayforCompareforCityName(origin.toLowerCase());
-                    if (matchingArray.length > 0) {
-                        matchingArray.forEach(function (arprt) {
-                            if (arprt.airport_FullName.toLowerCase().indexOf("all airport") != -1) {
-                                matchingArray[0] = arprt;
-                            }
-                        });
-                        $scope.Origin = matchingArray[0].airport_Code;
-                        $scope.OriginCityName = matchingArray[0].airport_CityName;
-                    }
-                }
-                else
-                    $scope.Origin = origin;
-            }
-            if ($scope.KnownDestinationAirport && $scope.KnownDestinationAirport.split(',').length >= 1) {
-                knownDestination = $scope.KnownDestinationAirport.split(',')[0].trim().toUpperCase();
-                if (knownDestination.length > 3) {
-                    var matchingArray = GetArrayforCompareforCityName(knownDestination.toLowerCase());
-                    if (matchingArray.length > 0) {
-                        matchingArray.forEach(function (arprt) {
-                            if (arprt.airport_FullName.toLowerCase().indexOf("all airport") != -1) {
-                                matchingArray[0] = arprt;
-                            }
-                        });
-                        $scope.KnownDestinationAirport = matchingArray[0].airport_Code;
-                    }
-                }
-                else
-                    $scope.KnownDestinationAirport = knownDestination;
-            }
-        }
+        //var correctAirportNames = function () {
+        //    var origin;
+        //    var knownDestination;
+        //    if ($scope.Origin.split(',').length >= 1) {
+        //        origin = $scope.Origin.split(',')[0].trim().toUpperCase();
+        //        //$scope.Origin = $scope.Origin.split(',')[0].trim().toUpperCase();
+        //        if (origin.length > 3) {
+        //            var matchingArray = GetArrayforCompareforCityName(origin.toLowerCase());
+        //            if (matchingArray.length > 0) {
+        //                matchingArray.forEach(function (arprt) {
+        //                    if (arprt.airport_FullName.toLowerCase().indexOf("all airport") != -1) {
+        //                        matchingArray[0] = arprt;
+        //                    }
+        //                });
+        //                $scope.Origin = matchingArray[0].airport_Code;
+        //                $scope.OriginCityName = matchingArray[0].airport_CityName;
+        //            }
+        //        }
+        //        else
+        //            $scope.Origin = origin;
+        //    }
+        //    if ($scope.KnownDestinationAirport && $scope.KnownDestinationAirport.split(',').length >= 1) {
+        //        knownDestination = $scope.KnownDestinationAirport.split(',')[0].trim().toUpperCase();
+        //        if (knownDestination.length > 3) {
+        //            var matchingArray = GetArrayforCompareforCityName(knownDestination.toLowerCase());
+        //            if (matchingArray.length > 0) {
+        //                matchingArray.forEach(function (arprt) {
+        //                    if (arprt.airport_FullName.toLowerCase().indexOf("all airport") != -1) {
+        //                        matchingArray[0] = arprt;
+        //                    }
+        //                });
+        //                $scope.KnownDestinationAirport = matchingArray[0].airport_Code;
+        //            }
+        //        }
+        //        else
+        //            $scope.KnownDestinationAirport = knownDestination;
+        //    }
+        //}
         initFareSliderValues();
         $scope.isModified = false;
         function LoadAirlineJson() {
@@ -298,17 +298,17 @@
                 updateSearchCriteria();
                 $timeout(function () {
                     $scope.destinationlist = arr;
-                     UtilFactory.ReadHighRankedAirportsJson().then(function (data) {
-                    //scope.highRankedAirportlist = data;
-                    //scope.displayDestinations(scope.destinations);
-                    //scope.setMarkerCluster();
-                    $rootScope.$broadcast('setMarkeronMap', {
-                        destinationlist: $scope.destinationlist,
-                        Region: $scope.Region,
-                        highRankedAirportlist : data
+                    UtilFactory.ReadHighRankedAirportsJson().then(function (data) {
+                        //scope.highRankedAirportlist = data;
+                        //scope.displayDestinations(scope.destinations);
+                        //scope.setMarkerCluster();
+                        $rootScope.$broadcast('setMarkeronMap', {
+                            destinationlist: $scope.destinationlist,
+                            Region: $scope.Region,
+                            highRankedAirportlist: data
+                        });
                     });
-                     });
-                    
+
                 }, 0, true);
             }
         }
@@ -327,7 +327,7 @@
             //$scope.isPopDestCollapsed = true;
             $scope.IsRefineSearchShow = true;
             $scope.isSearching = true;
-            correctAirportNames();
+            //correctAirportNames();
             //$scope.refineSearchValues.OrigintoDisp = $scope.Origin;
             updateSearchCriteria();
             var paramdata = CreateSearchCriteria();

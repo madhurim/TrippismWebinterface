@@ -67,10 +67,10 @@
                               finalpath += ';th=' + result.Theme;
                           if (result.Region != undefined)
                               finalpath += ';a=' + result.Region;
-                          if (result.Minfare != undefined)
-                              finalpath += ';lf=' + result.Minfare;
-                          if (result.Maxfare != undefined)
-                              finalpath += ';hf=' + result.Maxfare;
+                          //if (result.Minfare != undefined)
+                          //    finalpath += ';lf=' + result.Minfare;
+                          //if (result.Maxfare != undefined)
+                          //    finalpath += ';hf=' + result.Maxfare;
                           $location.path(finalpath);
                       };
 
@@ -253,10 +253,11 @@
                                               finalpath += ';th=' + result.Theme;
                                           if (result.Region != undefined)
                                               finalpath += ';a=' + result.Region;
-                                          if (result.Minfare != undefined)
-                                              finalpath += ';lf=' + result.Minfare;
-                                          if (result.Maxfare != undefined)
-                                              finalpath += ';hf=' + result.Maxfare;
+                                          //Not Required for destination page
+                                          //if (result.Minfare != undefined)
+                                          //    finalpath += ';lf=' + result.Minfare;
+                                          //if (result.Maxfare != undefined)
+                                          //    finalpath += ';hf=' + result.Maxfare;
                                           $location.path(finalpath);
                                       };
                                   })(marker, contentString, $scope.InfoWindow));

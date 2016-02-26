@@ -7,7 +7,7 @@
             <div ng-if="!SeasonalityWidgetDataFound && FareRangeWidgetDataFound"><h6 class="widget-popup-title">Fares recently paid
             </h6></div>
         </div>-->
-        <div class="popup-content">
+        <div class="popup-content" ng-show="!FareNoDataFound" ng-if="FareforecastData.Forecast.LowestPredictedFare != 'N/A' && FareforecastData.Forecast.LowestPredictedFare != 0">
             <!--added header under content-->
             <div class="popup-header" ng-show="!FareNoDataFound">
                 <div>
@@ -17,48 +17,51 @@
                     <h6 class="widget-popup-title" ng-if="FareforecastData.Recommendation == 'wait'">
                         We recommend Wait
                     </h6>
+                    <h6 class="widget-popup-title" ng-if="FareforecastData.Recommendation == 'unknown'">
+                        FareFor
+                    </h6>
                 </div>
             </div>
             <div class="overview-weather-box">
                 <!--<ul class="gird-line">
-                    <li>-->
-                        <div class="overview-weather-content" >
-                            <div class="row">
-                                <div class="col-md-6 col-sm-12 col-xs-12" ng-show="!FareNoDataFound" ng-if="FareforecastData.Forecast.LowestPredictedFare != 'N/A' && FareforecastData.Forecast.LowestPredictedFare != 0">
-                                    <div title="Forecasted price for next week for the same origin-destination pair and date combination selected" class="ibox-box  ibox-box-detail"><h4><span class="cursor-help" data-toggle="tooltip" popover="{{FareforecastData.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(FareforecastData.CurrencyCode)}}</span> {{FareforecastData.Forecast.LowestPredictedFare | number : 2 }}</h4><p>Lowest Predicted Fare for Next Week</p></div>
-                                </div>
-                                <div class="col-md-6 col-sm-12 col-xs-12" ng-if="!FareNoDataFound && IsRequestCompleted" ng-hide="FareforecastData.Recommendation == 'unknown'">
-                                    <div class="ibox-box ibox-box-detail" ng-show="!FareNoDataFound">
-                              
-                                        <img ng-if="FareforecastData.Recommendation == 'buy'" title="Go ahead, Buy!" src="/images/like-icon.png" />
-                                        <img ng-if="FareforecastData.Recommendation == 'wait'" title="Wait, price may drop!" src="/images/wait-icon.png" />
-                                        <p>Recommendation</p>
-                                    </div>
-                                </div>
+            <li>-->
+                <div class="overview-weather-content">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12 col-xs-12" ng-show="!FareNoDataFound" ng-if="FareforecastData.Forecast.LowestPredictedFare != 'N/A' && FareforecastData.Forecast.LowestPredictedFare != 0">
+                            <div title="Forecasted price for next week for the same origin-destination pair and date combination selected" class="ibox-box  ibox-box-detail"><h4><span class="cursor-help" data-toggle="tooltip" popover="{{FareforecastData.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(FareforecastData.CurrencyCode)}}</span> {{FareforecastData.Forecast.LowestPredictedFare | number : 2 }}</h4><p>Lowest Predicted Fare for Next Week</p></div>
+                        </div>
+                        <div class="col-md-6 col-sm-12 col-xs-12" ng-if="!FareNoDataFound && IsRequestCompleted" ng-hide="FareforecastData.Recommendation == 'unknown'">
+                            <div class="ibox-box ibox-box-detail" ng-show="!FareNoDataFound">
+
+                                <img ng-if="FareforecastData.Recommendation == 'buy'" title="Go ahead, Buy!" src="/images/like-icon.png" />
+                                <img ng-if="FareforecastData.Recommendation == 'wait'" title="Wait, price may drop!" src="/images/wait-icon.png" />
+                                <p ng-if="FareforecastData.Recommendation == 'buy'"> We recommend Buy</p>
                             </div>
                         </div>
-                        <!--<h6 class="widget-popup-title">
-                            Fares recently paid
-                        </h6>-->
-                        <!--<div  ng-if="FareRangeWidgetDataFound" > class="overview-weather-farerange" ng-style="!SeasonalityWidgetDataFound && {'border-left':'none'}"
-                        <p>Fares that were paid in the last 4 weeks for the same / similar search combination</p>    
-                        <p>
-                                <span ng-if="widgetParams.FareRangeData.IsMacOrigin">from ({{widgetParams.FareRangeData.OriginLocation}})</span>
-                                <span ng-if="widgetParams.FareRangeData.IsMacDestination">to ({{widgetParams.FareRangeData.DestinationLocation}})</span>
-                            </p>
-                            <div class="row">
-                                <div class="col-md-4 col-sm-12 col-xs-4">{{FareRangeWidgetData.CurrencyCode}} {{FareRangeWidgetData.MinimumFare | number : 2}}<p>Lowest Fare</p></div>
-                                <div class="col-md-4 col-sm-12 col-xs-4">{{FareRangeWidgetData.CurrencyCode}} {{FareRangeWidgetData.MedianFare | number : 2}} <p>Median Fare</p></div>
-                                <div class="col-md-4 col-sm-12 col-xs-4">{{FareRangeWidgetData.CurrencyCode}} {{FareRangeWidgetData.MaximumFare | number : 2}} <p>Highest Fare</p></div>
-                            </div>
-                        </div>-->
-                    <!--</li>
-                   
-                </ul>-->
+                    </div>
+                </div>
+                <!--<h6 class="widget-popup-title">
+                Fares recently paid
+            </h6>-->
+                <!--<div  ng-if="FareRangeWidgetDataFound" > class="overview-weather-farerange" ng-style="!SeasonalityWidgetDataFound && {'border-left':'none'}"
+            <p>Fares that were paid in the last 4 weeks for the same / similar search combination</p>
+            <p>
+                    <span ng-if="widgetParams.FareRangeData.IsMacOrigin">from ({{widgetParams.FareRangeData.OriginLocation}})</span>
+                    <span ng-if="widgetParams.FareRangeData.IsMacDestination">to ({{widgetParams.FareRangeData.DestinationLocation}})</span>
+                </p>
+                <div class="row">
+                    <div class="col-md-4 col-sm-12 col-xs-4">{{FareRangeWidgetData.CurrencyCode}} {{FareRangeWidgetData.MinimumFare | number : 2}}<p>Lowest Fare</p></div>
+                    <div class="col-md-4 col-sm-12 col-xs-4">{{FareRangeWidgetData.CurrencyCode}} {{FareRangeWidgetData.MedianFare | number : 2}} <p>Median Fare</p></div>
+                    <div class="col-md-4 col-sm-12 col-xs-4">{{FareRangeWidgetData.CurrencyCode}} {{FareRangeWidgetData.MaximumFare | number : 2}} <p>Highest Fare</p></div>
+                </div>
+            </div>-->
+                <!--</li>
+
+            </ul>-->
             </div>
-            </div>
+        </div>
         <div class="popup-content">
-            <div class="popup-header" ng-show="!FareNoDataFound">
+            <div class="popup-header">
                 <div>
                     <h6 class="widget-popup-title">
                         Fares recently paid

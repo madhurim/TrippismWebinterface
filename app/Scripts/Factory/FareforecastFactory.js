@@ -24,7 +24,6 @@
 
 
         function fareforecast(data) {
-            debugger;
             var criteria = data.Origin + data.DepartureDate + data.ReturnDate + data.Destination;
             var resultdata = $filter('filter')(FareForecastData, { Criteria: criteria })[0];
             if (resultdata != undefined && resultdata != "") {
@@ -33,7 +32,6 @@
                 return d.promise;
             }
             else {
-               
                 var dataURL = 'FareForecast?' + serialize(data);
                 var url = $rootScope.apiURL + dataURL;
                 return $http.get(url)

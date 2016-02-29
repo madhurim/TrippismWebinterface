@@ -38,7 +38,7 @@
                         $scope.instaFlightSearchResult = data;
                         $scope.DepartureDate = $scope.instaFlightSearchResult.DepartureDateTime;
                         $scope.ReturnDate = $scope.instaFlightSearchResult.ReturnDateTime;
-                        $scope.instaFlightSearchLimit = 10;                        
+                        $scope.instaFlightSearchLimit = 10;
                         $scope.currencyCode = getCurrencyCode($scope.instaFlightSearchResult.PricedItineraries[0]);
                         $scope.lowestFare = getLowestFare($scope.instaFlightSearchResult.PricedItineraries[0]);
                     }

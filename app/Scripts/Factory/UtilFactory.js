@@ -7,6 +7,7 @@
         // Define the functions and properties to reveal.
         var AirportJsonData = [];
         var highRankedAirports = [];
+        var airlinesList = [];
         var LastSearch;
         var service = {
             ReadAirportJson: ReadAirportJson,
@@ -169,9 +170,24 @@
         }
 
         function ReadAirlinesJson() {
-            return $http.get('scripts/Constants/airlines.json').then(function (_airlines) {
-                return _airlines.data.response;
-            });
+            if (airlinesList.length > 0) {
+                var d = $q.defer();
+                d.resolve(airlinesList);
+                return d.promise;
+            }
+            else
+                return $http.get($rootScope.apiURLForConstant + '/GetAirlines').then(function (data) {
+                    if (data.status == 200) {
+                        airlinesList = data.data;
+                        return airlinesList;
+                    }
+                    else
+                        return [];
+                });
+
+            //return $http.get('scripts/Constants/airlines.json').then(function (_airlines) {
+            //    return _airlines.data.response;
+            //});
         }
 
         function GetCurrencySymbols() {

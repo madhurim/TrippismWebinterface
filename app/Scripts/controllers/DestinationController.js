@@ -234,28 +234,33 @@
                 }
 
 
-                var WeatherData, farerangeInfo;//seasonalityfarerangewidgetInfo, ,weatherwidgetInfo;
+                var WeatherData, farerangeInfo, fareforcastinfo;//seasonalityfarerangewidgetInfo, ,weatherwidgetInfo;
 
                 $scope.$on('widgetLoaded', function (event, data) {
                     //if (data.name === 'seasonalityfarerangewidgetInfo') {
                     //    seasonalityfarerangewidgetInfo = data;
                     //} else
-
-                        if (data.name === 'WeatherData') {
+                    if (data.name === 'WeatherData') {
                         WeatherData = data;
                     }
                     else if (data.name === 'farerangeInfo') {
                         farerangeInfo = data;
-                    } 
+                    }
+                    else if (data.name === 'fareforcastinfo') {
+                        fareforcastinfo = data;
+                    }
+
+                    
+
                     //else if (data.name === 'weatherwidgetInfo') {
                     //    weatherwidgetInfo = data;
                     //}
-                    debugger;
-                    if (farerangeInfo && WeatherData) //&& seasonalityfarerangewidgetInfo  && weatherwidgetInfo
+                    if (farerangeInfo && WeatherData && fareforcastinfo) //&& seasonalityfarerangewidgetInfo  && weatherwidgetInfo
                     {
                         var columnData = {
                            // seasonalityfarerangewidgetInfo: seasonalityfarerangewidgetInfo,
                             farerangeInfo: farerangeInfo,
+                            fareforcastinfo : fareforcastinfo,
                             //weatherwidgetInfo: weatherwidgetInfo,
                             WeatherData: WeatherData
                         };

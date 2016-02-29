@@ -8,11 +8,12 @@
             scope.$on("columnLayoutChanged", function(e,d){
                 console.log(d.columnData);
                 //var seasonalityfarerangewidgetInfo = d.columnData.seasonalityfarerangewidgetInfo;
+                var fareforcastinfo = d.columnData.fareforcastinfo;
                 var farerangeInfo = d.columnData.farerangeInfo;
                 var WeatherData = d.columnData.WeatherData;
                 //var weatherwidgetInfo = d.columnData.weatherwidgetInfo;
                 debugger;
-                var isCol2Visible = (farerangeInfo.isVisible); // (seasonalityfarerangewidgetInfo.isVisible); //||
+                var isCol2Visible = (farerangeInfo.isVisible || fareforcastinfo.isVisible); // (seasonalityfarerangewidgetInfo.isVisible); //||
                 var isCol1Visible = (WeatherData.isVisible); //weatherwidgetInfo.isVisible || 
                 var delay = 2000;
                  $(elem).show();
@@ -43,7 +44,7 @@
                     }, 0, true);
                 }
                 else if(isCol2Visible && isCol1Visible){
-                    $timeout(function(){
+                    $timeout(function () {
                         $(elem).addClass('newouterDiv');
                     },delay);
                 }

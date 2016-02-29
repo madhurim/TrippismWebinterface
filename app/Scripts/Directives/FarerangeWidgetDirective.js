@@ -43,8 +43,10 @@
                         if (data.status == 404 || data.status == 400) {
                             $scope.FareApiLoaded = true;
                             $scope.FareNoDataFound = true;
+                            $scope.$emit('widgetLoaded', { name: "fareforcastinfo", isVisible: false });
                             return;
                         }
+                        $scope.$emit('widgetLoaded', { name: "fareforcastinfo", isVisible: true });
                         $scope.FareNoDataFound = false;
                         $scope.FareforecastData = data;
                         // Setting up fare data for email

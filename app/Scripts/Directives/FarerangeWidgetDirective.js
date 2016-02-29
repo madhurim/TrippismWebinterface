@@ -175,7 +175,7 @@
                 scope.$watch('fareRangeData', function (newValue, oldValue) {
                     if (newValue != oldValue && newValue != "" && newValue != undefined) {
                         var isVisible = !scope.loadingFareRange;
-                        scope.$emit('widgetLoaded', { name: "seasonalityfarerangewidgetInfo", isVisible: isVisible });
+                        scope.$emit('widgetLoaded', { name: "farerangeInfo", isVisible: isVisible });
                         PreparHtmldata();
                     }
                 })

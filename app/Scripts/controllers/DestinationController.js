@@ -234,25 +234,28 @@
                 }
 
 
-                var seasonalityfarerangewidgetInfo, WeatherData; //farerangeInfo,weatherwidgetInfo;
+                var WeatherData, farerangeInfo;//seasonalityfarerangewidgetInfo, ,weatherwidgetInfo;
 
                 $scope.$on('widgetLoaded', function (event, data) {
-                    if (data.name === 'seasonalityfarerangewidgetInfo') {
-                        seasonalityfarerangewidgetInfo = data;
-                    } else if (data.name === 'WeatherData') {
+                    //if (data.name === 'seasonalityfarerangewidgetInfo') {
+                    //    seasonalityfarerangewidgetInfo = data;
+                    //} else
+
+                        if (data.name === 'WeatherData') {
                         WeatherData = data;
                     }
-                    //else if (data.name === 'farerangeInfo') {
-                    //    farerangeInfo = data;
-                    //} else if (data.name === 'weatherwidgetInfo') {
+                    else if (data.name === 'farerangeInfo') {
+                        farerangeInfo = data;
+                    } 
+                    //else if (data.name === 'weatherwidgetInfo') {
                     //    weatherwidgetInfo = data;
                     //}
-
-                    if (seasonalityfarerangewidgetInfo && WeatherData) //&& farerangeInfo && weatherwidgetInfo
+                    debugger;
+                    if (farerangeInfo && WeatherData) //&& seasonalityfarerangewidgetInfo  && weatherwidgetInfo
                     {
                         var columnData = {
-                            seasonalityfarerangewidgetInfo: seasonalityfarerangewidgetInfo,
-                            //farerangeInfo: farerangeInfo,
+                           // seasonalityfarerangewidgetInfo: seasonalityfarerangewidgetInfo,
+                            farerangeInfo: farerangeInfo,
                             //weatherwidgetInfo: weatherwidgetInfo,
                             WeatherData: WeatherData
                         };

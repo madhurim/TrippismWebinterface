@@ -123,10 +123,16 @@
                                 objDestinationairport.objDestinationairport = $scope.DestinationLocation.toUpperCase();
                                 $scope.destinationlist.forEach(function (item) { item.DestinationLocation = item.objDestinationairport; });
                                 $scope.FareInfo = response.FareInfo[0];
-                                UtilFactory.ReadAirlinesJson().then(function (data) {
-                                    $scope.airlineJsonData = data;
-                                    readyfareParams();
-                                });
+
+                                // commented for the time being
+                                //UtilFactory.ReadAirlinesJson().then(function (data) {
+                                //    $scope.airlineJsonData = data;
+                                //    readyfareParams();
+                                //});
+
+                                $scope.airlineJsonData = [];
+                                readyfareParams();
+
                                 //$rootScope.$broadcast('EmptyFareForcastInfo', {
                                 //    Origin: originairport.airport_CityName,
                                 //    Destinatrion: DestinationairportName.airport_Code,
@@ -143,10 +149,15 @@
 
                             }
                             else {
-                                UtilFactory.ReadAirlinesJson().then(function (data) {
-                                    $scope.airlineJsonData = data;
-                                    readyfareParams();
-                                });
+                                // commented for the time being
+                                //UtilFactory.ReadAirlinesJson().then(function (data) {
+                                //    $scope.airlineJsonData = data;
+                                //    readyfareParams();
+                                //});
+
+                                $scope.airlineJsonData = [];
+                                readyfareParams();
+
                                 //alertify.alert("Destination Finder", "");
                                 //alertify.alert('We could not find details of the destination you are looking for, however we found other destinations that you can explore.').set('onok', function (closeEvent) { });
                             }
@@ -172,20 +183,31 @@
                             alertify.alert(CList).set('onok', function (closeEvent) { });
                         }
                         else {
-                            UtilFactory.ReadAirlinesJson().then(function (data) {
-                                $scope.airlineJsonData = data;
-                                readyfareParams();
-                            });
+                            // commented for the time being
+                            //UtilFactory.ReadAirlinesJson().then(function (data) {
+                            //    $scope.airlineJsonData = data;
+                            //    readyfareParams();
+                            //});
+
+                            $scope.airlineJsonData = [];
+                            readyfareParams();
+
                             //alertify.alert("Destination Finder", "");
                             //alertify.alert('No suggestions are available from your Origin. We recommend trying other nearby major airports.').set('onok', function (closeEvent) { });
                         }
                     });
                 }
                 else {
-                    UtilFactory.ReadAirlinesJson().then(function (data) {
-                        $scope.airlineJsonData = data;
-                        readyfareParams();
-                    });
+                    // commented for the time being
+                    //UtilFactory.ReadAirlinesJson().then(function (data) {
+                    //    $scope.airlineJsonData = data;
+                    //    readyfareParams();
+                    //});
+
+
+                    $scope.airlineJsonData = [];
+                    readyfareParams();
+
                 }
 
                 function FilterDestinations(destinations) {

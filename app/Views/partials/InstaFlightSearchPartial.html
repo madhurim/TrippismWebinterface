@@ -133,7 +133,9 @@
                             <div ng-repeat="flightSegment in originDestinationOption.FlightSegment">
                                 <div class="col-md-12">
                                     <div class="col-xs-12 col-sm-3 col-md-3 instaflight-center">
-                                        <img class="cursor-help" ng-src="http://pics.avs.io/100/30/{{flightSegment.OperatingAirline.Code}}.png" data-toggle="tooltip" data-placement="top" popover="{{::getAirlineName(flightSegment.OperatingAirline.Code);}}" popover-trigger="mouseenter" />
+                                        <!-- commented for the time being -->
+                                        <!--<img class="cursor-help" ng-src="http://pics.avs.io/100/30/{{flightSegment.OperatingAirline.Code}}.png" data-toggle="tooltip" data-placement="top" popover="{{::getAirlineName(flightSegment.OperatingAirline.Code);}}" popover-trigger="mouseenter" />-->
+                                        <img ng-src="http://pics.avs.io/100/30/{{flightSegment.OperatingAirline.Code}}.png" />
                                         <div>{{flightSegment.OperatingAirline.Code}}{{flightSegment.OperatingAirline.FlightNumber}}</div>
                                     </div>
                                     <div class="col-md-9">

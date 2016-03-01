@@ -174,9 +174,13 @@
         initFareSliderValues();
         $scope.isModified = false;
         function LoadAirlineJson() {
-            UtilFactory.ReadAirlinesJson().then(function (data) {
-                $scope.airlineJsonData = data;
-            });
+            // commented for the time being
+            //UtilFactory.ReadAirlinesJson().then(function (data) {
+            //    $scope.airlineJsonData = data;
+            //});
+
+            $scope.airlineJsonData = [];
+
         }
         LoadAirlineJson();
         GetCurrencySymbols();

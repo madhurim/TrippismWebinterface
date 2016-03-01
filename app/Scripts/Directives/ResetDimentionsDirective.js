@@ -12,7 +12,7 @@
                 var farerangeInfo = d.columnData.farerangeInfo;
                 var WeatherData = d.columnData.WeatherData;
                 //var weatherwidgetInfo = d.columnData.weatherwidgetInfo;
-                debugger;
+                
                 var isCol2Visible = (farerangeInfo.isVisible || fareforcastinfo.isVisible); // (seasonalityfarerangewidgetInfo.isVisible); //||
                 var isCol1Visible = (WeatherData.isVisible); //weatherwidgetInfo.isVisible || 
                 var delay = 2000;

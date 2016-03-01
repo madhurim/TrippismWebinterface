@@ -92,15 +92,25 @@
                 $scope.mappromise = UtilFactory.ReadAirportJson().then(function (data) {
                     $scope.IsairportJSONLoading = false;
                     $scope.AvailableAirports = data;
+
+                    var OriginAirport = _.find($scope.AvailableAirports, function (airport) {
+                        return airport.airport_Code == $scope.Origin
+                    });
+
+                    if (OriginAirport == undefined) {
+                        alertify.alert("Destination Finder", "");
+                        alertify.alert('Sorry , we do not have destinations to suggest for this search combination. This can also happen sometimes if the origin airport is not a popular airport. We suggest you try a different search combination or a more popular airport in your area to get destinations.');
+                        $scope.isShowSearchIcon = true;     // used for showing main search slider icon when user search first time
+                        updateSearchCriteria();
+                        return false;
+                    }
+
                     if ($scope.Origin != undefined && $scope.Origin != "") {
                         $scope.LastSelectedOrigin = $scope.Origin;
                         updateSearchCriteria();
                         findDestinations();
-
-
                     }
                 });
-
             }
         }
         $scope.ShowDestinationView = DestinationFactory.ShowDestinationView; // true;

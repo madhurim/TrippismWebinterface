@@ -61,16 +61,14 @@
                         if (para[0].trim() === "hf")
                             $scope.Maxfare = para[1].trim();
                     });
+
                     $scope.OriginairportName = _.find($scope.AvailableAirports, function (airport) {
                         return airport.airport_Code == $scope.Origin.toUpperCase()
                     });
                     $scope.DestinationairportName = _.find($scope.AvailableAirports, function (airport) {
                         return airport.airport_Code == $scope.DestinationLocation
                     });
-                    if ($scope.OriginairportName != undefined)
-                        $scope.PointOfsalesCountry = $scope.OriginairportName.airport_CountryCode;
-                    else
-                        $scope.PointOfsalesCountry = undefined;
+
                     var paramdata = {
                         Origin: $scope.Origin,
                         DestinationLocation: $scope.KnownDestinationAirport,
@@ -81,7 +79,15 @@
                         Minfare: $scope.Minfare,
                         Maxfare: $scope.Maxfare
                     }
+
                     UtilFactory.SetLastSearchval(paramdata)
+                    if ($scope.OriginairportName == undefined || $scope.DestinationairportName == undefined) {
+                        alertify.alert("Destination Finder", "");
+                        alertify.alert('No suggestions are available from your origin to destination. We recommend trying other nearby major airports.');
+                        return false;
+                    }
+
+                    $scope.PointOfsalesCountry = $scope.OriginairportName.airport_CountryCode;
                 }
                 var param = {
                     "Origin": $scope.Origin,
@@ -171,7 +177,7 @@
                                 readyfareParams();
                             });
                             //alertify.alert("Destination Finder", "");
-                            //alertify.alert('No suggestions are available from your Origin. We recomend trying other nearby major airports.').set('onok', function (closeEvent) { });
+                            //alertify.alert('No suggestions are available from your Origin. We recommend trying other nearby major airports.').set('onok', function (closeEvent) { });
                         }
                     });
                 }
@@ -250,7 +256,7 @@
                         fareforcastinfo = data;
                     }
 
-                    
+
 
                     //else if (data.name === 'weatherwidgetInfo') {
                     //    weatherwidgetInfo = data;
@@ -258,9 +264,9 @@
                     if (farerangeInfo && WeatherData && fareforcastinfo) //&& seasonalityfarerangewidgetInfo  && weatherwidgetInfo
                     {
                         var columnData = {
-                           // seasonalityfarerangewidgetInfo: seasonalityfarerangewidgetInfo,
+                            // seasonalityfarerangewidgetInfo: seasonalityfarerangewidgetInfo,
                             farerangeInfo: farerangeInfo,
-                            fareforcastinfo : fareforcastinfo,
+                            fareforcastinfo: fareforcastinfo,
                             //weatherwidgetInfo: weatherwidgetInfo,
                             WeatherData: WeatherData
                         };

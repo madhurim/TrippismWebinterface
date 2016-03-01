@@ -22,6 +22,7 @@
 
                 $scope.SendEmailToUser = SendEmailToUser;
                 function SendEmailToUser() {
+                    if (!$scope.fareParams) return;
                     var GetEmailDetPopupInstance = $modal.open({
                         templateUrl: '/Views/Partials/EmailDetFormPartial.html',
                         controller: 'EmailForDestinationDet',

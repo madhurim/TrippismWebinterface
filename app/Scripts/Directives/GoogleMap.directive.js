@@ -333,11 +333,8 @@
                       scope.highRankedAirportlist = args.highRankedAirportlist;
                       scope.resetMarker();
                       if (scope.destinations != undefined && scope.destinations.length > 0) {
-                          //  UtilFactory.ReadHighRankedAirportsJson().then(function (data) {
-                          //scope.highRankedAirportlist = data;
                           scope.displayDestinations(scope.destinations);
                           scope.setMarkerCluster();
-                          //  });
                       }
 
                       var originairport = _.find(scope.airportlist, function (airport) {
@@ -366,8 +363,9 @@
                   });
 
                   function setAirportMarkerOnMap() {
-                      if (!scope.origin) return;
                       UtilFactory.ReadAirportJson().then(function (data) {
+                          if (!scope.origin)
+                              return;
                           var originAirport = _.find(data, function (airport) {
                               return airport.airport_Code == scope.origin.toUpperCase()
                           });

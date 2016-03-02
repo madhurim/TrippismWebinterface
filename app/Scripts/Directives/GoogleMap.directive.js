@@ -41,7 +41,8 @@
                               width: 29,
                               anchor: [7, 37],
                               zIndex: 1000
-                          }]
+                          }],
+                          options: { zIndex: 1000 }
                       };
 
                       //sets the map options

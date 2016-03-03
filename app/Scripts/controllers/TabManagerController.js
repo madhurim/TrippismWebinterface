@@ -144,7 +144,7 @@
             _paramsdata.SearchCriteria = SearchCriteria;
             _paramsdata.instaFlightSearchData = {
                 OriginAirportName: $scope.seasonalitydirectiveData.OriginairportName.airport_Code,
-                DestinationaArportName: $scope.seasonalitydirectiveData.DestinationairportName.airport_Code,
+                DestinationAirportName: $scope.seasonalitydirectiveData.DestinationairportName.airport_Code,
                 FromDate: $scope.refineSearchValues.FromDate,
                 ToDate: $scope.refineSearchValues.ToDate,
                 Minfare: $scope.refineSearchValues.Minfare,

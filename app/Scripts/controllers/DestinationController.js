@@ -235,6 +235,7 @@
                     $scope.fareParams = {
                         OriginairportName: $scope.OriginairportName,
                         DestinationairportName: $scope.DestinationairportName,
+                        PointOfSaleCountry: $scope.PointOfsalesCountry,
                         FareInfo: $scope.FareInfo,
                         Fareforecastdata: param,
                         AvailableAirports: $scope.AvailableAirports,
@@ -250,7 +251,7 @@
                         },
                         instaFlightSearchData: {
                             OriginAirportName: $scope.Origin,
-                            DestinationaArportName: $scope.DestinationLocation,
+                            DestinationAirportName: $scope.DestinationLocation,
                             FromDate: $scope.FromDate,
                             ToDate: $scope.ToDate,
                             Minfare: $scope.Minfare,

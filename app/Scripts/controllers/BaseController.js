@@ -17,6 +17,7 @@
             $rootScope.apiURLForFeedback = 'http://localhost:14606/api/Email/SendFeedback';
             $rootScope.apiURLForInstaFlightSearch = 'http://localhost:14606/api/instaflight';
             $rootScope.apiURLForConstant = 'http://localhost:14606/api/Constants/';
+            $rootScope.apiURLForLeadFareCalendar = 'http://localhost:14606/api/LeadPriceCalendar/';
         }
         else {
             //live url
@@ -30,6 +31,7 @@
             $rootScope.apiURLForFeedback = 'http://' + $location.host() + '/api/Email/SendFeedback';
             $rootScope.apiURLForInstaFlightSearch = 'http://' + $location.host() + '/api/instaflight';
             $rootScope.apiURLForConstant = 'http://' + $location.host() + '/api/Constants/';
+            $rootScope.apiURLForLeadFareCalendar = 'http://' + $location.host() + '/api/LeadPriceCalendar/';
         }
 
 

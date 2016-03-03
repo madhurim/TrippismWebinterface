@@ -15,7 +15,7 @@
                 var lowestFare = instaFlightSearchData.LowestFare;
                 $scope.instaFlightSearch = {
                     Origin: $scope.instaFlightSearchData.OriginAirportName,
-                    Destination: $scope.instaFlightSearchData.DestinationaArportName,
+                    Destination: $scope.instaFlightSearchData.DestinationAirportName,
                     DepartureDate: departureDate,
                     ReturnDate: returnDate,
                     //Minfare: $scope.instaFlightSearchData.Minfare,

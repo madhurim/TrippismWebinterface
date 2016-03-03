@@ -23,7 +23,8 @@
             updateQueryStringParameter: updateQueryStringParameter,
             GetLastSearch: GetLastSearch,
             SetLastSearchval: SetLastSearchval,
-            ReadHighRankedAirportsJson: ReadHighRankedAirportsJson
+            ReadHighRankedAirportsJson: ReadHighRankedAirportsJson,
+            GetLowestFareObject: GetLowestFareObject
         };
         return service;
 
@@ -229,6 +230,30 @@
             if (LowRate == "N/A")
                 LowRate = LowestNonStopeFare; // MAM : New logic
             return LowRate;
+        }
+
+        // returns lowest fare object
+        function GetLowestFareObject(destination) {
+            var dest = [];
+            angular.copy(destination, dest);
+            if (dest.LowestNonStopFare != null && dest.LowestNonStopFare.Fare != "N/A") {
+                dest.LowestNonStopFare.Fare = parseFloat(dest.LowestNonStopFare.Fare).toFixed(2);
+                dest.LowestNonStopFare.outboundflightstops = 0;
+                dest.LowestNonStopFare.inboundflightstops = 0;
+            }
+            else
+                dest.LowestNonStopFare = null;
+
+            if (dest.LowestFare != null && dest.LowestFare.Fare != "N/A") {
+                dest.LowestFare.Fare = parseFloat(dest.LowestFare.Fare).toFixed(2);
+            }
+            else
+                dest.LowestFare = null;
+
+            var LowestFareObject = dest.LowestFare;
+            if (LowestFareObject == null || LowestFareObject.Fare == 0)
+                LowestFareObject = dest.LowestNonStopFare;
+            return LowestFareObject;
         }
     }
 })();

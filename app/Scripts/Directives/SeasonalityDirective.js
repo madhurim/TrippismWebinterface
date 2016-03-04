@@ -154,6 +154,7 @@
                     var chartDataLow = [];
                     var chartDataMedium = [];
                     var chartDataHigh = [];
+                    var chartDataAll = [];
                     var rec = 1;
                     var startdate;
                     if (scope.SeasonalityData != undefined && scope.SeasonalityData != "") {
@@ -192,20 +193,38 @@
                                 enddate: endutcdate,
                                 YearWeekNumber: chartrec[i].YearWeekNumber
                             };
+                            //if (SeasonalityIndicator == 1)
+                            //    chartDataLow.push(serise);
+                            //else if (SeasonalityIndicator == 2)
+                            //    chartDataMedium.push(serise);
+                            //else if (SeasonalityIndicator == 3)
+                            //    chartDataHigh.push(serise);
+
                             if (SeasonalityIndicator == 1)
-                                chartDataLow.push(serise);
+                                serise.marker = 'diamond';
                             else if (SeasonalityIndicator == 2)
-                                chartDataMedium.push(serise);
+                                serise.marker = 'square';
                             else if (SeasonalityIndicator == 3)
-                                chartDataHigh.push(serise);
+                                serise.marker = 'circle';
+
+                            chartDataAll.push(serise);
+
                             rec++;
 
                         }
+                        //var chartDataAll = chartDataLow.concat(chartDataMedium).concat(chartDataHigh);
+                        //{
+                        //    y: 3.9,
+                        //    marker: {
+                        //        symbol: 'url(https://www.highcharts.com/samples/graphics/snow.png)'
+                        //    }
+                        debugger;
+
                         var PrevDate = "";
                         var options = {
                             chart: {
                                 height: scope.chartHeight,
-                                type: 'bubble',
+                                type: 'line',
                                 renderTo: scope.divID,
                             },
                             title: {
@@ -296,22 +315,23 @@
                             },
                             series: [{
                                 name: "Low Seasonality",
-                                data: chartDataLow,
+                                data: chartDataAll,
                                 pointStart: startdate,
                                 color: '#adff2f',
                             },
-                            {
-                                name: "Medium Seasonality",
-                                data: chartDataMedium,
-                                pointStart: startdate,
-                                color: '#2e8b57',
-                            },
-                            {
-                                name: "High Seasonality",
-                                data: chartDataHigh,
-                                pointStart: startdate,
-                                color: '#87ceeb',
-                            }]
+                            //{
+                            //    name: "Medium Seasonality",
+                            //    data: chartDataMedium,
+                            //    pointStart: startdate,
+                            //    color: '#2e8b57',
+                            //},
+                            //{
+                            //    name: "High Seasonality",
+                            //    data: chartDataHigh,
+                            //    pointStart: startdate,
+                            //    color: '#87ceeb',
+                            //}
+                            ]
                         };
 
                         $timeout(function () {

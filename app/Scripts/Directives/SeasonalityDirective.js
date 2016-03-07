@@ -155,7 +155,6 @@
                     var chartDataMedium = [];
                     var chartDataHigh = [];
                     var chartDataAll = [];
-                    var rec = 1;
                     var startdate;
                     if (scope.SeasonalityData != undefined && scope.SeasonalityData != "") {
                         var chartrec = _.sortBy(scope.SeasonalityData, 'WeekStartDate');
@@ -200,25 +199,15 @@
                             //else if (SeasonalityIndicator == 3)
                             //    chartDataHigh.push(serise);
 
-                            if (SeasonalityIndicator == 1)
-                                serise.marker = 'diamond';
-                            else if (SeasonalityIndicator == 2)
-                                serise.marker = 'square';
-                            else if (SeasonalityIndicator == 3)
-                                serise.marker = 'circle';
+                            //if (SeasonalityIndicator == 1)
+                            //    serise.marker = { symbol: 'diamond', fillColor: 'rgba(255,0,0,.5)' };
+                            //else if (SeasonalityIndicator == 2)
+                            //    serise.marker = { symbol: 'square', fillColor: 'rgba(255,0,0,.75)' };
+                            //else if (SeasonalityIndicator == 3)
+                            //    serise.marker = { symbol: 'circle', fillColor: 'rgba(255,0,0,.25)' };
 
                             chartDataAll.push(serise);
-
-                            rec++;
-
                         }
-                        //var chartDataAll = chartDataLow.concat(chartDataMedium).concat(chartDataHigh);
-                        //{
-                        //    y: 3.9,
-                        //    marker: {
-                        //        symbol: 'url(https://www.highcharts.com/samples/graphics/snow.png)'
-                        //    }
-                        debugger;
 
                         var PrevDate = "";
                         var options = {

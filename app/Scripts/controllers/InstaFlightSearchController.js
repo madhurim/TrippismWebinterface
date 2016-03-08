@@ -13,25 +13,140 @@
                 var departureDate = $filter('date')(angular.isString($scope.instaFlightSearchData.FromDate) ? new Date($scope.instaFlightSearchData.FromDate.split('T')[0].replace(/-/g, "/")) : $scope.instaFlightSearchData.FromDate, 'yyyy-MM-dd');
                 var returnDate = $filter('date')(angular.isString($scope.instaFlightSearchData.ToDate) ? new Date($scope.instaFlightSearchData.ToDate.split('T')[0].replace(/-/g, "/")) : $scope.instaFlightSearchData.ToDate, 'yyyy-MM-dd');
                 var lowestFare = instaFlightSearchData.LowestFare;
+
+                // create instaflight request object.
+                //$scope.instaFlightSearch = {
+                //    Origin: $scope.instaFlightSearchData.OriginAirportName,
+                //    Destination: $scope.instaFlightSearchData.DestinationaArportName,
+                //    DepartureDate: departureDate,
+                //    ReturnDate: returnDate,
+                //    IncludedCarriers: $scope.instaFlightSearchData.IncludedCarriers,
+                //    PointOfSaleCountry: $scope.instaFlightSearchData.PointOfSaleCountry,
+                //    outboundflightstops: $scope.instaFlightSearchData.outboundflightstops,
+                //    inboundflightstops: $scope.instaFlightSearchData.inboundflightstops,                    
+                //};
+                //$scope.includedCarriers = $scope.instaFlightSearch.IncludedCarriers;
+                //$scope.DepartureDate = $scope.instaFlightSearch.DepartureDate;
+                //$scope.ReturnDate = $scope.instaFlightSearch.ReturnDate;
+                //if ($scope.instaFlightSearch.IncludedCarriers != '' && $scope.instaFlightSearch.IncludedCarriers.length > 0)
+                //    $scope.instaFlightSearch.IncludedCarriers = $scope.instaFlightSearch.IncludedCarriers.join(',');
+
+                //InstaFlightSearchFactory.GetData($scope.instaFlightSearch).then(function (data) {
+                //    if (data.status != 404 && data.status != 400 && data != "" && data.PricedItineraries.length > 0) {
+                //        $scope.isInstaFlightDataFound = true;
+                //        $scope.isSearchingFlights = false;
+                //        $scope.instaFlightSearchResult = data;
+                //        $scope.DepartureDate = $scope.instaFlightSearchResult.DepartureDateTime;
+                //        $scope.ReturnDate = $scope.instaFlightSearchResult.ReturnDateTime;
+                //        $scope.instaFlightSearchLimit = 10;
+                //        $scope.currencyCode = getCurrencyCode($scope.instaFlightSearchResult.PricedItineraries[0]);
+                //        $scope.lowestFare = getLowestFare($scope.instaFlightSearchResult.PricedItineraries[0]);
+                //    }
+                //    else {
+                //        $scope.isInstaFlightDataFound = false;
+                //    }
+                //})
+
                 $scope.instaFlightSearch = {
                     Origin: $scope.instaFlightSearchData.OriginAirportName,
                     Destination: $scope.instaFlightSearchData.DestinationaArportName,
                     DepartureDate: departureDate,
                     ReturnDate: returnDate,
-                    //Minfare: $scope.instaFlightSearchData.Minfare,
-                    //Maxfare: $scope.instaFlightSearchData.Maxfare,
                     IncludedCarriers: $scope.instaFlightSearchData.IncludedCarriers,
                     PointOfSaleCountry: $scope.instaFlightSearchData.PointOfSaleCountry,
                     outboundflightstops: $scope.instaFlightSearchData.outboundflightstops,
                     inboundflightstops: $scope.instaFlightSearchData.inboundflightstops,
-                    //LowestFare: instaFlightSearchData.LowestFare
                 };
                 $scope.includedCarriers = $scope.instaFlightSearch.IncludedCarriers;
                 $scope.DepartureDate = $scope.instaFlightSearch.DepartureDate;
                 $scope.ReturnDate = $scope.instaFlightSearch.ReturnDate;
                 if ($scope.instaFlightSearch.IncludedCarriers != '' && $scope.instaFlightSearch.IncludedCarriers.length > 0)
                     $scope.instaFlightSearch.IncludedCarriers = $scope.instaFlightSearch.IncludedCarriers.join(',');
-                InstaFlightSearchFactory.GetData($scope.instaFlightSearch).then(function (data) {
+
+                var instaFlightRequestObj = {
+                    "OTA_AirLowFareSearchRQ": {
+                        "Target": "Production",
+                        "POS": {
+                            "Source": [{
+                                "RequestorID": {
+                                    "Type": "1",
+                                    "ID": "1",
+                                    "CompanyName": {
+                                    }
+                                }
+                            }]
+                        },
+                        "OriginDestinationInformation": [{
+                            "RPH": "1",
+                            "DepartureDateTime": $scope.instaFlightSearch.DepartureDate + "T00:00:00",
+                            "OriginLocation": {
+                                "LocationCode": $scope.instaFlightSearch.Origin
+                            },
+                            "DestinationLocation": {
+                                "LocationCode": $scope.instaFlightSearch.Destination
+                            },
+                            "TPA_Extensions": {
+                                "SegmentType": {
+                                    "Code": "O"
+                                }
+                            }
+                        },
+                		{
+                		    "RPH": "2",
+                		    "DepartureDateTime": $scope.instaFlightSearch.ReturnDate + "T00:00:00",
+                		    "OriginLocation": {
+                		        "LocationCode": $scope.instaFlightSearch.Destination
+                		    },
+                		    "DestinationLocation": {
+                		        "LocationCode": $scope.instaFlightSearch.Origin
+                		    },
+                		    "TPA_Extensions": {
+                		        "SegmentType": {
+                		            "Code": "O"
+                		        }
+                		    }
+                		}],
+                        "TravelPreferences": {
+                            "ValidInterlineTicket": true,
+                            "CabinPref": [{
+                                "Cabin": "Y",
+                                "PreferLevel": "Preferred"
+                            }],
+                            "TPA_Extensions": {
+                                "TripType": {
+                                    "Value": "Return"
+                                },
+                                "LongConnectTime": {
+                                    "Min": 780,
+                                    "Max": 1200,
+                                    "Enable": true
+                                },
+                                "ExcludeCallDirectCarriers": {
+                                    "Enabled": true
+                                }
+                            }
+                        },
+                        "TravelerInfoSummary": {
+                            "SeatsRequested": [1],
+                            "AirTravelerAvail": [{
+                                "PassengerTypeQuantity": [{
+                                    "Code": "ADT",
+                                    "Quantity": 1
+                                }]
+                            }]
+                        },
+                        "TPA_Extensions": {
+                            "IntelliSellTransaction": {
+                                "RequestType": {
+                                    "Name": "50ITINS"
+                                }
+                            }
+                        }
+                    }
+                }
+
+                BargainFinderMaxFactory.Post(instaFlightRequestObj).then(function (data) {
+                    var data = createInstaFlightObject(data);
                     if (data.status != 404 && data.status != 400 && data != "" && data.PricedItineraries.length > 0) {
                         $scope.isInstaFlightDataFound = true;
                         $scope.isSearchingFlights = false;
@@ -49,6 +164,21 @@
             }
         }
         active();
+
+        function createInstaFlightObject(data) {
+            debugger;
+            var data = data.data.AirLowFareSearchRS.PricedItineraries;
+
+            data.PricedItineraries = data.PricedItinerary;
+            delete data.PricedItinerary;
+
+            _(data.PricedItineraries).each(function (item) {
+                item.OriginDestinationOption = item.AirItinerary.OriginDestinationOptions.OriginDestinationOption;
+                delete item.AirItinerary;
+            });
+
+            return data;
+        }
 
         $scope.dismiss = function () {
             $scope.$dismiss('cancel');
@@ -154,14 +284,16 @@
         var getLowestFare = function (pricedItinerary) {
             if (pricedItinerary == undefined)
                 return undefined;
-            return pricedItinerary.AirItineraryPricingInfo[0].TotalFare.Amount;
+            //return pricedItinerary.AirItineraryPricingInfo[0].TotalFare.Amount;
+            return undefined;
         }
         var getCurrencyCode = function (pricedItinerary) {
             var pricingInfo = $scope.instaFlightSearchResult.PricedItineraries[0].AirItineraryPricingInfo[0];
             if (pricingInfo && pricingInfo.TotalFare && pricingInfo.TotalFare.CurrencyCode)
                 return pricingInfo.TotalFare.CurrencyCode;
             else
-                return $scope.$parent.fareParams.mapOptions.CurrencyCode;
+                //return $scope.$parent.fareParams.mapOptions.CurrencyCode;
+                return '';
         }
         $scope.GetCurrencySymbol = function (code) {
             return UtilFactory.GetCurrencySymbol(code);

@@ -7,6 +7,7 @@
     function BaseController($scope, $modal, $rootScope, $location, $anchorScroll, UtilFactory) {
         if (angular.lowercase($location.host()) == "localhost") {
             //devlopment url
+            $rootScope.baseURL = 'http://localhost:14606/api/';
             $rootScope.apiURL = 'http://localhost:14606/api/Sabre/';
             $rootScope.apiURLForEmail = 'http://localhost:14606/api/Email/SendEmailtoUser';
             $rootScope.apiURLForGoogleAttraction = 'http://localhost:14606/api/googleplace/';
@@ -20,7 +21,8 @@
         }
         else {
             //live url
-            $rootScope.apiURL = 'http://' + $location.host() + '/api/';
+            $rootScope.baseURL = 'http://' + +$location.host() + +'/api/';
+            $rootScope.apiURL = 'http://' + $location.host() + '/api/Sabre/';
             $rootScope.apiURLForEmail = 'http://' + $location.host() + '/api/Email/SendEmailtoUser';
             $rootScope.apiURLForWeather = 'http://' + $location.host() + '/api/weather/international/history';
             $rootScope.apiURLForGoogleAttraction = 'http://' + $location.host() + '/api/googleplace/';
@@ -33,7 +35,7 @@
         }
 
 
-        
+
         $scope.ViewDestinations = function () {
             var result = UtilFactory.GetLastSearch()
             //$location.path('destinations/f=' + result.Origin.toUpperCase() + ';d=' + ConvertToRequiredDate(result.FromDate, 'API') + ';r=' + ConvertToRequiredDate(result.ToDate, 'API'));

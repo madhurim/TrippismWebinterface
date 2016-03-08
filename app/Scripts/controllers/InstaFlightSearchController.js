@@ -146,7 +146,7 @@
                 }
 
                 BargainFinderMaxFactory.Post(instaFlightRequestObj).then(function (data) {
-                    var data = createInstaFlightObject(data);
+                    debugger;
                     if (data.status != 404 && data.status != 400 && data != "" && data.PricedItineraries.length > 0) {
                         $scope.isInstaFlightDataFound = true;
                         $scope.isSearchingFlights = false;
@@ -164,21 +164,6 @@
             }
         }
         active();
-
-        function createInstaFlightObject(data) {
-            debugger;
-            var data = data.data.AirLowFareSearchRS.PricedItineraries;
-
-            data.PricedItineraries = data.PricedItinerary;
-            delete data.PricedItinerary;
-
-            _(data.PricedItineraries).each(function (item) {
-                item.OriginDestinationOption = item.AirItinerary.OriginDestinationOptions.OriginDestinationOption;
-                delete item.AirItinerary;
-            });
-
-            return data;
-        }
 
         $scope.dismiss = function () {
             $scope.$dismiss('cancel');
@@ -284,16 +269,14 @@
         var getLowestFare = function (pricedItinerary) {
             if (pricedItinerary == undefined)
                 return undefined;
-            //return pricedItinerary.AirItineraryPricingInfo[0].TotalFare.Amount;
-            return undefined;
+            return pricedItinerary.AirItineraryPricingInfo[0].TotalFare.Amount;
         }
         var getCurrencyCode = function (pricedItinerary) {
             var pricingInfo = $scope.instaFlightSearchResult.PricedItineraries[0].AirItineraryPricingInfo[0];
             if (pricingInfo && pricingInfo.TotalFare && pricingInfo.TotalFare.CurrencyCode)
                 return pricingInfo.TotalFare.CurrencyCode;
             else
-                //return $scope.$parent.fareParams.mapOptions.CurrencyCode;
-                return '';
+                return $scope.$parent.fareParams.mapOptions.CurrencyCode;
         }
         $scope.GetCurrencySymbol = function (code) {
             return UtilFactory.GetCurrencySymbol(code);

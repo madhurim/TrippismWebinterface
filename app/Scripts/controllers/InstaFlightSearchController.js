@@ -147,12 +147,12 @@
 
                 BargainFinderMaxFactory.Post(instaFlightRequestObj).then(function (data) {
                     debugger;
-                    if (data.status != 404 && data.status != 400 && data != "" && data.PricedItineraries.length > 0) {
+                    if (data.status != 404 && data.status != 400 && data.data != "" && data.data.PricedItineraries.length > 0) {
                         $scope.isInstaFlightDataFound = true;
                         $scope.isSearchingFlights = false;
-                        $scope.instaFlightSearchResult = data;
-                        $scope.DepartureDate = $scope.instaFlightSearchResult.DepartureDateTime;
-                        $scope.ReturnDate = $scope.instaFlightSearchResult.ReturnDateTime;
+                        $scope.instaFlightSearchResult = data.data;
+                        //$scope.DepartureDate = $scope.instaFlightSearchResult.DepartureDateTime;
+                        //$scope.ReturnDate = $scope.instaFlightSearchResult.ReturnDateTime;
                         $scope.instaFlightSearchLimit = 10;
                         $scope.currencyCode = getCurrencyCode($scope.instaFlightSearchResult.PricedItineraries[0]);
                         $scope.lowestFare = getLowestFare($scope.instaFlightSearchResult.PricedItineraries[0]);

@@ -8,6 +8,7 @@
             },
             templateUrl: '/Views/Partials/FarerangePartial.html',
             controller: function ($scope) {
+                $scope.GetCurrencySymbol = GetCurrencySymbol;
                 $scope.initFarerangeSummary = function () {
                     var isVisible = false; // this determines the widget visibility according to different parameters
                     var isVisibilityRecorded = false;
@@ -163,7 +164,7 @@
                     $scope.LoadLowestFareInfo($scope.widgetParams.FareInfo);
                 }
 
-                var GetCurrencySymbol = function (code) {
+                function GetCurrencySymbol(code) {
                     return UtilFactory.GetCurrencySymbol(code);
                 }
 

@@ -17,7 +17,7 @@
                         <div ng-show="!FareNoDataFound" ng-if="FareforecastData.Forecast.LowestPredictedFare != 'N/A' && FareforecastData.Forecast.LowestPredictedFare != 0">
                             <div class="col-md-4 col-sm-12 col-xs-12" ng-if="lowestFareObj">
                                 {{lowestFareObj.currencySymbol}} {{lowestFareObj.fare | number : 2}}
-                                <p>Lowest Fare</p>
+                                <p>Current lowest fare</p>
                             </div>
                             <div class="col-md-4 col-sm-12 col-xs-12">
                                 {{GetCurrencySymbol(FareforecastData.CurrencyCode)}} {{FareforecastData.Forecast.LowestPredictedFare | number : 2 }}

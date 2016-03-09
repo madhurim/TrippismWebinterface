@@ -239,12 +239,16 @@
                                             result = '<span>'
 
                                         var d = new Date(this.value);
-                                        return result += Highcharts.dateFormat(TrippismConstants.HighChartDateFormat, this.value) + '</span><b>';
+
+                                        //return result += Highcharts.dateFormat(TrippismConstants.HighChartDateFormat, this.value) + '</span><b>';
+                                        return result += Highcharts.dateFormat('%m-%Y', this.value) + '</span><b>';
                                     },
                                     rotation: -45
                                 },
-                                tickInterval: 336 * 3600 * 1000,
-                                minTickInterval: 336 * 3600 * 1000,
+                                tickInterval: 2 * 336 * 3600 * 1000,
+                                minTickInterval: 2 * 336 * 3600 * 1000,
+                                //tickInterval: 336 * 3600 * 1000,
+                                //minTickInterval: 336 * 3600 * 1000,
                                 title: {
                                     text: 'Historical Traffic Seasonality for ' + scope.seasonalityParams.DestinationairportName.airport_CityName
                                 }

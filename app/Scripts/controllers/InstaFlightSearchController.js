@@ -64,81 +64,82 @@
                     $scope.instaFlightSearch.IncludedCarriers = $scope.instaFlightSearch.IncludedCarriers.join(',');
 
                 var instaFlightRequestObj = {
-                    "OTA_AirLowFareSearchRQ": {
-                        "Target": "Production",
-                        "POS": {
-                            "Source": [{
-                                "RequestorID": {
-                                    "Type": "1",
-                                    "ID": "1",
-                                    "CompanyName": {
-                                    }
-                                }
-                            }]
-                        },
-                        "OriginDestinationInformation": [{
-                            "RPH": "1",
-                            "DepartureDateTime": $scope.instaFlightSearch.DepartureDate + "T00:00:00",
-                            "OriginLocation": {
-                                "LocationCode": $scope.instaFlightSearch.Origin
+                    OTA_AirLowFareSearchRQ: {
+                        Target: "Production",
+                        MaxResponses: "2",
+                        //POS: {
+                        //    Source: [{
+                        //        RequestorID: {
+                        //            Type: "1",
+                        //            ID: "1",
+                        //            CompanyName: {
+                        //            }
+                        //        }
+                        //    }]
+                        //},
+                        OriginDestinationInformation: [{
+                            RPH: "1",
+                            DepartureDateTime: $scope.instaFlightSearch.DepartureDate + "T00:00:00",
+                            OriginLocation: {
+                                LocationCode: $scope.instaFlightSearch.Origin
                             },
-                            "DestinationLocation": {
-                                "LocationCode": $scope.instaFlightSearch.Destination
+                            DestinationLocation: {
+                                LocationCode: $scope.instaFlightSearch.Destination
                             },
-                            "TPA_Extensions": {
-                                "SegmentType": {
-                                    "Code": "O"
+                            TPA_Extensions: {
+                                SegmentType: {
+                                    Code: "O"
                                 }
                             }
                         },
                 		{
-                		    "RPH": "2",
-                		    "DepartureDateTime": $scope.instaFlightSearch.ReturnDate + "T00:00:00",
-                		    "OriginLocation": {
-                		        "LocationCode": $scope.instaFlightSearch.Destination
+                		    RPH: "2",
+                		    DepartureDateTime: $scope.instaFlightSearch.ReturnDate + "T00:00:00",
+                		    OriginLocation: {
+                		        LocationCode: $scope.instaFlightSearch.Destination
                 		    },
-                		    "DestinationLocation": {
-                		        "LocationCode": $scope.instaFlightSearch.Origin
+                		    DestinationLocation: {
+                		        LocationCode: $scope.instaFlightSearch.Origin
                 		    },
-                		    "TPA_Extensions": {
-                		        "SegmentType": {
-                		            "Code": "O"
+                		    TPA_Extensions: {
+                		        SegmentType: {
+                		            Code: "O"
                 		        }
                 		    }
                 		}],
-                        "TravelPreferences": {
-                            "ValidInterlineTicket": true,
-                            "CabinPref": [{
-                                "Cabin": "Y",
-                                "PreferLevel": "Preferred"
+                        TravelPreferences: {
+                            ValidInterlineTicket: true,
+                            CabinPref: [{
+                                Cabin: "Y",
+                                PreferLevel: "Preferred"
                             }],
-                            "TPA_Extensions": {
-                                "TripType": {
-                                    "Value": "Return"
+                            TPA_Extensions: {
+                                TripType: {
+                                    Value: "Return"
                                 },
-                                "LongConnectTime": {
-                                    "Min": 780,
-                                    "Max": 1200,
-                                    "Enable": true
+                                LongConnectTime: {
+                                    Min: 780,
+                                    Max: 1200,
+                                    Enable: true
                                 },
-                                "ExcludeCallDirectCarriers": {
-                                    "Enabled": true
+                                ExcludeCallDirectCarriers: {
+                                    Enabled: true
                                 }
                             }
                         },
-                        "TravelerInfoSummary": {
-                            "SeatsRequested": [1],
-                            "AirTravelerAvail": [{
-                                "PassengerTypeQuantity": [{
-                                    "Code": "ADT",
-                                    "Quantity": 1
+                        TravelerInfoSummary: {
+                            SeatsRequested: [1],
+                            AirTravelerAvail: [{
+                                PassengerTypeQuantity: [{
+                                    Code: "ADT",
+                                    Quantity: 1
                                 }]
                             }]
                         },
-                        "TPA_Extensions": {
-                            "IntelliSellTransaction": {
-                                "RequestType": {
-                                    "Name": "50ITINS"
+                        TPA_Extensions: {
+                            IntelliSellTransaction: {
+                                RequestType: {
+                                    Name: "50ITINS"
                                 }
                             }
                         }
@@ -147,7 +148,7 @@
 
                 BargainFinderMaxFactory.Post(instaFlightRequestObj).then(function (data) {
                     debugger;
-                    if (data.status != 404 && data.status != 400 && data.data != "" && data.data.PricedItineraries.length > 0) {
+                    if (data.status != 404 && data.status != 400 && data.data && data.data.PricedItineraries.length > 0) {
                         $scope.isInstaFlightDataFound = true;
                         $scope.isSearchingFlights = false;
                         $scope.instaFlightSearchResult = data.data;

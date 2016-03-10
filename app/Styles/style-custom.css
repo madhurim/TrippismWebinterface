@@ -929,6 +929,36 @@ ul .stop-line {
     margin: 0px 0px 15px 0px;
 }
 
+.ibox-title.searched-box {
+    padding: 3px 10px;
+}
+
+    .ibox-title.searched-box .searched {
+        text-align: left !important;
+    }
+
+    .ibox-title.searched-box .ibox-box {
+        padding: 0px;
+        margin: 0px;
+        margin-top: 2px;
+    }
+
+    .ibox-title.searched-box .share-btn {
+        margin-top: 0px !important;
+    }
+
+.share-btn {
+    padding: 0px;
+}
+
+    .share-btn .icons {
+        float: right;
+    }
+
+.ibox-title.searched-box .ibox-box span {
+    vertical-align: -webkit-baseline-middle;
+}
+
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {
@@ -1075,6 +1105,17 @@ ul .stop-line {
 
     .refine-search .content {
         height: 235px;
+    }
+
+    .ibox-box.fare-box .pull-left {
+        float: none !important;
+        text-align: center;
+    }
+
+
+
+    .searched-box .search-det, .share-btn .icons {
+        float: none !important;
     }
 }
 /*#endregion Media queries */

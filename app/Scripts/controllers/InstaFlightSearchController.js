@@ -66,7 +66,8 @@
                 var instaFlightRequestObj = {
                     OTA_AirLowFareSearchRQ: {
                         Target: "Production",
-                        MaxResponses: "2",
+                        MaxResponses: "1",
+                        DirectFlightsOnly: true,
                         //POS: {
                         //    Source: [{
                         //        RequestorID: {

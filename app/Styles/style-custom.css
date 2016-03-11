@@ -906,12 +906,8 @@ ul .stop-line {
 }
 
 .fare-box {
-    text-align: right;
+    text-align: left;
 }
-
-    .fare-box .pull-left h4 {
-        margin-top: 3px;
-    }
 
 .book-wrapper img {
     width: 40px;
@@ -963,6 +959,11 @@ ul .stop-line {
     background: none;
     border: none;
     box-shadow: none;
+}
+
+.fare-box-inner {
+    display: inline-block;
+    vertical-align: top;
 }
 
 /*#region Media queries */
@@ -1104,6 +1105,19 @@ ul .stop-line {
     }
 }
 
+@media only screen and (max-width:520px) {
+    .col-fare {
+        margin: 0 auto;
+        float: none;
+        width: 100%;
+        display: table;
+    }
+
+    .fare-box {
+        text-align: right;
+    }
+}
+
 @media only screen and (max-width:480px) {
     .clustermarkerpopup {
         width: 100%;
@@ -1112,13 +1126,6 @@ ul .stop-line {
     .refine-search .content {
         height: 235px;
     }
-
-    .ibox-box.fare-box .pull-left {
-        float: none !important;
-        text-align: center;
-    }
-
-
 
     .searched-box .search-det, .share-btn .icons {
         float: none !important;

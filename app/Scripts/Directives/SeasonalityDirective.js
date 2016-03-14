@@ -20,7 +20,7 @@
                         if (scope.loadSeasonalityInfoLoaded == false) {
                             if (scope.MarkerSeasonalityInfo == "") {
                                 var Seasonalitydata = {
-                                    "Destination": scope.seasonalityParams.DestinationairportName.airport_Code, // scope.seasonalityParams.Destinatrion, // JFK
+                                    "Destination": scope.seasonalityParams.DestinationairportName.airport_Code,
                                 };
                                 $timeout(function () {
                                     scope.inProgressSeasonalityinfo = true;
@@ -75,17 +75,11 @@
                     scope.DepartDate = $filter('date')(scope.seasonalityParams.Fareforecastdata.DepartureDate, scope.format, null);
                     scope.ReturnDate = $filter('date')(scope.seasonalityParams.Fareforecastdata.ReturnDate, scope.format, null);
                     scope.chartHeight = 300;
-                    scope.divID = "seasonality"; // + scope.seasonalityParams.tabIndex
+                    scope.divID = "seasonality";
                     var mapHTML = "<div id='" + scope.divID + "'></div>";
                     elem.append($compile(mapHTML)(scope));
                     scope.loadSeasonalityInfo();
                 }
-                //SeasonalityData for Mail
-                //scope.SeasonalityDisplay = function () {
-                //    scope.MarkerSeasonalityInfo.Seasonality = scope.SeasonalityData;
-                //    scope.mailmarkereasonalityInfo.Seasonality = scope.SeasonalityData;
-                //    scope.Isviewmoredisplayed = true;
-                //};
 
                 scope.loadingSeasonality = true;
                 scope.$watch('loadSeasonalityInfoLoaded',
@@ -192,20 +186,6 @@
                                 enddate: endutcdate,
                                 YearWeekNumber: chartrec[i].YearWeekNumber
                             };
-                            //if (SeasonalityIndicator == 1)
-                            //    chartDataLow.push(serise);
-                            //else if (SeasonalityIndicator == 2)
-                            //    chartDataMedium.push(serise);
-                            //else if (SeasonalityIndicator == 3)
-                            //    chartDataHigh.push(serise);
-
-                            //if (SeasonalityIndicator == 1)
-                            //    serise.marker = { symbol: 'diamond', fillColor: 'rgba(255,0,0,.5)' };
-                            //else if (SeasonalityIndicator == 2)
-                            //    serise.marker = { symbol: 'square', fillColor: 'rgba(255,0,0,.75)' };
-                            //else if (SeasonalityIndicator == 3)
-                            //    serise.marker = { symbol: 'circle', fillColor: 'rgba(255,0,0,.25)' };
-
                             chartDataAll.push(serise);
                         }
 
@@ -232,23 +212,18 @@
                                         var enddaterange = new Date($filter('date')(this.value, scope.format, null));
                                         enddaterange = new Date(enddaterange.setDate(enddaterange.getDate() + 13));
                                         var departDate = new Date($filter('date')(scope.DepartDate, scope.format, null));
-                                        //startdaterange.getMonth() + 1 >= departDate.getMonth() + 1 && 
                                         if (departDate >= startdaterange && departDate <= enddaterange)
                                             result = '<span style="font-weight: bold; font-size:12px">'
                                         else
                                             result = '<span>'
 
                                         var d = new Date(this.value);
-
-                                        //return result += Highcharts.dateFormat(TrippismConstants.HighChartDateFormat, this.value) + '</span><b>';
                                         return result += Highcharts.dateFormat('%m-%Y', this.value) + '</span><b>';
                                     },
                                     rotation: -45
                                 },
                                 tickInterval: 2 * 336 * 3600 * 1000,
                                 minTickInterval: 2 * 336 * 3600 * 1000,
-                                //tickInterval: 336 * 3600 * 1000,
-                                //minTickInterval: 336 * 3600 * 1000,
                                 title: {
                                     text: 'Historical Traffic Seasonality for ' + scope.seasonalityParams.DestinationairportName.airport_CityName
                                 }
@@ -312,18 +287,6 @@
                                 pointStart: startdate,
                                 color: '#adff2f',
                             },
-                            //{
-                            //    name: "Medium Seasonality",
-                            //    data: chartDataMedium,
-                            //    pointStart: startdate,
-                            //    color: '#2e8b57',
-                            //},
-                            //{
-                            //    name: "High Seasonality",
-                            //    data: chartDataHigh,
-                            //    pointStart: startdate,
-                            //    color: '#87ceeb',
-                            //}
                             ]
                         };
 

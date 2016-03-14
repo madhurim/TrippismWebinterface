@@ -23,11 +23,17 @@
                                 {{GetCurrencySymbol(FareforecastData.CurrencyCode)}} {{FareforecastData.Forecast.LowestPredictedFare | number : 2 }}
                                 <p>Lowest Predicted Fare for Next Week</p>
                             </div>
-                            <div class="col-md-4 col-sm-12 col-xs-12" ng-if="!FareNoDataFound && IsRequestCompleted" ng-hide="FareforecastData.Recommendation == 'unknown'">
+                            <div class="col-md-4 col-sm-12 col-xs-12">
+                                {{GetCurrencySymbol(FareforecastData.CurrencyCode)}} {{FareforecastData.Forecast.HighestPredictedFare | number : 2 }}
+                                <p>Highest Predicted Fare for Next Week</p>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12 fare-rec" ng-if="!FareNoDataFound && IsRequestCompleted">
                                 <img ng-if="FareforecastData.Recommendation == 'buy'" title="Go ahead, Buy!" src="/images/like-icon.png" />
                                 <img ng-if="FareforecastData.Recommendation == 'wait'" title="Wait, price may drop!" src="/images/wait-icon.png" />
-                                <p ng-if="FareforecastData.Recommendation == 'buy'"> We recommend buy</p>
-                                <p ng-if="FareforecastData.Recommendation == 'wait'">We recommend wait to buy</p>
+                                <img ng-if="FareforecastData.Recommendation == 'unknown'" title="Wait to buy or buy!" src="/images/wait-icon.png" />
+                                <span ng-if="FareforecastData.Recommendation == 'buy'"> We recommend buy</span>
+                                <span ng-if="FareforecastData.Recommendation == 'wait'">We recommend wait to buy</span>
+                                <span ng-if="FareforecastData.Recommendation == 'unknown'">Wait to buy or buy</span>
                             </div>
                         </div>
                     </div>

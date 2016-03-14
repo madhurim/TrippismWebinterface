@@ -975,8 +975,20 @@ ul .stop-line {
 }
 
     .range-det div {
-        font-weight: 500;
+        font-size: 13px;
     }
+
+.fare-desc div {
+    color: #0bba0b;
+}
+
+.fare-text {
+    font-weight: 500;
+}
+
+.padding-bottom-0 {
+    padding-bottom: 0px;
+}
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {

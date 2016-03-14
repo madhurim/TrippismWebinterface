@@ -969,6 +969,14 @@ ul .stop-line {
 .fare-rec span {
     vertical-align: -webkit-baseline-middle;
 }
+
+.range-det {
+    margin-bottom: 10px;
+}
+
+    .range-det div {
+        font-weight: 500;
+    }
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {

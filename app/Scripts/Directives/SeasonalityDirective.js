@@ -186,9 +186,16 @@
                                 enddate: endutcdate,
                                 YearWeekNumber: chartrec[i].YearWeekNumber
                             };
+
+                            // highlight graph marker
+                            var startdaterange = new Date($filter('date')(serise.startdate, scope.format, null));
+                            var enddaterange = new Date($filter('date')(serise.enddate, scope.format, null));
+                            var departDate = new Date($filter('date')(scope.DepartDate, scope.format, null));
+                            if (departDate >= startdaterange && departDate <= enddaterange)
+                                serise.marker = { fillColor: '#39a848', states: { hover: { fillColor: '#39a848' } } };
+
                             chartDataAll.push(serise);
                         }
-
                         var PrevDate = "";
                         var options = {
                             chart: {
@@ -208,16 +215,16 @@
                                 labels: {
                                     formatter: function () {
                                         var result = "";
+
                                         var startdaterange = new Date($filter('date')(this.value, scope.format, null));
                                         var enddaterange = new Date($filter('date')(this.value, scope.format, null));
                                         enddaterange = new Date(enddaterange.setDate(enddaterange.getDate() + 13));
                                         var departDate = new Date($filter('date')(scope.DepartDate, scope.format, null));
+
                                         if (departDate >= startdaterange && departDate <= enddaterange)
                                             result = '<span style="font-weight: bold; font-size:12px">'
                                         else
                                             result = '<span>'
-
-                                        var d = new Date(this.value);
                                         return result += Highcharts.dateFormat('%m-%Y', this.value) + '</span><b>';
                                     },
                                     rotation: -45

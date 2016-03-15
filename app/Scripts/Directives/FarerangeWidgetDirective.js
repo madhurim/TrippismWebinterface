@@ -186,8 +186,6 @@
 
                 scope.$watch('fareRangeData', function (newValue, oldValue) {
                     if (newValue != oldValue && newValue != "" && newValue != undefined) {
-                        var isVisible = !scope.loadingFareRange;
-                        scope.$emit('widgetLoaded', { name: "farerangeInfo", isVisible: isVisible });
                         PreparHtmldata();
                     }
                 })
@@ -210,6 +208,7 @@
                                 break;
                             }
                         }
+                        scope.$emit('widgetLoaded', { name: "farerangeInfo", isVisible: scope.FareRangeWidgetDataFound });
                     }
 
                 }

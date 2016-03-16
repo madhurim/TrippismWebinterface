@@ -60,8 +60,8 @@
                     <!-- class="overview-weather-farerange" ng-style="!SeasonalityWidgetDataFound && {'border-left':'none'}"-->
                     <p class="fare-text">Fares that were paid in the last 4 weeks for the same / similar search combination</p>
                     <p>
-                        <span ng-if="widgetParams.FareRangeData.IsMacOrigin">from ({{widgetParams.FareRangeData.OriginLocation}})</span>
-                        <span ng-if="widgetParams.FareRangeData.IsMacDestination">to ({{widgetParams.FareRangeData.DestinationLocation}})</span>
+                        <span ng-if="FareRangeWidgetData.IsMacOrigin">from ({{FareRangeWidgetData.OriginLocation}})</span>
+                        <span ng-if="FareRangeWidgetData.IsMacDestination">to ({{FareRangeWidgetData.DestinationLocation}})</span>
                     </p>
                     <!--<div class="row range-det">
                         <div class="col-md-12 col-sm-12 col-xs-12 range-data" ng-if="FareRangeWidgetData.Count == 'Low'">Range of up to 1000 ticketed prices.</div>

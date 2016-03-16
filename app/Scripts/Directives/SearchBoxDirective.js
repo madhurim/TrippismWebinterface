@@ -11,7 +11,7 @@ function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParam
     return {
         restrict: 'E',
         scope: {
-            isPopup: '=isPopup'
+            isPopup: '=?isPopup'
         },
         templateUrl: '/Views/Partials/SearchBox.html',
         controller: function ($scope) {

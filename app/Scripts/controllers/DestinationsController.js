@@ -79,9 +79,12 @@
                     }
                     if (para[0].trim() === "th") {
                         $scope.Theme = para[1].trim();
+                        $scope.previousTheme = $scope.Theme;
                     }
-                    if (para[0].trim() === "a")
+                    if (para[0].trim() === "a") {
                         $scope.Region = para[1].trim();
+                        $scope.previousRegion = $scope.Region;
+                    }
                     if (para[0].trim() === "lf")
                         $scope.Minfare = para[1].trim();
                     if (para[0].trim() === "hf")

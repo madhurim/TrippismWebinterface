@@ -202,7 +202,11 @@
                                     MaximumFare: scope.fareRangeData.FareData[i].MaximumFare,
                                     MedianFare: scope.fareRangeData.FareData[i].MedianFare,
                                     CurrencyCode: UtilFactory.GetCurrencySymbol(scope.fareRangeData.FareData[i].CurrencyCode),
-                                    Count: scope.fareRangeData.FareData[i].Count
+                                    Count: scope.fareRangeData.FareData[i].Count,
+                                    IsMacOrigin: scope.fareRangeData.IsMacOrigin,
+                                    IsMacDestination: scope.fareRangeData.IsMacDestination,
+                                    DestinationLocation: scope.fareRangeData.DestinationLocation,
+                                    OriginLocation: scope.fareRangeData.OriginLocation,
                                 };
                                 scope.FareRangeWidgetDataFound = true;
                                 break;

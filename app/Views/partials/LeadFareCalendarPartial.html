@@ -1,0 +1,30 @@
+﻿<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 fare-cal-wrapper" ng-show="isShowCalendar">
+    <tabset>
+        <tab class="fare-cal-tab fare-cal-tab-first no-select" active="false" disable="true"></tab>
+        <tab class="fare-cal-tab" ng-repeat="tab in ::tabs" heading="{{tab.title}}" active="tab.isActive" ng-click="::updateCalendar(tab);">
+        </tab>
+    </tabset>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 div-leadfare-cal">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 lead-fare-header padding-0">Flexible? see fares for next six months for same length of stay {{LengthOfStay}}*</div>
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 div-cal-left">
+            <div class="leadfare-calendar" ui-calendar="uiConfig.calendar" ng-model="leadFareSources" calendar="leadFareCalendar"></div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 padding-0 div-cal-right" ng-show="lowestFareList">
+            <ul>
+                <li ng-repeat="item in ::lowestFareList" ng-class="{'active':totalMinFare === item.destination.Fare }"
+                    ng-click="::monthClick(item);"
+                    title="Lowest Fare: {{item.currencySymbol}} {{item.destination.Fare}}">
+                    <p class="div-cal-right-date">{{item.start|date:'MMM yyyy'}}</p>
+                    <p class="div-cal-right-fare">{{item.destination.Fare}}</p>
+                </li>
+            </ul>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding-0">
+            <p class="lead-fare-text">
+                <span>*</span> Fares on Trippism and 6 month fares are total fares : taxes and fees are included; however, ancillary fees charged by airlines, such as baggage and preferred seating, are not included.
+                <br />
+                <span>*</span> Fares displayed are for round-trip economy class, 1 adult.
+            </p>
+        </div>
+    </div>
+</div>

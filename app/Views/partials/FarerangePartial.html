@@ -58,11 +58,14 @@
             <div class="overview-weather-box">
                 <div ng-if="FareRangeWidgetDataFound">
                     <!-- class="overview-weather-farerange" ng-style="!SeasonalityWidgetDataFound && {'border-left':'none'}"-->
-                    <p class="fare-text">Fares that were paid in the last 4 weeks for the same / similar search combination</p>
-                    <p>
+                    <p class="fare-text">
+                        Fares that were paid in the last 4 weeks for the same search combination
+                        <span ng-if="FareRangeWidgetData.IsMacOrigin || FareRangeWidgetData.IsMacDestination">{{FareRangeWidgetData.OriginLocation}}-{{FareRangeWidgetData.DestinationLocation}}</span>
+                    </p>
+                    <!--<p>
                         <span ng-if="FareRangeWidgetData.IsMacOrigin">from ({{FareRangeWidgetData.OriginLocation}})</span>
                         <span ng-if="FareRangeWidgetData.IsMacDestination">to ({{FareRangeWidgetData.DestinationLocation}})</span>
-                    </p>
+                    </p>-->
                     <!--<div class="row range-det">
                         <div class="col-md-12 col-sm-12 col-xs-12 range-data" ng-if="FareRangeWidgetData.Count == 'Low'">Range of up to 1000 ticketed prices.</div>
                         <div class="col-md-12 col-sm-12 col-xs-12 range-data" ng-if="FareRangeWidgetData.Count == 'Medium'">Range of 1000 to 10,000 ticketed prices.</div>

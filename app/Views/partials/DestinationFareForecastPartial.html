@@ -8,8 +8,8 @@
         <div class="ibox-box searched pull-left search-det">
             <!--<h4>You Searched </h4>-->
             <p>
-                <span ng-show="fareParams.SearchCriteria.Origin">{{fareParams.SearchCriteria.Origin}} </span>
-                <span ng-show="fareParams.SearchCriteria.FromDate">{{fareParams.SearchCriteria.FromDate | date:'MMM-dd-yyyy'}} </span>
+                <span ng-show="fareParams.SearchCriteria.Origin && fareParams.SearchCriteria.DestinationLocation">{{fareParams.SearchCriteria.Origin}}-{{fareParams.SearchCriteria.DestinationLocation}}</span>
+                <span ng-show="fareParams.SearchCriteria.FromDate"> {{fareParams.SearchCriteria.FromDate | date:'MMM-dd-yyyy'}} </span>
                 <span ng-show="fareParams.SearchCriteria.ToDate">To {{fareParams.SearchCriteria.ToDate | date:'MMM-dd-yyyy'}}</span>
                 <span ng-show="fareParams.SearchCriteria.Minfare > 0"><br />{{fareCurrencySymbol}} {{fareParams.SearchCriteria.Minfare}}</span>
                 <span ng-show="fareParams.SearchCriteria.Maxfare > 0"> To {{fareCurrencySymbol}} {{fareParams.SearchCriteria.Maxfare}}</span>

@@ -231,9 +231,9 @@
                                 },
                                 tickInterval: 2 * 336 * 3600 * 1000,
                                 minTickInterval: 2 * 336 * 3600 * 1000,
-                                title: {
-                                    text: 'Historical Traffic Seasonality for ' + scope.seasonalityParams.DestinationairportName.airport_CityName
-                                }
+                                //title: {
+                                //    text: 'Historical Traffic Seasonality for ' + scope.seasonalityParams.DestinationairportName.airport_CityName
+                                //}
                             },
                             yAxis: {
                                 min: 0,

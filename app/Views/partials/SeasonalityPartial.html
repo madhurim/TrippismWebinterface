@@ -3,7 +3,7 @@
         <div class="popup-box">
             <div class="popup-header">
                 <!--<h5 class="widget-popup-title">Historical Visitor Traffic detail, {{seasonalityParams.DestinationairportName.airport_CityName}}</h5>-->
-                <h5 class="widget-popup-title">How crowded is it in {{seasonalityParams.DestinationairportName.airport_CityName}}?</h5>
+                <h5 class="widget-popup-title">Peak and Off Peak travel periods for {{seasonalityParams.DestinationairportName.airport_CityName}}</h5>
             </div>
             <div class="popup-content">
                 <h6 class="date-title">{{DepartDate}} to {{ReturnDate}}</h6>
@@ -19,21 +19,21 @@
                                     <li>
                                         <img title="High" ng-if="SeasonalityWidgetData.NoofIcons == 3" src="/images/User-12.png" alt="" />
                                         <img title="High" ng-if="SeasonalityWidgetData.NoofIcons != 3" src="/images/User-12grey.png" alt="" />
-                                        <p ng-if="SeasonalityWidgetData.NoofIcons == 3" class="redbold-font"> Very Crowded</p>
-                                        <p ng-if="SeasonalityWidgetData.NoofIcons != 3"> Very Crowded</p>
+                                        <p ng-if="SeasonalityWidgetData.NoofIcons == 3" class="redbold-font"> Peak</p>
+                                        <p ng-if="SeasonalityWidgetData.NoofIcons != 3"> Peak</p>
                                     </li>
                                     <li>
                                         <img title="Medium" ng-if="SeasonalityWidgetData.NoofIcons == 2" src="/images/User-5.png" alt="" />
                                         <img title="Medium" ng-if="SeasonalityWidgetData.NoofIcons != 2" src="/images/User-5grey.png" alt="" />
-                                        <p ng-if="SeasonalityWidgetData.NoofIcons == 2" class="redbold-font"> Crowded</p>
-                                        <p ng-if="SeasonalityWidgetData.NoofIcons != 2"> Crowded</p>
+                                        <p ng-if="SeasonalityWidgetData.NoofIcons == 2" class="redbold-font"> Medium</p>
+                                        <p ng-if="SeasonalityWidgetData.NoofIcons != 2"> Medium</p>
 
                                     </li>
                                     <li>
                                         <img title="Low" ng-if="SeasonalityWidgetData.NoofIcons == 1" src="/images/User-3.png" alt="" />
                                         <img title="Low" ng-if="SeasonalityWidgetData.NoofIcons != 1" src="/images/User-3grey.png" alt="" />
-                                        <p ng-if="SeasonalityWidgetData.NoofIcons == 1" class="redbold-font"> Less Crowded</p>
-                                        <p ng-if="SeasonalityWidgetData.NoofIcons != 1">Less Crowded</p>
+                                        <p ng-if="SeasonalityWidgetData.NoofIcons == 1" class="redbold-font"> Off-Peak</p>
+                                        <p ng-if="SeasonalityWidgetData.NoofIcons != 1">Off-Peak</p>
                                     </li>
                                 </ul>
                             </div>

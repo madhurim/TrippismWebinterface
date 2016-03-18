@@ -990,7 +990,7 @@ ul .stop-line {
     padding-bottom: 0px;
 }
 
-.mapinfobox {
+/*.mapinfobox {
     font-size: 12px;
     color: rgb(68, 68, 68);
     white-space: nowrap;
@@ -1006,7 +1006,39 @@ ul .stop-line {
 
     .mapinfobox p {
         margin: 0px;
+    }*/
+
+/*#region Alertify */
+.ajs-message.ajs-warning.ajs-visible,
+.alertify-notifier.ajs-right .ajs-message.ajs-visible {
+    /*width: 400px;
+    right: 365px;*/
+    width: 320px;
+    right: 300px;
+    background: #ddd;
+    border: 1px solid #ccc;
+    padding: 8px;
+    margin-top: 0px;
+}
+
+/*.alertify-notifier .ajs-message.ajs-visible {
+    margin-top: 100px;
+}*/
+
+.alert-box {
+    font-size: 11px;
+    cursor: pointer;
+}
+
+    .alert-box p {
+        margin: 0px;
     }
+
+    .alert-box input[type=button] {
+        padding: 2px 7px;
+        font-size: 12px;
+    }
+/*#endregion Alertify */
 
 /*#region Media queries */
 @media only screen and (max-width: 991px) {

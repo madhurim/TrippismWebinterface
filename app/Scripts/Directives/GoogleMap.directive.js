@@ -318,24 +318,13 @@
                       setIwCloseButtonPositionFn();
                   });
 
-                  var div = document.createElement("div");
-                  div.innerHTML = "<p>Click on any of the numbered clusters to see destinations.</p>"
-                      + "<p>Numbers represent how many destinations fall into a nearby radius.</p>"
-                      + "<p>'1' means the cluster contains only 1 destination.</p>"
-                      + "<p>Click on individual destination within the cluster to see destination details.</p>";
-                  div.className = "mapinfobox";
-                  //div.style.fontSize = '12px';
-                  //div.style.color = "rgb(68, 68, 68)";
-                  //div.style.whiteSpace = "nowrap";
-                  //div.style.fontFamily = "Roboto, Arial, sans-serif";
-                  //div.style.textAlign = "left";
-                  //div.style.backgroundColor = "red";
-                  //div.style.padding = "3px 5px";
-                  //div.style.opacity = "0.8";
-                  //div.style.zIndex = "1";
-                  //div.style.margin = "0";
-                  //div.style.marginTop = "35px";
-                  scope.destinationMap.controls[google.maps.ControlPosition.TOP_RIGHT].push(div);
+                  //var div = document.createElement("div");
+                  //div.innerHTML = "<p>Click on any of the numbered clusters to see destinations.</p>"
+                  //    + "<p>Numbers represent how many destinations fall into a nearby radius.</p>"
+                  //    + "<p>'1' means the cluster contains only 1 destination.</p>"
+                  //    + "<p>Click on individual destination within the cluster to see destination details.</p>";
+                  //div.className = "mapinfobox";
+                  //scope.destinationMap.controls[google.maps.ControlPosition.TOP_RIGHT].push(div);
 
 
                   // set position of infowindow close button
@@ -381,9 +370,6 @@
                       $timeout(function () {
                           scope.destinationMap.panTo(airportLoc);
                       }, 0, false);
-
-                      alertify.set('notifier', 'position', 'top-right');
-                      alertify.success("Click on any of the numbered clusters to see destinations.");
                   });
 
                   function setAirportMarkerOnMap() {
@@ -413,7 +399,27 @@
                           $timeout(function () {
                               scope.destinationMap.panTo(airportLoc);
                           }, 0, false);
+                          showMessage();
                       });
+                  }
+
+                  function showMessage() {
+                      var message = "<div class='alert-box'><p>Click on any of the numbered clusters to see destinations.</p>"
+                          + "<p>Numbers represent how many destinations fall into a nearby radius.</p>"
+                          + "<p>'1' means the cluster contains only 1 destination.</p>"
+                          + "<p>Click on individual destination within the cluster to see destination details.</p>"
+                          + "<input type='button' class='btn btn-primary' value='OK' />"
+                        + "</div>";
+                      alertify.set('notifier', 'position', 'top-right');
+                      alertify.warning(message, 6000000);
+                      showMessagePosition();
+                  }
+
+                  function showMessagePosition() {
+                      var alertBoxElement = angular.element(".ajs-message.ajs-warning.ajs-visible");
+                      var searchBoxElement = angular.element("#search-box")[0];
+                      var headerElement = angular.element("#header")[0];
+                      alertBoxElement.css({ "top": searchBoxElement.offsetHeight + headerElement.offsetHeight });
                   }
               }
               return directive;

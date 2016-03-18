@@ -1015,15 +1015,11 @@ ul .stop-line {
     right: 365px;*/
     width: 320px;
     right: 300px;
-    background: #ddd;
+    background: #fff;
     border: 1px solid #ccc;
     padding: 8px;
     margin-top: 0px;
 }
-
-/*.alertify-notifier .ajs-message.ajs-visible {
-    margin-top: 100px;
-}*/
 
 .alert-box {
     font-size: 11px;
@@ -1037,7 +1033,13 @@ ul .stop-line {
     .alert-box input[type=button] {
         padding: 2px 7px;
         font-size: 12px;
+        float: right;
+        margin-right: 10px;
     }
+
+.alertify-notifier {
+    z-index: 1;
+}
 /*#endregion Alertify */
 
 /*#region Media queries */

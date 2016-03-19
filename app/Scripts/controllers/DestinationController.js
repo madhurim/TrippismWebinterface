@@ -61,16 +61,14 @@
                         if (para[0].trim() === "hf")
                             $scope.Maxfare = para[1].trim();
                     });
+
                     $scope.OriginairportName = _.find($scope.AvailableAirports, function (airport) {
                         return airport.airport_Code == $scope.Origin.toUpperCase()
                     });
                     $scope.DestinationairportName = _.find($scope.AvailableAirports, function (airport) {
                         return airport.airport_Code == $scope.DestinationLocation
                     });
-                    if ($scope.OriginairportName != undefined)
-                        $scope.PointOfsalesCountry = $scope.OriginairportName.airport_CountryCode;
-                    else
-                        $scope.PointOfsalesCountry = undefined;
+
                     var paramdata = {
                         Origin: $scope.Origin,
                         DestinationLocation: $scope.KnownDestinationAirport,
@@ -81,7 +79,15 @@
                         Minfare: $scope.Minfare,
                         Maxfare: $scope.Maxfare
                     }
+
                     UtilFactory.SetLastSearchval(paramdata)
+                    if ($scope.OriginairportName == undefined || $scope.DestinationairportName == undefined) {
+                        alertify.alert("Destination Finder", "");
+                        alertify.alert('No suggestions are available from your origin to destination. We recommend trying other nearby major airports.');
+                        return false;
+                    }
+
+                    $scope.PointOfsalesCountry = $scope.OriginairportName.airport_CountryCode;
                 }
                 var param = {
                     "Origin": $scope.Origin,
@@ -117,10 +123,16 @@
                                 objDestinationairport.objDestinationairport = $scope.DestinationLocation.toUpperCase();
                                 $scope.destinationlist.forEach(function (item) { item.DestinationLocation = item.objDestinationairport; });
                                 $scope.FareInfo = response.FareInfo[0];
-                                UtilFactory.ReadAirlinesJson().then(function (data) {
-                                    $scope.airlineJsonData = data;
-                                    readyfareParams();
-                                });
+
+                                // commented for the time being
+                                //UtilFactory.ReadAirlinesJson().then(function (data) {
+                                //    $scope.airlineJsonData = data;
+                                //    readyfareParams();
+                                //});
+
+                                $scope.airlineJsonData = [];
+                                readyfareParams();
+
                                 //$rootScope.$broadcast('EmptyFareForcastInfo', {
                                 //    Origin: originairport.airport_CityName,
                                 //    Destinatrion: DestinationairportName.airport_Code,
@@ -137,10 +149,15 @@
 
                             }
                             else {
-                                UtilFactory.ReadAirlinesJson().then(function (data) {
-                                    $scope.airlineJsonData = data;
-                                    readyfareParams();
-                                });
+                                // commented for the time being
+                                //UtilFactory.ReadAirlinesJson().then(function (data) {
+                                //    $scope.airlineJsonData = data;
+                                //    readyfareParams();
+                                //});
+
+                                $scope.airlineJsonData = [];
+                                readyfareParams();
+
                                 //alertify.alert("Destination Finder", "");
                                 //alertify.alert('We could not find details of the destination you are looking for, however we found other destinations that you can explore.').set('onok', function (closeEvent) { });
                             }
@@ -166,20 +183,31 @@
                             alertify.alert(CList).set('onok', function (closeEvent) { });
                         }
                         else {
-                            UtilFactory.ReadAirlinesJson().then(function (data) {
-                                $scope.airlineJsonData = data;
-                                readyfareParams();
-                            });
+                            // commented for the time being
+                            //UtilFactory.ReadAirlinesJson().then(function (data) {
+                            //    $scope.airlineJsonData = data;
+                            //    readyfareParams();
+                            //});
+
+                            $scope.airlineJsonData = [];
+                            readyfareParams();
+
                             //alertify.alert("Destination Finder", "");
-                            //alertify.alert('No suggestions are available from your Origin. We recomend trying other nearby major airports.').set('onok', function (closeEvent) { });
+                            //alertify.alert('No suggestions are available from your Origin. We recommend trying other nearby major airports.').set('onok', function (closeEvent) { });
                         }
                     });
                 }
                 else {
-                    UtilFactory.ReadAirlinesJson().then(function (data) {
-                        $scope.airlineJsonData = data;
-                        readyfareParams();
-                    });
+                    // commented for the time being
+                    //UtilFactory.ReadAirlinesJson().then(function (data) {
+                    //    $scope.airlineJsonData = data;
+                    //    readyfareParams();
+                    //});
+
+
+                    $scope.airlineJsonData = [];
+                    readyfareParams();
+
                 }
 
                 function FilterDestinations(destinations) {
@@ -250,7 +278,7 @@
                         fareforcastinfo = data;
                     }
 
-                    
+
 
                     //else if (data.name === 'weatherwidgetInfo') {
                     //    weatherwidgetInfo = data;
@@ -258,9 +286,9 @@
                     if (farerangeInfo && WeatherData && fareforcastinfo) //&& seasonalityfarerangewidgetInfo  && weatherwidgetInfo
                     {
                         var columnData = {
-                           // seasonalityfarerangewidgetInfo: seasonalityfarerangewidgetInfo,
+                            // seasonalityfarerangewidgetInfo: seasonalityfarerangewidgetInfo,
                             farerangeInfo: farerangeInfo,
-                            fareforcastinfo : fareforcastinfo,
+                            fareforcastinfo: fareforcastinfo,
                             //weatherwidgetInfo: weatherwidgetInfo,
                             WeatherData: WeatherData
                         };

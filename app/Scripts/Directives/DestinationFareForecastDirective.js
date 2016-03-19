@@ -22,6 +22,7 @@
 
                 $scope.SendEmailToUser = SendEmailToUser;
                 function SendEmailToUser() {
+                    if (!$scope.fareParams) return;
                     var GetEmailDetPopupInstance = $modal.open({
                         templateUrl: '/Views/Partials/EmailDetFormPartial.html',
                         controller: 'EmailForDestinationDet',
@@ -39,7 +40,8 @@
                     $scope.IsRequestCompleted = false;
                     if ($scope.fareParams.FareInfo)
                         $scope.fareCurrencySymbol = $scope.GetCurrencySymbol($scope.fareParams.FareInfo.CurrencyCode);
-
+                    
+                    $scope.airportDetail = $scope.fareParams.DestinationairportName.airport_FullName + ', ' + $scope.fareParams.DestinationairportName.airport_CityName + ', ' + $scope.fareParams.DestinationairportName.airport_CountryName;
                     $scope.fareinfopromise = FareforecastFactory.fareforecast($scope.fareParams.Fareforecastdata).then(function (data) {
                         $scope.IsRequestCompleted = true;
                         $scope.inProgressFareinfo = false;

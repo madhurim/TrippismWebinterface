@@ -1,14 +1,14 @@
 ﻿angular.module('TrippismUIApp').directive('farerangewidgetInfo',
                 ['$compile', 'FareRangeFactory', '$filter', '$timeout', '$rootScope', 'UtilFactory', 'FareforecastFactory', 'TrippismConstants',
-    function ($compile, FareRangeFactory, $filter, $timeout, $rootScope, UtilFactory,FareforecastFactory, TrippismConstants) {
+    function ($compile, FareRangeFactory, $filter, $timeout, $rootScope, UtilFactory, FareforecastFactory, TrippismConstants) {
         return {
             restrict: 'E',
             scope: {
                 widgetParams: '=',
             },
             templateUrl: '/Views/Partials/FarerangePartial.html',
-            controller : function($scope)
-            {
+            controller: function ($scope) {
+                $scope.GetCurrencySymbol = GetCurrencySymbol;
                 $scope.initFarerangeSummary = function () {
                     var isVisible = false; // this determines the widget visibility according to different parameters
                     var isVisibilityRecorded = false;
@@ -31,7 +31,7 @@
                     var daydiff = getLengthOfStay($scope.widgetParams.Fareforecastdata.DepartureDate, $scope.LatestDepartureDate);
                     if (daydiff > 15) {
                         $scope.LatestDepartureDate = new Date($scope.widgetParams.Fareforecastdata.DepartureDate);//.split('T')[0].replace(/-/g, "/"))
-                        $scope.LatestDepartureDate.setDate(LatestDepartureDate.getDate() + 14);
+                        $scope.LatestDepartureDate.setDate($scope.LatestDepartureDate.getDate() + 14);
                     }
                     $scope.LatestDepartureDate = $filter('date')($scope.LatestDepartureDate, 'yyyy-MM-dd')
                     $scope.loadfareRangeInfo();
@@ -55,7 +55,7 @@
 
                     });
                 }
-              
+
                 $scope.loadfareRangeInfo = function () {
                     $scope.fareRangeInfoLoaded = false;
                     $scope.FareRangeWidgetDataFound = false;
@@ -161,6 +161,19 @@
 
                         }
                     }
+                    $scope.LoadLowestFareInfo($scope.widgetParams.FareInfo);
+                }
+
+                function GetCurrencySymbol(code) {
+                    return UtilFactory.GetCurrencySymbol(code);
+                }
+
+                $scope.LoadLowestFareInfo = function (fareInfo) {
+                    if (!fareInfo) return;
+                    if (fareInfo.LowestFare && !isNaN(fareInfo.LowestFare.Fare))
+                        $scope.lowestFareObj = { fare: fareInfo.LowestFare.Fare, currencySymbol: GetCurrencySymbol(fareInfo.CurrencyCode) };
+                    else if (fareInfo.LowestFare && !isNaN(fareInfo.LowestNonStopFare.Fare))
+                        $scope.lowestFareObj = { fare: fareInfo.LowestNonStopFare.Fare, currencySymbol: GetCurrencySymbol(fareInfo.CurrencyCode) };
                 }
             },
             link: function (scope, elem, attrs) {
@@ -171,13 +184,8 @@
                     }
                 });
 
-                scope.GetCurrencySymbol = function (code) {
-                    return UtilFactory.GetCurrencySymbol(code);
-                }
                 scope.$watch('fareRangeData', function (newValue, oldValue) {
                     if (newValue != oldValue && newValue != "" && newValue != undefined) {
-                        var isVisible = !scope.loadingFareRange;
-                        scope.$emit('widgetLoaded', { name: "farerangeInfo", isVisible: isVisible });
                         PreparHtmldata();
                     }
                 })
@@ -193,12 +201,18 @@
                                     MinimumFare: scope.fareRangeData.FareData[i].MinimumFare,
                                     MaximumFare: scope.fareRangeData.FareData[i].MaximumFare,
                                     MedianFare: scope.fareRangeData.FareData[i].MedianFare,
-                                    CurrencyCode: UtilFactory.GetCurrencySymbol(scope.fareRangeData.FareData[i].CurrencyCode)
+                                    CurrencyCode: UtilFactory.GetCurrencySymbol(scope.fareRangeData.FareData[i].CurrencyCode),
+                                    Count: scope.fareRangeData.FareData[i].Count,
+                                    IsMacOrigin: scope.fareRangeData.IsMacOrigin,
+                                    IsMacDestination: scope.fareRangeData.IsMacDestination,
+                                    DestinationLocation: scope.fareRangeData.DestinationLocation,
+                                    OriginLocation: scope.fareRangeData.OriginLocation,
                                 };
                                 scope.FareRangeWidgetDataFound = true;
                                 break;
                             }
                         }
+                        scope.$emit('widgetLoaded', { name: "farerangeInfo", isVisible: scope.FareRangeWidgetDataFound });
                     }
 
                 }

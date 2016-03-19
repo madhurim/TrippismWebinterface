@@ -41,7 +41,8 @@
                               width: 29,
                               anchor: [7, 37],
                               zIndex: 1000
-                          }]
+                          }],
+                          options: { zIndex: 1000 }
                       };
 
                       //sets the map options
@@ -333,11 +334,8 @@
                       scope.highRankedAirportlist = args.highRankedAirportlist;
                       scope.resetMarker();
                       if (scope.destinations != undefined && scope.destinations.length > 0) {
-                        //  UtilFactory.ReadHighRankedAirportsJson().then(function (data) {
-                              //scope.highRankedAirportlist = data;
-                              scope.displayDestinations(scope.destinations);
-                              scope.setMarkerCluster();
-                        //  });
+                          scope.displayDestinations(scope.destinations);
+                          scope.setMarkerCluster();
                       }
 
                       var originairport = _.find(scope.airportlist, function (airport) {
@@ -367,6 +365,8 @@
 
                   function setAirportMarkerOnMap() {
                       UtilFactory.ReadAirportJson().then(function (data) {
+                          if (!scope.origin)
+                              return;
                           var originAirport = _.find(data, function (airport) {
                               return airport.airport_Code == scope.origin.toUpperCase()
                           });

@@ -20,7 +20,7 @@
                         if (scope.loadSeasonalityInfoLoaded == false) {
                             if (scope.MarkerSeasonalityInfo == "") {
                                 var Seasonalitydata = {
-                                    "Destination": scope.seasonalityParams.DestinationairportName.airport_Code, // scope.seasonalityParams.Destinatrion, // JFK
+                                    "Destination": scope.seasonalityParams.DestinationairportName.airport_Code,
                                 };
                                 $timeout(function () {
                                     scope.inProgressSeasonalityinfo = true;
@@ -75,17 +75,11 @@
                     scope.DepartDate = $filter('date')(scope.seasonalityParams.Fareforecastdata.DepartureDate, scope.format, null);
                     scope.ReturnDate = $filter('date')(scope.seasonalityParams.Fareforecastdata.ReturnDate, scope.format, null);
                     scope.chartHeight = 300;
-                    scope.divID = "seasonality"; // + scope.seasonalityParams.tabIndex
+                    scope.divID = "seasonality";
                     var mapHTML = "<div id='" + scope.divID + "'></div>";
                     elem.append($compile(mapHTML)(scope));
                     scope.loadSeasonalityInfo();
                 }
-                //SeasonalityData for Mail
-                //scope.SeasonalityDisplay = function () {
-                //    scope.MarkerSeasonalityInfo.Seasonality = scope.SeasonalityData;
-                //    scope.mailmarkereasonalityInfo.Seasonality = scope.SeasonalityData;
-                //    scope.Isviewmoredisplayed = true;
-                //};
 
                 scope.loadingSeasonality = true;
                 scope.$watch('loadSeasonalityInfoLoaded',
@@ -154,7 +148,7 @@
                     var chartDataLow = [];
                     var chartDataMedium = [];
                     var chartDataHigh = [];
-                    var rec = 1;
+                    var chartDataAll = [];
                     var startdate;
                     if (scope.SeasonalityData != undefined && scope.SeasonalityData != "") {
                         var chartrec = _.sortBy(scope.SeasonalityData, 'WeekStartDate');
@@ -192,20 +186,21 @@
                                 enddate: endutcdate,
                                 YearWeekNumber: chartrec[i].YearWeekNumber
                             };
-                            if (SeasonalityIndicator == 1)
-                                chartDataLow.push(serise);
-                            else if (SeasonalityIndicator == 2)
-                                chartDataMedium.push(serise);
-                            else if (SeasonalityIndicator == 3)
-                                chartDataHigh.push(serise);
-                            rec++;
 
+                            // highlight graph marker
+                            var startdaterange = new Date($filter('date')(serise.startdate, scope.format, null));
+                            var enddaterange = new Date($filter('date')(serise.enddate, scope.format, null));
+                            var departDate = new Date($filter('date')(scope.DepartDate, scope.format, null));
+                            if (departDate >= startdaterange && departDate <= enddaterange)
+                                serise.marker = { fillColor: '#39a848', states: { hover: { fillColor: '#39a848' } } };
+
+                            chartDataAll.push(serise);
                         }
                         var PrevDate = "";
                         var options = {
                             chart: {
                                 height: scope.chartHeight,
-                                type: 'bubble',
+                                type: 'line',
                                 renderTo: scope.divID,
                             },
                             title: {
@@ -220,26 +215,25 @@
                                 labels: {
                                     formatter: function () {
                                         var result = "";
+
                                         var startdaterange = new Date($filter('date')(this.value, scope.format, null));
                                         var enddaterange = new Date($filter('date')(this.value, scope.format, null));
                                         enddaterange = new Date(enddaterange.setDate(enddaterange.getDate() + 13));
                                         var departDate = new Date($filter('date')(scope.DepartDate, scope.format, null));
-                                        //startdaterange.getMonth() + 1 >= departDate.getMonth() + 1 && 
+
                                         if (departDate >= startdaterange && departDate <= enddaterange)
                                             result = '<span style="font-weight: bold; font-size:12px">'
                                         else
                                             result = '<span>'
-
-                                        var d = new Date(this.value);
-                                        return result += Highcharts.dateFormat(TrippismConstants.HighChartDateFormat, this.value) + '</span><b>';
+                                        return result += Highcharts.dateFormat('%m-%Y', this.value) + '</span><b>';
                                     },
                                     rotation: -45
                                 },
-                                tickInterval: 336 * 3600 * 1000,
-                                minTickInterval: 336 * 3600 * 1000,
-                                title: {
-                                    text: 'Historical Traffic Seasonality for ' + scope.seasonalityParams.DestinationairportName.airport_CityName
-                                }
+                                tickInterval: 2 * 336 * 3600 * 1000,
+                                minTickInterval: 2 * 336 * 3600 * 1000,
+                                //title: {
+                                //    text: 'Historical Traffic Seasonality for ' + scope.seasonalityParams.DestinationairportName.airport_CityName
+                                //}
                             },
                             yAxis: {
                                 min: 0,
@@ -253,16 +247,16 @@
 
                                         var result = '';
                                         if (this.value == 1) {
-                                            result = '<span> ' + 'Low' + ' </span>';
+                                            result = '<span> Off-Peak </span>';
                                         }
                                         else if (this.value == 2) {
-                                            result = '<span> ' + 'Medium' + ' </span>';
+                                            result = '<span> Medium </span>';
                                         }
                                         else if (this.value == 3) {
-                                            result = '<span> ' + 'High' + ' </span>';
+                                            result = '<span> Peak </span>';
                                         }
                                         else {
-                                            result = '<span> ' + '' + ' </span>';
+                                            result = '<span> </span>';
                                         }
                                         return result;
                                     }
@@ -278,40 +272,29 @@
                                     var yresult = '';
 
                                     if (this.y == 1)
-                                        yresult = '<span> ' + 'Low' + ' </span>';
+                                        yresult = '<span> Off-Peak </span>';
 
                                     else if (this.y == 2)
-                                        yresult = '<span> ' + 'Medium' + ' </span>';
+                                        yresult = '<span> Medium </span>';
 
                                     else if (this.y == 3)
-                                        yresult = '<span> ' + 'High' + ' </span>';
+                                        yresult = '<span> Peak </span>';
 
                                     else
-                                        yresult = '<span> ' + '' + ' </span>';
+                                        yresult = '<span> </span>';
 
-                                    return '<span style="color:#87ceeb">Year Week :</span> <b> [#' + this.point.YearWeekNumber + ' of ' + Highcharts.dateFormat('%Y', new Date(this.point.startdate)) + '], [ ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.x)) + ' / ' + Highcharts.dateFormat(TrippismConstants.HighChartDateFormat, new Date(this.point.enddate)) + ' ] </b><br>' +
-                                        '<span style="color:#87ceeb">Volume :</span> <b> ' + yresult + '</b>';
+                                    return '<span style="color:#87ceeb">Year Week: </span> <b> [#' + this.point.YearWeekNumber + ' of ' + Highcharts.dateFormat('%Y', new Date(this.point.startdate)) + '], [ ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.x)) + ' / ' + Highcharts.dateFormat(TrippismConstants.HighChartDateFormat, new Date(this.point.enddate)) + ' ] </b><br>' +
+                                        '<span style="color:#87ceeb">Traffic Category: </span> <b> ' + yresult + '</b>';
 
                                 }
                             },
                             series: [{
                                 name: "Low Seasonality",
-                                data: chartDataLow,
+                                data: chartDataAll,
                                 pointStart: startdate,
                                 color: '#adff2f',
                             },
-                            {
-                                name: "Medium Seasonality",
-                                data: chartDataMedium,
-                                pointStart: startdate,
-                                color: '#2e8b57',
-                            },
-                            {
-                                name: "High Seasonality",
-                                data: chartDataHigh,
-                                pointStart: startdate,
-                                color: '#87ceeb',
-                            }]
+                            ]
                         };
 
                         $timeout(function () {

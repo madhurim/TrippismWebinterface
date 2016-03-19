@@ -7,14 +7,14 @@
         // Define the functions and properties to reveal.
         var AirportJsonData = [];
         var highRankedAirports = [];
-        var airlinesList = [];
+        //var airlinesList = [];
         var LastSearch;
         var service = {
             ReadAirportJson: ReadAirportJson,
             getIpinfo: getIpinfo,
             MapscrollTo: MapscrollTo,
             ReadStateJson: ReadStateJson,
-            ReadAirlinesJson: ReadAirlinesJson,
+            //ReadAirlinesJson: ReadAirlinesJson,
             GetCurrencySymbols: GetCurrencySymbols,
             GetCurrencySymbol: GetCurrencySymbol,
             AirportCodeLog: AirportCodeLog,
@@ -169,26 +169,22 @@
             return;
         }
 
-        function ReadAirlinesJson() {
-            if (airlinesList.length > 0) {
-                var d = $q.defer();
-                d.resolve(airlinesList);
-                return d.promise;
-            }
-            else
-                return $http.get($rootScope.apiURLForConstant + '/GetAirlines').then(function (data) {
-                    if (data.status == 200) {
-                        airlinesList = data.data;
-                        return airlinesList;
-                    }
-                    else
-                        return [];
-                });
-
-            //return $http.get('scripts/Constants/airlines.json').then(function (_airlines) {
-            //    return _airlines.data.response;
-            //});
-        }
+        //function ReadAirlinesJson() {
+        //    if (airlinesList.length > 0) {
+        //        var d = $q.defer();
+        //        d.resolve(airlinesList);
+        //        return d.promise;
+        //    }
+        //    else
+        //        return $http.get($rootScope.apiURLForConstant + '/GetAirlines').then(function (data) {
+        //            if (data.status == 200) {
+        //                airlinesList = data.data;
+        //                return airlinesList;
+        //            }
+        //            else
+        //                return [];
+        //        });
+        //}
 
         function GetCurrencySymbols() {
             $http.get($rootScope.apiURLForConstant + '/GetCurrencySymbols').then(function (data) {

@@ -134,20 +134,23 @@
         $scope.getStopArray = function (length) {
             return new Array(length);
         }
-        $scope.getAirlineName = function (airlineCode) {
-            var result = airlineCode;
-            var cacheValue = $filter('filter')(airlinesNameCache, { code: airlineCode })[0];
-            if (cacheValue)
-                return cacheValue.name;
-            if ($scope.$parent.fareParams.AvailableAirline) {
-                var data = $filter('filter')($scope.$parent.fareParams.AvailableAirline, { code: airlineCode });
-                if (data.length == 1) {
-                    airlinesNameCache.push({ code: airlineCode, name: data[0].name });
-                    return data[0].name;
-                }
-            }
-            return result;
-        }
+
+        // commented for the time being
+        //$scope.getAirlineName = function (airlineCode) {
+        //    var result = airlineCode;
+        //    var cacheValue = $filter('filter')(airlinesNameCache, { code: airlineCode })[0];
+        //    if (cacheValue)
+        //        return cacheValue.name;
+        //    if ($scope.$parent.fareParams.AvailableAirline) {
+        //        var data = $filter('filter')($scope.$parent.fareParams.AvailableAirline, { code: airlineCode });
+        //        if (data.length == 1) {
+        //            airlinesNameCache.push({ code: airlineCode, name: data[0].name });
+        //            return data[0].name;
+        //        }
+        //    }
+        //    return result;
+        //}
+
         var getLowestFare = function (pricedItinerary) {
             if (pricedItinerary == undefined)
                 return undefined;

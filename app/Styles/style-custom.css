@@ -906,12 +906,8 @@ ul .stop-line {
 }
 
 .fare-box {
-    text-align: right;
+    text-align: left;
 }
-
-    .fare-box .pull-left h4 {
-        margin-top: 3px;
-    }
 
 .book-wrapper img {
     width: 40px;
@@ -929,6 +925,70 @@ ul .stop-line {
     margin: 0px 0px 15px 0px;
 }
 
+.ibox-title.searched-box {
+    padding: 3px 10px;
+}
+
+    .ibox-title.searched-box .searched {
+        text-align: left !important;
+    }
+
+    .ibox-title.searched-box .ibox-box {
+        padding: 0px;
+        margin: 0px;
+        margin-top: 2px;
+    }
+
+    .ibox-title.searched-box .share-btn {
+        margin-top: 0px !important;
+    }
+
+.share-btn {
+    padding: 0px;
+}
+
+    .share-btn .icons {
+        float: right;
+    }
+
+.ibox-title.searched-box .ibox-box span {
+    vertical-align: -webkit-baseline-middle;
+}
+
+.ibox-title-new {
+    background: none;
+    border: none;
+    box-shadow: none;
+}
+
+.fare-box-inner {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.fare-rec span {
+    vertical-align: -webkit-baseline-middle;
+}
+
+.range-det {
+    margin-bottom: 10px;
+}
+
+    .range-det div {
+        font-size: 13px;
+    }
+
+.fare-desc div {
+    color: #0bba0b;
+}
+
+.fare-text {
+    font-weight: 500;
+}
+
+.padding-bottom-0 {
+    padding-bottom: 0px;
+}
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {
@@ -1068,6 +1128,19 @@ ul .stop-line {
     }
 }
 
+@media only screen and (max-width:520px) {
+    .col-fare {
+        margin: 0 auto;
+        float: none;
+        width: 100%;
+        display: table;
+    }
+
+    .fare-box {
+        text-align: right;
+    }
+}
+
 @media only screen and (max-width:480px) {
     .clustermarkerpopup {
         width: 100%;
@@ -1075,6 +1148,10 @@ ul .stop-line {
 
     .refine-search .content {
         height: 235px;
+    }
+
+    .searched-box .search-det, .share-btn .icons {
+        float: none !important;
     }
 }
 /*#endregion Media queries */

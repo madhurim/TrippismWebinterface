@@ -312,7 +312,6 @@
                   }];
 
               directive.link = function (scope, elm, attrs) {
-
                   var w = angular.element($window);
                   w.bind('resize', function () {
                       setIwCloseButtonPositionFn();
@@ -399,7 +398,10 @@
                           $timeout(function () {
                               scope.destinationMap.panTo(airportLoc);
                           }, 0, false);
-                          showMessage();
+
+                          if (w.width() >= 768) {
+                              showMessage();
+                          }
                       });
                   }
 

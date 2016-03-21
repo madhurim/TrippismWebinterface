@@ -74,7 +74,7 @@
 
                     scope.DepartDate = $filter('date')(scope.seasonalityParams.Fareforecastdata.DepartureDate, scope.format, null);
                     scope.ReturnDate = $filter('date')(scope.seasonalityParams.Fareforecastdata.ReturnDate, scope.format, null);
-                    scope.chartHeight = 300;
+                    scope.chartHeight = 200;
                     scope.divID = "seasonality";
                     var mapHTML = "<div id='" + scope.divID + "'></div>";
                     elem.append($compile(mapHTML)(scope));
@@ -236,29 +236,23 @@
                                 //}
                             },
                             yAxis: {
-                                min: 0,
-                                max: 4,
+                                min: 1,
+                                max: 3,
                                 tickInterval: 1,
                                 title: {
                                     text: 'Traffic Category'
                                 },
                                 labels: {
                                     formatter: function () {
-
-                                        var result = '';
                                         if (this.value == 1) {
-                                            result = '<span> Off-Peak </span>';
+                                            return '<span> Off-Peak </span>';
                                         }
                                         else if (this.value == 2) {
-                                            result = '<span> Medium </span>';
+                                            return '<span> Medium </span>';
                                         }
                                         else if (this.value == 3) {
-                                            result = '<span> Peak </span>';
+                                            return '<span> Peak </span>';
                                         }
-                                        else {
-                                            result = '<span> </span>';
-                                        }
-                                        return result;
                                     }
                                 }
                             },

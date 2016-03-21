@@ -405,11 +405,11 @@
 
                   function showMessage() {
                       if ($rootScope.isShowAlerityMessage) {
-                          var message = "<div class='alert-box'><p>Click on any of the numbered clusters to see destinations.</p>"
-                              + "<p>Numbers represent how many destinations fall into a nearby radius.</p>"
-                              + "<p>'1' means the cluster contains only 1 destination.</p>"
-                              + "<p>Click on individual destination within the cluster to see destination details.</p>"
-                              + "<input type='button' class='btn btn-primary' value='OK' />"
+                          var message = "<div class='alert-box'><p>Click on any of the numbered clusters to see destinations. Numbers represent how many destinations fall into a nearby radius.</p>"
+                              //+ "<p>Numbers represent how many destinations fall into a nearby radius.</p>"
+                              //+ "<p>'1' means the cluster contains only 1 destination.</p>"
+                              //+ "<p>Click on individual destination within the cluster to see destination details.</p>"
+                              + "<input type='button' class='btn btn-primary' value='Got It' />"
                             + "</div><div class='clear'></div>";
                           alertify.set('notifier', 'position', 'top-right');
                           alertify.warning(message, 6000000, function () { $rootScope.isShowAlerityMessage = false; });

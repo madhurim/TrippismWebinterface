@@ -344,6 +344,11 @@
                       if (scope.destinations != undefined && scope.destinations.length > 0) {
                           scope.displayDestinations(scope.destinations);
                           scope.setMarkerCluster();
+                          if (w.width() >= 768 && $rootScope.isShowAlerityMessage) {
+                              $timeout(function () {
+                                  showMessage();
+                              }, 0, false);
+                          }
                       }
 
                       var originairport = _.find(scope.airportlist, function (airport) {
@@ -398,25 +403,16 @@
                           $timeout(function () {
                               scope.destinationMap.panTo(airportLoc);
                           }, 0, false);
-
-                          if (w.width() >= 768) {
-                              showMessage();
-                          }
                       });
                   }
 
                   function showMessage() {
-                      if ($rootScope.isShowAlerityMessage) {
-                          var message = "<div class='alert-box'><p>Click on any of the numbered clusters to see destinations. Numbers represent how many destinations fall into a nearby radius.</p>"
-                              //+ "<p>Numbers represent how many destinations fall into a nearby radius.</p>"
-                              //+ "<p>'1' means the cluster contains only 1 destination.</p>"
-                              //+ "<p>Click on individual destination within the cluster to see destination details.</p>"
-                              + "<input type='button' class='btn btn-primary' value='Got It' />"
-                            + "</div><div class='clear'></div>";
-                          alertify.set('notifier', 'position', 'top-right');
-                          alertify.warning(message, 10, function () { $rootScope.isShowAlerityMessage = false; });
-                          showMessagePosition();
-                      }
+                      var message = "<div class='alert-box'><p>Click on any of the numbered clusters to see destinations. Numbers represent how many destinations fall into a nearby radius.</p>"
+                          + "<input type='button' class='btn btn-primary' value='Got It' />"
+                        + "</div><div class='clear'></div>";
+                      alertify.set('notifier', 'position', 'top-right');
+                      alertify.warning(message, 10, function () { $rootScope.isShowAlerityMessage = false; });
+                      showMessagePosition();
                   }
 
                   function showMessagePosition() {

@@ -1,25 +1,20 @@
 ﻿<div ng-controller="DestinationController" cg-busy="{promise:mappromise,message:'Please wait...'}">
-    <!--<destination-attraction></destination-attraction>-->
     <div class="row" title="">
         <div class="tab-content-wp col-xs-12">
             <destination-fare-forecast fare-params="fareParams"></destination-fare-forecast>
             <div class=" col-md-9 col-sm-12 col-xs-12">
-                <googleattraction-info googleattraction-params="fareParams" class="hidden-xs googleattraction" style="clear:both;"></googleattraction-info>
                 <div class="" reset-dimentions>
                     <div class="row outerDiv" id="outerDiv">
-                        <div class="col-md-5 col-sm-5 col-xs-12 paddingr-0 bg-white column-1">
-                            <!--ng-hide="attractionParams.WeatherInfoNoDataFound"-->
-                            <weather-info weather-params="fareParams"></weather-info>
-                            <!--<weather-info weather-params="fareParams"></weather-info>-->
-                        </div>
-                        <div class="col-md-7 col-sm-7 col-xs-12  bg-white column-2">
+                        <div class="col-md-12 col-sm-12 col-xs-12 column-2">
                             <farerangewidget-info widget-params="fareParams"></farerangewidget-info>
-                            <!--<farerange-info farerange-params="attractionParams" style="clear:both;"></farerange-info>-->
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 column-1">
+                            <weather-info weather-params="fareParams"></weather-info>
                         </div>
                     </div>
                 </div>
+                <googleattraction-info googleattraction-params="fareParams" class="hidden-xs googleattraction" style="clear:both;"></googleattraction-info>
                 <div class="col-md-12 col-sm-12 col-xs-12 lastDiv newouterDiv" id="lastDiv" style="clear:both;">
-                    <!--ng-show="!attractionParams.loadingSeasonality"-->
                     <seasonality-info seasonality-params="fareParams"></seasonality-info>
                 </div>
             </div>

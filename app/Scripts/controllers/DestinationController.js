@@ -262,12 +262,9 @@
                 }
 
 
-                var WeatherData, farerangeInfo, fareforcastinfo;//seasonalityfarerangewidgetInfo, ,weatherwidgetInfo;
+                var WeatherData, farerangeInfo, fareforcastinfo;
 
                 $scope.$on('widgetLoaded', function (event, data) {
-                    //if (data.name === 'seasonalityfarerangewidgetInfo') {
-                    //    seasonalityfarerangewidgetInfo = data;
-                    //} else
                     if (data.name === 'WeatherData') {
                         WeatherData = data;
                     }
@@ -278,18 +275,10 @@
                         fareforcastinfo = data;
                     }
 
-
-
-                    //else if (data.name === 'weatherwidgetInfo') {
-                    //    weatherwidgetInfo = data;
-                    //}
-                    if (farerangeInfo && WeatherData && fareforcastinfo) //&& seasonalityfarerangewidgetInfo  && weatherwidgetInfo
-                    {
+                    if (farerangeInfo && WeatherData && fareforcastinfo) {
                         var columnData = {
-                            // seasonalityfarerangewidgetInfo: seasonalityfarerangewidgetInfo,
                             farerangeInfo: farerangeInfo,
                             fareforcastinfo: fareforcastinfo,
-                            //weatherwidgetInfo: weatherwidgetInfo,
                             WeatherData: WeatherData
                         };
                         $scope.$broadcast("columnLayoutChanged", { columnData: columnData });

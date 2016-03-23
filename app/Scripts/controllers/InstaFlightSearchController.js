@@ -29,7 +29,7 @@
                 $scope.includedCarriers = $scope.instaFlightSearch.IncludedCarriers;
                 $scope.DepartureDate = $scope.instaFlightSearch.DepartureDate;
                 $scope.ReturnDate = $scope.instaFlightSearch.ReturnDate;
-                if ($scope.instaFlightSearch.IncludedCarriers != '' && $scope.instaFlightSearch.IncludedCarriers.length > 0)
+                if ($scope.instaFlightSearch.IncludedCarriers && $scope.instaFlightSearch.IncludedCarriers != '' && $scope.instaFlightSearch.IncludedCarriers.length > 0)
                     $scope.instaFlightSearch.IncludedCarriers = $scope.instaFlightSearch.IncludedCarriers.join(',');
                 InstaFlightSearchFactory.GetData($scope.instaFlightSearch).then(function (data) {
                     if (data.status != 404 && data.status != 400 && data != "" && data.PricedItineraries.length > 0) {

@@ -6,14 +6,12 @@
          'EmailForDestinationDetFactory', 'SeasonalityFactory',
          'FareRangeFactory',
          'eMailData',
-         'eMailDataFareForeCast',
          '$timeout', '$stateParams', '$state',
          'TrippismConstants', 'UtilFactory', EmailForDestinationDet]);
 
     function EmailForDestinationDet($scope, $filter, $modal,
         EmailForDestinationDetFactory, SeasonalityFactory, FareRangeFactory,
         eMailData,
-        eMailDataFareForeCast,
         $timeout, $stateParams, $state,
         TrippismConstants, UtilFactory) {
         $scope.fromEmail = '';
@@ -86,8 +84,6 @@
                 return Destination.DestinationLocation == $scope.eMailData.DestinationairportName.airport_Code.toUpperCase()
             });
 
-            var FareData = eMailDataFareForeCast;
-
             var sortedObjs = _.filter(basicDetinationDetlist, function (item) {
                 return item.LowestFare && item.LowestFare.Fare !== 'N/A';
             });
@@ -99,16 +95,16 @@
             $scope.eMailData.Destinatrion
 
             var url = 'http://' + window.document.location.host;
-            var tripissm_rdrURL = '<a href="' + url + '/#/destination/'+$stateParams.path+'">www.trippism.com</a>';
+            var tripissm_rdrURL = '<a href="' + url + '/#/destination/' + $stateParams.path + '">www.trippism.com</a>';
             var fblink = '<a href="' + "http://www.facebook.com/sharer/sharer.php?s=100&p[title]=vacation destination&p[url]=" + encodeURIComponent('http://dev.trippism.com/#/destination/' + $stateParams.path) + '">Facebook</a>';
             var twitterlink = '<a href="' + "http://twitter.com/share?text=vacation Destination&url=" + encodeURIComponent('http://dev.trippism.com/#/destination/' + $stateParams.path) + '">Twitter</a>';
             var gpluslink = '<a href="' + "https://plus.google.com/share?" + encodeURIComponent('http://dev.trippism.com/#/destination/' + $stateParams.path) + '">Google+</a>';
             var contentString = '<div style="font-family: arial,sans-serif;color: black;">' +
                            '<p>Hey there!</p><p> Check this out... I found a cool vacation destination going from ' + eMailData.OriginairportName.airport_CityName + '. Its ' + eMailData.DestinationairportName.airport_CityName + '! . What do you think ? Click here for more detail ' + tripissm_rdrURL + '</p>';
 
-           // contentString += ' <p style="clear:both;padding-top:20px;">Please explore  <a href="' + url +'">www.trippism.com</a> for more details to plan vacation, trip.</p><p>Thanks,</p><p>via Trippism - new generation trip planner!</p>';
-            contentString += ' <p style="clear:both;padding-top:20px;">Share on :  ' + fblink +', '+ twitterlink +', '+gpluslink+' </p></div>';
-            
+            // contentString += ' <p style="clear:both;padding-top:20px;">Please explore  <a href="' + url +'">www.trippism.com</a> for more details to plan vacation, trip.</p><p>Thanks,</p><p>via Trippism - new generation trip planner!</p>';
+            contentString += ' <p style="clear:both;padding-top:20px;">Share on :  ' + fblink + ', ' + twitterlink + ', ' + gpluslink + ' </p></div>';
+
             var email = {
                 From: $scope.fromEmail,
                 To: $scope.toEmail,

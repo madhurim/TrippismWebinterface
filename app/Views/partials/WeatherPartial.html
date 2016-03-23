@@ -8,7 +8,7 @@
             <!--added header under content-->
             <div class="popup-header">
                 <!--<h6 class="widget-popup-title">Historical weather pattern summary</h6>-->
-                <h6 class="widget-popup-title">What is the weather like?</h6>
+                <h6 class="widget-popup-title">What is the weather historically?</h6>
             </div>
 
             <div class="overview-weather-box">
@@ -18,17 +18,18 @@
                             <!--<h6>[ {{DepartDate}} to {{ReturnDate}} ] </h6>-->
                             <h6> {{DepartDate}} to {{ReturnDate}}  </h6>
                         </div>
-                        <div class="high-low-box">
-                            <div class="avg-high">
+                        <!--<div class="high-low-box">-->
+                        <div class="col-md-4 col-sm-12 col-xs-12 padding-0 margin-top-5">
+                            <div class="col-md-6 col-sm-6 col-xs-6 avg-high padding-0">
                                 <span>Avg. High </span>
                                 <h5>{{HighTempratureF}}&#x2109  &nbsp;&nbsp;{{HighTempratureC}}&#x2103</h5>
                             </div>
-                            <div class="avg-low">
+                            <div class="col-md-6 col-sm-6 col-xs-6 avg-low padding-0">
                                 <span>Avg. Low </span>
                                 <h5>{{LowTempratureF}}&#x2109  &nbsp;&nbsp;{{LowTempratureC}}&#x2103</h5>
                             </div>
                         </div>
-                        <div class="avg-box">
+                        <div class="col-md-8 col-sm-12 col-xs-12 avg-box padding-0">
                             <div ng-repeat="item in  WeatherwidgetData.WeatherChances">
                                 <div class="avg" ng-if="item.Name=='Cloudy' && item.Percentage >= 60">
                                     <img src="../images/weather/Cloudy.png" alt="" />
@@ -104,8 +105,83 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="avg-box" ng-if="WeatherwidgetData.WeatherChances" style="padding-bottom: 156px;">
+                        <!--<div class="col-md-8 col-sm-12 col-xs-12 avg-box padding-0">
+                            <div>
+                                <div class="avg">
+                                    <img src="../images/weather/Cloudy.png" alt="" />
+                                    <span class="title">Cloudy</span>
+                                </div>
+                                <div class="avg">
+                                    <img src="../images/weather/Humid.png" alt="" />
+                                    <span class="title">Humid</span>
+                                </div>
+                                <div class="avg">
+                                    <img src="../images/weather/Partly Cloudy.png" alt="" />
+                                    <span class="title">Partly Cloudy</span>
+                                </div>
+                                <div class="avg">
+                                    <img src="../images/weather/Precipitation.png" alt="" />
+                                    <span class="title">Precipitation</span>
+                                </div>
+                                <div class="avg">
+                                    <img src="../images/weather/Thunderstorms.png" alt="" />
+                                    <span class="title">Thunderstorms</span>
+                                </div>
+                                <div class="avg">
+                                    <img src="../images/weather/Rain.png" alt="" />
+                                    <span class="title">Rainy</span>
+                                </div>
+                                <div class="avg">
+                                    <img src="../images/weather/Sweltering.png" alt="" />
+                                    <span class="title">Very Hot</span>
+                                </div>
+                                <div class="avg">
+                                    <img src="../images/weather/warm.png" alt="" />
+                                    <span class="title">warm</span>
+                                </div>
+                                <div class="avg">
+                                    <img src="../images/weather/Sunny.png" alt="" />
+                                    <span class="title">Sunny</span>
+                                </div>
+                                <div class="avg">
+                                    <img src="../images/weather/Hot.png" alt="" />
+                                    <span class="title">Hot</span>
+                                </div>
+                                <div class="avg">
+                                    <img src="../images/weather/Windy.png" alt="" />
+                                    <span class="title">Windy</span>
+                                </div>
+                                <div class="avg">
+                                    <img src="../images/weather/Fog.png" alt="" />
+                                    <span class="title">Fog</span>
+                                </div>
+                                <div class="avg">
+                                    <img src="../images/weather/Ground Snow.png" alt="" />
+                                    <span class="title">Ground Snow</span>
+                                </div>
+                                <div class="avg">
+                                    <img src="../images/weather/Tornado.png" alt="" />
+                                    <span class="title">Tornado</span>
+                                </div>
+                                <div class="avg">
+                                    <img src="../images/weather/Freezing.png" alt="" />
+                                    <span class="title">Freezing</span>
+                                </div>
+                                <div class="avg">
+                                    <img src="../images/weather/Cool.png" alt="" />
+                                    <span class="title">Cool</span>
+                                </div>
+                                <div class="avg">
+                                    <img src="../images/weather/Hail.png" alt="" />
+                                    <span class="title">Hail</span>
+                                </div>
+                                <div class="avg">
+                                    <img src="../images/weather/Snow.png" alt="" />
+                                    <span class="title">Snow</span>
+                                </div>
+                            </div>
+                        </div>-->
+                        <div class="avg-box" ng-if="WeatherwidgetData.WeatherChances">
                         </div>
                     </li>
                 </ul>

@@ -1205,13 +1205,20 @@ i.calendar.active, .input-box:hover i.calendar {
     margin-top: 10px;
 }
 */
-.avg {
-    float: left;
-    /*width: 16.6666%;*/
+/*.avg {
+    float: left;   
     width: 25%;
     text-align: center;
     margin-top: 15px;
     height: 78px;
+}*/
+
+.avg {
+    float: left;
+    width: 15%;
+    text-align: center;
+    height: 78px;
+    vertical-align: -webkit-baseline-middle;
 }
 
     .avg img {
@@ -1223,11 +1230,17 @@ i.calendar.active, .input-box:hover i.calendar {
         color: #585858;
         font-size: 12px;
         color: #989898;
+        vertical-align: -webkit-baseline-middle;
     }
 
+/*.high-low-box {
+    width: 100%;
+    float: left;
+}*/
 .high-low-box {
     width: 100%;
     float: left;
+    max-width: 250px;
 }
 
     .high-low-box span {
@@ -1948,7 +1961,12 @@ i.calendar.active, .input-box:hover i.calendar {
 
 @media only screen and (max-width:1152px) {
     .avg {
-        width: 33.333%;
+        /*width: 33.333%;*/
+        width: 25%;
+    }
+
+    .ibox-title-new h4, .ibox-title-new p {
+        float: none!important;
     }
 }
 
@@ -1962,9 +1980,9 @@ i.calendar.active, .input-box:hover i.calendar {
         text-align: center;
     }
 
-    .right-sidebar {
+    /*.right-sidebar {
         margin-top: 30px;
-    }
+    }*/
 
     .btn-lg, .btn-group-lg > .btn {
         padding: 8px 12px;
@@ -2159,7 +2177,8 @@ i.calendar.active, .input-box:hover i.calendar {
     }
 
     .avg {
-        width: 33.333%;
+        /*width: 33.333%;*/
+        width: 15%;
     }
 }
 
@@ -2607,8 +2626,9 @@ em.ng-binding {
     padding-top: 8px;
     padding-bottom: 14px;
     border-radius: 2px;
-    padding: 15px 15px 15px 15px;
-    background: #fff;
+    /*padding: 15px 15px 15px 15px;
+    background: #fff;*/
+    padding: 0px;
 }
 
 .lastDiv {
@@ -2676,8 +2696,10 @@ em.ng-binding {
     background: whitesmoke;
     border: 1px solid #ADAAAA;
     border-radius: 3px;
-    margin-top: 8px;
-    margin-bottom: 0px;
+    /*margin-top: 8px;*/
+    /*margin-bottom: 0px;*/
+    /*margin-bottom: 8px;*/
+    margin-bottom: 14px;
 }
 
 

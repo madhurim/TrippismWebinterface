@@ -2,8 +2,8 @@
     //var selected;
     'use strict';
     angular.module('TrippismUIApp')
-      .directive('googleMap', ['$timeout', '$window', 'UtilFactory',
-          function ($timeout, $window, UtilFactory) {
+      .directive('googleMap', ['$timeout', '$rootScope', '$window', 'UtilFactory',
+          function ($timeout, $rootScope, $window, UtilFactory) {
               var directive = {};
               directive.templateUrl = '/Views/GoogleMap.html',
               directive.scope = {
@@ -13,8 +13,8 @@
                   airlineJsonData: "=airlinejsondata",
               }
 
-              directive.controller = ['$scope', '$q', '$compile', '$filter', '$rootScope', '$http', '$location', 'TrippismConstants',
-                  function ($scope, $q, $compile, $filter, $rootScope, $http, $location, TrippismConstants) {
+              directive.controller = ['$scope', '$q', '$compile', '$filter', '$http', '$location', 'TrippismConstants',
+                  function ($scope, $q, $compile, $filter, $http, $location, TrippismConstants) {
                       $scope.highRankedAirportlist = [];
                       $scope.destinationMap = undefined;
                       $scope.faresList = [];
@@ -22,7 +22,7 @@
                       $scope.bounds;
                       $scope.markerCluster;
                       $scope.Zoomsize = 8;
-                      $scope.clusterFlag = true;    // flag for solving cluster issue if theme/region multiple time clicked
+                      $scope.clusterFlag = true;    // flag for solving cluster issue if theme/region multiple time clicked                      
                       var mapStyle = TrippismConstants.destinationSearchMapSyle;
                       var imageurl = 'http://' + window.document.location.host
 
@@ -312,11 +312,19 @@
                   }];
 
               directive.link = function (scope, elm, attrs) {
-
                   var w = angular.element($window);
                   w.bind('resize', function () {
                       setIwCloseButtonPositionFn();
                   });
+
+                  //var div = document.createElement("div");
+                  //div.innerHTML = "<p>Click on any of the numbered clusters to see destinations.</p>"
+                  //    + "<p>Numbers represent how many destinations fall into a nearby radius.</p>"
+                  //    + "<p>'1' means the cluster contains only 1 destination.</p>"
+                  //    + "<p>Click on individual destination within the cluster to see destination details.</p>";
+                  //div.className = "mapinfobox";
+                  //scope.destinationMap.controls[google.maps.ControlPosition.TOP_RIGHT].push(div);
+
 
                   // set position of infowindow close button
                   function setIwCloseButtonPositionFn() {
@@ -390,7 +398,32 @@
                           $timeout(function () {
                               scope.destinationMap.panTo(airportLoc);
                           }, 0, false);
+
+                          if (w.width() >= 768) {
+                              showMessage();
+                          }
                       });
+                  }
+
+                  function showMessage() {
+                      if ($rootScope.isShowAlerityMessage) {
+                          var message = "<div class='alert-box'><p>Click on any of the numbered clusters to see destinations. Numbers represent how many destinations fall into a nearby radius.</p>"
+                              //+ "<p>Numbers represent how many destinations fall into a nearby radius.</p>"
+                              //+ "<p>'1' means the cluster contains only 1 destination.</p>"
+                              //+ "<p>Click on individual destination within the cluster to see destination details.</p>"
+                              + "<input type='button' class='btn btn-primary' value='Got It' />"
+                            + "</div><div class='clear'></div>";
+                          alertify.set('notifier', 'position', 'top-right');
+                          alertify.warning(message, 6000000, function () { $rootScope.isShowAlerityMessage = false; });
+                          showMessagePosition();
+                      }
+                  }
+
+                  function showMessagePosition() {
+                      var alertBoxElement = angular.element(".ajs-message.ajs-warning.ajs-visible");
+                      var searchBoxElement = angular.element("#search-box")[0];
+                      var headerElement = angular.element("#header")[0];
+                      alertBoxElement.css({ "top": searchBoxElement.offsetHeight + headerElement.offsetHeight - 9 });
                   }
               }
               return directive;

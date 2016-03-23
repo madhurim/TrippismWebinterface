@@ -32,8 +32,8 @@
             $rootScope.apiURLForConstant = 'http://' + $location.host() + '/api/Constants/';
         }
 
+        $rootScope.isShowAlerityMessage = true;
 
-        
         $scope.ViewDestinations = function () {
             var result = UtilFactory.GetLastSearch()
             //$location.path('destinations/f=' + result.Origin.toUpperCase() + ';d=' + ConvertToRequiredDate(result.FromDate, 'API') + ';r=' + ConvertToRequiredDate(result.ToDate, 'API'));

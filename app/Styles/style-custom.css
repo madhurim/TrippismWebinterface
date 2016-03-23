@@ -1032,6 +1032,40 @@ ul .stop-line {
 .font-16 {
     font-size: 16px;
 }
+
+/*#region Alertify */
+.ajs-message.ajs-warning.ajs-visible,
+.alertify-notifier.ajs-right .ajs-message.ajs-visible {
+    /*width: 400px;
+    right: 365px;*/
+    width: 320px;
+    right: 300px;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 8px;
+    margin-top: 0px;
+}
+
+.alert-box {
+    font-size: 11px;
+    cursor: pointer;
+}
+
+    .alert-box p {
+        margin: 0px;
+    }
+
+    .alert-box input[type=button] {
+        padding: 2px 7px;
+        font-size: 12px;
+        float: right;
+        margin-right: 10px;
+    }
+
+.alertify-notifier {
+    z-index: 1;
+}
+/*#endregion Alertify */
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {

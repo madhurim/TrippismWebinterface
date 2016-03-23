@@ -414,7 +414,7 @@
                               + "<input type='button' class='btn btn-primary' value='Got It' />"
                             + "</div><div class='clear'></div>";
                           alertify.set('notifier', 'position', 'top-right');
-                          alertify.warning(message, 6000000, function () { $rootScope.isShowAlerityMessage = false; });
+                          alertify.warning(message, 10, function () { $rootScope.isShowAlerityMessage = false; });
                           showMessagePosition();
                       }
                   }

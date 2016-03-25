@@ -230,7 +230,7 @@
                 }
 
                 function setFareRangeChart() {
-                    var chartRangeObj = getChartRange(scope.FareRangeWidgetData, scope.lowestFareObj.fare);
+                    //var chartRangeObj = getChartRange(scope.FareRangeWidgetData, scope.lowestFareObj.fare);
                     var chartFareObj = {
                         LowestFare: scope.lowestFareObj.fare,
                         MinimumFare: Math.ceil(scope.FareRangeWidgetData.MinimumFare),
@@ -295,10 +295,12 @@
 
                     $('#fareRageChart').highcharts({
                         chart: {
-                            height: 100,
+                            //height: 100,
+                            height: 80,
                             type: 'lineargauge',
                             inverted: true,
-                            marginTop: 30
+                            //marginTop: 30
+                            marginTop: 10
                         },
                         title: false,
                         credits: {
@@ -345,11 +347,11 @@
                                     //    return '<div class="gauge-label">High<br/>' + value + '</div>';
 
                                     if (this.value == 0)
-                                        return '<div class="gauge-label">Low<br/>' + chartFareObj.MinimumFare + '</div>';
+                                        return '<div class="gauge-label">Low<br/>' + scope.FareRangeWidgetData.CurrencyCode + ' ' + chartFareObj.MinimumFare + '</div>';
                                     else if (this.value == 50)
-                                        return '<div class="gauge-label">Median<br/>' + chartFareObj.MedianFare + '</div>';
+                                        return '<div class="gauge-label">Median<br/>' + scope.FareRangeWidgetData.CurrencyCode + ' ' + chartFareObj.MedianFare + '</div>';
                                     else if (this.value == 100)
-                                        return '<div class="gauge-label">High<br/>' + chartFareObj.MaximumFare + '</div>';
+                                        return '<div class="gauge-label">High<br/>' + scope.FareRangeWidgetData.CurrencyCode + ' ' + chartFareObj.MaximumFare + '</div>';
                                 }
                             },
                             plotBands: [{
@@ -384,16 +386,16 @@
                     });
                 }
 
-                function getChartRange(fareRangeObj, lowestFare) {
-                    var chartRangeObj = { from: fareRangeObj.MinimumFare, to: fareRangeObj.MaximumFare };
+                //function getChartRange(fareRangeObj, lowestFare) {
+                //    var chartRangeObj = { from: fareRangeObj.MinimumFare, to: fareRangeObj.MaximumFare };
 
-                    if (lowestFare < fareRangeObj.MinimumFare)
-                        chartRangeObj.from = lowestFare;
+                //    if (lowestFare < fareRangeObj.MinimumFare)
+                //        chartRangeObj.from = lowestFare;
 
-                    if (lowestFare > fareRangeObj.MaximumFare)
-                        chartRangeObj.to = lowestFare;
-                    return chartRangeObj;
-                }
+                //    if (lowestFare > fareRangeObj.MaximumFare)
+                //        chartRangeObj.to = lowestFare;
+                //    return chartRangeObj;
+                //}
             }
         }
     }]);

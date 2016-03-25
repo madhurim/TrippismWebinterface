@@ -1019,6 +1019,7 @@ ul .stop-line {
 
 .gauge-label {
     text-align: center;
+    word-spacing: -2px;
 }
 
 .fare-pred {

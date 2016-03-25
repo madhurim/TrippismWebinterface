@@ -1033,6 +1033,9 @@ ul .stop-line {
     font-size: 16px;
 }
 
+.book-wrapper a {
+    outline: none;
+}
 /*#region Alertify */
 .ajs-message.ajs-warning.ajs-visible,
 .alertify-notifier.ajs-right .ajs-message.ajs-visible {

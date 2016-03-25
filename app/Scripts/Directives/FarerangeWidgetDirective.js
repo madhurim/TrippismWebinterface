@@ -270,19 +270,19 @@
                                 // Hide column
                                 point.graphic.hide();
 
-                                if (!markLine) {
-                                    var path = inverted ? ['M', 0, 0, 'L', -5, -5, 'L', 5, -5, 'L', 0, 0, 'L', 0, 0 + xAxis.len] : ['M', 0, 0, 'L', -5, -5, 'L', -5, 5, 'L', 0, 0, 'L', xAxis.len, 0];
-                                    markLine = this.markLine = chart.renderer.path(path)
-                                        .attr({
-                                            'fill': series.color,
-                                            'stroke': series.color,
-                                            'stroke-width': 1,
-                                        }).add();
-                                }
-                                markLine[ani]({
-                                    translateX: inverted ? xAxis.left + yAxis.translate(point.y) : xAxis.left,
-                                    translateY: inverted ? xAxis.top : yAxis.top + yAxis.len - yAxis.translate(point.y)
-                                });
+                                //if (!markLine) {
+                                //    var path = inverted ? ['M', 0, 0, 'L', -5, -5, 'L', 5, -5, 'L', 0, 0, 'L', 0, 0 + xAxis.len] : ['M', 0, 0, 'L', -5, -5, 'L', -5, 5, 'L', 0, 0, 'L', xAxis.len, 0];
+                                //    markLine = this.markLine = chart.renderer.path(path)
+                                //        .attr({
+                                //            'fill': series.color,
+                                //            'stroke': series.color,
+                                //            'stroke-width': 1,
+                                //        }).add();
+                                //}
+                                //markLine[ani]({
+                                //    translateX: inverted ? xAxis.left + yAxis.translate(point.y) : xAxis.left,
+                                //    translateY: inverted ? xAxis.top : yAxis.top + yAxis.len - yAxis.translate(point.y)
+                                //});
 
                                 // solve problem of some portion of Low, High text gets hidden due to overflow
                                 $timeout(function () {
@@ -316,38 +316,54 @@
                             tickLength: 1,
                         },
                         yAxis: {
-                            min: chartRangeObj.from,
-                            max: chartRangeObj.to,
+                            //min: chartRangeObj.from,
+                            //max: chartRangeObj.to,
+                            min: 0,
+                            max: 100,
                             gridLineWidth: 0,
                             tickWidth: 1,
                             tickColor: '#C0C0C0',
                             gridLineColor: '#C0C0C0',
                             gridLineWidth: 1,
-                            startOnTick: chartFareObj.LowestFare > chartFareObj.MinimumFare,
-                            endOnTick: chartFareObj.LowestFare < chartFareObj.MaximumFare,
-                            tickPositions: [chartFareObj.MinimumFare, chartFareObj.MedianFare, chartFareObj.MaximumFare],
+                            //startOnTick: chartFareObj.LowestFare > chartFareObj.MinimumFare,
+                            //endOnTick: chartFareObj.LowestFare < chartFareObj.MaximumFare,
+                            startOnTick: true,
+                            endOnTick: true,
+                            //tickPositions: [chartFareObj.MinimumFare, chartFareObj.MedianFare, chartFareObj.MaximumFare],
+                            tickPositions: [0, 50, 100],
                             title: null,
                             labels: {
                                 step: 1,
                                 useHTML: true,
                                 formatter: function () {
                                     var value = $filter('number')(this.value);
-                                    if (this.value == chartFareObj.MinimumFare)
-                                        return '<div class="gauge-label">Low<br/>' + value + '</div>';
-                                    else if (this.value == chartFareObj.MedianFare)
-                                        return '<div class="gauge-label">Median<br/>' + value + '</div>';
-                                    else if (this.value == chartFareObj.MaximumFare)
-                                        return '<div class="gauge-label">High<br/>' + value + '</div>';
+                                    //if (this.value == chartFareObj.MinimumFare)
+                                    //    return '<div class="gauge-label">Low<br/>' + value + '</div>';
+                                    //else if (this.value == chartFareObj.MedianFare)
+                                    //    return '<div class="gauge-label">Median<br/>' + value + '</div>';
+                                    //else if (this.value == chartFareObj.MaximumFare)
+                                    //    return '<div class="gauge-label">High<br/>' + value + '</div>';
+
+                                    if (this.value == 0)
+                                        return '<div class="gauge-label">Low<br/>' + chartFareObj.MinimumFare + '</div>';
+                                    else if (this.value == 50)
+                                        return '<div class="gauge-label">Median<br/>' + chartFareObj.MedianFare + '</div>';
+                                    else if (this.value == 100)
+                                        return '<div class="gauge-label">High<br/>' + chartFareObj.MaximumFare + '</div>';
                                 }
                             },
                             plotBands: [{
-                                from: chartRangeObj.from,
-                                to: chartFareObj.MedianFare,
+                                //from: chartRangeObj.from,
+                                //to: chartFareObj.MedianFare,
+                                from: 0,
+                                to: 50,
                                 color: '#92d050'
                             },
                             {
-                                from: chartFareObj.MedianFare + 1,
-                                to: chartRangeObj.to,
+                                //from: chartFareObj.MedianFare + 1,
+                                //to: chartRangeObj.to,
+                                from: 50,
+                                to: 100,
                                 color: '#ffff00'
                             }]
                         },
@@ -358,7 +374,7 @@
                             data: [chartFareObj.LowestFare],
                             color: '#000000',
                             dataLabels: {
-                                enabled: true,
+                                enabled: false,
                                 align: 'center',
                                 formatter: function () { return $filter('number')(this.y); },
                                 y: 20,

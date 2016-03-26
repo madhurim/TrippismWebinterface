@@ -109,7 +109,8 @@
                         "Lengthofstay": $scope.LenghtOfStay,
                         "Minfare": $scope.Minfare == 0 ? null : $scope.Minfare,
                         "Maxfare": $scope.Maxfare == 0 ? null : $scope.Maxfare,
-                        "Destination": $scope.DestinationLocation
+                        "Destination": $scope.DestinationLocation,
+                        "PointOfSaleCountry": $scope.PointOfsalesCountry
                     }
                     DestinationFactory.findInstFlightDestination(apiparam).then(function (response) {
                         if (response.FareInfo != null) {

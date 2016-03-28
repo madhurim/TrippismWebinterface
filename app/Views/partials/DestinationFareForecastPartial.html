@@ -1,12 +1,6 @@
 ﻿<div class="ibox-wp">
-    <!--<div class="ibox-title">
-        <h4>
-            {{fareParams.DestinationairportName.airport_FullName + ', ' + fareParams.DestinationairportName.airport_CityName + ', ' + fareParams.DestinationairportName.airport_CountryName}}
-        </h4>
-    </div>-->
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ibox-title searched-box">
         <div class="ibox-box searched pull-left search-det">
-            <!--<h4>You Searched </h4>-->
             <p>
                 <span ng-show="fareParams.SearchCriteria.Origin && fareParams.SearchCriteria.DestinationLocation">{{fareParams.SearchCriteria.Origin}}-{{fareParams.SearchCriteria.DestinationLocation}}</span>
                 <span ng-show="fareParams.SearchCriteria.FromDate"> {{fareParams.SearchCriteria.FromDate | date:'MMM-dd-yyyy'}} </span>
@@ -22,10 +16,13 @@
         </div>
         <div class="clear"></div>
     </div>
+    <div class="clear"></div>
     <div class="ibox-title ibox-title-new">
         <h4>
             {{airportDetail}}
         </h4>
+        <p>Fares are round trip 1 adult economy. Taxes and fees are included; baggage and preferred seating, are not included.</p>
+        <div class="clear"></div>
     </div>
     <div class="ibox-content">
         <div class="row">
@@ -63,7 +60,7 @@
                     <div class="clear"></div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6 col-xs-12 col-fare" ng-show="FareNoDataFound && FareApiLoaded" ng-if="fareParams.FareInfo.LowestFare && fareParams.FareInfo.LowestFare.Fare != 'N/A' &&  fareParams.FareInfo.LowestFare.Fare != 0">
+            <div class="col-md-4 col-sm-6 col-xs-12 col-fare" ng-if="fareParams.FareInfo.LowestFare && fareParams.FareInfo.LowestFare.Fare != 'N/A' &&  fareParams.FareInfo.LowestFare.Fare != 0">
                 <div class="ibox-box fare-box">
                     <div class="fare-box-inner text-right">
                         <h4><span class="cursor-help" data-toggle="tooltip" popover="{{fareParams.FareInfo.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(fareParams.FareInfo.CurrencyCode)}}</span> {{fareParams.FareInfo.LowestFare.Fare | number : 2}}</h4>
@@ -79,48 +76,6 @@
                     <div class="clear"></div>
                 </div>
             </div>
-            <div class="col-md-4 col-sm-6 col-xs-12 col-fare" ng-show="!FareNoDataFound && FareforecastData != null" ng-if="FareforecastData.LowestFare != 'N/A' &&  FareforecastData.LowestFare != 0">
-                <div class="ibox-box fare-box">
-                    <div class="fare-box-inner text-right">
-                        <h4><span class="cursor-help" data-toggle="tooltip" popover="{{fareParams.FareInfo.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(fareParams.FareInfo.CurrencyCode)}}</span> {{fareParams.FareInfo.LowestFare.Fare | number : 2}}</h4>
-                        <p>Lowest</p>
-                    </div>
-                    <div class="fare-box-inner">
-                        <p class="hover-line book-wrapper">
-                            <a href="" ng-click="InstaFlightSearch(fareParams.FareInfo.LowestFare.AirlineCodes, fareParams.FareInfo.LowestFare.Fare);">
-                                <img src="../images/book_now.png" />
-                            </a>
-                        </p>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-            </div>
-
-            <!--<div class="col-md-2 col-sm-3 col-xs-6" ng-show="!FareNoDataFound" ng-if="FareforecastData.Forecast.LowestPredictedFare != 'N/A' && FareforecastData.Forecast.LowestPredictedFare != 0">
-                <div title="Forecasted price for next week for the same origin-destination pair and date combination selected" class="ibox-box"><h4><span class="cursor-help" data-toggle="tooltip" popover="{{FareforecastData.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(FareforecastData.CurrencyCode)}}</span> {{FareforecastData.Forecast.LowestPredictedFare | number : 2 }}</h4><p>Lowest Predicted Fare for Next Week</p></div>
-            </div>
-
-            <div class="col-md-2 col-sm-3 col-xs-6" ng-if="!FareNoDataFound && IsRequestCompleted" ng-hide="FareforecastData.Recommendation == 'unknown'">
-                <div class="ibox-box" ng-show="!FareNoDataFound">
-                    <img ng-if="FareforecastData.Recommendation == 'buy'" title="Go ahead, Buy!" src="/images/like-icon.png" />
-                    <img ng-if="FareforecastData.Recommendation == 'wait'" title="Wait, price may drop!" src="/images/wait-icon.png" />
-                    <p>Recommendation</p>
-                </div>
-            </div>-->
-            <!--<div class="col-md-3 col-sm-12 col-xs-12 searched-box">
-                <div class="ibox-box searched">
-                    <h4>You Searched </h4>
-                    <p>
-                        <span ng-show="fareParams.SearchCriteria.Origin">{{fareParams.SearchCriteria.Origin}} </span>
-                        <span ng-show="fareParams.SearchCriteria.FromDate">{{fareParams.SearchCriteria.FromDate | date:'MMM-dd-yyyy'}} </span>
-                        <span ng-show="fareParams.SearchCriteria.ToDate">To {{fareParams.SearchCriteria.ToDate | date:'MMM-dd-yyyy'}}</span>
-                        <span ng-show="fareParams.SearchCriteria.Minfare > 0"><br />{{fareCurrencySymbol}} {{fareParams.SearchCriteria.Minfare}}</span>
-                        <span ng-show="fareParams.SearchCriteria.Maxfare > 0"> To {{fareCurrencySymbol}} {{fareParams.SearchCriteria.Maxfare}}</span>
-                        <span ng-show="fareParams.SearchCriteria.Region "> {{fareParams.SearchCriteria.Region}}</span>
-                        <span ng-show="fareParams.SearchCriteria.Theme"> {{fareParams.SearchCriteria.Theme}}</span>
-                    </p>
-                </div>
-            </div>-->
         </div>
     </div>
 </div>

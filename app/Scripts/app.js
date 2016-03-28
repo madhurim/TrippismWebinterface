@@ -16,16 +16,16 @@ TrippismUIApp.config(['$stateProvider', '$urlRouterProvider', function ($statePr
         // HOME STATES AND NESTED VIEWS ========================================
         .state('home', {
             url: '/home',
-            templateUrl:'Views/Home.html'
+            templateUrl: 'Views/Home.html'
         })
         .state('destinations', {
             url: '/destinations/*path',
             templateUrl: 'Views/destinations.html'
         })
         .state('destination', {
-             url: '/destination/*path',
-             templateUrl: 'Views/destination.html'
-         })
+            url: '/destination/*path',
+            templateUrl: 'Views/destination.html'
+        })
 }]);
 
 TrippismUIApp.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $location) {

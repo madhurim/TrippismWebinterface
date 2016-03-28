@@ -31,6 +31,7 @@
         $scope.$emit('bodyClass', 'tabpage');
         init();
         function init() {
+            alertify.dismissAll();
             UtilFactory.GetCurrencySymbols();
             $scope.mappromise = UtilFactory.ReadAirportJson().then(function (response) {
                 $scope.AvailableAirports = response;
@@ -108,7 +109,8 @@
                         "Lengthofstay": $scope.LenghtOfStay,
                         "Minfare": $scope.Minfare == 0 ? null : $scope.Minfare,
                         "Maxfare": $scope.Maxfare == 0 ? null : $scope.Maxfare,
-                        "Destination": $scope.DestinationLocation
+                        "Destination": $scope.DestinationLocation,
+                        "PointOfSaleCountry": $scope.PointOfsalesCountry
                     }
                     DestinationFactory.findInstFlightDestination(apiparam).then(function (response) {
                         if (response.FareInfo != null) {
@@ -262,12 +264,9 @@
                 }
 
 
-                var WeatherData, farerangeInfo, fareforcastinfo;//seasonalityfarerangewidgetInfo, ,weatherwidgetInfo;
+                var WeatherData, farerangeInfo, fareforcastinfo;
 
                 $scope.$on('widgetLoaded', function (event, data) {
-                    //if (data.name === 'seasonalityfarerangewidgetInfo') {
-                    //    seasonalityfarerangewidgetInfo = data;
-                    //} else
                     if (data.name === 'WeatherData') {
                         WeatherData = data;
                     }
@@ -278,18 +277,10 @@
                         fareforcastinfo = data;
                     }
 
-
-
-                    //else if (data.name === 'weatherwidgetInfo') {
-                    //    weatherwidgetInfo = data;
-                    //}
-                    if (farerangeInfo && WeatherData && fareforcastinfo) //&& seasonalityfarerangewidgetInfo  && weatherwidgetInfo
-                    {
+                    if (farerangeInfo && WeatherData && fareforcastinfo) {
                         var columnData = {
-                            // seasonalityfarerangewidgetInfo: seasonalityfarerangewidgetInfo,
                             farerangeInfo: farerangeInfo,
                             fareforcastinfo: fareforcastinfo,
-                            //weatherwidgetInfo: weatherwidgetInfo,
                             WeatherData: WeatherData
                         };
                         $scope.$broadcast("columnLayoutChanged", { columnData: columnData });

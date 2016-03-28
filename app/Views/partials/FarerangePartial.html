@@ -1,54 +1,7 @@
-<!--<div class="col-md-6 col-sm-6 col-xs-12" ng-if="(FareRangeWidgetDataFound || SeasonalityWidgetDataFound ) && IsWidgetClosed ">-->
 <div class="">
     <div class="popup-box">
-        <div class="popup-content padding-bottom-0" ng-show="!FareNoDataFound" ng-if="FareforecastData.Forecast.LowestPredictedFare != 'N/A' && FareforecastData.Forecast.LowestPredictedFare != 0 && FareforecastData.Forecast.LowestPredictedFare != undefine">
-            <!--added header under content-->
-            <!--<div class="popup-header" ng-show="!FareNoDataFound">
-                <div>
-                    <h6 class="widget-popup-title">
-                        Fare forecast
-                    </h6>
-                </div>
-            </div>-->
-            <div class="popup-header" ng-show="!FareNoDataFound">
-                <div>
-                    <h6 class="widget-popup-title">
-                        How good is today's price?
-                    </h6>
-                </div>
-            </div>
-
-            <div class="overview-weather-box">
-                <div>
-                    <!--class="overview-weather-content"-->
-                    <div class="row">
-                        <div ng-show="!FareNoDataFound" ng-if="FareforecastData.Forecast.LowestPredictedFare != 'N/A' && FareforecastData.Forecast.LowestPredictedFare != 0">
-                            <div class="col-md-4 col-sm-12 col-xs-12" ng-if="lowestFareObj">
-                                {{lowestFareObj.currencySymbol}} {{lowestFareObj.fare | number : 2}}
-                                <p>Current lowest fare</p>
-                            </div>
-                            <div class="col-md-4 col-sm-12 col-xs-12">
-                                {{GetCurrencySymbol(FareforecastData.CurrencyCode)}} {{FareforecastData.Forecast.LowestPredictedFare | number : 2 }}
-                                <p>Lowest Predicted Fare for Next Week</p>
-                            </div>
-                            <div class="col-md-4 col-sm-12 col-xs-12">
-                                {{GetCurrencySymbol(FareforecastData.CurrencyCode)}} {{FareforecastData.Forecast.HighestPredictedFare | number : 2 }}
-                                <p>Highest Predicted Fare for Next Week</p>
-                            </div>
-                            <div class="col-md-12 col-sm-12 col-xs-12 fare-rec" ng-if="!FareNoDataFound && IsRequestCompleted">
-                                <img ng-if="FareforecastData.Recommendation == 'buy'" title="Go ahead, Buy!" src="/images/like-icon.png" />
-                                <img ng-if="FareforecastData.Recommendation == 'wait'" title="Wait, price may drop!" src="/images/wait-icon.png" />
-                                <span ng-if="FareforecastData.Recommendation == 'buy'"> We recommend buy</span>
-                                <span ng-if="FareforecastData.Recommendation == 'wait'">We recommend wait to buy</span>
-                                <span ng-if="FareforecastData.Recommendation == 'unknown'">Wait or buy</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="popup-content" ng-if="(FareRangeWidgetDataFound ) && IsWidgetClosed">
-            <div class="popup-header" ng-show="FareNoDataFound">
+            <div class="popup-header" ng-show="!FareNoDataFound">
                 <div>
                     <h6 class="widget-popup-title">
                         How good is today's price?
@@ -57,11 +10,17 @@
             </div>
             <div class="overview-weather-box">
                 <div ng-if="FareRangeWidgetDataFound">
-                    <!-- class="overview-weather-farerange" ng-style="!SeasonalityWidgetDataFound && {'border-left':'none'}"-->
                     <p class="fare-text">
-                        Fares that were paid in the last 4 weeks for the same search combination
-                        <span ng-if="FareRangeWidgetData.IsMacOrigin || FareRangeWidgetData.IsMacDestination">{{FareRangeWidgetData.OriginLocation}}-{{FareRangeWidgetData.DestinationLocation}}</span>
+                        <!--Fares that were paid in the last 4 weeks for the same search combination
+                        <span ng-if="FareRangeWidgetData.IsMacOrigin || FareRangeWidgetData.IsMacDestination">{{FareRangeWidgetData.OriginLocation}}-{{FareRangeWidgetData.DestinationLocation}}</span>-->
+                        Fares that were paid in the last 4 weeks for
+                        <span>{{FareRangeWidgetData.OriginLocation}}-{{FareRangeWidgetData.DestinationLocation}}</span>
+                        <span>{{DepartDate}} to {{ReturnDate}}</span>
                     </p>
+
+                    <div class="col-md-7 col-sm-12 col-xs-12 padleft0" id="fareRageChart"></div>
+                    <div class="clear"></div>
+                    <p>If the current lowest fare is less than median, it's a good price.</p>
                     <!--<p>
                         <span ng-if="FareRangeWidgetData.IsMacOrigin">from ({{FareRangeWidgetData.OriginLocation}})</span>
                         <span ng-if="FareRangeWidgetData.IsMacDestination">to ({{FareRangeWidgetData.DestinationLocation}})</span>
@@ -71,15 +30,48 @@
                         <div class="col-md-12 col-sm-12 col-xs-12 range-data" ng-if="FareRangeWidgetData.Count == 'Medium'">Range of 1000 to 10,000 ticketed prices.</div>
                         <div class="col-md-12 col-sm-12 col-xs-12 range-data" ng-if="FareRangeWidgetData.Count == 'High'">Range of more than 10,000 ticketed prices.</div>
                     </div>-->
-                    <div class="row">
+                    <!--<div class="row">
                         <div class="col-md-4 col-sm-12 col-xs-4">{{FareRangeWidgetData.CurrencyCode}} {{FareRangeWidgetData.MinimumFare | number : 2}}<p>Lowest Fare</p></div>
                         <div class="col-md-4 col-sm-12 col-xs-4">{{FareRangeWidgetData.CurrencyCode}} {{FareRangeWidgetData.MedianFare | number : 2}} <p>Median Fare</p></div>
                         <div class="col-md-4 col-sm-12 col-xs-4">{{FareRangeWidgetData.CurrencyCode}} {{FareRangeWidgetData.MaximumFare | number : 2}} <p>Highest Fare</p></div>
-                    </div>
+                    </div>-->
                     <!--<div class="row fare-desc">
                         <div class="col-md-12 col-sm-12 col-xs-12" ng-if="lowestFareObj && lowestFareObj.fare >= FareRangeWidgetData.MinimumFare && lowestFareObj.fare <= FareRangeWidgetData.MedianFare">Current lowest price is in the lower range of prices that got recently paid.</div>
                         <div class="col-md-12 col-sm-12 col-xs-12" ng-if="lowestFareObj && lowestFareObj.fare < FareRangeWidgetData.MinimumFare">Current lowest fare is less than the lowest fare paid last week.</div>
                     </div>-->
+                </div>
+            </div>
+        </div>
+        <div class="popup-content padding-bottom-0" ng-show="!FareNoDataFound" ng-if="FareforecastData.Forecast.LowestPredictedFare != 'N/A' && FareforecastData.Forecast.LowestPredictedFare != 0 && FareforecastData.Forecast.LowestPredictedFare != undefine">
+            <div class="popup-header" ng-show="FareNoDataFound">
+                <div>
+                    <h6 class="widget-popup-title">
+                        How good is today's price?
+                    </h6>
+                </div>
+            </div>
+
+            <div class="overview-weather-box">
+                <div>
+                    <div class="row">
+                        <div class="fare-pred" ng-show="!FareNoDataFound" ng-if="FareforecastData.Forecast.LowestPredictedFare != 'N/A' && FareforecastData.Forecast.LowestPredictedFare != 0">
+                            <div class="col-md-4 col-sm-12 col-xs-12">
+                                {{GetCurrencySymbol(FareforecastData.CurrencyCode)}} {{FareforecastData.Forecast.LowestPredictedFare | number : 2 }}
+                                <p>Lowest Predicted Fare for Next Week</p>
+                            </div>
+                            <div class="col-md-4 col-sm-12 col-xs-12">
+                                {{GetCurrencySymbol(FareforecastData.CurrencyCode)}} {{FareforecastData.Forecast.HighestPredictedFare | number : 2 }}
+                                <p>Highest Predicted Fare for Next Week</p>
+                            </div>
+                            <div class="col-md-4 col-sm-12 col-xs-12 fare-rec" ng-if="!FareNoDataFound && IsRequestCompleted">
+                                <img ng-if="FareforecastData.Recommendation == 'buy'" title="Go ahead, Buy!" src="/images/like-icon.png" />
+                                <img ng-if="FareforecastData.Recommendation == 'wait'" title="Wait, price may drop!" src="/images/wait-icon.png" />
+                                <span ng-if="FareforecastData.Recommendation == 'buy'"> We recommend buy</span>
+                                <span ng-if="FareforecastData.Recommendation == 'wait'">We recommend wait to buy</span>
+                                <span class="font-16" ng-if="FareforecastData.Recommendation == 'unknown'">Wait or buy</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -959,7 +959,26 @@ ul .stop-line {
     background: none;
     border: none;
     box-shadow: none;
+    float: none;
+    padding-right: 0px;
+    padding-top: 5px;
+    padding-bottom: 5px;
 }
+
+    .ibox-title-new h4 {
+        float: left;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    .ibox-title-new p {
+        float: right;
+        font-size: 11px;
+        font-weight: normal;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
 
 .fare-box-inner {
     display: inline-block;
@@ -989,6 +1008,68 @@ ul .stop-line {
 .padding-bottom-0 {
     padding-bottom: 0px;
 }
+
+.padding-top-0 {
+    padding-top: 0px;
+}
+
+.margin-top-5 {
+    margin-top: 5px;
+}
+
+.gauge-label {
+    text-align: center;
+    word-spacing: -2px;
+}
+
+.fare-pred {
+    font-weight: bold;
+}
+
+    .fare-pred p {
+        font-weight: normal;
+    }
+
+.font-16 {
+    font-size: 16px;
+}
+
+.book-wrapper a {
+    outline: none;
+}
+/*#region Alertify */
+.ajs-message.ajs-warning.ajs-visible,
+.alertify-notifier.ajs-right .ajs-message.ajs-visible {
+    /*width: 400px;
+    right: 365px;*/
+    width: 320px;
+    right: 300px;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 8px;
+    margin-top: 0px;
+}
+
+.alert-box {
+    font-size: 11px;
+    cursor: pointer;
+}
+
+    .alert-box p {
+        margin: 0px;
+    }
+
+    .alert-box input[type=button] {
+        padding: 2px 7px;
+        font-size: 12px;
+        float: right;
+        margin-right: 10px;
+    }
+
+.alertify-notifier {
+    z-index: 1;
+}
+/*#endregion Alertify */
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {

@@ -1,4 +1,4 @@
-﻿angular.module('TrippismUIApp').directive('weatherInfo', ['$filter', 'WeatherFactory',  
+﻿angular.module('TrippismUIApp').directive('weatherInfo', ['$filter', 'WeatherFactory',
     function ($filter, WeatherFactory) {
         return {
             restrict: 'E',
@@ -6,8 +6,7 @@
                 weatherParams: '=',
             },
             templateUrl: '/Views/Partials/WeatherPartial.html',
-            controller: ['$scope',function ($scope)
-            {
+            controller: ['$scope', function ($scope) {
                 $scope.initWeatherSummary = function () {
                     $scope.WeatherDataFound = false;
                     $scope.formats = Dateformat();
@@ -87,8 +86,8 @@
                     function removeElement(element) {
                         element && element.parentNode && element.parentNode.removeChild(element);
                     }
-                   
-                    
+
+
                 }
             }],
             link: function (scope, elem, attrs) {
@@ -108,7 +107,7 @@
                         if (scope.WeatherwidgetData != undefined && scope.WeatherwidgetData != "") {
                             scope.$emit('widgetLoaded', { name: "WeatherData", isVisible: scope.WeatherInfoLoaded });
                             console.log("weatherwidgetInfo data sent..");
-                            angular.element("#outerDiv").addClass("outerDiv");
+                            //angular.element("#outerDiv").addClass("outerDiv");
                             scope.WeatherInfoLoaded = true;
                             var participation = _.find(scope.WeatherwidgetData.WeatherChances, function (chances) { return chances.Name == 'Precipitation' });
                             var rain = _.find(scope.WeatherwidgetData.WeatherChances, function (chances) { return chances.Name == 'Rain' });

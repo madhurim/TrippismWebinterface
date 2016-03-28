@@ -4,10 +4,14 @@
     angular.module('TrippismUIApp').controller(controllerId,
          ['$scope',
             '$window',
+            'LocalStorageFactory',
+            'TrippismConstants',
              HomeController]);
     function HomeController(
        $scope,
-       $window
+       $window,
+       LocalStorageFactory,
+       TrippismConstants
        ) {
         $scope.Name = "Home Page";
         $scope.$emit('bodyClass', 'homepage');
@@ -24,6 +28,8 @@
         w.bind('resize', function () {
             setPageHeight();
         });
+
+        LocalStorageFactory.clear(TrippismConstants.refineSearchLocalStorage);
         // --- Ends----
     }
 })();

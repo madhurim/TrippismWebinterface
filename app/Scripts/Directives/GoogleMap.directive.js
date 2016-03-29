@@ -243,7 +243,6 @@
                                                     '</div> ';
 
                                   $scope.InfoWindow = new google.maps.InfoWindow();
-                                  var mapsdetails = maps[x];
                                   $scope.destinationMarkers.push(marker);
 
                                   google.maps.event.addListener(marker, 'click', (function (marker, contentString, infowindow) {
@@ -338,13 +337,26 @@
                   //Convert watch code into brodcast method 
 
                   scope.$on('setMarkeronMap', function (event, args) {
+                      if (!args) {
+                          $timeout(function () {
+                              debugger;
+                              scope.destinationMap = new google.maps.Map(document.getElementById("map_canvas"), scope.mapOptions);
+                              scope.displayDestinations([]);
+                              google.maps.event.addListenerOnce(scope.destinationMap, 'idle', function () {
+                                  google.maps.event.trigger(scope.destinationMap, 'resize');
+                              });
+                          }, 0, true);
+
+                          return;
+                      }
+
                       scope.destinations = args.destinationlist;
                       scope.highRankedAirportlist = args.highRankedAirportlist;
                       scope.resetMarker();
                       if (scope.destinations != undefined && scope.destinations.length > 0) {
                           scope.displayDestinations(scope.destinations);
                           scope.setMarkerCluster();
-                          if (w.width() >= 768 && $rootScope.isShowAlerityMessage) {
+                          if ($rootScope.isShowAlerityMessage && w.width() >= 768) {
                               $timeout(function () {
                                   showMessage();
                               }, 0, false);

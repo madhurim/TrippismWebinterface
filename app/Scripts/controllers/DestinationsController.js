@@ -105,6 +105,7 @@
                         alertify.alert('Sorry , we do not have destinations to suggest for this search combination. This can also happen sometimes if the origin airport is not a popular airport. We suggest you try a different search combination or a more popular airport in your area to get destinations.');
                         $scope.isShowSearchIcon = true;     // used for showing main search slider icon when user search first time
                         updateSearchCriteria();
+                        $scope.$broadcast('setMarkeronMap');
                         return false;
                     }
 

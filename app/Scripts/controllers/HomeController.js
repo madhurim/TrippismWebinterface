@@ -9,6 +9,7 @@
        $scope,
        $window
        ) {
+        alertify.dismissAll();
         $scope.Name = "Home Page";
         $scope.$emit('bodyClass', 'homepage');
 

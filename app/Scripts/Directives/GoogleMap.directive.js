@@ -338,15 +338,7 @@
 
                   scope.$on('setMarkeronMap', function (event, args) {
                       if (!args) {
-                          $timeout(function () {
-                              debugger;
-                              scope.destinationMap = new google.maps.Map(document.getElementById("map_canvas"), scope.mapOptions);
-                              scope.displayDestinations([]);
-                              google.maps.event.addListenerOnce(scope.destinationMap, 'idle', function () {
-                                  google.maps.event.trigger(scope.destinationMap, 'resize');
-                              });
-                          }, 0, true);
-
+                          displayBlankMap();
                           return;
                       }
 
@@ -433,6 +425,20 @@
                       var searchBoxElement = angular.element("#search-box")[0];
                       var headerElement = angular.element("#header")[0];
                       alertBoxElement.css({ "top": searchBoxElement.offsetHeight + headerElement.offsetHeight - 9 });
+                  }
+
+                  function displayBlankMap() {
+                      scope.destinationMap.setOptions({ zoomControl: false, scrollwheel: false, disableDoubleClickZoom: true });
+                      var latLng = new google.maps.LatLng(0, 0);
+                      var marker = new MarkerWithLabel({
+                          position: latLng,
+                          map: scope.destinationMap,
+                          visible: false
+                      });
+
+                      $timeout(function () {
+                          scope.destinationMap.panTo(latLng);
+                      }, 0, false);
                   }
               }
               return directive;

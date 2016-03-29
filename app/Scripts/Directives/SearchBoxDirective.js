@@ -71,8 +71,15 @@ function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParam
                                 $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
                                 $scope.urlParam.ToDate = $scope.ToDate;
                             }
+                        });
 
-                        })
+                        var fromDate = ConvertToDateObject($scope.FromDate);
+                        var toDate = ConvertToDateObject($scope.ToDate);
+                        if (toDate < fromDate) {
+                            $scope.ToDate = ConvertToRequiredDate(GetToDate($scope.FromDate), 'UI');
+                            $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
+                            $scope.urlParam.ToDate = $scope.ToDate;
+                        }
                     }
                 });
             }
@@ -139,7 +146,7 @@ function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParam
                             $scope.KnownDestinationAirport = matchingArray[0].airport_Code;
                         }
                     }
-                    else if ((completeName.split(",").length - 1) > 2) { /// Copy-Paste Whole Name with Comma and get values by code
+                    else if ((completeName.split(",").length - 1) >= 2) { /// Copy-Paste Whole Name with Comma and get values by code
                         var arprtDetails = completeName.split(',');
                         var arprtCode = arprtDetails[0];
                         var matchingArray = GetArrayforCompareforFullName(arprtCode);
@@ -185,7 +192,7 @@ function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParam
                             $scope.OriginCityName = matchingArray[0].airport_CityName;
                         }
                     }
-                    else if ((completeName.split(",").length - 1) > 2) { /// Copy-Paste Whole Name with Comma and get values by code
+                    else if ((completeName.split(",").length - 1) >= 2) { /// Copy-Paste Whole Name with Comma and get values by code
                         var arprtDetails = completeName.split(',');
                         var arprtCode = arprtDetails[0];
                         var matchingArray = GetArrayforCompareforFullName(arprtCode);
@@ -213,7 +220,24 @@ function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParam
                         if (matchingStuffs.indexOf(airport) == -1)
                             matchingStuffs.push(airport);
                         if (airport.airport_IsMAC == true) {
-                            var multiAirports = $filter('filter')($scope.AvailableAirports, { airport_IsMAC: false, airport_CityName: airport.airport_CityName });
+                            var multiAirports = $filter('filter')($scope.AvailableAirports, { airport_IsMAC: false, airport_CityName: airport.airport_CityName }, true);
+                            multiAirports.forEach(function (item) {
+                                matchingStuffs.push(item);
+                            });
+                        }
+                    }
+                });
+                return matchingStuffs;
+            }
+
+            function GetArrayforCompareforFullName(txtFullName) {
+                var matchingStuffs = [];
+                $scope.AvailableAirports.forEach(function (airport) {
+                    if (airport.airport_Code.substr(0, 3).toLowerCase() == txtFullName) {
+                        if (matchingStuffs.indexOf(airport) == -1)
+                            matchingStuffs.push(airport);
+                        if (airport.airport_IsMAC == true) {
+                            var multiAirports = $filter('filter')($scope.AvailableAirports, { airport_IsMAC: false, airport_CityName: airport.airport_CityName }, true);
                             multiAirports.forEach(function (item) {
                                 matchingStuffs.push(item);
                             });
@@ -420,7 +444,6 @@ function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParam
                     return;
 
                 var minToDt = new Date($scope.minFromDate);
-                //toDt.setDate(toDt.getDate() + 1);
                 minToDt.setHours(0, 0, 0, 0);
 
                 /* If from date is greater than to date */
@@ -433,13 +456,11 @@ function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParam
                 if (newDt < minToDt) {
                     $scope.ToDate = ConvertToRequiredDate(GetToDate($scope.FromDate), 'UI');
                     $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
-                    //$scope.invalidToDate = true;
                     return;
                 }
                 else if (newDt > mxToDate) {
                     $scope.ToDate = ConvertToRequiredDate(GetToDate($scope.FromDate), 'UI');
                     $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
-                    //$scope.invalidToDate = true;
                     return;
                 }
                 else {
@@ -457,17 +478,45 @@ function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParam
                     $scope.hasError = true;
                     return;
                 }
-                $scope.CallDestiantionsview(path);
+
+                if ($scope.AvailableAirports) {
+                    $scope.hasError = false;
+                    var KnownDestinationAirport = $scope.KnownDestinationAirport;
+                    var Origin = $scope.Origin;
+                    if ($scope.KnownDestinationAirport) {
+                        KnownDestinationAirport = $scope.KnownDestinationAirport.split(',')[0].toUpperCase().trim();
+                        var isDestination = _.findWhere($scope.AvailableAirports, { airport_Code: KnownDestinationAirport });
+                        if (!isDestination) {
+                            $scope.hasError = true;
+                            $scope.frmdestfinder.$invalid = true;
+                            $scope.frmdestfinder.KnownDestinationAirport.$invalid = true;
+                            document.getElementById("KnownDestinationAirport").focus();
+                        }
+                    }
+                    if ($scope.Origin) {
+                        Origin = $scope.Origin.split(',')[0].toUpperCase().trim();
+                        var isOrigin = _.findWhere($scope.AvailableAirports, { airport_Code: Origin });
+                        if (!isOrigin) {
+                            $scope.hasError = true;
+                            $scope.frmdestfinder.$invalid = true;
+                            $scope.frmdestfinder.Origin.$invalid = true;
+                            document.getElementById("Origin").focus();
+                        }
+                    }
+                    if ($scope.hasError) return;
+                }
+
+                $scope.CallDestiantionsview(path, Origin, $scope.FromDate, $scope.ToDate, KnownDestinationAirport);
 
             }
 
-            $scope.CallDestiantionsview = function (path) {
+            $scope.CallDestiantionsview = function (path, origin, fromDate, toDate, destination) {
                 if ($scope.selectedform == "SuggestDestination") {
-                    $location.path(path + '/f=' + $scope.Origin + ';d=' + ConvertToRequiredDate($scope.FromDate, 'API') + ';r=' + ConvertToRequiredDate($scope.ToDate, 'API'));
+                    $location.path(path + '/f=' + origin + ';d=' + ConvertToRequiredDate(fromDate, 'API') + ';r=' + ConvertToRequiredDate(toDate, 'API'));
                     $scope.isPopup = false;
                 }
                 else {
-                    $location.path(path + '/f=' + $scope.Origin + ';t=' + $scope.KnownDestinationAirport + ';d=' + ConvertToRequiredDate($scope.FromDate, 'API') + ';r=' + ConvertToRequiredDate($scope.ToDate, 'API'));
+                    $location.path(path + '/f=' + origin + ';t=' + destination + ';d=' + ConvertToRequiredDate(fromDate, 'API') + ';r=' + ConvertToRequiredDate(toDate, 'API'));
                     $scope.isPopup = false;
                 }
             }

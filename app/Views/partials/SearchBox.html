@@ -25,6 +25,7 @@
                                             <div class="input-group-addon"><img src="images/destination.png" alt="" /></div>
                                             <div class="form-group dropdown-box">
                                                 <input ng-model="Origin"
+                                                       id="Origin"
                                                        typeahead-min-length="2"
                                                        required
                                                        typeahead-input-formatter="formatInput($model)"
@@ -33,11 +34,11 @@
                                                        typeahead-template-url="airportDropdownTemplate.html"
                                                        name="Origin"
                                                        tabindex="1"
-                                                       placeholder="Enter Origin City or Airport Code"
+                                                       placeholder="Which airport are you leaving from?"
                                                        typeahead="state as state for AvailableCodes in airportsAutocomplete($viewValue)"
                                                        type="text"
                                                        class="input-control input-novalidate airport-dropdown"
-                                                       ng-class="hasError && frmdestfinder.$invalid  && frmdestfinder.Origin.$error.required ? 'Errorbox' :''"
+                                                       ng-class="hasError && frmdestfinder.$invalid  && (frmdestfinder.Origin.$error.required || frmdestfinder.Origin.$invalid) ? 'Errorbox' :''"
                                                        autocomplete="off" />
                                             </div>
                                         </div>
@@ -50,6 +51,7 @@
                                             <div class="input-group-addon"><img src="images/destination.png" alt="" /></div>
                                             <div class="form-group dropdown-box">
                                                 <input type="text"
+                                                       id="KnownDestinationAirport"
                                                        ng-model="KnownDestinationAirport"
                                                        typeahead-min-length="2"
                                                        ng-required="selectedform == 'KnowMyDestination'"
@@ -62,7 +64,7 @@
                                                        placeholder="Enter Destination City or Airport Code"
                                                        typeahead="state as state for AvailableCodes in airportsAutocomplete($viewValue)"
                                                        class="input-control input-novalidate airport-dropdown"
-                                                       ng-class="hasError && frmdestfinder.$invalid  && frmdestfinder.KnownDestinationAirport.$error.required ? 'Errorbox' :''"
+                                                       ng-class="hasError && frmdestfinder.$invalid  && (frmdestfinder.KnownDestinationAirport.$error.required || frmdestfinder.KnownDestinationAirport.$invalid) ? 'Errorbox' :''"
                                                        autocomplete="off">
                                             </div>
                                         </div>

@@ -243,7 +243,6 @@
                                                     '</div> ';
 
                                   $scope.InfoWindow = new google.maps.InfoWindow();
-                                  var mapsdetails = maps[x];
                                   $scope.destinationMarkers.push(marker);
 
                                   google.maps.event.addListener(marker, 'click', (function (marker, contentString, infowindow) {
@@ -335,16 +334,20 @@
                   }
 
                   setAirportMarkerOnMap();
-                  //Convert watch code into brodcast method 
-
+                  //Convert watch code into brodcast method                   
                   scope.$on('setMarkeronMap', function (event, args) {
+                      if (!args) {
+                          displayBlankMap();
+                          return;
+                      }
+
                       scope.destinations = args.destinationlist;
                       scope.highRankedAirportlist = args.highRankedAirportlist;
                       scope.resetMarker();
                       if (scope.destinations != undefined && scope.destinations.length > 0) {
                           scope.displayDestinations(scope.destinations);
                           scope.setMarkerCluster();
-                          if (w.width() >= 768 && $rootScope.isShowAlerityMessage) {
+                          if ($rootScope.isShowAlerityMessage && w.width() >= 768) {
                               $timeout(function () {
                                   showMessage();
                               }, 0, false);
@@ -421,6 +424,20 @@
                       var searchBoxElement = angular.element("#search-box")[0];
                       var headerElement = angular.element("#header")[0];
                       alertBoxElement.css({ "top": searchBoxElement.offsetHeight + headerElement.offsetHeight - 9 });
+                  }
+
+                  function displayBlankMap() {
+                      scope.destinationMap.setOptions({ zoomControl: false, scrollwheel: false, disableDoubleClickZoom: true });
+                      var latLng = new google.maps.LatLng(0, 0);
+                      var marker = new MarkerWithLabel({
+                          position: latLng,
+                          map: scope.destinationMap,
+                          visible: false
+                      });
+
+                      $timeout(function () {
+                          scope.destinationMap.panTo(latLng);
+                      }, 0, false);
                   }
               }
               return directive;

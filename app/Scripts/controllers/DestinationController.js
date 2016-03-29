@@ -29,6 +29,7 @@
         SeasonalityFactory,
         TrippismConstants) {
         $scope.$emit('bodyClass', 'tabpage');
+        $scope.Origin = $scope.DestinationLocation = '';
         init();
         function init() {
             alertify.dismissAll();
@@ -47,11 +48,9 @@
                             $scope.DestinationLocation = para[1].trim().toUpperCase();
                         if (para[0].trim() === "d") {
                             $scope.FromDate = ConvertToRequiredDate(para[1].trim(), 'UI');
-                            $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
                         }
                         if (para[0].trim() === "r") {
-                            $scope.ToDate = ConvertToRequiredDate(para[1].trim(), 'UI');;
-                            $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
+                            $scope.ToDate = ConvertToRequiredDate(para[1].trim(), 'UI');
                         }
                         if (para[0].trim() === "th")
                             $scope.Theme = para[1].trim();
@@ -70,6 +69,16 @@
                         return airport.airport_Code == $scope.DestinationLocation
                     });
 
+                    if ($scope.FromDate == null || $scope.ToDate == null) {
+                        SetFromDate();
+                        SetToDate();
+                    }
+
+                    var fromDate = ConvertToDateObject($scope.FromDate);
+                    var toDate = ConvertToDateObject($scope.ToDate);
+                    if (toDate < fromDate)
+                        SetToDate();
+
                     var paramdata = {
                         Origin: $scope.Origin,
                         DestinationLocation: $scope.KnownDestinationAirport,
@@ -82,9 +91,9 @@
                     }
 
                     UtilFactory.SetLastSearchval(paramdata)
-                    if ($scope.OriginairportName == undefined || $scope.DestinationairportName == undefined) {
+                    if ($scope.OriginairportName == undefined || $scope.DestinationairportName == undefined || $scope.FromDate == null || $scope.ToDate == null) {
                         alertify.alert("Destination Finder", "");
-                        alertify.alert('No suggestions are available from your origin to destination. We recommend trying other nearby major airports.');
+                        alertify.alert('We could not find any destination that matches your request. Please make sure you have entered valid airport codes and dates.');
                         return false;
                     }
 
@@ -288,6 +297,13 @@
                 });
 
             });
+
+            function SetFromDate() {
+                $scope.FromDate = ConvertToRequiredDate(GetFromDate(), 'UI');
+            };
+            function SetToDate(fromDate) {
+                $scope.ToDate = ConvertToRequiredDate(GetToDate($scope.FromDate), 'UI');
+            };
         }
         $scope.PageName = "Destination Page";
     }

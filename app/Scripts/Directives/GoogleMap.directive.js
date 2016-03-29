@@ -334,8 +334,7 @@
                   }
 
                   setAirportMarkerOnMap();
-                  //Convert watch code into brodcast method 
-
+                  //Convert watch code into brodcast method                   
                   scope.$on('setMarkeronMap', function (event, args) {
                       if (!args) {
                           displayBlankMap();

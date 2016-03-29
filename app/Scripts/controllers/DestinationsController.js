@@ -71,11 +71,9 @@
                         $scope.KnownDestinationAirport = para[1].trim().toUpperCase();
                     if (para[0].trim() === "d") {
                         $scope.FromDate = ConvertToRequiredDate(para[1].trim(), 'UI');
-                        $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
                     }
                     if (para[0].trim() === "r") {
-                        $scope.ToDate = ConvertToRequiredDate(para[1].trim(), 'UI');;
-                        $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
+                        $scope.ToDate = ConvertToRequiredDate(para[1].trim(), 'UI');
                     }
                     if (para[0].trim() === "th") {
                         $scope.Theme = para[1].trim();
@@ -90,6 +88,15 @@
                     if (para[0].trim() === "hf")
                         $scope.Maxfare = para[1].trim();
                 })
+
+                if ($scope.FromDate == null || $scope.ToDate == null) {
+                    SetFromDate();
+                    SetToDate();
+                }
+                var fromDate = ConvertToDateObject($scope.FromDate);
+                var toDate = ConvertToDateObject($scope.ToDate);
+                if (toDate < fromDate)
+                    SetToDate();
 
                 $scope.IsairportJSONLoading = true;
                 $scope.mappromise = UtilFactory.ReadAirportJson().then(function (data) {
@@ -107,7 +114,7 @@
                         // for displaying blank map and search popup
                         $scope.isShowSearchIcon = true;
                         updateSearchCriteria();
-                        $scope.$broadcast('setMarkeronMap');
+                        $timeout(function () { $scope.$broadcast('setMarkeronMap'); }, 0, false)
                         $scope.isModified = true;
 
                         return false;
@@ -504,5 +511,12 @@
             return UtilFactory.GetCurrencySymbol(code);
         }
         activate();
+
+        function SetFromDate() {
+            $scope.FromDate = ConvertToRequiredDate(GetFromDate(), 'UI');
+        };
+        function SetToDate(fromDate) {
+            $scope.ToDate = ConvertToRequiredDate(GetToDate($scope.FromDate), 'UI');
+        };
     }
 })();

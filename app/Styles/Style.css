@@ -1966,7 +1966,7 @@ i.calendar.active, .input-box:hover i.calendar {
     }
 
     .ibox-title-new h4, .ibox-title-new p {
-        float: none!important;
+        float: none !important;
     }
 }
 
@@ -2332,7 +2332,7 @@ i.calendar.active, .input-box:hover i.calendar {
         }
 
     .destination-form .input-control {
-        font-size: 11px;
+        font-size: 10px;
         height: 30px;
     }
 

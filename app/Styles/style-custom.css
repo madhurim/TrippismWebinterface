@@ -1070,6 +1070,10 @@ ul .stop-line {
     z-index: 1;
 }
 /*#endregion Alertify */
+
+.attr-wrapper {
+    position: relative;
+}
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {

@@ -71,6 +71,17 @@
                     }
                 });
 
+                // correct dates
+                if ($scope.FromDate == null || $scope.ToDate == null) {
+                    SetFromDate();
+                    SetToDate();
+                }
+                var fromDate = ConvertToDateObject($scope.FromDate);
+                var toDate = ConvertToDateObject($scope.ToDate);
+                if (toDate < fromDate)
+                    SetToDate();
+
+                // store into local storage
                 var data = {
                     f: $scope.Origin,
                     d: $scope.FromDate,
@@ -98,15 +109,6 @@
                     });
                 }
 
-
-                if ($scope.FromDate == null || $scope.ToDate == null) {
-                    SetFromDate();
-                    SetToDate();
-                }
-                var fromDate = ConvertToDateObject($scope.FromDate);
-                var toDate = ConvertToDateObject($scope.ToDate);
-                if (toDate < fromDate)
-                    SetToDate();
 
                 $scope.IsairportJSONLoading = true;
                 $scope.mappromise = UtilFactory.ReadAirportJson().then(function (data) {

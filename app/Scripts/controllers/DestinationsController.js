@@ -14,36 +14,8 @@
             'FareforecastFactory',
             'SeasonalityFactory',
             'TrippismConstants',
+            'LocalStorageFactory',
              DestinationsController]);
-    angular.module('TrippismUIApp').directive('allowOnlyDateInputs', function () {
-        return {
-            restrict: 'A',
-            link: function (scope, elm, attrs, ctrl) {
-                elm.on('keydown', function (event) {
-                    if (event.which == 64 || event.which == 16) {
-                        // to allow shift  
-                        return false;
-                    } else if (event.which >= 112 && event.which <= 123) {
-                        // to Function Keys  
-                        return true;
-                    } else if (event.which >= 48 && event.which <= 57) {
-                        // to allow numbers  
-                        return true;
-                    } else if (event.which >= 96 && event.which <= 105) {
-                        // to allow numpad number  
-                        return true;
-                    } else if ([8, 9, 13, 17, 27, 35, 36, 37, 38, 39, 40, 44, 46, 109, 110, 111, 173, 189, 190, 191].indexOf(event.which) > -1) {
-                        // to allow backspace,Tab, enter, cntrl, escape, Home, End, left, up, right, down, printscreen, delete, Numpad -, Numpad ., Numpad /, firfox -, all other -, ., /
-                        return true;
-                    } else {
-                        event.preventDefault();
-                        // to stop others  
-                        return false;
-                    }
-                });
-            }
-        }
-    });
     function DestinationsController(
         $scope,
         $location,
@@ -56,13 +28,17 @@
         UtilFactory,
         FareforecastFactory,
         SeasonalityFactory,
-        TrippismConstants
+        TrippismConstants,
+        LocalStorageFactory
         ) {
         $scope.$emit('bodyClass', 'mappage');   // for changing <body> class
         function activate() {
             if ($stateParams.path != undefined) {
+
                 var params = $stateParams.path.split(";");
                 // split destination and origin to compare with tab title
+
+                var isSearched = false;
                 angular.forEach(params, function (item) {
                     var para = item.split("=");
                     if (para[0].trim() === "f")
@@ -78,16 +54,50 @@
                     if (para[0].trim() === "th") {
                         $scope.Theme = para[1].trim();
                         $scope.previousTheme = $scope.Theme;
+                        isSearched = true;
                     }
                     if (para[0].trim() === "a") {
                         $scope.Region = para[1].trim();
                         $scope.previousRegion = $scope.Region;
+                        isSearched = true;
                     }
-                    if (para[0].trim() === "lf")
+                    if (para[0].trim() === "lf") {
                         $scope.Minfare = para[1].trim();
-                    if (para[0].trim() === "hf")
+                        isSearched = true;
+                    }
+                    if (para[0].trim() === "hf") {
                         $scope.Maxfare = para[1].trim();
-                })
+                        isSearched = true;
+                    }
+                });
+
+                var data = {
+                    f: $scope.Origin,
+                    d: $scope.FromDate,
+                    r: $scope.ToDate,
+                    th: $scope.Theme,
+                    a: $scope.Region,
+                    lf: $scope.Minfare,
+                    hf: $scope.Maxfare
+                };
+
+                if (isSearched == false) {
+                    var data = LocalStorageFactory.get(TrippismConstants.refineSearchLocalStorage, data);
+                    if (data) {
+                        $scope.previousTheme = $scope.Theme = data.th;
+                        $scope.previousRegion = $scope.Region = data.a;
+                        $scope.Minfare = data.lf;
+                        $scope.Maxfare = data.hf;
+                    }
+                }
+                else {
+                    LocalStorageFactory.save(TrippismConstants.refineSearchLocalStorage, data, {
+                        f: $scope.Origin,
+                        d: $scope.FromDate,
+                        r: $scope.ToDate
+                    });
+                }
+
 
                 if ($scope.FromDate == null || $scope.ToDate == null) {
                     SetFromDate();
@@ -226,7 +236,7 @@
                 $scope.isSearching = true;
         }
 
-        $scope.handleUp = function () {
+        $scope.handleUp = function (isSelected) {
             if (destinationlistOriginal && destinationlistOriginal.length > 0) {
                 var arr = [];
                 for (var i = 0; i < destinationlistOriginal.length; i++) {
@@ -269,6 +279,23 @@
                     }
                 }
                 updateSearchCriteria();
+                if (isSelected) {
+                    var data = {
+                        f: $scope.Origin,
+                        d: $scope.FromDate,
+                        r: $scope.ToDate,
+                        th: $scope.Theme,
+                        a: $scope.Region,
+                        lf: $scope.Minfare,
+                        hf: $scope.Maxfare
+                    };
+                    LocalStorageFactory.save(TrippismConstants.refineSearchLocalStorage, data, {
+                        f: $scope.Origin,
+                        d: $scope.FromDate,
+                        r: $scope.ToDate
+                    });
+                }
+
                 $timeout(function () {
                     $scope.destinationlist = arr;
                     $scope.mappromise = UtilFactory.ReadHighRankedAirportsJson().then(function (data) {
@@ -309,13 +336,18 @@
                         $scope.fareCurrencySymbol = $scope.GetCurrencySymbol(destination.CurrencyCode);
 
                     destinationlistOriginal = $scope.destinationlist;
-                    // for displaying default min/max fare values into refine search
+                    // for displaying default min/max fare values into refine search                    
+
+
                     var minMaxFare = getMinMaxFare($scope.destinationlist);
+                    var Maxfare, Minfare;
                     if (minMaxFare.MaxFare && minMaxFare.MaxFare != 0)
-                        $scope.Maxfare = Math.ceil(minMaxFare.MaxFare);
+                        Maxfare = Math.ceil(minMaxFare.MaxFare);
                     if (minMaxFare.MinFare && minMaxFare.MinFare != 0)
-                        $scope.Minfare = Math.floor(minMaxFare.MinFare);
-                    setFareSliderValues();
+                        Minfare = Math.floor(minMaxFare.MinFare);
+
+                    setFareSliderValues(Minfare, Maxfare, $scope.Minfare || Minfare, $scope.Maxfare || Maxfare);
+
                     UtilFactory.MapscrollTo('wrapper');
                     $scope.isRefineSeachCollapsed = true;
                     $scope.isShowSearchIcon = true;     // used for showing main search slider icon when user search first time                    
@@ -452,7 +484,7 @@
             }
             else
                 $scope.previousTheme = $scope.Theme = undefined;
-            $scope.handleUp();
+            $scope.handleUp(true);
         }
         $scope.displayRegion = function (name) {
             if ($scope.previousRegion != name) {
@@ -461,7 +493,7 @@
             }
             else
                 $scope.previousRegion = $scope.Region = undefined;
-            $scope.handleUp();
+            $scope.handleUp(true);
         }
 
         // used for max/min refine search slider
@@ -484,19 +516,19 @@
                 }
             };
         }
-        function setFareSliderValues() {
+        function setFareSliderValues(rangeMin, rangeMax, selectedMin, selectedMax) {
             $scope.priceSliderValues = {
                 originalRange: {
-                    min: ($scope.Origin == $scope.LastSelectedOrigin && $scope.priceSliderValues.originalRange.min != 0) ? $scope.priceSliderValues.originalRange.min : $scope.Minfare,
-                    max: ($scope.Origin == $scope.LastSelectedOrigin && $scope.priceSliderValues.originalRange.max != 0) ? $scope.priceSliderValues.originalRange.max : $scope.Maxfare
+                    min: rangeMin,
+                    max: rangeMax
                 },
                 range: {
-                    min: ($scope.Origin == $scope.LastSelectedOrigin && $scope.priceSliderValues.originalRange.min != 0) ? $scope.priceSliderValues.range.min : $scope.Minfare,
-                    max: ($scope.Origin == $scope.LastSelectedOrigin && $scope.priceSliderValues.originalRange.max != 0) ? $scope.priceSliderValues.range.max : $scope.Maxfare
+                    min: rangeMin,
+                    max: rangeMax
                 },
                 values: {
-                    min: $scope.Minfare,
-                    max: $scope.Maxfare
+                    min: selectedMin,
+                    max: selectedMax
                 }
             };
         }

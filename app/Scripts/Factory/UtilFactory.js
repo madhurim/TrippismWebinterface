@@ -29,7 +29,7 @@
 
         function GetLastSearch() {
 
-            if (LastSearch == null || LastSearch == undefined || LastSearch.length == 0) {
+            if (LastSearch == null || LastSearch.length == 0) {
                 return null;
             }
             else {

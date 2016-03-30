@@ -529,8 +529,8 @@
                     max: rangeMax
                 },
                 values: {
-                    min: selectedMin,
-                    max: selectedMax
+                    min: parseInt(selectedMin),
+                    max: parseInt(selectedMax)
                 }
             };
         }

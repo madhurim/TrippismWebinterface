@@ -59,19 +59,22 @@ function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParam
                             }
                             if (para[0].trim() === "d") {
                                 $scope.FromDate = ConvertToRequiredDate(para[1].trim(), 'UI');
-                                if ($scope.FromDate == null)
-                                    SetFromDate();
-                                $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
-                                $scope.urlParam.FromDate = $scope.FromDate;
                             }
                             if (para[0].trim() === "r") {
                                 $scope.ToDate = ConvertToRequiredDate(para[1].trim(), 'UI');
-                                if ($scope.ToDate == null)
-                                    SetToDate();
-                                $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
-                                $scope.urlParam.ToDate = $scope.ToDate;
                             }
                         });
+
+                        if ($scope.FromDate == null || $scope.ToDate == null) {
+                            SetFromDate();
+                            SetToDate();
+                        }
+
+                        $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
+                        $scope.urlParam.FromDate = $scope.FromDate;
+
+                        $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
+                        $scope.urlParam.ToDate = $scope.ToDate;
 
                         var fromDate = ConvertToDateObject($scope.FromDate);
                         var toDate = ConvertToDateObject($scope.ToDate);
@@ -391,11 +394,11 @@ function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParam
                 maxToDate.setHours(0, 0, 0, 0);
 
                 if (newDt >= todate) {
-                    $scope.ToDate = ConvertToRequiredDate(newDt.setDate(newDt.getDate() + 1), 'UI');
+                    $scope.ToDate = ConvertToRequiredDate(GetToDate(newDt), 'UI');
                     $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
                 }
                 else if (todate > maxToDate) {
-                    $scope.ToDate = ConvertToRequiredDate(newDt.setDate(newDt.getDate() + 1), 'UI');
+                    $scope.ToDate = ConvertToRequiredDate(GetToDate(newDt), 'UI');
                     $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
                 }
             })

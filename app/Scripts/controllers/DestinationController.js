@@ -56,10 +56,10 @@
                             $scope.Theme = para[1].trim();
                         if (para[0].trim() === "a")
                             $scope.Region = para[1].trim();
-                        if (para[0].trim() === "lf")
-                            $scope.Minfare = para[1].trim();
-                        if (para[0].trim() === "hf")
-                            $scope.Maxfare = para[1].trim();
+                        //if (para[0].trim() === "lf")
+                        //    $scope.Minfare = para[1].trim();
+                        //if (para[0].trim() === "hf")
+                        //    $scope.Maxfare = para[1].trim();
                     });
 
                     $scope.OriginairportName = _.find($scope.AvailableAirports, function (airport) {

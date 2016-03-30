@@ -88,8 +88,8 @@
                     r: $scope.ToDate,
                     th: $scope.Theme,
                     a: $scope.Region,
-                    //lf: $scope.Minfare,
-                    //hf: $scope.Maxfare
+                    lf: $scope.Minfare,
+                    hf: $scope.Maxfare
                 };
 
                 if (isSearched == false) {
@@ -97,8 +97,8 @@
                     if (data) {
                         $scope.previousTheme = $scope.Theme = data.th;
                         $scope.previousRegion = $scope.Region = data.a;
-                        //$scope.Minfare = data.lf;
-                        //$scope.Maxfare = data.hf;
+                        $scope.Minfare = data.lf;
+                        $scope.Maxfare = data.hf;
                     }
                 }
                 else {
@@ -288,8 +288,8 @@
                         r: $scope.ToDate,
                         th: $scope.Theme,
                         a: $scope.Region,
-                        //lf: $scope.Minfare,
-                        //hf: $scope.Maxfare
+                        lf: $scope.Minfare,
+                        hf: $scope.Maxfare
                     };
                     LocalStorageFactory.save(TrippismConstants.refineSearchLocalStorage, data, {
                         f: $scope.Origin,

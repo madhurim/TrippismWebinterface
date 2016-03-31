@@ -482,10 +482,11 @@ function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParam
                     return;
                 }
 
+                var KnownDestinationAirport = $scope.KnownDestinationAirport;
+                var Origin = $scope.Origin;
+
                 if ($scope.AvailableAirports) {
                     $scope.hasError = false;
-                    var KnownDestinationAirport = $scope.KnownDestinationAirport;
-                    var Origin = $scope.Origin;
                     if ($scope.KnownDestinationAirport) {
                         KnownDestinationAirport = $scope.KnownDestinationAirport.split(',')[0].toUpperCase().trim();
                         var isDestination = _.findWhere($scope.AvailableAirports, { airport_Code: KnownDestinationAirport });

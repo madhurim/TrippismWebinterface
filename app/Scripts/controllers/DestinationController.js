@@ -52,10 +52,10 @@
                         if (para[0].trim() === "r") {
                             $scope.ToDate = ConvertToRequiredDate(para[1].trim(), 'UI');
                         }
-                        if (para[0].trim() === "th")
-                            $scope.Theme = para[1].trim();
-                        if (para[0].trim() === "a")
-                            $scope.Region = para[1].trim();
+                        //if (para[0].trim() === "th")
+                        //    $scope.Theme = para[1].trim();
+                        //if (para[0].trim() === "a")
+                        //    $scope.Region = para[1].trim();
                         //if (para[0].trim() === "lf")
                         //    $scope.Minfare = para[1].trim();
                         //if (para[0].trim() === "hf")
@@ -79,18 +79,18 @@
                     if (toDate < fromDate)
                         SetToDate();
 
-                    var paramdata = {
-                        Origin: $scope.Origin,
-                        DestinationLocation: $scope.KnownDestinationAirport,
-                        FromDate: $scope.FromDate,
-                        ToDate: $scope.ToDate,
-                        Theme: $scope.Theme,
-                        Region: $scope.Region,
-                        Minfare: $scope.Minfare,
-                        Maxfare: $scope.Maxfare
-                    }
+                    //var paramdata = {
+                    //    Origin: $scope.Origin,
+                    //    DestinationLocation: $scope.KnownDestinationAirport,
+                    //    FromDate: $scope.FromDate,
+                    //    ToDate: $scope.ToDate,
+                    //    Theme: $scope.Theme,
+                    //    Region: $scope.Region,
+                    //    Minfare: $scope.Minfare,
+                    //    Maxfare: $scope.Maxfare
+                    //}
 
-                    UtilFactory.SetLastSearchval(paramdata)
+                    //UtilFactory.SetLastSearchval(paramdata)
                     if ($scope.OriginairportName == undefined || $scope.DestinationairportName == undefined || $scope.FromDate == null || $scope.ToDate == null) {
                         alertify.alert("Destination Finder", "");
                         alertify.alert('We could not find any destination that matches your request. Please make sure you have entered valid airport codes and dates.');

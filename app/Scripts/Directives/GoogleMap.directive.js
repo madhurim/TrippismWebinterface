@@ -62,12 +62,12 @@
                       };
 
                       $scope.destinationpopupClick = function (item) {
-                          var result = UtilFactory.GetLastSearch();
+                          //var result = UtilFactory.GetLastSearch();
                           var finalpath = 'destination/f=' + $scope.origin.toUpperCase() + ';t=' + item.CustomMarkerInfo.DestinationLocation + ';d=' + ConvertToRequiredDate(item.CustomMarkerInfo.DepartureDateTime, 'API') + ';r=' + ConvertToRequiredDate(item.CustomMarkerInfo.ReturnDateTime, 'API');
-                          if (result.Theme != undefined)
-                              finalpath += ';th=' + result.Theme;
-                          if (result.Region != undefined)
-                              finalpath += ';a=' + result.Region;
+                          //if (result.Theme != undefined)
+                          //    finalpath += ';th=' + result.Theme;
+                          //if (result.Region != undefined)
+                          //    finalpath += ';a=' + result.Region;
                           //if (result.Minfare != undefined)
                           //    finalpath += ';lf=' + result.Minfare;
                           //if (result.Maxfare != undefined)
@@ -247,7 +247,7 @@
 
                                   google.maps.event.addListener(marker, 'click', (function (marker, contentString, infowindow) {
                                       return function () {
-                                          var result = UtilFactory.GetLastSearch();
+                                          //var result = UtilFactory.GetLastSearch();
                                           var finalpath = 'destination/f=' + $scope.origin.toUpperCase() + ';t=' + marker.CustomMarkerInfo.DestinationLocation + ';d=' + ConvertToRequiredDate(marker.CustomMarkerInfo.DepartureDateTime, 'API') + ';r=' + ConvertToRequiredDate(marker.CustomMarkerInfo.ReturnDateTime, 'API');
                                           if (result.Theme != undefined)
                                               finalpath += ';th=' + result.Theme;

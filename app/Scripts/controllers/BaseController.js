@@ -34,21 +34,21 @@
 
         $rootScope.isShowAlerityMessage = true;
 
-        $scope.ViewDestinations = function () {
-            var result = UtilFactory.GetLastSearch()
-            //$location.path('destinations/f=' + result.Origin.toUpperCase() + ';d=' + ConvertToRequiredDate(result.FromDate, 'API') + ';r=' + ConvertToRequiredDate(result.ToDate, 'API'));
+        //$scope.ViewDestinations = function () {
+        //    var result = UtilFactory.GetLastSearch()
+        //    //$location.path('destinations/f=' + result.Origin.toUpperCase() + ';d=' + ConvertToRequiredDate(result.FromDate, 'API') + ';r=' + ConvertToRequiredDate(result.ToDate, 'API'));
 
-            var finalpath = 'destinations/f=' + result.Origin.toUpperCase() + ';d=' + ConvertToRequiredDate(result.FromDate, 'API') + ';r=' + ConvertToRequiredDate(result.ToDate, 'API');
-            if (result.Theme != undefined)
-                finalpath += ';th=' + result.Theme;
-            if (result.Region != undefined)
-                finalpath += ';a=' + result.Region;
-            if (result.Minfare != undefined)
-                finalpath += ';lf=' + result.Minfare;
-            if (result.Maxfare != undefined)
-                finalpath += ';hf=' + result.Maxfare;
-            $location.path(finalpath);
-        }
+        //    var finalpath = 'destinations/f=' + result.Origin.toUpperCase() + ';d=' + ConvertToRequiredDate(result.FromDate, 'API') + ';r=' + ConvertToRequiredDate(result.ToDate, 'API');
+        //    if (result.Theme != undefined)
+        //        finalpath += ';th=' + result.Theme;
+        //    if (result.Region != undefined)
+        //        finalpath += ';a=' + result.Region;
+        //    if (result.Minfare != undefined)
+        //        finalpath += ';lf=' + result.Minfare;
+        //    if (result.Maxfare != undefined)
+        //        finalpath += ';hf=' + result.Maxfare;
+        //    $location.path(finalpath);
+        //}
         $scope.getClass = function (path) {
             if ($location.path().substr(0, path.length) == path) {
                 return "active"

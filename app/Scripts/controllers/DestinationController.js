@@ -176,7 +176,7 @@
                         else if (response != null && typeof response == 'string') {
                             var POSCountriesList = [];
                             var CList = "Selected origin country is not among the countries we support. We currently support the below countries. We will continue to add support for more countries. <br/><br/><div class='pos_List'>";
-                            var POSList = JSON.parse(data);
+                            var POSList = JSON.parse(response);
                             for (var i = 0; i < POSList.Countries.length; i++) {
                                 POSCountriesList.push(POSList.Countries[i].CountryName.toString());
                             }

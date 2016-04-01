@@ -30,7 +30,12 @@
             setPageHeight();
         });
 
-        LocalStorageFactory.clear(TrippismConstants.refineSearchLocalStorage);
+        angular.element('#carousel').carousel({
+            interval: 3000,
+            pause: false
+        })
+
+        LocalStorageFactory.clear(TrippismConstants.refineSearchLocalStorage);        
         // --- Ends----
     }
 })();

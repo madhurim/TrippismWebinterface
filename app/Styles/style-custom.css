@@ -1075,12 +1075,14 @@ ul .stop-line {
     position: relative;
 }
 
+#destination-boxwrap div {
+    height: inherit;
+}
+
 .destination-image {
     background-image: url("../images/Mainpagebg2.jpg");
     background-position: 60% top;
     background-size: cover;
-    height: 100%;
-    width: 100%;
 }
 /*#region Media queries */
 @media only screen and (max-width: 991px) {

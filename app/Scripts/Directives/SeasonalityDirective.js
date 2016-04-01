@@ -63,7 +63,7 @@
             }],
             link: function (scope, elem, attrs) {
                 scope.$watch('seasonalityParams', function (newValue, oldValue) {
-                    if (newValue != undefined)
+                    if (newValue != undefined && newValue.Fareforecastdata != undefined)
                         initseasonalityData();
                 });
                 function initseasonalityData() {

@@ -1,19 +1,32 @@
 ﻿<div class="ibox-wp">
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ibox-title searched-box">
-        <div class="ibox-box searched pull-left search-det">
-            <p>
-                <span ng-show="fareParams.SearchCriteria.Origin && fareParams.SearchCriteria.DestinationLocation">{{fareParams.SearchCriteria.Origin}}-{{fareParams.SearchCriteria.DestinationLocation}}</span>
-                <span ng-show="fareParams.SearchCriteria.FromDate"> {{fareParams.SearchCriteria.FromDate | date:'MMM-dd-yyyy'}} </span>
-                <span ng-show="fareParams.SearchCriteria.ToDate">To {{fareParams.SearchCriteria.ToDate | date:'MMM-dd-yyyy'}}</span>
-                <span ng-show="fareParams.SearchCriteria.Minfare > 0"><br />{{fareCurrencySymbol}} {{fareParams.SearchCriteria.Minfare}}</span>
-                <span ng-show="fareParams.SearchCriteria.Maxfare > 0"> To {{fareCurrencySymbol}} {{fareParams.SearchCriteria.Maxfare}}</span>
-                <span ng-show="fareParams.SearchCriteria.Region "> {{fareParams.SearchCriteria.Region}}</span>
-                <span ng-show="fareParams.SearchCriteria.Theme"> {{fareParams.SearchCriteria.Theme}}</span>
-            </p>
+    <div class="row-fluid">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ibox-title searched-box">
+            <div class="col-md-3 col-sm-8 col-xs-8 breadcrum-container">
+                <!--<ol class="breadcrumb breadcrumb-custom">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Destinations</a></li>
+                    <li class="active">Destination</li>
+                </ol>-->
+                <breadcrumb:directive ng-model="breadcrumb"></breadcrumb:directive>
+            </div>
+            <div class="share-btn pull-right search-det">
+                <a title="Share via email" ng-click="SendEmailToUser()" class="icons red-bg"><img src="/images/share-icon.png" alt="" /></a>
+            </div>
+            <div class="clear"></div>
         </div>
-        <div class="share-btn pull-right search-det">
-            <a title="Share via email" ng-click="SendEmailToUser()" class="icons red-bg"><img src="/images/share-icon.png" alt="" /></a>
-        </div>
+    </div>
+    <div class="clear"></div>
+    <div class="ibox-box searched search-det">
+        <p class="pull-left">
+            <span ng-show="fareParams.SearchCriteria.Origin && fareParams.SearchCriteria.DestinationLocation">{{fareParams.SearchCriteria.Origin}}-{{fareParams.SearchCriteria.DestinationLocation}}</span>
+            <span ng-show="fareParams.SearchCriteria.FromDate"> {{fareParams.SearchCriteria.FromDate | date:'MMM-dd-yyyy'}} </span>
+            <span ng-show="fareParams.SearchCriteria.ToDate">To {{fareParams.SearchCriteria.ToDate | date:'MMM-dd-yyyy'}}</span>
+            <span ng-show="fareParams.SearchCriteria.Minfare > 0"><br />{{fareCurrencySymbol}} {{fareParams.SearchCriteria.Minfare}}</span>
+            <span ng-show="fareParams.SearchCriteria.Maxfare > 0"> To {{fareCurrencySymbol}} {{fareParams.SearchCriteria.Maxfare}}</span>
+            <span ng-show="fareParams.SearchCriteria.Region "> {{fareParams.SearchCriteria.Region}}</span>
+            <span ng-show="fareParams.SearchCriteria.Theme"> {{fareParams.SearchCriteria.Theme}}</span>
+        </p>
+        <h6 class="fare-info">Fares are round trip 1 adult economy. Taxes and fees are included; baggage and preferred seating, are not included.</h6>
         <div class="clear"></div>
     </div>
     <div class="clear"></div>
@@ -21,8 +34,6 @@
         <h4>
             {{airportDetail}}
         </h4>
-        <p>Fares are round trip 1 adult economy. Taxes and fees are included; baggage and preferred seating, are not included.</p>
-        <div class="clear"></div>
     </div>
     <div class="ibox-content">
         <div class="row">

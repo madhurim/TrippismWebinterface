@@ -965,19 +965,13 @@ ul .stop-line {
     padding-bottom: 5px;
 }
 
-    .ibox-title-new h4 {
-        float: left;
-        margin-top: 5px;
-        margin-bottom: 5px;
-    }
-
-    .ibox-title-new p {
-        float: right;
-        font-size: 11px;
-        font-weight: normal;
-        margin-top: 5px;
-        margin-bottom: 5px;
-    }
+.ibox-box .fare-info {
+    float: right;
+    font-size: 11px;
+    font-weight: normal;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
 
 
 .fare-box-inner {
@@ -1074,6 +1068,26 @@ ul .stop-line {
 .attr-wrapper {
     position: relative;
 }
+
+.breadcrumb-custom {
+    margin: 0px;
+    background-color: transparent;
+    padding: 0px;
+}
+
+.breadcrum-container {
+    width: auto;
+    padding-left: 0px;
+}
+
+.breadcrumb-custom li {
+    vertical-align: -webkit-baseline-middle;
+}
+
+.breadcrumb > li + li:before {
+    padding: 0 2px;
+}
+
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {
@@ -1237,6 +1251,10 @@ ul .stop-line {
 
     .searched-box .search-det, .share-btn .icons {
         float: none !important;
+    }
+
+    .breadcrum-container {
+        width: 100%;
     }
 }
 /*#endregion Media queries */

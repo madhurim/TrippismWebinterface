@@ -93,7 +93,7 @@
             link: function (scope, elem, attrs) {
 
                 scope.$watch('weatherParams', function (newValue, oldValue) {
-                    if (newValue != undefined) {
+                    if (newValue != undefined && newValue.Fareforecastdata != undefined) {
                         scope.initWeatherSummary();
                     }
                 });

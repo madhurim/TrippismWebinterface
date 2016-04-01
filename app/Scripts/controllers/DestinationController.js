@@ -52,10 +52,10 @@
                         if (para[0].trim() === "r") {
                             $scope.ToDate = ConvertToRequiredDate(para[1].trim(), 'UI');
                         }
-                        if (para[0].trim() === "th")
-                            $scope.Theme = para[1].trim();
-                        if (para[0].trim() === "a")
-                            $scope.Region = para[1].trim();
+                        //if (para[0].trim() === "th")
+                        //    $scope.Theme = para[1].trim();
+                        //if (para[0].trim() === "a")
+                        //    $scope.Region = para[1].trim();
                         //if (para[0].trim() === "lf")
                         //    $scope.Minfare = para[1].trim();
                         //if (para[0].trim() === "hf")
@@ -79,21 +79,22 @@
                     if (toDate < fromDate)
                         SetToDate();
 
-                    var paramdata = {
-                        Origin: $scope.Origin,
-                        DestinationLocation: $scope.KnownDestinationAirport,
-                        FromDate: $scope.FromDate,
-                        ToDate: $scope.ToDate,
-                        Theme: $scope.Theme,
-                        Region: $scope.Region,
-                        Minfare: $scope.Minfare,
-                        Maxfare: $scope.Maxfare
-                    }
+                    //var paramdata = {
+                    //    Origin: $scope.Origin,
+                    //    DestinationLocation: $scope.KnownDestinationAirport,
+                    //    FromDate: $scope.FromDate,
+                    //    ToDate: $scope.ToDate,
+                    //    Theme: $scope.Theme,
+                    //    Region: $scope.Region,
+                    //    Minfare: $scope.Minfare,
+                    //    Maxfare: $scope.Maxfare
+                    //}
 
-                    UtilFactory.SetLastSearchval(paramdata)
-                    if ($scope.OriginairportName == undefined || $scope.DestinationairportName == undefined || $scope.FromDate == null || $scope.ToDate == null) {
+                    //UtilFactory.SetLastSearchval(paramdata)
+                    if ($scope.OriginairportName == undefined || $scope.DestinationairportName == undefined) {
                         alertify.alert("Destination Finder", "");
                         alertify.alert('We could not find any destination that matches your request. Please make sure you have entered valid airport codes and dates.');
+                        readyfareParams();
                         return false;
                     }
 
@@ -130,7 +131,6 @@
                             var objDestinationairport = $scope.destinationlist[0];
                             if (objDestinationairport != undefined) {
 
-
                                 objDestinationairport.objDestinationairport = $scope.DestinationLocation.toUpperCase();
                                 $scope.destinationlist.forEach(function (item) { item.DestinationLocation = item.objDestinationairport; });
                                 $scope.FareInfo = response.FareInfo[0];
@@ -143,21 +143,7 @@
 
                                 $scope.airlineJsonData = [];
                                 readyfareParams();
-
-                                //$rootScope.$broadcast('EmptyFareForcastInfo', {
-                                //    Origin: originairport.airport_CityName,
-                                //    Destinatrion: DestinationairportName.airport_Code,
-                                //    Fareforecastdata: dataForecast,
-                                //    mapOptions: objDestinationairport,
-                                //    OriginairportName: originairport,
-                                //    DestinationairportName: DestinationairportName,
-                                //    DestinationList: $scope.destinationlist,
-                                //    AvailableAirports: $scope.AvailableAirports,
-                                //    AvailableAirline: $scope.airlineJsonData,
-                                //    SearchCriteria: SearchCriteria
-                                //});
                                 UtilFactory.MapscrollTo('wrapper');
-
                             }
                             else {
                                 // commented for the time being
@@ -176,7 +162,7 @@
                         else if (response != null && typeof response == 'string') {
                             var POSCountriesList = [];
                             var CList = "Selected origin country is not among the countries we support. We currently support the below countries. We will continue to add support for more countries. <br/><br/><div class='pos_List'>";
-                            var POSList = JSON.parse(data);
+                            var POSList = JSON.parse(response);
                             for (var i = 0; i < POSList.Countries.length; i++) {
                                 POSCountriesList.push(POSList.Countries[i].CountryName.toString());
                             }
@@ -192,6 +178,7 @@
                             CList += "</div>";
                             alertify.alert("Trippism", "");
                             alertify.alert(CList).set('onok', function (closeEvent) { });
+                            readyfareParams();
                         }
                         else {
                             // commented for the time being

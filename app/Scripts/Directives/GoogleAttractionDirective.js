@@ -15,7 +15,7 @@
             templateUrl: '/Views/Partials/GoogleAttractionPartial.html',
             controller: function ($scope) {
                 $scope.$watch('googleattractionParams', function (newValue, oldValue) {
-                    if (newValue != undefined) {
+                    if (newValue != undefined && newValue.DestinationairportName != undefined) {
                         var defaultAttractionTab = _.find(attractionsData, function (item) { return item.isDefault == true; });
                         if (defaultAttractionTab)
                             $scope.loadgoogleattractionInfo(defaultAttractionTab.name);

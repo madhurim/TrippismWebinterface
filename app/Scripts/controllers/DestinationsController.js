@@ -51,24 +51,24 @@
                     if (para[0].trim() === "r") {
                         $scope.ToDate = ConvertToRequiredDate(para[1].trim(), 'UI');
                     }
-                    if (para[0].trim() === "th") {
-                        $scope.Theme = para[1].trim();
-                        $scope.previousTheme = $scope.Theme;
-                        isSearched = true;
-                    }
-                    if (para[0].trim() === "a") {
-                        $scope.Region = para[1].trim();
-                        $scope.previousRegion = $scope.Region;
-                        isSearched = true;
-                    }
-                    if (para[0].trim() === "lf") {
-                        $scope.Minfare = para[1].trim();
-                        isSearched = true;
-                    }
-                    if (para[0].trim() === "hf") {
-                        $scope.Maxfare = para[1].trim();
-                        isSearched = true;
-                    }
+                    //if (para[0].trim() === "th") {
+                    //    $scope.Theme = para[1].trim();
+                    //    $scope.previousTheme = $scope.Theme;
+                    //    isSearched = true;
+                    //}
+                    //if (para[0].trim() === "a") {
+                    //    $scope.Region = para[1].trim();
+                    //    $scope.previousRegion = $scope.Region;
+                    //    isSearched = true;
+                    //}
+                    //if (para[0].trim() === "lf") {
+                    //    $scope.Minfare = para[1].trim();
+                    //    isSearched = true;
+                    //}
+                    //if (para[0].trim() === "hf") {
+                    //    $scope.Maxfare = para[1].trim();
+                    //    isSearched = true;
+                    //}
                 });
 
                 // correct dates
@@ -85,30 +85,17 @@
                 var data = {
                     f: $scope.Origin,
                     d: $scope.FromDate,
-                    r: $scope.ToDate,
-                    th: $scope.Theme,
-                    a: $scope.Region,
-                    lf: $scope.Minfare,
-                    hf: $scope.Maxfare
+                    r: $scope.ToDate
                 };
 
-                if (isSearched == false) {
-                    var data = LocalStorageFactory.get(TrippismConstants.refineSearchLocalStorage, data);
-                    if (data) {
-                        $scope.previousTheme = $scope.Theme = data.th;
-                        $scope.previousRegion = $scope.Region = data.a;
-                        $scope.Minfare = data.lf;
-                        $scope.Maxfare = data.hf;
-                    }
-                }
-                else {
-                    LocalStorageFactory.save(TrippismConstants.refineSearchLocalStorage, data, {
-                        f: $scope.Origin,
-                        d: $scope.FromDate,
-                        r: $scope.ToDate
-                    });
-                }
 
+                var data = LocalStorageFactory.get(TrippismConstants.refineSearchLocalStorage, data);
+                if (data) {
+                    $scope.previousTheme = $scope.Theme = data.th;
+                    $scope.previousRegion = $scope.Region = data.a;
+                    $scope.Minfare = data.lf;
+                    $scope.Maxfare = data.hf;
+                }
 
                 $scope.IsairportJSONLoading = true;
                 $scope.mappromise = UtilFactory.ReadAirportJson().then(function (data) {
@@ -134,7 +121,7 @@
 
                     if ($scope.Origin != undefined && $scope.Origin != "") {
                         $scope.LastSelectedOrigin = $scope.Origin;
-                        updateSearchCriteria();
+                        updateSearchCriteria();                        
                         findDestinations();
                     }
                 });
@@ -405,17 +392,17 @@
                 ToDate: (typeof $scope.ToDate == 'string') ? new Date($scope.ToDate) : $scope.ToDate
             };
             //Maintain data in service for SharableUrl 
-            var paramdata = {
-                Origin: $scope.Origin,
-                DestinationLocation: $scope.KnownDestinationAirport,
-                FromDate: $scope.FromDate,
-                ToDate: $scope.ToDate,
-                Theme: $scope.Theme,
-                Region: $scope.Region,
-                Minfare: $scope.Minfare,
-                Maxfare: $scope.Maxfare
-            }
-            UtilFactory.SetLastSearchval(paramdata)
+            //var paramdata = {
+            //    Origin: $scope.Origin,
+            //    DestinationLocation: $scope.KnownDestinationAirport,
+            //    FromDate: $scope.FromDate,
+            //    ToDate: $scope.ToDate,
+            //    Theme: $scope.Theme,
+            //    Region: $scope.Region,
+            //    Minfare: $scope.Minfare,
+            //    Maxfare: $scope.Maxfare
+            //}
+            //UtilFactory.SetLastSearchval(paramdata)
         }
 
         function clearRefineSearchSelection() {
@@ -551,6 +538,6 @@
         };
         function SetToDate(fromDate) {
             $scope.ToDate = ConvertToRequiredDate(GetToDate($scope.FromDate), 'UI');
-        };
+        };       
     }
 })();

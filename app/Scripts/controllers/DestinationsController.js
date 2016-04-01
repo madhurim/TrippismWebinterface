@@ -121,7 +121,7 @@
 
                     if ($scope.Origin != undefined && $scope.Origin != "") {
                         $scope.LastSelectedOrigin = $scope.Origin;
-                        updateSearchCriteria();
+                        updateSearchCriteria();                        
                         findDestinations();
                     }
                 });
@@ -538,6 +538,6 @@
         };
         function SetToDate(fromDate) {
             $scope.ToDate = ConvertToRequiredDate(GetToDate($scope.FromDate), 'UI');
-        };
+        };       
     }
 })();

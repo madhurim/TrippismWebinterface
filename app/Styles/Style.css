@@ -947,6 +947,10 @@ i.calendar.active, .input-box:hover i.calendar {
     font-size: 15px;
 }
 
+.ibox-box.searched {
+    padding: 5px 15px 0 10px;
+}
+
 .ibox-box img {
     margin-bottom: 10px;
 }

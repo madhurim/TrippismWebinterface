@@ -15,6 +15,7 @@
                 $scope.$watch('fareParams', function (newValue, oldValue) {
                     if (newValue != undefined) {
                         $scope.fareParams.dataforEmail = {};
+                        $scope.initBreadcrumb();
                         activate();
                     }
                 });
@@ -53,6 +54,16 @@
                         }
                     });
                 };
+
+                $scope.initBreadcrumb = function () {
+                    var search = $scope.fareParams.SearchCriteria;
+                    var destinationsPath = "f=" + search.Origin + ";d=" + ConvertToRequiredDate(search.FromDate, 'API') + ";r=" + ConvertToRequiredDate(search.ToDate, 'API');
+                    $scope.breadcrumb = [
+                        { state: 'home', name: 'Home' },
+                        { state: 'destinations({path:"' + destinationsPath + '"})', name: 'Destinations' },
+                        { state: 'destination', name: 'Destination', active: true, className: "active" }
+                    ];
+                }
             }
         }
     }]);

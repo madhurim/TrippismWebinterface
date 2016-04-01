@@ -2180,6 +2180,10 @@ i.calendar.active, .input-box:hover i.calendar {
         /*width: 33.333%;*/
         width: 15%;
     }
+
+    .copyright {
+        text-align: left;
+    }
 }
 
 @media only screen and (max-width: 767px) {
@@ -2191,9 +2195,12 @@ i.calendar.active, .input-box:hover i.calendar {
         margin-bottom: 71px;
     }
 
+    .footer-menu ul {
+        text-align: center;
+    }
+
     .footer-menu ul, .copyright {
         margin: 3px 0;
-        text-align: center;
     }
 
     .ibox-box {

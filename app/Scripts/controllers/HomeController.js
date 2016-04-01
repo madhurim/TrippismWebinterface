@@ -31,11 +31,11 @@
         });
 
         angular.element('#carousel').carousel({
-            interval: 3000,
+            interval: 4000,
             pause: false
         })
 
-        LocalStorageFactory.clear(TrippismConstants.refineSearchLocalStorage);        
+        LocalStorageFactory.clear(TrippismConstants.refineSearchLocalStorage);
         // --- Ends----
     }
 })();

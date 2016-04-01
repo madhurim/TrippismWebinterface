@@ -1079,11 +1079,36 @@ ul .stop-line {
     height: inherit;
 }
 
-.destination-image {
+/*.destination-image {
     background-image: url("../images/Mainpagebg2.jpg");
     background-position: 60% top;
     background-size: cover;
+}*/
+
+.destination-image-1 {
+    background-image: url("../images/home-images/Mainpagebg2.jpg");
+    background-position: 60% top;
+    background-size: cover;
 }
+
+.destination-image-2 {
+    background-image: url("../images/home-images/Mainpagebg3.jpg");
+    background-position: 60% top;
+    background-size: cover;
+}
+
+.destination-image-3 {
+    background-image: url("../images/home-images/Mainpagebg4.jpg");
+    background-position: 60% top;
+    background-size: cover;
+}
+
+.destination-image-4 {
+    background-image: url("../images/home-images/Mainpagebg5.jpg");
+    background-position: 60% top;
+    background-size: cover;
+}
+
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {

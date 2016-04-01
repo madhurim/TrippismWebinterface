@@ -878,9 +878,9 @@ ul .stop-line {
 }
 
 .homepage .destination-boxwrap {
-    background-image: url("../images/Mainpagebg2.jpg");
+    /*background-image: url("../images/Mainpagebg2.jpg");
     background-position: 60% top;
-    background-size: cover;
+    background-size: cover;*/
     height: 100%;
     width: 100%;
 }
@@ -1073,6 +1073,14 @@ ul .stop-line {
 
 .attr-wrapper {
     position: relative;
+}
+
+.destination-image {
+    background-image: url("../images/Mainpagebg2.jpg");
+    background-position: 60% top;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
 }
 /*#region Media queries */
 @media only screen and (max-width: 991px) {

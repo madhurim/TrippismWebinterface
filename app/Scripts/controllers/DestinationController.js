@@ -91,9 +91,10 @@
                     //}
 
                     //UtilFactory.SetLastSearchval(paramdata)
-                    if ($scope.OriginairportName == undefined || $scope.DestinationairportName == undefined || $scope.FromDate == null || $scope.ToDate == null) {
+                    if ($scope.OriginairportName == undefined || $scope.DestinationairportName == undefined) {
                         alertify.alert("Destination Finder", "");
                         alertify.alert('We could not find any destination that matches your request. Please make sure you have entered valid airport codes and dates.');
+                        readyfareParams();
                         return false;
                     }
 
@@ -130,7 +131,6 @@
                             var objDestinationairport = $scope.destinationlist[0];
                             if (objDestinationairport != undefined) {
 
-
                                 objDestinationairport.objDestinationairport = $scope.DestinationLocation.toUpperCase();
                                 $scope.destinationlist.forEach(function (item) { item.DestinationLocation = item.objDestinationairport; });
                                 $scope.FareInfo = response.FareInfo[0];
@@ -143,21 +143,7 @@
 
                                 $scope.airlineJsonData = [];
                                 readyfareParams();
-
-                                //$rootScope.$broadcast('EmptyFareForcastInfo', {
-                                //    Origin: originairport.airport_CityName,
-                                //    Destinatrion: DestinationairportName.airport_Code,
-                                //    Fareforecastdata: dataForecast,
-                                //    mapOptions: objDestinationairport,
-                                //    OriginairportName: originairport,
-                                //    DestinationairportName: DestinationairportName,
-                                //    DestinationList: $scope.destinationlist,
-                                //    AvailableAirports: $scope.AvailableAirports,
-                                //    AvailableAirline: $scope.airlineJsonData,
-                                //    SearchCriteria: SearchCriteria
-                                //});
                                 UtilFactory.MapscrollTo('wrapper');
-
                             }
                             else {
                                 // commented for the time being
@@ -192,6 +178,7 @@
                             CList += "</div>";
                             alertify.alert("Trippism", "");
                             alertify.alert(CList).set('onok', function (closeEvent) { });
+                            readyfareParams();
                         }
                         else {
                             // commented for the time being

@@ -14,9 +14,11 @@
             link: function ($scope, elem, attrs) {
                 $scope.$watch('fareParams', function (newValue, oldValue) {
                     if (newValue != undefined) {
-                        $scope.fareParams.dataforEmail = {};
+                        if (newValue.FareInfo != undefined) {
+                            $scope.fareParams.dataforEmail = {};
+                            activate();
+                        }
                         $scope.initBreadcrumb();
-                        activate();
                     }
                 });
 

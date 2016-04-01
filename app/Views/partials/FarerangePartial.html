@@ -1,7 +1,7 @@
 <div class="">
     <div class="popup-box">
         <div class="popup-content" ng-if="(FareRangeWidgetDataFound ) && IsWidgetClosed">
-            <div class="popup-header" ng-show="!FareNoDataFound">
+            <div class="popup-header" ng-show="FareRangeWidgetDataFound">
                 <div>
                     <h6 class="widget-popup-title">
                         How good is today's price?
@@ -43,7 +43,7 @@
             </div>
         </div>
         <div class="popup-content padding-bottom-0" ng-show="!FareNoDataFound" ng-if="FareforecastData.Forecast.LowestPredictedFare != 'N/A' && FareforecastData.Forecast.LowestPredictedFare != 0 && FareforecastData.Forecast.LowestPredictedFare != undefine">
-            <div class="popup-header" ng-show="FareNoDataFound">
+            <div class="popup-header" ng-show="!FareRangeWidgetDataFound">
                 <div>
                     <h6 class="widget-popup-title">
                         How good is today's price?

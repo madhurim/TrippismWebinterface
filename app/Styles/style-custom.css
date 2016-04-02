@@ -1109,6 +1109,33 @@ ul .stop-line {
     background-size: cover;
 }
 
+
+.carousel-inner .item {
+    opacity: 0;
+    -webkit-transition-property: opacity;
+    -moz-transition-property: opacity;
+    -o-transition-property: opacity;
+    transition-property: opacity;
+}
+
+.carousel-inner .active {
+    opacity: 1;
+}
+
+    .carousel-inner .active.left,
+    .carousel-inner .active.right {
+        left: 0;
+        z-index: 1;
+        animation-name: example1;
+        animation-duration: 1s;
+    }
+
+.carousel-inner .next.left,
+.carousel-inner .prev.right {
+    opacity: 1;
+}
+
+
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {

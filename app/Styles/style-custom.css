@@ -1081,7 +1081,9 @@ ul .stop-line {
 }
 
 .breadcrumb-custom li {
+    vertical-align: baseline;
     vertical-align: -webkit-baseline-middle;
+    vertical-align: -moz-middle-with-baseline;
 }
 
 .breadcrumb > li + li:before {

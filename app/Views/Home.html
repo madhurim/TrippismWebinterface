@@ -1,18 +1,15 @@
 ﻿<div ng-controller="HomeController">
     <div class="destination-boxwrap" id="destination-boxwrap">
-        <div id="carousel" class="carousel slide">
-            <div class="carousel-inner">
-                <div class="item active"><div class="destination-image-1"></div></div>
-                <div class="item"><div class="destination-image-2"></div></div>
-                <div class="item"><div class="destination-image-3"></div></div>
-                <div class="item"><div class="destination-image-4"></div></div>
+        <!--<div id="jssor_1" style="position: relative; margin: 0 auto; top: 0px; left: 0px; width: 600px; height: 300px; overflow: hidden; visibility: hidden;">
+            <div data-u="slides" style="cursor: default; position: relative; top: 0px; left: 0px; width: 600px; height: 300px; overflow: hidden;">-->
+        <div id="jssor_slider" style="">
+            <div id="jssor_1" data-u="slides">
+                <div class="item" data-p="112.50" style="display: none;"><div class="destination-image-1"></div></div>
+                <div class="item" data-p="112.50" style="display: none;"><div class="destination-image-2"></div></div>
+                <div class="item" data-p="112.50" style="display: none;"><div class="destination-image-3"></div></div>
+                <div class="item" data-p="112.50" style="display: none;"><div class="destination-image-4"></div></div>
             </div>
         </div>
-        <!--<div class="map-box-img">
-            <div class="map">
-                <img src="images/Mainpagebg2.jpg" alt="" />
-            </div>
-        </div>-->
         <search:box></search:box>
     </div>
     <div class="clear h50px" id="h50px"></div>

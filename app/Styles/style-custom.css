@@ -1135,7 +1135,22 @@ ul .stop-line {
     opacity: 1;
 }
 
+#jssor_slider {
+    position: relative;
+    margin: 0 auto;
+    top: 0px;
+    left: 0px;
+    overflow: hidden;
+    visibility: hidden;
+}
 
+#jssor_1 {
+    cursor: default;
+    position: relative;
+    top: 0px;
+    left: 0px;
+    overflow: hidden;
+}
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {

@@ -34,8 +34,8 @@
         setPageHeight();
         w.bind('resize', function () {
             setPageHeight();
-            setSliderSize();
-            jssor_1_slider_init();
+            //setSliderSize();
+            //jssor_1_slider.$ScaleHeight(pageHeight);
         });
 
         angular.element('#carousel').carousel({
@@ -47,28 +47,28 @@
         // --- Ends----
 
 
-        function setSliderSize() {
-            angular.element('#jssor_slider, #jssor_1').css({ width: pageWidth + 'px', height: pageHeight + 'px' });
-        }
+        //function setSliderSize() {
+        //    angular.element('#jssor_slider, #jssor_1').css({ width: pageWidth + 'px', height: pageHeight + 'px' });
+        //}
 
-        var jssor_1_slider_init = function () {
-            var jssor_1_SlideshowTransitions = [
-              { $Duration: 4000, $Opacity: 2 }
-            ];
+        //var jssor_1_slider_init = function () {
+        //    var jssor_1_SlideshowTransitions = [
+        //      { $Duration: 4000, $Opacity: 2 }
+        //    ];
 
-            var jssor_1_options = {
-                $AutoPlay: true,
-                $SlideshowOptions: {
-                    $Class: $JssorSlideshowRunner$,
-                    $Transitions: jssor_1_SlideshowTransitions,
-                    $TransitionsOrder: 1
-                }
-            };
+        //    var jssor_1_options = {
+        //        $AutoPlay: true,
+        //        $SlideshowOptions: {
+        //            $Class: $JssorSlideshowRunner$,
+        //            $Transitions: jssor_1_SlideshowTransitions,
+        //            $TransitionsOrder: 1
+        //        }
+        //    };
 
-            var jssor_1_slider = new $JssorSlider$("jssor_slider", jssor_1_options);
-        };
+        //    var jssor_1_slider = new $JssorSlider$("jssor_slider", jssor_1_options);
+        //};
 
-        setSliderSize();
-        jssor_1_slider_init();
+        //setSliderSize();
+        //jssor_1_slider_init();
     }
 })();

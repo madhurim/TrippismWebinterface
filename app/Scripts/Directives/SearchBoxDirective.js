@@ -487,7 +487,7 @@ function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParam
 
                 if ($scope.AvailableAirports) {
                     $scope.hasError = false;
-                    if ($scope.KnownDestinationAirport) {
+                    if ($scope.selectedform == "KnowMyDestination" && $scope.KnownDestinationAirport) {
                         KnownDestinationAirport = $scope.KnownDestinationAirport.split(',')[0].toUpperCase().trim();
                         var isDestination = _.findWhere($scope.AvailableAirports, { airport_Code: KnownDestinationAirport });
                         if (!isDestination) {

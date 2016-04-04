@@ -165,7 +165,35 @@ TrippismUIApp.directive('onCarouselChange', function ($parse) {
     }
 });
 
-
+angular.module('TrippismUIApp').directive('allowOnlyDateInputs', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, elm, attrs, ctrl) {
+            elm.on('keydown', function (event) {
+                if (event.which == 64 || event.which == 16) {
+                    // to allow shift  
+                    return false;
+                } else if (event.which >= 112 && event.which <= 123) {
+                    // to Function Keys  
+                    return true;
+                } else if (event.which >= 48 && event.which <= 57) {
+                    // to allow numbers  
+                    return true;
+                } else if (event.which >= 96 && event.which <= 105) {
+                    // to allow numpad number  
+                    return true;
+                } else if ([8, 9, 13, 17, 27, 35, 36, 37, 38, 39, 40, 44, 46, 109, 110, 111, 173, 189, 190, 191].indexOf(event.which) > -1) {
+                    // to allow backspace,Tab, enter, cntrl, escape, Home, End, left, up, right, down, printscreen, delete, Numpad -, Numpad ., Numpad /, firfox -, all other -, ., /
+                    return true;
+                } else {
+                    event.preventDefault();
+                    // to stop others  
+                    return false;
+                }
+            });
+        }
+    }
+});
 
 
 var constants = {
@@ -178,7 +206,8 @@ var constants = {
 
     attractionTabMapStyle: [{ "featureType": "landscape", "stylers": [{ "hue": "#FFBB00" }, { "saturation": 43.400000000000006 }, { "lightness": 37.599999999999994 }, { "gamma": 1 }] }, { "featureType": "road.highway", "stylers": [{ "hue": "#FFC200" }, { "saturation": -61.8 }, { "lightness": 45.599999999999994 }, { "gamma": 1 }] }, { "featureType": "road.arterial", "stylers": [{ "hue": "#FF0300" }, { "saturation": -100 }, { "lightness": 51.19999999999999 }, { "gamma": 1 }] }, { "featureType": "road.local", "stylers": [{ "hue": "#FF0300" }, { "saturation": -100 }, { "lightness": 52 }, { "gamma": 1 }] }, { "featureType": "water", "stylers": [{ "hue": "#0078FF" }, { "saturation": -13.200000000000003 }, { "lightness": 2.4000000000000057 }, { "gamma": 1 }] }, { "featureType": "poi", "stylers": [{ "hue": "#00FF6A" }, { "saturation": -1.0989010989011234 }, { "lightness": 11.200000000000017 }, { "gamma": 1 }] }],
     destinationSearchMapSyle: [{ "featureType": "landscape", "stylers": [{ "hue": "#FFBB00" }, { "saturation": 43.400000000000006 }, { "lightness": 37.599999999999994 }, { "gamma": 1 }] }, { "featureType": "road.highway", "stylers": [{ "hue": "#FFC200" }, { "saturation": -61.8 }, { "lightness": 45.599999999999994 }, { "gamma": 1 }] }, { "featureType": "road.arterial", "stylers": [{ "hue": "#FF0300" }, { "saturation": -100 }, { "lightness": 51.19999999999999 }, { "gamma": 1 }] }, { "featureType": "road.local", "stylers": [{ "hue": "#FF0300" }, { "saturation": -100 }, { "lightness": 52 }, { "gamma": 1 }] }, { "featureType": "water", "stylers": [{ "hue": "#0078FF" }, { "saturation": -13.200000000000003 }, { "lightness": 2.4000000000000057 }, { "gamma": 1 }] }, { "featureType": "poi", "stylers": [{ "hue": "#00FF6A" }, { "saturation": -1.0989010989011234 }, { "lightness": 11.200000000000017 }, { "gamma": 1 }] }],
-    destSearchURL: "/destinations"
+    destSearchURL: "/destinations",
+    refineSearchLocalStorage: 'refineSearchStorage'
 };
 
 TrippismUIApp.constant('TrippismConstants', constants);

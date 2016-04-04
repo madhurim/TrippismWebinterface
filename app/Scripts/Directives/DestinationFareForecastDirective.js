@@ -14,8 +14,11 @@
             link: function ($scope, elem, attrs) {
                 $scope.$watch('fareParams', function (newValue, oldValue) {
                     if (newValue != undefined) {
-                        $scope.fareParams.dataforEmail = {};
-                        activate();
+                        if (newValue.FareInfo != undefined) {
+                            $scope.fareParams.dataforEmail = {};
+                            activate();
+                        }
+                        $scope.initBreadcrumb();
                     }
                 });
 
@@ -53,6 +56,16 @@
                         }
                     });
                 };
+
+                $scope.initBreadcrumb = function () {
+                    var search = $scope.fareParams.SearchCriteria;
+                    var destinationsPath = "f=" + search.Origin + ";d=" + ConvertToRequiredDate(search.FromDate, 'API') + ";r=" + ConvertToRequiredDate(search.ToDate, 'API');
+                    $scope.breadcrumb = [
+                        { state: 'home', name: 'Home' },
+                        { state: 'destinations({path:"' + destinationsPath + '"})', name: 'Destinations' },
+                        { state: 'destination', name: 'Destination', active: true, className: "active" }
+                    ];
+                }
             }
         }
     }]);

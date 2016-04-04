@@ -852,7 +852,7 @@ i.calendar.active, .input-box:hover i.calendar {
 }
 
 .ibox-wp {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     padding: 0 15px;
 }
 
@@ -945,6 +945,10 @@ i.calendar.active, .input-box:hover i.calendar {
     font-family: 'Conv_gotham-bold';
     color: #585858;
     font-size: 15px;
+}
+
+.ibox-box.searched {
+    padding: 5px 15px 0 10px;
 }
 
 .ibox-box img {
@@ -1075,7 +1079,7 @@ i.calendar.active, .input-box:hover i.calendar {
 
 .popup-box {
     position: relative;
-    margin-top: 5px;
+    /*margin-top: 5px;*/
 }
 /*
 .popup-btn {
@@ -1135,6 +1139,7 @@ i.calendar.active, .input-box:hover i.calendar {
     color: #b90005 !important;
     margin: 0;
     text-align: left;
+    padding: 10px 0px 0px 5px;
 }
 
 /*
@@ -1966,7 +1971,7 @@ i.calendar.active, .input-box:hover i.calendar {
     }
 
     .ibox-title-new h4, .ibox-title-new p {
-        float: none!important;
+        float: none !important;
     }
 }
 
@@ -2332,7 +2337,7 @@ i.calendar.active, .input-box:hover i.calendar {
         }
 
     .destination-form .input-control {
-        font-size: 11px;
+        font-size: 10px;
         height: 30px;
     }
 
@@ -2692,7 +2697,8 @@ em.ng-binding {
 }
 
 .newouterDiv {
-    padding: 15px;
+    /*padding: 15px;*/
+    padding: 5px;
     background: whitesmoke;
     border: 1px solid #ADAAAA;
     border-radius: 3px;

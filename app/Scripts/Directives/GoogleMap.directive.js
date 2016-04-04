@@ -62,12 +62,12 @@
                       };
 
                       $scope.destinationpopupClick = function (item) {
-                          var result = UtilFactory.GetLastSearch();
+                          //var result = UtilFactory.GetLastSearch();
                           var finalpath = 'destination/f=' + $scope.origin.toUpperCase() + ';t=' + item.CustomMarkerInfo.DestinationLocation + ';d=' + ConvertToRequiredDate(item.CustomMarkerInfo.DepartureDateTime, 'API') + ';r=' + ConvertToRequiredDate(item.CustomMarkerInfo.ReturnDateTime, 'API');
-                          if (result.Theme != undefined)
-                              finalpath += ';th=' + result.Theme;
-                          if (result.Region != undefined)
-                              finalpath += ';a=' + result.Region;
+                          //if (result.Theme != undefined)
+                          //    finalpath += ';th=' + result.Theme;
+                          //if (result.Region != undefined)
+                          //    finalpath += ';a=' + result.Region;
                           //if (result.Minfare != undefined)
                           //    finalpath += ';lf=' + result.Minfare;
                           //if (result.Maxfare != undefined)
@@ -243,12 +243,11 @@
                                                     '</div> ';
 
                                   $scope.InfoWindow = new google.maps.InfoWindow();
-                                  var mapsdetails = maps[x];
                                   $scope.destinationMarkers.push(marker);
 
                                   google.maps.event.addListener(marker, 'click', (function (marker, contentString, infowindow) {
                                       return function () {
-                                          var result = UtilFactory.GetLastSearch();
+                                          //var result = UtilFactory.GetLastSearch();
                                           var finalpath = 'destination/f=' + $scope.origin.toUpperCase() + ';t=' + marker.CustomMarkerInfo.DestinationLocation + ';d=' + ConvertToRequiredDate(marker.CustomMarkerInfo.DepartureDateTime, 'API') + ';r=' + ConvertToRequiredDate(marker.CustomMarkerInfo.ReturnDateTime, 'API');
                                           if (result.Theme != undefined)
                                               finalpath += ';th=' + result.Theme;
@@ -335,45 +334,56 @@
                   }
 
                   setAirportMarkerOnMap();
-                  //Convert watch code into brodcast method 
-
+                  //Convert watch code into brodcast method                   
                   scope.$on('setMarkeronMap', function (event, args) {
-                      scope.destinations = args.destinationlist;
-                      scope.highRankedAirportlist = args.highRankedAirportlist;
-                      scope.resetMarker();
-                      if (scope.destinations != undefined && scope.destinations.length > 0) {
-                          scope.displayDestinations(scope.destinations);
-                          scope.setMarkerCluster();
-                          if (w.width() >= 768 && $rootScope.isShowAlerityMessage) {
-                              $timeout(function () {
-                                  showMessage();
-                              }, 0, false);
-                          }
+                      if (!args) {
+                          displayBlankMap();
+                          return;
                       }
 
-                      var originairport = _.find(scope.airportlist, function (airport) {
-                          return airport.airport_Code == scope.origin.toUpperCase()
-                      });
-                      var airportLoc;
-                      // lat lon information taken from http://www.mapsofworld.com/
-                      if (args.Region == "Africa")
-                          airportLoc = new google.maps.LatLng(7.1881, 21.0936);
-                      else if (args.Region == "Europe")
-                          airportLoc = new google.maps.LatLng(53.0000, 9.0000);
-                      else if (args.Region == "South America")
-                          airportLoc = new google.maps.LatLng(-14.6048, -59.0625);
-                      else if (args.Region == "North America")
-                          airportLoc = new google.maps.LatLng(48.1667, -100.1667);
-                      else if (args.Region == "Middle East")
-                          airportLoc = new google.maps.LatLng(31.268205, 29.995368);
-                      else if (args.Region == "Asia Pacific")
-                          airportLoc = new google.maps.LatLng(49.8380, 105.8203);
-                      else
-                          airportLoc = new google.maps.LatLng(originairport.airport_Lat, originairport.airport_Lng);
+                      if (scope.clusterFlag) {
+                          scope.clusterFlag = false;    // flag for solving cluster issue if theme/region multiple time clicked
 
-                      $timeout(function () {
-                          scope.destinationMap.panTo(airportLoc);
-                      }, 0, false);
+                          scope.destinations = args.destinationlist;
+                          scope.highRankedAirportlist = args.highRankedAirportlist;
+                          scope.resetMarker();
+                          if (scope.destinations != undefined && scope.destinations.length > 0) {
+                              scope.displayDestinations(scope.destinations);
+                              scope.setMarkerCluster();
+                              if ($rootScope.isShowAlerityMessage && w.width() >= 768) {
+                                  $timeout(function () {
+                                      showMessage();
+                                  }, 0, false);
+                              }
+                          }
+                          else
+                              scope.clusterFlag = true;    // flag for solving cluster issue if theme/region multiple time clicked
+
+
+                          var originairport = _.find(scope.airportlist, function (airport) {
+                              return airport.airport_Code == scope.origin.toUpperCase()
+                          });
+                          var airportLoc;
+                          // lat lon information taken from http://www.mapsofworld.com/
+                          if (args.Region == "Africa")
+                              airportLoc = new google.maps.LatLng(7.1881, 21.0936);
+                          else if (args.Region == "Europe")
+                              airportLoc = new google.maps.LatLng(53.0000, 9.0000);
+                          else if (args.Region == "South America")
+                              airportLoc = new google.maps.LatLng(-14.6048, -59.0625);
+                          else if (args.Region == "North America")
+                              airportLoc = new google.maps.LatLng(48.1667, -100.1667);
+                          else if (args.Region == "Middle East")
+                              airportLoc = new google.maps.LatLng(31.268205, 29.995368);
+                          else if (args.Region == "Asia Pacific")
+                              airportLoc = new google.maps.LatLng(49.8380, 105.8203);
+                          else
+                              airportLoc = new google.maps.LatLng(originairport.airport_Lat, originairport.airport_Lng);
+
+                          $timeout(function () {
+                              scope.destinationMap.panTo(airportLoc);
+                          }, 0, false);
+                      }
                   });
 
                   function setAirportMarkerOnMap() {
@@ -421,6 +431,20 @@
                       var searchBoxElement = angular.element("#search-box")[0];
                       var headerElement = angular.element("#header")[0];
                       alertBoxElement.css({ "top": searchBoxElement.offsetHeight + headerElement.offsetHeight - 9 });
+                  }
+
+                  function displayBlankMap() {
+                      scope.destinationMap.setOptions({ zoomControl: false, scrollwheel: false, disableDoubleClickZoom: true });
+                      var latLng = new google.maps.LatLng(0, 0);
+                      var marker = new MarkerWithLabel({
+                          position: latLng,
+                          map: scope.destinationMap,
+                          visible: false
+                      });
+
+                      $timeout(function () {
+                          scope.destinationMap.panTo(latLng);
+                      }, 0, false);
                   }
               }
               return directive;

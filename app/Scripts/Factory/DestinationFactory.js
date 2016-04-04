@@ -44,7 +44,8 @@
                 return $http.get(RequestedURL)
                 .then(function (data) {
                     result.data = data.data;
-                    DestinationsData.push(result);
+                    if (typeof data.data != 'string')
+                        DestinationsData.push(result);
                     return data.data;
                 }, function (e) {
                     return e;

@@ -1,6 +1,6 @@
 ﻿
-angular.module('TrippismUIApp').directive('youtubeInfo', [  'YouTubeFactory', 
-    function (  YouTubeFactory) {
+angular.module('TrippismUIApp').directive('youtubeInfo', ['YouTubeFactory',
+    function (YouTubeFactory) {
         return {
             restrict: 'E',
             scope: {
@@ -69,14 +69,14 @@ angular.module('TrippismUIApp').directive('youtubeInfo', [  'YouTubeFactory',
 
                 scope.youtubeInfoDataFound = false;
                 scope.$watchGroup(['youtubeParams'], function (newValue, oldValue, scope) {
-                    if (newValue != undefined) {
+                    if (newValue[0] && newValue[0].DestinationairportName != undefined) {
                         scope.youtubeData = "";
                         scope.loadyoutubeInfo();
                     }
                 });
 
-              
-            
+
+
             }
         }
     }]);

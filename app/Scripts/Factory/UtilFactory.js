@@ -21,36 +21,36 @@
             currencySymbol: { currencySymbolsList: [], currencySymbolsListCache: [] },
             GetLowFareForMap: GetLowFareForMap,
             updateQueryStringParameter: updateQueryStringParameter,
-            GetLastSearch: GetLastSearch,
-            SetLastSearchval: SetLastSearchval,
+            //GetLastSearch: GetLastSearch,
+            //SetLastSearchval: SetLastSearchval,
             ReadHighRankedAirportsJson: ReadHighRankedAirportsJson
         };
         return service;
 
-        function GetLastSearch() {
+        //function GetLastSearch() {
 
-            if (LastSearch == null || LastSearch == undefined || LastSearch.length == 0) {
-                return null;
-            }
-            else {
-                return LastSearch;
-            }
+        //    if (LastSearch == null || LastSearch.length == 0) {
+        //        return null;
+        //    }
+        //    else {
+        //        return LastSearch;
+        //    }
 
-        }
-        function SetLastSearchval(obj) {
-            var data = {
-                Origin: obj.Origin,
-                DestinationLocation: obj.DestinationLocation,
-                FromDate: obj.FromDate,
-                ToDate: obj.ToDate,
-                Theme: obj.Theme,
-                Region: obj.Region,
-                Minfare: obj.Minfare,
-                Maxfare: obj.Maxfare
-            }
-            return LastSearch = data;
+        //}
+        //function SetLastSearchval(obj) {
+        //    var data = {
+        //        Origin: obj.Origin,
+        //        DestinationLocation: obj.DestinationLocation,
+        //        FromDate: obj.FromDate,
+        //        ToDate: obj.ToDate,
+        //        Theme: obj.Theme,
+        //        Region: obj.Region,
+        //        Minfare: obj.Minfare,
+        //        Maxfare: obj.Maxfare
+        //    }
+        //    return LastSearch = data;
 
-        }
+        //}
         function ReadStateJson() {
             var States = [];
             return $http.get('scripts/Constants/State.json').then(function (_states) {

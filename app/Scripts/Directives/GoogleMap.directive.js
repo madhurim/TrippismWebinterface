@@ -277,7 +277,7 @@
                               d.resolve(airportCode); // return the original object, so you can access it's other properties
                           } else {
                               //Missing Airport Details log 
-                              UtilFactory.AirportCodeLog(airportCode.DestinationLocation);
+                              //UtilFactory.AirportCodeLog(airportCode.DestinationLocation);
                               d.resolve();
                           }
                           return d.promise;

@@ -1144,6 +1144,22 @@ ul .stop-line {
 }
 /*#endregion Jassor image slider */
 
+.footer-blog-wp ul li {
+    display: inline-block;
+    margin: 0 3px;
+    vertical-align: top;
+}
+
+/*.footer-right div {
+    float: right;
+}
+
+.footer-right .footer-blog-wp {
+    float: left;
+    padding: 2px 0px;
+    margin-right: 15px;
+}*/
+
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {

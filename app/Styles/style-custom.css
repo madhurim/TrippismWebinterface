@@ -1109,164 +1109,9 @@ ul .stop-line {
     background-size: cover;
 }
 
+/*#region Jassor image slider */
 
-/*.carousel-inner .item {
-    opacity: 0;
-    -webkit-transition-property: opacity;
-    -moz-transition-property: opacity;
-    -o-transition-property: opacity;
-    transition-property: opacity;
-}
-
-.carousel-inner .active {
-    opacity: 1;
-}
-
-    .carousel-inner .active.left,
-    .carousel-inner .active.right {
-        left: 0;
-        z-index: 1;
-        animation-name: example1;
-        animation-duration: 1s;
-    }
-
-.carousel-inner .next.left,
-.carousel-inner .prev.right {
-    opacity: 1;
-}*/
-
-/*#region carousel*/
-.carousel-fade .carousel-inner .item {
-    opacity: 0;
-    transition-property: opacity;
-    transition-duration: 4s;
-    transition-timing-function: linear;
-}
-
-.carousel-fade .carousel-inner .active {
-    opacity: 1;
-}
-
-    .carousel-fade .carousel-inner .active.left,
-    .carousel-fade .carousel-inner .active.right {
-        left: 0;
-        opacity: 0;
-        z-index: 1;
-    }
-
-.carousel-fade .carousel-inner .next.left,
-.carousel-fade .carousel-inner .prev.right {
-    opacity: 1;
-}
-
-.carousel-fade .carousel-control {
-    z-index: 2;
-}
-
-@media all and (transform-3d), (-webkit-transform-3d) {
-    .carousel-fade .carousel-inner > .item.next,
-    .carousel-fade .carousel-inner > .item.active.right {
-        opacity: 0;
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-    }
-
-    .carousel-fade .carousel-inner > .item.prev,
-    .carousel-fade .carousel-inner > .item.active.left {
-        opacity: 0;
-        -webkit-transform: translate3d(0, 0, 0);
-        transform: translate3d(0, 0, 0);
-    }
-
-        .carousel-fade .carousel-inner > .item.next.left,
-        .carousel-fade .carousel-inner > .item.prev.right,
-        .carousel-fade .carousel-inner > .item.active {
-            opacity: 1;
-            -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
-        }
-}
-/*#endregion carousel*/
-
-
-/*#region fade slider*/
-/* fade slider */
-
-
-/* keyframes #anim_slides */
-@-webkit-keyframes anim_slides {
-    0% {
-        opacity: 0;
-    }
-
-    6% {
-        opacity: 1;
-    }
-
-    24% {
-        opacity: 1;
-    }
-
-    30% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 0;
-    }
-}
-
-
-.slides div {
-    /* css3 animation */
-    animation-name: anim_slides;
-    animation-duration: 4.0s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: normal;
-    animation-delay: 0;
-    animation-play-state: running;
-    animation-fill-mode: forwards;
-    -webkit-animation-name: anim_slides;
-    -webkit-animation-duration: 4.0s;
-    -webkit-animation-timing-function: linear;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-direction: normal;
-    -webkit-animation-delay: 0;
-    -webkit-animation-play-state: running;
-    -webkit-animation-fill-mode: forwards;
-    -moz-animation-name: anim_slides;
-    -moz-animation-duration: 4.0s;
-    -moz-animation-timing-function: linear;
-    -moz-animation-iteration-count: infinite;
-    -moz-animation-direction: normal;
-    -moz-animation-delay: 0;
-    -moz-animation-play-state: running;
-    -moz-animation-fill-mode: forwards;
-}
-
-    /* css3 delays */
-    .slides div:nth-child(2) {
-        animation-delay: 6.0s;
-        -webkit-animation-delay: 6.0s;
-        -moz-animation-delay: 6.0s;
-    }
-
-    .slides div:nth-child(3) {
-        animation-delay: 12.0s;
-        -webkit-animation-delay: 12.0s;
-        -moz-animation-delay: 12.0s;
-    }
-
-    .slides div:nth-child(4) {
-        animation-delay: 18.0s;
-        -webkit-animation-delay: 18.0s;
-        -moz-animation-delay: 18.0s;
-    }
-/*#endregion fade slider*/
-
-
-/*#jssor_slider {
+#jssor_slider {
     position: relative;
     margin: 0 auto;
     top: 0px;
@@ -1281,7 +1126,9 @@ ul .stop-line {
     top: 0px;
     left: 0px;
     overflow: hidden;
-}*/
+}
+/*#endregion Jassor image slider */
+
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {

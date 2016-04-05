@@ -21,21 +21,15 @@
 
         // set page height based on window's height
         var w = angular.element($window);
-        var pageHeight;
-        var pageWidth;
         function setPageHeight() {
             var boxwrap = angular.element("#destination-boxwrap");
             var h50px = angular.element("#h50px");
-            pageHeight = w.height() - h50px.height();
-            pageWidth = boxwrap.width();
-            boxwrap.height(pageHeight);
+            boxwrap.height(w.height() - h50px.height());
         }
 
         setPageHeight();
         w.bind('resize', function () {
             setPageHeight();
-            //setSliderSize();
-            //jssor_1_slider.$ScaleHeight(pageHeight);
         });
 
         angular.element('#carousel').carousel({
@@ -47,28 +41,43 @@
         // --- Ends----
 
 
-        //function setSliderSize() {
-        //    angular.element('#jssor_slider, #jssor_1').css({ width: pageWidth + 'px', height: pageHeight + 'px' });
-        //}
+        // [S] Jssor slider
+        function setJssorSliderSize() {
+            var boxwrap = angular.element("#destination-boxwrap");
+            angular.element('#jssor_slider, #jssor_slider div').css({ width: boxwrap.css('width'), height: boxwrap.css('height') });
+        }
 
-        //var jssor_1_slider_init = function () {
-        //    var jssor_1_SlideshowTransitions = [
-        //      { $Duration: 4000, $Opacity: 2 }
-        //    ];
+        var initJassorSlider = function () {
+            var slideshowTransitions = [
+              { $Duration: 4000, $Opacity: 2 }
+            ];
 
-        //    var jssor_1_options = {
-        //        $AutoPlay: true,
-        //        $SlideshowOptions: {
-        //            $Class: $JssorSlideshowRunner$,
-        //            $Transitions: jssor_1_SlideshowTransitions,
-        //            $TransitionsOrder: 1
-        //        }
-        //    };
+            var jssorOptions = {
+                $AutoPlay: true,
+                $SlideshowOptions: {
+                    $Class: $JssorSlideshowRunner$,
+                    $Transitions: slideshowTransitions,
+                    $TransitionsOrder: 1
+                }
+            };
 
-        //    var jssor_1_slider = new $JssorSlider$("jssor_slider", jssor_1_options);
-        //};
+            var JassorSlider = new $JssorSlider$("jssor_slider", jssorOptions);
 
-        //setSliderSize();
-        //jssor_1_slider_init();
+            function ScaleSlider() {
+                var refSize = JassorSlider.$Elmt.parentNode.clientWidth;
+                if (refSize) {
+                    refSize = Math.min(refSize, 600);
+                    JassorSlider.$ScaleWidth(refSize);
+                }
+                else {
+                    window.setTimeout(ScaleSlider, 30);
+                }
+            }
+            $Jssor$.$AddEvent(window, "resize", setJssorSliderSize);
+        };
+
+        setJssorSliderSize();
+        initJassorSlider();
+        // [E] Jssor slider
     }
 })();

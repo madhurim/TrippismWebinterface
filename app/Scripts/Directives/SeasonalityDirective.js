@@ -76,7 +76,7 @@
                     scope.ReturnDate = $filter('date')(scope.seasonalityParams.Fareforecastdata.ReturnDate, scope.format, null);
                     scope.chartHeight = 200;
                     scope.divID = "seasonality";
-                    var mapHTML = "<div id='" + scope.divID + "'></div>";
+                    var mapHTML = "<div style='background:white' id='" + scope.divID + "'></div>";
                     elem.append($compile(mapHTML)(scope));
                     scope.loadSeasonalityInfo();
                 }
@@ -294,6 +294,7 @@
                         $timeout(function () {
                             scope.Chart = new Highcharts.Chart(options);
                             scope.ChartLoaded = true;
+                            angular.element('#lastDiv').addClass('newouterDiv');
                         }, 0, false);
                     }
                 }

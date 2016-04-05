@@ -21,36 +21,11 @@
             currencySymbol: { currencySymbolsList: [], currencySymbolsListCache: [] },
             GetLowFareForMap: GetLowFareForMap,
             updateQueryStringParameter: updateQueryStringParameter,
-            //GetLastSearch: GetLastSearch,
-            //SetLastSearchval: SetLastSearchval,
-            ReadHighRankedAirportsJson: ReadHighRankedAirportsJson
+            ReadHighRankedAirportsJson: ReadHighRankedAirportsJson,
+            GetValidDates: GetValidDates
         };
         return service;
 
-        //function GetLastSearch() {
-
-        //    if (LastSearch == null || LastSearch.length == 0) {
-        //        return null;
-        //    }
-        //    else {
-        //        return LastSearch;
-        //    }
-
-        //}
-        //function SetLastSearchval(obj) {
-        //    var data = {
-        //        Origin: obj.Origin,
-        //        DestinationLocation: obj.DestinationLocation,
-        //        FromDate: obj.FromDate,
-        //        ToDate: obj.ToDate,
-        //        Theme: obj.Theme,
-        //        Region: obj.Region,
-        //        Minfare: obj.Minfare,
-        //        Maxfare: obj.Maxfare
-        //    }
-        //    return LastSearch = data;
-
-        //}
         function ReadStateJson() {
             var States = [];
             return $http.get('scripts/Constants/State.json').then(function (_states) {
@@ -229,6 +204,31 @@
             if (LowRate == "N/A")
                 LowRate = LowestNonStopeFare; // MAM : New logic
             return LowRate;
+        }
+
+        function SetFromDate() {
+            return ConvertToRequiredDate(GetFromDate(), 'UI');
+        };
+        function SetToDate(fromDate) {
+            return ConvertToRequiredDate(GetToDate(fromDate), 'UI');
+        };
+
+        function GetValidDates(fromDate, toDate) {
+            var obj = { FromDate: fromDate, ToDate: toDate };
+            if (fromDate == null) {
+                obj.FromDate = SetFromDate();
+                obj.ToDate = SetToDate(obj.FromDate);
+            }
+            else if (toDate == null) {
+                obj.ToDate = SetToDate(fromDate);
+            }
+
+            var fromDate = ConvertToDateObject(obj.FromDate);
+            var toDate = ConvertToDateObject(obj.ToDate);
+            if (toDate < fromDate)
+                obj.ToDate = SetToDate(fromDate);
+
+            return obj;
         }
     }
 })();

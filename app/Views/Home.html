@@ -1,10 +1,13 @@
 ﻿<div ng-controller="HomeController">
     <div class="destination-boxwrap" id="destination-boxwrap">
-        <!--<div class="map-box-img">
-              <div class="map">
-                  <img src="images/Mainpagebg2.jpg" alt="" />
-              </div>
-          </div>-->
+        <div id="jssor_slider">
+            <div id="jssor_1" data-u="slides">
+                <div class="item" data-p="112.50" style="display: none;"><div class="destination-image destination-image-1"></div></div>
+                <div class="item" data-p="112.50" style="display: none;"><div class="destination-image destination-image-2"></div></div>
+                <div class="item" data-p="112.50" style="display: none;"><div class="destination-image destination-image-3"></div></div>
+                <div class="item" data-p="112.50" style="display: none;"><div class="destination-image destination-image-4"></div></div>
+            </div>
+        </div>
         <search:box></search:box>
     </div>
     <div class="clear h50px" id="h50px"></div>
@@ -57,10 +60,3 @@
         </div>
     </div>
 </div>
-<!--<script>
-    $(document).ready(function () {
-        $(window).resize(function () {
-            $(".destination-boxwrap").height($(window).height() - $(".h50px ").height());
-        }).resize();
-    });
-</script>-->

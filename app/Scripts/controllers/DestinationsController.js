@@ -51,35 +51,12 @@
                     if (para[0].trim() === "r") {
                         $scope.ToDate = ConvertToRequiredDate(para[1].trim(), 'UI');
                     }
-                    //if (para[0].trim() === "th") {
-                    //    $scope.Theme = para[1].trim();
-                    //    $scope.previousTheme = $scope.Theme;
-                    //    isSearched = true;
-                    //}
-                    //if (para[0].trim() === "a") {
-                    //    $scope.Region = para[1].trim();
-                    //    $scope.previousRegion = $scope.Region;
-                    //    isSearched = true;
-                    //}
-                    //if (para[0].trim() === "lf") {
-                    //    $scope.Minfare = para[1].trim();
-                    //    isSearched = true;
-                    //}
-                    //if (para[0].trim() === "hf") {
-                    //    $scope.Maxfare = para[1].trim();
-                    //    isSearched = true;
-                    //}
                 });
 
                 // correct dates
-                if ($scope.FromDate == null || $scope.ToDate == null) {
-                    SetFromDate();
-                    SetToDate();
-                }
-                var fromDate = ConvertToDateObject($scope.FromDate);
-                var toDate = ConvertToDateObject($scope.ToDate);
-                if (toDate < fromDate)
-                    SetToDate();
+                var dates = UtilFactory.GetValidDates($scope.FromDate, $scope.ToDate);
+                $scope.FromDate = dates.FromDate;
+                $scope.ToDate = dates.ToDate;
 
                 // store into local storage
                 var data = {
@@ -121,7 +98,7 @@
 
                     if ($scope.Origin != undefined && $scope.Origin != "") {
                         $scope.LastSelectedOrigin = $scope.Origin;
-                        updateSearchCriteria();                        
+                        updateSearchCriteria();
                         findDestinations();
                     }
                 });
@@ -538,6 +515,6 @@
         };
         function SetToDate(fromDate) {
             $scope.ToDate = ConvertToRequiredDate(GetToDate($scope.FromDate), 'UI');
-        };       
+        };
     }
 })();

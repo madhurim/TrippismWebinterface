@@ -52,14 +52,6 @@
                         if (para[0].trim() === "r") {
                             $scope.ToDate = ConvertToRequiredDate(para[1].trim(), 'UI');
                         }
-                        //if (para[0].trim() === "th")
-                        //    $scope.Theme = para[1].trim();
-                        //if (para[0].trim() === "a")
-                        //    $scope.Region = para[1].trim();
-                        //if (para[0].trim() === "lf")
-                        //    $scope.Minfare = para[1].trim();
-                        //if (para[0].trim() === "hf")
-                        //    $scope.Maxfare = para[1].trim();
                     });
 
                     $scope.OriginairportName = _.find($scope.AvailableAirports, function (airport) {
@@ -68,29 +60,11 @@
                     $scope.DestinationairportName = _.find($scope.AvailableAirports, function (airport) {
                         return airport.airport_Code == $scope.DestinationLocation
                     });
+                    
+                    var dates = UtilFactory.GetValidDates($scope.FromDate, $scope.ToDate);
+                    $scope.FromDate = dates.FromDate;
+                    $scope.ToDate = dates.ToDate;
 
-                    if ($scope.FromDate == null || $scope.ToDate == null) {
-                        SetFromDate();
-                        SetToDate();
-                    }
-
-                    var fromDate = ConvertToDateObject($scope.FromDate);
-                    var toDate = ConvertToDateObject($scope.ToDate);
-                    if (toDate < fromDate)
-                        SetToDate();
-
-                    //var paramdata = {
-                    //    Origin: $scope.Origin,
-                    //    DestinationLocation: $scope.KnownDestinationAirport,
-                    //    FromDate: $scope.FromDate,
-                    //    ToDate: $scope.ToDate,
-                    //    Theme: $scope.Theme,
-                    //    Region: $scope.Region,
-                    //    Minfare: $scope.Minfare,
-                    //    Maxfare: $scope.Maxfare
-                    //}
-
-                    //UtilFactory.SetLastSearchval(paramdata)
                     if ($scope.OriginairportName == undefined || $scope.DestinationairportName == undefined) {
                         alertify.alert("Destination Finder", "");
                         alertify.alert('We could not find any destination that matches your request. Please make sure you have entered valid airport codes and dates.');
@@ -282,15 +256,7 @@
                         $scope.$broadcast("columnLayoutChanged", { columnData: columnData });
                     }
                 });
-
             });
-
-            function SetFromDate() {
-                $scope.FromDate = ConvertToRequiredDate(GetFromDate(), 'UI');
-            };
-            function SetToDate(fromDate) {
-                $scope.ToDate = ConvertToRequiredDate(GetToDate($scope.FromDate), 'UI');
-            };
         }
         $scope.PageName = "Destination Page";
     }

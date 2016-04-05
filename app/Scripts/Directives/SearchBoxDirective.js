@@ -65,24 +65,15 @@ function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParam
                             }
                         });
 
-                        if ($scope.FromDate == null || $scope.ToDate == null) {
-                            SetFromDate();
-                            SetToDate();
-                        }
+                        var dates = UtilFactory.GetValidDates($scope.FromDate, $scope.ToDate);
+                        $scope.FromDate = dates.FromDate;
+                        $scope.ToDate = dates.ToDate;
 
                         $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
                         $scope.urlParam.FromDate = $scope.FromDate;
 
                         $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
                         $scope.urlParam.ToDate = $scope.ToDate;
-
-                        var fromDate = ConvertToDateObject($scope.FromDate);
-                        var toDate = ConvertToDateObject($scope.ToDate);
-                        if (toDate < fromDate) {
-                            $scope.ToDate = ConvertToRequiredDate(GetToDate($scope.FromDate), 'UI');
-                            $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
-                            $scope.urlParam.ToDate = $scope.ToDate;
-                        }
                     }
                 });
             }

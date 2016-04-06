@@ -1159,7 +1159,10 @@ ul .stop-line {
     padding: 2px 0px;
     margin-right: 15px;
 }*/
-
+.video {
+    width: 640px;
+    height: 357px;
+}
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {

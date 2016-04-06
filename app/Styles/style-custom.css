@@ -1160,8 +1160,9 @@ ul .stop-line {
     margin-right: 15px;
 }*/
 .video {
-    width: 640px;
-    height: 357px;
+    width: 50%;
+    margin: 0 auto;
+    display: block;
 }
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
@@ -1269,6 +1270,10 @@ ul .stop-line {
 @media only screen and (max-width:767px) {
     .service_content {
         min-height: 250px;
+    }
+
+    .video {
+        width: 100%;
     }
 }
 

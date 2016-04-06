@@ -1160,6 +1160,16 @@ ul .stop-line {
     margin-right: 15px;
 }*/
 
+.copyright a {
+    color: white;
+    margin-right: 5px;
+    float: left;
+    margin-right: 15px;
+}
+
+    .copyright a:hover {
+        text-decoration: underline;
+    }
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {

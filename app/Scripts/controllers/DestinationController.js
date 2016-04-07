@@ -28,7 +28,7 @@
         FareforecastFactory,
         SeasonalityFactory,
         TrippismConstants) {
-        $scope.$emit('bodyClass', 'tabpage');
+        $scope.$emit('bodyClass', 'otherpage');
         $scope.Origin = $scope.DestinationLocation = '';
         init();
         function init() {

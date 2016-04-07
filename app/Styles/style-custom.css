@@ -1150,10 +1150,6 @@ ul .stop-line {
     vertical-align: top;
 }
 
-#videoModel .modal-body {
-    padding: 0px;
-}
-
 #videoModel .video {
     width: 100%;
     margin: 0 auto;
@@ -1176,6 +1172,42 @@ ul .stop-line {
     margin: 10px 0px 3px 0px;
     font-weight: 500;
 }
+
+.copyright a {
+    color: white;
+    margin-right: 5px;
+    float: left;
+    margin-right: 15px;
+}
+
+    .copyright a:hover {
+        text-decoration: underline;
+    }
+
+.faq-container {
+    position: relative;
+    /*min-height: 537px;*/
+    margin-top: 15px;
+    background-color: #fff;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+.faq-container .row-fluid:not(:last-child) {
+    border-bottom: 1px solid #ddd;
+}
+
+.faqpage .footer-box {
+    position: fixed;
+}
+
+/*@media only screen and (max-height: 600px) {
+    .faqpage .footer-box {
+        position: relative;
+    }
+}*/
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {
@@ -1276,6 +1308,15 @@ ul .stop-line {
 
     div.form-fromDate .dropdown-menu {
         left: 0px !important;
+    }
+
+    .copyright span {
+        float: right;
+    }
+
+    .footer-blog-wp {
+        width: auto;
+        float: right;
     }
 }
 

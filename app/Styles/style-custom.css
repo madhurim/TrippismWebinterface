@@ -1170,9 +1170,25 @@ ul .stop-line {
     .copyright a:hover {
         text-decoration: underline;
     }
+
+.faq-container {
+    position: relative;
+    /*min-height: 537px;*/
+    margin-top: 15px;
+    background-color: #fff;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+.faq-container .row-fluid:not(:last-child) {
+    border-bottom: 1px solid #ddd;
+}
+
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
-    .panel-header-insta, .header-text {
+    .panel-header-insta, .header-text; {
         text-align: center;
     }
 
@@ -1270,6 +1286,15 @@ ul .stop-line {
 
     div.form-fromDate .dropdown-menu {
         left: 0px !important;
+    }
+
+    .copyright span {
+        float: right;
+    }
+
+    .footer-blog-wp {
+        width: auto;
+        float: right;
     }
 }
 

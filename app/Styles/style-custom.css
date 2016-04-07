@@ -1150,19 +1150,31 @@ ul .stop-line {
     vertical-align: top;
 }
 
-/*.footer-right div {
-    float: right;
+#videoModel .modal-body {
+    padding: 0px;
 }
 
-.footer-right .footer-blog-wp {
-    float: left;
-    padding: 2px 0px;
-    margin-right: 15px;
-}*/
+#videoModel .video {
+    width: 100%;
+    margin: 0 auto;
+    display: block;
+}
+
 .video {
     width: 50%;
     margin: 0 auto;
     display: block;
+}
+
+.btn-video {
+    margin: 0px 10px 0px 0px;
+}
+
+.video-title {
+    text-align: center;
+    font-size: 20px;
+    margin: 10px 0px 3px 0px;
+    font-weight: 500;
 }
 /*#region Media queries */
 @media only screen and (max-width: 991px) {

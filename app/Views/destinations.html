@@ -18,7 +18,8 @@
                     </h5>
                 </div>
                 <div class="refine-btn-group" style="z-index:9999">
-                    <a class="btn btn-danger" data-toggle="modal" data-target="#myModal">Learn</a>
+                    <!--<a class="btn btn-danger" data-toggle="modal" data-target="#videoModel">Learn</a>-->
+                    <a class="btn btn-danger" video-popup-directive>Learn</a>
                     <a class="btn btn-danger " ng-click="isModified=!isModified;isRefineSeachCollapsed=false;"> Modify </a>
                 </div>
             </div>
@@ -294,24 +295,4 @@
         <search-box is-popup="isModified"></search-box>
     </div>
     <!--</search-box>-->
-    <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-sm-12">
-                            <video src="../Videos/trippismm.mp4" class="video" controls></video>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>

@@ -44,7 +44,7 @@
         // [S] Jssor slider
         var initJassorSlider = function () {
             var slideshowTransitions = [
-              { $Duration: 4000, $Opacity: 2 }
+              { $Duration: 2000, $Opacity: 2 }
             ];
 
             var jssorOptions = {
@@ -53,7 +53,8 @@
                     $Class: $JssorSlideshowRunner$,
                     $Transitions: slideshowTransitions,
                     $TransitionsOrder: 1
-                }
+                },
+                $PauseOnHover: 0
             };
 
             var JassorSlider = new $JssorSlider$("jssor_slider", jssorOptions);

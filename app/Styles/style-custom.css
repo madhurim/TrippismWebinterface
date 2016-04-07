@@ -1130,6 +1130,12 @@ ul .stop-line {
     background-size: cover;
 }
 
+.destination-image-6 {
+    background-image: url("../images/home-images/Mainpagebg7.jpg");
+    background-position: 60% top;
+    background-size: cover;
+}
+
 /*#region Jassor image slider */
 
 #jssor_slider {

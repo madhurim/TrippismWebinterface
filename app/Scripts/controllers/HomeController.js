@@ -7,13 +7,15 @@
             '$timeout',
             'LocalStorageFactory',
             'TrippismConstants',
+            '$interval',
              HomeController]);
     function HomeController(
        $scope,
        $window,
        $timeout,
        LocalStorageFactory,
-       TrippismConstants
+       TrippismConstants,
+       $interval
        ) {
         alertify.dismissAll();
         $scope.Name = "Home Page";
@@ -47,17 +49,49 @@
             return { width: width, height: height };
         }
 
-        var size = resizeSlider();
-        angular.element('#slideshow').fadeSlideShow({
-            speed: 3000,
-            interval: 5000,
-            width: size.width,
-            height: size.height,
-            PlayPauseElement: false,
-            NextElement: false,
-            PrevElement: false,
-            ListElement: false,
-        });
-        //window.setTimeout(function () { angular.element('#slideshow li').css({ display: 'list-item' }) }, 2000);
+        function startSlider() {
+            var size = resizeSlider();
+            var element = angular.element('#slideshow');
+            var settings = {
+                speed: 3000,
+                interval: 5000,
+                width: size.width,
+                height: size.height
+            }
+
+            angular.element(element).css({
+                width: settings.width,
+                height: settings.height,
+                position: 'relative',
+                overflow: 'hidden'
+            });
+
+            angular.element('> *', element).css({
+                position: 'absolute',
+                width: settings.width,
+                height: settings.height
+            });
+
+            var Slides = angular.element('> *', element).length;
+            Slides = Slides - 1;
+            var ActSlide = Slides;
+
+            var jQslide = angular.element('> *', element);
+
+            $interval.cancel($scope.intval);
+            $scope.intval = $interval(function () {
+                jQslide.eq(ActSlide).fadeOut(settings.speed);
+
+                if (ActSlide <= 0) {
+                    ActSlide = Slides;
+                    jQslide.eq(ActSlide).fadeIn(settings.speed, function () { jQslide.fadeIn(); });
+                } else {
+                    ActSlide = ActSlide - 1;
+                    jQslide.eq(ActSlide).css({ opacity: 1 });
+                }
+            }, settings.interval);
+        }
+
+        startSlider();
     }
 })();

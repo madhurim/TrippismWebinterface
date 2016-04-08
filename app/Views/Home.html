@@ -1,12 +1,21 @@
 ﻿<div ng-controller="HomeController">
     <div class="destination-boxwrap" id="destination-boxwrap">
-        <div id="jssor_slider">
-            <div id="jssor_1" data-u="slides">
-                <div class="item" data-p="112.50" style="display: none;"><div class="destination-image destination-image-1"></div></div>
-                <div class="item" data-p="112.50" style="display: none;"><div class="destination-image destination-image-2"></div></div>
-                <div class="item" data-p="112.50" style="display: none;"><div class="destination-image destination-image-3"></div></div>
-                <div class="item" data-p="112.50" style="display: none;"><div class="destination-image destination-image-4"></div></div>
-            </div>
+        <div id="slideshowWrapper">
+            <ul id="slideshow">
+                <!--<li style="display:none;"><div class="destination-image destination-image-1"></div></li>
+                <li style="display:none;"><div class="destination-image destination-image-5"></div></li>
+                <li style="display:none;"><div class="destination-image destination-image-4"></div></li>
+                <li style="display:none;"><div class="destination-image destination-image-3"></div></li>
+                <li style="display:none;"><div class="destination-image destination-image-2"></div></li>-->
+
+                <li style="opacity:0;"><div class="destination-image destination-image-1"></div></li>
+                <li style="opacity:0;"><div class="destination-image destination-image-5"></div></li>
+                <li style="opacity:0;"><div class="destination-image destination-image-4"></div></li>
+                <li style="opacity:0;"><div class="destination-image destination-image-3"></div></li>
+                <li style="opacity:0;"><div class="destination-image destination-image-2"></div></li>
+                <li><div class="destination-image destination-image-6"></div></li>
+            </ul>
+            <br clear="all" />
         </div>
         <search:box></search:box>
     </div>
@@ -20,7 +29,7 @@
                         <div class="service_content">
                             <img src="../images/explore_icon.png" />
                             <p>
-                                Visual mapped exploration of hundreds
+                                Visually mapped exploration of hundreds
                                 of destinations with flight prices
                                 allowing filters based on budget.
                             </p>

@@ -1157,8 +1157,8 @@ ul .stop-line {
 }
 
 .video {
-    width: 50%;
-    margin: 0 auto;
+    width: 70%;
+    /*margin: 0 auto;*/
     display: block;
 }
 
@@ -1166,12 +1166,28 @@ ul .stop-line {
     margin: 0px 10px 0px 0px;
 }
 
-.video-title {
-    text-align: center;
-    font-size: 20px;
-    margin: 10px 0px 3px 0px;
-    font-weight: 500;
+.video-wp {
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
+
+.video-title {
+    border-right: 1px solid #e8e8e8;
+    text-align: center;
+}
+
+    .video-title h3 {
+        font-size: 30px;
+        margin: 10px 0px 3px 0px;
+        font-weight: 500;
+        color: #5b74b7;
+    }
+
+    .video-title p {
+        margin: 10px 0px;
+        text-align: justify;
+        text-indent: 15px;
+    }
 
 .copyright a {
     color: white;
@@ -1327,6 +1343,10 @@ ul .stop-line {
 
     .video {
         width: 100%;
+    }
+
+    .video-title {
+        border-right: none;
     }
 }
 

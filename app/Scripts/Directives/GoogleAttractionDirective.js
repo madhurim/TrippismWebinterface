@@ -193,7 +193,7 @@
                             data.Types = attractionDetail.Types;
                             data.ExcludeTypes = attractionDetail.ExcludeTypes;
                             isSetCenter = attractionDetail.isSetMapCenter;
-                            $scope.attractionText = attractionDetail.attractionText;
+                            //$scope.attractionText = attractionDetail.attractionText;
 
                             // setting map option, used into view
                             $scope.attractionmapOptions = {

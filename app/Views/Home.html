@@ -1,10 +1,22 @@
 ﻿<div ng-controller="HomeController">
     <div class="destination-boxwrap" id="destination-boxwrap">
-        <!--<div class="map-box-img">
-              <div class="map">
-                  <img src="images/Mainpagebg2.jpg" alt="" />
-              </div>
-          </div>-->
+        <div id="slideshowWrapper">
+            <ul id="slideshow">
+                <!--<li style="display:none;"><div class="destination-image destination-image-1"></div></li>
+                <li style="display:none;"><div class="destination-image destination-image-5"></div></li>
+                <li style="display:none;"><div class="destination-image destination-image-4"></div></li>
+                <li style="display:none;"><div class="destination-image destination-image-3"></div></li>
+                <li style="display:none;"><div class="destination-image destination-image-2"></div></li>-->
+
+                <li style="opacity:0;"><div class="destination-image destination-image-1"></div></li>
+                <li style="opacity:0;"><div class="destination-image destination-image-5"></div></li>
+                <li style="opacity:0;"><div class="destination-image destination-image-4"></div></li>
+                <li style="opacity:0;"><div class="destination-image destination-image-3"></div></li>
+                <li style="opacity:0;"><div class="destination-image destination-image-2"></div></li>
+                <li><div class="destination-image destination-image-6"></div></li>
+            </ul>
+            <br clear="all" />
+        </div>
         <search:box></search:box>
     </div>
     <div class="clear h50px" id="h50px"></div>
@@ -17,7 +29,7 @@
                         <div class="service_content">
                             <img src="../images/explore_icon.png" />
                             <p>
-                                Visual mapped exploration of hundreds
+                                Visually mapped exploration of hundreds
                                 of destinations with flight prices
                                 allowing filters based on budget.
                             </p>
@@ -57,10 +69,3 @@
         </div>
     </div>
 </div>
-<!--<script>
-    $(document).ready(function () {
-        $(window).resize(function () {
-            $(".destination-boxwrap").height($(window).height() - $(".h50px ").height());
-        }).resize();
-    });
-</script>-->

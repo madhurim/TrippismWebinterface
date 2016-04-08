@@ -49,8 +49,8 @@
 
         var size = resizeSlider();
         angular.element('#slideshow').fadeSlideShow({
-            speed: 2000,
-            interval: 3000,
+            speed: 3000,
+            interval: 5000,
             width: size.width,
             height: size.height,
             PlayPauseElement: false,
@@ -58,6 +58,6 @@
             PrevElement: false,
             ListElement: false,
         });
-
+        //window.setTimeout(function () { angular.element('#slideshow li').css({ display: 'list-item' }) }, 2000);
     }
 })();

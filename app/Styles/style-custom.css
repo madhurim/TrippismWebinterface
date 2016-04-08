@@ -1,4 +1,4 @@
-﻿@charset "utf-8";
+﻿
 /* CSS Document */
 
 /* #region trippismapp.css */
@@ -1107,31 +1107,31 @@ ul .stop-line {
 }
 
 .destination-image-2 {
-    background-image: url("../images/home-images/Mainpagebg3.jpg");
+    background-image: url("../images/home-images/compressed/Mainpagebg3.jpg");
     background-position: 60% top;
     background-size: cover;
 }
 
 .destination-image-3 {
-    background-image: url("../images/home-images/Mainpagebg4.jpg");
+    background-image: url("../images/home-images/compressed/Mainpagebg4.jpg");
     background-position: 60% top;
     background-size: cover;
 }
 
 .destination-image-4 {
-    background-image: url("../images/home-images/Mainpagebg5.jpg");
+    background-image: url("../images/home-images/compressed/Mainpagebg5.jpg");
     background-position: 60% top;
     background-size: cover;
 }
 
 .destination-image-5 {
-    background-image: url("../images/home-images/Mainpagebg6.jpg");
+    background-image: url("../images/home-images/compressed/Mainpagebg6.jpg");
     background-position: 60% top;
     background-size: cover;
 }
 
 .destination-image-6 {
-    background-image: url("../images/home-images/Mainpagebg7.jpg");
+    background-image: url("../images/home-images/compressed/Mainpagebg7.jpg");
     background-position: 60% top;
     background-size: cover;
 }

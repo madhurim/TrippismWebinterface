@@ -825,7 +825,7 @@ ul .stop-line {
 
 .service_box {
     /*padding: 50px 0;*/
-    padding: 10px 0;
+    padding: 10px 0 0 0;
     margin-top: -70px;
 }
 
@@ -1156,9 +1156,9 @@ ul .stop-line {
     display: block;
 }
 
+/*#region video*/
 .video {
-    width: 70%;
-    /*margin: 0 auto;*/
+    width: 100%;
     display: block;
 }
 
@@ -1166,13 +1166,19 @@ ul .stop-line {
     margin: 0px 10px 0px 0px;
 }
 
+.video-container {
+    background: #ececec;
+    margin-bottom: 0px;
+}
+
 .video-wp {
     padding-top: 20px;
     padding-bottom: 20px;
+    margin: auto;
+    width: 80%;
 }
 
 .video-title {
-    border-right: 1px solid #e8e8e8;
     text-align: center;
 }
 
@@ -1188,6 +1194,7 @@ ul .stop-line {
         text-align: justify;
         text-indent: 15px;
     }
+/*#endregion video*/
 
 .copyright a {
     color: white;
@@ -1341,12 +1348,8 @@ ul .stop-line {
         min-height: 250px;
     }
 
-    .video {
+    .video-wp {
         width: 100%;
-    }
-
-    .video-title {
-        border-right: none;
     }
 }
 

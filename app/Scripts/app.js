@@ -26,6 +26,10 @@ TrippismUIApp.config(['$stateProvider', '$urlRouterProvider', function ($statePr
             url: '/destination/*path',
             templateUrl: 'Views/destination.html'
         })
+        .state('FAQs', {
+            url: '/FAQs',
+            templateUrl: 'Views/FAQs.html'
+        })
 }]);
 
 TrippismUIApp.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $location) {

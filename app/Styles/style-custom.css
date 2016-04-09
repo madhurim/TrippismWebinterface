@@ -825,7 +825,7 @@ ul .stop-line {
 
 .service_box {
     /*padding: 50px 0;*/
-    padding: 10px 0;
+    padding: 10px 0 0 0;
     margin-top: -70px;
 }
 
@@ -1162,15 +1162,95 @@ ul .stop-line {
     vertical-align: top;
 }
 
-/*.footer-right div {
-    float: right;
+#videoModel .video {
+    width: 100%;
+    margin: 0 auto;
+    display: block;
 }
 
-.footer-right .footer-blog-wp {
+/*#region video*/
+.video {
+    width: 60%;
+    display: block;
+    margin: auto;
+}
+
+.btn-video {
+    margin: 0px 10px 0px 0px;
+}
+
+.video-container {
+    margin-bottom: 0px;
+}
+
+.video-wp {
+    padding-top: 10px;
+    padding-bottom: 20px;
+    margin: auto;
+    width: 80%;
+}
+
+.video-title {
+    text-align: center;
+    margin-bottom: 10px;
+}
+/*#endregion video*/
+
+.copyright a {
+    color: white;
+    margin-right: 5px;
     float: left;
-    padding: 2px 0px;
     margin-right: 15px;
-}*/
+}
+
+    .copyright a:hover {
+        text-decoration: underline;
+    }
+
+.faq-container {
+    position: relative;
+    /*min-height: 537px;*/
+    margin-top: 15px;
+    background-color: #fff;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+.faq-container .row-fluid:not(:last-child) {
+    border-bottom: 1px solid #ddd;
+}
+
+.faqpage .footer-box {
+    position: fixed;
+}
+
+.ico-social {
+    display: block;
+    width: 24px;
+    height: 24px;
+}
+
+.ico-fb {
+    background: Url('../images/social.png');
+}
+
+.ico-twi {
+    background: Url('../images/social.png') -26px 0;
+}
+
+.ico-pin {
+    background: Url('../images/social.png') -52px 0;
+}
+
+.ico-lin {
+    background: Url('../images/social.png') -78px 0;
+}
+
+.ico-blog {
+    background: Url('../images/social.png') -104px 0;
+}
 
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
@@ -1273,11 +1353,28 @@ ul .stop-line {
     div.form-fromDate .dropdown-menu {
         left: 0px !important;
     }
+
+    .copyright span {
+        float: right;
+    }
+
+    .footer-blog-wp {
+        width: auto;
+        float: right;
+    }
 }
 
 @media only screen and (max-width:767px) {
     .service_content {
         min-height: 250px;
+    }
+
+    .video-wp {
+        width: 100%;
+    }
+
+    .video {
+        width: 80%;
     }
 }
 
@@ -1338,6 +1435,9 @@ ul .stop-line {
     }
 
     .breadcrum-container {
+        width: 100%;
+    }
+    .video {
         width: 100%;
     }
 }

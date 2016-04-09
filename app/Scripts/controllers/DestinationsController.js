@@ -306,7 +306,7 @@
 
 
                     var minMaxFare = getMinMaxFare($scope.destinationlist);
-                    var Maxfare, Minfare;
+                    var Maxfare = 0, Minfare = 0;
                     if (minMaxFare.MaxFare && minMaxFare.MaxFare != 0)
                         Maxfare = Math.ceil(minMaxFare.MaxFare);
                     if (minMaxFare.MinFare && minMaxFare.MinFare != 0)
@@ -392,20 +392,23 @@
 
 
         function getMinMaxFare(destinationList) {
-            var max = Math.max.apply(Math, destinationList.map(function (item) {
-                var lowFare = UtilFactory.GetLowFareForMap(item);
-                if (lowFare != 'N/A')
-                    return UtilFactory.GetLowFareForMap(item);
-                else
-                    return 0;
-            }));
-            var min = Math.min.apply(Math, destinationList.map(function (item) {
-                var lowFare = UtilFactory.GetLowFareForMap(item);
-                if (lowFare != 'N/A')
-                    return UtilFactory.GetLowFareForMap(item);
-                else
-                    return 0;
-            }));
+            var max = 0, min = 0;
+            if (destinationList.length) {
+                max = Math.max.apply(Math, destinationList.map(function (item) {
+                    var lowFare = UtilFactory.GetLowFareForMap(item);
+                    if (lowFare != 'N/A')
+                        return UtilFactory.GetLowFareForMap(item);
+                    else
+                        return 0;
+                }));
+                min = Math.min.apply(Math, destinationList.map(function (item) {
+                    var lowFare = UtilFactory.GetLowFareForMap(item);
+                    if (lowFare != 'N/A')
+                        return UtilFactory.GetLowFareForMap(item);
+                    else
+                        return 0;
+                }));
+            }
             return { MinFare: min, MaxFare: max };
         }
 

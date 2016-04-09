@@ -1170,8 +1170,9 @@ ul .stop-line {
 
 /*#region video*/
 .video {
-    width: 100%;
+    width: 60%;
     display: block;
+    margin: auto;
 }
 
 .btn-video {
@@ -1179,12 +1180,11 @@ ul .stop-line {
 }
 
 .video-container {
-    background: #ececec;
     margin-bottom: 0px;
 }
 
 .video-wp {
-    padding-top: 20px;
+    padding-top: 10px;
     padding-bottom: 20px;
     margin: auto;
     width: 80%;
@@ -1192,20 +1192,8 @@ ul .stop-line {
 
 .video-title {
     text-align: center;
+    margin-bottom: 10px;
 }
-
-    .video-title h3 {
-        font-size: 30px;
-        margin: 10px 0px 3px 0px;
-        font-weight: 500;
-        color: #5b74b7;
-    }
-
-    .video-title p {
-        margin: 10px 0px;
-        text-align: justify;
-        text-indent: 15px;
-    }
 /*#endregion video*/
 
 .copyright a {
@@ -1384,6 +1372,10 @@ ul .stop-line {
     .video-wp {
         width: 100%;
     }
+
+    .video {
+        width: 80%;
+    }
 }
 
 @media only screen and (min-width:481px) and (max-width:736px) {
@@ -1443,6 +1435,9 @@ ul .stop-line {
     }
 
     .breadcrum-container {
+        width: 100%;
+    }
+    .video {
         width: 100%;
     }
 }

@@ -76,6 +76,7 @@
             });
         }
 
+        // also used to stop image slider [HomeController]
         $scope.$on('bodyClass', function (event, args) {
             $scope.bodyClass = args;
         });

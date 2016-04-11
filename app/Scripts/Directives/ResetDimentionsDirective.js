@@ -4,9 +4,9 @@
         controller: function () {
         },
         link: function (scope, elem, attrs) {
-            console.log("calling reset directive" + new Date());
+           // console.log("calling reset directive" + new Date());
             scope.$on("columnLayoutChanged", function (e, d) {
-                console.log(d.columnData);
+                //console.log(d.columnData);
                 //var seasonalityfarerangewidgetInfo = d.columnData.seasonalityfarerangewidgetInfo;
                 var fareforcastinfo = d.columnData.fareforcastinfo;
                 var farerangeInfo = d.columnData.farerangeInfo;

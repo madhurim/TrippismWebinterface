@@ -63,7 +63,7 @@ TrippismUIApp.directive("reportMyHeight", ['$timeout', '$window', function ($tim
                     });
                     scope.isShowSearchIcon = false;
                     scope.isShowSearchIcon = true;
-                    console.log('offsetHeight = ' + element[0].offsetHeight);
+                    //console.log('offsetHeight = ' + element[0].offsetHeight);
                 }, false);
             });
             scope.$watchCollection('paramtab.tabItems', function (newValue, oldValue) {
@@ -72,7 +72,7 @@ TrippismUIApp.directive("reportMyHeight", ['$timeout', '$window', function ($tim
                     mapid.css({
                         top: newValue.length > oldValue.length ? 0 + 'px' : element[0].offsetHeight + 'px',
                     });
-                    console.log('offsetHeight = ' + element[0].offsetHeight);
+                    //console.log('offsetHeight = ' + element[0].offsetHeight);
                 }, false);
             });
 

@@ -106,7 +106,7 @@
 
                         if (scope.WeatherwidgetData != undefined && scope.WeatherwidgetData != "") {
                             scope.$emit('widgetLoaded', { name: "WeatherData", isVisible: scope.WeatherInfoLoaded });
-                            console.log("weatherwidgetInfo data sent..");
+                            //console.log("weatherwidgetInfo data sent..");
                             //angular.element("#outerDiv").addClass("outerDiv");
                             scope.WeatherInfoLoaded = true;
                             var participation = _.find(scope.WeatherwidgetData.WeatherChances, function (chances) { return chances.Name == 'Precipitation' });

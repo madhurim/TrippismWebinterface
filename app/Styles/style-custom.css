@@ -1170,9 +1170,10 @@ ul .stop-line {
 
 /*#region video*/
 .video {
-    width: 60%;
+    width: 560px;
     display: block;
     margin: auto;
+    height: 315px;
 }
 
 .btn-video {
@@ -1375,6 +1376,7 @@ ul .stop-line {
 
     .video {
         width: 80%;
+        height: 283px;
     }
 }
 
@@ -1437,8 +1439,10 @@ ul .stop-line {
     .breadcrum-container {
         width: 100%;
     }
+
     .video {
         width: 100%;
+        height: 172px;
     }
 }
 /*#endregion Media queries */

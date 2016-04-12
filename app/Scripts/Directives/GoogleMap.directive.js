@@ -74,9 +74,9 @@
                       };
 
                       var infowindow = new google.maps.InfoWindow();
-                      google.maps.event.addListener(infowindow, 'domready', function () {
+                      function drawInfowindow() {
                           // Reference to the DIV that wraps the bottom of infowindow
-                          var iwOuter = angular.element(document.getElementsByClassName('gm-style-iw'));
+                          var iwOuter = angular.element('.gm-style-iw');
                           // move info window right
                           iwOuter.parent().parent().css({ left: '20px' });
                           // remove default popup divs
@@ -96,14 +96,13 @@
                               'position': 'absolute',
                               'z-index': '1002'
                           });
-                          $timeout(function () {
-                              // set parent div's width
-                              iwOuter.parent().css({ maxWidth: iwOuter.css('width'), width: iwOuter.css('width') });
-                              iwCloseBtn.css({
-                                  left: '98%',
-                              });
-                          }, 100, false);
-                      });
+
+                          // set parent div's width
+                          iwOuter.parent().css({ maxWidth: iwOuter.css('width'), width: iwOuter.css('width') });
+                          iwCloseBtn.css({
+                              left: '98%',
+                          });
+                      }
 
                       $scope.closeInfowindow = function () {
                           if (infowindow)
@@ -167,6 +166,8 @@
                                       var finaltitle = $compile(titles)($scope);
                                       infowindow.setContent(finaltitle[0]); //set infowindow content to titles                              
                                       infowindow.open(map, info);
+                                      drawInfowindow();
+
                                       // adjusting info window height if there are less than 3 markers
                                       if (markers.length <= 3) {
                                           var iwWrapper = angular.element(document.getElementsByClassName('clustermarkerpopup'));

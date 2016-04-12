@@ -39,10 +39,8 @@
                               textColor: "black",
                               textSize: 12,
                               width: 29,
-                              anchor: [7, 37],
-                              zIndex: 1000
-                          }],
-                          options: { zIndex: 1000 }
+                              anchor: [7, 37]
+                          }]
                       };
 
                       //sets the map options
@@ -406,7 +404,7 @@
                               labelStyle: { opacity: 0.75 },
                               icon: 'images/attraction-marker/airport-marker.png',
                               options:
-                                  { zIndex: 0 }
+                                  { zIndex: -1 }
 
                           });
 

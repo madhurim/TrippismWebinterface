@@ -40,7 +40,7 @@
                     if (data.Data.status == "ok") {
                         $scope.dismiss();
                         alertify.alert("Success", "");
-                        alertify.alert('Feedback sent sucessfully.').set('onok', function (closeEvent) { });
+                        alertify.alert('Feedback sent successfully.').set('onok', function (closeEvent) { });
                     }
                     else {
                         alertify.alert("Error", "");

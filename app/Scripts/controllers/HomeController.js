@@ -19,7 +19,7 @@
        ) {
         alertify.dismissAll();
         $scope.Name = "Home Page";
-        $scope.$emit('bodyClass', 'homepage');
+        $scope.$emit('bodyClass', 'homepage'); // also used to stop image slider
 
         LocalStorageFactory.clear(TrippismConstants.refineSearchLocalStorage);
 
@@ -32,14 +32,15 @@
         }
 
         setPageHeight();
-        w.bind('resize', function () {
-            setPageHeight();
-            resizeSlider();
-        });
+
+        w.bind('resize', setPageHeight);
+        w.bind('resize', resizeSlider);
+
         // --- Ends----
 
         function resizeSlider() {
             var boxwrap = angular.element("#destination-boxwrap");
+            if (!boxwrap.length) { w.unbind("resize", resizeSlider); return; };
             var height = boxwrap.css('height');
             if (w.width() <= 767)
                 height = "365px"
@@ -78,18 +79,22 @@
 
             var jQslide = angular.element('> *', element);
 
-            $interval.cancel($scope.intval);
+            $interval.cancel($scope.intval);        // clear interval
             $scope.intval = $interval(function () {
-                jQslide.eq(ActSlide).fadeOut(settings.speed);
+                window.setTimeout(function () {
+                    // clear interval if current page is not home page
+                    if ($scope.bodyClass != 'homepage') { $interval.cancel($scope.intval); return; };
+                    jQslide.eq(ActSlide).fadeOut(settings.speed);
 
-                if (ActSlide <= 0) {
-                    ActSlide = Slides;
-                    jQslide.eq(ActSlide).fadeIn(settings.speed, function () { jQslide.fadeIn(); });
-                } else {
-                    ActSlide = ActSlide - 1;
-                    jQslide.eq(ActSlide).css({ opacity: 1 });
-                }
-            }, settings.interval);
+                    if (ActSlide <= 0) {
+                        ActSlide = Slides;
+                        jQslide.eq(ActSlide).fadeIn(settings.speed, function () { jQslide.fadeIn(); });
+                    } else {
+                        ActSlide = ActSlide - 1;
+                        jQslide.eq(ActSlide).css({ opacity: 1 });
+                    }
+                }, 0);
+            }, settings.interval, 0, false);
         }
 
         startSlider();

@@ -4,7 +4,11 @@
             <a class="close-panel-button pull-right" ng-click="dismiss()" role="button" id="close_destination_panel" tabindex="0">X</a>
         </div>
         <div style="clear:both;" ng-show="hasError">
-            <div class="alert alert-danger triperror" role="alert" ng-show="isValidFromEmail == false">
+            <div class="alert alert-danger triperror" role="alert" ng-show="FormGetEmailDet.fromEmail.$error.required">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                Please enter from email address.
+            </div>
+            <div class="alert alert-danger triperror" role="alert" ng-show="!FormGetEmailDet.fromEmail.$error.required && isValidFromEmail == false">
                 <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                 Please enter valid from email address.
             </div>
@@ -24,7 +28,7 @@
         <form name="FormGetEmailDet" novalidate="novalidate" class="sharenow-form">
             <div class="form-group">
                 <label for="fromEmail">From email address</label>
-                <input type="text" ng-model="fromEmail" class="form-control" style="color:black !important;" id="fromEmail" name="fromEmail" placeholder="Enter email" autocomplete="off" />
+                <input type="text" ng-model="fromEmail" class="form-control" style="color:black !important;" id="fromEmail" name="fromEmail" placeholder="Enter email" required autocomplete="off" />
             </div>
             <div class="form-group">
                 <label for="toEmail">To email address</label>

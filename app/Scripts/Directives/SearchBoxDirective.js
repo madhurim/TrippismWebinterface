@@ -7,7 +7,8 @@
             '$window',
             '$stateParams',
             'UtilFactory',
-function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParams, UtilFactory) {
+            'TrippismConstants',
+function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParams, UtilFactory, TrippismConstants) {
     return {
         restrict: 'E',
         scope: {
@@ -378,7 +379,7 @@ function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParam
 
                 //SET MINIMUN SELECTED DATE for TODATE
                 $scope.minFromDate = new Date(newValue);
-                $scope.MaximumToDate = addDays($scope.minFromDate, 16);
+                $scope.MaximumToDate = addDays($scope.minFromDate, TrippismConstants.MaxLOS);
                 $scope.minFromDate = $scope.minFromDate.setDate($scope.minFromDate.getDate() + 1);
 
                 var maxToDate = new Date($scope.MaximumToDate);

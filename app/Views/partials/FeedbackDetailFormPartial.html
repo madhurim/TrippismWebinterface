@@ -1,6 +1,6 @@
 ﻿<div class="panel panel-default panel-margin">
     <div class="panel-heading">
-        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">Your feedbacks are key in driving Trippism forward..</div>
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 padleft0">Your feedbacks are key in driving Trippism forward..</div>
         <div class="button-right col-lg-2">
             <a class="close-panel-button pull-right" ng-click="dismiss()" role="button" tabindex="0">X</a>
         </div>
@@ -8,7 +8,7 @@
     </div>
     <div cg-busy="{promise:sendFeedbackPromise,message:'Sending feedback...'}" style="color:black"></div>
     <div class="panel-body">
-        <form name="FormFeedback" novalidate="novalidate" class="sharenow-form form-box">
+        <form name="FormFeedback" novalidate="novalidate" class="sharenow-form form-box form-box-new">
             <div class="form-group">
                 <label for="feedbackType">Choose the type of feedback</label>
                 <select class="form-control" id="feedbackType" name="feedbackType" ng-model="feedbackType" style="max-width:300px;">

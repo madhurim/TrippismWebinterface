@@ -8,7 +8,7 @@ img {
 
 .triperror {
     padding: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 0px;
 }
 
 .form-group.required .control-label:after {
@@ -1251,6 +1251,11 @@ ul .stop-line {
 
 .ico-blog {
     background: Url('../images/social.png') -104px 0;
+}
+
+.form-box-new select {
+    height: 40px;
+    font-size: 14px;
 }
 
 /*#region Media queries */

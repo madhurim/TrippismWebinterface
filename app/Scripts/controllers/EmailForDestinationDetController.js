@@ -19,8 +19,8 @@
         $scope.isValidFromEmail = true;
         $scope.isValidToEmail = true;
         $scope.SharedbuttonText = "Share";
-        $scope.Defaultsubject = eMailData.DestinationairportName.airport_CityName //eMailData.OriginairportName.airport_FullName;
-        $scope.Subject = "How about a vacation to  " + $scope.Defaultsubject + "?"; //Destination Locations from Origin " + $scope.Defaultsubject + " via [Trippism]";
+        $scope.Defaultsubject = eMailData.DestinationairportName.airport_CityName;
+        $scope.Subject = "How about a vacation to  " + $scope.Defaultsubject + "?";
         $scope.emailvalidate = true;
         $scope.eMailData = eMailData;
 

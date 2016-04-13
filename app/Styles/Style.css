@@ -206,7 +206,6 @@ a, a:hover, a:focus, label, form-control, .form-control:focus, .btn, button, .po
     border-color: #fff;
     height: 50px;
     font-size: 12px;
-    text-transform: uppercase;
     color: #fefefe;
     border-radius: 0px;
     background-image: linear-gradient(#b90005, #b90005), linear-gradient(#fff, #fff);

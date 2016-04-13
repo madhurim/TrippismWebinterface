@@ -1,9 +1,9 @@
 ﻿(function () {
     'use strict';
     var serviceId = 'UtilFactory';
-    angular.module('TrippismUIApp').factory(serviceId, ['$http', '$location', '$anchorScroll', '$rootScope', '$filter', '$q', UtilFactory]);
+    angular.module('TrippismUIApp').factory(serviceId, ['$http', '$location', '$anchorScroll', '$rootScope', '$filter', '$q', 'TrippismConstants', UtilFactory]);
 
-    function UtilFactory($http, $location, $anchorScroll, $rootScope, $filter, $q) {
+    function UtilFactory($http, $location, $anchorScroll, $rootScope, $filter, $q, TrippismConstants) {
         // Define the functions and properties to reveal.
         var AirportJsonData = [];
         var highRankedAirports = [];
@@ -225,8 +225,12 @@
 
             var fromDate = ConvertToDateObject(obj.FromDate);
             var toDate = ConvertToDateObject(obj.ToDate);
+
             if (toDate < fromDate)
                 obj.ToDate = SetToDate(fromDate);
+            else if (toDate > addDays(fromDate, TrippismConstants.MaxLOS)) {
+                obj.ToDate = SetToDate(fromDate);
+            }
 
             return obj;
         }

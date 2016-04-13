@@ -8,7 +8,7 @@ img {
 
 .triperror {
     padding: 5px;
-    margin-bottom: 5px;
+    margin-bottom: 0px;
 }
 
 .form-group.required .control-label:after {
@@ -1171,6 +1171,11 @@ ul .stop-line {
     padding: 2px 0px;
     margin-right: 15px;
 }*/
+
+.form-box-new select {
+    height: 40px;
+    font-size: 14px;
+}
 
 /*#region Media queries */
 @media only screen and (max-width: 991px) {

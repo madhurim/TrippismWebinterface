@@ -226,7 +226,7 @@
             var fromDate = ConvertToDateObject(obj.FromDate);
             var toDate = ConvertToDateObject(obj.ToDate);
 
-            if (toDate < fromDate)
+            if (toDate <= fromDate)
                 obj.ToDate = SetToDate(fromDate);
             else if (toDate > addDays(fromDate, TrippismConstants.MaxLOS)) {
                 obj.ToDate = SetToDate(fromDate);

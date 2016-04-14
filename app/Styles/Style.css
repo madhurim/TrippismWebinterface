@@ -239,6 +239,7 @@ a, a:hover, a:focus, label, form-control, .form-control:focus, .btn, button, .po
 .sharenow-form .form-control {
     background-image: linear-gradient(#b90005, #b90005), linear-gradient(#999, #999);
     background-image: -webkit-linear-gradient(#b90005, #b90005), -webkit-linear-gradient(#999, #999);
+    font-size: 13px;
 }
 
 .input-box i.icon-box {

@@ -1259,6 +1259,14 @@ ul .stop-line {
     font-size: 14px;
 }
 
+.border-bottom {
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.pad-bot-20 {
+    padding-bottom: 20px;
+}
+
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {

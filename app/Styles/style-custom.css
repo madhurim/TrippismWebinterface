@@ -758,6 +758,8 @@ ul .stop-line {
     font-weight: normal;
     margin: 0;
     margin-top: 10px;
+    float: left;
+    margin-left: 15px;
 }
 
 /* for solving the red border for required and invalid textbox in IE and Mozilla */
@@ -939,16 +941,19 @@ ul .stop-line {
         margin-top: 2px;
     }
 
-    .ibox-title.searched-box .share-btn {
-        margin-top: 0px !important;
-    }
-
 .share-btn {
+    margin-top: 0px !important;
     padding: 0px;
 }
 
+    .share-btn a {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
     .share-btn .icons {
-        float: right;
+        float: left;
+        margin-right: 10px;
     }
 
 .ibox-title.searched-box .ibox-box span {
@@ -1176,10 +1181,6 @@ ul .stop-line {
     height: 315px;
 }
 
-.btn-video {
-    margin: 0px 10px 0px 0px;
-}
-
 .video-container {
     margin-bottom: 0px;
 }
@@ -1363,6 +1364,11 @@ ul .stop-line {
         width: auto;
         float: right;
     }
+
+    .refine-btn-group a {
+        padding: 4px 6px;
+        margin-top: 2px !important;
+    }
 }
 
 @media only screen and (max-width:767px) {
@@ -1407,6 +1413,20 @@ ul .stop-line {
 @media only screen and (max-width:667px) {
     div.dropdown-box ul.dropdown-menu {
         font-size: 11px;
+    }
+
+    .search-detail {
+        margin-left: 5px;
+    }
+
+    .refine-btn-group {
+        margin-left: 0px;
+    }
+}
+
+@media only screen and (max-width:667px) and (orientation : landscape) {
+    .refine-btn-group {
+        float: right;
     }
 }
 

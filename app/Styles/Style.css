@@ -872,14 +872,6 @@ i.calendar.active, .input-box:hover i.calendar {
         font-size: 15px;
     }
 
-    /*.ibox-title .share-btn {
-        position: absolute;
-        right: 10px;
-        top: 50%;
-        margin-top: -15px;
-    }*/
-
-
     .ibox-title .share-link {
         position: absolute;
         right: 50px;
@@ -1523,11 +1515,18 @@ i.calendar.active, .input-box:hover i.calendar {
     .destination-box-popup .destination-title {
         color: #fff;
         font-size: 30px;
-        font-weight: 500;
+        font-weight: 300;
         margin: 0;
         padding: 20px 15px;
-        text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+        text-shadow: 0 2px 5px rgba(0,0,0,0.7);
     }
+
+.destination-title strong {
+    display: block;
+    font-size: 37px;
+    font-weight: normal;
+    margin-top: 5px;
+}
 
 .destination-boxwrap-nav-tabs .nav.nav-tabs {
     background-color: #fff;
@@ -1627,7 +1626,7 @@ i.calendar.active, .input-box:hover i.calendar {
 
 @media only screen and (max-width: 767px) {
 
-    .destination-box-popup .destination-title {
+    .destination-box-popup .destination-title, .destination-title strong {
         font-size: 22px;
     }
 
@@ -1740,7 +1739,7 @@ i.calendar.active, .input-box:hover i.calendar {
                 width: 0;
             }
 
-/*.refine-your-destination-box .your-searched:before{
+        /*.refine-your-destination-box .your-searched:before{
    background-color: #e8ebee;
     bottom: 0;
     content: "";
@@ -1753,14 +1752,13 @@ i.calendar.active, .input-box:hover i.calendar {
 }*/
 
 
-.your-searched-content {
-    float: left;
+        /*.your-searched-content {
     margin-left: 30px;
-}
+}*/
 
-.refine-your-destination-box .your-searched h5 {
-    margin: 0;
-}
+        .refine-your-destination-box .your-searched h5 {
+            margin: 0;
+        }
 /*.refine-btn-group {
     padding: 8px 0;
 }*/
@@ -1770,7 +1768,8 @@ i.calendar.active, .input-box:hover i.calendar {
     /*position: absolute;
     right: 10px;*/
     /*top: 5px;*/
-    float: right;
+    float: left;
+    margin-left: 15px;
 }
 
     .refine-btn-group .btn {
@@ -1959,6 +1958,10 @@ i.calendar.active, .input-box:hover i.calendar {
         padding: 25px 15px;
     }
 
+    .destination-title strong {
+        font-size: 40px;
+    }
+
     .homepage .map-box-img {
         height: 800px !important;
     }
@@ -2116,11 +2119,11 @@ i.calendar.active, .input-box:hover i.calendar {
             position: static;
         }
 
-        .ibox-title .share-btn {
-            float: left;
-            margin-top: 7px;
-            position: static;
-        }
+    .share-btn {
+        float: left;
+        margin-top: 7px;
+        position: static;
+    }
 
     .destination-box-popup {
         bottom: 0;
@@ -2188,6 +2191,14 @@ i.calendar.active, .input-box:hover i.calendar {
 
     .copyright {
         text-align: left;
+    }
+
+    .destination-box-popup .destination-title {
+        font-size: 25px;
+    }
+
+    .destination-title strong {
+        font-size: 31px;
     }
 }
 
@@ -2316,8 +2327,12 @@ i.calendar.active, .input-box:hover i.calendar {
     }
 
     .destination-box-popup .destination-title {
-        font-size: 15px;
+        font-size: 13.5px;
         padding: 13px 15px;
+    }
+
+    .destination-title strong {
+        font-size: 17px;
     }
 
     .destination-boxwrap-nav-tabs .nav.nav-tabs > li > a {
@@ -2418,17 +2433,17 @@ i.calendar.active, .input-box:hover i.calendar {
         height: 80px;
     }
 
-    .refine-your-destination-box {
+    /*.refine-your-destination-box {
         padding: 4px 5px 5px 155px;
+    }*/
+
+    .refine-your-destination-box .your-searched p {
+        text-align: left;
     }
 
-        .refine-your-destination-box .your-searched p {
-            text-align: left;
-        }
-
-    .your-searched-content {
+    /*.your-searched-content {
         margin-left: -140px;
-    }
+    }*/
 
     .refine-your-destination-box .your-searched {
         width: 100%;
@@ -2517,11 +2532,11 @@ i.calendar.active, .input-box:hover i.calendar {
             position: static;
         }
 
-        .ibox-title .share-btn {
-            float: left;
-            margin-top: 7px;
-            position: static;
-        }
+    .share-btn {
+        float: left;
+        margin-top: 7px;
+        position: static;
+    }
 
     .popular-destinations {
         top: 33%;
@@ -2534,6 +2549,15 @@ i.calendar.active, .input-box:hover i.calendar {
     }
 }
 
+@media only screen and (max-width:240px) {
+    .destination-box-popup .destination-title {
+        font-size: 8px;
+    }
+
+    .destination-title strong {
+        font-size: 10px;
+    }
+}
 
 
 .googleattraction {
@@ -2735,9 +2759,12 @@ em.ng-binding {
     /*                          .destination-boxwrap-nav-tabs .tab-content{
                                    min-height: 826px; 
                           }*/
-
     .destination-box-popup .destination-title {
-        font-size: 18px;
+        font-size: 30px;
+    }
+
+    .destination-title strong {
+        font-size: 37px;
     }
 }
 /* css rules for ipad portrait ends*/
@@ -2759,7 +2786,11 @@ em.ng-binding {
                                    min-height: 500px; 
                           }*/
     .destination-box-popup .destination-title {
-        font-size: 18px;
+        font-size: 30px;
+    }
+
+    .destination-title strong {
+        font-size: 37px;
     }
 }
 /* css rules for ipad landscape starts*/

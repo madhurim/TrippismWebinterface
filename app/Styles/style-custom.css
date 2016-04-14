@@ -1386,7 +1386,7 @@ ul .stop-line {
     .gm-style-iw > div {
         width: 100%;
         max-width: 100% !important;
-        overflow: hidden !important;
+        overflow-x: hidden !important;
     }
 }
 

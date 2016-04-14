@@ -81,8 +81,9 @@
                           iwOuter.parent().parent().css({ left: '20px' });
                           // remove default popup divs
                           iwOuter.prev().remove();
+                          iwOuter.parent().css({ maxWidth: iwOuter.css('width'), width: iwOuter.css('width') });
 
-                          // Reference to the div that groups the close button elements.
+                          // Reference to the div that groups the close button elements.                                                   
                           var iwCloseBtn = iwOuter.next();
                           var closeButton = $compile('<img class="iw-close" src="images/close.png" ng-click="closeInfowindow();"/>')($scope);
                           iwCloseBtn.html(closeButton);
@@ -94,14 +95,10 @@
                               'box-shadow': '0 0 5px #3990B9',
                               'box-sizing': 'content-box',
                               'position': 'absolute',
-                              'z-index': '1002'
+                              'z-index': '1002',
                           });
 
-                          // set parent div's width
-                          iwOuter.parent().css({ maxWidth: iwOuter.css('width'), width: iwOuter.css('width') });
-                          iwCloseBtn.css({
-                              left: '98%',
-                          });
+                          iwCloseBtn.css({ left: '98%', });
                       }
 
                       $scope.closeInfowindow = function () {

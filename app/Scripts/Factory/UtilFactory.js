@@ -168,11 +168,11 @@
             });
         }
         function GetCurrencySymbol(currencyCode) {
-            var cacheResult = $filter('filter')(service.currencySymbol.currencySymbolsListCache, { code: currencyCode })[0];
+            var cacheResult = _.findWhere(service.currencySymbol.currencySymbolsListCache, { code: currencyCode });
             if (cacheResult)
                 return cacheResult.symbol;
 
-            var result = $filter('filter')(service.currencySymbol.currencySymbolsList, { code: currencyCode })[0];
+            var result = _.findWhere(service.currencySymbol.currencySymbolsList, { code: currencyCode });
             if (result) {
                 service.currencySymbol.currencySymbolsListCache.push({ symbol: result.symbol, code: result.code });
                 return result.symbol;

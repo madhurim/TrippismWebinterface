@@ -95,7 +95,6 @@ function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParam
 
         },
         link: function ($scope, elem, attrs) {
-
             $scope.onSelect = function ($item, $model, $label) {
                 $scope.Origin = $item.airport_Code;
                 $scope.OriginCityName = $item.airport_CityName;

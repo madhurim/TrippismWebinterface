@@ -167,7 +167,7 @@
 
                                       // adjusting info window height if there are less than 3 markers
                                       if (markers.length <= 3) {
-                                          var iwWrapper = angular.element(document.getElementsByClassName('clustermarkerpopup'));
+                                          var iwWrapper = angular.element('.clustermarkerpopup');
                                           iwWrapper.css({ height: (markers.length * 80) - ((markers.length - 1) * 15) + 'px' });
                                       }
                                       loadScrollbars();
@@ -308,25 +308,18 @@
 
               directive.link = function (scope, elm, attrs) {
                   var w = angular.element($window);
-                  w.bind('resize', function () {
-                      setIwCloseButtonPositionFn();
-                  });
-
-                  //var div = document.createElement("div");
-                  //div.innerHTML = "<p>Click on any of the numbered clusters to see destinations.</p>"
-                  //    + "<p>Numbers represent how many destinations fall into a nearby radius.</p>"
-                  //    + "<p>'1' means the cluster contains only 1 destination.</p>"
-                  //    + "<p>Click on individual destination within the cluster to see destination details.</p>";
-                  //div.className = "mapinfobox";
-                  //scope.destinationMap.controls[google.maps.ControlPosition.TOP_RIGHT].push(div);
-
+                  w.bind('resize', setIwCloseButtonPositionFn);
 
                   // set position of infowindow close button
                   function setIwCloseButtonPositionFn() {
-                      return $timeout(function () {
-                          var iwOuter = angular.element(document.getElementsByClassName('gm-style-iw'));
+                      $timeout(function () {
+                          if (!angular.element('#mainmap').length) w.unbind('resize', setIwCloseButtonPositionFn);
+                          var iwOuter = angular.element('.gm-style-iw');
                           iwOuter.parent().css({ width: iwOuter.css('width'), maxWidth: iwOuter.css('width') });
                       }, 100, false);
+
+                      var iwOuter = angular.element('.clustermarkerpopup');
+                      angular.element('.gm-style-iw').css({ width: iwOuter.css('width'), maxWidth: iwOuter.css('width') });
                   }
 
                   setAirportMarkerOnMap();

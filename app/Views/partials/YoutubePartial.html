@@ -36,10 +36,18 @@
 </div>
 
 <script type="text/ng-template" id="YoutubePlayerPartial.html">
-    <div class="modal-header head" style="padding-bottom: 24px !important;">
-        <button class="close closebutton" ng-click="cancel()" type="button">×</button>
-    </div>
-    <div class="modal-body" cg-busy="{promise:youtubeplayerpromise,message:'Loading video'}" style="padding-top: 0px !important;">
-        <iframe width="100%" height="375" ng-src="{{videoID}}" frameborder="0" allowfullscreen></iframe>
+    <div class="panel panel-default panel-margin">
+        <div class="panel-heading" style="padding:3px 15px;">
+            <div class="pull-right">
+                <a class="close-panel-button pull-right" ng-click="cancel()" role="button" tabindex="0">X</a>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="panel-body">
+            <div cg-busy="{promise:youtubeplayerpromise,message:'Loading video'}" style="padding-top: 0px !important;">
+                <iframe width="100%" height="375" ng-src="{{videoID}}" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
     </div>
 </script>
+

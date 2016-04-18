@@ -77,6 +77,12 @@
                       function drawInfowindow() {
                           // Reference to the DIV that wraps the bottom of infowindow
                           var iwOuter = angular.element('.gm-style-iw');
+                          iwOuter.css({
+                              backgroundColor: '#fff',
+                              boxShadow: '#666 1px 2px 7px',
+                              border: '1px solid rgba(72, 181, 233, 0.6)'
+                          });
+
                           // move info window right
                           iwOuter.parent().parent().css({ left: '20px' });
                           // remove default popup divs
@@ -89,7 +95,7 @@
                           iwCloseBtn.html(closeButton);
                           iwCloseBtn.css({
                               opacity: '1',
-                              top: '3px',
+                              top: '0px',
                               border: '4px solid #01a7e4',
                               'border-radius': '10px',
                               'box-shadow': '0 0 5px #3990B9',
@@ -98,7 +104,7 @@
                               'z-index': '1002',
                           });
 
-                          iwCloseBtn.css({ left: '98%', });
+                          iwCloseBtn.css({ left: '100%', });
                       }
 
                       $scope.closeInfowindow = function () {
@@ -243,17 +249,7 @@
 
                                   google.maps.event.addListener(marker, 'click', (function (marker, contentString, infowindow) {
                                       return function () {
-                                          //var result = UtilFactory.GetLastSearch();
                                           var finalpath = 'destination/f=' + $scope.origin.toUpperCase() + ';t=' + marker.CustomMarkerInfo.DestinationLocation + ';d=' + ConvertToRequiredDate(marker.CustomMarkerInfo.DepartureDateTime, 'API') + ';r=' + ConvertToRequiredDate(marker.CustomMarkerInfo.ReturnDateTime, 'API');
-                                          if (result.Theme != undefined)
-                                              finalpath += ';th=' + result.Theme;
-                                          if (result.Region != undefined)
-                                              finalpath += ';a=' + result.Region;
-                                          //Not Required for destination page
-                                          //if (result.Minfare != undefined)
-                                          //    finalpath += ';lf=' + result.Minfare;
-                                          //if (result.Maxfare != undefined)
-                                          //    finalpath += ';hf=' + result.Maxfare;
                                           $location.path(finalpath);
                                       };
                                   })(marker, contentString, $scope.InfoWindow));

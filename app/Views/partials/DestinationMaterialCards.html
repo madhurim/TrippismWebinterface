@@ -1,0 +1,15 @@
+﻿<div class="container md-container border-bottom pad-top-20 pad-bot-20">
+    <div class="row">
+        <div class="col-sm-4" ng-repeat="item in destinationsData">
+            <md-card>
+                <img ng-src="/images/destination/{{item.destination}}.jpg" class="md-card-image" alt="user avatar" style="height:300px;">
+                <md-card-content md-theme="primary">
+                    <h4 class="md-headline">{{item.origin}}-{{item.destination}}</h4>
+                </md-card-content>
+                <div class="md-actions" layout="row" layout-align="end center">
+                    <md-button>Explore</md-button>
+                </div>
+            </md-card>
+        </div>
+    </div>
+</div>

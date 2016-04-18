@@ -1,0 +1,13 @@
+﻿[
+    { "origin": "NYC", "destination": "MIA" },
+    { "origin": "SYD", "destination": "MEL" },
+    { "origin": "LAX", "destination": "DCA" },
+    { "origin": "CHI", "destination": "NYC" },
+    { "origin": "LAX", "destination": "SFO" },
+    { "origin": "LAX", "destination": "NYC" },
+    { "origin": "ATL", "destination": "MIA" },
+    { "origin": "ATL", "destination": "CHI" },
+    { "origin": "CHI", "destination": "DCA" },
+    { "origin": "DEL", "destination": "BOM" },
+    { "origin": "NYC", "destination": "CHI" }
+]

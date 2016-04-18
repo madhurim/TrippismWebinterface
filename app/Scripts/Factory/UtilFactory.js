@@ -22,7 +22,8 @@
             GetLowFareForMap: GetLowFareForMap,
             updateQueryStringParameter: updateQueryStringParameter,
             ReadHighRankedAirportsJson: ReadHighRankedAirportsJson,
-            GetValidDates: GetValidDates
+            GetValidDates: GetValidDates,
+            ReadLocationPairJson: ReadLocationPairJson
         };
         return service;
 
@@ -144,23 +145,6 @@
             return;
         }
 
-        //function ReadAirlinesJson() {
-        //    if (airlinesList.length > 0) {
-        //        var d = $q.defer();
-        //        d.resolve(airlinesList);
-        //        return d.promise;
-        //    }
-        //    else
-        //        return $http.get($rootScope.apiURLForConstant + '/GetAirlines').then(function (data) {
-        //            if (data.status == 200) {
-        //                airlinesList = data.data;
-        //                return airlinesList;
-        //            }
-        //            else
-        //                return [];
-        //        });
-        //}
-
         function GetCurrencySymbols() {
             $http.get($rootScope.apiURLForConstant + '/GetCurrencySymbols').then(function (data) {
                 if (data.status == 200)
@@ -233,6 +217,12 @@
             }
 
             return obj;
+        }
+
+        function ReadLocationPairJson() {
+            return $http.get('scripts/Constants/locationsPair.json').then(function (data) {
+                return data.data;
+            });
         }
     }
 })();

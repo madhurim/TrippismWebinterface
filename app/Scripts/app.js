@@ -4,10 +4,10 @@ var TrippismUIApp = angular.module('TrippismUIApp',
   'ui.bootstrap',
   'ui.map',
   'ui.event',
-  //'blockUI',
   'cgBusy',
   'ngRoute',
-  'ui-rangeSlider'
+  'ui-rangeSlider',
+  'ngMaterial'
 ]);
 
 TrippismUIApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {

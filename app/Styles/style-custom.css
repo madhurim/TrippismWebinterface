@@ -645,7 +645,7 @@ ul .stop-line {
 }
 
 .gm-style-iw {
-    max-width: 340px;    
+    max-width: 340px;
 }
 
 .clustermarkerpopup .iw-destinations-list {
@@ -1267,8 +1267,50 @@ ul .stop-line {
 }
 
 /*#region md-card*/
-.md-container, .md-container h4, .md-card {
+.mdcard img {
+    height: 300px;
+}
+
+.md-button {
     color: #333 !important;
+    width: 15px;
+    font-size: 11px;
+    float: right;
+    line-height: 1px;
+    padding: 0px;
+    min-height: 30px;
+}
+
+.mdtitle {
+    position: absolute;
+    padding: 5px 16px;
+    color: #fff;
+}
+
+.mdcontent {
+    display: block;
+    padding: 13px 16px;
+}
+
+    .mdcontent h3, .mdcontent p {
+        margin: 0px;
+    }
+
+    .mdcontent p {
+        margin: 3px 0px;
+    }
+
+.mddisplay1 {
+    font-size: 25px;
+}
+
+    .mddisplay1.mdfare .text-super {
+        vertical-align: super;
+    }
+
+.mdborder {
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ddd;
 }
 /*#endregion md-card*/
 
@@ -1392,6 +1434,10 @@ ul .stop-line {
         width: 100%;
         max-width: 100% !important;
         overflow-x: hidden !important;
+    }
+
+    .mdcard img {
+        height: 200px;
     }
 }
 

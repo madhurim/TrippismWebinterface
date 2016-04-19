@@ -146,6 +146,8 @@
         }
 
         function GetCurrencySymbols() {
+            if (service.currencySymbol.currencySymbolsList.length)
+                return;
             $http.get($rootScope.apiURLForConstant + '/GetCurrencySymbols').then(function (data) {
                 if (data.status == 200)
                     service.currencySymbol.currencySymbolsList = data.data.Currency;

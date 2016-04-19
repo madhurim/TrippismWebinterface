@@ -32,6 +32,7 @@
         $scope.Origin = $scope.DestinationLocation = '';
         init();
         function init() {
+            window.scrollTo(0, 0);
             alertify.dismissAll();
             UtilFactory.GetCurrencySymbols();
             $scope.mappromise = UtilFactory.ReadAirportJson().then(function (response) {
@@ -60,7 +61,7 @@
                     $scope.DestinationairportName = _.find($scope.AvailableAirports, function (airport) {
                         return airport.airport_Code == $scope.DestinationLocation
                     });
-                    
+
                     var dates = UtilFactory.GetValidDates($scope.FromDate, $scope.ToDate);
                     $scope.FromDate = dates.FromDate;
                     $scope.ToDate = dates.ToDate;

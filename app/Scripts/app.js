@@ -29,7 +29,7 @@ TrippismUIApp.config(['$stateProvider', '$urlRouterProvider', function ($statePr
         .state('FAQs', {
             url: '/FAQs',
             templateUrl: 'Views/FAQs.html'
-        })
+        });
 }]);
 
 TrippismUIApp.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $location) {

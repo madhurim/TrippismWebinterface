@@ -1,17 +1,24 @@
 ﻿<md-card class="mdcard" ng-if="::destinationData">
     <h4 class="md-title mdtitle">{{::destinationData.origin}} - {{::destinationData.destination}}</h4>
-    <img ng-src="/images/destination/{{::destinationData.destination}}.jpg" class="md-card-image" alt="{{::destinationData.destination}}">
+    <a ui-sref="destination({path:url})">
+        <img ng-src="/images/destination/{{::destinationData.destination}}.jpg" class="md-card-image" alt="{{::destinationData.destination}}">
+    </a>
     <div class="mdcontent">
         <p class="md-body-1">{{::destinationData.departureDate}} - {{::destinationData.returnDate}}</p>
-        <p class="md-body-1" ng-if="::destinationData.themes.length">{{::destinationData.themes.length > 1? 'Themes':'Theme'}}: {{::destinationData.themes.join(', ')}}</p>
+        <p class="md-body-1" ng-if="::destinationData.themes.length">{{::destinationData.themes.join(', ')}}</p>
         <div class="mdborder"></div>
-        <h3 class="md-display-1 mddisplay1 mdfare" ng-init="::amtbifercation = amountBifercation(destinationData.lowestFare);">
-            <span class="cursor-help" data-toggle="tooltip" popover="{{::destinationData.currencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{::GetCurrencySymbol(destinationData.currencyCode)}}</span>
-            {{amtbifercation.BeforeDecimal}}<span class="text-super vertical-top">{{amtbifercation.AfterDecimal}}</span>
-        </h3>
+        <div class="pull-left">
+            <h3 class="md-display-1 mddisplay1 mdfare" ng-init="::amtbifercation = amountBifercation(destinationData.lowestFare);">
+                <span class="cursor-help" data-toggle="tooltip" popover="{{::destinationData.currencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{::GetCurrencySymbol(destinationData.currencyCode)}}</span>
+                {{amtbifercation.BeforeDecimal}}<span class="text-super vertical-top">{{amtbifercation.AfterDecimal}}</span>
+            </h3>
+        </div>
+        <div class="pull-right margin-top-15">
+            <a ui-sref="destination({path:url})">Explore</a>
+        </div>
     </div>
     <!--<button class="md-button" layout-align="end center">Explore</button>-->
-    <md-card-actions layout="row" layout-align="end center">
+    <!--<md-card-actions layout="row" layout-align="end center">
         <a ui-sref="destination({path:url})">Explore</a>
-    </md-card-actions>
+    </md-card-actions>-->
 </md-card>

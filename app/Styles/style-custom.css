@@ -1267,9 +1267,14 @@ ul .stop-line {
 }
 
 /*#region md-card*/
-.mdcard img {
-    height: 300px;
+.mdcard {
+    height: 445px;
 }
+
+    .mdcard img {
+        height: 300px;
+        cursor: pointer;
+    }
 
 .md-button {
     color: #333 !important;
@@ -1311,6 +1316,10 @@ ul .stop-line {
 .mdborder {
     padding-bottom: 5px;
     border-bottom: 1px solid #ddd;
+}
+
+.margin-top-15 {
+    margin-top: 15px;
 }
 /*#endregion md-card*/
 
@@ -1436,8 +1445,18 @@ ul .stop-line {
         overflow-x: hidden !important;
     }
 
-    .mdcard img {
-        height: 200px;
+    .mdcard {
+        height: 365px;
+    }
+
+        .mdcard img {
+            height: 200px;
+        }
+}
+
+@media only screen and (max-width:769px) and (orientation:landscape) {
+    .mdcard {
+        height: 320px;
     }
 }
 

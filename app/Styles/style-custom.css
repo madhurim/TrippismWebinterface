@@ -645,12 +645,7 @@ ul .stop-line {
 }
 
 .gm-style-iw {
-    max-width: 340px;
-    top: 15px !important;
-    left: 0px !important;
-    background-color: #fff;
-    box-shadow: #666 1px 2px 7px;
-    border: 1px solid rgba(72, 181, 233, 0.6);
+    max-width: 340px;    
 }
 
 .clustermarkerpopup .iw-destinations-list {

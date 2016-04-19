@@ -1,0 +1,9 @@
+﻿<md-card ng-if="::destinationData">
+    <img ng-src="/images/destination/{{::destinationData.destination}}.jpg" class="md-card-image" alt="{{::destinationData.destination}}" style="height:300px;">
+    <md-card-content>
+        <h4 class="md-title">{{::destinationData.origin}}-{{::destinationData.destination}}</h4>
+    </md-card-content>
+    <md-card-actions layout="row" layout-align="end center">
+        <md-button>Explore</md-button>
+    </md-card-actions>
+</md-card>

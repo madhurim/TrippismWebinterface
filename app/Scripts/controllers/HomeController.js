@@ -8,6 +8,7 @@
             'LocalStorageFactory',
             'TrippismConstants',
             '$interval',
+            'UtilFactory',
              HomeController]);
     function HomeController(
        $scope,
@@ -15,7 +16,8 @@
        $timeout,
        LocalStorageFactory,
        TrippismConstants,
-       $interval
+       $interval,
+       UtilFactory
        ) {
         alertify.dismissAll();
         $scope.Name = "Home Page";
@@ -97,6 +99,37 @@
             }, settings.interval, 0, false);
         }
 
+        function loadDestinationCard() {
+            var currDate = new Date();
+            var departureDate = new Date(currDate.setMonth(currDate.getMonth() + 1));
+            var returnDate = new Date(departureDate);
+            returnDate = new Date(returnDate.setDate(returnDate.getDate() + 5));
+
+            UtilFactory.ReadAirportJson().then(function (airports) {
+                UtilFactory.ReadLocationPairJson().then(function (data) {
+                    if (data && data.length) {
+                        $scope.destinationRequestList = [];
+                        var random = _.sample(data, 3);
+                        _.each(random, function (item) {
+                            var originAirport = _.findWhere(airports, { airport_Code: item.origin });
+                            if (originAirport) {
+                                var request = {
+                                    origin: item.origin,
+                                    destination: item.destination,
+                                    departureDate: ConvertToRequiredDate(departureDate, 'API'),
+                                    returnDate: ConvertToRequiredDate(returnDate, 'API'),
+                                    pointOfSaleCountry: originAirport.airport_CountryCode,
+                                    limit: 1
+                                };
+                                $scope.destinationRequestList.push(request);
+                            }
+                        });
+                    }
+                });
+            });
+        }
+
         startSlider();
+        loadDestinationCard();
     }
 })();

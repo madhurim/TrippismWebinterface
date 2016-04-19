@@ -67,7 +67,13 @@
                 </div>
             </div>
         </div>
-        <destination:material:cards:directive></destination:material:cards:directive>
+        <div class="container md-container border-bottom pad-top-20 pad-bot-20">
+            <div class="row">
+                <div class="col-sm-4" ng-repeat="item in ::destinationRequestList">
+                    <destination-card-directive request-data="item"></destination-card-directive>
+                </div>
+            </div>
+        </div>
         <div class="container-fluid video-container">
             <div class="container">
                 <div class="video-wp">

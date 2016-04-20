@@ -1,5 +1,5 @@
 ﻿<md-card class="mdcard" ng-if="::destinationData">
-    <h4 class="md-title mdtitle">{{::destinationData.origin}} - {{::destinationData.destination}}</h4>
+    <h4 class="md-title mdtitle">{{::destinationData.originName}} - {{::destinationData.destinationName}}</h4>
     <a ui-sref="destination({path:url})">
         <img ng-src="/images/destination/{{::destinationData.destination}}.jpg" class="md-card-image" alt="{{::destinationData.destination}}">
     </a>

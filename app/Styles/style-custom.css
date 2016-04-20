@@ -1309,9 +1309,9 @@ ul .stop-line {
     font-size: 25px;
 }
 
-    .mddisplay1.mdfare .text-super {
-        vertical-align: super;
-    }
+.mdfare .text-super {
+    vertical-align: super;
+}
 
 .mdborder {
     padding-bottom: 5px;

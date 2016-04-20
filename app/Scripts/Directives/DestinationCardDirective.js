@@ -15,6 +15,8 @@
                     UtilFactory.ReadAirportJson().then(function (airports) {
                         var originAirport = _.findWhere(airports, { airport_Code: $scope.requestData.origin });
                         if (!originAirport) return;
+
+                        var destinationAirport = _.findWhere(airports, { airport_Code: $scope.requestData.destination });
                         var request = {
                             origin: $scope.requestData.origin,
                             destination: $scope.requestData.destination,
@@ -28,6 +30,8 @@
                                 $scope.destinationData = {
                                     origin: request.origin,
                                     destination: request.destination,
+                                    originName: originAirport.airport_CityName,
+                                    destinationName: destinationAirport.airport_CityName,
                                     departureDate: ConvertToRequiredDate(data.DepartureDateTime, 'UI'),
                                     returnDate: ConvertToRequiredDate(data.ReturnDateTime, 'UI'),
                                     lowestFare: getLowestFare(data.PricedItineraries[0]),

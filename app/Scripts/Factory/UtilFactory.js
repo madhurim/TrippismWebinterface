@@ -4,17 +4,12 @@
     angular.module('TrippismUIApp').factory(serviceId, ['$http', '$location', '$anchorScroll', '$rootScope', '$filter', '$q', 'TrippismConstants', UtilFactory]);
 
     function UtilFactory($http, $location, $anchorScroll, $rootScope, $filter, $q, TrippismConstants) {
-        // Define the functions and properties to reveal.
         var AirportJsonData = [];
         var highRankedAirports = [];
-        //var airlinesList = [];
         var LastSearch;
         var service = {
             ReadAirportJson: ReadAirportJson,
-            getIpinfo: getIpinfo,
             MapscrollTo: MapscrollTo,
-            ReadStateJson: ReadStateJson,
-            //ReadAirlinesJson: ReadAirlinesJson,
             GetCurrencySymbols: GetCurrencySymbols,
             GetCurrencySymbol: GetCurrencySymbol,
             AirportCodeLog: AirportCodeLog,
@@ -27,12 +22,6 @@
         };
         return service;
 
-        function ReadStateJson() {
-            var States = [];
-            return $http.get('scripts/Constants/State.json').then(function (_states) {
-                return _states.data;
-            });
-        }
         function updateQueryStringParameter(uri, key, value) {
             var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
             var separator = uri.indexOf('?') !== -1 ? "&" : "?";
@@ -122,19 +111,6 @@
             var dataURL = 'MissingAirportLog?Airportcode=' + AirportCode;
             var url = $rootScope.apiURLForConstant + dataURL;
             $http.jsonp(url);
-        }
-
-        function getIpinfo(AvailableCodes) {
-            var url = "http://ipinfo.io?callback=JSON_CALLBACK";
-            return $http.jsonp(url)
-            .then(function (data) {
-                data = data.data;
-                var originairport = _.find(AvailableCodes, function (airport) { return airport.airport_CityName == data.city && airport.airport_CountryCode == data.country });
-                if (originairport != null) {
-                    return originairport;
-                }
-            });
-
         }
 
         function MapscrollTo(id) {

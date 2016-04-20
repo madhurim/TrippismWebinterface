@@ -5,15 +5,12 @@
 
     function DestinationFactory($http, $rootScope, $filter, $q) {
         var DestinationsData = [];
-        var InstaflightData = [];
         var service = {
             findDestinations: findDestinations,
-            findTopDestinations: findTopDestinations,
-            findDestinationsDetails: findDestinationsDetails,
             findInstFlightDestination: findInstFlightDestination,
             ShowDestinationView: true,
             GetDestinationFareInfo: GetDestinationFareInfo,
-
+            setDestinationData: setDestinationData
         };
         return service;
 
@@ -63,51 +60,21 @@
         }
 
         function findInstFlightDestination(paramdata) {
-            var resultdata = $filter('filter')(DestinationsData, { Criteria: paramdata.Origin + paramdata.Destination + paramdata.DepartureDate + paramdata.ReturnDate })[0];
-            if (resultdata != undefined && resultdata != "") {
-                var d = $q.defer();
-                d.resolve(resultdata.data);
-                return d.promise;
-            }
-            else {
-                var result = {
-                    Criteria: paramdata.Origin + paramdata.Destination + paramdata.DepartureDate + paramdata.ReturnDate,
-                    data: null
-                }
-                var dataURL = '?' + serialize(paramdata);
-                var RequestedURL = $rootScope.apiURLForInstaFlightSearch + '/GetDestination' + dataURL;
-                return $http.get(RequestedURL)
-               .then(function (data) {
-                   result.data = data.data;
-                   InstaflightData.push(resultdata)
-                   return data.data;
-               }, function (e) {
-                   return e;
-               });
-            }
-        }
-
-        function findDestinationsDetails(data) {
-
-            var dataURL = 'instaflight/search?' + serialize(data);
-            var RequestedURL = $rootScope.apiURL + dataURL;
+            var dataURL = '?' + serialize(paramdata);
+            var RequestedURL = $rootScope.apiURLForInstaFlightSearch + '/GetDestination' + dataURL;
             return $http.get(RequestedURL)
-            .then(function (data) {
-                return data.data;
-            }, function (e) {
-                return e;
-            });
+           .then(function (data) {
+               return data.data;
+           }, function (e) {
+               return e;
+           });
         }
+        function getDestinationInstFlightData(key) {
+            return _.find(DestinationsData, { Criteria: key });
 
-        function findTopDestinations(data) {
-            var dataURL = 'TopDestinations?' + serialize(data);
-            var RequestedURL = $rootScope.apiURL + dataURL;
-            return $http.get(RequestedURL)
-            .then(function (data) {
-                return data.data;
-            }, function (e) {
-                return e;
-            });
+        }
+        function setDestinationInstFlightData(key, data) {
+            InstaflightData.push({ Criteria: Key, data: data });
         }
     }
 })();

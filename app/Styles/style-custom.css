@@ -1267,14 +1267,14 @@ ul .stop-line {
 }
 
 /*#region md-card*/
-.mdcard {
-    height: 445px;
-}
+/*.mdcard {
+    height: 430px;
+}*/
 
-    .mdcard img.mdimage {
-        height: 300px;
-        cursor: pointer;
-    }
+.mdcard img.mdimage {
+    height: 300px;
+    cursor: pointer;
+}
 
 .md-button {
     color: #333 !important;
@@ -1286,10 +1286,18 @@ ul .stop-line {
     min-height: 30px;
 }
 
-.mdtitle {
+.mdtop {
     position: absolute;
     padding: 5px 16px;
     color: #fff;
+}
+
+.mdtitle {
+    margin-bottom: 3px;
+}
+
+.mdtop p {
+    font-size: 13px;
 }
 
 .mdcontent {
@@ -1318,9 +1326,14 @@ ul .stop-line {
     border-bottom: 1px solid #ddd;
 }
 
-.margin-top-15 {
-    margin-top: 15px;
+.mdlink {
+    margin-top: 13px;
+    font-size: 16px;
 }
+
+    .mdlink a:hover {
+        text-decoration: underline;
+    }
 
 .mdattimg {
     margin-bottom: 5px;
@@ -1474,22 +1487,34 @@ ul .stop-line {
         overflow-x: hidden !important;
     }
 
-    .mdcard {
+    /*.mdcard {
         height: 365px;
+    }*/
+
+    .mdcard img.mdimage {
+        height: 200px;
     }
 
-        .mdcard img.mdimage {
-            height: 200px;
-        }
-
-    .md-title {
+    .mdtitle {
         font-size: 17px;
+    }
+
+    .mdtop p {
+        font-size: 12px;
+    }
+
+    .mddisplay1 {
+        font-size: 21px;
     }
 }
 
 @media only screen and (max-width:769px) and (orientation:landscape) {
     .mdcard {
-        height: 320px;
+        height: 340px;
+    }
+
+    .mddisplay1 {
+        font-size: 25px;
     }
 }
 

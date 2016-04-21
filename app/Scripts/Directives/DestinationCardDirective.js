@@ -7,7 +7,8 @@
                 origin: '=',
                 destination: '=',
                 departureDate: '=',
-                returnDate: '='
+                returnDate: '=',
+                imageUrl: '@'
             },
             templateUrl: '/Views/partials/DestinationCard.html',
             controller: ['$scope', '$parse', '$filter', 'UtilFactory', 'InstaFlightSearchFactory', 'DestinationFactory', function ($scope, $parse, $filter, UtilFactory, InstaFlightSearchFactory, DestinationFactory) {
@@ -16,7 +17,7 @@
                 init();
                 function init() {
                     DestinationFactory.clearDestinationData();
-                    UtilFactory.ReadAirportJson().then(function (airports) {
+                    UtilFactory.ReadHighRankedAirportsJson().then(function (airports) {
                         var originAirport = _.findWhere(airports, { airport_Code: $scope.origin });
                         var destinationAirport = _.findWhere(airports, { airport_Code: $scope.destination });
                         if (!originAirport && !destinationAirport) return;
@@ -41,7 +42,6 @@
                                     currencyCode: getCurrencyCode(data.PricedItineraries[0])
                                 }
 
-                                if (request.destination == "YTO") debugger;
                                 if (destinationAirport.airport_IsMAC) {
                                     var multiAirports = $filter('filter')(airports, { airport_IsMAC: false, airport_CityCode: destinationAirport.airport_CityCode }, true);
                                     destinationAirport.themes = _.unique(_.flatten(_.map(multiAirports, function (i) { if (i.themes.length) return i.themes; }), true));

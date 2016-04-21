@@ -9,5 +9,9 @@
     { "origin": "ATL", "destination": "CHI" },
     { "origin": "CHI", "destination": "DCA" },
     { "origin": "DEL", "destination": "BOM" },
-    { "origin": "NYC", "destination": "CHI" }
+    { "origin": "NYC", "destination": "CHI" },
+    { "origin": "BOM", "destination": "YTO" },
+    { "origin": "NYC", "destination": "IST" },
+    { "origin": "MCO", "destination": "LAX" },
+    { "origin": "HKG", "destination": "BKK" }
 ]

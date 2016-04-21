@@ -1,28 +1,31 @@
 ﻿(function () {
     angular.module('TrippismUIApp').directive('destinationCardDirective', [DestinationMaterialCardsDirective]);
-    function DestinationMaterialCardsDirective($scope) {
+    function DestinationMaterialCardsDirective() {
         return {
             restrict: 'E',
             scope: {
-                requestData: '=?requestData'
+                origin: '=',
+                destination: '=',
+                departureDate: '=',
+                returnDate: '='
             },
             templateUrl: '/Views/partials/DestinationCard.html',
-            controller: ['$scope', 'UtilFactory', 'InstaFlightSearchFactory', function ($scope, UtilFactory, InstaFlightSearchFactory) {
+            controller: ['$scope', '$parse', '$filter', 'UtilFactory', 'InstaFlightSearchFactory', 'DestinationFactory', function ($scope, $parse, $filter, UtilFactory, InstaFlightSearchFactory, DestinationFactory) {
                 $scope.GetCurrencySymbol = GetCurrencySymbol;
                 GetCurrencySymbols();
                 init();
                 function init() {
+                    DestinationFactory.clearDestinationData();
                     UtilFactory.ReadAirportJson().then(function (airports) {
-                        var originAirport = _.findWhere(airports, { airport_Code: $scope.requestData.origin });
-                        if (!originAirport) return;
-
-                        var destinationAirport = _.findWhere(airports, { airport_Code: $scope.requestData.destination });
+                        var originAirport = _.findWhere(airports, { airport_Code: $scope.origin });
+                        var destinationAirport = _.findWhere(airports, { airport_Code: $scope.destination });
+                        if (!originAirport && !destinationAirport) return;
                         var request = {
-                            origin: $scope.requestData.origin,
-                            destination: $scope.requestData.destination,
-                            departureDate: $scope.requestData.departureDate,
-                            returnDate: $scope.requestData.returnDate,
-                            pointOfSaleCountry: $scope.requestData.pointOfSaleCountry,
+                            origin: $scope.origin,
+                            destination: $scope.destination,
+                            departureDate: $scope.departureDate,
+                            returnDate: $scope.returnDate,
+                            pointOfSaleCountry: originAirport.airport_CountryCode,
                             limit: 1
                         };
                         getDestinationFare(request).then(function (data) {
@@ -35,10 +38,29 @@
                                     departureDate: ConvertToRequiredDate(data.DepartureDateTime, 'UI'),
                                     returnDate: ConvertToRequiredDate(data.ReturnDateTime, 'UI'),
                                     lowestFare: getLowestFare(data.PricedItineraries[0]),
-                                    currencyCode: getCurrencyCode(data.PricedItineraries[0]),
-                                    themes: originAirport.themes
+                                    currencyCode: getCurrencyCode(data.PricedItineraries[0])
                                 }
+
+                                if (request.destination == "YTO") debugger;
+                                if (destinationAirport.airport_IsMAC) {
+                                    var multiAirports = $filter('filter')(airports, { airport_IsMAC: false, airport_CityCode: destinationAirport.airport_CityCode }, true);
+                                    destinationAirport.themes = _.unique(_.flatten(_.map(multiAirports, function (i) { if (i.themes.length) return i.themes; }), true));
+                                }
+                                // creating $scope element from theme name (for displaying theme icon into page)
+                                _.each(destinationAirport.themes, function (item) {
+                                    if (item) {
+                                        var model = $parse(item.replace('-', ''));
+                                        model.assign($scope, true);
+                                    }
+                                });
                                 $scope.destinationData.currencySymbol = GetCurrencySymbol($scope.destinationData.currencyCode);
+                                DestinationFactory.setDestinationData(
+                                    {
+                                        Origin: $scope.origin,
+                                        Destination: $scope.destination,
+                                        DepartureDate: $scope.departureDate,
+                                        ReturnDate: $scope.returnDate
+                                    }, data);
                                 $scope.url = 'f=' + $scope.destinationData.origin + ';t=' + $scope.destinationData.destination + ';d=' + data.DepartureDateTime + ';r=' + data.ReturnDateTime;
                             }
                         });
@@ -72,7 +94,7 @@
 
             }],
             link: function (scope, elem, attrs) {
-                scope.amountBifercation = function (TotalfareAmount) {
+                scope.amountBifurcation = function (TotalfareAmount) {
                     var afterDec = (TotalfareAmount + "").split(".")[1];
                     if (afterDec == undefined)
                         afterDec = '00';

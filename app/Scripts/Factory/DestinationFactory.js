@@ -5,12 +5,15 @@
 
     function DestinationFactory($http, $rootScope, $filter, $q) {
         var DestinationsData = [];
+        var DestinationData = [];
         var service = {
             findDestinations: findDestinations,
             findInstFlightDestination: findInstFlightDestination,
             ShowDestinationView: true,
             GetDestinationFareInfo: GetDestinationFareInfo,
-            setDestinationData: setDestinationData
+            getDestinationData: getDestinationData,
+            setDestinationData: setDestinationData,
+            clearDestinationData: clearDestinationData
         };
         return service;
 
@@ -50,12 +53,10 @@
             }
         }
         function GetDestinationFareInfo(paramdata) {
-            if (DestinationsData == undefined)
-                return null;
-            var result = $filter('filter')(DestinationsData, { Criteria: paramdata.Origin + paramdata.DepartureDate + paramdata.ReturnDate })[0];
+            var result = _.findWhere(DestinationsData, { Criteria: paramdata.Origin + paramdata.DepartureDate + paramdata.ReturnDate });
             if (result == undefined)
                 return null;
-            var fareInfo = $filter('filter')(result.data.FareInfo, { DestinationLocation: paramdata.Destination })[0];
+            var fareInfo = _.findWhere(result.data.FareInfo, { DestinationLocation: paramdata.Destination });
             return fareInfo;
         }
 
@@ -69,12 +70,15 @@
                return e;
            });
         }
-        function getDestinationInstFlightData(key) {
-            return _.find(DestinationsData, { Criteria: key });
+        function getDestinationData(key) {
+            return $filter('filter')(DestinationData, { key: key }, true)[0];
 
         }
-        function setDestinationInstFlightData(key, data) {
-            InstaflightData.push({ Criteria: Key, data: data });
+        function setDestinationData(key, data) {
+            DestinationData.push({ key: key, data: data });
+        }
+        function clearDestinationData() {
+            DestinationData = [];
         }
     }
 })();

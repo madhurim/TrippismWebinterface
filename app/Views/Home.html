@@ -40,14 +40,10 @@
                     <div class="service_inner text-center">
                         <div class="service_title">Discover</div>
                         <div class="service_content">
-                            <img src="../images/discovre_icon.png" />
+                            <div class="ico-youtube" video-popup-directive title="Click to watch our video"></div>
                             <p>
-                                Discover a destination in few
-                                minutes with relevant
-                                information like air fares, fare
-                                analysis, attractions, videos,
-                                reviews and ratings.
-                                All in one place.
+                                Watch our video on how to Discover a destination in few minutes.
+                                Find air fares, fare analysis, attractions, videos, reviews and ratings.
                             </p>
                         </div>
                     </div>
@@ -70,20 +66,7 @@
         <div class="container md-container border-bottom pad-top-20 pad-bot-20">
             <div class="row">
                 <div class="col-sm-4" ng-repeat="item in ::destinationRequestList">
-                    <destination-card-directive request-data="item"></destination-card-directive>
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid video-container">
-            <div class="container">
-                <div class="video-wp">
-                    <div class="col-md-12 col-sm-12 col-xs-12 video-title">
-                        <div class="service_title">How it works ?</div>
-                    </div>
-                    <div class="col-md-12 col-sm-12 col-sm-12 video-sec">
-                        <iframe class="video" width="560" height="315" src="https://www.youtube.com/embed/owy3jDW-eBQ?rel=0&showinfo=0" frameborder="0" allowfullscreen></iframe>
-                    </div>
-                    <div class="clear"></div>
+                    <destination-card-directive origin="item.origin" destination="item.destination" departure-date="item.departureDate" return-date="item.returnDate"></destination-card-directive>
                 </div>
             </div>
         </div>

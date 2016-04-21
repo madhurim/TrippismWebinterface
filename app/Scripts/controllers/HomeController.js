@@ -117,9 +117,7 @@
                                     origin: item.origin,
                                     destination: item.destination,
                                     departureDate: ConvertToRequiredDate(departureDate, 'API'),
-                                    returnDate: ConvertToRequiredDate(returnDate, 'API'),
-                                    pointOfSaleCountry: originAirport.airport_CountryCode,
-                                    limit: 1
+                                    returnDate: ConvertToRequiredDate(returnDate, 'API')
                                 };
                                 $scope.destinationRequestList.push(request);
                             }

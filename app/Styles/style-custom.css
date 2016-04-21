@@ -1271,7 +1271,7 @@ ul .stop-line {
     height: 445px;
 }
 
-    .mdcard img {
+    .mdcard img.mdimage {
         height: 300px;
         cursor: pointer;
     }
@@ -1321,7 +1321,36 @@ ul .stop-line {
 .margin-top-15 {
     margin-top: 15px;
 }
+
+.mdattimg {
+    margin-bottom: 5px;
+}
+
+    .mdattimg img {
+        height: 25px;
+        width: 25px;
+        display: inline-block;
+        margin: 2px 0px;
+    }
 /*#endregion md-card*/
+
+.ico-youtube {
+    background-image: url("../images/youtube.png");
+    height: 50px;
+    width: 85px;
+    margin: auto;
+    background-repeat: no-repeat;
+    background-position: 0px -5px;
+    margin-top: 30px;
+    margin-bottom: 23px;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+    .ico-youtube:hover {
+        background-position: 0px -58px;
+        opacity: 1;
+    }
 
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
@@ -1449,9 +1478,13 @@ ul .stop-line {
         height: 365px;
     }
 
-        .mdcard img {
+        .mdcard img.mdimage {
             height: 200px;
         }
+
+    .md-title {
+        font-size: 17px;
+    }
 }
 
 @media only screen and (max-width:769px) and (orientation:landscape) {

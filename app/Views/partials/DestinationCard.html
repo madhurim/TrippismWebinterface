@@ -2,7 +2,7 @@
     <a ui-sref="destination(::{path:url})">
         <div class="mdtop">
             <h4 class="md-title mdtitle">{{::destinationData.originName}} to {{::destinationData.destinationName}}</h4>
-            <p class="md-body-1">{{::destinationData.departureDate}} - {{::destinationData.returnDate}}</p>
+            <p class="md-body-1" ng-if="destinationData.departureDate">{{::destinationData.departureDate}} - {{::destinationData.returnDate}}</p>
         </div>
         <img class="mdimage" ng-src="{{imageUrl}}" class="md-card-image" alt="{{::destinationData.destination}}">
     </a>

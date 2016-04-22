@@ -102,11 +102,14 @@
         function loadDestinationCard() {
             UtilFactory.ReadLocationPairJson().then(function (data) {
                 if (data && data.length) {
+                    var display = 6;
+                    var displayNonUS = display / 3;
+                    var displayUs = display - (display / 3);
                     $scope.destinationRequestList = [];
                     var random;
                     var arr = _.partition(data, function (item) { return item.nonUS == true; });    // arr[0] = nonUS list, arr[1] = US list
                     if (arr[0].length)
-                        random = _.shuffle(_.sample(arr[0], 1).concat(_.sample(arr[1], 2)));    // get 1 nonUS, 2 US and shuffle result
+                        random = _.shuffle(_.sample(arr[0], displayNonUS).concat(_.sample(arr[1], displayUs)));    // get 1 nonUS, 2 US and shuffle result
                     else
                         random = _.sample(data, 3);
                     _.each(random, function (item) {

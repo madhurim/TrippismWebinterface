@@ -4,9 +4,10 @@
     angular.module('TrippismUIApp').factory(serviceId, ['$http', '$location', '$anchorScroll', '$rootScope', '$filter', '$q', 'TrippismConstants', UtilFactory]);
 
     function UtilFactory($http, $location, $anchorScroll, $rootScope, $filter, $q, TrippismConstants) {
-        var AirportJsonData = [];
-        var highRankedAirports = [];
         var LastSearch;
+        var highRankedAirportsPromise;
+        var CurrencySymbolsPromise;
+        var airportJsonPromise;
         var service = {
             ReadAirportJson: ReadAirportJson,
             MapscrollTo: MapscrollTo,
@@ -33,29 +34,28 @@
             }
         }
         function ReadAirportJson(url) {
-            if (AirportJsonData.length > 0) {
-                var d = $q.defer();
-                d.resolve(AirportJsonData);
-                return d.promise;
+            if (airportJsonPromise) {
+                return $q.when(airportJsonPromise).then(function (value) {
+                    return value;
+                });
             }
             else
-                return getAirportJson($rootScope.apiURLForConstant + '/GetAirports').then(function (data) {
-                    AirportJsonData = data;
+                return airportJsonPromise = getAirportJson($rootScope.apiURLForConstant + '/GetAirports').then(function (data) {
                     return data;
                 });
         }
 
         function ReadHighRankedAirportsJson(url) {
-            if (highRankedAirports.length > 0) {
-                var d = $q.defer();
-                d.resolve(highRankedAirports);
-                return d.promise;
+            if (highRankedAirportsPromise) {
+                return $q.when(highRankedAirportsPromise).then(function (value) {
+                    return value;
+                });
             }
-            else
-                return getAirportJson($rootScope.apiURLForConstant + '/GetHighRankedAirports').then(function (data) {
-                    highRankedAirports = data;
+            else {
+                return highRankedAirportsPromise = getAirportJson($rootScope.apiURLForConstant + '/GetHighRankedAirports').then(function (data) {
                     return data;
                 });
+            }
         }
 
         function getAirportJson(url) {
@@ -122,9 +122,9 @@
         }
 
         function GetCurrencySymbols() {
-            if (service.currencySymbol.currencySymbolsList.length)
+            if (CurrencySymbolsPromise)
                 return;
-            $http.get($rootScope.apiURLForConstant + '/GetCurrencySymbols').then(function (data) {
+            CurrencySymbolsPromise = $http.get($rootScope.apiURLForConstant + '/GetCurrencySymbols').then(function (data) {
                 if (data.status == 200)
                     service.currencySymbol.currencySymbolsList = data.data.Currency;
             });

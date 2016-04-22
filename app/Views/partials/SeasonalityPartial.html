@@ -17,21 +17,21 @@
                                 <!--<h6> [ {{DepartDate}} To {{ReturnDate}} ]</h6>-->
                                 <ul>
                                     <li>
-                                        <img title="High" ng-if="SeasonalityWidgetData.NoofIcons == 3" src="/images/User-12.png" alt="" />
-                                        <img title="High" ng-if="SeasonalityWidgetData.NoofIcons != 3" src="/images/User-12grey.png" alt="" />
+                                        <img ng-if="SeasonalityWidgetData.NoofIcons == 3" src="/images/User-12.png" alt="" />
+                                        <img ng-if="SeasonalityWidgetData.NoofIcons != 3" src="/images/User-12grey.png" alt="" />
                                         <p ng-if="SeasonalityWidgetData.NoofIcons == 3" class="redbold-font"> Peak</p>
                                         <p ng-if="SeasonalityWidgetData.NoofIcons != 3"> Peak</p>
                                     </li>
                                     <li>
-                                        <img title="Medium" ng-if="SeasonalityWidgetData.NoofIcons == 2" src="/images/User-5.png" alt="" />
-                                        <img title="Medium" ng-if="SeasonalityWidgetData.NoofIcons != 2" src="/images/User-5grey.png" alt="" />
+                                        <img ng-if="SeasonalityWidgetData.NoofIcons == 2" src="/images/User-5.png" alt="" />
+                                        <img ng-if="SeasonalityWidgetData.NoofIcons != 2" src="/images/User-5grey.png" alt="" />
                                         <p ng-if="SeasonalityWidgetData.NoofIcons == 2" class="redbold-font"> Medium</p>
                                         <p ng-if="SeasonalityWidgetData.NoofIcons != 2"> Medium</p>
 
                                     </li>
                                     <li>
-                                        <img title="Low" ng-if="SeasonalityWidgetData.NoofIcons == 1" src="/images/User-3.png" alt="" />
-                                        <img title="Low" ng-if="SeasonalityWidgetData.NoofIcons != 1" src="/images/User-3grey.png" alt="" />
+                                        <img ng-if="SeasonalityWidgetData.NoofIcons == 1" src="/images/User-3.png" alt="" />
+                                        <img ng-if="SeasonalityWidgetData.NoofIcons != 1" src="/images/User-3grey.png" alt="" />
                                         <p ng-if="SeasonalityWidgetData.NoofIcons == 1" class="redbold-font"> Off-Peak</p>
                                         <p ng-if="SeasonalityWidgetData.NoofIcons != 1">Off-Peak</p>
                                     </li>

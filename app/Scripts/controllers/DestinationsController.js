@@ -368,18 +368,6 @@
                 FromDate: (typeof $scope.FromDate == 'string') ? new Date($scope.FromDate) : $scope.FromDate,
                 ToDate: (typeof $scope.ToDate == 'string') ? new Date($scope.ToDate) : $scope.ToDate
             };
-            //Maintain data in service for SharableUrl 
-            //var paramdata = {
-            //    Origin: $scope.Origin,
-            //    DestinationLocation: $scope.KnownDestinationAirport,
-            //    FromDate: $scope.FromDate,
-            //    ToDate: $scope.ToDate,
-            //    Theme: $scope.Theme,
-            //    Region: $scope.Region,
-            //    Minfare: $scope.Minfare,
-            //    Maxfare: $scope.Maxfare
-            //}
-            //UtilFactory.SetLastSearchval(paramdata)
         }
 
         function clearRefineSearchSelection() {

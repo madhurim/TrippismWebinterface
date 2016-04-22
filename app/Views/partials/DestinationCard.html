@@ -1,0 +1,36 @@
+﻿<md-card class="mdcard" ng-if="::destinationData">
+    <a ui-sref="destination(::{path:url})">
+        <div class="mdtop">
+            <h4 class="md-title mdtitle">{{::destinationData.originName}} to {{::destinationData.destinationName}}</h4>
+            <p class="md-body-1" ng-if="destinationData.departureDate">{{::destinationData.departureDate}} - {{::destinationData.returnDate}}</p>
+        </div>
+        <img class="mdimage" ng-src="{{imageUrl}}" class="md-card-image" alt="{{::destinationData.destination}}">
+    </a>
+    <div class="mdcontent">
+        <div class="mdattimg">
+            <img ng-if="::Beach" src="../images/attraction-marker/palm-tree-icon.png" title="Beach" alt="Beach" />
+            <img ng-if="::Disney" src="../images/attraction-marker/paris-icon.png" title="Disney" alt="Disney" />
+            <img ng-if="::Gambling" src="../images/attraction-marker/dice-icon.png" title="Gambling" alt="Gambling" />
+            <img ng-if="::Historic" src="../images/attraction-marker/bank-icon.png" title="Historic" alt="Historic" />
+            <img ng-if="::Mountains" src="../images/attraction-marker/camera-icon.png" title="Mountains" alt="Mountains" />
+            <img ng-if="::NationalParks" src="../images/attraction-marker/Park-icon.png" title="National-Parks" alt="National-Parks" />
+            <img ng-if="::Outdoors" src="../images/attraction-marker/climbing-icon.png" title="Outdoors" alt="Outdoors" />
+            <img ng-if="::Romantic" src="../images/attraction-marker/hearts-icon.png" title="Romantic" alt="Romantic" />
+            <img ng-if="::Shopping" src="../images/attraction-marker/full-icon.png" title="Shopping" alt="Shopping" />
+            <img ng-if="::ThemePark" src="../images/attraction-marker/cruise-icon.png" title="Theme-Park" alt="Theme-Park" />
+            <img ng-if="::Skiing" src="../images/attraction-marker/sport-icon.png" title="Skiing" alt="Skiing" />
+            <img ng-if="::Caribbean" src="../images/attraction-marker/holidays-icon.png" title="Caribbean" alt="Caribbean" />
+        </div>
+        <div class="mdborder"></div>
+        <div class="pull-left">
+            <md-progress-circular md-mode='indeterminate' md-diameter="40px" ng-if="!isDataFound"></md-progress-circular>
+            <h3 class="md-display-1 mddisplay1 mdfare" ng-if="destinationData.lowestFare" ng-init="::amount = amountBifurcation(destinationData.lowestFare);">
+                <span class="cursor-help" data-toggle="tooltip" popover="{{::destinationData.currencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{::GetCurrencySymbol(destinationData.currencyCode)}}</span>
+                {{amount.BeforeDecimal}}<span class="text-super vertical-top">{{amount.AfterDecimal}}</span>
+            </h3>
+        </div>
+        <div class="pull-right mdlink">
+            <a ui-sref="destination(::{path:url})">Explore</a>
+        </div>
+    </div>
+</md-card>

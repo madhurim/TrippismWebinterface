@@ -250,7 +250,6 @@
 
                                   google.maps.event.addListener(marker, 'click', (function (marker, contentString, infowindow) {
                                       return function () {
-                                          //var result = UtilFactory.GetLastSearch();
                                           var finalpath = 'destination/f=' + $scope.origin.toUpperCase() + ';t=' + marker.CustomMarkerInfo.DestinationLocation + ';d=' + ConvertToRequiredDate(marker.CustomMarkerInfo.DepartureDateTime, 'API') + ';r=' + ConvertToRequiredDate(marker.CustomMarkerInfo.ReturnDateTime, 'API');
                                           $location.path(finalpath);
                                       };

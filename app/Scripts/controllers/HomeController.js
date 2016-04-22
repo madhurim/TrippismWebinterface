@@ -8,6 +8,7 @@
             'LocalStorageFactory',
             'TrippismConstants',
             '$interval',
+            'UtilFactory',
              HomeController]);
     function HomeController(
        $scope,
@@ -15,7 +16,8 @@
        $timeout,
        LocalStorageFactory,
        TrippismConstants,
-       $interval
+       $interval,
+       UtilFactory
        ) {
         alertify.dismissAll();
         $scope.Name = "Home Page";
@@ -97,6 +99,44 @@
             }, settings.interval, 0, false);
         }
 
+        function loadDestinationCard() {
+            UtilFactory.ReadLocationPairJson().then(function (data) {
+                if (data && data.length) {
+                    var display = 6;
+                    var itemPerRow = 3;
+                    var displayNonUS = display / itemPerRow;
+                    var displayUs = display - displayNonUS;
+                    var destinationRequestList = [];
+                    var random;
+                    var arr = _.partition(data, function (item) { return item.nonUS == true; });    // arr[0] = nonUS list, arr[1] = US list
+                    if (arr[0].length)
+                        random = _.shuffle(_.sample(arr[0], displayNonUS).concat(_.sample(arr[1], displayUs)));    // get 1 nonUS, 2 US and shuffle result
+                    else
+                        random = _.sample(data, display);
+
+                    _.each(random, function (item) {
+                        var currDate = new Date();
+                        var departureDate = new Date(currDate.setMonth(currDate.getMonth() + 1));   // minimun departure date 1 month from current date
+                        departureDate = new Date(departureDate.setDate(departureDate.getDate() + (data.indexOf(item) + _.random(1, 9)))); // add random days to departure date
+                        var returnDate = new Date(departureDate);
+                        returnDate = new Date(returnDate.setDate(returnDate.getDate() + 5));    // set return date 5 days from departure date
+
+                        var request = {
+                            origin: item.origin,
+                            destination: item.destination,
+                            departureDate: ConvertToRequiredDate(departureDate, 'API'),
+                            returnDate: ConvertToRequiredDate(returnDate, 'API')
+                        };
+                        destinationRequestList.push(request);
+                    });
+
+                    $scope.destinationRequestList = _.partition(destinationRequestList, function (item, index) { return index % 2 == 0; });
+                    $scope.rowArr = new Array(Math.ceil(display / itemPerRow));
+                }
+            });
+        }
+
         startSlider();
+        loadDestinationCard();
     }
 })();

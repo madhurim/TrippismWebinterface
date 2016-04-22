@@ -1,0 +1,12 @@
+﻿[
+    { "origin": "LON", "destination": "BUD", "nonUS": true },
+    { "origin": "DEL", "destination": "BCN", "nonUS": true },
+    { "origin": "SFO", "destination": "OGG" },
+    { "origin": "CDG", "destination": "SYD", "nonUS": true },
+    { "origin": "HKG", "destination": "NYC", "nonUS": true },
+    { "origin": "BOM", "destination": "MLE", "nonUS": true },
+    { "origin": "ATL", "destination": "DCA" },
+    { "origin": "NYC", "destination": "SFO" },
+    { "origin": "CHI", "destination": "BOS" },
+    { "origin": "BOS", "destination": "LAS" }
+]

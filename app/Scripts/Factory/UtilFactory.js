@@ -4,17 +4,13 @@
     angular.module('TrippismUIApp').factory(serviceId, ['$http', '$location', '$anchorScroll', '$rootScope', '$filter', '$q', 'TrippismConstants', UtilFactory]);
 
     function UtilFactory($http, $location, $anchorScroll, $rootScope, $filter, $q, TrippismConstants) {
-        // Define the functions and properties to reveal.
-        var AirportJsonData = [];
-        var highRankedAirports = [];
-        //var airlinesList = [];
         var LastSearch;
+        var highRankedAirportsPromise;
+        var CurrencySymbolsPromise;
+        var airportJsonPromise;
         var service = {
             ReadAirportJson: ReadAirportJson,
-            getIpinfo: getIpinfo,
             MapscrollTo: MapscrollTo,
-            ReadStateJson: ReadStateJson,
-            //ReadAirlinesJson: ReadAirlinesJson,
             GetCurrencySymbols: GetCurrencySymbols,
             GetCurrencySymbol: GetCurrencySymbol,
             AirportCodeLog: AirportCodeLog,
@@ -22,16 +18,11 @@
             GetLowFareForMap: GetLowFareForMap,
             updateQueryStringParameter: updateQueryStringParameter,
             ReadHighRankedAirportsJson: ReadHighRankedAirportsJson,
-            GetValidDates: GetValidDates
+            GetValidDates: GetValidDates,
+            ReadLocationPairJson: ReadLocationPairJson
         };
         return service;
 
-        function ReadStateJson() {
-            var States = [];
-            return $http.get('scripts/Constants/State.json').then(function (_states) {
-                return _states.data;
-            });
-        }
         function updateQueryStringParameter(uri, key, value) {
             var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
             var separator = uri.indexOf('?') !== -1 ? "&" : "?";
@@ -43,29 +34,28 @@
             }
         }
         function ReadAirportJson(url) {
-            if (AirportJsonData.length > 0) {
-                var d = $q.defer();
-                d.resolve(AirportJsonData);
-                return d.promise;
+            if (airportJsonPromise) {
+                return $q.when(airportJsonPromise).then(function (value) {
+                    return value;
+                });
             }
             else
-                return getAirportJson($rootScope.apiURLForConstant + '/GetAirports').then(function (data) {
-                    AirportJsonData = data;
+                return airportJsonPromise = getAirportJson($rootScope.apiURLForConstant + '/GetAirports').then(function (data) {
                     return data;
                 });
         }
 
         function ReadHighRankedAirportsJson(url) {
-            if (highRankedAirports.length > 0) {
-                var d = $q.defer();
-                d.resolve(highRankedAirports);
-                return d.promise;
+            if (highRankedAirportsPromise) {
+                return $q.when(highRankedAirportsPromise).then(function (value) {
+                    return value;
+                });
             }
-            else
-                return getAirportJson($rootScope.apiURLForConstant + '/GetHighRankedAirports').then(function (data) {
-                    highRankedAirports = data;
+            else {
+                return highRankedAirportsPromise = getAirportJson($rootScope.apiURLForConstant + '/GetHighRankedAirports').then(function (data) {
                     return data;
                 });
+            }
         }
 
         function getAirportJson(url) {
@@ -123,19 +113,6 @@
             $http.jsonp(url);
         }
 
-        function getIpinfo(AvailableCodes) {
-            var url = "http://ipinfo.io?callback=JSON_CALLBACK";
-            return $http.jsonp(url)
-            .then(function (data) {
-                data = data.data;
-                var originairport = _.find(AvailableCodes, function (airport) { return airport.airport_CityName == data.city && airport.airport_CountryCode == data.country });
-                if (originairport != null) {
-                    return originairport;
-                }
-            });
-
-        }
-
         function MapscrollTo(id) {
             var old = $location.hash();
             $location.hash(id);
@@ -144,25 +121,10 @@
             return;
         }
 
-        //function ReadAirlinesJson() {
-        //    if (airlinesList.length > 0) {
-        //        var d = $q.defer();
-        //        d.resolve(airlinesList);
-        //        return d.promise;
-        //    }
-        //    else
-        //        return $http.get($rootScope.apiURLForConstant + '/GetAirlines').then(function (data) {
-        //            if (data.status == 200) {
-        //                airlinesList = data.data;
-        //                return airlinesList;
-        //            }
-        //            else
-        //                return [];
-        //        });
-        //}
-
         function GetCurrencySymbols() {
-            $http.get($rootScope.apiURLForConstant + '/GetCurrencySymbols').then(function (data) {
+            if (CurrencySymbolsPromise)
+                return;
+            CurrencySymbolsPromise = $http.get($rootScope.apiURLForConstant + '/GetCurrencySymbols').then(function (data) {
                 if (data.status == 200)
                     service.currencySymbol.currencySymbolsList = data.data.Currency;
             });
@@ -233,6 +195,12 @@
             }
 
             return obj;
+        }
+
+        function ReadLocationPairJson() {
+            return $http.get('scripts/Constants/locationsPair_live.json').then(function (data) {
+                return data.data;
+            });
         }
     }
 })();

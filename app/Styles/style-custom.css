@@ -1262,6 +1262,109 @@ ul .stop-line {
     padding-bottom: 20px;
 }
 
+.pad-top-20 {
+    padding-top: 20px;
+}
+
+/*#region md-card*/
+/*.mdcard {
+    height: 430px;
+}*/
+
+.mdcard img.mdimage {
+    height: 300px;
+    cursor: pointer;
+}
+
+.md-button {
+    color: #333 !important;
+    width: 15px;
+    font-size: 11px;
+    float: right;
+    line-height: 1px;
+    padding: 0px;
+    min-height: 30px;
+}
+
+.mdtop {
+    position: absolute;
+    padding: 5px 16px;
+    color: #fff;
+}
+
+.mdtitle {
+    margin-bottom: 3px;
+}
+
+.mdtop p {
+    font-size: 13px;
+}
+
+.mdcontent {
+    display: block;
+    padding: 13px 16px;
+}
+
+    .mdcontent h3, .mdcontent p {
+        margin: 0px;
+    }
+
+    .mdcontent p {
+        margin: 3px 0px;
+    }
+
+.mddisplay1 {
+    font-size: 25px;
+}
+
+.mdfare .text-super {
+    vertical-align: super;
+}
+
+.mdborder {
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ddd;
+}
+
+.mdlink {
+    margin-top: 13px;
+    font-size: 16px;
+}
+
+    .mdlink a:hover {
+        text-decoration: underline;
+    }
+
+.mdattimg {
+    margin-bottom: 5px;
+}
+
+    .mdattimg img {
+        height: 25px;
+        width: 25px;
+        display: inline-block;
+        margin: 2px 0px;
+    }
+/*#endregion md-card*/
+
+.ico-youtube {
+    background-image: url("../images/youtube.png");
+    height: 50px;
+    width: 85px;
+    margin: auto;
+    background-repeat: no-repeat;
+    background-position: 0px -5px;
+    margin-top: 30px;
+    margin-bottom: 23px;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+    .ico-youtube:hover {
+        background-position: 0px -58px;
+        opacity: 1;
+    }
+
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {
@@ -1382,6 +1485,36 @@ ul .stop-line {
         width: 100%;
         max-width: 100% !important;
         overflow-x: hidden !important;
+    }
+
+    /*.mdcard {
+        height: 365px;
+    }*/
+
+    .mdcard img.mdimage {
+        height: 200px;
+    }
+
+    .mdtitle {
+        font-size: 17px;
+    }
+
+    .mdtop p {
+        font-size: 12px;
+    }
+
+    .mddisplay1 {
+        font-size: 21px;
+    }
+}
+
+@media only screen and (max-width:769px) and (orientation:landscape) {
+    .mdcard {
+        height: 340px;
+    }
+
+    .mddisplay1 {
+        font-size: 25px;
     }
 }
 

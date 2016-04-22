@@ -42,7 +42,7 @@
                         <div class="service_content">
                             <div class="ico-youtube" video-popup-directive title="Click to watch our video"></div>
                             <p>
-                                Watch our video on how to Discover a destination in few minutes.
+                                Watch our video on how to discover a destination in few minutes.
                                 Find air fares, fare analysis, attractions, videos, reviews and ratings.
                             </p>
                         </div>
@@ -54,7 +54,7 @@
                         <div class="service_content">
                             <img src="../images/escape_icon.png" />
                             <p>
-                                Then just hit the Book button & Go!
+                                Hit the Book button & Go!
                                 Painless journey from
                                 exploration to book.
                             </p>
@@ -64,8 +64,8 @@
             </div>
         </div>
         <div class="container md-container border-bottom pad-top-20 pad-bot-20">
-            <div class="row">
-                <div class="col-sm-4" ng-repeat="item in ::destinationRequestList">
+            <div class="row" ng-repeat="item in rowArr track by $index">
+                <div class="col-sm-4" ng-repeat="item in ::destinationRequestList[$index]">
                     <destination-card-directive origin="item.origin" destination="item.destination" departure-date="item.departureDate" return-date="item.returnDate" image-url="/images/destination/{{::item.destination}}.jpg"></destination-card-directive>
                 </div>
             </div>

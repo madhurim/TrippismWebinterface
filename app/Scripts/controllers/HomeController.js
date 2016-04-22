@@ -103,15 +103,17 @@
             UtilFactory.ReadLocationPairJson().then(function (data) {
                 if (data && data.length) {
                     var display = 6;
-                    var displayNonUS = display / 3;
-                    var displayUs = display - (display / 3);
-                    $scope.destinationRequestList = [];
+                    var itemPerRow = 3;
+                    var displayNonUS = display / itemPerRow;
+                    var displayUs = display - displayNonUS;
+                    var destinationRequestList = [];
                     var random;
                     var arr = _.partition(data, function (item) { return item.nonUS == true; });    // arr[0] = nonUS list, arr[1] = US list
                     if (arr[0].length)
                         random = _.shuffle(_.sample(arr[0], displayNonUS).concat(_.sample(arr[1], displayUs)));    // get 1 nonUS, 2 US and shuffle result
                     else
-                        random = _.sample(data, 3);
+                        random = _.sample(data, display);
+
                     _.each(random, function (item) {
                         var currDate = new Date();
                         var departureDate = new Date(currDate.setMonth(currDate.getMonth() + 1));   // minimun departure date 1 month from current date
@@ -125,8 +127,11 @@
                             departureDate: ConvertToRequiredDate(departureDate, 'API'),
                             returnDate: ConvertToRequiredDate(returnDate, 'API')
                         };
-                        $scope.destinationRequestList.push(request);
+                        destinationRequestList.push(request);
                     });
+
+                    $scope.destinationRequestList = _.partition(destinationRequestList, function (item, index) { return index % 2 == 0; });
+                    $scope.rowArr = new Array(Math.ceil(display / itemPerRow));
                 }
             });
         }

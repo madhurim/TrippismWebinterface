@@ -198,7 +198,7 @@
         }
 
         function ReadLocationPairJson() {
-            return $http.get('scripts/Constants/locationsPair.json').then(function (data) {
+            return $http.get('scripts/Constants/locationsPair_live.json').then(function (data) {
                 return data.data;
             });
         }

@@ -29,30 +29,31 @@
                             pointOfSaleCountry: originAirport.airport_CountryCode,
                             limit: 1
                         };
+                        $scope.destinationData = {
+                            origin: request.origin,
+                            destination: request.destination,
+                            originName: originAirport.airport_CityName,
+                            destinationName: destinationAirport.airport_CityName
+                        }
+                        if (destinationAirport.airport_IsMAC) {
+                            var multiAirports = $filter('filter')(airports, { airport_IsMAC: false, airport_CityCode: destinationAirport.airport_CityCode }, true);
+                            destinationAirport.themes = _.unique(_.flatten(_.map(multiAirports, function (i) { if (i.themes.length) return i.themes; }), true));
+                        }
+                        // creating $scope element from theme name (for displaying theme icon into page)
+                        _.each(destinationAirport.themes, function (item) {
+                            if (item) {
+                                var model = $parse(item.replace('-', ''));
+                                model.assign($scope, true);
+                            }
+                        });
                         getDestinationFare(request).then(function (data) {
                             if (data && data.PricedItineraries && data.PricedItineraries.length) {
-                                $scope.destinationData = {
-                                    origin: request.origin,
-                                    destination: request.destination,
-                                    originName: originAirport.airport_CityName,
-                                    destinationName: destinationAirport.airport_CityName,
-                                    departureDate: ConvertToRequiredDate(data.DepartureDateTime, 'UI'),
-                                    returnDate: ConvertToRequiredDate(data.ReturnDateTime, 'UI'),
-                                    lowestFare: getLowestFare(data.PricedItineraries[0]),
-                                    currencyCode: getCurrencyCode(data.PricedItineraries[0])
-                                }
+                                $scope.destinationData.lowestFare = getLowestFare(data.PricedItineraries[0]);
+                                $scope.destinationData.departureDate = ConvertToRequiredDate(data.DepartureDateTime, 'UI'),
+                                $scope.destinationData.returnDate = ConvertToRequiredDate(data.ReturnDateTime, 'UI'),
+                                $scope.destinationData.lowestFare = getLowestFare(data.PricedItineraries[0]),
+                                $scope.destinationData.currencyCode = getCurrencyCode(data.PricedItineraries[0])
 
-                                if (destinationAirport.airport_IsMAC) {
-                                    var multiAirports = $filter('filter')(airports, { airport_IsMAC: false, airport_CityCode: destinationAirport.airport_CityCode }, true);
-                                    destinationAirport.themes = _.unique(_.flatten(_.map(multiAirports, function (i) { if (i.themes.length) return i.themes; }), true));
-                                }
-                                // creating $scope element from theme name (for displaying theme icon into page)
-                                _.each(destinationAirport.themes, function (item) {
-                                    if (item) {
-                                        var model = $parse(item.replace('-', ''));
-                                        model.assign($scope, true);
-                                    }
-                                });
                                 $scope.destinationData.currencySymbol = GetCurrencySymbol($scope.destinationData.currencyCode);
                                 DestinationFactory.setDestinationData(
                                     {

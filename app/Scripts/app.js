@@ -202,7 +202,7 @@ angular.module('TrippismUIApp').directive('allowOnlyDateInputs', function () {
 // for refreshing the datepicker when needed
 angular.module('ui.bootstrap.datepicker')
     .config(function ($provide) {
-        $provide.decorator('datepickerDirective', ['$delegate', '$rootScope', function ($delegate, $rootScope) {
+        $provide.decorator('datepickerDirective', ['$delegate', function ($delegate) {
             var directive = $delegate[0];
             var link = directive.link;
             directive.compile = function () {

@@ -645,7 +645,7 @@ ul .stop-line {
 }
 
 .gm-style-iw {
-    max-width: 340px;    
+    max-width: 340px;
 }
 
 .clustermarkerpopup .iw-destinations-list {
@@ -1345,6 +1345,10 @@ ul .stop-line {
         display: inline-block;
         margin: 2px 0px;
     }
+
+.mdcard md-progress-circular {
+    color: #4254b6;
+}
 /*#endregion md-card*/
 
 .ico-youtube {

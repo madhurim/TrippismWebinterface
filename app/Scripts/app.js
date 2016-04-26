@@ -223,6 +223,12 @@ angular.module('ui.bootstrap.datepicker')
         }]);
     });
 
+// removing huge amount of styles binded to <head> section by ngMaterial
+angular.module('ngMaterial')
+      .config(['$provide', function ($provide) {
+          $provide.constant('$MD_THEME_CSS', '/**/');
+      }]);
+
 var constants = {
     googlePlacesApiKey: "AIzaSyC0CVNlXkejEzLzGCMVMj8PZ7gBzj8ewuQ",
     DefaultLenghtOfStay: 4,

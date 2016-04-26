@@ -7,6 +7,7 @@
         // Define the functions and properties to reveal.
         var AirportJsonData = [];
         var highRankedAirports = [];
+        var highRankedAirportsCurrency = [];
         //var airlinesList = [];
         var LastSearch;
         var service = {
@@ -22,6 +23,8 @@
             GetLowFareForMap: GetLowFareForMap,
             updateQueryStringParameter: updateQueryStringParameter,
             ReadHighRankedAirportsJson: ReadHighRankedAirportsJson,
+            ReadHighRankedAirportsCurrency : ReadHighRankedAirportsCurrency,
+            GetAirportCurrency:GetAirportCurrency,
             GetValidDates: GetValidDates
         };
         return service;
@@ -233,6 +236,39 @@
             }
 
             return obj;
+        }
+        function ReadHighRankedAirportsCurrency(url) {
+              if (highRankedAirportsCurrency.length > 0) {
+                var d = $q.defer();
+                d.resolve(highRankedAirportsCurrency);
+                return d.promise;
+            }
+            else
+                return getAirportCurrencyJson($rootScope.apiURLForConstant + '/GetHighRankedAirportsCurrency').then(function (data) {                 
+                    highRankedAirportsCurrency = data;
+                    return data;
+                });
+        }
+        function getAirportCurrencyJson(url) {
+            return $http.get(url).then(function (_arrairportscurrency) {
+                var AvailableAirportCurrencyCodes = [];   
+                if (_arrairportscurrency.status == 200) {          
+                    AvailableAirportCurrencyCodes = _arrairportscurrency.data.AirportCurrencies;
+                }
+                return AvailableAirportCurrencyCodes;
+            });
+        }
+
+        function GetAirportCurrency(airportCode) {
+            var cacheResult = _.findWhere(highRankedAirportsCurrency, { aCode: airportCode });
+            if (cacheResult)
+            {
+                return cacheResult.cCode;
+            }
+            else
+            {
+               return ''; 
+            }   
         }
     }
 })();

@@ -3,9 +3,9 @@
          angular.module('TrippismUIApp').directive("hotelRange",['$compile','UtilFactory','HotelRangeFactory', function($compile,UtilFactory,HotelRangeFactory) {
     return {
         template : "<div style='float:right;border:Red'>" +
-                       "<div ng-if='HotelRangeData.ThreeStar != null && HotelRangeData.ThreeStar.MinimumPriceAvg != 0.0 '> <b> 3 CROWN Hotel </b> <br> {{ HotelRangeData.ThreeStar.CurrencyCode }}  {{HotelRangeData.ThreeStar.MinimumPriceAvg}} - {{HotelRangeData.ThreeStar.MaximumPriceAvg}} </div>" +
-                        "<div ng-if='HotelRangeData.FourStar != null && HotelRangeData.FourStar.MinimumPriceAvg != 0.0 '>  <b> 4 CROWN Hotel </b> <br> {{ HotelRangeData.FourStar.CurrencyCode }}  {{HotelRangeData.FourStar.MinimumPriceAvg}} - {{HotelRangeData.FourStar.MaximumPriceAvg}} </div>" +
-                       "<div ng-if='HotelRangeData.FiveStar != null && HotelRangeData.FiveStar.MinimumPriceAvg != 0.0 '>  <b> 5 CROWN Hotel  </b> <br> {{ HotelRangeData.FiveStar.CurrencyCode }}  {{HotelRangeData.FiveStar.MaximumPriceAvg}}  - {{HotelRangeData.FiveStar.MinimumPriceAvg}} </div>" +
+                       "<div ng-if='HotelRangeData.ThreeStar  && HotelRangeData.ThreeStar.MinimumPriceAvg != 0.0 '> <b> 3 CROWN Hotel </b> <br> {{ hotelCurrencySymbol }} {{HotelRangeData.ThreeStar.MinimumPriceAvg | number:2 }} - {{HotelRangeData.ThreeStar.MaximumPriceAvg | number:2 }} </div>" +
+                        "<div ng-if='HotelRangeData.FourStar  && HotelRangeData.FourStar.MinimumPriceAvg != 0.0 '>  <b> 4 CROWN Hotel </b> <br> {{ hotelCurrencySymbol }}  {{HotelRangeData.FourStar.MinimumPriceAvg | number:2 }} - {{HotelRangeData.FourStar.MaximumPriceAvg | number:2 }} </div>" +
+                       "<div ng-if='HotelRangeData.FiveStar  && HotelRangeData.FiveStar.MinimumPriceAvg != 0.0 '>  <b> 5 CROWN Hotel  </b> <br> {{ hotelCurrencySymbol }}  {{HotelRangeData.FiveStar.MinimumPriceAvg | number:2 }}  - {{HotelRangeData.FiveStar.MaximumPriceAvg | number:2 }} </div>" +
                     "</div>",
         controller: ['$scope','$stateParams', function ($scope,$stateParams) {
         if ($stateParams.path != undefined) {
@@ -43,9 +43,14 @@
                                                             "CurrencyCode": null
                                                         }
                                            };
+                    
                     var dates = UtilFactory.GetValidDates($scope.FromDate, $scope.ToDate);
+                    $scope.mappromise = UtilFactory.ReadHighRankedAirportsCurrency().then(function (response) {
                     $scope.FromDate = dates.FromDate;
-                    $scope.ToDate = dates.ToDate;
+                    $scope.ToDate = dates.ToDate;            
+                    $scope.hotelCurrency=UtilFactory.GetAirportCurrency($scope.DestinationLocation);
+                   
+                    $scope.hotelCurrencySymbol = UtilFactory.GetCurrencySymbol($scope.hotelCurrency)
                     $scope.hotelInputData={
                         "CorporateId": null,
                         "GuestCounts": 1,
@@ -53,11 +58,10 @@
                         "StartDate":  $scope.FromDate,
                         "EndDate":  $scope.ToDate,
                         "SecurityToken": null,
-                        "CurrencyCode": "INR"
+                        "CurrencyCode": $scope.hotelCurrency
                         }                      
                         HotelRangeFactory.GetHotelRange($scope.hotelInputData).then(function (data) {                   
                             if (data != null && data.status == 200 ) {
-                                //alertify.alert("Success", "");
                                   $scope.HotelRangeData=  data.data;         
                             }
                             else {
@@ -66,7 +70,7 @@
                             }
                        });
                       
-
+});
                 }
             }],
     };

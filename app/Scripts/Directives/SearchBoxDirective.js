@@ -278,7 +278,7 @@ function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParam
             $scope.openFromDate = function ($event) {
                 $event.preventDefault();
                 $event.stopPropagation();
-                $scope.opened = false;
+                $scope.openedToDate = false;
                 $scope.openedFromDate = true;
                 $scope.SetFromDate();
                 document.getElementById('txtFromDate').select();
@@ -288,9 +288,15 @@ function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParam
                 $event.preventDefault();
                 $event.stopPropagation();
                 $scope.openedFromDate = false;
-                $scope.opened = true;
+                $scope.openedToDate = true;
                 document.getElementById('txtToDate').select();
             };
+
+            // for solving ToDate datepicker render issue
+            $scope.$watch('openedToDate', function (newVal, oldVal) {
+                if (newVal && !oldVal && $scope.ToDate)
+                    $timeout(function () { $scope.$broadcast('refreshDatepickers', new Date($scope.ToDate)); }, 0, false);
+            });
 
             // watch FromDate textbox value
             $scope.$watch('frmdestfinder.FromDate.$viewValue', function (newVal, OldVal) {
@@ -331,7 +337,6 @@ function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParam
                     $scope.FromDateDisplay = "";
                 }
 
-
                 var newValue = $scope.FromDate;
                 if (newValue == null)
                     return;
@@ -353,7 +358,6 @@ function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParam
                 maxFrmDate.setHours(0, 0, 0, 0);
 
                 if (newDt < todayDt) {
-                    //$scope.invalidFromDate = true;
                     $scope.FromDate = ConvertToRequiredDate(GetFromDate(), 'UI');
 
                     $scope.ToDate = undefined;
@@ -365,13 +369,11 @@ function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParam
                     return;
                 }
                 else if (newDt > maxFrmDate) {
-                    //$scope.invalidFromDate = true;
                     $scope.FromDate = ConvertToRequiredDate(GetFromDate(), 'UI');
                     $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
                     return;
                 }
                 else {
-                    $scope.invalidFromDate = false;
                     $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
                 }
                 /**/
@@ -458,17 +460,12 @@ function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParam
                     return;
                 }
                 else {
-                    $scope.invalidToDate = false;
                     $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
                 }
             })
 
             $scope.GetDestinationClick = function (path) {
                 if ($scope.frmdestfinder.$invalid) {
-                    $scope.hasError = true;
-                    return;
-                }
-                if ($scope.invalidFromDate || $scope.invalidToDate) {
                     $scope.hasError = true;
                     return;
                 }

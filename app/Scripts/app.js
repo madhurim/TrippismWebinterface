@@ -199,6 +199,29 @@ angular.module('TrippismUIApp').directive('allowOnlyDateInputs', function () {
     }
 });
 
+// for refreshing the datepicker when needed
+angular.module('ui.bootstrap.datepicker')
+    .config(function ($provide) {
+        $provide.decorator('datepickerDirective', ['$delegate', function ($delegate) {
+            var directive = $delegate[0];
+            var link = directive.link;
+            directive.compile = function () {
+                return function (scope, element, attrs, ctrls) {
+                    link.apply(this, arguments);
+                    var datepickerCtrl = ctrls[0];
+                    var ngModelCtrl = ctrls[1];
+                    if (ngModelCtrl) {
+                        // brodcast refreshDatepickers to refresh datepicker
+                        scope.$on('refreshDatepickers', function refreshView(event, args) {
+                            datepickerCtrl.activeDate = args;   // setting date of datepicker
+                            datepickerCtrl.refreshView();
+                        });
+                    }
+                }
+            };
+            return $delegate;
+        }]);
+    });
 
 var constants = {
     googlePlacesApiKey: "AIzaSyC0CVNlXkejEzLzGCMVMj8PZ7gBzj8ewuQ",

@@ -7,7 +7,7 @@
         // Define the functions and properties to reveal.
         var AirportJsonData = [];
         var highRankedAirports = [];
-        var highRankedAirportsCurrency = [];
+        var airportsCurrency = [];
         //var airlinesList = [];
         var LastSearch;
         var service = {
@@ -23,7 +23,7 @@
             GetLowFareForMap: GetLowFareForMap,
             updateQueryStringParameter: updateQueryStringParameter,
             ReadHighRankedAirportsJson: ReadHighRankedAirportsJson,
-            ReadHighRankedAirportsCurrency : ReadHighRankedAirportsCurrency,
+            ReadAirportsCurrency : ReadAirportsCurrency,
             GetAirportCurrency:GetAirportCurrency,
             GetValidDates: GetValidDates
         };
@@ -237,15 +237,15 @@
 
             return obj;
         }
-        function ReadHighRankedAirportsCurrency(url) {
-              if (highRankedAirportsCurrency.length > 0) {
+        function ReadAirportsCurrency(url) {
+              if (airportsCurrency.length > 0) {
                 var d = $q.defer();
-                d.resolve(highRankedAirportsCurrency);
+                d.resolve(airportsCurrency);
                 return d.promise;
             }
             else
-                return getAirportCurrencyJson($rootScope.apiURLForConstant + '/GetHighRankedAirportsCurrency').then(function (data) {                 
-                    highRankedAirportsCurrency = data;
+                return getAirportCurrencyJson($rootScope.apiURLForConstant + '/GetAirportsCurrency').then(function (data) {                 
+                    airportsCurrency = data;
                     return data;
                 });
         }
@@ -260,7 +260,7 @@
         }
 
         function GetAirportCurrency(airportCode) {
-            var cacheResult = _.findWhere(highRankedAirportsCurrency, { aCode: airportCode });
+            var cacheResult = _.findWhere(airportsCurrency, { aCode: airportCode });
             if (cacheResult)
             {
                 return cacheResult.cCode;

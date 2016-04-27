@@ -45,10 +45,10 @@
                                            };
                     
                     var dates = UtilFactory.GetValidDates($scope.FromDate, $scope.ToDate);
-                    $scope.mappromise = UtilFactory.ReadHighRankedAirportsCurrency().then(function (response) {
+                    $scope.mappromise = UtilFactory.ReadAirportsCurrency().then(function (response) {
                     $scope.FromDate = dates.FromDate;
                     $scope.ToDate = dates.ToDate;            
-                    $scope.hotelCurrency=UtilFactory.GetAirportCurrency($scope.DestinationLocation);
+                    $scope.hotelCurrency=UtilFactory.GetAirportCurrency($scope.Origin);
                    
                     $scope.hotelCurrencySymbol = UtilFactory.GetCurrencySymbol($scope.hotelCurrency)
                     $scope.hotelInputData={

@@ -12,8 +12,7 @@
             },
             templateUrl: '/Views/partials/DestinationCard.html',
             controller: ['$scope', '$parse', '$filter', 'UtilFactory', 'InstaFlightSearchFactory', 'DestinationFactory', function ($scope, $parse, $filter, UtilFactory, InstaFlightSearchFactory, DestinationFactory) {
-                $scope.GetCurrencySymbol = GetCurrencySymbol;
-                GetCurrencySymbols();
+                UtilFactory.GetCurrencySymbols();
                 init();
                 function init() {
                     DestinationFactory.clearDestinationData();
@@ -46,16 +45,14 @@
                                 model.assign($scope, true);
                             }
                         });
-                        getDestinationFare(request).then(function (data) {
+                        InstaFlightSearchFactory.GetData(request).then(function (data) {
                             $scope.isDataFound = true;
                             if (data && data.PricedItineraries && data.PricedItineraries.length) {
                                 $scope.destinationData.lowestFare = getLowestFare(data.PricedItineraries[0]);
                                 $scope.destinationData.departureDate = ConvertToRequiredDate(data.DepartureDateTime, 'UI'),
                                 $scope.destinationData.returnDate = ConvertToRequiredDate(data.ReturnDateTime, 'UI'),
-                                $scope.destinationData.lowestFare = getLowestFare(data.PricedItineraries[0]),
                                 $scope.destinationData.currencyCode = getCurrencyCode(data.PricedItineraries[0])
-
-                                $scope.destinationData.currencySymbol = GetCurrencySymbol($scope.destinationData.currencyCode);
+                                $scope.destinationData.currencySymbol = UtilFactory.GetCurrencySymbol($scope.destinationData.currencyCode);
                             }
 
                             DestinationFactory.setDestinationData(
@@ -70,12 +67,6 @@
                     });
                 }
 
-                function getDestinationFare(request) {
-                    return InstaFlightSearchFactory.GetData(request).then(function (data) {
-                        return data;
-                    })
-                }
-
                 function getLowestFare(pricedItinerary) {
                     if (pricedItinerary == undefined)
                         return undefined;
@@ -86,21 +77,10 @@
                     if (pricingInfo && pricingInfo.TotalFare && pricingInfo.TotalFare.CurrencyCode)
                         return pricingInfo.TotalFare.CurrencyCode;
                 }
-
-                function GetCurrencySymbols() {
-                    UtilFactory.GetCurrencySymbols();
-                }
-
-                function GetCurrencySymbol(code) {
-                    return UtilFactory.GetCurrencySymbol(code);
-                }
-
             }],
             link: function (scope, elem, attrs) {
                 scope.amountBifurcation = function (TotalfareAmount) {
-                    var afterDec = (TotalfareAmount + "").split(".")[1];
-                    if (afterDec == undefined)
-                        afterDec = '00';
+                    var afterDec = (TotalfareAmount + "").split(".")[1] || '00';
                     var result = {
                         BeforeDecimal: Math.floor(TotalfareAmount),
                         AfterDecimal: "." + (afterDec.length == 1 ? afterDec + '0' : afterDec)

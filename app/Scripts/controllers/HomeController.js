@@ -4,7 +4,6 @@
     angular.module('TrippismUIApp').controller(controllerId,
          ['$scope',
             '$window',
-            '$timeout',
             'LocalStorageFactory',
             'TrippismConstants',
             '$interval',
@@ -13,7 +12,6 @@
     function HomeController(
        $scope,
        $window,
-       $timeout,
        LocalStorageFactory,
        TrippismConstants,
        $interval,

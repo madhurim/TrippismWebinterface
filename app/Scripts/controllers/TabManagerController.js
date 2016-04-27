@@ -4,28 +4,20 @@
     angular.module('TrippismUIApp').controller(controllerId,
     ['$scope',
         '$location',
-        '$modal',
         '$rootScope',
-        '$timeout',
         '$filter',
-        '$window',
         'DestinationFactory',
         'UtilFactory',
-        'FareforecastFactory',
         'SeasonalityFactory',
         'TrippismConstants',
          TabManagerController]);
     function TabManagerController(
        $scope,
        $location,
-       $modal,
        $rootScope,
-       $timeout,
        $filter,
-       $window,
        DestinationFactory,
        UtilFactory,
-       FareforecastFactory,
        SeasonalityFactory,
        TrippismConstants
        ) {
@@ -85,8 +77,8 @@
                 $location.url($location.$$url, false);
             }
         }
-  
-        
+
+
         $scope.$on('EmptyFareForcastInfo', function (event, args) {
             var createNewTab = true;
             if ($scope.tabManager.tabItems.length != 0) {
@@ -109,7 +101,7 @@
             }
 
             if (createNewTab == true) {
-             //   $scope.IsHistoricalInfo = false;
+                //   $scope.IsHistoricalInfo = false;
                 $scope.MarkerInfo = "";
                 $scope.MarkerSeasonalityInfo = "";
                 $scope.OriginFullName = args.Origin;
@@ -186,7 +178,7 @@
                 TabcontentView: true
             });
             DestinationFactory.ShowDestinationView = false;
-           // $scope.ShowDestinationView = false;
+            // $scope.ShowDestinationView = false;
         });
 
     }

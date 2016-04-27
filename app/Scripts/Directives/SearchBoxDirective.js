@@ -1,14 +1,11 @@
 ﻿angular.module('TrippismUIApp').directive('searchBox', [
             '$location',
-            '$modal',
-            '$rootScope',
             '$timeout',
             '$filter',
-            '$window',
             '$stateParams',
             'UtilFactory',
             'TrippismConstants',
-function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParams, UtilFactory, TrippismConstants) {
+function ($location, $timeout, $filter, $stateParams, UtilFactory, TrippismConstants) {
     return {
         restrict: 'E',
         scope: {

@@ -41,6 +41,7 @@
             var attractionList = [
                 //{ name: 'Attractions', Types: &types=restaurant|cafe, ExcludeTypes: null, Keywords: null, attractionText: 'Attractions', isSetMapCenter: true, markerImage: 'images/mapicon-small.png' },
                 {
+                    rank: 5,
                     name: 'Restaurants',
                     attractionText: 'Food',
                     Types: '&types=restaurant|cafe',
@@ -48,10 +49,11 @@
                     Keywords: null,
                     isSetMapCenter: true,
                     markerImage: 'images/attraction-marker/mapicon-restaurant.png',
-                    isDefault: true,
+                    isDefault: false,
                     htmlClass: 'attr-foods'
                 },
                 {
+                    rank: 6,
                     name: 'beaches',
                     attractionText: 'Beaches',
                     Types: '&keyword=beach',
@@ -63,6 +65,7 @@
                     htmlClass: 'attr-beaches'
                 },
                 {
+                    rank: 7,
                     name: 'casinos',
                     attractionText: 'Casinos',
                     Types: '&types=casino',
@@ -74,6 +77,7 @@
                     htmlClass: 'attr-casinos'
                 },
                 {
+                    rank: 1,
                     name: 'outdoors',
                     attractionText: 'Outdoors',
                     Types: '&types=park|zoo|campground',
@@ -81,10 +85,11 @@
                     Keywords: null,
                     isSetMapCenter: false,
                     markerImage: 'images/attraction-marker/climbing-icon.png',
-                    isDefault: false,
+                    isDefault: true,
                     htmlClass: 'attr-outdoors'
                 },
                 {
+                    rank: 3,
                     name: 'shopping',
                     attractionText: 'Shops and Spas',
                     Types: '&types=spa|shopping_mall',
@@ -96,6 +101,7 @@
                     htmlClass: 'attr-shops'
                 },
                 {
+                    rank: 4,
                     name: 'themeparks',
                     attractionText: 'Theme Parks',
                     Types: '&types=amusement_park',
@@ -107,6 +113,7 @@
                     htmlClass: 'attr-theme-parks'
                 },
                 {
+                    rank: 2,
                     name: 'historical',
                     attractionText: 'History and Culture',
                     Types: '&types=art_gallery|church|mosque|hindu_temple|synagogue|museum',

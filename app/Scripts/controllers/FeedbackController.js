@@ -2,9 +2,9 @@
     'use strict';
     var controllerId = 'FeedbackController';
     angular.module('TrippismUIApp').controller(controllerId,
-       ['$scope', '$filter', '$modal', 'FeedbackFactory', FeedbackController]);
+       ['$scope', 'FeedbackFactory', FeedbackController]);
 
-    function FeedbackController($scope, $filter, $model, FeedbackFactory) {
+    function FeedbackController($scope, FeedbackFactory) {
         $scope.feedbackType = '0';
         $scope.whatBroughtYou = '0';
         $scope.tellFriend = '0';

@@ -1,9 +1,9 @@
 ﻿(function () {
     'use strict';
     var serviceId = 'UtilFactory';
-    angular.module('TrippismUIApp').factory(serviceId, ['$http', '$location', '$anchorScroll', '$rootScope', '$filter', '$q', 'TrippismConstants', UtilFactory]);
+    angular.module('TrippismUIApp').factory(serviceId, ['$http', '$location', '$anchorScroll', '$rootScope', '$q', 'TrippismConstants', UtilFactory]);
 
-    function UtilFactory($http, $location, $anchorScroll, $rootScope, $filter, $q, TrippismConstants) {
+    function UtilFactory($http, $location, $anchorScroll, $rootScope, $q, TrippismConstants) {
         var LastSearch;
         var highRankedAirportsPromise;
         var CurrencySymbolsPromise;

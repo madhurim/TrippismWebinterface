@@ -1,6 +1,6 @@
 ﻿
-angular.module('TrippismUIApp').directive("averageStarRating", ['$timeout',
-    function ($timeout) {
+angular.module('TrippismUIApp').directive("averageStarRating", [
+    function () {
         return {
             restrict: "EAC",
             template: "<div class='average-rating-container'>" +
@@ -31,9 +31,9 @@ angular.module('TrippismUIApp').directive("averageStarRating", ['$timeout',
                     scope.filledInStarsContainerWidth = scope.averageRatingValue / scope.max * starContainerMaxWidth;
                 };
                 scope.$watch("averageRatingValue", function (oldVal, newVal) {
-                    if (newVal) 
+                    if (newVal)
                         updateStars();
-                    
+
                 });
             }
         };

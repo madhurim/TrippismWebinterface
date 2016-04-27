@@ -1,14 +1,10 @@
 ﻿angular.module('TrippismUIApp').directive('googleattractionInfo',
-                                            ['$compile',
-                                                '$q',
-                                                '$rootScope',
+                                            ['$rootScope',
                                                 'GoogleAttractionFactory',
                                                 '$timeout',
-                                                '$modal',
-                                                '$sce',
                                                 '$filter',
                                                 'TrippismConstants',
-    function ($compile, $q, $rootScope, GoogleAttractionFactory, $timeout, $modal, $sce, $filter, TrippismConstants) {
+    function ($rootScope, GoogleAttractionFactory, $timeout, $filter, TrippismConstants) {
         return {
             restrict: 'E',
             scope: { googleattractionParams: '=', isOpen: '=' },

@@ -47,7 +47,6 @@
                     Types: '&types=restaurant|cafe',
                     ExcludeTypes: ["lodging"],
                     Keywords: null,
-                    isSetMapCenter: true,
                     markerImage: 'images/attraction-marker/mapicon-restaurant.png',
                     isDefault: false,
                     htmlClass: 'attr-foods'
@@ -59,7 +58,6 @@
                     Types: '&keyword=beach',
                     ExcludeTypes: ["store"],
                     Keywords: null,
-                    isSetMapCenter: false,
                     markerImage: 'images/attraction-marker/palm-tree-icon.png',
                     isDefault: false,
                     htmlClass: 'attr-beaches'
@@ -71,7 +69,6 @@
                     Types: '&types=casino',
                     ExcludeTypes: ["store"],
                     Keywords: null,
-                    isSetMapCenter: false,
                     markerImage: 'images/attraction-marker/dice-icon.png',
                     isDefault: false,
                     htmlClass: 'attr-casinos'
@@ -83,7 +80,6 @@
                     Types: '&types=park|zoo|campground',
                     ExcludeTypes: ["store"],
                     Keywords: null,
-                    isSetMapCenter: false,
                     markerImage: 'images/attraction-marker/climbing-icon.png',
                     isDefault: true,
                     htmlClass: 'attr-outdoors'
@@ -95,7 +91,6 @@
                     Types: '&types=spa|shopping_mall',
                     ExcludeTypes: null,
                     Keywords: null,
-                    isSetMapCenter: false,
                     markerImage: 'images/attraction-marker/full-icon.png',
                     isDefault: false,
                     htmlClass: 'attr-shops'
@@ -107,7 +102,6 @@
                     Types: '&types=amusement_park',
                     ExcludeTypes: ["store"],
                     Keywords: null,
-                    isSetMapCenter: false,
                     markerImage: 'images/attraction-marker/cruise-icon.png',
                     isDefault: false,
                     htmlClass: 'attr-theme-parks'
@@ -119,7 +113,6 @@
                     Types: '&types=art_gallery|church|mosque|hindu_temple|synagogue|museum',
                     ExcludeTypes: ["store"],
                     Keywords: null,
-                    isSetMapCenter: false,
                     markerImage: 'images/attraction-marker/bank-icon.png',
                     isDefault: false,
                     htmlClass: 'attr-history'

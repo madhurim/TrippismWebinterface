@@ -8,7 +8,7 @@
             '$filter',
             '$stateParams',
             'DestinationFactory',
-            'UtilFactory',            
+            'UtilFactory',
             'TrippismConstants',
             'LocalStorageFactory',
              DestinationsController]);
@@ -19,7 +19,7 @@
         $filter,
         $stateParams,
         DestinationFactory,
-        UtilFactory,        
+        UtilFactory,
         TrippismConstants,
         LocalStorageFactory
         ) {
@@ -296,7 +296,6 @@
                     destinationlistOriginal = $scope.destinationlist;
                     // for displaying default min/max fare values into refine search                    
 
-
                     var minMaxFare = getMinMaxFare($scope.destinationlist);
                     var Maxfare = 0, Minfare = 0;
                     if (minMaxFare.MaxFare && minMaxFare.MaxFare != 0)
@@ -411,12 +410,12 @@
                 "Lengthofstay": $scope.LenghtOfStay,
                 "Earliestdeparturedate": ($scope.Earliestdeparturedate == '' || $scope.Earliestdeparturedate == undefined) ? null : ConvertToRequiredDate($scope.Earliestdeparturedate, 'API'),
                 "Latestdeparturedate": ($scope.Latestdeparturedate == '' || $scope.Latestdeparturedate == undefined) ? null : ConvertToRequiredDate($scope.Latestdeparturedate, 'API'),
-                "Theme": null,//$scope.Theme
+                "Theme": null,
                 "Location": $scope.Location,
-                "Minfare": null,//$scope.Minfare == 0 ? null : $scope.Minfare
-                "Maxfare": null,//$scope.Maxfare == 0 ? null : $scope.Maxfare
+                "Minfare": null,
+                "Maxfare": null,
                 "PointOfSaleCountry": $scope.PointOfsalesCountry,
-                "Region": null,//$scope.Region
+                "Region": null,
                 "Destination": $scope.KnownDestinationAirport
             };
             return data;

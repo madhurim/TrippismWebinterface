@@ -14,7 +14,7 @@
                 <div class="destination-boxwrap-nav-tabs">
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" ng-class="{'active' : selectedform == 'SuggestDestination'}" class="active"><a ng-click="selectedform = 'SuggestDestination'; hasError = false;" aria-controls="suggest-destinations" role="tab" data-toggle="tab">Suggest Destinations</a></li>
+                        <li role="presentation" ng-class="{'active' : selectedform == 'SuggestDestination'}"><a ng-click="selectedform = 'SuggestDestination'; hasError = false;" aria-controls="suggest-destinations" role="tab" data-toggle="tab">Suggest Destinations</a></li>
                         <li role="presentation" ng-class="{'active' : selectedform == 'KnowMyDestination'}"><a ng-click="selectedform = 'KnowMyDestination'; hasError = false" aria-controls="i-know-my-destination" role="tab" data-toggle="tab">I Know My Destination</a></li>
                     </ul>
 
@@ -33,7 +33,7 @@
                                                        required
                                                        typeahead-input-formatter="formatInput($model)"
                                                        typeahead-editable="true"
-                                                       typeahead-on-select="onSelect($item, $model, $label)"
+                                                       typeahead-on-select="onSelect($item)"
                                                        typeahead-template-url="airportDropdownTemplate.html"
                                                        name="Origin"
                                                        tabindex="1"
@@ -60,7 +60,7 @@
                                                        ng-required="selectedform == 'KnowMyDestination'"
                                                        typeahead-input-formatter="formatInput($model)"
                                                        typeahead-editable="true"
-                                                       typeahead-on-select="onKnowDestinationSelect($item, $model, $label)"
+                                                       typeahead-on-select="onKnowDestinationSelect($item)"
                                                        typeahead-template-url="airportDropdownTemplate.html"
                                                        name="KnownDestinationAirport"
                                                        tabindex="2"
@@ -138,9 +138,6 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 text-center" ng-if="selectedform == 'SuggestDestination'">
-                                        <!--ng-click="IscalledFromIknowMyDest= false; GetDestinationClick()"
-                                             ng-disabled="SearchbuttonIsLoading"-->
-
                                         <button type="submit"
                                                 class="btn btn-danger btn-search"
                                                 ng-click="GetDestinationClick('/destinations')"
@@ -149,8 +146,6 @@
                                         </button>
                                     </div>
                                     <div class="col-md-12 text-center" ng-if="selectedform == 'KnowMyDestination'">
-                                        <!--ng-click="GetDestinationClick()"
-                                        ng-disabled="KnowSearchbuttonIsLoading"-->
                                         <button type="submit"
                                                 class="btn btn-danger btn-search"
                                                 ng-click="GetDestinationClick('/destination')"

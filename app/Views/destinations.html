@@ -21,7 +21,7 @@
     <div class="map-box" id="mainmap">
         <div class="" style="height:100%;width:auto;" cg-busy="{promise:mappromise,message:'Please wait...'}">
             <div id="wrapper" cg-busy="{promise:destinationmappromise,message:'Please wait...'}">
-                <div google-map ng-show="isShowSearchIcon || ShowDestinationView" origin="refineSearchValues.OrigintoDisp" airlinejsondata="airlineJsonData" airportlist="AvailableAirports" class="map"></div>   <!--destinations="destinationlist" defaultlat="20" defaultlng="0"-->
+                <div google-map ng-show="isShowSearchIcon || ShowDestinationView" airlinejsondata="airlineJsonData" airportlist="AvailableAirports" class="map"></div>   <!--destinations="destinationlist" defaultlat="20" defaultlng="0"-->
             </div>
         </div>
     </div>

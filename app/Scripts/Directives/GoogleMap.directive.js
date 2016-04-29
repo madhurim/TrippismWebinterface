@@ -7,19 +7,27 @@
               var directive = {};
               directive.templateUrl = '/Views/GoogleMap.html',
               directive.scope = {
-                  origin: "=",
                   airportlist: "=airportlist",
                   airlineJsonData: "=airlinejsondata",
               }
 
-              directive.controller = ['$scope', '$q', '$compile', '$filter', '$http', '$location', 'TrippismConstants',
-                  function ($scope, $q, $compile, $filter, $http, $location, TrippismConstants) {
+              directive.controller = ['$scope', '$q', '$compile', '$location', 'TrippismConstants', '$stateParams',
+                  function ($scope, $q, $compile, $location, TrippismConstants, $stateParams) {
                       $scope.highRankedAirportlist = [];
                       $scope.destinationMap = undefined;
                       $scope.destinationMarkers = [];
                       $scope.bounds;
                       $scope.markerCluster;
                       $scope.clusterFlag = true;    // flag for solving cluster issue if theme/region multiple time clicked                      
+
+                      var params = $stateParams.path.split(";");
+                      for (var i = 0; i < params.length; i++) {
+                          var para = params[i].split("=");
+                          if (para[0].trim() === "f") {
+                              $scope.origin = para[1].trim().toUpperCase();
+                              break;
+                          }
+                      }
 
                       // sets the cluster options
                       var mcOptions = {

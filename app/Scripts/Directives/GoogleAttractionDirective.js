@@ -3,8 +3,9 @@
                                                 'GoogleAttractionFactory',
                                                 '$timeout',
                                                 '$filter',
+                                                '$sce',
                                                 'TrippismConstants',
-    function ($rootScope, GoogleAttractionFactory, $timeout, $filter, TrippismConstants) {
+    function ($rootScope, GoogleAttractionFactory, $timeout, $filter, $sce, TrippismConstants) {
         return {
             restrict: 'E',
             scope: { googleattractionParams: '=', isOpen: '=' },

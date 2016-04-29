@@ -53,15 +53,14 @@
                                 $scope.destinationData.returnDate = ConvertToRequiredDate(data.ReturnDateTime, 'UI'),
                                 $scope.destinationData.currencyCode = getCurrencyCode(data.PricedItineraries[0])
                                 $scope.destinationData.currencySymbol = UtilFactory.GetCurrencySymbol($scope.destinationData.currencyCode);
+                                DestinationFactory.setDestinationData(
+                                   {
+                                       Origin: $scope.origin,
+                                       Destination: $scope.destination,
+                                       DepartureDate: $scope.departureDate,
+                                       ReturnDate: $scope.returnDate
+                                   }, data);
                             }
-
-                            DestinationFactory.setDestinationData(
-                                    {
-                                        Origin: $scope.origin,
-                                        Destination: $scope.destination,
-                                        DepartureDate: $scope.departureDate,
-                                        ReturnDate: $scope.returnDate
-                                    }, data);
                             $scope.url = 'f=' + $scope.destinationData.origin + ';t=' + $scope.destinationData.destination + ';d=' + $scope.departureDate + ';r=' + $scope.returnDate;
                         });
                     });

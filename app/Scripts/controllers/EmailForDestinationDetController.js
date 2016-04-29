@@ -2,18 +2,17 @@
     'use strict';
     var controllerId = 'EmailForDestinationDet';
     angular.module('TrippismUIApp').controller(controllerId,
-        ['$scope', '$filter', '$modal',
-         'EmailForDestinationDetFactory', 'SeasonalityFactory',
-         'FareRangeFactory',
+        ['$scope',
+         'EmailForDestinationDetFactory',
          'eMailData',
-         '$timeout', '$stateParams', '$state',
-         'TrippismConstants', 'UtilFactory', EmailForDestinationDet]);
+         '$stateParams',
+        EmailForDestinationDet]);
 
-    function EmailForDestinationDet($scope, $filter, $modal,
-        EmailForDestinationDetFactory, SeasonalityFactory, FareRangeFactory,
+    function EmailForDestinationDet($scope,
+        EmailForDestinationDetFactory,
         eMailData,
-        $timeout, $stateParams, $state,
-        TrippismConstants, UtilFactory) {
+        $stateParams
+        ) {
         $scope.fromEmail = '';
         $scope.toEmail = '';
         $scope.isValidFromEmail = true;

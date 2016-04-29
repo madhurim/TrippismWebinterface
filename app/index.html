@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>Trippism</title>
     <meta property="fb:page_id" content="1493664570958968" />
     <meta name="p:domain_verify" content="7fde15372ee2a145ec9d36d7ec144c55" />
     <meta name="rating" content="GENERAL" />
@@ -85,15 +84,12 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-5 col-sm-7 col-xs-12">
-                        <!--<div class="col-md-6 col-sm-12 col-xs-12">-->
                         <div class="footer-menu">
                             <ul>
                                 <li><a>Powered By</a></li>
                                 <li><a class="partners-image sabre-img"></a></li>
                                 <li><a class="partners-image google-img"></a></li>
                                 <li><a class="partners-image underground-img"></a></li>
-                                <!--<li> <a class="partners-image triveni-img" href="http://www.trivenitechnologies.com/" target="_blank"></a></li>
-                                <li> <a class="partners-image highchart-img"> </a></li>-->
                             </ul>
                         </div>
                     </div>
@@ -147,9 +143,6 @@
     <script src="bower_components/angular-ui-utils/index.js"></script>
     <script src="bower_components/angular-ui-map/ui-map.js"></script>
     <script src="bower_components/angular-busy/dist/angular-busy.js"></script>
-    <script src="bower_components/highcharts/highcharts.js"></script>
-    <script src="bower_components/highcharts/highcharts-more.js"></script>
-    <script src="bower_components/highcharts/modules/exporting.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-rangeslider/angular.rangeSlider.js"></script>
     <!-- endbower -->
@@ -159,16 +152,14 @@
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
-    <script src="scripts/libs/Loader.js"></script>
     <script src="scripts/libs/alertify.js"></script>
-    <script src="scripts/libs/exporting.js"></script>
     <script src="scripts/libs/underscore.js"></script>
     <script src="scripts/libs/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="scripts/libs/script.js"></script>
     <script src="scripts/libs/Utility.js"></script>
     <script src="scripts/libs/angular-youtube-embed.js"></script>
     <script src="scripts/libs/markerwithlabel.js"></script>
     <script src="scripts/libs/markerclusterer.js"></script>
+    <script src="Scripts/libs/highcharts.js"></script>
 
     <script src="scripts/Factory/DestinationFactory.js"></script>
     <script src="scripts/Factory/FareforecastFactory.js"></script>
@@ -183,14 +174,12 @@
     <script src="scripts/Factory/InstaFlightSearchFactory.js"></script>
     <script src="scripts/Factory/FeedbackFactory.js"></script>
     <script src="scripts/Factory/LocalStorageFactory.js"></script>
-    <script src="scripts/routers/routes.js"></script>
 
     <script src="scripts/Controllers/BaseController.js"></script>
     <script src="scripts/Controllers/HomeController.js"></script>
     <script src="Scripts/Controllers/DestinationController.js"></script>
 
     <script src="scripts/Controllers/DestinationsController.js"></script>
-    <script src="scripts/Controllers/TabManagerController.js"></script>
     <script src="scripts/Controllers/YouTubeController.js"></script>
     <script src="scripts/Controllers/EmailForDestinationDetController.js"></script>
     <script src="scripts/Controllers/InstaFlightSearchController.js"></script>
@@ -200,20 +189,14 @@
     <script src="scripts/Directives/GoogleMap.directive.js"></script>
     <script src="scripts/Directives/SearchBoxDirective.js"></script>
     <script src="scripts/Directives/SeasonalityDirective.js"></script>
-    <!--<script src="scripts/Directives/FareRangeDirective.js"></script>-->
-    <!--<script src="scripts/Directives/WetherApiDirective.js"></script>-->
+
     <script src="scripts/Directives/GoogleAttractionDirective.js"></script>
     <script src="scripts/Directives/YoutubeDirective.js"></script>
-    <script src="scripts/Directives/AverageStarRatingDirective.js"></script>
-
-    <!--<script src="scripts/Directives/AttractionTabDirective.js"></script>-->
 
     <script src="scripts/Directives/DestinationFareForecastDirective.js"></script>
-    <script src="scripts/Directives/TopDestinationsDirective.js"></script>
     <script src="scripts/Directives/AttractionsListDirective.js"></script>
     <script src="scripts/Directives/WeatherDirective.js"></script>
     <script src="scripts/Directives/FarerangeWidgetDirective.js"></script>
-    <!--<script src="scripts/Directives/BackButtonHandlerDirective.js"></script>-->
     <script src="scripts/Directives/ResetDimentionsDirective.js"></script>
     <script src="scripts/Directives/AirportDropdownDirective.js"></script>
     <script src="Scripts/Directives/BreadcrumbDirective.js"></script>

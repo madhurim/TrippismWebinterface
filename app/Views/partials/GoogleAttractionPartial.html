@@ -1,5 +1,5 @@
 ﻿<div class="attr-wrapper" ng-show="DisplayattractionsInfo">
-    <div class="" style="clear:both;" cg-busy="{promise:googleattractionpromise,message:'Loading details'}">
+    <div class="" style="clear:both;" cg-busy="{promise:googleattractionpromise,message:'Getting things to do in '+ googleattractionParams.DestinationairportName.airport_CityName}">
         <div ui-map="googleattractionsMap" id={{gMapId}} ui-options="attractionmapOptions" style="width:100%;min-height:200px;" class="map-canvas"></div>
     </div>
     <attraction-list class="attraction-slide" ng-show="DisplayattractionsInfo" attractiontabindex="googleattractionParams.tabIndex" attractionmap="googleattractionsMap" attractions="attractionsplaces" load-more-attraction-info="loadMoreGoogleAttractionInfo()" load-attraction-info="loadgoogleattractionInfo(type)"></attraction-list>
@@ -11,7 +11,7 @@
             <div ng-show="IsMapPopupLoading" class="sqrloadclass" style="padding-top:10px;padding-bottom:0px;">
             </div>
             <div class="modal-body" style="padding:0px;" ng-show="!IsMapPopupLoading">
-                <div class="col-md-12" ng-class="attractionReviews.length > 0 ? '' : 'padding-0'">
+                <div class="col-md-12">
                     <div ng-class="attractionReviews.length > 0 ? 'col-md-8' : 'col-md-12 padding-0'">
                         <div style="height:400px;overflow:auto;" ng-if="slides.length == 0">
                             <img height="300" width="500" src="../images/noimageavailable.png">
@@ -25,7 +25,7 @@
                                 </slide>
                             </carousel>
                         </div>
-                        <div style="color:black;font-size:14px;min-height:105px;">
+                        <div style="color:black;font-size:14px;min-height:105px;margin-top:5px;">
                             <div class="col-md-12 padleft0"><strong>{{PlaceName }}</strong><br></div>
                             <div style="word-wrap:break-word;" ng-bind-html="Placeaddress"></div>
                             {{PhoneNo}}

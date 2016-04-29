@@ -66,6 +66,7 @@
                     if (newValue != undefined && newValue.Fareforecastdata != undefined)
                         initseasonalityData();
                 });
+                var divID = 'seasonality';
                 function initseasonalityData() {
                     scope.formats = Dateformat();
                     scope.format = scope.formats[5];
@@ -75,8 +76,7 @@
                     scope.DepartDate = $filter('date')(scope.seasonalityParams.Fareforecastdata.DepartureDate, scope.format, null);
                     scope.ReturnDate = $filter('date')(scope.seasonalityParams.Fareforecastdata.ReturnDate, scope.format, null);
                     scope.chartHeight = 200;
-                    scope.divID = "seasonality";
-                    var mapHTML = "<div style='background:white' id='" + scope.divID + "'></div>";
+                    var mapHTML = "<div style='background:white;overflow-x:hidden;' id='" + divID + "'></div>";
                     elem.append($compile(mapHTML)(scope));
                     scope.loadSeasonalityInfo();
                 }
@@ -201,7 +201,7 @@
                             chart: {
                                 height: scope.chartHeight,
                                 type: 'line',
-                                renderTo: scope.divID,
+                                renderTo: divID,
                             },
                             title: {
                                 text: ''

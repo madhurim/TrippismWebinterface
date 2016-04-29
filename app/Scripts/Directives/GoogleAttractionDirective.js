@@ -1,14 +1,11 @@
 ﻿angular.module('TrippismUIApp').directive('googleattractionInfo',
-                                            ['$compile',
-                                                '$q',
-                                                '$rootScope',
+                                            ['$rootScope',
                                                 'GoogleAttractionFactory',
                                                 '$timeout',
-                                                '$modal',
-                                                '$sce',
                                                 '$filter',
+                                                '$sce',
                                                 'TrippismConstants',
-    function ($compile, $q, $rootScope, GoogleAttractionFactory, $timeout, $modal, $sce, $filter, TrippismConstants) {
+    function ($rootScope, GoogleAttractionFactory, $timeout, $filter, $sce, TrippismConstants) {
         return {
             restrict: 'E',
             scope: { googleattractionParams: '=', isOpen: '=' },
@@ -23,8 +20,8 @@
                 });
 
                 $scope.DisplayattractionsInfo = true;
-                $scope.googleMapId = "googleMapId_"; //+$scope.googleattractionParams.tabIndex
-                $scope.gMapId = "gMapId_";// +$scope.googleattractionParams.tabIndex
+                $scope.googleMapId = "googleMapId_";
+                $scope.gMapId = "gMapId_";
                 $scope.RenderMap = RenderMap;
                 $scope.setAirportMarkerOnMap = setAirportMarkerOnMap;
                 $scope.googleattractionsMap = undefined;
@@ -38,9 +35,7 @@
                 $scope.$on('ontabClicked', function (event, args) {
                     if ($scope.MapLoaded) {
                         $timeout(function () {
-                            // if ($scope.InfoWindow) $scope.InfoWindow.close();
                             $scope.FittoScreen();
-                            //$scope.FittoScreen(); // Added due to back button issue
                         }, 100, false);
                     }
                     else {
@@ -164,22 +159,14 @@
                 $scope.GoogleAttractionDisplay = function () {
                     $scope.quantity = 20;
                 };
-                //$scope.$watchGroup(['googleattractionParams', 'isOpen'], function (newValue, oldValue, $scope) {
-                //    if ($scope.googleattractionsMap != undefined) {
-                //        $timeout(function () {
-                //            //$scope.FittoScreen();
-                //        }, 1000, false);
-                //    }
-                //});
 
                 // get attractions from API
                 $scope.loadgoogleattractionInfo = function (type) {
                     $scope.attractionsplaces = [];
                     if ($scope.googleattractionParams != undefined) {
-                        var isSetCenter = true;
                         var data = {
-                            "Latitude": $scope.googleattractionParams.DestinationairportName.airport_Lat,//$scope.googleattractionParams.airport_Lat,
-                            "Longitude": $scope.googleattractionParams.DestinationairportName.airport_Lng, //$scope.googleattractionParams.airport_Lng,
+                            "Latitude": $scope.googleattractionParams.DestinationairportName.airport_Lat,
+                            "Longitude": $scope.googleattractionParams.DestinationairportName.airport_Lng
                         };
 
                         var markerObj = _(markerList).find(function (item) { return item.type == type });
@@ -192,7 +179,7 @@
                             // setting parameters for requested attraction 
                             data.Types = attractionDetail.Types;
                             data.ExcludeTypes = attractionDetail.ExcludeTypes;
-                            isSetCenter = attractionDetail.isSetMapCenter;
+                            var isSetCenter = attractionDetail.isDefault;
                             //$scope.attractionText = attractionDetail.attractionText;
 
                             // setting map option, used into view
@@ -332,7 +319,6 @@
 
                             $scope.bounds.extend(marker.position);
                             var contentString = "";
-                            //$scope.InfoWindow = new google.maps.InfoWindow();
                             var MapDet = maps[x];
                             google.maps.event.addListener(marker, 'click', (function (MapDet) {
                                 return function () {

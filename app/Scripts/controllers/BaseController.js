@@ -2,9 +2,9 @@
     'use strict';
     var controllerId = 'BaseController';
     angular.module('TrippismUIApp').controller(controllerId,
-        ['$scope', '$modal', '$rootScope', '$location', '$anchorScroll', 'UtilFactory', BaseController]);
+        ['$scope', '$modal', '$rootScope', '$location', '$anchorScroll', BaseController]);
 
-    function BaseController($scope, $modal, $rootScope, $location, $anchorScroll, UtilFactory) {
+    function BaseController($scope, $modal, $rootScope, $location, $anchorScroll) {
         if (angular.lowercase($location.host()) == "localhost") {
             //devlopment url
             $rootScope.apiURL = 'http://localhost:14606/api/Sabre/';
@@ -34,21 +34,6 @@
 
         $rootScope.isShowAlerityMessage = true;
 
-        //$scope.ViewDestinations = function () {
-        //    var result = UtilFactory.GetLastSearch()
-        //    //$location.path('destinations/f=' + result.Origin.toUpperCase() + ';d=' + ConvertToRequiredDate(result.FromDate, 'API') + ';r=' + ConvertToRequiredDate(result.ToDate, 'API'));
-
-        //    var finalpath = 'destinations/f=' + result.Origin.toUpperCase() + ';d=' + ConvertToRequiredDate(result.FromDate, 'API') + ';r=' + ConvertToRequiredDate(result.ToDate, 'API');
-        //    if (result.Theme != undefined)
-        //        finalpath += ';th=' + result.Theme;
-        //    if (result.Region != undefined)
-        //        finalpath += ';a=' + result.Region;
-        //    if (result.Minfare != undefined)
-        //        finalpath += ';lf=' + result.Minfare;
-        //    if (result.Maxfare != undefined)
-        //        finalpath += ';hf=' + result.Maxfare;
-        //    $location.path(finalpath);
-        //}
         $scope.getClass = function (path) {
             if ($location.path().substr(0, path.length) == path) {
                 return "active"

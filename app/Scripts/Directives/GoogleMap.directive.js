@@ -7,35 +7,38 @@
               var directive = {};
               directive.templateUrl = '/Views/GoogleMap.html',
               directive.scope = {
-                  origin: "=",
-                  //  destinations: "=destinations",
                   airportlist: "=airportlist",
                   airlineJsonData: "=airlinejsondata",
               }
 
-              directive.controller = ['$scope', '$q', '$compile', '$filter', '$http', '$location', 'TrippismConstants',
-                  function ($scope, $q, $compile, $filter, $http, $location, TrippismConstants) {
+              directive.controller = ['$scope', '$q', '$compile', '$location', 'TrippismConstants', '$stateParams',
+                  function ($scope, $q, $compile, $location, TrippismConstants, $stateParams) {
                       $scope.highRankedAirportlist = [];
                       $scope.destinationMap = undefined;
-                      $scope.faresList = [];
                       $scope.destinationMarkers = [];
                       $scope.bounds;
                       $scope.markerCluster;
-                      $scope.Zoomsize = 8;
                       $scope.clusterFlag = true;    // flag for solving cluster issue if theme/region multiple time clicked                      
-                      var mapStyle = TrippismConstants.destinationSearchMapSyle;
-                      var imageurl = 'http://' + window.document.location.host
+
+                      var params = $stateParams.path.split(";");
+                      for (var i = 0; i < params.length; i++) {
+                          var para = params[i].split("=");
+                          if (para[0].trim() === "f") {
+                              $scope.origin = para[1].trim().toUpperCase();
+                              break;
+                          }
+                      }
 
                       // sets the cluster options
                       var mcOptions = {
                           gridSize: 50,
-                          maxZoom: $scope.Zoomsize,
+                          maxZoom: 8,
                           zoomOnClick: false,
                           minimumClusterSize: 1,
                           setZoomOnClick: 8,
                           styles: [{
                               height: 36,
-                              url: imageurl + '/images/icon-gps40x401.png',
+                              url: 'http://' + window.document.location.host + '/images/icon-gps40x401.png',
                               textColor: "black",
                               textSize: 12,
                               width: 29,
@@ -54,22 +57,12 @@
                               style: google.maps.ZoomControlStyle.LARGE
                           },
                           backgroundColor: "#BCCFDE",
-                          styles: mapStyle,
+                          styles: TrippismConstants.destinationSearchMapSyle,
                           mapTypeId: google.maps.MapTypeId.ROADMAP,
-                          //center: new google.maps.LatLng($scope.defaultlat, $scope.defaultlng)        // commented because we want Origin airport marker as a center of map
                       };
 
                       $scope.destinationpopupClick = function (item) {
-                          //var result = UtilFactory.GetLastSearch();
                           var finalpath = 'destination/f=' + $scope.origin.toUpperCase() + ';t=' + item.CustomMarkerInfo.DestinationLocation + ';d=' + ConvertToRequiredDate(item.CustomMarkerInfo.DepartureDateTime, 'API') + ';r=' + ConvertToRequiredDate(item.CustomMarkerInfo.ReturnDateTime, 'API');
-                          //if (result.Theme != undefined)
-                          //    finalpath += ';th=' + result.Theme;
-                          //if (result.Region != undefined)
-                          //    finalpath += ';a=' + result.Region;
-                          //if (result.Minfare != undefined)
-                          //    finalpath += ';lf=' + result.Minfare;
-                          //if (result.Maxfare != undefined)
-                          //    finalpath += ';hf=' + result.Maxfare;
                           $location.path(finalpath);
                       };
 
@@ -199,9 +192,8 @@
                       }
 
                       $scope.displayDestinations = function (destinations) {
-                          $scope.faresList = [];
-                          $scope.faresList = angular.copy(destinations);
-                          $scope.showPosition(_.uniq($scope.faresList, function (destination) { return destination.DestinationLocation; }))
+                          var faresList = angular.copy(destinations);
+                          $scope.showPosition(_.uniq(faresList, function (destination) { return destination.DestinationLocation; }))
                       }
 
                       var RenderMap = function (maps) {

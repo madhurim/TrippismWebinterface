@@ -290,6 +290,9 @@ function ($location, $timeout, $filter, $stateParams, UtilFactory, TrippismConst
                 $scope.openedFromDate = true;
                 $scope.SetFromDate();
                 document.getElementById('txtFromDate').select();
+
+                if ($scope.isPopup && $scope.FromDate)
+                    $timeout(function () { $scope.$broadcast('refreshDatepickers', new Date($scope.FromDate)); }, 0, false);
             };
 
             $scope.openToDate = function ($event) {

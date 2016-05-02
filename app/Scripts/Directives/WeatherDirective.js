@@ -14,12 +14,11 @@
                     $scope.DepartDate = $filter('date')($scope.weatherParams.Fareforecastdata.DepartureDate, $scope.format, null);
                     $scope.ReturnDate = $filter('date')($scope.weatherParams.Fareforecastdata.ReturnDate, $scope.format, null);
                     $scope.WeatherFor = $scope.weatherParams.DestinationairportName.airport_CityName + "_" + $filter('date')($scope.weatherParams.Fareforecastdata.DepartureDate, $scope.format, null);
-                    $scope.WeatherInfoNoDataFound = true;
                     $scope.getWeatherInformation = function (data) {
                         if ($scope.WeatherInfoLoaded == false) {
                             $scope.WeatherData = angular.copy(WeatherFactory.ResultData($scope.WeatherFor));
                             if ($scope.WeatherData == "" || $scope.WeatherData == undefined) {
-                                $scope.Weatherpromise = WeatherFactory.GetData(data).then(function (data) {
+                                WeatherFactory.GetData(data).then(function (data) {
                                     $scope.WeatherInfoLoaded = false;
                                     if (data == "" || data.status == 404 || data.WeatherChances == undefined || data.WeatherChances.length == 0) {
                                         $scope.WeatherInfoLoaded = false;
@@ -47,7 +46,6 @@
                         $scope.LowTempratureC = "0";
                         $scope.LowTempratureF = "0";
                         $scope.WeatherInfoLoaded = false;
-                        $scope.WeatherInfoNoDataFound = true;
 
                         //New Code
                         if ($scope.weatherParams != undefined) {
@@ -82,12 +80,6 @@
                     }
 
                     $scope.WeatherRangeInfo();
-
-                    function removeElement(element) {
-                        element && element.parentNode && element.parentNode.removeChild(element);
-                    }
-
-
                 }
             }],
             link: function (scope, elem, attrs) {
@@ -106,8 +98,6 @@
 
                         if (scope.WeatherwidgetData != undefined && scope.WeatherwidgetData != "") {
                             scope.$emit('widgetLoaded', { name: "WeatherData", isVisible: scope.WeatherInfoLoaded });
-                            //console.log("weatherwidgetInfo data sent..");
-                            //angular.element("#outerDiv").addClass("outerDiv");
                             scope.WeatherInfoLoaded = true;
                             var participation = _.find(scope.WeatherwidgetData.WeatherChances, function (chances) { return chances.Name == 'Precipitation' });
                             var rain = _.find(scope.WeatherwidgetData.WeatherChances, function (chances) { return chances.Name == 'Rain' });

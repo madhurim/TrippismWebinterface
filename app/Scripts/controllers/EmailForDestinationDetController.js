@@ -17,10 +17,7 @@
         $scope.toEmail = '';
         $scope.isValidFromEmail = true;
         $scope.isValidToEmail = true;
-        $scope.SharedbuttonText = "Share";
-        $scope.Defaultsubject = eMailData.DestinationairportName.airport_CityName;
-        $scope.Subject = "How about a vacation to  " + $scope.Defaultsubject + "?";
-        $scope.emailvalidate = true;
+        $scope.Subject = "How about a vacation to  " + eMailData.DestinationairportName.airport_CityName + "?";
         $scope.eMailData = eMailData;
 
         $scope.submitModal = function () {
@@ -63,11 +60,7 @@
         };
 
         function activate() {
-            $scope.formats = Dateformat();
-            $scope.format = $scope.formats[5];
-            var basicDetinationDetlist = $scope.eMailData.DestinationList;
-
-            var basicDetinationDetlist = _.filter(basicDetinationDetlist, function (item) {
+            var basicDetinationDetlist = _.filter($scope.eMailData.DestinationList, function (item) {
                 return item.LowestNonStopFare && item.LowestNonStopFare.Fare !== 'N/A';
             });
             var basicDetinationDetlist = basicDetinationDetlist.sort(function (a, b) { return (parseFloat(a.LowestNonStopFare.Fare) < parseFloat(b.LowestNonStopFare.Fare)) ? 1 : -1; }).reverse().slice(0, 20);

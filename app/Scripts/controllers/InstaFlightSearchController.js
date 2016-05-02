@@ -18,13 +18,10 @@
                     Destination: $scope.instaFlightSearchData.DestinationaArportName,
                     DepartureDate: departureDate,
                     ReturnDate: returnDate,
-                    //Minfare: $scope.instaFlightSearchData.Minfare,
-                    //Maxfare: $scope.instaFlightSearchData.Maxfare,
                     IncludedCarriers: $scope.instaFlightSearchData.IncludedCarriers,
                     PointOfSaleCountry: $scope.instaFlightSearchData.PointOfSaleCountry,
                     outboundflightstops: $scope.instaFlightSearchData.outboundflightstops,
                     inboundflightstops: $scope.instaFlightSearchData.inboundflightstops,
-                    //LowestFare: instaFlightSearchData.LowestFare
                 };
                 $scope.includedCarriers = $scope.instaFlightSearch.IncludedCarriers;
                 $scope.DepartureDate = $scope.instaFlightSearch.DepartureDate;

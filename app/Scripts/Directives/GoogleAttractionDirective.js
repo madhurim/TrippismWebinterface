@@ -19,9 +19,6 @@
                     }
                 });
 
-                $scope.DisplayattractionsInfo = true;
-                $scope.googleMapId = "googleMapId_";
-                $scope.gMapId = "gMapId_";
                 $scope.RenderMap = RenderMap;
                 $scope.setAirportMarkerOnMap = setAirportMarkerOnMap;
                 $scope.googleattractionsMap = undefined;
@@ -110,11 +107,11 @@
                         }
                     });
 
-                    var mapheight = $('#' + $scope.gMapId).height() - 400;
-                    var mapWidth = $('#' + $scope.gMapId).width() - 600;
+                    var mapheight = $('#gMapId_').height() - 400;
+                    var mapWidth = $('#gMapId_').width() - 600;
 
-                    $("#" + $scope.googleMapId).css('top', '-25px');
-                    $("#" + $scope.googleMapId).css('left', mapWidth / 2);
+                    $("#googleMapId_").css('top', '-25px');
+                    $("#googleMapId_").css('left', mapWidth / 2);
 
                     $scope.IsMarkerSelected = true;
 
@@ -141,7 +138,6 @@
                     styles: mapStyle,
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
-                var mapid = angular.element(document.querySelector('.map-canvas'));
 
                 if ($rootScope.mapHeight == undefined) {
                     $rootScope.mapHeight = $(window).height() - 350;
@@ -155,10 +151,6 @@
                 $timeout(function () {
                     google.maps.event.trigger($scope.googleattractionsMap, 'resize');
                 }, 1000, false);
-
-                $scope.GoogleAttractionDisplay = function () {
-                    $scope.quantity = 20;
-                };
 
                 // get attractions from API
                 $scope.loadgoogleattractionInfo = function (type) {
@@ -180,7 +172,6 @@
                             data.Types = attractionDetail.Types;
                             data.ExcludeTypes = attractionDetail.ExcludeTypes;
                             var isSetCenter = attractionDetail.isDefault;
-                            //$scope.attractionText = attractionDetail.attractionText;
 
                             // setting map option, used into view
                             $scope.attractionmapOptions = {
@@ -203,7 +194,6 @@
                                 RenderMap(data.results, type);
                                 $scope.MapLoaded = true;
                                 $scope.attractionsplaces = { type: type, next_page_token: data.next_page_token, results: data.results };
-                                $scope.quantity = 5;
                             });
                         }
                     }
@@ -229,14 +219,13 @@
                     $scope.IsMarkerSelected = false;
                 };
 
-                $scope.MaxRating = 5;
                 function getRatings(num) {
+                    var MaxRating = 5;
                     var stars = [];
-                    for (var i = 0; i < $scope.MaxRating; i++) {
+                    for (var i = 0; i < MaxRating; i++) {
                         stars.push({});
                     }
-                    var starContainerMaxWidth = 86.3; //% changed from 100 to 86.3 because of star fill problem
-                    var filledInStarsContainerWidth = num / $scope.MaxRating * starContainerMaxWidth;
+                    var filledInStarsContainerWidth = num / MaxRating * 86.3; //% changed from 100 to 86.3 because of star fill problem
 
                     var ratingDiv = "<div class='average-rating-container' title='" + num + "'>";
                     if (stars.length > 0) {
@@ -257,7 +246,6 @@
                 }
 
                 $scope.IsMapPopupLoading = false;
-                $scope.noWrapSlides = false;
 
                 var slides = [];
                 $scope.slides = [];

@@ -10,17 +10,6 @@
         };
         return service;
 
-        function serialize(obj) {
-            var str = [];
-            for (var p in obj)
-                if (obj.hasOwnProperty(p)) {
-                    var propval = encodeURIComponent(obj[p]);
-                    if (propval != "undefined" && propval != "null" && propval != '')
-                        str.push(encodeURIComponent(p) + "=" + propval);
-                }
-            return str.join("&");
-        }
-
         function SendEmail(data) {
             var url = $rootScope.apiURLForFeedback
             return $http({

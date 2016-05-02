@@ -2,9 +2,9 @@
     'use strict';
     var controllerId = 'BaseController';
     angular.module('TrippismUIApp').controller(controllerId,
-        ['$scope', '$modal', '$rootScope', '$location', '$anchorScroll', BaseController]);
+        ['$scope', '$modal', '$rootScope', '$location', BaseController]);
 
-    function BaseController($scope, $modal, $rootScope, $location, $anchorScroll) {
+    function BaseController($scope, $modal, $rootScope, $location) {
         if (angular.lowercase($location.host()) == "localhost") {
             //devlopment url
             $rootScope.apiURL = 'http://localhost:14606/api/Sabre/';
@@ -34,19 +34,6 @@
 
         $rootScope.isShowAlerityMessage = true;
 
-        $scope.getClass = function (path) {
-            if ($location.path().substr(0, path.length) == path) {
-                return "active"
-            } else {
-                return ""
-            }
-        }
-        $scope.GoToTop = function () {
-            var old = $location.hash();
-            $location.hash('top');
-            $anchorScroll();
-            $location.hash(old);
-        }
         $scope.aboutUs = function () {
             var GetFeedbackPopupInstance = $modal.open({
                 templateUrl: '/Views/Partials/AboutUsPartial.html',

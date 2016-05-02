@@ -10,14 +10,11 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory)
         controller: function ($scope) {
             $scope.GetCurrencySymbol = GetCurrencySymbol;
             $scope.initFarerangeSummary = function () {
-                var isVisible = false; // this determines the widget visibility according to different parameters
-                var isVisibilityRecorded = false;
+                var isVisible = false; // this determines the widget visibility according to different parameters                
                 $scope.IsWidgetClosed = true;
                 $scope.formats = Dateformat();
                 $scope.format = $scope.formats[5];
-                $scope.closeWidget = function () {
-                    $scope.IsWidgetClosed = false;
-                }
+
                 $scope.FareRangeWidgetDataFound = false;
 
                 $scope.DepartDate = $filter('date')($scope.widgetParams.Fareforecastdata.DepartureDate, $scope.format, null);
@@ -41,7 +38,6 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory)
                 $scope.fareinfopromise = FareforecastFactory.fareforecast($scope.widgetParams.Fareforecastdata).then(function (data) {
                     $scope.IsRequestCompleted = true;
                     if (data.status == 404 || data.status == 400) {
-                        $scope.FareApiLoaded = true;
                         $scope.FareNoDataFound = true;
                         $scope.$emit('widgetLoaded', { name: "fareforcastinfo", isVisible: false });
                         return;
@@ -49,10 +45,6 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory)
                     $scope.$emit('widgetLoaded', { name: "fareforcastinfo", isVisible: true });
                     $scope.FareNoDataFound = false;
                     $scope.FareforecastData = data;
-                    // Setting up fare data for email
-                    $scope.widgetParams.dataforEmail.FareForecastDataForEmail = {};
-                    $scope.widgetParams.dataforEmail.FareForecastDataForEmail = data;
-
                 });
             }
 
@@ -71,10 +63,8 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory)
                     if ($scope.fareRangeInfoLoaded == false && $scope.fareRangeData == "") {
                         $scope.farerangepromise = FareRangeFactory.fareRange(data).then(function (data) {
                             if (data.status == 404 || data.status == 400) {
-                                $scope.fareRangeInfoNoDataFound = true;
                                 ////No Data Found then return 
                                 $scope.$emit('widgetLoaded', { name: "farerangeInfo", isVisible: false });
-                                //console.log("farerangeInfo data sent..");
                                 return;
                             }
                             var originairport = _.find($scope.widgetParams.AvailableAirports, function (airport) { return airport.airport_Code == $scope.widgetParams.Fareforecastdata.Origin });
@@ -153,8 +143,6 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory)
                                 else if (data.FareData != undefined && data.FareData[0].OriginLocation == undefined) {
                                     $scope.fareRangeData = data;
                                 }
-
-                                //$scope.farerangeParams.FareRangeData = $scope.fareRangeData;
                             }
                             $scope.fareRangeInfoLoaded = true;
                         });
@@ -230,7 +218,6 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory)
             }
 
             function setFareRangeChart() {
-                //var chartRangeObj = getChartRange(scope.FareRangeWidgetData, scope.lowestFareObj.fare);
                 var chartFareObj = {
                     LowestFare: scope.lowestFareObj.fare,
                     MinimumFare: Math.ceil(scope.FareRangeWidgetData.MinimumFare),
@@ -247,7 +234,6 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory)
                     defaultPlotOptions.lineargauge = H.merge(defaultPlotOptions.column, {});
                     H.seriesTypes.lineargauge = H.extendClass(columnType, {
                         type: 'lineargauge',
-                        //inverted: true,
                         setVisible: function () {
                             columnType.prototype.setVisible.apply(this, arguments);
                             if (this.markLine) {
@@ -270,20 +256,6 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory)
                             // Hide column
                             point.graphic.hide();
 
-                            //if (!markLine) {
-                            //    var path = inverted ? ['M', 0, 0, 'L', -5, -5, 'L', 5, -5, 'L', 0, 0, 'L', 0, 0 + xAxis.len] : ['M', 0, 0, 'L', -5, -5, 'L', -5, 5, 'L', 0, 0, 'L', xAxis.len, 0];
-                            //    markLine = this.markLine = chart.renderer.path(path)
-                            //        .attr({
-                            //            'fill': series.color,
-                            //            'stroke': series.color,
-                            //            'stroke-width': 1,
-                            //        }).add();
-                            //}
-                            //markLine[ani]({
-                            //    translateX: inverted ? xAxis.left + yAxis.translate(point.y) : xAxis.left,
-                            //    translateY: inverted ? xAxis.top : yAxis.top + yAxis.len - yAxis.translate(point.y)
-                            //});
-
                             // solve problem of some portion of Low, High text gets hidden due to overflow
                             $timeout(function () {
                                 var container = angular.element('#fareRageChart .highcharts-container');
@@ -295,11 +267,9 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory)
 
                 $('#fareRageChart').highcharts({
                     chart: {
-                        //height: 100,
                         height: 80,
                         type: 'lineargauge',
                         inverted: true,
-                        //marginTop: 30
                         marginTop: 10
                     },
                     title: false,
@@ -318,8 +288,6 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory)
                         tickLength: 1,
                     },
                     yAxis: {
-                        //min: chartRangeObj.from,
-                        //max: chartRangeObj.to,
                         min: 0,
                         max: 100,
                         gridLineWidth: 0,
@@ -327,11 +295,8 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory)
                         tickColor: '#C0C0C0',
                         gridLineColor: '#C0C0C0',
                         gridLineWidth: 1,
-                        //startOnTick: chartFareObj.LowestFare > chartFareObj.MinimumFare,
-                        //endOnTick: chartFareObj.LowestFare < chartFareObj.MaximumFare,
                         startOnTick: true,
                         endOnTick: true,
-                        //tickPositions: [chartFareObj.MinimumFare, chartFareObj.MedianFare, chartFareObj.MaximumFare],
                         tickPositions: [0, 50, 100],
                         title: null,
                         labels: {
@@ -339,13 +304,6 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory)
                             useHTML: true,
                             formatter: function () {
                                 var value = $filter('number')(this.value);
-                                //if (this.value == chartFareObj.MinimumFare)
-                                //    return '<div class="gauge-label">Low<br/>' + value + '</div>';
-                                //else if (this.value == chartFareObj.MedianFare)
-                                //    return '<div class="gauge-label">Median<br/>' + value + '</div>';
-                                //else if (this.value == chartFareObj.MaximumFare)
-                                //    return '<div class="gauge-label">High<br/>' + value + '</div>';
-
                                 if (this.value == 0)
                                     return '<div class="gauge-label">Low<br/>' + scope.FareRangeWidgetData.CurrencyCode + ' ' + chartFareObj.MinimumFare + '</div>';
                                 else if (this.value == 50)
@@ -355,15 +313,11 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory)
                             }
                         },
                         plotBands: [{
-                            //from: chartRangeObj.from,
-                            //to: chartFareObj.MedianFare,
                             from: 0,
                             to: 50,
                             color: '#92d050'
                         },
                         {
-                            //from: chartFareObj.MedianFare + 1,
-                            //to: chartRangeObj.to,
                             from: 50,
                             to: 100,
                             color: '#ffff00'
@@ -385,17 +339,6 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory)
                     }]
                 });
             }
-
-            //function getChartRange(fareRangeObj, lowestFare) {
-            //    var chartRangeObj = { from: fareRangeObj.MinimumFare, to: fareRangeObj.MaximumFare };
-
-            //    if (lowestFare < fareRangeObj.MinimumFare)
-            //        chartRangeObj.from = lowestFare;
-
-            //    if (lowestFare > fareRangeObj.MaximumFare)
-            //        chartRangeObj.to = lowestFare;
-            //    return chartRangeObj;
-            //}
         }
     }
 }]);

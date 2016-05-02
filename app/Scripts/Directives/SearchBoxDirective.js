@@ -26,9 +26,8 @@ function ($location, $timeout, $filter, $stateParams, UtilFactory, TrippismConst
             $scope.format = $scope.formats[5];
             $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
             $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
-            $scope.minTodayDate = new Date();
-            $scope.minFromDate = new Date();
-            $scope.minFromDate = $scope.minFromDate.setDate($scope.minFromDate.getDate() + 1);
+            var minFromDate = new Date();
+            minFromDate = minFromDate.setDate(minFromDate.getDate() + 1);
 
             $scope.dateOptions = {
                 formatYear: 'yy',
@@ -117,7 +116,7 @@ function ($location, $timeout, $filter, $stateParams, UtilFactory, TrippismConst
 
             $scope.formatInput = function ($model) {
                 if ($model == "" || $model == undefined) return '';
-                if (!$scope.AvailableAirports) return '';
+                if (!$scope.AvailableAirports) return $model.toUpperCase();
                 var originairport = _.find($scope.AvailableAirports, function (airport) { return airport.airport_Code == $model.toUpperCase() });
                 if (!originairport) return '';
                 var CountryName = (originairport.airport_CountryName != undefined) ? originairport.airport_CountryName : "";
@@ -388,9 +387,9 @@ function ($location, $timeout, $filter, $stateParams, UtilFactory, TrippismConst
                 /**/
 
                 //SET MINIMUN SELECTED DATE for TODATE
-                $scope.minFromDate = new Date(newValue);
-                $scope.MaximumToDate = addDays($scope.minFromDate, TrippismConstants.MaxLOS);
-                $scope.minFromDate = $scope.minFromDate.setDate($scope.minFromDate.getDate() + 1);
+                minFromDate = new Date(newValue);
+                $scope.MaximumToDate = addDays(minFromDate, TrippismConstants.MaxLOS);
+                minFromDate = minFromDate.setDate(minFromDate.getDate() + 1);
 
                 var maxToDate = new Date($scope.MaximumToDate);
                 maxToDate.setHours(0, 0, 0, 0);
@@ -448,7 +447,7 @@ function ($location, $timeout, $filter, $stateParams, UtilFactory, TrippismConst
                 if (newValue == null)
                     return;
 
-                var minToDt = new Date($scope.minFromDate);
+                var minToDt = new Date(minFromDate);
                 minToDt.setHours(0, 0, 0, 0);
 
                 /* If from date is greater than to date */

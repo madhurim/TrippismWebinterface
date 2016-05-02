@@ -1,9 +1,9 @@
-﻿<div class="attr-wrapper" ng-show="DisplayattractionsInfo">
+﻿<div class="attr-wrapper">
     <div class="" style="clear:both;" cg-busy="{promise:googleattractionpromise,message:'Getting things to do in '+ googleattractionParams.DestinationairportName.airport_CityName}">
-        <div ui-map="googleattractionsMap" id={{gMapId}} ui-options="attractionmapOptions" style="width:100%;min-height:200px;" class="map-canvas"></div>
+        <div ui-map="googleattractionsMap" id="gMapId_" ui-options="attractionmapOptions" style="width:100%;min-height:200px;" class="map-canvas"></div>
     </div>
-    <attraction-list class="attraction-slide" ng-show="DisplayattractionsInfo" attractiontabindex="googleattractionParams.tabIndex" attractionmap="googleattractionsMap" attractions="attractionsplaces" load-more-attraction-info="loadMoreGoogleAttractionInfo()" load-attraction-info="loadgoogleattractionInfo(type)"></attraction-list>
-    <div ng-show="IsMarkerSelected" id={{googleMapId}} class="popupmarker" ng-class="attractionReviews.length > 0 ? 'popupmarker-lg' : 'popupmarker-md'">
+    <attraction-list class="attraction-slide" attractiontabindex="googleattractionParams.tabIndex" attractionmap="googleattractionsMap" attractions="attractionsplaces" load-more-attraction-info="loadMoreGoogleAttractionInfo()" load-attraction-info="loadgoogleattractionInfo(type)"></attraction-list>
+    <div ng-show="IsMarkerSelected" id="googleMapId_" class="popupmarker" ng-class="attractionReviews.length > 0 ? 'popupmarker-lg' : 'popupmarker-md'">
         <div class="modal-content">
             <div class="modal-header head ng-scope" style="padding-bottom: 24px !important;">
                 <button class="close closebutton" style="margin-top:2px !important;" ng-click="cancel()" type="button">×</button>
@@ -17,7 +17,7 @@
                             <img height="300" width="500" src="../images/noimageavailable.png">
                         </div>
                         <div style="height:400px;overflow:auto;" ng-if="slides.length > 0">
-                            <carousel no-wrap="noWrapSlides" class="slidercarsoul">
+                            <carousel no-wrap="false" class="slidercarsoul">
                                 <slide ng-repeat="slide in slides" active="slide.active">
                                     <img ng-src="{{slide.image}}" style="margin:auto;max-width:570px;max-height:400px;display:inline-block;">
                                     <div class="carousel-caption">

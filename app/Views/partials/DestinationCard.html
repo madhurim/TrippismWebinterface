@@ -1,4 +1,4 @@
-﻿<md-card class="mdcard" ng-if="::destinationData">
+﻿<div class="mdcard" ng-if="::destinationData">
     <a ui-sref="destination(::{path:url})">
         <div class="mdtop">
             <h4 class="md-title mdtitle">{{::destinationData.originName}} to {{::destinationData.destinationName}}</h4>
@@ -23,14 +23,15 @@
         </div>
         <div class="mdborder"></div>
         <div class="pull-left">
-            <md-progress-circular md-mode='indeterminate' md-diameter="40px" ng-show="!isDataFound"></md-progress-circular>
+            <span ng-show="!isDataFound" class="glyphicon glyphicon-refresh glyphicon-spin"></span>
             <h3 class="md-display-1 mddisplay1 mdfare" ng-if="destinationData.lowestFare" ng-init="::amount = amountBifurcation(destinationData.lowestFare);">
-                <span class="cursor-help" data-toggle="tooltip" popover="{{::destinationData.currencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{::GetCurrencySymbol(destinationData.currencyCode)}}</span>
+                <span class="cursor-help" data-toggle="tooltip" popover="{{::destinationData.currencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{::destinationData.currencySymbol}}</span>
                 {{amount.BeforeDecimal}}<span class="text-super vertical-top">{{amount.AfterDecimal}}</span>
             </h3>
         </div>
         <div class="pull-right mdlink">
             <a ui-sref="destination(::{path:url})">Explore</a>
         </div>
+        <div class="clear"></div>
     </div>
-</md-card>
+</div>

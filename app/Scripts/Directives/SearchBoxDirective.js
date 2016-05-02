@@ -1,14 +1,11 @@
 ﻿angular.module('TrippismUIApp').directive('searchBox', [
             '$location',
-            '$modal',
-            '$rootScope',
             '$timeout',
             '$filter',
-            '$window',
             '$stateParams',
             'UtilFactory',
             'TrippismConstants',
-function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParams, UtilFactory, TrippismConstants) {
+function ($location, $timeout, $filter, $stateParams, UtilFactory, TrippismConstants) {
     return {
         restrict: 'E',
         scope: {
@@ -46,37 +43,51 @@ function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParam
             function activate() {
                 UtilFactory.ReadAirportJson().then(function (data) {
                     $scope.AvailableAirports = data;
-                    if ($stateParams.path != undefined) {
-                        var params = $stateParams.path.split(";");
-                        angular.forEach(params, function (item) {
-                            var para = item.split("=");
-                            if (para[0].trim() === "f") {
-                                $scope.Origin = para[1].trim().toUpperCase();
-                                $scope.urlParam.Origin = $scope.Origin;
-                            }
-                            if (para[0].trim() === "t") {
-                                $scope.KnownDestinationAirport = para[1].trim().toUpperCase();
-                                $scope.urlParam.KnownDestinationAirport = $scope.KnownDestinationAirport;
-                            }
-                            if (para[0].trim() === "d") {
-                                $scope.FromDate = ConvertToRequiredDate(para[1].trim(), 'UI');
-                            }
-                            if (para[0].trim() === "r") {
-                                $scope.ToDate = ConvertToRequiredDate(para[1].trim(), 'UI');
-                            }
-                        });
-
-                        var dates = UtilFactory.GetValidDates($scope.FromDate, $scope.ToDate);
-                        $scope.FromDate = dates.FromDate;
-                        $scope.ToDate = dates.ToDate;
-
-                        $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
-                        $scope.urlParam.FromDate = $scope.FromDate;
-
-                        $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
-                        $scope.urlParam.ToDate = $scope.ToDate;
-                    }
                 });
+
+                if ($stateParams.path != undefined) {
+                    var params = $stateParams.path.split(";");
+                    angular.forEach(params, function (item) {
+                        var para = item.split("=");
+                        if (para[0].trim() === "f") {
+                            $scope.Origin = para[1].trim().toUpperCase();
+                            $scope.urlParam.Origin = $scope.Origin;
+                        }
+                        if (para[0].trim() === "t") {
+                            $scope.KnownDestinationAirport = para[1].trim().toUpperCase();
+                            $scope.urlParam.KnownDestinationAirport = $scope.KnownDestinationAirport;
+                        }
+                        if (para[0].trim() === "d") {
+                            $scope.FromDate = ConvertToRequiredDate(para[1].trim(), 'UI');
+                        }
+                        if (para[0].trim() === "r") {
+                            $scope.ToDate = ConvertToRequiredDate(para[1].trim(), 'UI');
+                        }
+                    });
+
+                    var dates = UtilFactory.GetValidDates($scope.FromDate, $scope.ToDate);
+                    $scope.FromDate = dates.FromDate;
+                    $scope.ToDate = dates.ToDate;
+
+                    $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
+                    $scope.urlParam.FromDate = $scope.FromDate;
+
+                    $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
+                    $scope.urlParam.ToDate = $scope.ToDate;
+                }
+                else {
+                    var lastSearch = UtilFactory.LastSearch;
+                    if (lastSearch) {
+                        $scope.Origin = lastSearch.origin;
+                        if (lastSearch.destination) {
+                            $scope.KnownDestinationAirport = lastSearch.destination;
+                            $scope.selectedform = "KnowMyDestination";
+                        }
+                        $scope.FromDate = lastSearch.fromDate;
+                        $scope.ToDate = lastSearch.toDate;
+                    }
+                }
+
             }
             activate();
 
@@ -95,12 +106,12 @@ function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParam
 
         },
         link: function ($scope, elem, attrs) {
-            $scope.onSelect = function ($item, $model, $label) {
+            $scope.onSelect = function ($item) {
                 $scope.Origin = $item.airport_Code;
                 $scope.OriginCityName = $item.airport_CityName;
             };
 
-            $scope.onKnowDestinationSelect = function ($item, $model, $label) {
+            $scope.onKnowDestinationSelect = function ($item) {
                 $scope.KnownDestinationAirport = $item.airport_Code;
             };
 
@@ -109,9 +120,7 @@ function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParam
                 if (!$scope.AvailableAirports) return '';
                 var originairport = _.find($scope.AvailableAirports, function (airport) { return airport.airport_Code == $model.toUpperCase() });
                 if (!originairport) return '';
-                //var airportname = (originairport.airport_FullName.toLowerCase().indexOf("airport") > 0) ? originairport.airport_FullName : originairport.airport_FullName + " Airport";
                 var CountryName = (originairport.airport_CountryName != undefined) ? originairport.airport_CountryName : "";
-                //return originairport.airport_Code + ", " + airportname + ", " + originairport.airport_CityName + ", " + CountryName;
                 return originairport.airport_Code + ", " + originairport.airport_CityName + ", " + CountryName;
             }
 
@@ -248,7 +257,7 @@ function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParam
                     if ($scope.selectedform != "KnowMyDestination") {
                         $scope.KnownDestinationAirport = null;
                     }
-                    // clearRefineSearchSelection();
+
                     if ($scope.FromDate && $scope.ToDate)
                         resetDates();
                     updateSearchCriteria();
@@ -505,12 +514,13 @@ function ($location, $modal, $rootScope, $timeout, $filter, $window, $stateParam
             $scope.CallDestiantionsview = function (path, origin, fromDate, toDate, destination) {
                 if ($scope.selectedform == "SuggestDestination") {
                     $location.path(path + '/f=' + origin + ';d=' + ConvertToRequiredDate(fromDate, 'API') + ';r=' + ConvertToRequiredDate(toDate, 'API'));
-                    $scope.isPopup = false;
+                    destination = null;
                 }
                 else {
                     $location.path(path + '/f=' + origin + ';t=' + destination + ';d=' + ConvertToRequiredDate(fromDate, 'API') + ';r=' + ConvertToRequiredDate(toDate, 'API'));
-                    $scope.isPopup = false;
                 }
+                UtilFactory.LastSearch = { origin: origin, fromDate: fromDate, toDate: toDate, destination: destination };
+                $scope.isPopup = false;
             }
         }
     }

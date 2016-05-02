@@ -2,19 +2,14 @@
     <div ng-if="!loadingSeasonality" class="col-md-12">
         <div class="popup-box">
             <div class="popup-header">
-                <!--<h5 class="widget-popup-title">Historical Visitor Traffic detail, {{seasonalityParams.DestinationairportName.airport_CityName}}</h5>-->
                 <h5 class="widget-popup-title">Peak and Off Peak travel periods for {{seasonalityParams.DestinationairportName.airport_CityName}}</h5>
             </div>
             <div class="popup-content">
                 <h6 class="date-title">{{DepartDate}} to {{ReturnDate}}</h6>
-                <!--<p>
-                    Traffic volume booked to the requested destination airport for each of the previous 52 weeks. It’s the booked traffic for each week to each of the other previous 51 weeks, and rated accordingly
-                </p>-->
                 <div class="overview-weather-box">
                     <ul class="gird-line">
                         <li>
                             <div class="overview-weather-content" ng-if="!loadingSeasonality">
-                                <!--<h6> [ {{DepartDate}} To {{ReturnDate}} ]</h6>-->
                                 <ul>
                                     <li>
                                         <img ng-if="SeasonalityWidgetData.NoofIcons == 3" src="/images/User-12.png" alt="" />

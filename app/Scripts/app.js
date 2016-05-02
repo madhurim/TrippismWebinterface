@@ -3,11 +3,9 @@ var TrippismUIApp = angular.module('TrippismUIApp',
   'ui.router',
   'ui.bootstrap',
   'ui.map',
-  'ui.event',
   'cgBusy',
   'ngRoute',
-  'ui-rangeSlider',
-  'ngMaterial'
+  'ui-rangeSlider'
 ]);
 
 TrippismUIApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
@@ -223,11 +221,6 @@ angular.module('ui.bootstrap.datepicker')
         }]);
     });
 
-// removing huge amount of styles binded to <head> section by ngMaterial
-angular.module('ngMaterial')
-      .config(['$provide', function ($provide) {
-          $provide.constant('$MD_THEME_CSS', '/**/');
-      }]);
 
 var constants = {
     googlePlacesApiKey: "AIzaSyC0CVNlXkejEzLzGCMVMj8PZ7gBzj8ewuQ",

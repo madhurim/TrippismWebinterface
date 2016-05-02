@@ -1,9 +1,9 @@
 ﻿(function () {
     'use strict';
     var serviceId = 'UtilFactory';
-    angular.module('TrippismUIApp').factory(serviceId, ['$http', '$location', '$anchorScroll', '$rootScope', '$filter', '$q', 'TrippismConstants', UtilFactory]);
+    angular.module('TrippismUIApp').factory(serviceId, ['$http', '$location', '$anchorScroll', '$rootScope', '$q', 'TrippismConstants', '$sce', UtilFactory]);
 
-    function UtilFactory($http, $location, $anchorScroll, $rootScope, $filter, $q, TrippismConstants) {
+    function UtilFactory($http, $location, $anchorScroll, $rootScope, $q, TrippismConstants, $sce) {
         var LastSearch;
         var highRankedAirportsPromise;
         var CurrencySymbolsPromise;
@@ -16,23 +16,12 @@
             AirportCodeLog: AirportCodeLog,
             currencySymbol: { currencySymbolsList: [], currencySymbolsListCache: [] },
             GetLowFareForMap: GetLowFareForMap,
-            updateQueryStringParameter: updateQueryStringParameter,
             ReadHighRankedAirportsJson: ReadHighRankedAirportsJson,
             GetValidDates: GetValidDates,
             ReadLocationPairJson: ReadLocationPairJson
         };
         return service;
 
-        function updateQueryStringParameter(uri, key, value) {
-            var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
-            var separator = uri.indexOf('?') !== -1 ? "&" : "?";
-            if (uri.match(re)) {
-                return uri.replace(re, '$1' + key + "=" + value + '$2');
-            }
-            else {
-                return uri + separator + key + "=" + value;
-            }
-        }
         function ReadAirportJson(url) {
             if (airportJsonPromise) {
                 return $q.when(airportJsonPromise).then(function (value) {
@@ -40,7 +29,7 @@
                 });
             }
             else
-                return airportJsonPromise = getAirportJson($rootScope.apiURLForConstant + '/GetAirports').then(function (data) {
+                return airportJsonPromise = getAirportJson($rootScope.apiURLForConstant + 'GetAirports').then(function (data) {
                     return data;
                 });
         }
@@ -52,7 +41,7 @@
                 });
             }
             else {
-                return highRankedAirportsPromise = getAirportJson($rootScope.apiURLForConstant + '/GetHighRankedAirports').then(function (data) {
+                return highRankedAirportsPromise = getAirportJson($rootScope.apiURLForConstant + 'GetHighRankedAirports').then(function (data) {
                     return data;
                 });
             }
@@ -124,12 +113,13 @@
         function GetCurrencySymbols() {
             if (CurrencySymbolsPromise)
                 return;
-            CurrencySymbolsPromise = $http.get($rootScope.apiURLForConstant + '/GetCurrencySymbols').then(function (data) {
+            CurrencySymbolsPromise = $http.get($rootScope.apiURLForConstant + 'GetCurrencySymbols').then(function (data) {
                 if (data.status == 200)
                     service.currencySymbol.currencySymbolsList = data.data.Currency;
             });
         }
         function GetCurrencySymbol(currencyCode) {
+            //if (currencyCode == "INR") return $sce.trustAsHtml('<i class="fa fa-inr"></i>');
             var cacheResult = _.findWhere(service.currencySymbol.currencySymbolsListCache, { code: currencyCode });
             if (cacheResult)
                 return cacheResult.symbol;

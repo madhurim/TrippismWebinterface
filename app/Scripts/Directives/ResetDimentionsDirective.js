@@ -1,10 +1,10 @@
-﻿angular.module('TrippismUIApp').directive('resetDimentions', ['$rootScope', '$timeout', function ($rootScope, $timeout) {
+﻿angular.module('TrippismUIApp').directive('resetDimentions', ['$timeout', function ($timeout) {
     return {
         restrict: 'EA',
         controller: function () {
         },
         link: function (scope, elem, attrs) {
-           // console.log("calling reset directive" + new Date());
+            // console.log("calling reset directive" + new Date());
             scope.$on("columnLayoutChanged", function (e, d) {
                 //console.log(d.columnData);
                 //var seasonalityfarerangewidgetInfo = d.columnData.seasonalityfarerangewidgetInfo;

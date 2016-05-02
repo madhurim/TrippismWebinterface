@@ -1,8 +1,8 @@
 ﻿(function () {
     'use strict';
     var controllerId = 'InstaFlightSearchController';
-    angular.module('TrippismUIApp').controller(controllerId, ['$scope', '$filter', '$modal', 'InstaFlightSearchFactory', 'UtilFactory', 'instaFlightSearchData', InstaFlightSearchController]);
-    function InstaFlightSearchController($scope, $filter, $modal, InstaFlightSearchFactory, UtilFactory, instaFlightSearchData) {
+    angular.module('TrippismUIApp').controller(controllerId, ['$scope', '$filter', 'InstaFlightSearchFactory', 'UtilFactory', 'instaFlightSearchData', InstaFlightSearchController]);
+    function InstaFlightSearchController($scope, $filter, InstaFlightSearchFactory, UtilFactory, instaFlightSearchData) {
         $scope.isInstaFlightDataFound = null;
         $scope.instaFlightSearchData = instaFlightSearchData;
         var airportNameCache = [];

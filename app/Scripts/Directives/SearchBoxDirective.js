@@ -117,7 +117,7 @@ function ($location, $timeout, $filter, $stateParams, UtilFactory, TrippismConst
 
             $scope.formatInput = function ($model) {
                 if ($model == "" || $model == undefined) return '';
-                if (!$scope.AvailableAirports) return '';
+                if (!$scope.AvailableAirports) return $model.toUpperCase();
                 var originairport = _.find($scope.AvailableAirports, function (airport) { return airport.airport_Code == $model.toUpperCase() });
                 if (!originairport) return '';
                 var CountryName = (originairport.airport_CountryName != undefined) ? originairport.airport_CountryName : "";
@@ -291,6 +291,9 @@ function ($location, $timeout, $filter, $stateParams, UtilFactory, TrippismConst
                 $scope.openedFromDate = true;
                 $scope.SetFromDate();
                 document.getElementById('txtFromDate').select();
+
+                if ($scope.isPopup && $scope.FromDate)
+                    $timeout(function () { $scope.$broadcast('refreshDatepickers', new Date($scope.FromDate)); }, 0, false);
             };
 
             $scope.openToDate = function ($event) {

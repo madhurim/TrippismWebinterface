@@ -1,25 +1,25 @@
 ﻿<div ng-controller="DestinationController" cg-busy="{promise:mappromise,message:'Please wait...'}">
     <div class="row" title="">
         <div class="tab-content-wp col-xs-12">
-            <destination-fare-forecast fare-params="fareParams"></destination-fare-forecast>
+            <destination-fare-forecast fare-params="params"></destination-fare-forecast>
             <div class=" col-md-9 col-sm-12 col-xs-12">
                 <div class="" reset-dimentions>
                     <div class="row outerDiv" id="outerDiv">
                         <div class="col-md-12 col-sm-12 col-xs-12 column-2">
-                            <farerangewidget-info widget-params="fareParams"></farerangewidget-info>
+                            <farerangewidget-info widget-params="params"></farerangewidget-info>
                         </div>
                         <div class="col-md-12 col-sm-12 col-xs-12 column-1">
-                            <weather-info weather-params="fareParams"></weather-info>
+                            <weather-info weather-params="params"></weather-info>
                         </div>
                     </div>
                 </div>
-                <googleattraction-info googleattraction-params="fareParams" class="hidden-xs googleattraction" style="clear:both;"></googleattraction-info>
+                <googleattraction-info googleattraction-params="params" class="hidden-xs googleattraction" style="clear:both;"></googleattraction-info>
                 <div class="col-md-12 col-sm-12 col-xs-12 lastDiv" id="lastDiv" style="clear:both;">
-                    <seasonality-info seasonality-params="fareParams"></seasonality-info>
+                    <seasonality-info seasonality-params="params"></seasonality-info>
                 </div>
             </div>
             <div class="col-md-3 col-sm-12 col-xs-12 padleft0">
-                <youtube-info youtube-params="fareParams"></youtube-info>
+                <youtube-info youtube-params="params"></youtube-info>
             </div>
         </div>
     </div>

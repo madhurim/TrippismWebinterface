@@ -13,7 +13,7 @@
         <div class="clear"></div>
     </div>
     <div class="row-fluid">
-        <div class="col-md-9">
+        <div class="col-md-6">
             <div class="row">
                 <div class="ibox-box searched search-det">
                     <p>
@@ -33,7 +33,7 @@
                     </h4>
                 </div>
                 <div class="row">
-                    <div class="col-md-4 col-sm-6 col-xs-12 col-fare" ng-if="fareParams.FareInfo.LowestNonStopFare && fareParams.FareInfo.LowestNonStopFare.Fare != 'N/A' && fareParams.FareInfo.LowestNonStopFare.Fare != 0">
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-fare" ng-if="fareParams.FareInfo.LowestNonStopFare && fareParams.FareInfo.LowestNonStopFare.Fare != 'N/A' && fareParams.FareInfo.LowestNonStopFare.Fare != 0">
                         <div class="ibox-box fare-box">
                             <div class="fare-box-inner text-right">
                                 <h4><span class="cursor-help" data-toggle="tooltip" popover="{{fareParams.FareInfo.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(fareParams.FareInfo.CurrencyCode)}}</span> {{fareParams.FareInfo.LowestNonStopFare.Fare | number : 2}}</h4>
@@ -49,7 +49,7 @@
                             <div class="clear"></div>
                         </div>
                     </div>
-                    <div class="col-md-4 col-sm-6 col-xs-12 col-fare" ng-if="(!fareParams.FareInfo.LowestNonStopFare || fareParams.FareInfo.LowestNonStopFare.Fare == 'N/A' || fareParams.FareInfo.LowestNonStopFare.Fare == 0) && fareParams.FareInfo.LowestFare && fareParams.FareInfo.LowestFare.Fare != 'N/A' &&  fareParams.FareInfo.LowestFare.Fare != 0">
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-fare" ng-if="(!fareParams.FareInfo.LowestNonStopFare || fareParams.FareInfo.LowestNonStopFare.Fare == 'N/A' || fareParams.FareInfo.LowestNonStopFare.Fare == 0) && fareParams.FareInfo.LowestFare && fareParams.FareInfo.LowestFare.Fare != 'N/A' &&  fareParams.FareInfo.LowestFare.Fare != 0">
                         <div class="ibox-box fare-box">
 
                             <div class="fare-box-inner text-right">
@@ -94,10 +94,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3 col-sm-12 col-xs-12 col-hotel" ng-if="fareParams">
-            <div class="popup-content">
-                <hotel-range origin="fareParams.SearchCriteria.Origin" destination="fareParams.SearchCriteria.DestinationLocation" departure-date="fareParams.SearchCriteria.FromDate | date:format" return-date="fareParams.SearchCriteria.ToDate | date:format"></hotel-range>
-            </div>
+        <div id="divhotel" class="col-md-3 col-sm-12 col-xs-12 col-hotel" ng-if="fareParams">
+            <hotel-range origin="fareParams.SearchCriteria.Origin" destination="fareParams.SearchCriteria.DestinationLocation" departure-date="fareParams.SearchCriteria.FromDate | date:format" return-date="fareParams.SearchCriteria.ToDate | date:format"></hotel-range>
         </div>
     </div>
 </div>

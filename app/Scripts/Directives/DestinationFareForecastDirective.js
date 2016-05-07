@@ -12,6 +12,10 @@
                 }
                 $scope.formats = Dateformat();
                 $scope.format = $scope.formats[5];
+                $scope.$on('hotelDataFound', function (event, data) {
+                    if (!data)
+                        angular.element('#divhotel').remove();
+                });
             },
             link: function ($scope, elem, attrs) {
                 $scope.$watch('fareParams', function (newValue, oldValue) {

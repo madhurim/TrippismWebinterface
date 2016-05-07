@@ -1269,18 +1269,42 @@ ul .stop-line {
 
 /*#region Hotels*/
 .col-hotel {
-    border: 1px solid #ADAAAA;
     padding: 5px;
     margin-top: 10px;
-    border-radius: 3px;
 }
 
     .col-hotel .popup-content {
         padding: 5px;
     }
 
-.hotel-wrapper img {
-    vertical-align: sub;
+.hotel-wrapper {
+    color: #585858;
+}
+
+    .hotel-wrapper title {
+        white-space: pre-line;
+    }
+
+    .hotel-wrapper img {
+        vertical-align: sub;
+    }
+
+    .hotel-wrapper table {
+        width: 100%;
+        max-width: 330px;
+        margin-top: 3px;
+    }
+
+    .hotel-wrapper th {
+        padding: 3px 1px 3px 1px;
+    }
+
+    .hotel-wrapper .widget-popup-title {
+        color: inherit;
+    }
+
+.hotel-title h6 {
+    font-size: 16px;
 }
 /*#endregion Hotels*/
 

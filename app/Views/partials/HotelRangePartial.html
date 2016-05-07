@@ -1,5 +1,43 @@
-﻿<div class="hotel-wrapper" ng-if="HotelRangeData" cg-busy="{promise:hotelPromise,message:'Getting Hotels...'}">
+﻿<!--<div class="hotel-wrapper" ng-if="HotelRangeData" cg-busy="{promise:hotelPromise,message:'Getting Hotels...'}">
     <div class="col-xs-12 col-sm-3 col-md-12" ng-if='HotelRangeData.ThreeStar && HotelRangeData.ThreeStar.MinimumPriceAvg != 0.0'> <b> 3 <img src="/images/crown.png" width="20" height="18" /> Hotel </b> <br> {{ hotelCurrencySymbol }} {{HotelRangeData.ThreeStar.MinimumPriceAvg | number:2 }} - {{HotelRangeData.ThreeStar.MaximumPriceAvg | number:2 }} </div>
     <div class="col-xs-12 col-sm-3 col-md-12" ng-if='HotelRangeData.FourStar  && HotelRangeData.FourStar.MinimumPriceAvg != 0.0'>  <b> 4 <img src="/images/crown.png" width="20" height="18" /> Hotel </b> <br> {{ hotelCurrencySymbol }}  {{HotelRangeData.FourStar.MinimumPriceAvg | number:2 }} - {{HotelRangeData.FourStar.MaximumPriceAvg | number:2 }} </div>
     <div class="col-xs-12 col-sm-3 col-md-12" ng-if='HotelRangeData.FiveStar  && HotelRangeData.FiveStar.MinimumPriceAvg != 0.0'>  <b> 5 <img src="/images/crown.png" width="20" height="18" /> Hotel  </b> <br> {{ hotelCurrencySymbol }}  {{HotelRangeData.FiveStar.MinimumPriceAvg | number:2 }}  - {{HotelRangeData.FiveStar.MaximumPriceAvg | number:2 }} </div>
+</div>-->
+<div ng-show="!hotelRequestComplete" style="text-align:center">
+    <h4 class="glyphicon glyphicon-refresh glyphicon-spin"></h4>
+    <h5>Bringing latest Hotel prices...</h5>
+    <h4>Working on it</h4>
+</div>
+<div class="hotel-wrapper cursor-help" ng-if="HotelRangeData" cg-busy="{promise:hotelPromise,message:'Getting Hotels...'}" title="The crowns are ratings provided by Northstar Travel Group, a premium Hotel rating system.&#013; Price ranges can vary very quickly, based on hotel availabilities. Hotel Price is 2 adults / night.">
+    <div class="hotel-title">
+        <h6>
+            Average price range of currently available hotels
+        </h6>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Avg Min</th>
+                <th>Avg Max</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-if='HotelRangeData.ThreeStar && HotelRangeData.ThreeStar.MinimumPriceAvg != 0.0'>
+                <td><span data-toggle="tooltip" popover="{{hotelCurrency}}" popover-trigger="mouseenter" popover-placement="top">{{ hotelCurrencySymbol }}</span> {{HotelRangeData.ThreeStar.MinimumPriceAvg | number:0 }}</td>
+                <td><span data-toggle="tooltip" popover="{{hotelCurrency}}" popover-trigger="mouseenter" popover-placement="top">{{ hotelCurrencySymbol }}</span> {{HotelRangeData.ThreeStar.MaximumPriceAvg | number:0 }}</td>
+                <td><b> 3 <img src="/images/crown.png" width="20" height="18" /></b></td>
+            </tr>
+            <tr ng-if='HotelRangeData.FourStar  && HotelRangeData.FourStar.MinimumPriceAvg != 0.0'>
+                <td><span data-toggle="tooltip" popover="{{hotelCurrency}}" popover-trigger="mouseenter" popover-placement="top">{{ hotelCurrencySymbol }}</span> {{HotelRangeData.FourStar.MinimumPriceAvg | number:0 }}</td>
+                <td><span data-toggle="tooltip" popover="{{hotelCurrency}}" popover-trigger="mouseenter" popover-placement="top">{{ hotelCurrencySymbol }}</span> {{HotelRangeData.FourStar.MaximumPriceAvg | number:0 }}</td>
+                <td><b> 4 <img src="/images/crown.png" width="20" height="18" /></b></td>
+            </tr>
+            <tr ng-if='HotelRangeData.FiveStar  && HotelRangeData.FiveStar.MinimumPriceAvg != 0.0'>
+                <td><span data-toggle="tooltip" popover="{{hotelCurrency}}" popover-trigger="mouseenter" popover-placement="top">{{ hotelCurrencySymbol }}</span> {{HotelRangeData.FiveStar.MinimumPriceAvg | number:0 }}</td>
+                <td><span data-toggle="tooltip" popover="{{hotelCurrency}}" popover-trigger="mouseenter" popover-placement="top">{{ hotelCurrencySymbol }}</span> {{HotelRangeData.FiveStar.MaximumPriceAvg | number:0 }}</td>
+                <td><b> 5 <img src="/images/crown.png" width="20" height="18" /></b></td>
+            </tr>
+        </tbody>
+    </table>
 </div>

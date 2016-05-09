@@ -211,6 +211,7 @@
                         $rootScope.$broadcast('setMarkeronMap', {
                             destinationlist: $scope.destinationlist,
                             Region: $scope.Region,
+                            Theme: $scope.Theme,
                             highRankedAirportlist: data
                         });
                     });

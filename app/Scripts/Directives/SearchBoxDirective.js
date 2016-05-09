@@ -26,8 +26,6 @@ function ($location, $timeout, $filter, $stateParams, UtilFactory, TrippismConst
             $scope.format = $scope.formats[5];
             $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
             $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
-            var minFromDate = new Date();
-            minFromDate = minFromDate.setDate(minFromDate.getDate() + 1);
 
             $scope.dateOptions = {
                 formatYear: 'yy',
@@ -105,6 +103,9 @@ function ($location, $timeout, $filter, $stateParams, UtilFactory, TrippismConst
 
         },
         link: function ($scope, elem, attrs) {
+            var minFromDate = new Date();
+            minFromDate = minFromDate.setDate(minFromDate.getDate() + 1);
+
             $scope.onSelect = function ($item) {
                 $scope.Origin = $item.airport_Code;
                 $scope.OriginCityName = $item.airport_CityName;

@@ -58,8 +58,6 @@
                         $scope.fareParams = readyfareParams();
                         return false;
                     }
-
-                    $scope.PointOfsalesCountry = $scope.OriginairportName.airport_CountryCode;
                 }
                 var param = {
                     "Origin": $scope.Origin,
@@ -94,7 +92,7 @@
                             ToDate: $scope.ToDate,
                             Minfare: $scope.Minfare,
                             Maxfare: $scope.Maxfare,
-                            PointOfSaleCountry: $scope.PointOfsalesCountry
+                            PointOfSaleCountry: $scope.OriginairportName.airport_CountryCode
                         },
                         AvailableAirline: $scope.airlineJsonData
                     }

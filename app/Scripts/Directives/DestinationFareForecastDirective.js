@@ -53,6 +53,7 @@
                     $scope.Region = $scope.fareParams.SearchCriteria.Region;
                     $scope.Minfare = $scope.fareParams.SearchCriteria.Minfare;
                     $scope.Maxfare = $scope.fareParams.SearchCriteria.Maxfare;
+                    var PointOfsalesCountry = $scope.fareParams.OriginairportName.airport_CountryCode;
 
                     if ($scope.FareInfo == null) {
                         var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
@@ -67,7 +68,7 @@
                             "Minfare": $scope.Minfare == 0 ? null : $scope.Minfare,
                             "Maxfare": $scope.Maxfare == 0 ? null : $scope.Maxfare,
                             "Destination": $scope.DestinationLocation,
-                            "PointOfSaleCountry": $scope.PointOfsalesCountry
+                            "PointOfSaleCountry": PointOfsalesCountry
                         }
                         DestinationFactory.findInstFlightDestination(apiparam).then(function (response) {
                             if (response.FareInfo != null) {

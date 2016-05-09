@@ -17,6 +17,7 @@
             $rootScope.apiURLForFeedback = 'http://localhost:14606/api/Email/SendFeedback';
             $rootScope.apiURLForInstaFlightSearch = 'http://localhost:14606/api/instaflight';
             $rootScope.apiURLForConstant = 'http://localhost:14606/api/Constants/';
+            $rootScope.apiURLForHotelRange = 'http://localhost:14606/api/sabre/hotels';
         }
         else {
             //live url
@@ -30,6 +31,7 @@
             $rootScope.apiURLForFeedback = 'http://' + $location.host() + '/api/Email/SendFeedback';
             $rootScope.apiURLForInstaFlightSearch = 'http://' + $location.host() + '/api/instaflight';
             $rootScope.apiURLForConstant = 'http://' + $location.host() + '/api/Constants/';
+            $rootScope.apiURLForHotelRange = 'http://' + $location.host() + '/api/sabre/hotels';
         }
 
         $rootScope.isShowAlerityMessage = true;

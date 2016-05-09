@@ -5,7 +5,6 @@ html, body, #map_canvas {
 }
 
 body {
-    /*font-family: 'Conv_gotham-book';*/
     font-family: "Roboto",sans-serif;
     background-color: transparent;
     overflow-x: hidden;

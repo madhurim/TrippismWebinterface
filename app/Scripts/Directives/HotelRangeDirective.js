@@ -23,7 +23,7 @@
                         "EndDate": $scope.returnDate,
                         "CurrencyCode": $scope.hotelCurrency
                     }
-                    $scope.hotelPromise = HotelRangeFactory.GetHotelRange($scope.hotelInputData).then(function (data) {
+                    HotelRangeFactory.GetHotelRange($scope.hotelInputData).then(function (data) {
                         $scope.hotelRequestComplete = true;
                         if (data != null && data.status == 200) {
                             $scope.HotelRangeData = data.data;

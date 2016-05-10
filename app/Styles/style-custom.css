@@ -1341,19 +1341,9 @@ ul .stop-line {
 .hotel-wrapper {
     color: #585858;
 }
-
+    /* formating tooltip */
     .hotel-wrapper title {
         white-space: pre-line;
-    }
-
-    .hotel-wrapper img {
-        vertical-align: sub;
-    }
-
-    .hotel-wrapper table {
-        width: 100%;
-        max-width: 330px;
-        margin-top: 3px;
     }
 
     .hotel-wrapper th {
@@ -1367,6 +1357,24 @@ ul .stop-line {
 .hotel-title h6 {
     font-size: 16px;
 }
+
+.hotel-wrapper img {
+    vertical-align: sub;
+}
+
+.hotel-wrapper table {
+    width: 100%;
+    max-width: 330px;
+    margin-top: 3px;
+}
+
+    .hotel-wrapper table thead {
+        text-decoration: underline;
+    }
+
+    .hotel-wrapper table tbody {
+        font-weight: 500;
+    }
 /*#endregion Hotels*/
 
 /*#region Media queries */

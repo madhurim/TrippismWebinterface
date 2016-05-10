@@ -52,136 +52,128 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory)
                 $scope.fareRangeInfoLoaded = false;
                 $scope.FareRangeWidgetDataFound = false;
                 if ($scope.widgetParams != undefined) {
-                    $scope.fareRangeData = "";
+                    $scope.fareRangeData;
                     var data = {
                         "Origin": $scope.widgetParams.Fareforecastdata.Origin.toUpperCase(),
                         "Destination": $scope.widgetParams.Fareforecastdata.Destination,
                         "EarliestDepartureDate": $scope.widgetParams.Fareforecastdata.DepartureDate,
                         "LatestDepartureDate": $scope.LatestDepartureDate,
-                        "Lengthofstay": $scope.staydaylength  //TrippismConstants.DefaultLenghtOfStay
+                        "Lengthofstay": $scope.staydaylength
                     };
-                    if ($scope.fareRangeInfoLoaded == false && $scope.fareRangeData == "") {
-                        $scope.farerangepromise = FareRangeFactory.fareRange(data).then(function (data) {
-                            if (data.status == 404 || data.status == 400) {
-                                ////No Data Found then return 
-                                $scope.$emit('widgetLoaded', { name: "farerangeInfo", isVisible: false });
-                                return;
+                    $scope.farerangepromise = FareRangeFactory.fareRange(data).then(function (data) {
+                        if (data.status == 404 || data.status == 400) {
+                            ////No Data Found then return                            
+                            $scope.$emit('widgetLoaded', { name: "farerangeInfo", isVisible: false });
+                            return;
+                        }
+                        var originairport = _.find($scope.widgetParams.AvailableAirports, function (airport) { return airport.airport_Code == $scope.widgetParams.Fareforecastdata.Origin });
+                        var destinationairport = _.find($scope.widgetParams.AvailableAirports, function (airport) { return airport.airport_Code == $scope.widgetParams.Fareforecastdata.Destination });
+
+                        // Done this code where citycode and airport code is same
+                        var originList = _.where($scope.widgetParams.AvailableAirports, { airport_CityCode: $scope.widgetParams.Fareforecastdata.Origin });
+                        var originairportObj = _.find(originList, function (airport) { return airport.airport_IsMAC == true });
+                        if (originairportObj != undefined) originairport.airport_IsMAC = true;
+                        else originairport.airport_IsMAC = false;
+
+                        var desList = _.where($scope.widgetParams.AvailableAirports, { airport_CityCode: $scope.widgetParams.Fareforecastdata.Destination });
+                        var destinationairportObj = _.find(desList, function (airport) { return airport.airport_IsMAC == true });
+                        if (destinationairportObj != undefined) destinationairport.airport_IsMAC = true;
+                        else destinationairport.airport_IsMAC = false;
+
+                        if (originairport != undefined && destinationairport != undefined) {
+                            // If both airports are not MAC
+                            if (!originairport.airport_IsMAC && !destinationairport.airport_IsMAC) {
+                                $scope.IsMacOrigin = false;
+                                data.IsMacOrigin = false
+                                $scope.fareRangeData = data;
                             }
-                            var originairport = _.find($scope.widgetParams.AvailableAirports, function (airport) { return airport.airport_Code == $scope.widgetParams.Fareforecastdata.Origin });
-                            var destinationairport = _.find($scope.widgetParams.AvailableAirports, function (airport) { return airport.airport_Code == $scope.widgetParams.Fareforecastdata.Destination });
+                                // If Origin airport is MAC and Destination is not
+                            else if ((originairport.airport_IsMAC && !destinationairport.airport_IsMAC) || (originairport.airport_IsMAC && destinationairport.airport_IsMAC)) {
+                                $scope.IsMacOrigin = true;
+                                var origins = _.groupBy(data.FareData, 'OriginLocation');
+                                if (origins != undefined) {
+                                    var MinimumLocation = [];
+                                    _.each(origins, function (org) {
+                                        MinimumLocation.push(_.min(org, function (loc) { return loc.MinimumFare; }));
+                                    });
+                                    var MinSelectedLocation = _.min(MinimumLocation, function (loc) { return loc.MinimumFare; });
 
-                            // Done this code where citycode and airport code is same
-                            var originList = _.where($scope.widgetParams.AvailableAirports, { airport_CityCode: $scope.widgetParams.Fareforecastdata.Origin });
-                            var originairportObj = _.find(originList, function (airport) { return airport.airport_IsMAC == true });
-                            if (originairportObj != undefined) originairport.airport_IsMAC = true;
-                            else originairport.airport_IsMAC = false;
+                                    var locationairport = _.find($scope.widgetParams.AvailableAirports, function (airport) { return airport.airport_Code == MinSelectedLocation.OriginLocation.toUpperCase() });
+                                    if (locationairport != undefined)
+                                        $scope.SelectedLocation = MinSelectedLocation.OriginLocation + ', ' + locationairport.airport_FullName + ", " + locationairport.airport_CityName;
 
-                            var desList = _.where($scope.widgetParams.AvailableAirports, { airport_CityCode: $scope.widgetParams.Fareforecastdata.Destination });
-                            var destinationairportObj = _.find(desList, function (airport) { return airport.airport_IsMAC == true });
-                            if (destinationairportObj != undefined) destinationairport.airport_IsMAC = true;
-                            else destinationairport.airport_IsMAC = false;
-
-                            if (originairport != undefined && destinationairport != undefined) {
-                                // If both airports are not MAC
-                                if (!originairport.airport_IsMAC && !destinationairport.airport_IsMAC) {
-                                    $scope.IsMacOrigin = false;
-                                    data.IsMacOrigin = false
-                                    $scope.fareRangeData = data;
-                                }
-                                    // If Origin airport is MAC and Destination is not
-                                else if ((originairport.airport_IsMAC && !destinationairport.airport_IsMAC) || (originairport.airport_IsMAC && destinationairport.airport_IsMAC)) {
-                                    $scope.IsMacOrigin = true;
-                                    var origins = _.groupBy(data.FareData, 'OriginLocation');
-                                    if (origins != undefined) {
-                                        var MinimumLocation = [];
-                                        _.each(origins, function (org) {
-                                            MinimumLocation.push(_.min(org, function (loc) { return loc.MinimumFare; }));
-                                        });
-                                        var MinSelectedLocation = _.min(MinimumLocation, function (loc) { return loc.MinimumFare; });
-
-                                        var locationairport = _.find($scope.widgetParams.AvailableAirports, function (airport) { return airport.airport_Code == MinSelectedLocation.OriginLocation.toUpperCase() });
-                                        if (locationairport != undefined)
-                                            $scope.SelectedLocation = MinSelectedLocation.OriginLocation + ', ' + locationairport.airport_FullName + ", " + locationairport.airport_CityName;
-
-                                        var faredata = {
-                                            DestinationLocation: MinSelectedLocation.DestinationLocation,
-                                            OriginLocation: MinSelectedLocation.OriginLocation,
-                                            IsMacOrigin: true,
-                                            SelectedLocation: $scope.SelectedLocation,
-                                            FareData: origins[MinSelectedLocation.OriginLocation]
-                                        };
-                                        $scope.fareRangeData = faredata;
-                                    }
-                                }
-                                    // If Destination airport is MAC and Origin  is not
-                                else if (!originairport.airport_IsMAC && destinationairport.airport_IsMAC) {
-                                    $scope.IsMacDestination = true;
-                                    var destinations = _.groupBy(data.FareData, 'DestinationLocation');
-                                    if (destinations != undefined) {
-                                        var MinimumLocation = [];
-                                        _.each(destinations, function (org) {
-                                            MinimumLocation.push(_.min(org, function (loc) { return loc.MinimumFare; }));
-                                        });
-                                        var MinSelectedLocation = _.min(MinimumLocation, function (loc) { return loc.MinimumFare; });
-
-                                        var locationairport = _.find($scope.widgetParams.AvailableAirports, function (airport) { return airport.airport_Code == MinSelectedLocation.DestinationLocation.toUpperCase() });
-                                        if (locationairport != undefined)
-                                            $scope.SelectedDestinationLocation = MinSelectedLocation.DestinationLocation + ', ' + locationairport.airport_FullName + ", " + locationairport.airport_CityName;
-
-                                        var faredata = {
-                                            DestinationLocation: MinSelectedLocation.DestinationLocation,
-                                            OriginLocation: MinSelectedLocation.OriginLocation,
-                                            IsMacOrigin: false,
-                                            IsMacDestination: true,
-                                            SelectedLocation: '',
-                                            SelectedDestinationLocation: $scope.SelectedDestinationLocation,
-                                            FareData: destinations[MinSelectedLocation.DestinationLocation]
-                                        };
-                                        $scope.fareRangeData = faredata;
-                                    }
-                                }
-                                else if (data.FareData != undefined && data.FareData[0].OriginLocation == undefined) {
-                                    $scope.fareRangeData = data;
+                                    var faredata = {
+                                        DestinationLocation: MinSelectedLocation.DestinationLocation,
+                                        OriginLocation: MinSelectedLocation.OriginLocation,
+                                        IsMacOrigin: true,
+                                        SelectedLocation: $scope.SelectedLocation,
+                                        FareData: origins[MinSelectedLocation.OriginLocation]
+                                    };
+                                    $scope.fareRangeData = faredata;
                                 }
                             }
-                            $scope.fareRangeInfoLoaded = true;
-                        });
+                                // If Destination airport is MAC and Origin  is not
+                            else if (!originairport.airport_IsMAC && destinationairport.airport_IsMAC) {
+                                $scope.IsMacDestination = true;
+                                var destinations = _.groupBy(data.FareData, 'DestinationLocation');
+                                if (destinations != undefined) {
+                                    var MinimumLocation = [];
+                                    _.each(destinations, function (org) {
+                                        MinimumLocation.push(_.min(org, function (loc) { return loc.MinimumFare; }));
+                                    });
+                                    var MinSelectedLocation = _.min(MinimumLocation, function (loc) { return loc.MinimumFare; });
 
-                    }
+                                    var locationairport = _.find($scope.widgetParams.AvailableAirports, function (airport) { return airport.airport_Code == MinSelectedLocation.DestinationLocation.toUpperCase() });
+                                    if (locationairport != undefined)
+                                        $scope.SelectedDestinationLocation = MinSelectedLocation.DestinationLocation + ', ' + locationairport.airport_FullName + ", " + locationairport.airport_CityName;
+
+                                    var faredata = {
+                                        DestinationLocation: MinSelectedLocation.DestinationLocation,
+                                        OriginLocation: MinSelectedLocation.OriginLocation,
+                                        IsMacOrigin: false,
+                                        IsMacDestination: true,
+                                        SelectedLocation: '',
+                                        SelectedDestinationLocation: $scope.SelectedDestinationLocation,
+                                        FareData: destinations[MinSelectedLocation.DestinationLocation]
+                                    };
+                                    $scope.fareRangeData = faredata;
+                                }
+                            }
+                            else if (data.FareData != undefined && data.FareData[0].OriginLocation == undefined) {
+                                $scope.fareRangeData = data;
+                            }
+                        }
+                        $scope.fareRangeInfoLoaded = true;
+                    });
                 }
-                $scope.LoadLowestFareInfo($scope.widgetParams.FareInfo);
             }
 
             function GetCurrencySymbol(code) {
                 return UtilFactory.GetCurrencySymbol(code);
             }
-
-            $scope.LoadLowestFareInfo = function (fareInfo) {
-                if (!fareInfo) return;
-                if (fareInfo.LowestFare && !isNaN(fareInfo.LowestFare.Fare))
-                    $scope.lowestFareObj = { fare: fareInfo.LowestFare.Fare, currencySymbol: GetCurrencySymbol(fareInfo.CurrencyCode) };
-                else if (fareInfo.LowestFare && !isNaN(fareInfo.LowestNonStopFare.Fare))
-                    $scope.lowestFareObj = { fare: fareInfo.LowestNonStopFare.Fare, currencySymbol: GetCurrencySymbol(fareInfo.CurrencyCode) };
-            }
         },
         link: function (scope, elem, attrs) {
+            scope.$on('destinationFareInfo', function (event, data) {
+                scope.lowestFareObj = data;
+            });
 
             scope.$watch('widgetParams', function (newValue, oldValue) {
                 if (newValue != undefined) {
-                    if (!newValue.FareInfo) {
-                        scope.$emit('widgetLoaded', { name: "fareforcastinfo", isVisible: false });
-                        scope.$emit('widgetLoaded', { name: "farerangeInfo", isVisible: false });
-                        return;
-                    }
                     scope.initFarerangeSummary();
                 }
             });
 
-            scope.$watch('fareRangeData', function (newValue, oldValue) {
-                if (newValue != oldValue && newValue != "" && newValue != undefined) {
+            scope.$watchGroup(['fareRangeData', 'lowestFareObj'], function (newValue, oldValue) {
+                if (newValue[0] != undefined && newValue[1] != undefined) {
+                    if (!isNaN(newValue[1].LowestFare.Fare))
+                        scope.isFareFound = true;
+                    else if (!isNaN(newValue[1].LowestNonStopFare.Fare))
+                        scope.isFareFound = true;
+
                     PreparHtmldata();
                 }
             })
+
             function PreparHtmldata() {
                 if (scope.fareRangeData != undefined && scope.fareRangeData != "") {
                     // replace(/-/g, "/") used because of safari date convert problem
@@ -191,7 +183,7 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory)
                         var WeekStartDate = new Date(scope.fareRangeData.FareData[i].DepartureDateTime.split('T')[0].replace(/-/g, "/"));
                         if (WeekStartDate >= FrmDate && WeekStartDate <= Todate) {
 
-                            if (!scope.lowestFareObj || (scope.fareRangeData.FareData[i].MinimumFare == scope.fareRangeData.FareData[i].MedianFare && scope.fareRangeData.FareData[i].MinimumFare == scope.fareRangeData.FareData[i].MaximumFare))
+                            if (!scope.isFareFound || (scope.fareRangeData.FareData[i].MinimumFare == scope.fareRangeData.FareData[i].MedianFare && scope.fareRangeData.FareData[i].MinimumFare == scope.fareRangeData.FareData[i].MaximumFare))
                                 break;
 
                             scope.FareRangeWidgetData = {
@@ -219,7 +211,6 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory)
 
             function setFareRangeChart() {
                 var chartFareObj = {
-                    LowestFare: scope.lowestFareObj.fare,
                     MinimumFare: Math.ceil(scope.FareRangeWidgetData.MinimumFare),
                     MedianFare: Math.ceil(scope.FareRangeWidgetData.MedianFare),
                     MaximumFare: Math.ceil(scope.FareRangeWidgetData.MaximumFare)
@@ -327,15 +318,10 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory)
                         enabled: false
                     },
                     series: [{
-                        data: [chartFareObj.LowestFare],
-                        color: '#000000',
+                        data: [0],
                         dataLabels: {
                             enabled: false,
-                            align: 'center',
-                            formatter: function () { return $filter('number')(this.y); },
-                            y: 20,
-                        },
-                        name: 'Current Lowest'
+                        }
                     }]
                 });
             }

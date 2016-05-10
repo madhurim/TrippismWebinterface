@@ -120,6 +120,9 @@
                         $scope.$broadcast("columnLayoutChanged", { columnData: columnData });
                     }
                 });
+                $scope.$on('destinationFare', function (event, data) {
+                    $scope.$broadcast('destinationFareInfo', data);
+                });
             });
         }
         $scope.PageName = "Destination Page";

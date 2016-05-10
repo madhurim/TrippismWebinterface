@@ -84,6 +84,7 @@
                                     $scope.fareParams.FareInfo = $scope.FareInfo;
                                     $scope.fareCurrencySymbol = $scope.GetCurrencySymbol($scope.fareParams.FareInfo.CurrencyCode);
                                     UtilFactory.MapscrollTo('wrapper');
+                                    $scope.$emit('destinationFare', $scope.FareInfo);
                                 }
                                 else {
                                     $scope.airlineJsonData = [];

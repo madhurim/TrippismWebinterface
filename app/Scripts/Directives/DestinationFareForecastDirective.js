@@ -1,5 +1,5 @@
-﻿angular.module('TrippismUIApp').directive('destinationFareForecast', ['$rootScope', '$compile', '$modal', 'DestinationFactory', 'UtilFactory', '$stateParams', '$state',
-    function ($rootScope, $compile, $modal, DestinationFactory, UtilFactory, $stateParams, $state) {
+﻿angular.module('TrippismUIApp').directive('destinationFareForecast', ['$rootScope', '$compile', '$modal', 'DestinationFactory', 'UtilFactory', '$stateParams', '$state', '$timeout',
+    function ($rootScope, $compile, $modal, DestinationFactory, UtilFactory, $stateParams, $state, $timeout) {
         return {
             restrict: 'E',
             scope: {
@@ -119,6 +119,7 @@
                         $scope.airlineJsonData = [];
                         $scope.fareParams.FareInfo = $scope.FareInfo;
                         $scope.fareCurrencySymbol = $scope.GetCurrencySymbol($scope.fareParams.FareInfo.CurrencyCode);
+                        $timeout(function () { $scope.$emit('destinationFare', $scope.FareInfo) }, 0, false);
                     }
                     $scope.airportDetail = $scope.fareParams.DestinationairportName.airport_FullName + ', ' + $scope.fareParams.DestinationairportName.airport_CityName + ', ' + $scope.fareParams.DestinationairportName.airport_CountryName;
                 };

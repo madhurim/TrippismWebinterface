@@ -60,6 +60,7 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory)
                         "LatestDepartureDate": $scope.LatestDepartureDate,
                         "Lengthofstay": $scope.staydaylength
                     };
+                    
                     $scope.farerangepromise = FareRangeFactory.fareRange(data).then(function (data) {
                         if (data.status == 404 || data.status == 400) {
                             ////No Data Found then return                            

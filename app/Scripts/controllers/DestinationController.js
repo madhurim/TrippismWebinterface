@@ -98,28 +98,14 @@
                     }
                 }
 
-                var WeatherData, farerangeInfo, fareforcastinfo;
-
                 $scope.$on('widgetLoaded', function (event, data) {
-                    if (data.name === 'WeatherData') {
-                        WeatherData = data;
-                    }
-                    else if (data.name === 'farerangeInfo') {
-                        farerangeInfo = data;
-                    }
-                    else if (data.name === 'fareforcastinfo') {
-                        fareforcastinfo = data;
-                    }
-
-                    if (farerangeInfo && WeatherData && fareforcastinfo) {
-                        var columnData = {
-                            farerangeInfo: farerangeInfo,
-                            fareforcastinfo: fareforcastinfo,
-                            WeatherData: WeatherData
-                        };
-                        $scope.$broadcast("columnLayoutChanged", { columnData: columnData });
-                    }
+                    if (data.isVisible)
+                        $scope.$broadcast("columnLayoutChanged", data.name);
                 });
+
+                // broadcast from destiantionFareForecast.
+                // broadcast to farerangeWidget.
+                // we are not displaying farerangeWidget if no destination fare found.
                 $scope.$on('destinationFare', function (event, data) {
                     $scope.$broadcast('destinationFareInfo', data);
                 });

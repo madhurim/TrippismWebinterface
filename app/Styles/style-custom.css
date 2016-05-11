@@ -924,6 +924,10 @@ ul .stop-line {
     vertical-align: top;
 }
 
+    .fare-box-inner p {
+        font-size: 15px;
+    }
+
 .fare-rec span {
     vertical-align: -webkit-baseline-middle;
 }
@@ -1368,15 +1372,57 @@ ul .stop-line {
     margin-top: 3px;
 }
 
-    .hotel-wrapper table thead {
-        text-decoration: underline;
-    }
-
     .hotel-wrapper table tbody {
         font-weight: 500;
+        font-size: 17px;
     }
 /*#endregion Hotels*/
+.col-dest-title {
+    /*color: #585858;*/
+    color: #b90005;
+}
 
+.col-fare-title.col-dest-title {
+    margin-left: 10px;
+}
+
+.col-hotel-title.col-dest-title {
+    padding-left: 0px;
+}
+
+.col-dest-title i {
+    margin-right: 5px;
+}
+
+.avg-high, .avg-low {
+    font-size: 15px;
+}
+
+    .avg-high h5, .avg-low h5 {
+        font-size: 22px;
+    }
+
+        .avg-high h5 span, .avg-low h5 span {
+            font-size: 12px;
+            vertical-align: top;
+        }
+
+.avg .title {
+    font-size: 14px;
+}
+
+.col-weather {
+    max-width: 300px;
+}
+
+.overview-weather-content img {
+    width: 30px;
+}
+
+    .overview-weather-content img.selected {
+        width: 50px;
+        margin-top: -10px;
+    }
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {

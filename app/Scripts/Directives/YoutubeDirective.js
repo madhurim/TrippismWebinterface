@@ -17,7 +17,7 @@ angular.module('TrippismUIApp').directive('youtubeInfo', ['YouTubeFactory',
                     scope.youtubeInfoDataFound = false;
                     // scope.youtubeData = "";
                     if (scope.youtubeParams != undefined) {
-                        var parameters = scope.youtubeParams.DestinationairportName.airport_Lat + "," + scope.youtubeParams.DestinationairportName.airport_Lng;
+                        var parameters = scope.youtubeParams.DestinationAirport.airport_Lat + "," + scope.youtubeParams.DestinationAirport.airport_Lng;
                         if (nextTokenID != null) {
                             scope.curPage = scope.curPage + 1;
                             parameters += "&pageToken=" + nextTokenID
@@ -69,14 +69,11 @@ angular.module('TrippismUIApp').directive('youtubeInfo', ['YouTubeFactory',
 
                 scope.youtubeInfoDataFound = false;
                 scope.$watchGroup(['youtubeParams'], function (newValue, oldValue, scope) {
-                    if (newValue[0] && newValue[0].DestinationairportName != undefined) {
+                    if (newValue[0] && newValue[0].DestinationAirport != undefined) {
                         scope.youtubeData = "";
                         scope.loadyoutubeInfo();
                     }
                 });
-
-
-
             }
         }
     }]);

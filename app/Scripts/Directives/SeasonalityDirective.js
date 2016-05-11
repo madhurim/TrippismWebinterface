@@ -18,7 +18,7 @@
                     if (scope.seasonalityParams != undefined) {
                         if (scope.loadSeasonalityInfoLoaded == false) {
                             var Seasonalitydata = {
-                                "Destination": scope.seasonalityParams.DestinationairportName.airport_Code,
+                                "Destination": scope.seasonalityParams.DestinationAirport.airport_Code,
                             };
                             $timeout(function () {
                                 scope.seasonalitypromise = SeasonalityFactory.Seasonality(Seasonalitydata).then(function (data) {
@@ -214,10 +214,7 @@
                                     rotation: -45
                                 },
                                 tickInterval: 2 * 336 * 3600 * 1000,
-                                minTickInterval: 2 * 336 * 3600 * 1000,
-                                //title: {
-                                //    text: 'Historical Traffic Seasonality for ' + scope.seasonalityParams.DestinationairportName.airport_CityName
-                                //}
+                                minTickInterval: 2 * 336 * 3600 * 1000
                             },
                             yAxis: {
                                 min: 1,

@@ -16,6 +16,17 @@
                     if (!data)
                         angular.element('#divhotel').remove();
                 });
+
+                $scope.amountBifercation = function (TotalfareAmount) {
+                    var afterDec = (TotalfareAmount + "").split(".")[1];
+                    if (afterDec == undefined)
+                        afterDec = '00';
+                    var result = {
+                        BeforeDecimal: Math.floor(TotalfareAmount),
+                        AfterDecimal: "." + (afterDec.length == 1 ? afterDec + '0' : afterDec)
+                    };
+                    return result;
+                }
             },
             link: function ($scope, elem, attrs) {
                 $scope.$watch('fareParams', function (newValue, oldValue) {
@@ -53,7 +64,7 @@
                     $scope.Region = $scope.fareParams.SearchCriteria.Region;
                     $scope.Minfare = $scope.fareParams.SearchCriteria.Minfare;
                     $scope.Maxfare = $scope.fareParams.SearchCriteria.Maxfare;
-                    var PointOfsalesCountry = $scope.fareParams.OriginairportName.airport_CountryCode;
+                    var PointOfsalesCountry = $scope.fareParams.OriginAirport.airport_CountryCode;
 
                     if ($scope.FareInfo == null) {
                         var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
@@ -123,7 +134,7 @@
                         initFares($scope.FareInfo);
                         $timeout(function () { $scope.$emit('destinationFare', $scope.FareInfo) }, 0, false);
                     }
-                    $scope.airportDetail = $scope.fareParams.DestinationairportName.airport_FullName + ', ' + $scope.fareParams.DestinationairportName.airport_CityName + ', ' + $scope.fareParams.DestinationairportName.airport_CountryName;
+                    $scope.airportDetail = $scope.fareParams.DestinationAirport.airport_FullName + ', ' + $scope.fareParams.DestinationAirport.airport_CityName + ', ' + $scope.fareParams.DestinationAirport.airport_CountryName;
                 };
 
                 function initFares(FareInfo) {

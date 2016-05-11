@@ -12,7 +12,7 @@
             templateUrl: '/Views/Partials/GoogleAttractionPartial.html',
             controller: function ($scope) {
                 $scope.$watch('googleattractionParams', function (newValue, oldValue) {
-                    if (newValue != undefined && newValue.DestinationairportName != undefined) {
+                    if (newValue != undefined && newValue.DestinationAirport != undefined) {
                         var defaultAttractionTab = _.find(attractionsData, function (item) { return item.isDefault == true; });
                         if (defaultAttractionTab)
                             $scope.loadgoogleattractionInfo(defaultAttractionTab.name);
@@ -157,8 +157,8 @@
                     $scope.attractionsplaces = [];
                     if ($scope.googleattractionParams != undefined) {
                         var data = {
-                            "Latitude": $scope.googleattractionParams.DestinationairportName.airport_Lat,
-                            "Longitude": $scope.googleattractionParams.DestinationairportName.airport_Lng
+                            "Latitude": $scope.googleattractionParams.DestinationAirport.airport_Lat,
+                            "Longitude": $scope.googleattractionParams.DestinationAirport.airport_Lng
                         };
 
                         var markerObj = _(markerList).find(function (item) { return item.type == type });
@@ -175,7 +175,7 @@
 
                             // setting map option, used into view
                             $scope.attractionmapOptions = {
-                                center: new google.maps.LatLng($scope.googleattractionParams.DestinationairportName.airport_Lat, $scope.googleattractionParams.DestinationairportName.airport_Lng),
+                                center: new google.maps.LatLng($scope.googleattractionParams.DestinationAirport.airport_Lat, $scope.googleattractionParams.DestinationAirport.airport_Lng),
                                 zoom: 12,
                                 minZoom: 4,
                                 backgroundColor: "#BCCFDE",
@@ -260,11 +260,11 @@
                 // set airport marker on map
                 function setAirportMarkerOnMap() {
                     createMapLabelControl();
-                    airportMarkerLatLog = new google.maps.LatLng($scope.googleattractionParams.DestinationairportName.airport_Lat, $scope.googleattractionParams.DestinationairportName.airport_Lng);
+                    airportMarkerLatLog = new google.maps.LatLng($scope.googleattractionParams.DestinationAirport.airport_Lat, $scope.googleattractionParams.DestinationAirport.airport_Lng);
                     var marker = new MarkerWithLabel({
                         position: airportMarkerLatLog,
                         map: $scope.googleattractionsMap,
-                        title: $scope.googleattractionParams.DestinationairportName.airport_FullName,
+                        title: $scope.googleattractionParams.DestinationAirport.airport_FullName,
                         labelAnchor: new google.maps.Point(12, 35),
                         labelInBackground: false,
                         visible: true,

@@ -70,8 +70,8 @@
 
                 function readyfareParams() {
                     return {
-                        OriginairportName: $scope.OriginairportName,
-                        DestinationairportName: $scope.DestinationairportName,
+                        OriginAirport: $scope.OriginairportName,
+                        DestinationAirport: $scope.DestinationairportName,
                         FareInfo: $scope.FareInfo,
                         Fareforecastdata: param,
                         AvailableAirports: $scope.AvailableAirports,

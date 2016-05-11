@@ -13,7 +13,7 @@
                     $scope.format = $scope.formats[5];
                     $scope.DepartDate = $filter('date')($scope.weatherParams.Fareforecastdata.DepartureDate, $scope.format, null);
                     $scope.ReturnDate = $filter('date')($scope.weatherParams.Fareforecastdata.ReturnDate, $scope.format, null);
-                    $scope.WeatherFor = $scope.weatherParams.DestinationairportName.airport_CityName + "_" + $filter('date')($scope.weatherParams.Fareforecastdata.DepartureDate, $scope.format, null);
+                    $scope.WeatherFor = $scope.weatherParams.DestinationAirport.airport_CityName + "_" + $filter('date')($scope.weatherParams.Fareforecastdata.DepartureDate, $scope.format, null);
                     $scope.getWeatherInformation = function (data) {
                         if ($scope.WeatherInfoLoaded == false) {
                             $scope.WeatherData = angular.copy(WeatherFactory.ResultData($scope.WeatherFor));
@@ -51,15 +51,15 @@
                         if ($scope.weatherParams != undefined) {
                             $scope.WeatherData = "";
                             var data = {};
-                            if ($scope.weatherParams.DestinationairportName.airport_CountryCode == "US") {
+                            if ($scope.weatherParams.DestinationAirport.airport_CountryCode == "US") {
                                 data = {
                                     "State": null,
-                                    "CountryCode": $scope.weatherParams.DestinationairportName.airport_CountryCode,
-                                    "City": $scope.weatherParams.DestinationairportName.airport_CityName,
+                                    "CountryCode": $scope.weatherParams.DestinationAirport.airport_CountryCode,
+                                    "City": $scope.weatherParams.DestinationAirport.airport_CityName,
                                     "DepartDate": $filter('date')($scope.weatherParams.Fareforecastdata.DepartureDate, $scope.format, null),
                                     "ReturnDate": $filter('date')($scope.weatherParams.Fareforecastdata.ReturnDate, $scope.format, null),
-                                    "Latitude": $scope.weatherParams.DestinationairportName.airport_Lat,
-                                    "Longitude": $scope.weatherParams.DestinationairportName.airport_Lng,
+                                    "Latitude": $scope.weatherParams.DestinationAirport.airport_Lat,
+                                    "Longitude": $scope.weatherParams.DestinationAirport.airport_Lng,
                                     "WeatherFor": $scope.WeatherFor
 
                                 };
@@ -67,9 +67,9 @@
                             }
                             else {
                                 data = {
-                                    "CityName": $scope.weatherParams.DestinationairportName.airport_CityName,
-                                    "CountryCode": $scope.weatherParams.DestinationairportName.airport_CountryCode,
-                                    "AirportCode": $scope.weatherParams.DestinationairportName.airport_Code,//$scope.weatherParams.DestinationairportName.airport_CityName,
+                                    "CityName": $scope.weatherParams.DestinationAirport.airport_CityName,
+                                    "CountryCode": $scope.weatherParams.DestinationAirport.airport_CountryCode,
+                                    "AirportCode": $scope.weatherParams.DestinationAirport.airport_Code,
                                     "DepartDate": $filter('date')($scope.weatherParams.Fareforecastdata.DepartureDate, $scope.format, null),
                                     "ReturnDate": $filter('date')($scope.weatherParams.Fareforecastdata.ReturnDate, $scope.format, null),
                                     "WeatherFor": $scope.WeatherFor

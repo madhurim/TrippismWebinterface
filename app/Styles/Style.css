@@ -615,6 +615,7 @@ i.calendar.active, .input-box:hover i.calendar {
         color: #585858;
         margin: 0;
         font-size: 15px;
+        font-weight: normal;
     }
 
     .ibox-title .share-link {
@@ -673,12 +674,13 @@ i.calendar.active, .input-box:hover i.calendar {
     margin-top: 0;
     margin-bottom: 4px;
     color: #585858;
-    font-size: 15px;
+    font-size: 19px;
     font-weight: 900;
 }
 
 .ibox-box.searched {
     padding: 5px 15px 0 10px;
+    font-weight: 500;
 }
 
 .ibox-box img {
@@ -687,7 +689,7 @@ i.calendar.active, .input-box:hover i.calendar {
 
 .ibox-box p {
     margin-bottom: 0;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
     color: #585858;
     font-size: 14px;
 }
@@ -1594,7 +1596,7 @@ i.calendar.active, .input-box:hover i.calendar {
     }
 
     .avg {
-        width: 15%;
+        width: 20%;
     }
 
     .copyright {

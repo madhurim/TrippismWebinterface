@@ -122,7 +122,6 @@
             });
         }
         function GetCurrencySymbol(currencyCode) {
-            //if (currencyCode == "INR") return $sce.trustAsHtml('<i class="fa fa-inr"></i>');
             var cacheResult = _.findWhere(service.currencySymbol.currencySymbolsListCache, { code: currencyCode });
             if (cacheResult)
                 return cacheResult.symbol;

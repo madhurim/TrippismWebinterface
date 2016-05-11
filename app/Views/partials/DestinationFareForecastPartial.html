@@ -33,15 +33,15 @@
                     </h4>
                 </div>
                 <div class="row">
-                    <div class="col-md-6 col-sm-6 col-xs-12 col-fare" ng-if="fareParams.FareInfo.LowestNonStopFare && fareParams.FareInfo.LowestNonStopFare.Fare != 'N/A' && fareParams.FareInfo.LowestNonStopFare.Fare != 0">
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-fare" ng-if="::LowestNonStopFare">
                         <div class="ibox-box fare-box">
                             <div class="fare-box-inner text-right">
-                                <h4><span class="cursor-help" data-toggle="tooltip" popover="{{fareParams.FareInfo.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(fareParams.FareInfo.CurrencyCode)}}</span> {{fareParams.FareInfo.LowestNonStopFare.Fare | number : 2}}</h4>
+                                <h4><span class="cursor-help" data-toggle="tooltip" popover="{{fareParams.FareInfo.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(fareParams.FareInfo.CurrencyCode)}}</span> {{LowestNonStopFare.Fare | number : 2}}</h4>
                                 <p>Lowest Non Stop</p>
                             </div>
                             <div class="fare-box-inner">
                                 <p class="hover-line book-wrapper">
-                                    <a href="" ng-click="InstaFlightSearch(fareParams.FareInfo.LowestNonStopFare.AirlineCodes, fareParams.FareInfo.LowestNonStopFare.Fare,0,0);">
+                                    <a href="" ng-click="InstaFlightSearch(LowestNonStopFare.AirlineCodes, LowestNonStopFare.Fare);">
                                         <img src="../images/book_now.png" />
                                     </a>
                                 </p>
@@ -49,32 +49,15 @@
                             <div class="clear"></div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-sm-6 col-xs-12 col-fare" ng-if="(!fareParams.FareInfo.LowestNonStopFare || fareParams.FareInfo.LowestNonStopFare.Fare == 'N/A' || fareParams.FareInfo.LowestNonStopFare.Fare == 0) && fareParams.FareInfo.LowestFare && fareParams.FareInfo.LowestFare.Fare != 'N/A' &&  fareParams.FareInfo.LowestFare.Fare != 0">
-                        <div class="ibox-box fare-box">
-
-                            <div class="fare-box-inner text-right">
-                                <h4><span class="cursor-help" data-toggle="tooltip" popover="{{fareParams.FareInfo.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(fareParams.FareInfo.CurrencyCode)}}</span> {{fareParams.FareInfo.LowestFare.Fare | number : 2}}</h4>
-                                <p>Lowest Non Stop</p>
-                            </div>
-                            <div class="fare-box-inner">
-                                <p class="hover-line book-wrapper">
-                                    <a href="" ng-click="InstaFlightSearch(fareParams.FareInfo.LowestFare.AirlineCodes, fareParams.FareInfo.LowestFare.Fare);">
-                                        <img src="../images/book_now.png" />
-                                    </a>
-                                </p>
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-sm-6 col-xs-12 col-fare" ng-if="fareParams.FareInfo.LowestFare && fareParams.FareInfo.LowestFare.Fare != 'N/A' &&  fareParams.FareInfo.LowestFare.Fare != 0">
+                    <div class="col-md-4 col-sm-6 col-xs-12 col-fare" ng-if="::LowestFare">
                         <div class="ibox-box fare-box">
                             <div class="fare-box-inner text-right">
-                                <h4><span class="cursor-help" data-toggle="tooltip" popover="{{fareParams.FareInfo.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(fareParams.FareInfo.CurrencyCode)}}</span> {{fareParams.FareInfo.LowestFare.Fare | number : 2}}</h4>
+                                <h4><span class="cursor-help" data-toggle="tooltip" popover="{{fareParams.FareInfo.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(fareParams.FareInfo.CurrencyCode)}}</span> {{LowestFare.Fare | number : 2}}</h4>
                                 <p>Lowest</p>
                             </div>
                             <div class="fare-box-inner">
                                 <p class="hover-line book-wrapper">
-                                    <a href="" ng-click="InstaFlightSearch(fareParams.FareInfo.LowestFare.AirlineCodes, fareParams.FareInfo.LowestFare.Fare);">
+                                    <a href="" ng-click="InstaFlightSearch(LowestFare.AirlineCodes, LowestFare.Fare);">
                                         <img src="../images/book_now.png" />
                                     </a>
                                 </p>
@@ -83,7 +66,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" ng-if="LowestNonStopFare || LowestFare">
                     <div class="col-md-12 clear">
                         <div class="ibox-box searched margin-0">
                             <h6 class="margin-0">

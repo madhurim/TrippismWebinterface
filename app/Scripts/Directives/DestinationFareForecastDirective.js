@@ -81,8 +81,9 @@
                                     $scope.destinationlist.forEach(function (item) { item.DestinationLocation = item.objDestinationairport; });
                                     $scope.FareInfo = response.FareInfo[0];
                                     $scope.airlineJsonData = [];
-                                    $scope.fareParams.FareInfo = $scope.FareInfo;
+                                    $scope.fareParams.FareInfo = $scope.FareInfo;                                    
                                     $scope.fareCurrencySymbol = $scope.GetCurrencySymbol($scope.fareParams.FareInfo.CurrencyCode);
+                                    initFares($scope.FareInfo);
                                     UtilFactory.MapscrollTo('wrapper');
                                     $scope.$emit('destinationFare', $scope.FareInfo);
                                 }
@@ -119,10 +120,22 @@
                         $scope.airlineJsonData = [];
                         $scope.fareParams.FareInfo = $scope.FareInfo;
                         $scope.fareCurrencySymbol = $scope.GetCurrencySymbol($scope.fareParams.FareInfo.CurrencyCode);
+                        initFares($scope.FareInfo);
                         $timeout(function () { $scope.$emit('destinationFare', $scope.FareInfo) }, 0, false);
                     }
                     $scope.airportDetail = $scope.fareParams.DestinationairportName.airport_FullName + ', ' + $scope.fareParams.DestinationairportName.airport_CityName + ', ' + $scope.fareParams.DestinationairportName.airport_CountryName;
                 };
+
+                function initFares(FareInfo) {
+                    if (FareInfo.LowestNonStopFare && FareInfo.LowestNonStopFare.Fare != 'N/A' && FareInfo.LowestNonStopFare.Fare != 0)
+                        $scope.LowestNonStopFare = FareInfo.LowestNonStopFare;
+                    else if (FareInfo.LowestFare && FareInfo.LowestFare.Fare != 'N/A' && FareInfo.LowestFare.Fare != 0)
+                        $scope.LowestNonStopFare = FareInfo.LowestFare;
+
+                    if (FareInfo.LowestFare && FareInfo.LowestFare.Fare != 'N/A' && FareInfo.LowestFare.Fare != 0)
+                        $scope.LowestFare = FareInfo.LowestFare;
+
+                }
 
                 function FilterDestinations(destinations) {
                     var destinationstodisp = [];

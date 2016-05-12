@@ -5,7 +5,6 @@ html, body, #map_canvas {
 }
 
 body {
-    /*font-family: 'Conv_gotham-book';*/
     font-family: "Roboto",sans-serif;
     background-color: transparent;
     overflow-x: hidden;
@@ -31,20 +30,9 @@ a, a:hover, a:focus, label, form-control, .form-control:focus, .btn, button, .po
     transition: all 0.3s ease-in-out;
 }
 
-
-/*Marker round css*/
-
 .ibox-box.ibox-box-detail {
     padding-top: 0;
     margin-top: 0;
-}
-
-.rimg {
-    border: 2px solid #fff;
-    border-radius: 150px;
-    height: 80px;
-    overflow: hidden;
-    width: 80px;
 }
 
 .glyphicon.glyphicon-align-justify {
@@ -104,17 +92,8 @@ a, a:hover, a:focus, label, form-control, .form-control:focus, .btn, button, .po
     background-position: -168px bottom;
 }
 
-
-
-
 .destination-form .input-group {
     box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.44);
-    /*overflow: hidden;*/
-}
-
-/*!important use for panle header*/
-.balck-bg { /*background-color:#222221;*/
-    background-color: rgba(34, 34, 33, 0.7);
 }
 
 .icons {
@@ -144,11 +123,11 @@ a, a:hover, a:focus, label, form-control, .form-control:focus, .btn, button, .po
     margin: 0 auto;
     border-radius: 0 0 2px 2px;
     color: #fff;
-    font-family: "Conv_Gotham-Black";
     font-size: 15px;
     line-height: 25px;
     padding: 8px 20px;
     text-transform: uppercase;
+    font-weight: 900;
 }
 
     .toggle-btn:hover, .toggle-btn:focus {
@@ -265,28 +244,13 @@ input.form-control[type="number"] {
     padding-right: 15px;
 }
 
-.slide-top {
-    position: relative;
-}
-/*
-.slide-content-top {
-    position: relative;
-    display: none;
-    z-index: 1;
-}*/
-
 .slide-bottom {
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 0; /*margin-bottom:40px;*/
+    bottom: 0;
 }
-/*
-.slide-content-bottom {
-    display: none;
-    position: relative;
-}
-*/
+
 .map-box {
     bottom: 0;
     left: 0;
@@ -310,39 +274,7 @@ input.form-control[type="number"] {
     padding: 15px 0;
     position: relative;
 }
-/*
-.home-btn, .user-btn {
-    float: left;
-    position: relative;
-    z-index: 1;
-}
-*/
-.home-btn .icons {
-    padding: 0;
-    position: relative;
-}
 
-    .home-btn .icons img {
-        bottom: 0;
-        left: 0;
-        margin: auto;
-        position: absolute;
-        right: 0;
-        top: 0;
-    }
-/*
-.user-btn {
-    margin-left: 13px;
-}
-
-    .user-btn .icons {
-        padding: 0;
-    }
-
-        .user-btn .icons img {
-            width: 100%;
-        }
-*/
 .dropdown-menu {
     border: 0px;
     margin-top: 10px;
@@ -395,37 +327,6 @@ input.form-control[type="number"] {
         margin-top: -10px;
     }
 
-
-.btn-box.feedback-box {
-    left: auto;
-    right: -42px;
-    top: 65%;
-    transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
-    -webkit-transform: rotate(90deg);
-    -o-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-}
-
-.feedback-box .feedback-btn {
-    color: #ffffff;
-    cursor: pointer;
-    display: table;
-    font-family: "Conv_Gotham-Black";
-    font-size: 15px;
-    line-height: 25px;
-    margin: 0 auto;
-    padding: 8px 20px;
-    text-transform: uppercase;
-}
-
-.searchcenter-box .destination-wp {
-    background-color: rgba(34, 34, 33, 0.80);
-    padding: 15px 0;
-    padding: 15px 0 0;
-    width: 100%;
-}
-
 .toggle-btn i.search-icon {
     background-position: left -38px;
 }
@@ -446,84 +347,6 @@ input.form-control[type="number"] {
     z-index: -1;
 }
 
-.destination-tab .nav-tabs {
-    border: 0 none;
-    margin: 0 auto 25px;
-    display: table;
-}
-
-    .destination-tab .nav-tabs > li {
-        margin-bottom: 0;
-    }
-
-        .destination-tab .nav-tabs > li > a {
-            position: relative;
-            border: 0px;
-            margin-right: 0px;
-            border-radius: 0px;
-            border-color: transparent;
-            background-color: transparent;
-            color: #fff;
-            font-size: 14px;
-            font-weight: 400;
-            padding: 10px 25px 15px;
-        }
-
-            .destination-tab .nav-tabs > li.active > a, .destination-tab .nav-tabs > li > a:hover, .destination-tab .nav-tabs > li > a:focus {
-                border: 0px;
-                background-color: transparent;
-                color: #fff;
-            }
-
-        .destination-tab .nav-tabs > li:first-child > a {
-            border-radius: 0;
-        }
-
-        .destination-tab .nav-tabs > li:last-child > a {
-            border-radius: 0;
-        }
-
-        .destination-tab .nav-tabs > li > a:before {
-            background-color: transparent;
-            border-radius: 15px;
-            bottom: 0;
-            content: "";
-            height: 3px;
-            left: 0;
-            margin: auto;
-            position: absolute;
-            right: 0;
-            width: 0;
-            -webkit-transition: all 0.5s ease-in-out;
-            -moz-transition: all 0.5s ease-in-out;
-            -ms-transition: all 0.5s ease-in-out;
-            -o-transition: all 0.5s ease-in-out;
-            transition: all 0.5s ease-in-out;
-        }
-
-        .destination-tab .nav-tabs > li.active > a:before {
-            width: 80%;
-            background-color: #ffcd03;
-        }
-
-.destination-tab .tab-content {
-    margin-top: 15px;
-}
-
-.destination-tab p {
-    color: #fff;
-    text-align: center;
-    margin-bottom: 3px;
-    font-size: 30px;
-    font-family: "Conv_Gotham-Black";
-    margin-bottom: 5px;
-}
-
-.destination-tab label {
-    margin-bottom: 0;
-    color: #fff;
-    font-size: 14px;
-}
 
 .input-box i.location {
     background-image: url(../images/location-icon.png);
@@ -642,17 +465,6 @@ i.calendar.active, .input-box:hover i.calendar {
     background-color: #e0e0e0;
 }
 
-.show-btn {
-    padding: 5px 10px;
-    float: left;
-    width: 100%;
-}
-
-    .show-btn .btn {
-        font-size: 10px;
-        padding: 3px 5px;
-    }
-
 .destinations-list h6 {
     color: #575757;
     font-size: 17px;
@@ -677,10 +489,6 @@ i.calendar.active, .input-box:hover i.calendar {
         }
 
 
-.refine-your-search-box .btn-box {
-    position: relative;
-}
-
 .toggle-btn.your-search-btn {
     top: auto;
     bottom: 100%;
@@ -690,19 +498,6 @@ i.calendar.active, .input-box:hover i.calendar {
 .advanced-search {
     background-color: rgba(245,245,245,0.75);
 }
-
-.ng-pristine-form { /*padding: 18px 0;*/
-    padding: 5px 0;
-}
-
-    .ng-pristine-form .form-group:first-child {
-        margin: 0;
-    }
-
-    .ng-pristine-form .form-control {
-        color: #858585;
-        background-image: linear-gradient(#b90005, #b90005), linear-gradient(#585858, #585858);
-    }
 
 .selector-box h3 {
     font-size: 14px;
@@ -760,12 +555,6 @@ i.calendar.active, .input-box:hover i.calendar {
     width: 33.33%;
 }
 
-.refine-btn-row {
-    padding: 20px 0;
-    text-align: center;
-    width: 100%;
-}
-
 .mappage .footer-box {
     position: fixed;
 }
@@ -807,50 +596,6 @@ i.calendar.active, .input-box:hover i.calendar {
     padding: 5px 0;
 }
 
-
-.search-title-details {
-    background-color: rgba(34, 34, 33, 0.7);
-    border: 0 none;
-    border-radius: 5px 0 0 5px;
-    color: #fff;
-    font-size: 12px;
-    margin: 0 auto;
-    padding: 5px 15px;
-    position: absolute;
-    right: 0;
-    text-align: left;
-    top: 5px;
-    width: 480px; /*padding: 5px 15px;position: absolute;top: 0;width: 43%;background-color: rgba(255,255,255,0.5); font-size:12px;*/
-}
-
-    .search-title-details p {
-        margin: 0;
-    }
-
-/*.short-desperation-box {left: 0;position: absolute;right: 0;top: -60px;width: 100%;padding:0;z-index:2;}
-.short-desperation-tab .nav-tabs {border: 0 none;padding-left: 8.33333%;padding-right: 16.6667%; box-shadow: 0 2px 2px rgba(0, 0, 0, 0.09);position:relative;}
-.short-desperation-tab .nav-tabs > li { margin:-1px 7px 0;}
-.short-desperation-tab .nav-tabs > li:before {background-color: transparent;bottom: -4px;content: "";height: 4px;left: 0;position: absolute;right: 0;width: 100%;z-index: 0;}
-.short-desperation-tab .nav-tabs > li.active:before{ background-color:#f4f5f9;}
-.short-desperation-tab .nav-tabs > li > a{ position:relative; border:0px; margin-right:0px; border-radius:0px; border-color:#e9e9e9; background-color:#e9e9e9; color:#b90005; font-size:15px; font-weight:400; padding:20px 25px;}
-.short-desperation-tab .nav-tabs > li > a:before,.short-desperation-tab .nav-tabs > li > a:after{background-position: left top;background-repeat: no-repeat;border: 0 none;content: "";height: 60px;position: absolute;top: 2px;width: 13px;opacity:0;}
-.short-desperation-tab .nav-tabs > li > a:before {background-image: url(../images/left-shadrow.png);left: -13px;}
-.short-desperation-tab .nav-tabs > li > a:after {background-image: url(../images/right-shadrow.png);right: -13px;}
-.short-desperation-tab .nav-tabs > li.active > a:before ,.short-desperation-tab .nav-tabs > li.active > a:after,.short-desperation-tab .nav-tabs > li > a:hover:before ,.short-desperation-tab .nav-tabs > li > a:hover:after,.short-desperation-tab .nav-tabs > li > a:focus:before ,.short-desperation-tab .nav-tabs > li > a:focus:after{ opacity:1;}
-.short-desperation-tab .nav-tabs > li > a span.cancel {color: #222221;display: inline-block;font-size: 10px;height: 12px;margin-left: 10px;position: relative;text-align: center;top: -1px;width: 10px;}
-.short-desperation-tab .nav-tabs > li.active > a, .short-desperation-tab .nav-tabs > li > a:hover,.short-desperation-tab .nav-tabs > li > a:focus{ border:0px; background-color:#f5f5f5; color:#b90005;}
-
-.short-desperation-box .tab-content{ background-color:#f4f5f9;padding: 15px 15px 0; margin-bottom:40px;}*/
-.blink_me {
-    animation: blinker 1s linear infinite;
-}
-
-@keyframes blinker {
-    50% {
-        opacity: 0.50;
-    }
-}
-
 .ibox-wp {
     margin-bottom: 10px;
     padding: 0 15px;
@@ -870,6 +615,7 @@ i.calendar.active, .input-box:hover i.calendar {
         color: #585858;
         margin: 0;
         font-size: 15px;
+        font-weight: normal;
     }
 
     .ibox-title .share-link {
@@ -887,13 +633,6 @@ i.calendar.active, .input-box:hover i.calendar {
     width: 30px;
 }
 
-.middle-content-bar {
-    position: relative;
-}
-
-    .middle-content-bar .map-box {
-        position: static;
-    }
 
 .total-attractions-found-box .btn-box {
     position: relative;
@@ -934,13 +673,14 @@ i.calendar.active, .input-box:hover i.calendar {
 .ibox-box h4 {
     margin-top: 0;
     margin-bottom: 4px;
-    font-family: 'Conv_gotham-bold';
     color: #585858;
-    font-size: 15px;
+    font-size: 19px;
+    font-weight: 900;
 }
 
 .ibox-box.searched {
     padding: 5px 15px 0 10px;
+    font-weight: 500;
 }
 
 .ibox-box img {
@@ -949,19 +689,11 @@ i.calendar.active, .input-box:hover i.calendar {
 
 .ibox-box p {
     margin-bottom: 0;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
     color: #585858;
     font-size: 14px;
 }
-/*
-.middle-content-bar {
-    position: relative;
-}
 
-    .middle-content-bar .map-box {
-        position: static;
-    }
-*/
 .total-attractions-found-box .btn-box {
     position: relative;
 }
@@ -1071,39 +803,8 @@ i.calendar.active, .input-box:hover i.calendar {
 
 .popup-box {
     position: relative;
-    /*margin-top: 5px;*/
-}
-/*
-.popup-btn {
-    font-size: 10px;
-    margin-top: 15px;
-    padding: 3px 5px;
 }
 
-.popup-none {
-    display: none;
-    z-index: 1;
-    margin: 0 auto;
-    width: 80%;
-}
-
-.popup-transparent-bg {
-    background-color: rgba(0, 0, 0, 0.7);
-    bottom: 0;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 1;
-    display: none;
-    opacity: 0;
-}
-
-    .popup-transparent-bg.active {
-        display: block;
-        opacity: 1;
-    }
-*/
 .popup-header {
     text-align: left;
     padding: 0px 16px 22px 0px;
@@ -1118,10 +819,9 @@ i.calendar.active, .input-box:hover i.calendar {
     box-shadow: 0 0 0px rgba(0, 0, 0, 0.1);
 }
 
-.popup-title { /*margin:0; font-size:15px; font-family: 'Conv_Gotham-Black'; color:#fff; text-transform:uppercase;*/
+.popup-title {
     font-size: 15px;
     color: #fff;
-    /*color: #b90005;*/
     margin: 0;
     text-align: left;
 }
@@ -1134,16 +834,6 @@ i.calendar.active, .input-box:hover i.calendar {
     padding: 10px 0px 0px 5px;
 }
 
-/*
-.popup-header .clear-btn {
-    bottom: 0;
-    margin-top: 10px;
-    position: absolute;
-    right: 15px;
-    top: 0;
-    cursor: pointer;
-}
-*/
 .overview-weather-box li {
     float: left;
     width: 100%;
@@ -1183,33 +873,6 @@ i.calendar.active, .input-box:hover i.calendar {
         top: 0;
     }
 
-.overview-weather-farerange {
-    float: left;
-    width: 50%;
-    padding-left: 15px;
-    border-left: 1px dashed #a5a6a8;
-}
-
-    .overview-weather-farerange p {
-        margin-bottom: 3px;
-        font-size: 12px;
-        color: #989898;
-    }
-/*
-.avg-high-low-box {
-    float: left;
-    width: 100%;
-    margin-top: 10px;
-}
-*/
-/*.avg {
-    float: left;   
-    width: 25%;
-    text-align: center;
-    margin-top: 15px;
-    height: 78px;
-}*/
-
 .avg {
     float: left;
     width: 15%;
@@ -1228,39 +891,6 @@ i.calendar.active, .input-box:hover i.calendar {
         font-size: 12px;
         color: #989898;
         vertical-align: -webkit-baseline-middle;
-    }
-
-/*.high-low-box {
-    width: 100%;
-    float: left;
-}*/
-.high-low-box {
-    width: 100%;
-    float: left;
-    max-width: 250px;
-}
-
-    .high-low-box span {
-        font-size: 12px;
-        color: #989898;
-    }
-
-    .high-low-box h5 {
-        font-size: 16px;
-        color: #575757;
-        margin-bottom: 0;
-        font-family: 'Conv_Gotham-Black';
-        margin-top: 3px;
-    }
-
-    .high-low-box .avg-high {
-        float: left;
-        text-align: left;
-    }
-
-    .high-low-box .avg-low {
-        float: right;
-        text-align: right;
     }
 
 .chart-box img {
@@ -1375,107 +1005,6 @@ i.calendar.active, .input-box:hover i.calendar {
         color: #585858;
         font-size: 12px;
         overflow: hidden;
-    }
-
-.tabs-wp.ng-scope {
-    float: left;
-    margin-top: 15px;
-    padding: 0 15px;
-    width: 100%;
-    margin-top: -45px;
-}
-
-.tabs-wp .my-tab {
-    border-bottom: 0 none;
-    /*margin-left: 9.667%;
-    margin-right: 16.667%;*/
-    margin-left: 16.667%;
-    margin-right: 9.667%;
-}
-
-
-.tabs-wp .nav li {
-    display: inline-block;
-    margin: 2px 0 0;
-    padding: 0 7px;
-    position: relative;
-}
-
-    .tabs-wp .nav li:before {
-        background-color: transparent;
-        bottom: -4px;
-        content: "";
-        height: 4px;
-        left: 0;
-        position: absolute;
-        right: 0;
-        width: 100%;
-        z-index: 0;
-    }
-
-    .tabs-wp .nav li.selected:before {
-        background-color: #f4f5f9;
-    }
-
-    .tabs-wp .nav li a {
-        border: 0px;
-        border-radius: 0;
-        display: block;
-        text-transform: uppercase;
-        position: relative;
-        background-color: #e9e9e9;
-        color: #b90005;
-        font-size: 14px;
-        font-weight: 400;
-        padding: 15px;
-        width: 139px;
-        text-align: center;
-    }
-
-        .tabs-wp .nav li a:before, .tabs-wp .nav li a:after {
-            background-position: left top;
-            background-repeat: no-repeat;
-            border: 0 none;
-            content: "";
-            height: 47px;
-            position: absolute;
-            top: 2px;
-            width: 13px;
-            opacity: 0;
-            background-size: 100% 100%;
-        }
-
-        .tabs-wp .nav li a:before {
-            background-image: url(../images/left-shadrow.png);
-            left: -13px;
-        }
-
-        .tabs-wp .nav li a:after {
-            background-image: url(../images/right-shadrow.png);
-            right: -13px;
-        }
-
-        .tabs-wp .nav li.active a:before, .tabs-wp .nav li.active a:after, .tabs-wp .nav li a:hover:before, .tabs-wp .nav li a:hover:after, .tabs-wp .nav li a:focus:before, .tabs-wp .nav li a:focus:after {
-            opacity: 1;
-        }
-
-    .tabs-wp .nav li.active > a, .tabs-wp .nav li > a:hover, .tabs-wp .nav li > a:focus {
-        border-radius: 0;
-        border: 0px;
-        background-color: #f5f5f5;
-        color: #b90005;
-    }
-
-    .tabs-wp .nav li > a span.glyphicon {
-        color: #222221;
-        font-size: 10px;
-        height: 12px;
-        margin-left: 10px;
-        position: relative;
-        text-align: center;
-        top: -1px;
-        width: 10px;
-        cursor: pointer;
     }
 
 .searched-box {
@@ -1665,40 +1194,6 @@ i.calendar.active, .input-box:hover i.calendar {
     }
 }
 
-.input-airportcode {
-    position: relative;
-    margin-top: 40px;
-}
-
-.input-airportcode-addon {
-    position: absolute;
-    left: 0;
-    top: 0;
-    background-color: #e5e5e5;
-    height: 100%;
-    display: block;
-    width: 70px;
-    text-align: center;
-    vertical-align: middle;
-    padding: 10px 0;
-    border-radius: 4px 0 0 4px;
-}
-
-    .input-airportcode-addon img {
-        display: inline-block;
-        vertical-align: middle;
-    }
-
-/*Map page search lable*/
-/*.refine-your-destination-box {
-    background-color: #fff;
-    display: inline-block;
-    padding: 7px 0;
-    width: 100%;
-    overflow: hidden;
-    position:relative;
-    z-index:1;
- }*/
 .refine-your-destination-box {
     background-color: #fff;
     display: inline-block;
@@ -1739,35 +1234,12 @@ i.calendar.active, .input-box:hover i.calendar {
                 width: 0;
             }
 
-        /*.refine-your-destination-box .your-searched:before{
-   background-color: #e8ebee;
-    bottom: 0;
-    content: "";
-    height: 150%;
-    left: -10px;
-    margin: 10px;
-    position: absolute;
-    top: -22px;
-    width: 100%;
-}*/
-
-
-        /*.your-searched-content {
-    margin-left: 30px;
-}*/
-
         .refine-your-destination-box .your-searched h5 {
             margin: 0;
         }
-/*.refine-btn-group {
-    padding: 8px 0;
-}*/
+
 .refine-btn-group {
-    /*padding: 8px 0;*/
     padding: 2px 0;
-    /*position: absolute;
-    right: 10px;*/
-    /*top: 5px;*/
     float: left;
     margin-left: 15px;
 }
@@ -1778,40 +1250,12 @@ i.calendar.active, .input-box:hover i.calendar {
         margin: 0 5px;
         border-radius: 3px;
     }
-
-.btn-gray {
-    background-color: #525252;
-    border-color: #525252;
-}
 /*Map page search lable*/
 /*Main page popu CSS end*/
 
 @media only screen and (min-width: 1600px) {
-
-    .searchcenter-box .destination-wp {
-        height: 100%;
-        min-height: 450px;
-        padding: 3% 0 0 0;
-    }
-
     .destination-wp {
         padding: 1% 0 0;
-    }
-
-    .destination-tab p {
-        color: #fff;
-        font-size: 320%;
-        margin-bottom: 2%;
-    }
-
-    .destination-tab .nav-tabs > li > a {
-        font-size: 104%;
-        padding: 7% 10%;
-        width: 102%;
-    }
-
-    .destination-tab label, .dateDisplay {
-        font-size: 110%;
     }
 
     .form-control {
@@ -1969,7 +1413,6 @@ i.calendar.active, .input-box:hover i.calendar {
 
 @media only screen and (max-width:1152px) {
     .avg {
-        /*width: 33.333%;*/
         width: 25%;
     }
 
@@ -1980,32 +1423,12 @@ i.calendar.active, .input-box:hover i.calendar {
 
 @media only screen and (max-width: 991px) {
 
-
-    .search-title-details {
-        font-size: 12px;
-        margin-top: 50px;
-        width: 100%;
-        text-align: center;
-    }
-
-    /*.right-sidebar {
-        margin-top: 30px;
-    }*/
-
     .btn-lg, .btn-group-lg > .btn {
         padding: 8px 12px;
     }
 
     .btn {
         font-size: 10px;
-    }
-
-    .tabs-wp .my-tab {
-        margin-left: 16.6667%;
-    }
-
-    .destination-tab p {
-        font-size: 35px;
     }
 }
 
@@ -2018,7 +1441,7 @@ i.calendar.active, .input-box:hover i.calendar {
     .service_content img {
         padding: 10px 0;
     }
-    
+
     .service_box {
         padding: 10px 0;
     }
@@ -2094,18 +1517,6 @@ i.calendar.active, .input-box:hover i.calendar {
     .logo img {
         margin-top: 0px;
         width: 98px;
-    }
-
-    .user-btn img {
-        height: 25px !important;
-    }
-
-    .user-btn {
-        height: auto !important;
-    }
-
-    .destination-tab p {
-        font-size: 25px;
     }
 
     .ibox-title {
@@ -2185,8 +1596,7 @@ i.calendar.active, .input-box:hover i.calendar {
     }
 
     .avg {
-        /*width: 33.333%;*/
-        width: 15%;
+        width: 20%;
     }
 
     .copyright {
@@ -2223,15 +1633,6 @@ i.calendar.active, .input-box:hover i.calendar {
         min-height: inherit;
     }
 
-    .tabs-wp .my-tab {
-        margin: 0;
-        width: 100%;
-    }
-
-    .tabs-wp.ng-scope {
-        margin-top: 10px;
-    }
-
     .searched-box .searched {
         text-align: center;
     }
@@ -2240,52 +1641,12 @@ i.calendar.active, .input-box:hover i.calendar {
         padding-left: 15px !important;
     }
 
-    footer, .feedback-box {
+    footer {
         display: none;
     }
 
-    .refine-your-search-box.slide-bottom {
-        margin-bottom: 0;
-    }
-
-    .advanced-search .advanced-content {
-        height: 150px !important;
-        overflow-x: hidden;
-        overflow-y: scroll;
-    }
-
-    .refine-your-search-box .toggle-btn {
-        font-size: 12px;
-        line-height: 17px;
-        padding: 8px 10px;
-    }
-
-        .refine-your-search-box .toggle-btn i {
-            background-size: 39px auto;
-            height: 15px;
-            margin-right: 5px;
-            width: 15px;
-            margin-top: 1px;
-        }
-
-            .refine-your-search-box .toggle-btn i.search-icon {
-                background-position: left -24px;
-            }
-
-    .advanced-search .ng-pristine-form {
-        padding: 8px 0;
-    }
-
-        .advanced-search .ng-pristine-form .form-control {
-            height: 35px;
-        }
-
     .selector-box h3 {
         margin-bottom: 10px;
-    }
-
-    .refine-btn-row {
-        padding: 8px 0 10px;
     }
 
     .popular-destinations .toggle-btn {
@@ -2311,15 +1672,6 @@ i.calendar.active, .input-box:hover i.calendar {
     .content {
         height: 100px;
         padding: 8px 0;
-    }
-
-    .advanced-search .advanced-content {
-        height: 100px !important;
-    }
-
-
-    .destination-tab p {
-        font-size: 20px;
     }
 
     .destination-boxwrap-nav-tabs .nav.nav-tabs > li > a {
@@ -2430,25 +1782,14 @@ i.calendar.active, .input-box:hover i.calendar {
 
 
 @media only screen and (max-width: 640px) {
-    .advanced-search .advanced-content {
-        height: 70px !important;
-    }
 
     .content {
         height: 80px;
     }
 
-    /*.refine-your-destination-box {
-        padding: 4px 5px 5px 155px;
-    }*/
-
     .refine-your-destination-box .your-searched p {
         text-align: left;
     }
-
-    /*.your-searched-content {
-        margin-left: -140px;
-    }*/
 
     .refine-your-destination-box .your-searched {
         width: 100%;
@@ -2470,12 +1811,6 @@ i.calendar.active, .input-box:hover i.calendar {
 
     .popup-title, h4, .news-wp .news-title h6 {
         font-size: 15px;
-    }
-
-    .destination-tab .nav-tabs > li > a {
-        text-align: center;
-        padding: 8px 12px;
-        font-size: 12px;
     }
 
     .toggle-btn {
@@ -2504,12 +1839,6 @@ i.calendar.active, .input-box:hover i.calendar {
         margin-bottom: 15px;
     }
 
-    .overview-weather-farerange {
-        padding: 0;
-        width: 100%;
-        border-left: 0px;
-    }
-
     .list-line .overview-weather-content {
         padding: 0;
     }
@@ -2517,14 +1846,6 @@ i.calendar.active, .input-box:hover i.calendar {
         .list-line .overview-weather-content p {
             position: static;
         }
-
-    .destination-tab .tab-content {
-        height: 135px;
-        margin-bottom: 15px;
-        overflow-x: hidden;
-        overflow-y: auto;
-        padding-right: 15px;
-    }
 
     .ibox-title {
         padding: 10px;
@@ -2548,12 +1869,6 @@ i.calendar.active, .input-box:hover i.calendar {
     }
 }
 
-@media only screen and (max-width: 330px) {
-    .destination-tab .nav-tabs > li {
-        width: 50%;
-    }
-}
-
 @media only screen and (max-width:240px) {
     .destination-box-popup .destination-title {
         font-size: 8px;
@@ -2566,7 +1881,6 @@ i.calendar.active, .input-box:hover i.calendar {
 
 
 .googleattraction {
-    /*float: left;*/
     height: 100%;
     width: 100%;
 }
@@ -2578,19 +1892,7 @@ i.calendar.active, .input-box:hover i.calendar {
         width: 100%;
     }
 
-
-/*@-moz-document url-prefix() { 
- .dropdown-menu{ min-width:280px; width:100%;}
-.dropdown-menu table{ width:100%;}
-}*/
-/*.dropdown-menu{ min-width:280px; padding:5px;}
-.dropdown-menu > li{ width:100%; float:left;}
-.dropdown-menu table{ width:100%;}
-.dropdown-menu table .ng-scope.btn{  padding:5px;}
-.dropdown-menu table .btn{font-size:12px;}*/
-
 .dropdown-menu {
-    /*min-width: 280px;*/
     padding: 5px;
 }
 
@@ -2628,7 +1930,7 @@ em.ng-binding {
 /* for repositioning of top destination and refine search */
 .refine-search .content {
     padding: 0;
-    height: 340px; /*400px;*/
+    height: 340px;
 }
 
 .selector-box li label span {
@@ -2684,63 +1986,15 @@ em.ng-binding {
     margin-bottom: 50px;
 }
 
-.paddingr-0 {
-    padding-right: 0px;
-    /*width: 489px;*/
-}
-
-.weatherDiv {
-    /*    padding-bottom: 167px;*/
-    /*padding-bottom: 164px;*/
-    background: #fff;
-    padding-top: 50px;
-}
-
-.fareDiv1 {
-    padding-bottom: 102px;
-    /* padding-bottom: 164px; */
-    /*background: #fff;*/
-    padding-top: 50px;
-}
-
 .no-border {
     border: none;
 }
 
-.add-border {
-    clear: both;
-    margin-right: 0px;
-    margin-left: 0px;
-    /*    border: 1px solid #ADAAAA;*/
-    padding-top: 8px;
-    padding-bottom: 14px;
-    border-radius: 2px;
-    padding: 0px 15px 15px 15px;
-}
-
-
-.newDiv {
-    padding-bottom: 500px;
-    background: #fff;
-}
-
-.fareDiv {
-    background: #fff;
-}
-
-.bg-white {
-    background: #fff;
-}
-
 .newouterDiv {
-    /*padding: 15px;*/
     padding: 5px;
     background: whitesmoke;
     border: 1px solid #ADAAAA;
     border-radius: 3px;
-    /*margin-top: 8px;*/
-    /*margin-bottom: 0px;*/
-    /*margin-bottom: 8px;*/
     margin-bottom: 14px;
 }
 
@@ -2761,9 +2015,6 @@ em.ng-binding {
         padding-left: 12px !important;
     }
 
-    /*                          .destination-boxwrap-nav-tabs .tab-content{
-                                   min-height: 826px; 
-                          }*/
     .destination-box-popup .destination-title {
         font-size: 30px;
     }
@@ -2787,9 +2038,7 @@ em.ng-binding {
     .padleft0 {
         padding-left: 12px !important;
     }
-    /*                           .destination-boxwrap-nav-tabs .tab-content{
-                                   min-height: 500px; 
-                          }*/
+
     .destination-box-popup .destination-title {
         font-size: 30px;
     }
@@ -2805,18 +2054,12 @@ em.ng-binding {
     .lastDiv {
         margin-bottom: 0px;
     }
-    /*                           .destination-boxwrap-nav-tabs .tab-content{
-                                   min-height: 500px; 
-                          }*/
 }
 
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : landscape) {
     .lastDiv {
         margin-bottom: 0px;
     }
-    /*                           .destination-boxwrap-nav-tabs .tab-content{
-                                   min-height: 826px; 
-                          }*/
 }
 /* Smartphones (portrait and landscape)  ends */
 
@@ -2825,9 +2068,6 @@ em.ng-binding {
     .padleft0 {
         padding-left: 12px !important;
     }
-    /*                               .destination-boxwrap-nav-tabs .tab-content{
-                                       min-height: 500px; 
-                    }*/
 
     .newouterDiv {
         width: 100% !important;
@@ -2845,11 +2085,6 @@ em.ng-binding {
     .padleft0 {
         padding-left: 12px !important;
     }
-    /*                               .destination-boxwrap-nav-tabs .tab-content{
-                                       min-height: 400px; 
-                    }*/
-
-
 
     .newouterDiv {
         width: 100% !important;
@@ -2884,9 +2119,6 @@ em.ng-binding {
     .popup-box {
         width: 100% !important;
     }
-    /*                               .destination-boxwrap-nav-tabs .tab-content{
-                                       min-height: 500px; 
-                    }*/
 }
 /*iPhone 6 in landscape ends*/
 
@@ -2911,9 +2143,6 @@ em.ng-binding {
     .popup-box {
         width: 100% !important;
     }
-    /*                                 .destination-boxwrap-nav-tabs .tab-content{
-                                         min-height: 500px; 
-                      }*/
 }
 /*iPhone 6 in portrait ends*/
 
@@ -2930,9 +2159,6 @@ em.ng-binding {
     .padleft0 {
         padding-left: 12px !important;
     }
-    /*                 .destination-boxwrap-nav-tabs .tab-content{
-                         min-height: 500px; 
-                 }*/
 
     .newouterDiv {
         width: 100% !important;
@@ -2959,9 +2185,7 @@ em.ng-binding {
     .padleft0 {
         padding-left: 12px !important;
     }
-    /*                 .destination-boxwrap-nav-tabs .tab-content{
-                         min-height: 0px; 
-                 }*/
+
     .newouterDiv {
         width: 100%;
     }

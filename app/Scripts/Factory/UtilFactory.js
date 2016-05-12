@@ -8,6 +8,7 @@
         var highRankedAirportsPromise;
         var CurrencySymbolsPromise;
         var airportJsonPromise;
+        var airportsCurrency = [];
         var service = {
             ReadAirportJson: ReadAirportJson,
             MapscrollTo: MapscrollTo,
@@ -18,7 +19,10 @@
             GetLowFareForMap: GetLowFareForMap,
             ReadHighRankedAirportsJson: ReadHighRankedAirportsJson,
             GetValidDates: GetValidDates,
-            ReadLocationPairJson: ReadLocationPairJson
+            ReadLocationPairJson: ReadLocationPairJson,
+            ReadAirportsCurrency: ReadAirportsCurrency,
+            GetAirportCurrency: GetAirportCurrency,
+            amountBifurcation: amountBifurcation
         };
         return service;
 
@@ -119,7 +123,6 @@
             });
         }
         function GetCurrencySymbol(currencyCode) {
-            //if (currencyCode == "INR") return $sce.trustAsHtml('<i class="fa fa-inr"></i>');
             var cacheResult = _.findWhere(service.currencySymbol.currencySymbolsListCache, { code: currencyCode });
             if (cacheResult)
                 return cacheResult.symbol;
@@ -178,7 +181,11 @@
             var fromDate = ConvertToDateObject(obj.FromDate);
             var toDate = ConvertToDateObject(obj.ToDate);
 
-            if (toDate <= fromDate)
+            if (fromDate <= new Date(new Date().setHours(0, 0, 0))) {
+                obj.FromDate = SetFromDate();
+                obj.ToDate = SetToDate(obj.FromDate);
+            }
+            else if (toDate <= fromDate)
                 obj.ToDate = SetToDate(fromDate);
             else if (toDate > addDays(fromDate, TrippismConstants.MaxLOS)) {
                 obj.ToDate = SetToDate(fromDate);
@@ -186,11 +193,50 @@
 
             return obj;
         }
-
         function ReadLocationPairJson() {
             return $http.get('scripts/Constants/locationsPair_live.json').then(function (data) {
                 return data.data;
             });
+        }
+        function ReadAirportsCurrency(url) {
+            if (airportsCurrency.length > 0) {
+                var d = $q.defer();
+                d.resolve(airportsCurrency);
+                return d.promise;
+            }
+            else
+                return getAirportCurrencyJson($rootScope.apiURLForConstant + '/GetAirportsCurrency').then(function (data) {
+                    airportsCurrency = data;
+                    return data;
+                });
+        }
+        function getAirportCurrencyJson(url) {
+            return $http.get(url).then(function (_arrairportscurrency) {
+                var AvailableAirportCurrencyCodes = [];
+                if (_arrairportscurrency.status == 200) {
+                    AvailableAirportCurrencyCodes = _arrairportscurrency.data.AirportCurrencies;
+                }
+                return AvailableAirportCurrencyCodes;
+            });
+        }
+
+        function GetAirportCurrency(airportCode) {
+            var cacheResult = _.findWhere(airportsCurrency, { aCode: airportCode });
+            if (cacheResult) {
+                return cacheResult.cCode;
+            }
+            else {
+                return '';
+            }
+        }
+
+        function amountBifurcation(TotalfareAmount) {
+            var afterDec = (TotalfareAmount + "").split(".")[1] || '00';
+            var result = {
+                BeforeDecimal: Math.floor(TotalfareAmount),
+                AfterDecimal: "." + (afterDec.length == 1 ? afterDec + '0' : afterDec)
+            };
+            return result;
         }
     }
 })();

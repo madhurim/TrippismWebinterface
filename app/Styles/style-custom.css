@@ -1,7 +1,4 @@
-﻿
-/* CSS Document */
-
-/* #region trippismapp.css */
+﻿/* #region trippismapp.css */
 img {
     max-width: 100%;
 }
@@ -239,11 +236,6 @@ img {
 /* #endregion trippismapp.css */
 
 .custom-tooltip {
-    /*--for marker pin icon--*/
-    /*margin-left: -34px !important;
-    margin-top: -90px !important;*/
-    /*--for marker round icon--*/
-    /*margin-left: -33px !important;*/
     margin-left: -41px !important;
     margin-top: -45px !important;
     min-width: 80px;
@@ -321,12 +313,7 @@ a {
     margin-top: 10px;
 }
 
-.font-lato {
-    font-family: Lato,sans-serif;
-}
-
 .acc-heading {
-    /*opacity: 0.8;*/
     padding: 0;
 }
 
@@ -335,7 +322,6 @@ a {
     margin: auto;
     vertical-align: baseline;
     font-size: 18px;
-    /*color: #7dcdcd;*/
     padding: 11px 9px;
     font-weight: bold;
 }
@@ -354,8 +340,6 @@ a {
 
 .insta-details {
     opacity: 0.8;
-    font-family: Lato,sans-serif;
-    /*padding: 10px 0;*/
     font-size: 15px;
 }
 
@@ -399,19 +383,6 @@ a {
     margin-bottom: 5px;
 }
 
-/*.rotate-right {
-    -webkit-transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
-    -o-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    transform: rotate(90deg);
-}*/
-
-/*.insta-code {
-    padding: 7px 0;
-    font-size: 1.3em;
-}*/
-
 .position-abs {
     position: absolute;
 }
@@ -424,16 +395,6 @@ a {
     right: 0;
 }
 
-/*.plane-set {
-    float: left;
-    text-align: left;
-}*/
-
-/*.plane-ico {
-    margin: 0 6px;
-}*/
-
-
 .font-15 {
     font-size: 15px;
 }
@@ -441,11 +402,6 @@ a {
 .margin-bottom-15 {
     margin-bottom: 15px;
 }
-
-/*.insta-stop {
-    text-align: right;
-    width: 86px;
-}*/
 
 .cross-btn {
     position: absolute;
@@ -510,6 +466,7 @@ ul .stop-line {
 
 .leg-stops-1 {
     padding-left: 17px;
+    font-weight: normal;
 }
 
 .leg-stops-green {
@@ -536,11 +493,6 @@ ul .stop-line {
 .font-13 {
     font-size: 13px;
 }
-
-/*.text-book {
-    font-size: 12px;
-    font-weight: bold;
-}*/
 
 .header-text {
     text-align: center;
@@ -818,17 +770,13 @@ ul .stop-line {
 
 /* #region home-bottom */
 
-
-
 .service_box {
-    /*padding: 50px 0;*/
     padding: 10px 0 0 0;
     margin-top: -70px;
 }
 
 .service_title {
     color: #292524;
-    /*font-size: 32px;*/
     font-size: 28px;
     font-weight: 300;
 }
@@ -875,9 +823,6 @@ ul .stop-line {
 }
 
 .homepage .destination-boxwrap {
-    /*background-image: url("../images/Mainpagebg2.jpg");
-    background-position: 60% top;
-    background-size: cover;*/
     height: 100%;
     width: 100%;
 }
@@ -979,6 +924,10 @@ ul .stop-line {
     vertical-align: top;
 }
 
+    .fare-box-inner p {
+        font-size: 15px;
+    }
+
 .fare-rec span {
     vertical-align: -webkit-baseline-middle;
 }
@@ -1034,8 +983,6 @@ ul .stop-line {
 /*#region Alertify */
 .ajs-message.ajs-warning.ajs-visible,
 .alertify-notifier.ajs-right .ajs-message.ajs-visible {
-    /*width: 400px;
-    right: 365px;*/
     width: 320px;
     right: 300px;
     background: #fff;
@@ -1093,12 +1040,6 @@ ul .stop-line {
 #destination-boxwrap div {
     height: inherit;
 }
-
-/*.destination-image {
-    background-image: url("../images/Mainpagebg2.jpg");
-    background-position: 60% top;
-    background-size: cover;
-}*/
 
 .destination-image-1 {
     background-image: url("../images/home-images/Mainpagebg2.jpg");
@@ -1206,7 +1147,6 @@ ul .stop-line {
 
 .faq-container {
     position: relative;
-    /*min-height: 537px;*/
     margin-top: 15px;
     background-color: #fff;
 }
@@ -1392,6 +1332,110 @@ ul .stop-line {
         opacity: 1;
     }
 
+/*#region Hotels*/
+.col-hotel {
+    padding: 5px;
+    margin-top: 10px;
+}
+
+    .col-hotel .popup-content {
+        padding: 5px;
+    }
+
+.hotel-wrapper {
+    color: #585858;
+}
+    /* formating tooltip */
+    .hotel-wrapper title {
+        white-space: pre-line;
+    }
+
+    .hotel-wrapper th {
+        padding: 3px 1px 3px 1px;
+        /*text-align: right;*/
+    }
+
+    .hotel-wrapper .widget-popup-title {
+        color: inherit;
+    }
+
+.hotel-title h6 {
+    font-size: 16px;
+}
+
+.hotel-wrapper img {
+    vertical-align: sub;
+}
+
+.hotel-wrapper table {
+    width: 100%;
+    max-width: 330px;
+    margin-top: 3px;
+    /*margin-left: -40px;*/
+}
+
+    .hotel-wrapper table tbody {
+        font-weight: 500;
+        font-size: 17px;
+    }
+
+/*.hotel-wrapper tbody td {
+    width: 120px;
+    text-align: right;
+}
+
+    .hotel-wrapper tbody td:last-child {
+        width: 60px;
+        min-width: 40px;
+    }*/
+/*#endregion Hotels*/
+
+.col-dest-title {
+    /*color: #585858;*/
+    color: #b90005;
+}
+
+.col-fare-title.col-dest-title {
+    margin-left: 10px;
+}
+
+.col-hotel-title.col-dest-title {
+    padding-left: 0px;
+}
+
+.col-dest-title i {
+    margin-right: 5px;
+}
+
+.avg-high, .avg-low {
+    font-size: 15px;
+}
+
+    .avg-high h5, .avg-low h5 {
+        font-size: 22px;
+    }
+
+        .avg-high h5 span, .avg-low h5 span {
+            font-size: 12px;
+            vertical-align: top;
+        }
+
+.avg .title {
+    font-size: 14px;
+}
+
+.col-weather {
+    max-width: 300px;
+}
+
+.overview-weather-content img {
+    width: 30px;
+}
+
+    .overview-weather-content img.selected {
+        width: 50px;
+        margin-top: -10px;
+    }
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {
@@ -1513,10 +1557,6 @@ ul .stop-line {
         max-width: 100% !important;
         overflow-x: hidden !important;
     }
-
-    /*.mdcard {
-        height: 365px;
-    }*/
 
     .mdcard img.mdimage {
         height: 200px;

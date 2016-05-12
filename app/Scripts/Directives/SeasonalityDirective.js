@@ -13,49 +13,39 @@
             templateUrl: '/Views/Partials/SeasonalityPartial.html',
             controller: ['$scope', function (scope) {
                 scope.loadSeasonalityInfo = function () {
-                    scope.MarkerSeasonalityInfo = "";
                     scope.loadSeasonalityInfoLoaded = false;
                     scope.SeasonalityNoDataFound = false;
                     if (scope.seasonalityParams != undefined) {
                         if (scope.loadSeasonalityInfoLoaded == false) {
-                            if (scope.MarkerSeasonalityInfo == "") {
-                                var Seasonalitydata = {
-                                    "Destination": scope.seasonalityParams.DestinationairportName.airport_Code,
-                                };
-                                $timeout(function () {
-                                    scope.inProgressSeasonalityinfo = true;
-                                    scope.seasonalitypromise = SeasonalityFactory.Seasonality(Seasonalitydata).then(function (data) {
+                            var Seasonalitydata = {
+                                "Destination": scope.seasonalityParams.DestinationAirport.airport_Code,
+                            };
+                            $timeout(function () {
+                                scope.seasonalitypromise = SeasonalityFactory.Seasonality(Seasonalitydata).then(function (data) {
 
-                                        if (data.status == 404) {
-                                            scope.SeasonalityNoDataFound = true;
-                                            return;
-                                        }
-                                        scope.SeasonalityData = data.Seasonality;
-                                        var defaultSeasonality = data.Seasonality;
-                                        var now = new Date();
-                                        var NextDate = addDays(now, 30);
+                                    if (data.status == 404) {
+                                        scope.SeasonalityNoDataFound = true;
+                                        return;
+                                    }
+                                    scope.SeasonalityData = data.Seasonality;
+                                    var now = new Date();
+                                    var NextDate = addDays(now, 30);
 
-                                        var filteredSeasonalityData = [];
-                                        for (var i = 0; i < defaultSeasonality.length; i++) {
-                                            scope.MarkerSeasonalityInfo.Seasonality = [];
-                                            var datetocheck = new Date(defaultSeasonality[i].WeekStartDate.split('T')[0].replace(/-/g, "/"));
-                                            if (datetocheck > now && datetocheck < NextDate)
-                                                filteredSeasonalityData.push(defaultSeasonality[i]);
-                                        }
-                                        if (filteredSeasonalityData.length == 0) {
-                                            for (var i = 0; i < 5; i++)
-                                                filteredSeasonalityData.push(defaultSeasonality[i]);
-                                        }
-                                        data.Seasonality = filteredSeasonalityData;
-                                        scope.MarkerSeasonalityInfo = data;
-                                        scope.mailmarkereasonalityInfo = data;
+                                    var filteredSeasonalityData = [];
+                                    for (var i = 0; i < scope.SeasonalityData.length; i++) {
+                                        var datetocheck = new Date(scope.SeasonalityData[i].WeekStartDate.split('T')[0].replace(/-/g, "/"));
+                                        if (datetocheck > now && datetocheck < NextDate)
+                                            filteredSeasonalityData.push(scope.SeasonalityData[i]);
+                                    }
+                                    if (filteredSeasonalityData.length == 0) {
+                                        for (var i = 0; i < 5; i++)
+                                            filteredSeasonalityData.push(scope.SeasonalityData[i]);
+                                    }
+                                    data.Seasonality = filteredSeasonalityData;
+                                    scope.loadSeasonalityInfoLoaded = true;
 
-                                        scope.inProgressSeasonalityinfo = false;
-                                        scope.loadSeasonalityInfoLoaded = true;
-
-                                    });
-                                }, 0, false);
-                            }
+                                });
+                            }, 0, false);
                         }
 
                     }
@@ -70,12 +60,8 @@
                 function initseasonalityData() {
                     scope.formats = Dateformat();
                     scope.format = scope.formats[5];
-                    scope.Isviewmoredisplayed = false;
-                    scope.ChartLoaded = false;
-
-                    scope.DepartDate = $filter('date')(scope.seasonalityParams.Fareforecastdata.DepartureDate, scope.format, null);
-                    scope.ReturnDate = $filter('date')(scope.seasonalityParams.Fareforecastdata.ReturnDate, scope.format, null);
-                    scope.chartHeight = 200;
+                    scope.DepartDate = new Date(scope.seasonalityParams.Fareforecastdata.DepartureDate);
+                    scope.ReturnDate = new Date(scope.seasonalityParams.Fareforecastdata.ReturnDate);
                     var mapHTML = "<div style='background:white;overflow-x:hidden;' id='" + divID + "'></div>";
                     elem.append($compile(mapHTML)(scope));
                     scope.loadSeasonalityInfo();
@@ -85,7 +71,6 @@
                 scope.$watch('loadSeasonalityInfoLoaded',
                   function (newValue) {
                       scope.loadingSeasonality = angular.copy(!newValue);
-                      scope.$parent.divSeasonality = newValue;
                       if (newValue == true) {
                           angular.element("#lastDiv").removeClass("no-border");
                       } else {
@@ -199,7 +184,7 @@
                         var PrevDate = "";
                         var options = {
                             chart: {
-                                height: scope.chartHeight,
+                                height: 200,
                                 type: 'line',
                                 renderTo: divID,
                             },
@@ -215,7 +200,6 @@
                                 labels: {
                                     formatter: function () {
                                         var result = "";
-
                                         var startdaterange = new Date($filter('date')(this.value, scope.format, null));
                                         var enddaterange = new Date($filter('date')(this.value, scope.format, null));
                                         enddaterange = new Date(enddaterange.setDate(enddaterange.getDate() + 13));
@@ -230,10 +214,7 @@
                                     rotation: -45
                                 },
                                 tickInterval: 2 * 336 * 3600 * 1000,
-                                minTickInterval: 2 * 336 * 3600 * 1000,
-                                //title: {
-                                //    text: 'Historical Traffic Seasonality for ' + scope.seasonalityParams.DestinationairportName.airport_CityName
-                                //}
+                                minTickInterval: 2 * 336 * 3600 * 1000
                             },
                             yAxis: {
                                 min: 1,
@@ -293,7 +274,6 @@
 
                         $timeout(function () {
                             scope.Chart = new Highcharts.Chart(options);
-                            scope.ChartLoaded = true;
                             angular.element('#lastDiv').addClass('newouterDiv');
                         }, 0, false);
                     }

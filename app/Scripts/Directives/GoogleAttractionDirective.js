@@ -12,16 +12,13 @@
             templateUrl: '/Views/Partials/GoogleAttractionPartial.html',
             controller: function ($scope) {
                 $scope.$watch('googleattractionParams', function (newValue, oldValue) {
-                    if (newValue != undefined && newValue.DestinationairportName != undefined) {
+                    if (newValue != undefined && newValue.DestinationAirport != undefined) {
                         var defaultAttractionTab = _.find(attractionsData, function (item) { return item.isDefault == true; });
                         if (defaultAttractionTab)
                             $scope.loadgoogleattractionInfo(defaultAttractionTab.name);
                     }
                 });
 
-                $scope.DisplayattractionsInfo = true;
-                $scope.googleMapId = "googleMapId_";
-                $scope.gMapId = "gMapId_";
                 $scope.RenderMap = RenderMap;
                 $scope.setAirportMarkerOnMap = setAirportMarkerOnMap;
                 $scope.googleattractionsMap = undefined;
@@ -110,11 +107,11 @@
                         }
                     });
 
-                    var mapheight = $('#' + $scope.gMapId).height() - 400;
-                    var mapWidth = $('#' + $scope.gMapId).width() - 600;
+                    var mapheight = $('#gMapId_').height() - 400;
+                    var mapWidth = $('#gMapId_').width() - 600;
 
-                    $("#" + $scope.googleMapId).css('top', '-25px');
-                    $("#" + $scope.googleMapId).css('left', mapWidth / 2);
+                    $("#googleMapId_").css('top', '-25px');
+                    $("#googleMapId_").css('left', mapWidth / 2);
 
                     $scope.IsMarkerSelected = true;
 
@@ -141,7 +138,6 @@
                     styles: mapStyle,
                     mapTypeId: google.maps.MapTypeId.ROADMAP
                 };
-                var mapid = angular.element(document.querySelector('.map-canvas'));
 
                 if ($rootScope.mapHeight == undefined) {
                     $rootScope.mapHeight = $(window).height() - 350;
@@ -156,17 +152,13 @@
                     google.maps.event.trigger($scope.googleattractionsMap, 'resize');
                 }, 1000, false);
 
-                $scope.GoogleAttractionDisplay = function () {
-                    $scope.quantity = 20;
-                };
-
                 // get attractions from API
                 $scope.loadgoogleattractionInfo = function (type) {
                     $scope.attractionsplaces = [];
                     if ($scope.googleattractionParams != undefined) {
                         var data = {
-                            "Latitude": $scope.googleattractionParams.DestinationairportName.airport_Lat,
-                            "Longitude": $scope.googleattractionParams.DestinationairportName.airport_Lng
+                            "Latitude": $scope.googleattractionParams.DestinationAirport.airport_Lat,
+                            "Longitude": $scope.googleattractionParams.DestinationAirport.airport_Lng
                         };
 
                         var markerObj = _(markerList).find(function (item) { return item.type == type });
@@ -180,11 +172,10 @@
                             data.Types = attractionDetail.Types;
                             data.ExcludeTypes = attractionDetail.ExcludeTypes;
                             var isSetCenter = attractionDetail.isDefault;
-                            //$scope.attractionText = attractionDetail.attractionText;
 
                             // setting map option, used into view
                             $scope.attractionmapOptions = {
-                                center: new google.maps.LatLng($scope.googleattractionParams.DestinationairportName.airport_Lat, $scope.googleattractionParams.DestinationairportName.airport_Lng),
+                                center: new google.maps.LatLng($scope.googleattractionParams.DestinationAirport.airport_Lat, $scope.googleattractionParams.DestinationAirport.airport_Lng),
                                 zoom: 12,
                                 minZoom: 4,
                                 backgroundColor: "#BCCFDE",
@@ -203,7 +194,6 @@
                                 RenderMap(data.results, type);
                                 $scope.MapLoaded = true;
                                 $scope.attractionsplaces = { type: type, next_page_token: data.next_page_token, results: data.results };
-                                $scope.quantity = 5;
                             });
                         }
                     }
@@ -229,14 +219,13 @@
                     $scope.IsMarkerSelected = false;
                 };
 
-                $scope.MaxRating = 5;
                 function getRatings(num) {
+                    var MaxRating = 5;
                     var stars = [];
-                    for (var i = 0; i < $scope.MaxRating; i++) {
+                    for (var i = 0; i < MaxRating; i++) {
                         stars.push({});
                     }
-                    var starContainerMaxWidth = 86.3; //% changed from 100 to 86.3 because of star fill problem
-                    var filledInStarsContainerWidth = num / $scope.MaxRating * starContainerMaxWidth;
+                    var filledInStarsContainerWidth = num / MaxRating * 86.3; //% changed from 100 to 86.3 because of star fill problem
 
                     var ratingDiv = "<div class='average-rating-container' title='" + num + "'>";
                     if (stars.length > 0) {
@@ -257,7 +246,6 @@
                 }
 
                 $scope.IsMapPopupLoading = false;
-                $scope.noWrapSlides = false;
 
                 var slides = [];
                 $scope.slides = [];
@@ -272,11 +260,11 @@
                 // set airport marker on map
                 function setAirportMarkerOnMap() {
                     createMapLabelControl();
-                    airportMarkerLatLog = new google.maps.LatLng($scope.googleattractionParams.DestinationairportName.airport_Lat, $scope.googleattractionParams.DestinationairportName.airport_Lng);
+                    airportMarkerLatLog = new google.maps.LatLng($scope.googleattractionParams.DestinationAirport.airport_Lat, $scope.googleattractionParams.DestinationAirport.airport_Lng);
                     var marker = new MarkerWithLabel({
                         position: airportMarkerLatLog,
                         map: $scope.googleattractionsMap,
-                        title: $scope.googleattractionParams.DestinationairportName.airport_FullName,
+                        title: $scope.googleattractionParams.DestinationAirport.airport_FullName,
                         labelAnchor: new google.maps.Point(12, 35),
                         labelInBackground: false,
                         visible: true,

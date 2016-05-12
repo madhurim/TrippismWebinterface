@@ -7,16 +7,6 @@
             GetData: GetData
         };
 
-        function serialize(obj) {
-            var str = [];
-            for (var p in obj)
-                if (obj.hasOwnProperty(p)) {
-                    var propval = encodeURIComponent(obj[p]);
-                    if (propval != "undefined" && propval != "null" && propval != '')
-                        str.push(encodeURIComponent(p) + "=" + propval);
-                }
-            return str.join("&");
-        }
 
         function GetData(data) {
             var dataURL = '?' + serialize(data);

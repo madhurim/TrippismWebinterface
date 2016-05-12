@@ -66,9 +66,7 @@
                     $scope.Maxfare = data.hf;
                 }
 
-                $scope.IsairportJSONLoading = true;
                 $scope.mappromise = UtilFactory.ReadAirportJson().then(function (data) {
-                    $scope.IsairportJSONLoading = false;
                     $scope.AvailableAirports = data;
 
                     var OriginAirport = _.find($scope.AvailableAirports, function (airport) {
@@ -84,7 +82,6 @@
                         updateSearchCriteria();
                         $timeout(function () { $scope.$broadcast('setMarkeronMap'); }, 0, false)
                         $scope.isModified = true;
-
                         return false;
                     }
 
@@ -98,22 +95,13 @@
         }
         $scope.ShowDestinationView = DestinationFactory.ShowDestinationView; // true;
         $scope.isSearching = true;
-        $scope.MailMarkerSeasonalityInfo = {};
-        $scope.MailFareRangeData = {};
-        $scope.hasError = false;
-        $scope.formats = Dateformat();
-        $scope.format = $scope.formats[5];
         $scope.activate = activate;
         $scope.findDestinations = findDestinations;
-        $scope.OriginCityName = '';
-        $scope.Destination = '';
         $scope.AvailableAirports = [];
         var destinationlistOriginal = '';   // used for filtering data on refine search click
         $scope.destinationlist = "";
         $scope.AvailableThemes = AvailableTheme();
         $scope.AvailableRegions = AvailableRegions();
-        $scope.LoadingText = "Loading..";
-        $scope.oneAtATime = true;
 
         $scope.PointOfsalesCountry;
 
@@ -151,48 +139,11 @@
             return destinationstodisp;
         }
 
-        $scope.ISloader = false;
-        $scope.btnSearchClick = btnSearchClick;
-
-        $scope.Destinationfortab = "";
-
         $scope.$watch(function () { return DestinationFactory.ShowDestinationView }, function (newVal, oldVal) {
             if (typeof newVal !== 'undefined') {
                 $scope.ShowDestinationView = newVal;
             }
         });
-        $scope.$watch(function (scope) { return scope.Earliestdeparturedate },
-           function (newValue, oldValue) {
-               if (newValue == null)
-                   return;
-
-               /* If from date is greater than to date */
-               var newDt = new Date(newValue);
-               newDt.setHours(0, 0, 0, 0);
-               var todate = ($scope.Latestdeparturedate == undefined || $scope.Latestdeparturedate == '') ? new Date() : new Date($scope.Latestdeparturedate);
-               todate.setHours(0, 0, 0, 0);
-
-               if (newDt >= todate) {
-                   $scope.Latestdeparturedate = ConvertToRequiredDate(newDt.setDate(newDt.getDate() + 1), 'UI')
-               }
-               /**/
-
-               // Calculate datediff
-               var diff = daydiff(new Date(newValue).setHours(0, 0, 0, 0), new Date($scope.Latestdeparturedate).setHours(0, 0, 0, 0));
-               if (diff > 30)
-                   $scope.Latestdeparturedate = ConvertToRequiredDate(addDays(newDt, 30), 'UI');
-
-               $scope.MaximumLatestdeparturedate = addDays(newDt, 30);
-           }
-        );
-
-        function btnSearchClick() {
-            $scope.fareforecastdirectiveDisplay = false;
-            if ($scope.isSearching == true)
-                $scope.isSearching = false;
-            else
-                $scope.isSearching = true;
-        }
 
         $scope.handleUp = function (isSelected) {
             if (destinationlistOriginal && destinationlistOriginal.length > 0) {
@@ -260,6 +211,7 @@
                         $rootScope.$broadcast('setMarkeronMap', {
                             destinationlist: $scope.destinationlist,
                             Region: $scope.Region,
+                            Theme: $scope.Theme,
                             highRankedAirportlist: data
                         });
                     });
@@ -269,8 +221,6 @@
         }
 
         function findDestinations() {
-            if ($scope.IsairportJSONLoading)
-                return;
             $scope.isModified = false;
             $scope.destinationlist = "";
             destinationlistOriginal = '';
@@ -345,7 +295,6 @@
 
             paramdata.TopDestinations = 50;
             $scope.selectedform = 'SuggestDestination';
-            $scope.hasError = false;    // for removing error from destination textbox
             loadScrollbars();
         }
 
@@ -403,13 +352,12 @@
                 $scope.PointOfsalesCountry = originairport.airport_CountryCode;
             else
                 $scope.PointOfsalesCountry = undefined;
+
             var data = {
                 "Origin": $scope.Origin,
                 "DepartureDate": ($scope.FromDate == '' || $scope.FromDate == undefined) ? null : ConvertToRequiredDate($scope.FromDate, 'API'),
                 "ReturnDate": ($scope.ToDate == '' || $scope.ToDate == undefined) ? null : ConvertToRequiredDate($scope.ToDate, 'API'),
                 "Lengthofstay": $scope.LenghtOfStay,
-                "Earliestdeparturedate": ($scope.Earliestdeparturedate == '' || $scope.Earliestdeparturedate == undefined) ? null : ConvertToRequiredDate($scope.Earliestdeparturedate, 'API'),
-                "Latestdeparturedate": ($scope.Latestdeparturedate == '' || $scope.Latestdeparturedate == undefined) ? null : ConvertToRequiredDate($scope.Latestdeparturedate, 'API'),
                 "Theme": null,
                 "Location": $scope.Location,
                 "Minfare": null,

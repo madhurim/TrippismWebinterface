@@ -9,19 +9,7 @@
         };
         return service;
 
-        function serialize(obj) {
-            var str = [];
-            for (var p in obj)
-                if (obj.hasOwnProperty(p)) {
-                    var propval = encodeURIComponent(obj[p]);
-                    if (propval != "undefined" && propval != "null" && propval != '')
-                        str.push(encodeURIComponent(p) + "=" + propval);
-                }
-            return str.join("&");
-        }
-
-
-        function googleGeoReverseLookup(data) {            
+        function googleGeoReverseLookup(data) {
             var dataURL = '?' + serialize(data);
             var url = $rootScope.apiURLForGoogleGeoReverseLookup + dataURL;
             return $http.get(url)

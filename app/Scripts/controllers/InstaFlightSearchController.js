@@ -18,13 +18,10 @@
                     Destination: $scope.instaFlightSearchData.DestinationaArportName,
                     DepartureDate: departureDate,
                     ReturnDate: returnDate,
-                    //Minfare: $scope.instaFlightSearchData.Minfare,
-                    //Maxfare: $scope.instaFlightSearchData.Maxfare,
                     IncludedCarriers: $scope.instaFlightSearchData.IncludedCarriers,
                     PointOfSaleCountry: $scope.instaFlightSearchData.PointOfSaleCountry,
                     outboundflightstops: $scope.instaFlightSearchData.outboundflightstops,
                     inboundflightstops: $scope.instaFlightSearchData.inboundflightstops,
-                    //LowestFare: instaFlightSearchData.LowestFare
                 };
                 $scope.includedCarriers = $scope.instaFlightSearch.IncludedCarriers;
                 $scope.DepartureDate = $scope.instaFlightSearch.DepartureDate;
@@ -86,16 +83,7 @@
             }
             return result;
         }
-        $scope.amountBifercation = function (TotalfareAmount) {
-            var afterDec = (TotalfareAmount + "").split(".")[1];
-            if (afterDec == undefined)
-                afterDec = '00';
-            var result = {
-                BeforeDecimal: Math.floor(TotalfareAmount),
-                AfterDecimal: "." + (afterDec.length == 1 ? afterDec + '0' : afterDec)
-            };
-            return result;
-        }
+        $scope.amountBifurcation = function (value) { return UtilFactory.amountBifurcation(value); };
         var getAirportNameFromCode = function (airportCode) {
             var airportName = airportCode;
             var cacheValue = $filter('filter')(airportNameCache, { airport_Code: airportCode })[0];

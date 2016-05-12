@@ -2,30 +2,30 @@
     <div ng-if="!loadingSeasonality" class="col-md-12">
         <div class="popup-box">
             <div class="popup-header">
-                <h5 class="widget-popup-title">Peak and Off Peak travel periods for {{seasonalityParams.DestinationairportName.airport_CityName}}</h5>
+                <h5 class="widget-popup-title">Peak and Off Peak travel periods for {{seasonalityParams.DestinationAirport.airport_CityName}}</h5>
             </div>
             <div class="popup-content">
-                <h6 class="date-title">{{DepartDate}} to {{ReturnDate}}</h6>
+                <h6 class="date-title"> {{DepartDate | date:'MMM-dd-yyyy'}} To {{ReturnDate | date:'MMM-dd-yyyy'}} </h6>
                 <div class="overview-weather-box">
                     <ul class="gird-line">
                         <li>
                             <div class="overview-weather-content" ng-if="!loadingSeasonality">
                                 <ul>
                                     <li>
-                                        <img ng-if="SeasonalityWidgetData.NoofIcons == 3" src="/images/User-12.png" alt="" />
+                                        <img class="selected" ng-if="SeasonalityWidgetData.NoofIcons == 3" src="/images/User-12.png" alt="" />
                                         <img ng-if="SeasonalityWidgetData.NoofIcons != 3" src="/images/User-12grey.png" alt="" />
                                         <p ng-if="SeasonalityWidgetData.NoofIcons == 3" class="redbold-font"> Peak</p>
                                         <p ng-if="SeasonalityWidgetData.NoofIcons != 3"> Peak</p>
                                     </li>
                                     <li>
-                                        <img ng-if="SeasonalityWidgetData.NoofIcons == 2" src="/images/User-5.png" alt="" />
+                                        <img class="selected" ng-if="SeasonalityWidgetData.NoofIcons == 2" src="/images/User-5.png" alt="" />
                                         <img ng-if="SeasonalityWidgetData.NoofIcons != 2" src="/images/User-5grey.png" alt="" />
                                         <p ng-if="SeasonalityWidgetData.NoofIcons == 2" class="redbold-font"> Medium</p>
                                         <p ng-if="SeasonalityWidgetData.NoofIcons != 2"> Medium</p>
 
                                     </li>
                                     <li>
-                                        <img ng-if="SeasonalityWidgetData.NoofIcons == 1" src="/images/User-3.png" alt="" />
+                                        <img class="selected" ng-if="SeasonalityWidgetData.NoofIcons == 1" src="/images/User-3.png" alt="" />
                                         <img ng-if="SeasonalityWidgetData.NoofIcons != 1" src="/images/User-3grey.png" alt="" />
                                         <p ng-if="SeasonalityWidgetData.NoofIcons == 1" class="redbold-font"> Off-Peak</p>
                                         <p ng-if="SeasonalityWidgetData.NoofIcons != 1">Off-Peak</p>
@@ -35,7 +35,7 @@
                         </li>
                     </ul>
                 </div>
-                <h6 class="date-title">Year Around</h6>
+                <h6 class="date-title">Year round</h6>
                 <h6>Search Off-Peak weeks to get a better pricing. Compare Off-Peak weeks with Peaks to understand price patterns.</h6>
                 <div class="chart-box"></div>
             </div>

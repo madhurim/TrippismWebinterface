@@ -74,14 +74,13 @@ angular.module('TrippismUIApp').directive('attractionList', ['$sce', '$rootScope
                 }
             });
 
-            scope.MaxRating = 5;
             function getRatings(num) {
+                var MaxRating = 5;
                 var stars = [];
-                for (var i = 0; i < scope.MaxRating; i++) {
+                for (var i = 0; i < MaxRating; i++) {
                     stars.push({});
                 }
-                var starContainerMaxWidth = 86.3; //% changed from 100 to 86.3 because of star fill problem
-                var filledInStarsContainerWidth = num / scope.MaxRating * starContainerMaxWidth;
+                var filledInStarsContainerWidth = num / MaxRating * 86.3; //% changed from 100 to 86.3 because of star fill problem
 
                 var ratingDiv = "<div class='average-rating-container' title='" + num + "'>";
                 if (stars.length > 0) {

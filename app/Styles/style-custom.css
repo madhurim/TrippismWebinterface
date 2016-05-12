@@ -1352,6 +1352,7 @@ ul .stop-line {
 
     .hotel-wrapper th {
         padding: 3px 1px 3px 1px;
+        /*text-align: right;*/
     }
 
     .hotel-wrapper .widget-popup-title {
@@ -1370,13 +1371,25 @@ ul .stop-line {
     width: 100%;
     max-width: 330px;
     margin-top: 3px;
+    /*margin-left: -40px;*/
 }
 
     .hotel-wrapper table tbody {
         font-weight: 500;
         font-size: 17px;
     }
+
+/*.hotel-wrapper tbody td {
+    width: 120px;
+    text-align: right;
+}
+
+    .hotel-wrapper tbody td:last-child {
+        width: 60px;
+        min-width: 40px;
+    }*/
 /*#endregion Hotels*/
+
 .col-dest-title {
     /*color: #585858;*/
     color: #b90005;

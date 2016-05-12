@@ -16,7 +16,6 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory)
                 $scope.format = $scope.formats[5];
 
                 $scope.FareRangeWidgetDataFound = false;
-                debugger;
                 $scope.DepartDate = $filter('date')($scope.widgetParams.Fareforecastdata.DepartureDate, $scope.format, null);
                 $scope.ReturnDate = $filter('date')($scope.widgetParams.Fareforecastdata.ReturnDate, $scope.format, null);
                 var frdt = new Date($scope.widgetParams.Fareforecastdata.DepartureDate);

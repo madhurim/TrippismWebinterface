@@ -16,6 +16,7 @@
                     if (!data)
                         angular.element('#divhotel').remove();
                 });
+                $scope.amountBifurcation = function (value) { return UtilFactory.amountBifurcation(value); };
             },
             link: function ($scope, elem, attrs) {
                 $scope.$watch('fareParams', function (newValue, oldValue) {
@@ -53,7 +54,7 @@
                     $scope.Region = $scope.fareParams.SearchCriteria.Region;
                     $scope.Minfare = $scope.fareParams.SearchCriteria.Minfare;
                     $scope.Maxfare = $scope.fareParams.SearchCriteria.Maxfare;
-                    var PointOfsalesCountry = $scope.fareParams.OriginairportName.airport_CountryCode;
+                    var PointOfsalesCountry = $scope.fareParams.OriginAirport.airport_CountryCode;
 
                     if ($scope.FareInfo == null) {
                         var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
@@ -81,7 +82,7 @@
                                     $scope.destinationlist.forEach(function (item) { item.DestinationLocation = item.objDestinationairport; });
                                     $scope.FareInfo = response.FareInfo[0];
                                     $scope.airlineJsonData = [];
-                                    $scope.fareParams.FareInfo = $scope.FareInfo;                                    
+                                    $scope.fareParams.FareInfo = $scope.FareInfo;
                                     $scope.fareCurrencySymbol = $scope.GetCurrencySymbol($scope.fareParams.FareInfo.CurrencyCode);
                                     initFares($scope.FareInfo);
                                     UtilFactory.MapscrollTo('wrapper');
@@ -123,7 +124,7 @@
                         initFares($scope.FareInfo);
                         $timeout(function () { $scope.$emit('destinationFare', $scope.FareInfo) }, 0, false);
                     }
-                    $scope.airportDetail = $scope.fareParams.DestinationairportName.airport_FullName + ', ' + $scope.fareParams.DestinationairportName.airport_CityName + ', ' + $scope.fareParams.DestinationairportName.airport_CountryName;
+                    $scope.airportDetail = $scope.fareParams.DestinationAirport.airport_FullName + ', ' + $scope.fareParams.DestinationAirport.airport_CityName + ', ' + $scope.fareParams.DestinationAirport.airport_CountryName;
                 };
 
                 function initFares(FareInfo) {

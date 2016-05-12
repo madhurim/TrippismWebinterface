@@ -16,19 +16,19 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory)
                 $scope.format = $scope.formats[5];
 
                 $scope.FareRangeWidgetDataFound = false;
-
+                debugger;
                 $scope.DepartDate = $filter('date')($scope.widgetParams.Fareforecastdata.DepartureDate, $scope.format, null);
                 $scope.ReturnDate = $filter('date')($scope.widgetParams.Fareforecastdata.ReturnDate, $scope.format, null);
                 var frdt = new Date($scope.widgetParams.Fareforecastdata.DepartureDate);
                 var todt = new Date($scope.widgetParams.Fareforecastdata.ReturnDate);
                 var timeDiff = Math.abs(todt.getTime() - frdt.getTime());
                 $scope.staydaylength = Math.ceil(timeDiff / (1000 * 3600 * 24));
-                $scope.LatestDepartureDate = new Date($scope.widgetParams.Fareforecastdata.ReturnDate); //.split('T')[0].replace(/-/g, "/"))
+                $scope.LatestDepartureDate = new Date($scope.widgetParams.Fareforecastdata.ReturnDate);
                 $scope.LatestDepartureDate.setDate($scope.LatestDepartureDate.getDate() + 5);
 
                 var daydiff = getLengthOfStay($scope.widgetParams.Fareforecastdata.DepartureDate, $scope.LatestDepartureDate);
                 if (daydiff > 15) {
-                    $scope.LatestDepartureDate = new Date($scope.widgetParams.Fareforecastdata.DepartureDate);//.split('T')[0].replace(/-/g, "/"))
+                    $scope.LatestDepartureDate = new Date($scope.widgetParams.Fareforecastdata.DepartureDate);
                     $scope.LatestDepartureDate.setDate($scope.LatestDepartureDate.getDate() + 14);
                 }
                 $scope.LatestDepartureDate = $filter('date')($scope.LatestDepartureDate, 'yyyy-MM-dd')
@@ -60,7 +60,7 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory)
                         "LatestDepartureDate": $scope.LatestDepartureDate,
                         "Lengthofstay": $scope.staydaylength
                     };
-                    
+
                     $scope.farerangepromise = FareRangeFactory.fareRange(data).then(function (data) {
                         if (data.status == 404 || data.status == 400) {
                             ////No Data Found then return                            
@@ -99,15 +99,10 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory)
                                     });
                                     var MinSelectedLocation = _.min(MinimumLocation, function (loc) { return loc.MinimumFare; });
 
-                                    var locationairport = _.find($scope.widgetParams.AvailableAirports, function (airport) { return airport.airport_Code == MinSelectedLocation.OriginLocation.toUpperCase() });
-                                    if (locationairport != undefined)
-                                        $scope.SelectedLocation = MinSelectedLocation.OriginLocation + ', ' + locationairport.airport_FullName + ", " + locationairport.airport_CityName;
-
                                     var faredata = {
                                         DestinationLocation: MinSelectedLocation.DestinationLocation,
                                         OriginLocation: MinSelectedLocation.OriginLocation,
                                         IsMacOrigin: true,
-                                        SelectedLocation: $scope.SelectedLocation,
                                         FareData: origins[MinSelectedLocation.OriginLocation]
                                     };
                                     $scope.fareRangeData = faredata;
@@ -124,17 +119,11 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory)
                                     });
                                     var MinSelectedLocation = _.min(MinimumLocation, function (loc) { return loc.MinimumFare; });
 
-                                    var locationairport = _.find($scope.widgetParams.AvailableAirports, function (airport) { return airport.airport_Code == MinSelectedLocation.DestinationLocation.toUpperCase() });
-                                    if (locationairport != undefined)
-                                        $scope.SelectedDestinationLocation = MinSelectedLocation.DestinationLocation + ', ' + locationairport.airport_FullName + ", " + locationairport.airport_CityName;
-
                                     var faredata = {
                                         DestinationLocation: MinSelectedLocation.DestinationLocation,
                                         OriginLocation: MinSelectedLocation.OriginLocation,
                                         IsMacOrigin: false,
                                         IsMacDestination: true,
-                                        SelectedLocation: '',
-                                        SelectedDestinationLocation: $scope.SelectedDestinationLocation,
                                         FareData: destinations[MinSelectedLocation.DestinationLocation]
                                     };
                                     $scope.fareRangeData = faredata;
@@ -166,9 +155,9 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory)
 
             scope.$watchGroup(['fareRangeData', 'lowestFareObj'], function (newValue, oldValue) {
                 if (newValue[0] != undefined && newValue[1] != undefined) {
-                    if (!isNaN(newValue[1].LowestFare.Fare))
+                    if (newValue[1].LowestFare && !isNaN(newValue[1].LowestFare.Fare))
                         scope.isFareFound = true;
-                    else if (!isNaN(newValue[1].LowestNonStopFare.Fare))
+                    else if (newValue[1].LowestNonStopFare && !isNaN(newValue[1].LowestNonStopFare.Fare))
                         scope.isFareFound = true;
 
                     PreparHtmldata();
@@ -250,8 +239,7 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory)
 
                             // solve problem of some portion of Low, High text gets hidden due to overflow
                             $timeout(function () {
-                                var container = angular.element('#fareRageChart .highcharts-container');
-                                container.css({ overflow: 'visible' });
+                                angular.element('#fareRageChart .highcharts-container').css({ overflow: 'visible' });
                             });
                         }
                     });

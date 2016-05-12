@@ -21,7 +21,8 @@
             GetValidDates: GetValidDates,
             ReadLocationPairJson: ReadLocationPairJson,
             ReadAirportsCurrency: ReadAirportsCurrency,
-            GetAirportCurrency: GetAirportCurrency
+            GetAirportCurrency: GetAirportCurrency,
+            amountBifurcation: amountBifurcation
         };
         return service;
 
@@ -227,6 +228,15 @@
             else {
                 return '';
             }
+        }
+
+        function amountBifurcation(TotalfareAmount) {
+            var afterDec = (TotalfareAmount + "").split(".")[1] || '00';
+            var result = {
+                BeforeDecimal: Math.floor(TotalfareAmount),
+                AfterDecimal: "." + (afterDec.length == 1 ? afterDec + '0' : afterDec)
+            };
+            return result;
         }
     }
 })();

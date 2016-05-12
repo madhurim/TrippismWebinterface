@@ -16,17 +16,7 @@
                     if (!data)
                         angular.element('#divhotel').remove();
                 });
-
-                $scope.amountBifercation = function (TotalfareAmount) {
-                    var afterDec = (TotalfareAmount + "").split(".")[1];
-                    if (afterDec == undefined)
-                        afterDec = '00';
-                    var result = {
-                        BeforeDecimal: Math.floor(TotalfareAmount),
-                        AfterDecimal: "." + (afterDec.length == 1 ? afterDec + '0' : afterDec)
-                    };
-                    return result;
-                }
+                $scope.amountBifurcation = function (value) { return UtilFactory.amountBifurcation(value); };
             },
             link: function ($scope, elem, attrs) {
                 $scope.$watch('fareParams', function (newValue, oldValue) {
@@ -92,7 +82,7 @@
                                     $scope.destinationlist.forEach(function (item) { item.DestinationLocation = item.objDestinationairport; });
                                     $scope.FareInfo = response.FareInfo[0];
                                     $scope.airlineJsonData = [];
-                                    $scope.fareParams.FareInfo = $scope.FareInfo;                                    
+                                    $scope.fareParams.FareInfo = $scope.FareInfo;
                                     $scope.fareCurrencySymbol = $scope.GetCurrencySymbol($scope.fareParams.FareInfo.CurrencyCode);
                                     initFares($scope.FareInfo);
                                     UtilFactory.MapscrollTo('wrapper');

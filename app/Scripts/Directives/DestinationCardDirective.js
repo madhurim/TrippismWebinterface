@@ -38,7 +38,7 @@
                             var multiAirports = $filter('filter')(airports, { airport_IsMAC: false, airport_CityCode: destinationAirport.airport_CityCode }, true);
                             destinationAirport.themes = _.unique(_.flatten(_.map(multiAirports, function (i) { if (i.themes.length) return i.themes; }), true));
                         }
-                        // creating $scope element from theme name (for displaying theme icon into page)
+                        // creating $scope element from theme name (for displaying theme icon on page)
                         _.each(destinationAirport.themes, function (item) {
                             if (item) {
                                 var model = $parse(item.replace('-', ''));
@@ -76,16 +76,9 @@
                     if (pricingInfo && pricingInfo.TotalFare && pricingInfo.TotalFare.CurrencyCode)
                         return pricingInfo.TotalFare.CurrencyCode;
                 }
+                $scope.amountBifurcation = function (value) { return UtilFactory.amountBifurcation(value); };
             }],
             link: function (scope, elem, attrs) {
-                scope.amountBifurcation = function (TotalfareAmount) {
-                    var afterDec = (TotalfareAmount + "").split(".")[1] || '00';
-                    var result = {
-                        BeforeDecimal: Math.floor(TotalfareAmount),
-                        AfterDecimal: "." + (afterDec.length == 1 ? afterDec + '0' : afterDec)
-                    };
-                    return result;
-                }
             }
         }
     }

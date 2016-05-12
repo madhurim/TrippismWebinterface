@@ -37,7 +37,7 @@
                     <div class="col-md-6 col-sm-6 col-xs-12 col-fare" ng-if="::LowestNonStopFare">
                         <div class="ibox-box fare-box">
                             <div class="fare-box-inner text-right">
-                                <h4 ng-init="::amtbifercation=amountBifercation(LowestNonStopFare.Fare);">
+                                <h4 ng-init="::amtbifercation=amountBifurcation(LowestNonStopFare.Fare);">
                                     <span class="cursor-help" data-toggle="tooltip" popover="{{fareParams.FareInfo.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(fareParams.FareInfo.CurrencyCode)}}</span>
                                     {{amtbifercation.BeforeDecimal}}<span class="text-super vertical-top">{{amtbifercation.AfterDecimal}}</span>
                                 </h4>
@@ -56,7 +56,7 @@
                     <div class="col-md-4 col-sm-6 col-xs-12 col-fare" ng-if="::LowestFare">
                         <div class="ibox-box fare-box">
                             <div class="fare-box-inner text-right">
-                                <h4 ng-init="::amtbifercation=amountBifercation(LowestFare.Fare);">
+                                <h4 ng-init="::amtbifercation=amountBifurcation(LowestFare.Fare);">
                                     <span class="cursor-help" data-toggle="tooltip" popover="{{fareParams.FareInfo.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(fareParams.FareInfo.CurrencyCode)}}</span>
                                     {{amtbifercation.BeforeDecimal}}<span class="text-super vertical-top">{{amtbifercation.AfterDecimal}}</span>
                                 </h4>

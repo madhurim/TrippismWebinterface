@@ -128,8 +128,11 @@
                 };
 
                 function initFares(FareInfo) {
-                    if (FareInfo.LowestNonStopFare && FareInfo.LowestNonStopFare.Fare != 'N/A' && FareInfo.LowestNonStopFare.Fare != 0)
+                    if (FareInfo.LowestNonStopFare && FareInfo.LowestNonStopFare.Fare != 'N/A' && FareInfo.LowestNonStopFare.Fare != 0) {
                         $scope.LowestNonStopFare = FareInfo.LowestNonStopFare;
+                        $scope.LowestNonStopFare.outboundflightstops = 0;
+                        $scope.LowestNonStopFare.inboundflightstops = 0;
+                    }
                     else if (FareInfo.LowestFare && FareInfo.LowestFare.Fare != 'N/A' && FareInfo.LowestFare.Fare != 0)
                         $scope.LowestNonStopFare = FareInfo.LowestFare;
 

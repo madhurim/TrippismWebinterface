@@ -15,9 +15,10 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory)
                 $scope.formats = Dateformat();
                 $scope.format = $scope.formats[5];
 
-                $scope.FareRangeWidgetDataFound = false;
-                $scope.DepartDate = $filter('date')($scope.widgetParams.Fareforecastdata.DepartureDate, $scope.format, null);
-                $scope.ReturnDate = $filter('date')($scope.widgetParams.Fareforecastdata.ReturnDate, $scope.format, null);
+                $scope.FareRangeWidgetDataFound = false;                
+                $scope.DepartDate = new Date($scope.widgetParams.Fareforecastdata.DepartureDate);
+                $scope.ReturnDate = new Date($scope.widgetParams.Fareforecastdata.ReturnDate);
+
                 var frdt = new Date($scope.widgetParams.Fareforecastdata.DepartureDate);
                 var todt = new Date($scope.widgetParams.Fareforecastdata.ReturnDate);
                 var timeDiff = Math.abs(todt.getTime() - frdt.getTime());

@@ -60,8 +60,8 @@
                 function initseasonalityData() {
                     scope.formats = Dateformat();
                     scope.format = scope.formats[5];
-                    scope.DepartDate = $filter('date')(scope.seasonalityParams.Fareforecastdata.DepartureDate, scope.format, null);
-                    scope.ReturnDate = $filter('date')(scope.seasonalityParams.Fareforecastdata.ReturnDate, scope.format, null);
+                    scope.DepartDate = new Date(scope.seasonalityParams.Fareforecastdata.DepartureDate);
+                    scope.ReturnDate = new Date(scope.seasonalityParams.Fareforecastdata.ReturnDate);
                     var mapHTML = "<div style='background:white;overflow-x:hidden;' id='" + divID + "'></div>";
                     elem.append($compile(mapHTML)(scope));
                     scope.loadSeasonalityInfo();

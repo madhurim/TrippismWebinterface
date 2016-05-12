@@ -5,7 +5,7 @@
                 <h5 class="widget-popup-title">Peak and Off Peak travel periods for {{seasonalityParams.DestinationAirport.airport_CityName}}</h5>
             </div>
             <div class="popup-content">
-                <h6 class="date-title">{{DepartDate}} to {{ReturnDate}}</h6>
+                <h6 class="date-title"> {{DepartDate | date:'MMM-dd-yyyy'}} To {{ReturnDate | date:'MMM-dd-yyyy'}} </h6>
                 <div class="overview-weather-box">
                     <ul class="gird-line">
                         <li>

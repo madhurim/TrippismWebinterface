@@ -23,17 +23,17 @@
             <tr ng-if='HotelRangeData.ThreeStar && HotelRangeData.ThreeStar.MinimumPriceAvg != 0.0'>
                 <td><span class="cursor-help" data-toggle="tooltip" popover="{{hotelCurrency}}" popover-trigger="mouseenter" popover-placement="top">{{ hotelCurrencySymbol }}</span> {{HotelRangeData.ThreeStar.MinimumPriceAvg | number:0 }}</td>
                 <td><span class="cursor-help" data-toggle="tooltip" popover="{{hotelCurrency}}" popover-trigger="mouseenter" popover-placement="top">{{ hotelCurrencySymbol }}</span> {{HotelRangeData.ThreeStar.MaximumPriceAvg | number:0 }}</td>
-                <td><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></td>
+                <td title="3 star hotels"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></td>
             </tr>
             <tr ng-if='HotelRangeData.FourStar && HotelRangeData.FourStar.MinimumPriceAvg != 0.0'>
                 <td><span class="cursor-help" data-toggle="tooltip" popover="{{hotelCurrency}}" popover-trigger="mouseenter" popover-placement="top">{{ hotelCurrencySymbol }}</span> {{HotelRangeData.FourStar.MinimumPriceAvg | number:0 }}</td>
                 <td><span class="cursor-help" data-toggle="tooltip" popover="{{hotelCurrency}}" popover-trigger="mouseenter" popover-placement="top">{{ hotelCurrencySymbol }}</span> {{HotelRangeData.FourStar.MaximumPriceAvg | number:0 }}</td>
-                <td><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></td>
+                <td title="4 star hotels"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></td>
             </tr>
             <tr ng-if='HotelRangeData.FiveStar && HotelRangeData.FiveStar.MinimumPriceAvg != 0.0'>
                 <td><span class="cursor-help" data-toggle="tooltip" popover="{{hotelCurrency}}" popover-trigger="mouseenter" popover-placement="top">{{ hotelCurrencySymbol }}</span> {{HotelRangeData.FiveStar.MinimumPriceAvg | number:0 }}</td>
                 <td><span class="cursor-help" data-toggle="tooltip" popover="{{hotelCurrency}}" popover-trigger="mouseenter" popover-placement="top">{{ hotelCurrencySymbol }}</span> {{HotelRangeData.FiveStar.MaximumPriceAvg | number:0 }}</td>
-                <td><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></td>
+                <td title="5 star hotels"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></td>
             </tr>
         </tbody>
     </table>

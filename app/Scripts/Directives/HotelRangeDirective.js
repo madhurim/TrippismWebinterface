@@ -7,7 +7,8 @@
                 origin: '=',
                 destination: '=',
                 departureDate: '=',
-                returnDate: '='
+                returnDate: '=',
+                showTitle: '=?'
             },
             templateUrl: '/Views/Partials/HotelRangePartial.html',
             controller: ['$scope', function ($scope) {

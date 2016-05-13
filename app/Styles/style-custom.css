@@ -1436,6 +1436,12 @@ ul .stop-line {
         width: 50px;
         margin-top: -10px;
     }
+
+/*#region md-hotel*/
+.mdhotel i {
+    font-size: 18px;
+}
+/*#endregion md-hotel*/
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {

@@ -7,8 +7,8 @@
     <div class="col-md-12 col-hotel-title col-dest-title"><h4><i class="fa fa-bed"></i>Hotels</h4></div>
     <div class="hotel-title">
         <h6>
-            Average price range of currently available hotels
-            <img src="images/help-icon.png" class="tool-tips cursor-help" width="20" height="20" title="The crowns are ratings provided by Northstar Travel Group, a premium hotel rating system.&#013; Price ranges can vary very quickly, based on hotel availabilities. Hotel Price is 1 adult/night." />
+            Average price range of currently available hotels            
+            <img src="images/help-icon.png" class="tool-tips cursor-help" width="20" height="20" title="Ratings are provided by Northstar Group, a premium Hotel Rating System.&#013;Hotel prices can vary very quickly based on availability. Prices are single room / night." />
         </h6>
     </div>
     <table>
@@ -23,17 +23,17 @@
             <tr ng-if='HotelRangeData.ThreeStar && HotelRangeData.ThreeStar.MinimumPriceAvg != 0.0'>
                 <td><span class="cursor-help" data-toggle="tooltip" popover="{{hotelCurrency}}" popover-trigger="mouseenter" popover-placement="top">{{ hotelCurrencySymbol }}</span> {{HotelRangeData.ThreeStar.MinimumPriceAvg | number:0 }}</td>
                 <td><span class="cursor-help" data-toggle="tooltip" popover="{{hotelCurrency}}" popover-trigger="mouseenter" popover-placement="top">{{ hotelCurrencySymbol }}</span> {{HotelRangeData.ThreeStar.MaximumPriceAvg | number:0 }}</td>
-                <td><img src="/images/crown3.png" width="20" height="20" title="3 crowns hotels" /></td>
+                <td title="3 star hotels"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></td>
             </tr>
             <tr ng-if='HotelRangeData.FourStar && HotelRangeData.FourStar.MinimumPriceAvg != 0.0'>
                 <td><span class="cursor-help" data-toggle="tooltip" popover="{{hotelCurrency}}" popover-trigger="mouseenter" popover-placement="top">{{ hotelCurrencySymbol }}</span> {{HotelRangeData.FourStar.MinimumPriceAvg | number:0 }}</td>
                 <td><span class="cursor-help" data-toggle="tooltip" popover="{{hotelCurrency}}" popover-trigger="mouseenter" popover-placement="top">{{ hotelCurrencySymbol }}</span> {{HotelRangeData.FourStar.MaximumPriceAvg | number:0 }}</td>
-                <td><img src="/images/crown4.png" width="20" height="20" title="4 crowns hotels" /></td>
+                <td title="4 star hotels"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></td>
             </tr>
             <tr ng-if='HotelRangeData.FiveStar && HotelRangeData.FiveStar.MinimumPriceAvg != 0.0'>
                 <td><span class="cursor-help" data-toggle="tooltip" popover="{{hotelCurrency}}" popover-trigger="mouseenter" popover-placement="top">{{ hotelCurrencySymbol }}</span> {{HotelRangeData.FiveStar.MinimumPriceAvg | number:0 }}</td>
                 <td><span class="cursor-help" data-toggle="tooltip" popover="{{hotelCurrency}}" popover-trigger="mouseenter" popover-placement="top">{{ hotelCurrencySymbol }}</span> {{HotelRangeData.FiveStar.MaximumPriceAvg | number:0 }}</td>
-                <td><img src="/images/crown5.png" width="20" height="20" title="5 crowns hotels" /></td>
+                <td title="5 star hotels"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></td>
             </tr>
         </tbody>
     </table>

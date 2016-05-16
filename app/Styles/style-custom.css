@@ -1379,6 +1379,10 @@ ul .stop-line {
         font-size: 17px;
     }
 
+.hotel-wrapper .fa-star {
+    color: #f6ab02;
+}
+
 /*.hotel-wrapper tbody td {
     width: 120px;
     text-align: right;

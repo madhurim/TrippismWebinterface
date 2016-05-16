@@ -1446,6 +1446,11 @@ ul .stop-line {
     font-size: 13px;
 }
 
+.mdhotel tbody td {
+    display: inline-block;
+    margin-right: 15px;
+}
+
 /*#endregion md-hotel*/
 /*#region Media queries */
 @media only screen and (max-width: 991px) {

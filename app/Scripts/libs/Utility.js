@@ -33,11 +33,6 @@ function ConvertToDateObject(dtval) {
     return dt;
 }
 
-
-function daydiff(first, second) {
-    return Math.round((second - first) / (1000 * 60 * 60 * 24));
-}
-
 function Dateformat() {
     var format = ['yyyy-MM-dd', 'dd-MM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate', 'MM/dd/yyyy'];
     return format;

@@ -16,12 +16,12 @@
                     $scope.hotelCurrency = UtilFactory.GetAirportCurrency($scope.origin);
                     $scope.hotelCurrencySymbol = UtilFactory.GetCurrencySymbol($scope.hotelCurrency)
                     $scope.hotelInputData = {
-                        "CorporateId": null,
-                        "GuestCounts": 1,
-                        "HotelCityCode": $scope.destination,
-                        "StartDate": $scope.departureDate,
-                        "EndDate": $scope.returnDate,
-                        "CurrencyCode": $scope.hotelCurrency
+                        CorporateId: null,
+                        GuestCounts: 1,
+                        HotelCityCode: $scope.destination,
+                        StartDate: $scope.departureDate,
+                        EndDate: $scope.returnDate,
+                        CurrencyCode: $scope.hotelCurrency
                     }
                     HotelRangeFactory.GetHotelRange($scope.hotelInputData).then(function (data) {
                         $scope.hotelRequestComplete = true;

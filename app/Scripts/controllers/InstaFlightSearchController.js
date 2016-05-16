@@ -29,7 +29,7 @@
                 if ($scope.instaFlightSearch.IncludedCarriers && $scope.instaFlightSearch.IncludedCarriers != '' && $scope.instaFlightSearch.IncludedCarriers.length > 0)
                     $scope.instaFlightSearch.IncludedCarriers = $scope.instaFlightSearch.IncludedCarriers.join(',');
                 InstaFlightSearchFactory.GetData($scope.instaFlightSearch).then(function (data) {
-                    if (data.status != 404 && data.status != 400 && data != "" && data.PricedItineraries.length > 0) {
+                    if (data.PricedItineraries && data.PricedItineraries.length > 0) {
                         $scope.isInstaFlightDataFound = true;
                         $scope.isSearchingFlights = false;
                         $scope.instaFlightSearchResult = data;
@@ -148,8 +148,7 @@
             var pricingInfo = $scope.instaFlightSearchResult.PricedItineraries[0].AirItineraryPricingInfo[0];
             if (pricingInfo && pricingInfo.TotalFare && pricingInfo.TotalFare.CurrencyCode)
                 return pricingInfo.TotalFare.CurrencyCode;
-            else
-                return $scope.$parent.fareParams.mapOptions.CurrencyCode;
+            return '';
         }
         $scope.GetCurrencySymbol = function (code) {
             return UtilFactory.GetCurrencySymbol(code);

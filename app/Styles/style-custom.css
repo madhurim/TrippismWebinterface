@@ -1227,7 +1227,7 @@ ul .stop-line {
 }
 
 .mdcard img.mdimage {
-    height: 300px;
+    height: 250px;
     cursor: pointer;
     width: 100%;
 }
@@ -1440,6 +1440,13 @@ ul .stop-line {
         width: 50px;
         margin-top: -10px;
     }
+
+/*#region md-hotel*/
+.mdhotel .col-hotel-title h4, .mdhotel table thead, .mdhotel table tbody {
+    font-size: 13px;
+}
+
+/*#endregion md-hotel*/
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {

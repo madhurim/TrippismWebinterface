@@ -79,6 +79,11 @@
                 $scope.amountBifurcation = function (value) { return UtilFactory.amountBifurcation(value); };
             }],
             link: function (scope, elem, attrs) {
+
+                scope.$on('hotelDataFound', function (event, data) {
+                    if (!data)
+                        elem.find('.mdhotel').remove();
+                });
             }
         }
     }

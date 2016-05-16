@@ -1,0 +1,17 @@
+﻿<div ng-show="!hotelRequestComplete" style="text-align:center">
+    <h4 class="glyphicon glyphicon-refresh glyphicon-spin"></h4>
+    <h5>Bringing latest Hotel prices...</h5>
+    <h4>Working on it</h4>
+</div>
+<div class="hotel-wrapper" ng-if="HotelRangeData">
+    <table>
+        <tbody>
+            <tr ng-if='HotelRangeData.ThreeStar && HotelRangeData.ThreeStar.MinimumPriceAvg != 0.0'>
+                <td><div class="col-md-12 col-hotel-title col-dest-title"><i class="fa fa-bed"></i>Hotels</h4></div></td>
+                <td><b>Avg Min</b></td>
+                <td><span class="cursor-help" data-toggle="tooltip" popover="{{hotelCurrency}}" popover-trigger="mouseenter" popover-placement="top">{{ hotelCurrencySymbol }}</span> {{HotelRangeData.ThreeStar.MinimumPriceAvg | number:0 }}</td>
+                <td><img src="/images/crown3.png" width="20" height="20" title="3 crowns hotels" /></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

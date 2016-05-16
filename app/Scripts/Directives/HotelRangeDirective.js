@@ -7,10 +7,15 @@
                 origin: '=',
                 destination: '=',
                 departureDate: '=',
-                returnDate: '='
+                returnDate: '=',
+                templateUrl: '@?'
             },
-            templateUrl: '/Views/Partials/HotelRangePartial.html',
+            template: '<ng-include src="getsrc();" />',
+            //templateUrl: '/Views/Partials/HotelRangePartial.html',
             controller: ['$scope', function ($scope) {
+                $scope.getsrc = function () {
+                    return $scope.templateUrl || 'Views/Partials/HotelRangePartial.html';
+                }
                 $scope.hotelRequestComplete = false;
                 UtilFactory.ReadAirportsCurrency().then(function (response) {
                     $scope.hotelCurrency = UtilFactory.GetAirportCurrency($scope.origin);

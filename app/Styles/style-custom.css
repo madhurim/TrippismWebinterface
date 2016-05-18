@@ -1442,8 +1442,8 @@ ul .stop-line {
     }
 
 /*#region md-hotel*/
-.mdhotel .col-hotel-title h4, .mdhotel table thead, .mdhotel table tbody {
-    font-size: 13px;
+.mdhotel .col-hotel-title h4, .mdhotel table tbody {
+    font-size: 15px;
 }
 
 .mdhotel tbody td {

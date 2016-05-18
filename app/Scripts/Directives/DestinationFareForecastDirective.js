@@ -1,5 +1,5 @@
-﻿angular.module('TrippismUIApp').directive('destinationFareForecast', ['$rootScope', '$compile', '$modal', 'DestinationFactory', 'UtilFactory', '$stateParams', '$state', '$timeout',
-    function ($rootScope, $compile, $modal, DestinationFactory, UtilFactory, $stateParams, $state, $timeout) {
+﻿angular.module('TrippismUIApp').directive('destinationFareForecast', ['$rootScope', '$compile', '$modal', 'DestinationFactory', 'UtilFactory', '$stateParams', '$state', '$timeout', 'InstaFlightSearchFactory',
+    function ($rootScope, $compile, $modal, DestinationFactory, UtilFactory, $stateParams, $state, $timeout, InstaFlightSearchFactory) {
         return {
             restrict: 'E',
             scope: {
@@ -71,51 +71,100 @@
                             "Destination": $scope.DestinationLocation,
                             "PointOfSaleCountry": PointOfsalesCountry
                         }
-                        DestinationFactory.findInstFlightDestination(apiparam).then(function (response) {
-                            if (response.FareInfo != null) {
-                                $scope.destinationlist = FilterDestinations(response.FareInfo);
-                                var DestinationairportName = _.find($scope.AvailableAirports, function (airport) { return airport.airport_Code == $scope.DestinationLocation.toUpperCase() });
 
-                                var objDestinationairport = $scope.destinationlist[0];
-                                if (objDestinationairport != undefined) {
-                                    objDestinationairport.objDestinationairport = $scope.DestinationLocation.toUpperCase();
-                                    $scope.destinationlist.forEach(function (item) { item.DestinationLocation = item.objDestinationairport; });
-                                    $scope.FareInfo = response.FareInfo[0];
-                                    $scope.airlineJsonData = [];
-                                    $scope.fareParams.FareInfo = $scope.FareInfo;
+                        var destinationData = DestinationFactory.DestinationDataStorage.fare.get(param);
+                        if (destinationData) {
+                            var FareInfo =
+                              {
+                                  OriginLocation: destinationData.data.OriginLocation,
+                                  LowestFare: {
+                                      AirlineCodes: _.map(destinationData.data.PricedItineraries[0].OriginDestinationOption[0].FlightSegment, function (item) { return item.OperatingAirline.Code; }),
+                                      Fare: destinationData.data.PricedItineraries[0].AirItineraryPricingInfo[0].TotalFare.Amount
+                                  },
+                                  CurrencyCode: destinationData.data.PricedItineraries[0].AirItineraryPricingInfo[0].TotalFare.CurrencyCode,
+                                  DepartureDateTime: destinationData.data.DepartureDateTime,
+                                  ReturnDateTime: destinationData.data.ReturnDateTime,
+                                  DestinationLocation: destinationData.data.DestinationLocation,
+                              };
+
+                            var isStop = _.some(destinationData.data.PricedItineraries[0].OriginDestinationOption, function (item) { return item.FlightSegment.length > 1; });
+                            if (isStop) {
+                                apiparam.limit = 1;
+                                apiparam.outboundflightstops = 0;
+                                apiparam.inboundflightstops = 0;
+                                InstaFlightSearchFactory.GetData(apiparam).then(function (response) {
+                                    if (response && response.PricedItineraries) {
+                                        FareInfo.LowestNonStopFare = {
+                                            AirlineCodes: _.map(response.PricedItineraries[0].OriginDestinationOption[0].FlightSegment, function (item) { return item.OperatingAirline.Code; }),
+                                            Fare: response.PricedItineraries[0].AirItineraryPricingInfo[0].TotalFare.Amount
+                                        };
+                                    }
+
+                                    $scope.fareParams.FareInfo = FareInfo;
+                                    $scope.FareInfo = FareInfo;
                                     $scope.fareCurrencySymbol = $scope.GetCurrencySymbol($scope.fareParams.FareInfo.CurrencyCode);
                                     initFares($scope.FareInfo);
-                                    UtilFactory.MapscrollTo('wrapper');
+                                    $scope.airlineJsonData = [];
                                     $scope.$emit('destinationFare', $scope.FareInfo);
+                                });
+                            }
+                            else {
+                                FareInfo.LowestNonStopFare = FareInfo.LowestFare;
+                                $scope.fareParams.FareInfo = FareInfo;
+                                $scope.FareInfo = FareInfo;
+                                $scope.fareCurrencySymbol = $scope.GetCurrencySymbol($scope.fareParams.FareInfo.CurrencyCode);
+                                initFares($scope.FareInfo);
+                                $scope.airlineJsonData = [];
+                                $timeout(function () { $scope.$emit('destinationFare', $scope.FareInfo) }, 0, false);
+                            }
+                        }
+                        else {
+                            DestinationFactory.findInstFlightDestination(apiparam).then(function (response) {
+                                if (response.FareInfo != null) {
+                                    $scope.destinationlist = FilterDestinations(response.FareInfo);
+                                    var DestinationairportName = _.find($scope.AvailableAirports, function (airport) { return airport.airport_Code == $scope.DestinationLocation.toUpperCase() });
+
+                                    var objDestinationairport = $scope.destinationlist[0];
+                                    if (objDestinationairport != undefined) {
+                                        objDestinationairport.objDestinationairport = $scope.DestinationLocation.toUpperCase();
+                                        $scope.destinationlist.forEach(function (item) { item.DestinationLocation = item.objDestinationairport; });
+                                        $scope.FareInfo = response.FareInfo[0];
+                                        $scope.airlineJsonData = [];
+                                        $scope.fareParams.FareInfo = $scope.FareInfo;
+                                        $scope.fareCurrencySymbol = $scope.GetCurrencySymbol($scope.fareParams.FareInfo.CurrencyCode);
+                                        initFares($scope.FareInfo);
+                                        UtilFactory.MapscrollTo('wrapper');
+                                        $scope.$emit('destinationFare', $scope.FareInfo);
+                                    }
+                                    else {
+                                        $scope.airlineJsonData = [];
+                                    }
+                                }
+                                else if (typeof response == 'string') {
+                                    var POSCountriesList = [];
+                                    var CList = "Selected origin country is not among the countries we support. We currently support the below countries. We will continue to add support for more countries. <br/><br/><div class='pos_List'>";
+                                    var POSList = JSON.parse(response);
+                                    for (var i = 0; i < POSList.Countries.length; i++) {
+                                        POSCountriesList.push(POSList.Countries[i].CountryName.toString());
+                                    }
+                                    POSCountriesList.sort();
+                                    for (var i = 0; i < POSCountriesList.length; i++) {
+                                        if (i == POSCountriesList.length - 1) {
+                                            CList += "<span class='lblpos'>" + POSCountriesList[i].toString() + "." + "</span><br/>";
+                                        }
+                                        else {
+                                            CList += "<span class='lblpos'>" + POSCountriesList[i].toString() + "," + "</span><br/>";//+ "(" + POSList.Countries[i].CountryCode.toString() + ")"
+                                        }
+                                    }
+                                    CList += "</div>";
+                                    alertify.alert("Trippism", "");
+                                    alertify.alert(CList).set('onok', function (closeEvent) { });
                                 }
                                 else {
                                     $scope.airlineJsonData = [];
                                 }
-                            }
-                            else if (typeof response == 'string') {
-                                var POSCountriesList = [];
-                                var CList = "Selected origin country is not among the countries we support. We currently support the below countries. We will continue to add support for more countries. <br/><br/><div class='pos_List'>";
-                                var POSList = JSON.parse(response);
-                                for (var i = 0; i < POSList.Countries.length; i++) {
-                                    POSCountriesList.push(POSList.Countries[i].CountryName.toString());
-                                }
-                                POSCountriesList.sort();
-                                for (var i = 0; i < POSCountriesList.length; i++) {
-                                    if (i == POSCountriesList.length - 1) {
-                                        CList += "<span class='lblpos'>" + POSCountriesList[i].toString() + "." + "</span><br/>";
-                                    }
-                                    else {
-                                        CList += "<span class='lblpos'>" + POSCountriesList[i].toString() + "," + "</span><br/>";//+ "(" + POSList.Countries[i].CountryCode.toString() + ")"
-                                    }
-                                }
-                                CList += "</div>";
-                                alertify.alert("Trippism", "");
-                                alertify.alert(CList).set('onok', function (closeEvent) { });
-                            }
-                            else {
-                                $scope.airlineJsonData = [];
-                            }
-                        });
+                            });
+                        }
                     }
                     else {
                         $scope.airlineJsonData = [];

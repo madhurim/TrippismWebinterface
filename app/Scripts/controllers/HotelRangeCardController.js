@@ -10,5 +10,6 @@
                     $scope.HotelAvg = minHotel;
             }
         }
+        getMinHotelAvgPrice($scope.HotelRangeData);
     }
 })();

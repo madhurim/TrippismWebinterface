@@ -1,16 +1,15 @@
-﻿<div ng-show="!hotelRequestComplete" style="text-align:center">
-    <h4 class="glyphicon glyphicon-refresh glyphicon-spin"></h4>
-    <h5>Bringing latest Hotel prices...</h5>
-    <h4>Working on it</h4>
+﻿<div ng-show="!hotelRequestComplete">
+    <h5><span class="glyphicon glyphicon-refresh glyphicon-spin margin-0"></span> &nbsp;Bringing latest Hotel prices...</h5>
 </div>
-<div class="hotel-wrapper" ng-controller="HotelRangeCardController as HR" ng-if="HotelRangeData && HR.HotelAvg" ng-init="HR.HotelAvg = getMinHotelAvgPrice(HotelRangeData);">
+<div class="hotel-wrapper" ng-if="::HotelRangeData" ng-controller="HotelRangeCardController">
     <table>
         <tbody>
             <tr>
                 <td><div class="col-md-12 col-hotel-title col-dest-title"><i class="fa fa-bed"></i>Hotels</div></td>
-                <td><b>Avg Min</b></td>
-                <td><span class="cursor-help" data-toggle="tooltip" popover="{{hotelCurrency}}" popover-trigger="mouseenter" popover-placement="top">{{ hotelCurrencySymbol }}</span> {{HR.HotelAvg.MinimumPriceAvg | number:0 }}</td>
-                <td title="5 star hotels"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></td>
+                <td><span class="cursor-help" data-toggle="tooltip" popover="{{::hotelCurrency}}" popover-trigger="mouseenter" popover-placement="top">{{ ::hotelCurrencySymbol }}</span> {{::HotelAvg.MinimumPriceAvg | number:0 }}+</td>
+                <td ng-if="::HotelAvg.Star == '3 CROWN'" title="3 star hotels"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></td>
+                <td ng-if="::HotelAvg.Star == '4 CROWN'" title="4 star hotels"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></td>
+                <td ng-if="::HotelAvg.Star == '5 CROWN'" title="5 star hotels"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></td>
             </tr>
         </tbody>
     </table>

@@ -6,14 +6,31 @@
     function DestinationFactory($http, $rootScope, $filter, $q) {
         var DestinationsData = [];
         var DestinationData = [];
+        var DestinationHotelData = [];
+
+        var DestinationDataStorage = {
+            fare: {
+                get: function (key) { return $filter('filter')(DestinationData, { key: key }, true)[0]; },
+                set: function (key, data) { DestinationData.push({ key: key, data: data }); },
+                clear: function () { DestinationData = []; }
+            },
+            hotel: {
+                get: function (key) { return $filter('filter')(DestinationHotelData, { key: key }, true)[0]; },
+                set: function (key, data) { DestinationHotelData.push({ key: key, data: data }); },
+                clear: function () { DestinationHotelData = []; }
+            }
+        }
+
+
         var service = {
             findDestinations: findDestinations,
             findInstFlightDestination: findInstFlightDestination,
             ShowDestinationView: true,
             GetDestinationFareInfo: GetDestinationFareInfo,
-            getDestinationData: getDestinationData,
-            setDestinationData: setDestinationData,
-            clearDestinationData: clearDestinationData
+            DestinationDataStorage: DestinationDataStorage
+            //getDestinationData: getDestinationData,
+            //setDestinationData: setDestinationData,
+            //clearDestinationData: clearDestinationData,
         };
         return service;
         function findDestinations(paramdata) {
@@ -58,16 +75,6 @@
            }, function (e) {
                return e;
            });
-        }
-        function getDestinationData(key) {
-            return $filter('filter')(DestinationData, { key: key }, true)[0];
-
-        }
-        function setDestinationData(key, data) {
-            DestinationData.push({ key: key, data: data });
-        }
-        function clearDestinationData() {
-            DestinationData = [];
         }
     }
 })();

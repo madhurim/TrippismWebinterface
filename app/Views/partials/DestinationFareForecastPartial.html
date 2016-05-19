@@ -1,5 +1,5 @@
-﻿<div class="container-fluid ibox-wp">
-    <div class="row" id="destination-breadcrumb">
+﻿<div class="ibox-wp">
+    <div class="row-fluid" id="destination-breadcrumb">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ibox-title searched-box">
             <div class="col-md-3 col-sm-8 col-xs-8 breadcrum-container">
                 <breadcrumb:directive ng-model="breadcrumb"></breadcrumb:directive>
@@ -13,7 +13,7 @@
         <div class="clear"></div>
     </div>
     <div class="row-fluid">
-        <div class="col-md-6">
+        <div class="col-md-8">
             <div class="row">
                 <div class="ibox-box searched search-det">
                     <p>
@@ -37,7 +37,7 @@
                     <div class="col-md-6 col-sm-6 col-xs-12 col-fare" ng-if="::LowestNonStopFare">
                         <div class="ibox-box fare-box">
                             <div class="fare-box-inner text-right">
-                                <h4 ng-init="::amtbifercation=amountBifurcation(LowestNonStopFare.Fare);">
+                                <h4 class="fare-font" ng-init="::amtbifercation=amountBifurcation(LowestNonStopFare.Fare);">
                                     <span class="cursor-help" data-toggle="tooltip" popover="{{fareParams.FareInfo.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(fareParams.FareInfo.CurrencyCode)}}</span>
                                     {{amtbifercation.BeforeDecimal}}<span class="text-super vertical-top">{{amtbifercation.AfterDecimal}}</span>
                                 </h4>
@@ -56,7 +56,7 @@
                     <div class="col-md-6 col-sm-6 col-xs-12 col-fare" ng-if="::LowestFare">
                         <div class="ibox-box fare-box">
                             <div class="fare-box-inner text-right">
-                                <h4 ng-init="::amtbifercation=amountBifurcation(LowestFare.Fare);">
+                                <h4 class="fare-font" ng-init="::amtbifercation=amountBifurcation(LowestFare.Fare);">
                                     <span class="cursor-help" data-toggle="tooltip" popover="{{fareParams.FareInfo.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(fareParams.FareInfo.CurrencyCode)}}</span>
                                     {{amtbifercation.BeforeDecimal}}<span class="text-super vertical-top">{{amtbifercation.AfterDecimal}}</span>
                                 </h4>
@@ -76,7 +76,7 @@
                 <div class="row" ng-if="LowestNonStopFare || LowestFare">
                     <div class="col-md-12 clear">
                         <div class="ibox-box searched margin-0">
-                            <h6 class="margin-0">
+                            <h6 class="margin-0 font-normal">
                                 Fares are round trip 1 adult economy. Taxes and fees are included; baggage and preferred seating, are not included.
                             </h6>
                         </div>
@@ -84,8 +84,9 @@
                 </div>
             </div>
         </div>
-        <div id="divhotel" class="col-md-3 col-sm-12 col-xs-12 col-hotel" ng-if="fareParams">
+        <div id="divhotel" class="col-md-4 col-sm-12 col-xs-12 col-hotel" ng-if="fareParams">
             <hotel-range origin="fareParams.SearchCriteria.Origin" destination="fareParams.SearchCriteria.DestinationLocation" departure-date="fareParams.SearchCriteria.FromDate | date:format" return-date="fareParams.SearchCriteria.ToDate | date:format"></hotel-range>
         </div>
     </div>
+    <div class="clear"></div>
 </div>

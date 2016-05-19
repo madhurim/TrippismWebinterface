@@ -1377,6 +1377,7 @@ ul .stop-line {
     .hotel-wrapper table tbody {
         font-weight: 500;
         font-size: 17px;
+        color: #333;
     }
 
 .hotel-wrapper .fa-star {
@@ -1415,14 +1416,10 @@ ul .stop-line {
     font-size: 15px;
 }
 
-    .avg-high h5, .avg-low h5 {
-        font-size: 22px;
+    .avg-high h5 span, .avg-low h5 span {
+        font-size: 12px;
+        vertical-align: top;
     }
-
-        .avg-high h5 span, .avg-low h5 span {
-            font-size: 12px;
-            vertical-align: top;
-        }
 
 .avg .title {
     font-size: 14px;
@@ -1441,8 +1438,17 @@ ul .stop-line {
         margin-top: -10px;
     }
 
+.font-normal {
+    font-weight: normal;
+}
+
+.fare-font {
+    font-size: 22px;
+    font-weight: 500;
+    color: #333;
+}
 /*#region destination-layout*/
-.destination-page #destination-boxwrap img {
+.destination-page #destination-imgwrap img {
     width: 100%;
     height: 100%;
 }
@@ -1451,20 +1457,15 @@ ul .stop-line {
     width: 80%;
     margin: auto;
     background-color: #fff;
-    margin-top: -80px;
 }
-
-#destination-breadcrumb {
-    margin-top: -40px;
-}
-
-    #destination-breadcrumb .ibox-title {
-        background: rgba(255,255,255,0.7);
-    }
 
 .tab-content-wp {
     box-shadow: 1px 1px 12px #aaa;
-    background: rgba(255,255,255,0.8);
+    padding-top: 10px;
+}
+
+#destination-breadcrumb .ibox-title {
+    border: 1px solid #ccc;
 }
 
 /*#endregion destination-layout*/
@@ -1629,6 +1630,12 @@ ul .stop-line {
     .video {
         width: 80%;
         height: 283px;
+    }
+
+    #destination-content {
+        width: 100%;
+        padding: 0px;
+        box-shadow: none;
     }
 }
 

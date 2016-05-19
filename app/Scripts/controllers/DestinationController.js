@@ -18,11 +18,15 @@
         $window) {
 
         $scope.$emit('bodyClass', 'otherpage destination-page');
+        var w = angular.element($window);
+        w.bind('resize', setPageHeight);
+
         setPageHeight();
+
         function setPageHeight() {
-            var w = angular.element($window);
-            var boxwrap = angular.element("#destination-boxwrap");
-            boxwrap.height(w.height() - 100);
+            var boxwrap = angular.element("#destination-imgwrap");
+            if (!boxwrap.length) { w.unbind("resize", setPageHeight); return; };
+            boxwrap.height((w.height() * 60) / 100);
         }
 
         $scope.Origin = $scope.DestinationLocation = '';

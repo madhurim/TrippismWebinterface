@@ -963,7 +963,7 @@ i.calendar.active, .input-box:hover i.calendar {
 .news-block ul li {
     float: left;
     margin-top: 15px;
-    width: 100%;
+    display: inline-block;
 }
 
     .news-block ul li:first-child {

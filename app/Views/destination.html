@@ -1,9 +1,9 @@
 ﻿<div ng-controller="DestinationController" cg-busy="{promise:mappromise,message:'Please wait...'}" id="destination-wrapper">
-    <div class="destination-boxwrap" id="destination-boxwrap"><img src="../images/destination/background.jpg" /></div>
+    <div class="destination-boxwrap" id="destination-boxwrap"><img src="../images/destination/background2.jpg" /></div>
     <div class="row" title="" id="destination-content">
         <div class="tab-content-wp col-xs-12">
             <destination-fare-forecast fare-params="params"></destination-fare-forecast>
-            <div class=" col-md-9 col-sm-12 col-xs-12">
+            <div class=" col-md-12 col-sm-12 col-xs-12">
                 <div class="" reset-dimentions>
                     <div class="row outerDiv" id="outerDiv">
                         <div class="col-md-12 col-sm-12 col-xs-12 column-2">
@@ -19,8 +19,10 @@
                     <seasonality-info seasonality-params="params"></seasonality-info>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-12 col-xs-12 padleft0">
-                <youtube-info youtube-params="params"></youtube-info>
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="col-md-12 col-sm-12 col-xs-12 newouterDiv">
+                    <youtube-info youtube-params="params"></youtube-info>
+                </div>
             </div>
         </div>
     </div>

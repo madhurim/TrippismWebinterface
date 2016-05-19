@@ -14,16 +14,16 @@
                     </nav>
                 </div>
                 <div id="examples" class="news-block">
-                    <div class="content contentVertical">
+                    <div class="contentHorizontal">
                         <ul>
-                            <li ng-repeat="data in youtubeData.items | limitTo: pageSize ">
-                                <div class="news-img-block">
+                            <li ng-repeat="data in youtubeData.items | limitTo: pageSize " style="width:150px;margin-top:0px;text-align:center;padding:0px 10px;">
+                                <div class="news-img-block" style="float:none;margin:auto;">
                                     <a ng-click="open(data.id.videoId)" style="cursor:pointer;">
                                         <span class="play"><img src="/images/play-icon.png" alt="" /></span>
-                                        <img ng-src="{{data.snippet.thumbnails.default.url}}" alt="" />
+                                        <img ng-src="{{data.snippet.thumbnails.default.url}}" alt="" width="85" height="64" />
                                     </a>
                                 </div>
-                                <div class="news-content-block">
+                                <div class="news-content-block" style="margin-top:5px;">
                                     <p>{{data.snippet.title}}</p>
                                 </div>
                             </li>

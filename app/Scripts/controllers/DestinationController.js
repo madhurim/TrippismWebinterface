@@ -7,15 +7,24 @@
             'DestinationFactory',
             'UtilFactory',
             'InstaFlightSearchFactory',
+            '$window',
              DestinationController]);
     function DestinationController(
         $scope,
         $stateParams,
         DestinationFactory,
         UtilFactory,
-        InstaFlightSearchFactory) {
+        InstaFlightSearchFactory,
+        $window) {
 
-        $scope.$emit('bodyClass', 'otherpage');
+        $scope.$emit('bodyClass', 'otherpage destination-page');
+        setPageHeight();
+        function setPageHeight() {
+            var w = angular.element($window);
+            var boxwrap = angular.element("#destination-boxwrap");
+            boxwrap.height(w.height() - 100);
+        }
+
         $scope.Origin = $scope.DestinationLocation = '';
         init();
         function init() {

@@ -811,7 +811,7 @@ ul .stop-line {
     font-size: 16px;
 }
 
-.homepage .header {
+.homepage .header, .destination-page .header-box {
     position: absolute;
     left: 0;
     right: 0;
@@ -822,7 +822,7 @@ ul .stop-line {
     background-color: transparent;
 }
 
-.homepage .destination-boxwrap {
+.homepage .destination-boxwrap, .destination-page .destination-boxwrap {
     height: 100%;
     width: 100%;
 }
@@ -1440,6 +1440,34 @@ ul .stop-line {
         width: 50px;
         margin-top: -10px;
     }
+
+/*#region destination-layout*/
+.destination-page #destination-boxwrap img {
+    width: 100%;
+    height: 100%;
+}
+
+#destination-content {
+    width: 80%;
+    margin: auto;
+    background-color: #fff;
+    margin-top: -80px;
+}
+
+#destination-breadcrumb {
+    margin-top: -40px;
+}
+
+    #destination-breadcrumb .ibox-title {
+        background: rgba(255,255,255,0.8);
+    }
+
+.tab-content-wp {
+    box-shadow: 1px 1px 12px #aaa;
+    background: rgba(255,255,255,0.8);
+}
+
+/*#endregion destination-layout*/
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {

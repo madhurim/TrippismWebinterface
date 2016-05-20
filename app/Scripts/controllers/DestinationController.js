@@ -26,7 +26,7 @@
         function setPageHeight() {
             var boxwrap = angular.element("#destination-imgwrap");
             if (!boxwrap.length) { w.unbind("resize", setPageHeight); return; };
-            boxwrap.height((w.height() * 60) / 100);
+            boxwrap.height((w.height() * 70) / 100);    // make image height 70% of the screen height
         }
 
         $scope.Origin = $scope.DestinationLocation = '';

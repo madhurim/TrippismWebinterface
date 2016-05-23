@@ -15,7 +15,7 @@
     <div class="row-fluid">
         <div class="col-md-8">
             <div class="row">
-                <div class="ibox-box searched search-det">
+                <div class="ibox-box searched search-det font-light">
                     <p>
                         <span ng-show="fareParams.OriginAirport && fareParams.DestinationAirport">{{fareParams.OriginAirport.airport_CityName}}-{{fareParams.DestinationAirport.airport_CityName}}</span>
                         <span ng-show="fareParams.SearchCriteria.FromDate"> {{fareParams.SearchCriteria.FromDate | date:'MMM-dd-yyyy'}} </span>
@@ -27,7 +27,7 @@
                     </p>
                     <div class="clear"></div>
                 </div>
-                <div class="ibox-title ibox-title-new">
+                <div class="ibox-title ibox-title-new font-light">
                     <h4>
                         {{airportDetail}}
                     </h4>
@@ -76,7 +76,7 @@
                 <div class="row" ng-if="LowestNonStopFare || LowestFare">
                     <div class="col-md-12 clear">
                         <div class="ibox-box searched margin-0">
-                            <h6 class="margin-0 font-normal">
+                            <h6 class="margin-0 font-normal font-light">
                                 Fares are round trip 1 adult economy. Taxes and fees are included; baggage and preferred seating, are not included.
                             </h6>
                         </div>

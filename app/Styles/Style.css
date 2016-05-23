@@ -676,7 +676,6 @@ i.calendar.active, .input-box:hover i.calendar {
 
 .ibox-box.searched {
     padding: 5px 15px 0 10px;
-    font-weight: 500;
 }
 
 .ibox-box img {
@@ -835,13 +834,11 @@ i.calendar.active, .input-box:hover i.calendar {
 }
 
 .overview-weather-content h6 {
-    color: #585858;
     font-size: 14px;
     margin-top: 0;
 }
 
 .overview-weather-content p {
-    color: #989898;
     font-size: 12px;
     margin-bottom: 8px;
 }
@@ -882,9 +879,6 @@ i.calendar.active, .input-box:hover i.calendar {
     }
 
     .avg .title {
-        color: #585858;
-        font-size: 12px;
-        color: #989898;
         vertical-align: -webkit-baseline-middle;
     }
 
@@ -1000,7 +994,6 @@ i.calendar.active, .input-box:hover i.calendar {
         }
 
     .news-block ul li .news-content-block {
-        color: #585858;
         font-size: 12px;
         overflow: hidden;
         height: 34px;

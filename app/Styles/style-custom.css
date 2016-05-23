@@ -403,6 +403,10 @@ a {
     margin-bottom: 15px;
 }
 
+.margin-top-15 {
+    margin-top: 15px;
+}
+
 .cross-btn {
     position: absolute;
     right: 0;
@@ -508,6 +512,10 @@ ul .stop-line {
 
 .vertical-top {
     vertical-align: top;
+}
+
+.vertical-bottom {
+    vertical-align: bottom;
 }
 
 .paddingtop7 {
@@ -965,16 +973,17 @@ ul .stop-line {
     word-spacing: -2px;
 }
 
-.fare-pred {
-    font-weight: bold;
-}
-
-    .fare-pred p {
-        font-weight: normal;
+    .gauge-label .font-imp {
+        font-size: 14px;
+        font-weight: 600;
     }
 
 .font-16 {
     font-size: 16px;
+}
+
+.font-18 {
+    font-size: 18px;
 }
 
 .book-wrapper a {
@@ -1447,6 +1456,17 @@ ul .stop-line {
     font-weight: 500;
     color: #333;
 }
+
+.font-light {
+    color: #565a5c;
+    font-weight: normal;
+}
+
+.font-imp {
+    font-weight: 500;
+    color: #333;
+}
+
 /*#region destination-layout*/
 .destination-page #destination-imgwrap img {
     width: 100%;

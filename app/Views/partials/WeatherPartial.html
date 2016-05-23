@@ -9,19 +9,19 @@
                 <ul class="list-line">
                     <li>
                         <div class="overview-weather-content">
-                            <h6> {{DepartDate | date:'MMM-dd-yyyy'}} To {{ReturnDate | date:'MMM-dd-yyyy'}}  </h6>
+                            <h6 class="font-light"> {{DepartDate | date:'MMM-dd-yyyy'}} To {{ReturnDate | date:'MMM-dd-yyyy'}}  </h6>
                         </div>
                         <div class="col-md-4 col-sm-12 col-xs-12 col-weather padding-0 margin-top-5">
                             <div class="col-md-6 col-sm-6 col-xs-6 avg-high padding-0">
-                                <span>Avg. High </span>
+                                <span class="font-light">Avg. High </span>
                                 <h5 class="fare-font">{{HighTempratureF}}<span>&#x2109</span>&nbsp;&nbsp;{{HighTempratureC}}<span>&#x2103</span></h5>
                             </div>
                             <div class="col-md-6 col-sm-6 col-xs-6 avg-low padding-0">
-                                <span>Avg. Low </span>
+                                <span class="font-light">Avg. Low </span>
                                 <h5 class="fare-font">{{LowTempratureF}}<span>&#x2109</span>  &nbsp;&nbsp;{{LowTempratureC}}<span>&#x2103</span></h5>
                             </div>
                         </div>
-                        <div class="col-md-8 col-sm-12 col-xs-12 avg-box padding-0">
+                        <div class="col-md-8 col-sm-12 col-xs-12 avg-box padding-0 font-light">
                             <div ng-repeat="item in  WeatherwidgetData.WeatherChances">
                                 <div class="avg" ng-if="item.Name=='Cloudy' && item.Percentage >= 60">
                                     <img src="../images/weather/Cloudy.png" alt="" />

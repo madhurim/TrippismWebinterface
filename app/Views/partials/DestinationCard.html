@@ -25,6 +25,7 @@
         <div class="pull-left">
             <span ng-show="!isDataFound" class="glyphicon glyphicon-refresh glyphicon-spin"></span>
             <h3 class="md-display-1 mddisplay1 mdfare" ng-if="destinationData.lowestFare" ng-init="::amount = amountBifurcation(destinationData.lowestFare);">
+                <i class="fa fa-plane"></i>
                 <span class="cursor-help" data-toggle="tooltip" popover="{{::destinationData.currencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{::destinationData.currencySymbol}}</span>
                 {{amount.BeforeDecimal}}<span class="text-super vertical-top">{{amount.AfterDecimal}}</span>
             </h3>

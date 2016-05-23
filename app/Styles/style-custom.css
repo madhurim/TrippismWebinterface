@@ -1383,15 +1383,18 @@ ul .stop-line {
     color: #f6ab02;
 }
 
-/*.hotel-wrapper tbody td {
-    width: 120px;
-    text-align: right;
+.mddisplay1 {
+    font-size: 23px;
+    color: #333;
 }
 
-    .hotel-wrapper tbody td:last-child {
-        width: 60px;
-        min-width: 40px;
-    }*/
+    .mddisplay1 .fa {
+        width: 25px;
+    }
+
+    .mddisplay1 .fa-bed {
+        font-size: 20px;
+    }
 /*#endregion Hotels*/
 
 .col-dest-title {
@@ -1451,6 +1454,9 @@ ul .stop-line {
     margin-right: 15px;
 }
 
+.display-block {
+    display: inline-block;
+}
 /*#endregion md-hotel*/
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
@@ -1587,8 +1593,16 @@ ul .stop-line {
     }
 
     .mddisplay1 {
-        font-size: 21px;
+        font-size: 20px;
     }
+
+        .mddisplay1 .fa {
+            width: 20px;
+        }
+
+        .mddisplay1 .fa-bed {
+            font-size: 17px;
+        }
 }
 
 @media only screen and (max-width:769px) and (orientation:landscape) {
@@ -1597,7 +1611,7 @@ ul .stop-line {
     }
 
     .mddisplay1 {
-        font-size: 25px;
+        font-size: 23px;
     }
 }
 

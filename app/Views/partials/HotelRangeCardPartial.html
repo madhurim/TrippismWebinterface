@@ -2,15 +2,25 @@
     <h5><span class="glyphicon glyphicon-refresh glyphicon-spin margin-0"></span> &nbsp;Bringing latest Hotel prices...</h5>
 </div>
 <div class="hotel-wrapper" ng-if="::HotelRangeData">
-    <table>
+    <div class="pull-left">
+        <h3 class="md-display-1 mddisplay1 mdfare" ng-init="::amount = amountBifurcation(HotelRangeData.Fare);">
+            <i class="fa fa-bed"></i>
+            <span class="cursor-help" data-toggle="tooltip" popover="{{::hotelCurrency}}" popover-trigger="mouseenter" popover-placement="top">{{ ::hotelCurrencySymbol }}</span>
+            {{amount.BeforeDecimal}}<span class="text-super vertical-top">{{amount.AfterDecimal}}</span>
+            <span class="margin-left-5 display-block" ng-if="::HotelRangeData.Star == '3'" title="3 star hotels"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
+            <span class="margin-left-5 display-block" ng-if="::HotelRangeData.Star == '4'" title="4 star hotels"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
+            <span class="margin-left-5 display-block" ng-if="::HotelRangeData.Star == '5'" title="5 star hotels"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
+        </h3>
+    </div>
+    <!--<table>
         <tbody>
             <tr>
-                <td><div class="col-md-12 col-hotel-title col-dest-title"><i class="fa fa-bed"></i>Hotels</div></td>
+                <td><div class="col-md-12 col-hotel-title col-dest-title"><i class="fa fa-bed"></i></div></td>
                 <td><span class="cursor-help" data-toggle="tooltip" popover="{{::hotelCurrency}}" popover-trigger="mouseenter" popover-placement="top">{{ ::hotelCurrencySymbol }}</span> {{::HotelRangeData.Fare|number:2}}</td>
                 <td ng-if="::HotelRangeData.Star == '3'" title="3 star hotels"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></td>
                 <td ng-if="::HotelRangeData.Star == '4'" title="4 star hotels"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></td>
                 <td ng-if="::HotelRangeData.Star == '5'" title="5 star hotels"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></td>
             </tr>
         </tbody>
-    </table>
+    </table>-->
 </div>

@@ -66,6 +66,7 @@
                             $scope.$emit('hotelDataFound', false);
                     });
                 });
+                $scope.amountBifurcation = function (value) { return UtilFactory.amountBifurcation(value); };
             }],
         };
     }]);

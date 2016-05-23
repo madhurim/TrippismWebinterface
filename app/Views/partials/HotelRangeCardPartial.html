@@ -1,0 +1,16 @@
+﻿<div ng-show="!hotelRequestComplete">
+    <h5><span class="glyphicon glyphicon-refresh glyphicon-spin margin-0"></span> &nbsp;Bringing latest Hotel prices...</h5>
+</div>
+<div class="hotel-wrapper" ng-if="::HotelRangeData">
+    <table>
+        <tbody>
+            <tr>
+                <td><div class="col-md-12 col-hotel-title col-dest-title"><i class="fa fa-bed"></i>Hotels</div></td>
+                <td><span class="cursor-help" data-toggle="tooltip" popover="{{::hotelCurrency}}" popover-trigger="mouseenter" popover-placement="top">{{ ::hotelCurrencySymbol }}</span> {{::HotelRangeData.Fare|number:2}}</td>
+                <td ng-if="::HotelRangeData.Star == '3'" title="3 star hotels"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></td>
+                <td ng-if="::HotelRangeData.Star == '4'" title="4 star hotels"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></td>
+                <td ng-if="::HotelRangeData.Star == '5'" title="5 star hotels"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

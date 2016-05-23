@@ -18,6 +18,7 @@
         $scope.$emit('bodyClass', 'otherpage');
         $scope.Origin = $scope.DestinationLocation = '';
         init();
+
         function init() {
             window.scrollTo(0, 0);
             alertify.dismissAll();

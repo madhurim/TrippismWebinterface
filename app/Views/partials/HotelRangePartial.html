@@ -14,7 +14,7 @@
         </thead>
         <tbody>
             <tr>
-                <td><span class="cursor-help" data-toggle="tooltip" popover="{{hotelCurrency}}" popover-trigger="mouseenter" popover-placement="top">{{ hotelCurrencySymbol }}</span> {{HotelRangeData.Fare | number:2}}</td>
+                <td><span class="cursor-help" data-toggle="tooltip" popover="{{HotelRangeData.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{ HotelRangeData.CurrencySymbol }}</span> {{HotelRangeData.Fare | number:2}}</td>
                 <td title="3 star hotels" ng-if="HotelRangeData.Star == '3'"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></td>
                 <td title="4 star hotels" ng-if="HotelRangeData.Star == '4'"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></td>
                 <td title="5 star hotels" ng-if="HotelRangeData.Star == '5'"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></td>

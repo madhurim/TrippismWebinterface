@@ -17,8 +17,7 @@
                 }
                 $scope.hotelRequestComplete = false;
                 UtilFactory.ReadAirportsCurrency().then(function (response) {
-                    $scope.hotelCurrency = UtilFactory.GetAirportCurrency($scope.origin);
-                    $scope.hotelCurrencySymbol = UtilFactory.GetCurrencySymbol($scope.hotelCurrency);
+                    var hotelCurrency = UtilFactory.GetAirportCurrency($scope.origin);
                     var key = {
                         Origin: $scope.origin,
                         Destination: $scope.destination,
@@ -40,7 +39,7 @@
                         HotelCityCode: $scope.destination,
                         StartDate: $scope.departureDate,
                         EndDate: $scope.returnDate,
-                        CurrencyCode: $scope.hotelCurrency
+                        CurrencyCode: hotelCurrency
                     }
 
                     HotelRangeFactory.GetAllHotelRange($scope.hotelInputData).then(function (data) {
@@ -53,6 +52,8 @@
 
                             if (hotelRange != Infinity) {
                                 $scope.HotelRangeData = {
+                                    CurrencyCode: hotelRange.RateRange.CurrencyCode,
+                                    CurrencySymbol: UtilFactory.GetCurrencySymbol(hotelRange.RateRange.CurrencyCode),
                                     Fare: hotelRange.RateRange.Min,
                                     Star: hotelRange.HotelRating ? hotelRange.HotelRating[0].RatingText.substring(0, 1) : null
                                 };

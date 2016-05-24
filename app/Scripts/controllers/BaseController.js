@@ -5,34 +5,22 @@
         ['$scope', '$modal', '$rootScope', '$location', BaseController]);
 
     function BaseController($scope, $modal, $rootScope, $location) {
+        var hostName = "http://api.trippism.com";
         if (angular.lowercase($location.host()) == "localhost") {
-            //devlopment url
-            $rootScope.apiURL = 'http://localhost:14606/api/Sabre/';
-            $rootScope.apiURLForEmail = 'http://localhost:14606/api/Email/SendEmailtoUser';
-            $rootScope.apiURLForGoogleAttraction = 'http://localhost:14606/api/googleplace/';
-            $rootScope.apiURLForYouTube = 'http://localhost:14606/api/youtube/';
-            $rootScope.apiURLForWeather = 'http://localhost:14606/api/weather/international/history';
-            $rootScope.apiURLForUSWeather = 'http://localhost:14606/api/weather/history';
-            $rootScope.apiURLForGoogleGeoReverseLookup = 'http://localhost:14606/api/googlegeocode/reverselookup/';
-            $rootScope.apiURLForFeedback = 'http://localhost:14606/api/Email/SendFeedback';
-            $rootScope.apiURLForInstaFlightSearch = 'http://localhost:14606/api/instaflight';
-            $rootScope.apiURLForConstant = 'http://localhost:14606/api/Constants/';
-            $rootScope.apiURLForHotelRange = 'http://localhost:14606/api/sabre/hotels';
+            hostName = 'http://localhost:14606';
         }
-        else {
-            //live url
-            $rootScope.apiURL = 'http://' + $location.host() + '/api/';
-            $rootScope.apiURLForEmail = 'http://' + $location.host() + '/api/Email/SendEmailtoUser';
-            $rootScope.apiURLForWeather = 'http://' + $location.host() + '/api/weather/international/history';
-            $rootScope.apiURLForGoogleAttraction = 'http://' + $location.host() + '/api/googleplace/';
-            $rootScope.apiURLForYouTube = 'http://' + $location.host() + '/api/youtube/';
-            $rootScope.apiURLForUSWeather = 'http://' + $location.host() + '/api/weather/history';
-            $rootScope.apiURLForGoogleGeoReverseLookup = 'http://' + $location.host() + '/api/googlegeocode/reverselookup/';
-            $rootScope.apiURLForFeedback = 'http://' + $location.host() + '/api/Email/SendFeedback';
-            $rootScope.apiURLForInstaFlightSearch = 'http://' + $location.host() + '/api/instaflight';
-            $rootScope.apiURLForConstant = 'http://' + $location.host() + '/api/Constants/';
-            $rootScope.apiURLForHotelRange = 'http://' + $location.host() + '/api/sabre/hotels';
-        }
+
+        $rootScope.apiURL = hostName + '/api/Sabre/';
+        $rootScope.apiURLForEmail = hostName + '/api/Email/SendEmailtoUser';
+        $rootScope.apiURLForGoogleAttraction = hostName + '/api/googleplace/';
+        $rootScope.apiURLForYouTube = hostName + '/api/youtube/';
+        $rootScope.apiURLForWeather = hostName + '/api/weather/international/history';
+        $rootScope.apiURLForUSWeather = hostName + '/api/weather/history';
+        $rootScope.apiURLForGoogleGeoReverseLookup = hostName + '/api/googlegeocode/reverselookup/';
+        $rootScope.apiURLForFeedback = hostName + '/api/Email/SendFeedback';
+        $rootScope.apiURLForInstaFlightSearch = hostName + '/api/instaflight';
+        $rootScope.apiURLForConstant = hostName + '/api/Constants/';
+        $rootScope.apiURLForHotelRange = hostName + '/api/sabre/hotels';
 
         $rootScope.isShowAlerityMessage = true;
 

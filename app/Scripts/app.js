@@ -147,6 +147,17 @@ angular.module('TrippismUIApp').directive('allowOnlyDateInputs', function () {
     }
 });
 
+angular.module('TrippismUIApp').directive('srcError', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, elm, attrs) {
+            elm.bind('error', function () {
+                angular.element(this).attr("src", attrs.srcError);
+            });
+        }
+    }
+});
+
 // for refreshing the datepicker when needed
 angular.module('ui.bootstrap.datepicker')
     .config(function ($provide) {

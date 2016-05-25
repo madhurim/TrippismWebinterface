@@ -1693,6 +1693,10 @@ ul .stop-line {
     .fare-box {
         text-align: right;
     }
+
+    .hotel-wrapper .fare-box {
+        text-align: left;
+    }
 }
 
 @media only screen and (max-width:480px) {

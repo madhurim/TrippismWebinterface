@@ -5,7 +5,7 @@
 </div>
 <div class="hotel-wrapper" ng-if="HotelRangeData">
     <div class="col-fare-title col-dest-title"><h4><i class="fa fa-bed"></i>Hotels</h4></div>
-    <div class="col-md-12 padleft0">
+    <div class="col-md-12">
         <div class="ibox-box fare-box">
             <div class="fare-box-inner text-right">
                 <div class="pull-left">
@@ -14,17 +14,20 @@
                         {{amtbifercation.BeforeDecimal}}<span class="text-super vertical-top">{{amtbifercation.AfterDecimal}}</span>
                     </h4>
                     <p>Lowest</p>
-                </div>
-                <div class="pull-right margin-left-30">
                     <h4 title="3 star hotels" ng-if="HotelRangeData.Star == '3'"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></h4>
                     <h4 title="4 star hotels" ng-if="HotelRangeData.Star == '4'"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></h4>
                     <h4 title="5 star hotels" ng-if="HotelRangeData.Star == '5'"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></h4>
                 </div>
+                <!--<div class="pull-right margin-left-30">
+                    <h4 title="3 star hotels" ng-if="HotelRangeData.Star == '3'"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></h4>
+                    <h4 title="4 star hotels" ng-if="HotelRangeData.Star == '4'"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></h4>
+                    <h4 title="5 star hotels" ng-if="HotelRangeData.Star == '5'"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></h4>
+                </div>-->
             </div>
-            <div class="fare-box-inner">
+            <div class="fare-box-inner hidden-xs">
                 <p class="hover-line book-wrapper">
                     <a href="javascript:void(0)" ng-click="showHotelDetails();">
-                        <img src="../images/book_now.png" />
+                        <img src="../images/showmore.png" />
                     </a>
                 </p>
             </div>

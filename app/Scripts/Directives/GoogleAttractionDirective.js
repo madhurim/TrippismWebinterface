@@ -3,11 +3,10 @@
                                                 'GoogleAttractionFactory',
                                                 '$timeout',
                                                 '$filter',
-                                                '$sce',
                                                 'TrippismConstants',
                                                 'DestinationFactory',
-                                                'UtilFactory',
-function ($rootScope, GoogleAttractionFactory, $timeout, $filter, $sce, TrippismConstants, DestinationFactory, UtilFactory) {
+                                                '$modal',
+function ($rootScope, GoogleAttractionFactory, $timeout, $filter, TrippismConstants, DestinationFactory, $modal) {
     return {
         restrict: 'E',
         scope: { googleattractionParams: '=', isOpen: '=' },
@@ -45,105 +44,9 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, $sce, Trippism
             });
 
             $scope.$on('onMarkerPopup', function (event, args) {
-                SetMarkerSlider(args.place)
+                $scope.attractionPopup(args.place);
             });
 
-            function SetMarkerSlider(MapDet) {
-                $scope.slides = [];
-                $scope.IsMarkerSelected = false;
-                $scope.IsMapPopupLoading = true;
-                if (MapDet.type == "hotels") {
-                    var data = {
-                        Latitude: MapDet.geometry.location.lat,
-                        Longitude: MapDet.geometry.location.lng,
-                        radius: 200,
-                        name: MapDet.name
-                    };
-                    $scope.attractionMessage = 'Getting hotel details';
-                    $scope.googleattractionpromise = GoogleAttractionFactory.googleAttraction(data).then(function (data) {
-                        if (data && data.results && data.results.length) {
-                            MapDet.place_id = data.results[0].place_id;
-                            getPlaceDetails(MapDet);
-                        }
-                    });
-                }
-                else
-                    getPlaceDetails(MapDet);
-            }
-
-            function getPlaceDetails(MapDet) {
-                $scope.locationDetail = {
-                    PhoneNo: "",
-                    raitingToAppend: "",
-                    PlaceName: "",
-                    Placeaddress: "",
-                    AttractionType: MapDet.type
-                }
-                if ($scope.locationDetail.AttractionType == 'hotels') {
-                    $scope.locationDetail.FreeWifiInRooms = MapDet.details.FreeWifiInRooms;
-                    $scope.locationDetail.RateRange = MapDet.details.RateRange;
-                }
-
-                $scope.attractionReviews = [];
-                var service = new google.maps.places.PlacesService($scope.googleattractionsMap);
-                var request = { placeId: MapDet.place_id };
-                $scope.SelectedPlaceId = MapDet.place_id;
-                service.getDetails(request, function (place, status) {
-                    $scope.IsMapPopupLoading = false;
-                    if (status == google.maps.places.PlacesServiceStatus.OK) {
-                        // Multi photo
-                        if (place.photos != null && place.photos.length > 0) {
-                            var photos = [];
-                            for (var photoidx = 0; photoidx < place.photos.length; photoidx++) {
-                                var Imgsrc = place.photos[photoidx].getUrl({ 'maxWidth': 570, 'maxHeight': 400 });
-                                var objtopush = { image: Imgsrc, text: "" };
-                                photos.push(objtopush);
-                            }
-                            $scope.addSlides(photos);
-                        }
-                        $scope.locationDetail.PlaceName = place.name;
-                        $scope.locationDetail.Placeaddress = $sce.trustAsHtml(place.adr_address);
-                        if (place.formatted_phone_number != undefined)
-                            $scope.locationDetail.PhoneNo = place.formatted_phone_number;
-
-                        if (place.rating != undefined)
-                            $scope.locationDetail.raitingToAppend = $sce.trustAsHtml(getRatings(place.rating));
-
-                        $scope.IsMapPopupLoading = false;
-                        if (place.reviews != null && place.reviews.length > 0) {
-                            for (var i = 0; i < place.reviews.length; i++) {
-                                if (place.reviews[i].text.length > 0) {
-                                    // commented because currently we are not displaying aspects into reviews
-                                    //var rating = [];
-                                    //for (var x = 0; x < place.reviews[i].aspects.length; x++) {
-                                    //    var item = place.reviews[i].aspects[x];
-                                    //    item.rating = $sce.trustAsHtml(getRatings(item.rating));
-                                    //    rating.push(item);
-                                    //}
-                                    //$scope.attractionReviews.push({
-                                    //    author_name: place.reviews[i].author_name, text: place.reviews[i].text,
-                                    //    rating: $sce.trustAsHtml(getRatings(place.reviews[i].rating)), aspects: place.reviews[i].aspects, time: place.reviews[i].time
-                                    //});
-
-                                    $scope.attractionReviews.push({
-                                        author_name: place.reviews[i].author_name, text: place.reviews[i].text,
-                                        rating: $sce.trustAsHtml(getRatings(place.reviews[i].rating)), time: place.reviews[i].time
-                                    });
-                                }
-                            }
-                        }
-                        $scope.$apply();
-                    }
-                });
-
-                var mapheight = $('#gMapId_').height() - 400;
-                var mapWidth = $('#gMapId_').width() - 600;
-
-                $("#googleMapId_").css('top', '-25px');
-                $("#googleMapId_").css('left', mapWidth / 2);
-
-                $scope.IsMarkerSelected = true;
-            }
             // resize google map and fit all the bounds into viewport
             $scope.FittoScreen = function () {
                 google.maps.event.trigger($scope.googleattractionsMap, 'resize');
@@ -216,6 +119,7 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, $sce, Trippism
                                         name: itemData.HotelName,
                                         vicinity: itemData.Address[0] + itemData.Address[1],
                                         rating: rating,
+                                        type: 'hotels',
                                         details: { FreeWifiInRooms: itemData.PropertyOptionInfo.FreeWifiInRooms, RateRange: itemData.RateRange, Rating: rating }
                                     }
                                 }
@@ -283,48 +187,6 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, $sce, Trippism
                 }
             };
 
-            $scope.cancel = function () {
-                $scope.IsMarkerSelected = false;
-            };
-
-            function getRatings(num) {
-                var MaxRating = 5;
-                var stars = [];
-                for (var i = 0; i < MaxRating; i++) {
-                    stars.push({});
-                }
-                var filledInStarsContainerWidth = num / MaxRating * 86.3; //% changed from 100 to 86.3 because of star fill problem
-
-                var ratingDiv = "<div class='average-rating-container' title='" + num + "'>";
-                if (stars.length > 0) {
-
-                    ratingDiv += "<ul class='rating background' class='readonly'>";
-
-                    for (var starIdx = 0; starIdx < stars.length; starIdx++)
-                        ratingDiv += "<li class='star'><i class='fa fa-star'></i></li>";
-
-                    ratingDiv += "</ul>";
-                    ratingDiv += "<ul class='rating foreground readonly'  style='width:" + filledInStarsContainerWidth + "%'>";
-
-                    for (var starIdx = 0; starIdx < stars.length; starIdx++)
-                        ratingDiv += "<li class='star filled'><i class='fa fa-star'></i></li>";
-                }
-                ratingDiv += "  </ul></div>";
-                return ratingDiv;
-            }
-
-            $scope.IsMapPopupLoading = false;
-
-            var slides = [];
-            $scope.slides = [];
-
-            $scope.addSlides = function (photos) {
-                for (var photoidex = 0; photoidex < photos.length; photoidex++)
-                    $scope.slides.push(photos[photoidex]);
-                $scope.$apply();
-            };
-            $scope.SelectedPlaceId = "";
-
             // set airport marker on map
             function setAirportMarkerOnMap() {
                 createMapLabelControl();
@@ -378,7 +240,7 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, $sce, Trippism
                         var MapDet = maps[x];
                         google.maps.event.addListener(marker, 'click', (function (MapDet) {
                             return function () {
-                                SetMarkerSlider(MapDet);
+                                $scope.attractionPopup(MapDet);
                             };
                         })(MapDet));
                         $scope.AttractionMarkers.push(marker);
@@ -410,11 +272,19 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, $sce, Trippism
                 if (attraction)
                     return attraction.markerImage;
             }
-
-            $scope.amountBifurcation = function (value) { return UtilFactory.amountBifurcation(value); };
-            $scope.GetCurrencySymbol = function (code) {
-                return UtilFactory.GetCurrencySymbol(code);
-            }
+        },
+        link: function ($scope, elem, attr) {
+            $scope.attractionPopup = function (attractionData) {
+                var attractionPopupInstance = $modal.open({
+                    templateUrl: 'Views/Partials/AttractionPopupPartial.html',
+                    controller: 'AttractionPopupController',
+                    scope: $scope,
+                    size: 'lg',
+                    resolve: {
+                        attractionData: function () { return attractionData; }
+                    }
+                });
+            };
         }
     }
 }]);

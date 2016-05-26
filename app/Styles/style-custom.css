@@ -226,7 +226,7 @@ img {
     left: 0;
     position: relative !important;
     right: 0;
-    top: -10px !important;
+    top: 10px;
     height: 24px;
 }
 
@@ -765,6 +765,12 @@ ul .stop-line {
 .attr-foods, .attr-beaches, .attr-casinos, .attr-outdoors, .attr-shops, .attr-theme-parks, .attr-history {
     width: auto;
     height: auto;
+}
+
+.attr-top {
+    min-height: 100px;
+    color: #333;
+    padding: 20px;
 }
 /* #endregion attraction */
 

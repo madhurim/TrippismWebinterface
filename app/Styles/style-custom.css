@@ -1473,7 +1473,39 @@ ul .stop-line {
 }
 /*#endregion md-hotel*/
 
+.font-light {
+    color: #565a5c;
+    font-weight: normal;
+}
 
+.fare-calc {
+    color: #333;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+    .fare-calc .box {
+        background-color: #ccc;
+        padding: 3px 5px;
+        border-radius: 3px;
+        display: inline-block;
+    }
+
+    .font-11 {
+        font-size: 11px;
+    }
+
+.margin-lr-3 {
+    margin: 0px 3px;
+}
+
+.margin-right-3 {
+    margin-right: 3px;
+}
+
+.font-700 {
+    font-weight: 700;
+}
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {

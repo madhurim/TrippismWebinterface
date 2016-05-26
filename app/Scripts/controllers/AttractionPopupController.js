@@ -26,8 +26,18 @@
                         attractionData.place_id = data.results[0].place_id;
                         getPlaceDetails(attractionData);
                     }
-                    else
-                        $scope.isAttrDataFound = false;
+                    else {
+                        $scope.IsMapPopupLoading = false;
+                        $scope.locationDetail = {
+                            AttractionType: attractionData.type
+                        }
+                        if ($scope.locationDetail.AttractionType == 'hotels') {
+                            $scope.locationDetail.FreeWifiInRooms = attractionData.details.FreeWifiInRooms;
+                            $scope.locationDetail.RateRange = attractionData.details.RateRange;
+                            $scope.locationDetail.PlaceName = attractionData.name;
+                            $scope.locationDetail.Placeaddress = $sce.trustAsHtml(attractionData.Placeaddress);
+                        }
+                    }
                 });
             }
             else

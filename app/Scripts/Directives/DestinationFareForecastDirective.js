@@ -15,6 +15,8 @@
                 $scope.$on('hotelDataFound', function (event, data) {
                     if (!data)
                         angular.element('#divhotel').remove();
+                    else
+                        $scope.HotelData = data;
                 });
                 $scope.amountBifurcation = function (value) { return UtilFactory.amountBifurcation(value); };
             },
@@ -234,6 +236,9 @@
                         { state: 'destinations({path:"' + destinationsPath + '"})', name: 'Destinations' },
                         { state: 'destination', name: 'Destination', active: true, className: "active" }
                     ];
+                }
+                $scope.totalFare = function () {
+                    return 2 * parseFloat($scope.LowestFare.Fare) + parseFloat($scope.HotelData.Fare);
                 }
             }
         }

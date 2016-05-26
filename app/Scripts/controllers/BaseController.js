@@ -6,6 +6,7 @@
 
     function BaseController($scope, $modal, $rootScope, $location) {
         var hostName = "http://api.trippism.com";
+        //var hostName = 'http://' + $location.host();
         if (angular.lowercase($location.host()) == "localhost") {
             hostName = 'http://localhost:14606';
         }

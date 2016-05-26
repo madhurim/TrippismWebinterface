@@ -65,7 +65,7 @@
                             Fare: hotelRange.RateRange.Min,
                             Star: hotelRange.HotelRating ? hotelRange.HotelRating[0].RatingText.substring(0, 1) : null
                         };
-                        $scope.$emit('hotelDataFound', true);
+                        $scope.$emit('hotelDataFound', $scope.HotelRangeData);
                     }
                     else
                         $scope.$emit('hotelDataFound', false);

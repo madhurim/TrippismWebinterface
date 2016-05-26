@@ -76,9 +76,35 @@
                         <div class="row" ng-if="LowestNonStopFare || LowestFare">
                             <div class="col-md-12 clear">
                                 <div class="ibox-box searched margin-0">
-                                    <h6 class="margin-0">
-                                        Fares are round trip 1 adult economy. Taxes and fees are included; baggage and preferred seating, are not included.<br />
-                                        Lowest likely cost of travel for 2 adults : 2 * ( lowest air fare ) + lowest hotel fare = the total value.
+                                    <h6 class="margin-0 font-light">
+                                        Fares are round trip 1 adult economy. Taxes and fees are included; baggage and preferred seating, are not included.
+                                    </h6>
+                                    <h6>
+                                        <span class="fare-calc" ng-if="HotelData">
+                                            Lowest likely cost of travel for 2 adults:&nbsp;
+                                            <span class="font-700">
+                                                <span class="display-block">
+                                                    2 *
+                                                    <span class="box" ng-init="::amtFare=amountBifurcation(LowestFare.Fare);">
+                                                        <i class="fa fa-plane margin-right-3" aria-hidden="true"></i>
+                                                        <span class="cursor-help" data-toggle="tooltip" popover="{{fareParams.FareInfo.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(fareParams.FareInfo.CurrencyCode)}}</span>
+                                                        {{amtFare.BeforeDecimal}}<span class="text-super vertical-top font-11">{{amtFare.AfterDecimal}}</span>
+                                                        <!--{{LowestFare.Fare}}-->
+                                                    </span>
+                                                </span>
+                                                <span class="margin-lr-3">+</span>
+                                                <span class="display-block box" ng-init="::amtHotel=amountBifurcation(HotelData.Fare);">
+                                                    <i class="fa fa-bed margin-right-3" aria-hidden="true"></i>
+                                                    <span class="cursor-help" data-toggle="tooltip" popover="{{HotelData.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(HotelData.CurrencyCode)}}</span>
+                                                    {{amtHotel.BeforeDecimal}}<span class="text-super vertical-top font-11">{{amtHotel.AfterDecimal}}</span>
+                                                </span>
+                                                <span class="display-block" ng-init="::amtTotal=amountBifurcation(totalFare());">
+                                                    <span class="margin-lr-3">=</span>
+                                                    <span class="cursor-help" data-toggle="tooltip" popover="{{HotelData.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(HotelData.CurrencyCode)}}</span>
+                                                    {{amtTotal.BeforeDecimal}}<span class="text-super vertical-top font-11">{{amtTotal.AfterDecimal}}</span>                                                    
+                                                </span>
+                                            </span>
+                                        </span>
                                     </h6>
                                 </div>
                             </div>

@@ -1,5 +1,5 @@
 ﻿
-angular.module('TrippismUIApp').directive('attractionList', ['$sce', '$rootScope', '$timeout', 'GoogleAttractionFactory', function ($sce, $rootScope, $timeout, GoogleAttractionFactory) {
+angular.module('TrippismUIApp').directive('attractionList', ['$sce', '$rootScope', '$timeout', 'GoogleAttractionFactory', 'UtilFactory', function ($sce, $rootScope, $timeout, GoogleAttractionFactory, UtilFactory) {
     return {
         restrict: 'E',
         scope: {
@@ -37,7 +37,6 @@ angular.module('TrippismUIApp').directive('attractionList', ['$sce', '$rootScope
                                     var raitingToAppend = "";
                                     if (results[i].rating != undefined)
                                         raitingToAppend = $sce.trustAsHtml(getRatings(results[i].rating));
-
                                     var placedetails = {
                                         geometry: results[i].geometry,
                                         name: results[i].name,
@@ -152,6 +151,11 @@ angular.module('TrippismUIApp').directive('attractionList', ['$sce', '$rootScope
             scope.$on('showHotelDetailsOnMap', function () {
                 scope.loadAttractions('hotels', true);
             });
+
+            scope.amountBifurcation = function (value) { return UtilFactory.amountBifurcation(value); };
+            scope.GetCurrencySymbol = function (code) {
+                return UtilFactory.GetCurrencySymbol(code);
+            }
         }
     }
 }]);

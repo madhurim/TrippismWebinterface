@@ -4,9 +4,8 @@
             <button class="close closebutton" style="margin-top:2px !important;" ng-click="dismiss();" type="button">×</button>
         </div>
         <div class="modal-body" style="padding:0px;">
-            <div class="attr-top" ng-if="IsMapPopupLoading || !isAttrDataFound">
+            <div class="attr-top" ng-if="IsMapPopupLoading">
                 <div ng-show="IsMapPopupLoading" ng-hide="!isAttrDataFound" class="sqrloadclass" style="padding-top:10px;padding-bottom:0px;"></div>
-                <div ng-if="!isAttrDataFound">Attraction details not found!</div>
             </div>
             <div ng-show="!IsMapPopupLoading">
                 <div class="col-md-12">

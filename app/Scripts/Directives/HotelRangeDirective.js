@@ -28,8 +28,7 @@
                     var cacheData = DestinationFactory.DestinationDataStorage.hotel.get(key);
                     if (cacheData) {
                         $scope.hotelRequestComplete = true;
-                        $scope.HotelRangeData = cacheData.data;
-                        $scope.$emit('hotelDataFound', true);
+                        setHotelData(cacheData.data);
                         return;
                     }
 
@@ -45,30 +44,40 @@
                     HotelRangeFactory.GetAllHotelRange($scope.hotelInputData).then(function (data) {
                         $scope.hotelRequestComplete = true;
                         if (data.status == 200 && data.data != null) {
-                            var hotelRange = _.chain(data.data.HotelAvailability).map(function (item) {
-                                if (item.HotelDetail.RateRange)
-                                    return item.HotelDetail;
-                            }).compact().min(function (item) { return item ? item.RateRange.Min : Infinity; }).value();
-
-                            if (hotelRange != Infinity) {
-                                $scope.HotelRangeData = {
-                                    CurrencyCode: hotelRange.RateRange.CurrencyCode,
-                                    CurrencySymbol: UtilFactory.GetCurrencySymbol(hotelRange.RateRange.CurrencyCode),
-                                    Fare: hotelRange.RateRange.Min,
-                                    Star: hotelRange.HotelRating ? hotelRange.HotelRating[0].RatingText.substring(0, 1) : null
-                                };
-                                DestinationFactory.DestinationDataStorage.hotel.set(key, $scope.HotelRangeData);
-                                $scope.$emit('hotelDataFound', true);
-                            }
-                            else
-                                $scope.$emit('hotelDataFound', false);
+                            DestinationFactory.DestinationDataStorage.hotel.set(key, data.data.HotelAvailability);
+                            setHotelData(data.data.HotelAvailability);
                         }
                         else
                             $scope.$emit('hotelDataFound', false);
                     });
                 });
                 $scope.amountBifurcation = function (value) { return UtilFactory.amountBifurcation(value); };
+                function setHotelData(data) {
+                    var hotelRange = _.chain(data).map(function (item) {
+                        if (item.HotelDetail.RateRange)
+                            return item.HotelDetail;
+                    }).compact().min(function (item) { return item ? item.RateRange.Min : Infinity; }).value();
+
+                    if (hotelRange != Infinity) {
+                        $scope.HotelRangeData = {
+                            CurrencyCode: hotelRange.RateRange.CurrencyCode,
+                            CurrencySymbol: UtilFactory.GetCurrencySymbol(hotelRange.RateRange.CurrencyCode),
+                            Fare: hotelRange.RateRange.Min,
+                            Star: hotelRange.HotelRating ? hotelRange.HotelRating[0].RatingText.substring(0, 1) : null
+                        };
+                        $scope.$emit('hotelDataFound', true);
+                    }
+                    else
+                        $scope.$emit('hotelDataFound', false);
+                }                
             }],
+            link: function ($scope, elem, attrs) {
+                $scope.showHotelDetails = showHotelDetails;
+                function showHotelDetails() {
+                    $scope.$emit('showHotelDetails');
+                    angular.element('body').animate({ scrollTop: angular.element('#attrmapwrapper').offset().top - 100 }, "slow");
+                }
+            }
         };
     }]);
 })();

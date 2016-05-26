@@ -21,9 +21,10 @@
         <div id="examples">
             <div class="content contentHorizontal">
                 <div ng-click="SelectPlace(item)" ng-repeat="item in attractionstoDisp" class="destinations-list">
-                    <h6>{{item.name}}</h6>
+                    <h6 class="text-capitalize">{{item.name | lowercase}}</h6>
                     <div class="placeaddress-list">
-                        <span ng-bind-html="item.Placeaddress"></span>
+                        <!--<span ng-bind-html="item.Placeaddress"></span>-->
+                        <span class="text-capitalize">{{item.Placeaddress | lowercase}}</span>
                         <div ng-bind-html="item.raitingToAppend"></div>
                     </div>
                 </div>

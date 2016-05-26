@@ -1,8 +1,8 @@
-﻿<div class="attr-wrapper">
-    <div class="" style="clear:both;" cg-busy="{promise:googleattractionpromise,message:'Getting things to do in '+ googleattractionParams.DestinationAirport.airport_CityName}">
+﻿<div class="attr-wrapper" id="attrmapwrapper">
+    <div class="" style="clear:both;" cg-busy="{promise:googleattractionpromise,message:attractionMessage}">
         <div ui-map="googleattractionsMap" id="gMapId_" ui-options="attractionmapOptions" style="width:100%;min-height:200px;" class="map-canvas"></div>
     </div>
-    <attraction-list class="attraction-slide" attractiontabindex="googleattractionParams.tabIndex" attractionmap="googleattractionsMap" attractions="attractionsplaces" load-more-attraction-info="loadMoreGoogleAttractionInfo()" load-attraction-info="loadgoogleattractionInfo(type)"></attraction-list>
+    <attraction-list class="attraction-slide" attractiontabindex="googleattractionParams.tabIndex" attractionmap="googleattractionsMap" attractions="attractionsplaces" load-more-attraction-info="loadMoreGoogleAttractionInfo()" load-attraction-info="loadgoogleattractionInfo(type,obj)"></attraction-list>
     <div ng-show="IsMarkerSelected" id="googleMapId_" class="popupmarker" ng-class="attractionReviews.length > 0 ? 'popupmarker-lg' : 'popupmarker-md'">
         <div class="modal-content">
             <div class="modal-header head ng-scope" style="padding-bottom: 24px !important;">
@@ -26,10 +26,37 @@
                             </carousel>
                         </div>
                         <div style="color:black;font-size:14px;margin-top:5px;margin-bottom:5px;">
-                            <div class="col-md-12 padleft0"><strong>{{PlaceName }}</strong><br></div>
-                            <div style="word-wrap:break-word;" ng-bind-html="Placeaddress"></div>
-                            {{PhoneNo}}
-                            <div ng-bind-html="raitingToAppend"></div>
+                            <div class="col-md-12 padleft0"><strong>{{locationDetail.PlaceName }}</strong><br></div>
+                            <div style="word-wrap:break-word;" ng-bind-html="locationDetail.Placeaddress"></div>
+                            {{locationDetail.PhoneNo}}
+                            <div ng-if="locationDetail.AttractionType == 'hotels'">
+                                <div class="row">
+                                    <div class="col-md-6" ng-if="locationDetail.RateRange">
+                                        <h4>
+                                            <span>
+                                                <span class="cursor-help" data-toggle="tooltip" popover="{{locationDetail.RateRange.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(locationDetail.RateRange.CurrencyCode)}}</span>
+                                                {{locationDetail.RateRange.Min}}
+                                            </span>
+                                            -
+                                            <span ng-init="amtbifercation=amountBifurcation(locationDetail.RateRange.Max);">
+                                                <span class="cursor-help" data-toggle="tooltip" popover="{{locationDetail.RateRange.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(locationDetail.RateRange.CurrencyCode)}}</span>
+                                                {{locationDetail.RateRange.Max}}
+                                            </span>
+                                            <!--<span ng-init="amtbifercation1=amountBifurcation(locationDetail.RateRange.Min);">
+                                                <span class="cursor-help" data-toggle="tooltip" popover="{{locationDetail.RateRange.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(locationDetail.RateRange.CurrencyCode)}}</span>
+                                                {{amtbifercation1.BeforeDecimal}}<span class="text-super vertical-top">{{amtbifercation1.AfterDecimal}}</span>
+                                            </span>
+                                            -
+                                            <span ng-init="amtbifercation=amountBifurcation(locationDetail.RateRange.Max);">
+                                                <span class="cursor-help" data-toggle="tooltip" popover="{{locationDetail.RateRange.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(locationDetail.RateRange.CurrencyCode)}}</span>
+                                                {{amtbifercation.BeforeDecimal}}<span class="text-super vertical-top">{{amtbifercation.AfterDecimal}}</span>
+                                            </span>-->
+                                        </h4>
+                                    </div>
+                                    <div class="col-md-2" ng-if="locationDetail.details.FreeWifiInRooms"><h4><i class="fa fa-wifi" aria-hidden="true"></i></h4></div>
+                                </div>
+                            </div>
+                            <div ng-bind-html="locationDetail.raitingToAppend"></div>
                         </div>
                     </div>
                     <div class="col-md-4 review-wrapper">

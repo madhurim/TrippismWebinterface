@@ -39,10 +39,14 @@ angular.module('TrippismUIApp').directive('attractionList', ['$sce', '$rootScope
                                         raitingToAppend = $sce.trustAsHtml(getRatings(results[i].rating));
 
                                     var placedetails = {
+                                        geometry: results[i].geometry,
                                         name: results[i].name,
-                                        Placeaddress: $sce.trustAsHtml(results[i].vicinity),
+                                        //Placeaddress: $sce.trustAsHtml(results[i].vicinity),
+                                        Placeaddress: results[i].vicinity,
                                         place_id: results[i].place_id,
                                         raitingToAppend: raitingToAppend,
+                                        type: scope.attractions.type,
+                                        details: results[i].details
                                     };
                                     scope.attractionstoDisp.push(placedetails);
                                 }
@@ -60,7 +64,7 @@ angular.module('TrippismUIApp').directive('attractionList', ['$sce', '$rootScope
             scope.SelectPlace = function (place) {
                 var sliderdata = {
                     tabIndex: scope.attractiontabindex,
-                    place: place
+                    place: place,
                 };
                 $rootScope.$broadcast('onMarkerPopup', sliderdata);
             };
@@ -103,7 +107,7 @@ angular.module('TrippismUIApp').directive('attractionList', ['$sce', '$rootScope
             scope.loadMoreAttractions = function () {
                 scope.loadMoreAttractionInfo();
             }
-            scope.loadAttractions = function (type) {
+            scope.loadAttractions = function (type, keepOpen) {
                 // for setting <li> tag active class            
                 if (type == 'btn')
                     scope.isAttractionCollapsed = !scope.isAttractionCollapsed;
@@ -112,7 +116,7 @@ angular.module('TrippismUIApp').directive('attractionList', ['$sce', '$rootScope
                     var attraction = _.find(scope.attractionsData, function (item) { return item.name === type; });
                     if (attraction) {
                         // if attraction tab is currently opened then just collepse attraction section
-                        if (attraction.isActive == true) {
+                        if (attraction.isActive && !keepOpen) {
                             scope.isAttractionCollapsed = !scope.isAttractionCollapsed;
                             return;
                         }
@@ -144,6 +148,10 @@ angular.module('TrippismUIApp').directive('attractionList', ['$sce', '$rootScope
                     }
                 }
             }
+
+            scope.$on('showHotelDetailsOnMap', function () {
+                scope.loadAttractions('hotels', true);
+            });
         }
     }
 }]);

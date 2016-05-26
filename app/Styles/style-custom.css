@@ -758,6 +758,10 @@ ul .stop-line {
     content: 'History and Culture';
 }
 
+.attr-hotels:before {
+    content: 'Hotels';
+}
+
 .attr-foods, .attr-beaches, .attr-casinos, .attr-outdoors, .attr-shops, .attr-theme-parks, .attr-history {
     width: auto;
     height: auto;
@@ -1462,6 +1466,8 @@ ul .stop-line {
     display: inline-block;
 }
 /*#endregion md-hotel*/
+
+
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {
@@ -1500,7 +1506,7 @@ ul .stop-line {
     }
 
     /* #region attraction */
-    .attr-foods:before, .attr-beaches:before, .attr-casinos:before, .attr-outdoors:before, .attr-shops:before, .attr-theme-parks:before, .attr-history:before {
+    .attr-foods:before, .attr-beaches:before, .attr-casinos:before, .attr-outdoors:before, .attr-shops:before, .attr-theme-parks:before, .attr-history:before, .attr-hotels:before {
         content: '';
     }
 
@@ -1537,7 +1543,11 @@ ul .stop-line {
         background-image: url("/images/attraction-marker/bank-icon.png");
     }
 
-    .attr-foods, .attr-beaches, .attr-casinos, .attr-outdoors, .attr-shops, .attr-theme-parks, .attr-history {
+    .attr-hotels {
+        background-image: url("/images/attraction-marker/hotels-icon.png");
+    }
+
+    .attr-foods, .attr-beaches, .attr-casinos, .attr-outdoors, .attr-shops, .attr-theme-parks, .attr-history, .attr-hotels {
         background-repeat: no-repeat;
         background-position: center;
         width: 42px;

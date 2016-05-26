@@ -113,6 +113,10 @@
             });
         }
         $scope.PageName = "Destination Page";
+
+        $scope.$on('showHotelDetails', function () {
+            $scope.$broadcast('showHotelDetailsOnMap');
+        });
     }
 
 })();

@@ -28,7 +28,6 @@
                         $scope.initBreadcrumb();
                     }
                 });
-
                 $scope.SendEmailToUser = SendEmailToUser;
                 function SendEmailToUser() {
                     if (!$scope.fareParams) return;

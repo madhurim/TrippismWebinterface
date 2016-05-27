@@ -89,7 +89,6 @@
                                                         <i class="fa fa-plane margin-right-3" aria-hidden="true"></i>
                                                         <span class="cursor-help" data-toggle="tooltip" popover="{{fareParams.FareInfo.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(fareParams.FareInfo.CurrencyCode)}}</span>
                                                         {{amtFare.BeforeDecimal}}<span class="text-super vertical-top font-11">{{amtFare.AfterDecimal}}</span>
-                                                        <!--{{LowestFare.Fare}}-->
                                                     </span>
                                                 </span>
                                                 <span class="margin-lr-3">+</span>
@@ -101,7 +100,7 @@
                                                 <span class="display-block" ng-init="::amtTotal=amountBifurcation(totalFare());">
                                                     <span class="margin-lr-3">=</span>
                                                     <span class="cursor-help" data-toggle="tooltip" popover="{{HotelData.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(HotelData.CurrencyCode)}}</span>
-                                                    {{amtTotal.BeforeDecimal}}<span class="text-super vertical-top font-11">{{amtTotal.AfterDecimal}}</span>                                                    
+                                                    {{amtTotal.BeforeDecimal}}<span class="text-super vertical-top font-11">{{amtTotal.AfterDecimal}}</span>
                                                 </span>
                                             </span>
                                         </span>

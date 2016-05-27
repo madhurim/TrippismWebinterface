@@ -238,7 +238,7 @@
                     ];
                 }
                 $scope.totalFare = function () {
-                    return 2 * parseFloat($scope.LowestFare.Fare) + parseFloat($scope.HotelData.Fare);
+                    return (2 * parseFloat($scope.LowestFare.Fare) + parseFloat($scope.HotelData.Fare)).toFixed(2);
                 }
             }
         }

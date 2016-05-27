@@ -19,18 +19,22 @@
 
         $scope.$emit('bodyClass', 'otherpage destination-page');
         var w = angular.element($window);
-        w.bind('resize', setPageHeight);
+        w.bind('resize', setImageHeight);
 
-        setPageHeight();
+        setImageHeight();
 
-        function setPageHeight() {
+        function setImageHeight() {
             var boxwrap = angular.element("#destination-imgwrap");
-            if (!boxwrap.length) { w.unbind("resize", setPageHeight); return; };
-            boxwrap.height((w.height() * 70) / 100);    // make image height 70% of the screen height
+            if (!boxwrap.length) { w.unbind("resize", setImageHeight); return; };
+            if (w.width() < 480)
+                boxwrap.height((w.height() * 40) / 100);    // make image height 40% of the screen height
+            else
+                boxwrap.height((w.height() * 70) / 100);    // make image height 70% of the screen height
         }
 
         $scope.Origin = $scope.DestinationLocation = '';
         init();
+
         function init() {
             window.scrollTo(0, 0);
             alertify.dismissAll();
@@ -125,6 +129,10 @@
             });
         }
         $scope.PageName = "Destination Page";
+
+        $scope.$on('showHotelDetails', function () {
+            $scope.$broadcast('showHotelDetailsOnMap');
+        });
     }
 
 })();

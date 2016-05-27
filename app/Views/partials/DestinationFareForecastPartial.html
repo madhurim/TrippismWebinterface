@@ -13,7 +13,7 @@
         <div class="clear"></div>
     </div>
     <div class="row-fluid">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <div class="row">
                 <div class="ibox-box searched search-det font-light">
                     <p>
@@ -32,54 +32,82 @@
                         {{airportDetail}}
                     </h4>
                 </div>
-                <div class="row">
-                    <div class="col-md-12 col-fare-title col-dest-title" ng-if="LowestNonStopFare || LowestFare"><h4><i class="fa fa-plane"></i>Flights</h4></div>
-                    <div class="col-md-6 col-sm-6 col-xs-12 col-fare" ng-if="::LowestNonStopFare">
-                        <div class="ibox-box fare-box">
-                            <div class="fare-box-inner text-right">
-                                <h4 class="fare-font" ng-init="::amtbifercation=amountBifurcation(LowestNonStopFare.Fare);">
-                                    <span class="cursor-help" data-toggle="tooltip" popover="{{fareParams.FareInfo.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(fareParams.FareInfo.CurrencyCode)}}</span>
-                                    {{amtbifercation.BeforeDecimal}}<span class="text-super vertical-top">{{amtbifercation.AfterDecimal}}</span>
-                                </h4>
-                                <p>Lowest Non Stop</p>
-                            </div>
-                            <div class="fare-box-inner">
-                                <p class="hover-line book-wrapper">
-                                    <a href="" ng-click="InstaFlightSearch(LowestNonStopFare.AirlineCodes, LowestNonStopFare.Fare,LowestNonStopFare.outboundflightstops,LowestNonStopFare.inboundflightstops);">
-                                        <img src="../images/book_now.png" />
-                                    </a>
-                                </p>
-                            </div>
-                            <div class="clear"></div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="col-md-12 col-fare-title col-dest-title" ng-if="LowestNonStopFare || LowestFare"><h4><i class="fa fa-plane"></i>Flights</h4></div>
+                <div class="col-md-6 col-sm-6 col-xs-12 col-fare" ng-if="::LowestNonStopFare">
+                    <div class="ibox-box fare-box">
+                        <div class="fare-box-inner text-right">
+                            <h4 class="fare-font" ng-init="::amtbifercation=amountBifurcation(LowestNonStopFare.Fare);">
+                                <span class="cursor-help" data-toggle="tooltip" popover="{{fareParams.FareInfo.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(fareParams.FareInfo.CurrencyCode)}}</span>
+                                {{amtbifercation.BeforeDecimal}}<span class="text-super vertical-top">{{amtbifercation.AfterDecimal}}</span>
+                            </h4>
+                            <p>Lowest Non Stop</p>
                         </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-xs-12 col-fare" ng-if="::LowestFare">
-                        <div class="ibox-box fare-box">
-                            <div class="fare-box-inner text-right">
-                                <h4 class="fare-font" ng-init="::amtbifercation=amountBifurcation(LowestFare.Fare);">
-                                    <span class="cursor-help" data-toggle="tooltip" popover="{{fareParams.FareInfo.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(fareParams.FareInfo.CurrencyCode)}}</span>
-                                    {{amtbifercation.BeforeDecimal}}<span class="text-super vertical-top">{{amtbifercation.AfterDecimal}}</span>
-                                </h4>
-                                <p>Lowest</p>
-                            </div>
-                            <div class="fare-box-inner">
-                                <p class="hover-line book-wrapper">
-                                    <a href="" ng-click="InstaFlightSearch(LowestFare.AirlineCodes, LowestFare.Fare);">
-                                        <img src="../images/book_now.png" />
-                                    </a>
-                                </p>
-                            </div>
-                            <div class="clear"></div>
+                        <div class="fare-box-inner">
+                            <p class="hover-line book-wrapper">
+                                <a href="" ng-click="InstaFlightSearch(LowestNonStopFare.AirlineCodes, LowestNonStopFare.Fare,LowestNonStopFare.outboundflightstops,LowestNonStopFare.inboundflightstops);">
+                                    <img src="../images/book_now.png" />
+                                </a>
+                            </p>
                         </div>
+                        <div class="clear"></div>
                     </div>
                 </div>
-                <div class="row" ng-if="LowestNonStopFare || LowestFare">
-                    <div class="col-md-12 clear">
-                        <div class="ibox-box searched margin-0">
-                            <h6 class="margin-0 font-normal font-light">
-                                Fares are round trip 1 adult economy. Taxes and fees are included; baggage and preferred seating, are not included.
-                            </h6>
+                <div class="col-md-6 col-sm-6 col-xs-12 col-fare" ng-if="::LowestFare">
+                    <div class="ibox-box fare-box">
+                        <div class="fare-box-inner text-right">
+                            <h4 class="fare-font" ng-init="::amtbifercation=amountBifurcation(LowestFare.Fare);">
+                                <span class="cursor-help" data-toggle="tooltip" popover="{{fareParams.FareInfo.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(fareParams.FareInfo.CurrencyCode)}}</span>
+                                {{amtbifercation.BeforeDecimal}}<span class="text-super vertical-top">{{amtbifercation.AfterDecimal}}</span>
+                            </h4>
+                            <p>Lowest</p>
                         </div>
+                        <div class="fare-box-inner">
+                            <p class="hover-line book-wrapper">
+                                <a href="" ng-click="InstaFlightSearch(LowestFare.AirlineCodes, LowestFare.Fare);">
+                                    <img src="../images/book_now.png" />
+                                </a>
+                            </p>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" ng-if="LowestNonStopFare || LowestFare">
+                <div class="col-md-12 clear">
+                    <div class="ibox-box searched margin-0">
+                        <h6 class="margin-0 font-normal font-light">
+                            Fares are round trip 1 adult economy. Taxes and fees are included; baggage and preferred seating, are not included.
+                        </h6>
+                        <h6>
+                            <span class="fare-calc" ng-if="HotelData">
+                                Lowest likely cost of travel for 2 adults:&nbsp;
+                                <span class="font-700 display-block">
+                                    <span class="display-block font-imp">
+                                        2 *
+                                        <span class="box" ng-init="::amtFare=amountBifurcation(LowestFare.Fare);">
+                                            <i class="fa fa-plane margin-right-3" aria-hidden="true"></i>
+                                            <span class="cursor-help" data-toggle="tooltip" popover="{{fareParams.FareInfo.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(fareParams.FareInfo.CurrencyCode)}}</span>
+                                            {{amtFare.BeforeDecimal}}<span class="text-super vertical-top font-11">{{amtFare.AfterDecimal}}</span>
+                                        </span>
+                                    </span>
+                                    <span class="margin-lr-3">+</span>
+                                    <span class="display-block box font-imp" ng-init="::amtHotel=amountBifurcation(HotelData.Fare);">
+                                        <i class="fa fa-bed margin-right-3" aria-hidden="true"></i>
+                                        <span class="cursor-help" data-toggle="tooltip" popover="{{HotelData.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(HotelData.CurrencyCode)}}</span>
+                                        {{amtHotel.BeforeDecimal}}<span class="text-super vertical-top font-11">{{amtHotel.AfterDecimal}}</span>
+                                    </span>
+                                    <span class="display-block font-imp" ng-init="::amtTotal=amountBifurcation(totalFare());">
+                                        <span class="margin-lr-3">=</span>
+                                        <span class="cursor-help" data-toggle="tooltip" popover="{{HotelData.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(HotelData.CurrencyCode)}}</span>
+                                        {{amtTotal.BeforeDecimal}}<span class="text-super vertical-top font-11">{{amtTotal.AfterDecimal}}</span>
+                                    </span>
+                                </span>
+                            </span>
+                        </h6>
                     </div>
                 </div>
             </div>

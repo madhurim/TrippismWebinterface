@@ -29,6 +29,14 @@
             // (isDefault: true) used for setting attraction as default active and fetch it's data first when destination tab page is opened.
             var attractionList = [
                 //{ name: 'Attractions', Types: &types=restaurant|cafe, ExcludeTypes: null, Keywords: null, attractionText: 'Attractions', isSetMapCenter: true, markerImage: 'images/mapicon-small.png' },
+                  {
+                      rank: 8,
+                      name: 'hotels',
+                      attractionText: 'Hotels',
+                      markerImage: 'images/attraction-marker/hotels-icon.png',
+                      isDefault: false,
+                      htmlClass: 'attr-hotels'
+                  },
                 {
                     rank: 5,
                     name: 'Restaurants',

@@ -248,7 +248,7 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory)
 
                 $('#fareRageChart').highcharts({
                     chart: {
-                        height: 80,
+                        height: 85,
                         type: 'lineargauge',
                         inverted: true,
                         marginTop: 10

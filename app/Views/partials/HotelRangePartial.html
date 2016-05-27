@@ -1,42 +1,34 @@
-﻿<div ng-show="!hotelRequestComplete" style="text-align:center">
-    <h4 class="glyphicon glyphicon-refresh glyphicon-spin"></h4>
-    <h5>Bringing latest Hotel prices...</h5>
-    <h4>Working on it</h4>
-</div>
-<div class="hotel-wrapper" ng-if="HotelRangeData">
-    <div class="col-md-12 col-hotel-title col-dest-title">
-        <h4>
-            <i class="fa fa-bed"></i>Hotels
-            <img src="images/help-icon.png" class="tool-tips cursor-help" width="20" height="20" title="Ratings are provided by Northstar Group, a premium Hotel Rating System.&#013;Hotel prices can vary very quickly based on availability. Prices are single room / night." />
-        </h4>
+﻿<div class="row">
+    <div class="col-md-12" ng-show="!hotelRequestComplete" style="text-align:center;float:left;">
+        <h4 class="glyphicon glyphicon-refresh glyphicon-spin"></h4>
+        <h5>Bringing latest Hotel prices...</h5>
+        <h4>Working on it</h4>
     </div>
-    <div class="hotel-title font-light">
-        <p>Average price range of currently available hotels</p>
+    <div class="hotel-wrapper" ng-if="HotelRangeData">
+        <div class="col-md-12 col-fare-title col-dest-title"><h4><i class="fa fa-bed"></i>Hotels</h4></div>
+        <div class="col-md-12">
+            <div class="ibox-box fare-box">
+                <div class="fare-box-inner text-right">
+                    <div class="pull-left">
+                        <h4 class="fare-font" ng-init="::amtbifercation=amountBifurcation(HotelRangeData.Fare);">
+                            <span class="cursor-help" data-toggle="tooltip" popover="{{HotelRangeData.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{HotelRangeData.CurrencySymbol}}</span>
+                            {{amtbifercation.BeforeDecimal}}<span class="text-super vertical-top">{{amtbifercation.AfterDecimal}}</span>
+                        </h4>
+                        <p>Lowest</p>
+                        <h4 title="3 star hotels" ng-if="HotelRangeData.Star == '3'"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></h4>
+                        <h4 title="4 star hotels" ng-if="HotelRangeData.Star == '4'"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></h4>
+                        <h4 title="5 star hotels" ng-if="HotelRangeData.Star == '5'"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></h4>
+                    </div>
+                </div>
+                <div class="fare-box-inner hidden-xs">
+                    <p class="hover-line book-wrapper">
+                        <a href="javascript:void(0)" ng-click="showHotelDetails();">
+                            <img src="../images/showmore.png" />
+                        </a>
+                    </p>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
     </div>
-    <table>
-        <thead class="font-light">
-            <tr>
-                <td>Avg Min</td>
-                <td>Avg Max</td>
-                <td></td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-if='HotelRangeData.ThreeStar && HotelRangeData.ThreeStar.MinimumPriceAvg != 0.0'>
-                <td><span class="cursor-help" data-toggle="tooltip" popover="{{hotelCurrency}}" popover-trigger="mouseenter" popover-placement="top">{{ hotelCurrencySymbol }}</span> {{HotelRangeData.ThreeStar.MinimumPriceAvg | number:0 }}</td>
-                <td><span class="cursor-help" data-toggle="tooltip" popover="{{hotelCurrency}}" popover-trigger="mouseenter" popover-placement="top">{{ hotelCurrencySymbol }}</span> {{HotelRangeData.ThreeStar.MaximumPriceAvg | number:0 }}</td>
-                <td title="3 star hotels"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></td>
-            </tr>
-            <tr ng-if='HotelRangeData.FourStar && HotelRangeData.FourStar.MinimumPriceAvg != 0.0'>
-                <td><span class="cursor-help" data-toggle="tooltip" popover="{{hotelCurrency}}" popover-trigger="mouseenter" popover-placement="top">{{ hotelCurrencySymbol }}</span> {{HotelRangeData.FourStar.MinimumPriceAvg | number:0 }}</td>
-                <td><span class="cursor-help" data-toggle="tooltip" popover="{{hotelCurrency}}" popover-trigger="mouseenter" popover-placement="top">{{ hotelCurrencySymbol }}</span> {{HotelRangeData.FourStar.MaximumPriceAvg | number:0 }}</td>
-                <td title="4 star hotels"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></td>
-            </tr>
-            <tr ng-if='HotelRangeData.FiveStar && HotelRangeData.FiveStar.MinimumPriceAvg != 0.0'>
-                <td><span class="cursor-help" data-toggle="tooltip" popover="{{hotelCurrency}}" popover-trigger="mouseenter" popover-placement="top">{{ hotelCurrencySymbol }}</span> {{HotelRangeData.FiveStar.MinimumPriceAvg | number:0 }}</td>
-                <td><span class="cursor-help" data-toggle="tooltip" popover="{{hotelCurrency}}" popover-trigger="mouseenter" popover-placement="top">{{ hotelCurrencySymbol }}</span> {{HotelRangeData.FiveStar.MaximumPriceAvg | number:0 }}</td>
-                <td title="5 star hotels"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></td>
-            </tr>
-        </tbody>
-    </table>
 </div>

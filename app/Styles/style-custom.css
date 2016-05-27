@@ -226,7 +226,7 @@ img {
     left: 0;
     position: relative !important;
     right: 0;
-    top: -10px !important;
+    top: 10px;
     height: 24px;
 }
 
@@ -766,9 +766,19 @@ ul .stop-line {
     content: 'History and Culture';
 }
 
+.attr-hotels:before {
+    content: 'Hotels';
+}
+
 .attr-foods, .attr-beaches, .attr-casinos, .attr-outdoors, .attr-shops, .attr-theme-parks, .attr-history {
     width: auto;
     height: auto;
+}
+
+.attr-top {
+    min-height: 100px;
+    color: #333;
+    padding: 20px;
 }
 /* #endregion attraction */
 
@@ -1236,7 +1246,7 @@ ul .stop-line {
 }
 
 .mdcard img.mdimage {
-    height: 300px;
+    height: 250px;
     cursor: pointer;
     width: 100%;
 }
@@ -1342,14 +1352,9 @@ ul .stop-line {
     }
 
 /*#region Hotels*/
-.col-hotel {
+.col-hotel .popup-content {
     padding: 5px;
-    margin-top: 10px;
 }
-
-    .col-hotel .popup-content {
-        padding: 5px;
-    }
 
 .hotel-wrapper {
     color: #585858;
@@ -1393,15 +1398,22 @@ ul .stop-line {
     color: #f6ab02;
 }
 
-/*.hotel-wrapper tbody td {
-    width: 120px;
-    text-align: right;
+.mddisplay1 {
+    font-size: 23px;
+    color: #333;
 }
 
-    .hotel-wrapper tbody td:last-child {
-        width: 60px;
-        min-width: 40px;
-    }*/
+    .mddisplay1 .fa {
+        width: 25px;
+    }
+
+    .mddisplay1 .fa-bed {
+        font-size: 20px;
+    }
+
+.margin-left-30 {
+    margin-left: 30px;
+}
 /*#endregion Hotels*/
 
 .col-dest-title {
@@ -1447,6 +1459,55 @@ ul .stop-line {
         margin-top: -10px;
     }
 
+/*#region md-hotel*/
+.mdhotel .col-hotel-title h4, .mdhotel table tbody {
+    font-size: 15px;
+}
+
+.mdhotel tbody td {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.display-block {
+    display: inline-block;
+}
+/*#endregion md-hotel*/
+
+.font-light {
+    color: #565a5c;
+    font-weight: normal;
+}
+
+.fare-calc {
+    color: #333;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+    .fare-calc .box {
+        background-color: #ccc;
+        padding: 3px 5px;
+        border-radius: 3px;
+        display: inline-block;
+    }
+
+.font-11 {
+    font-size: 11px;
+}
+
+.margin-lr-3 {
+    margin: 0px 3px;
+}
+
+.margin-right-3 {
+    margin-right: 3px;
+}
+
+.font-700 {
+    font-weight: 700;
+}
+
 .font-normal {
     font-weight: normal;
 }
@@ -1455,11 +1516,6 @@ ul .stop-line {
     font-size: 22px;
     font-weight: 500;
     color: #333;
-}
-
-.font-light {
-    color: #565a5c;
-    font-weight: normal;
 }
 
 .font-imp {
@@ -1489,6 +1545,7 @@ ul .stop-line {
 }
 
 /*#endregion destination-layout*/
+
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {
@@ -1527,7 +1584,7 @@ ul .stop-line {
     }
 
     /* #region attraction */
-    .attr-foods:before, .attr-beaches:before, .attr-casinos:before, .attr-outdoors:before, .attr-shops:before, .attr-theme-parks:before, .attr-history:before {
+    .attr-foods:before, .attr-beaches:before, .attr-casinos:before, .attr-outdoors:before, .attr-shops:before, .attr-theme-parks:before, .attr-history:before, .attr-hotels:before {
         content: '';
     }
 
@@ -1564,7 +1621,11 @@ ul .stop-line {
         background-image: url("/images/attraction-marker/bank-icon.png");
     }
 
-    .attr-foods, .attr-beaches, .attr-casinos, .attr-outdoors, .attr-shops, .attr-theme-parks, .attr-history {
+    .attr-hotels {
+        background-image: url("/images/attraction-marker/hotels-icon.png");
+    }
+
+    .attr-foods, .attr-beaches, .attr-casinos, .attr-outdoors, .attr-shops, .attr-theme-parks, .attr-history, .attr-hotels {
         background-repeat: no-repeat;
         background-position: center;
         width: 42px;
@@ -1624,7 +1685,19 @@ ul .stop-line {
     }
 
     .mddisplay1 {
-        font-size: 21px;
+        font-size: 20px;
+    }
+
+        .mddisplay1 .fa {
+            width: 20px;
+        }
+
+        .mddisplay1 .fa-bed {
+            font-size: 17px;
+        }
+
+    .hotel-wrapper {
+        max-width: 250px;
     }
 }
 
@@ -1634,7 +1707,7 @@ ul .stop-line {
     }
 
     .mddisplay1 {
-        font-size: 25px;
+        font-size: 23px;
     }
 }
 
@@ -1713,6 +1786,10 @@ ul .stop-line {
 
     .fare-box {
         text-align: right;
+    }
+
+    .hotel-wrapper .fare-box {
+        text-align: left;
     }
 }
 

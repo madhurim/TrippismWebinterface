@@ -75,7 +75,7 @@
                 $scope.showHotelDetails = showHotelDetails;
                 function showHotelDetails() {
                     $scope.$emit('showHotelDetails');
-                    angular.element('body').animate({ scrollTop: angular.element('#attrmapwrapper').offset().top - 100 }, "slow");
+                    angular.element('body,html').animate({ scrollTop: angular.element('#attrmapwrapper').offset().top - 100 }, "slow");
                 }
             }
         };

@@ -41,7 +41,7 @@
                                             </span>
                                         </h4>
                                     </div>
-                                    <div class="col-md-2 col-sm-2 col-dest-title" ng-if="locationDetail.FreeWifiInRooms"><h4><i title="Free Wi-Fi in rooms" class="fa fa-wifi cursor-help" aria-hidden="true"></i></h4></div>
+                                    <div class="col-md-2 col-sm-2" ng-if="locationDetail.FreeWifiInRooms"><h4><i title="Free Wi-Fi in rooms" class="fa fa-wifi cursor-help" aria-hidden="true" style="color:green"></i></h4></div>
                                 </div>
                             </div>
                             <div ng-show="locationDetail.AttractionType != 'hotels'" ng-bind-html="::locationDetail.raitingToAppend"></div>

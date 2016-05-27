@@ -109,24 +109,19 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, TrippismConsta
                         if (cacheData) {
                             object = _.chain(cacheData.data).map(function (item) {
                                 var itemData = item.HotelDetail;
-                                if (itemData.Latitude) {
-                                    var rating = itemData.HotelRating ? itemData.HotelRating[0].RatingText.substring(0, 1) : 0;
-                                    return {
-                                        geometry:
-                                            {
-                                                location: { lat: itemData.Latitude, lng: itemData.Longitude }
-                                            },
-                                        name: itemData.HotelName,
-                                        vicinity: itemData.Address[0] + itemData.Address[1],
-                                        rating: rating,
-                                        type: 'hotels',
-                                        details: { FreeWifiInRooms: itemData.PropertyOptionInfo.FreeWifiInRooms, RateRange: itemData.RateRange, Rating: rating }
-                                    }
+                                var rating = itemData.HotelRating ? itemData.HotelRating[0].RatingText.substring(0, 1) : 0;
+                                return {
+                                    geometry:
+                                       itemData.Latitude ? {
+                                           location: { lat: itemData.Latitude, lng: itemData.Longitude }
+                                       } : null,
+                                    name: itemData.HotelName,
+                                    vicinity: itemData.Address[0] + itemData.Address[1],
+                                    rating: rating,
+                                    type: 'hotels',
+                                    details: { FreeWifiInRooms: itemData.PropertyOptionInfo.FreeWifiInRooms, RateRange: itemData.RateRange, Rating: rating }
                                 }
-                                else
-                                    return null;
-
-                            }).compact().sortBy(function (item) { return item.rating * -1; }).value();
+                            }).compact().sortBy(function (item) { return item.details.RateRange ? parseFloat(item.details.RateRange.Min) : Infinity; }).value();
                             if (object && object.length)
                                 markerList.push({ results: object, type: type });
                         }
@@ -221,29 +216,31 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, TrippismConsta
                     $scope.AttractionMarkers = [];
                     // used for clearing all markers                        
                     for (var x = 0; x < maps.length; x++) {
-                        var iconlatlng = new google.maps.LatLng(maps[x].geometry.location.lat, maps[x].geometry.location.lng);
-                        var marker = new MarkerWithLabel({
-                            position: iconlatlng,
-                            map: $scope.googleattractionsMap,
-                            title: '' + maps[x].name + '',
-                            labelAnchor: new google.maps.Point(12, 35),
-                            labelInBackground: false,
-                            visible: true,
-                            animation: google.maps.Animation.DROP,
-                            CustomMarkerInfo: maps[x],
-                            labelStyle: { opacity: 0.75 },
-                            icon: getMarker(type)
-                        });
+                        if (maps[x].geometry) {
+                            var iconlatlng = new google.maps.LatLng(maps[x].geometry.location.lat, maps[x].geometry.location.lng);
+                            var marker = new MarkerWithLabel({
+                                position: iconlatlng,
+                                map: $scope.googleattractionsMap,
+                                title: '' + maps[x].name + '',
+                                labelAnchor: new google.maps.Point(12, 35),
+                                labelInBackground: false,
+                                visible: true,
+                                animation: google.maps.Animation.DROP,
+                                CustomMarkerInfo: maps[x],
+                                labelStyle: { opacity: 0.75 },
+                                icon: getMarker(type)
+                            });
 
-                        $scope.bounds.extend(marker.position);
-                        var contentString = "";
-                        var MapDet = maps[x];
-                        google.maps.event.addListener(marker, 'click', (function (MapDet) {
-                            return function () {
-                                $scope.attractionPopup(MapDet);
-                            };
-                        })(MapDet));
-                        $scope.AttractionMarkers.push(marker);
+                            $scope.bounds.extend(marker.position);
+                            var contentString = "";
+                            var MapDet = maps[x];
+                            google.maps.event.addListener(marker, 'click', (function (MapDet) {
+                                return function () {
+                                    $scope.attractionPopup(MapDet);
+                                };
+                            })(MapDet));
+                            $scope.AttractionMarkers.push(marker);
+                        }
                     }
                 }
                 $timeout(function () { $scope.FittoScreen(); }, 1000, false);
@@ -254,7 +251,7 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, TrippismConsta
                 if ($scope.googleattractionsMap) {
                     var label = document.createElement("Label");
                     label.innerHTML = "Points of interest in 30 miles radius of Airport";
-                    label.style.fontSize = '10px';
+                    label.style.fontSize = '11px';
                     label.style.color = "rgb(68, 68, 68)";
                     label.style.whiteSpace = "nowrap";
                     label.style.fontFamily = "Roboto, Arial, sans-serif";

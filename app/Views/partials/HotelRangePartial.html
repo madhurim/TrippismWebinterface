@@ -5,7 +5,7 @@
         <h4>Working on it</h4>
     </div>
     <div class="hotel-wrapper" ng-if="HotelRangeData">
-        <div class="col-md-12 col-fare-title col-dest-title"><h4><i class="fa fa-bed"></i>Hotels</h4></div>
+        <div class="col-fare-title col-dest-title"><h4><i class="fa fa-bed"></i>Hotels</h4></div>
         <div class="col-md-12">
             <div class="ibox-box fare-box">
                 <div class="fare-box-inner text-right">
@@ -15,18 +15,19 @@
                             {{amtbifercation.BeforeDecimal}}<span class="text-super vertical-top">{{amtbifercation.AfterDecimal}}</span>
                         </h4>
                         <p>Lowest</p>
-                        <h4 title="3 star hotels" ng-if="HotelRangeData.Star == '3'"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></h4>
+                        <!--<h4 title="3 star hotels" ng-if="HotelRangeData.Star == '3'"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></h4>
                         <h4 title="4 star hotels" ng-if="HotelRangeData.Star == '4'"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></h4>
-                        <h4 title="5 star hotels" ng-if="HotelRangeData.Star == '5'"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></h4>
+                        <h4 title="5 star hotels" ng-if="HotelRangeData.Star == '5'"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></h4>-->
+                        <a href="javascript:void(0)" ng-click="showHotelDetails();"><h5 class="margin-0 font-15">Show more!</h5></a>
                     </div>
                 </div>
-                <div class="fare-box-inner hidden-xs">
+                <!--<div class="fare-box-inner hidden-xs">
                     <p class="hover-line book-wrapper">
                         <a href="javascript:void(0)" ng-click="showHotelDetails();">
                             <img src="../images/showmore.png" />
                         </a>
                     </p>
-                </div>
+                </div>-->
                 <div class="clear"></div>
             </div>
         </div>

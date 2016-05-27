@@ -14,34 +14,41 @@
             $scope.IsMapPopupLoading = true;
             $scope.isAttrDataFound = true;
             if (attractionData.type == "hotels") {
-                var data = {
-                    Latitude: attractionData.geometry.location.lat,
-                    Longitude: attractionData.geometry.location.lng,
-                    radius: 200,
-                    name: attractionData.name
-                };
-                $scope.attractionMessage = 'Getting hotel details';
-                $scope.googleattractionpromise = GoogleAttractionFactory.googleAttraction(data).then(function (data) {
-                    if (data && data.results && data.results.length) {
-                        attractionData.place_id = data.results[0].place_id;
-                        getPlaceDetails(attractionData);
-                    }
-                    else {
-                        $scope.IsMapPopupLoading = false;
-                        $scope.locationDetail = {
-                            AttractionType: attractionData.type
+                if (attractionData.geometry) {
+                    var data = {
+                        Latitude: attractionData.geometry.location.lat,
+                        Longitude: attractionData.geometry.location.lng,
+                        radius: 200,
+                        name: attractionData.name
+                    };
+                    $scope.attractionMessage = 'Getting hotel details';
+                    $scope.googleattractionpromise = GoogleAttractionFactory.googleAttraction(data).then(function (data) {
+                        if (data && data.results && data.results.length) {
+                            attractionData.place_id = data.results[0].place_id;
+                            getPlaceDetails(attractionData);
                         }
-                        if ($scope.locationDetail.AttractionType == 'hotels') {
-                            $scope.locationDetail.FreeWifiInRooms = attractionData.details.FreeWifiInRooms;
-                            $scope.locationDetail.RateRange = attractionData.details.RateRange;
-                            $scope.locationDetail.PlaceName = attractionData.name;
-                            $scope.locationDetail.Placeaddress = $sce.trustAsHtml(attractionData.Placeaddress);
-                        }
-                    }
-                });
+                        else
+                            setDefaultPopupDetails(attractionData);
+                    });
+                }
+                else
+                    setDefaultPopupDetails(attractionData);
             }
             else
                 getPlaceDetails(attractionData);
+        }
+
+        function setDefaultPopupDetails(attractionData) {
+            $scope.IsMapPopupLoading = false;
+            $scope.locationDetail = {
+                AttractionType: attractionData.type
+            }
+            if ($scope.locationDetail.AttractionType == 'hotels') {
+                $scope.locationDetail.FreeWifiInRooms = attractionData.details.FreeWifiInRooms;
+                $scope.locationDetail.RateRange = attractionData.details.RateRange;
+                $scope.locationDetail.PlaceName = attractionData.name;
+                $scope.locationDetail.Placeaddress = $sce.trustAsHtml(attractionData.Placeaddress);
+            }
         }
 
         function getPlaceDetails(attractionData) {

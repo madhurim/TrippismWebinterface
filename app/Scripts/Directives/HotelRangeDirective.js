@@ -34,7 +34,7 @@
 
                     $scope.hotelInputData = {
                         CorporateId: null,
-                        GuestCounts: 2,
+                        GuestCounts: 1,
                         HotelCityCode: $scope.destination,
                         StartDate: $scope.departureDate,
                         EndDate: $scope.returnDate,
@@ -56,7 +56,7 @@
                     var hotelRange = _.chain(data).map(function (item) {
                         if (item.HotelDetail.RateRange)
                             return item.HotelDetail;
-                    }).compact().min(function (item) { return item ? item.RateRange.Min : Infinity; }).value();
+                    }).compact().min(function (item) { return item ? parseFloat(item.RateRange.Min) : Infinity; }).value();
 
                     if (hotelRange != Infinity) {
                         $scope.HotelRangeData = {
@@ -69,7 +69,7 @@
                     }
                     else
                         $scope.$emit('hotelDataFound', false);
-                }                
+                }
             }],
             link: function ($scope, elem, attrs) {
                 $scope.showHotelDetails = showHotelDetails;

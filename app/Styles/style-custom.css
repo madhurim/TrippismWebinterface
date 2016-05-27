@@ -923,9 +923,10 @@ ul .stop-line {
     border: none;
     box-shadow: none;
     float: none;
-    padding-right: 0px;
+    /*padding-right: 0px;
     padding-top: 5px;
-    padding-bottom: 5px;
+    padding-bottom: 5px;*/
+    padding: 5px 0px;
 }
 
 .ibox-box .fare-info {
@@ -1414,6 +1415,10 @@ ul .stop-line {
 .margin-left-30 {
     margin-left: 30px;
 }
+
+.fare-box-inner a:hover {
+    text-decoration: underline;
+}
 /*#endregion Hotels*/
 
 .col-dest-title {
@@ -1421,9 +1426,9 @@ ul .stop-line {
     color: #b90005;
 }
 
-.col-fare-title.col-dest-title {
+/*.col-fare-title.col-dest-title {
     margin-left: 10px;
-}
+}*/
 
 .col-hotel-title.col-dest-title {
     padding-left: 0px;
@@ -1542,6 +1547,17 @@ ul .stop-line {
     border: 1px solid #ccc;
 }
 
+.pad-bot-10 {
+    padding-bottom: 10px;
+}
+
+.line-20 {
+    line-height: 20px;
+}
+
+.font-14 {
+    font-size: 14px;
+}
 /*#endregion destination-layout*/
 
 /*#region Media queries */

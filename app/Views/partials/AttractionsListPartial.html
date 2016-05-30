@@ -21,10 +21,10 @@
         <div id="examples">
             <div class="content contentHorizontal">
                 <div ng-click="SelectPlace(item)" ng-repeat="item in attractionstoDisp" class="destinations-list">
-                    <h6 class="text-capitalize">{{item.name | lowercase}}</h6>
+                    <h6 class="text-capitalize">{{item.name}}</h6>
                     <div class="placeaddress-list">
                         <!--<span ng-bind-html="item.Placeaddress"></span>-->
-                        <span class="text-capitalize">{{item.Placeaddress | lowercase}}</span>
+                        <span class="text-capitalize">{{item.Placeaddress}}</span>
                         <h6 class="margin-0 line-20 font-14" ng-if="item.type=='hotels'">
                             <span ng-if="::item.details.RateRange">
                                 <span ng-init="amtbifercation1=amountBifurcation(item.details.RateRange.Min);">

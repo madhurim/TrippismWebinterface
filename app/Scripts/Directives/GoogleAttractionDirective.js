@@ -115,8 +115,8 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, TrippismConsta
                                        itemData.Latitude ? {
                                            location: { lat: itemData.Latitude, lng: itemData.Longitude }
                                        } : null,
-                                    name: itemData.HotelName,
-                                    vicinity: itemData.Address[0] + itemData.Address[1],
+                                    name: itemData.HotelName.toLowerCase(),
+                                    vicinity: (itemData.Address[0] + itemData.Address[1]).toLowerCase(),
                                     rating: rating,
                                     type: 'hotels',
                                     details: { FreeWifiInRooms: itemData.PropertyOptionInfo.FreeWifiInRooms, RateRange: itemData.RateRange, Rating: rating }

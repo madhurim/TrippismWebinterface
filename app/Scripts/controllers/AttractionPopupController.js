@@ -46,7 +46,7 @@
             if ($scope.locationDetail.AttractionType == 'hotels') {
                 $scope.locationDetail.FreeWifiInRooms = attractionData.details.FreeWifiInRooms;
                 $scope.locationDetail.RateRange = attractionData.details.RateRange;
-                $scope.locationDetail.PlaceName = attractionData.name;
+                $scope.locationDetail.PlaceName = attractionData.name.toLowerCase();
                 $scope.locationDetail.Placeaddress = $sce.trustAsHtml(attractionData.Placeaddress);
             }
         }
@@ -79,8 +79,14 @@
                         }
                         $scope.addSlides(photos);
                     }
-                    $scope.locationDetail.PlaceName = place.name;
-                    $scope.locationDetail.Placeaddress = $sce.trustAsHtml(place.adr_address);
+                    if ($scope.locationDetail.AttractionType == 'hotels') {
+                        $scope.locationDetail.PlaceName = attractionData.name;
+                        $scope.locationDetail.Placeaddress = $sce.trustAsHtml(attractionData.Placeaddress);
+                    }
+                    else {
+                        $scope.locationDetail.PlaceName = place.name;
+                        $scope.locationDetail.Placeaddress = $sce.trustAsHtml(place.adr_address);
+                    }
                     if (place.formatted_phone_number != undefined)
                         $scope.locationDetail.PhoneNo = place.formatted_phone_number;
 

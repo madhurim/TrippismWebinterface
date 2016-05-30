@@ -23,8 +23,8 @@
                             </carousel>
                         </div>
                         <div style="color:black;font-size:14px;margin-top:5px;margin-bottom:5px;">
-                            <div class="col-md-12 padleft0"><strong>{{::locationDetail.PlaceName }}</strong><br></div>
-                            <div style="word-wrap:break-word;" ng-bind-html="::locationDetail.Placeaddress"></div>
+                            <div class="col-md-12 padleft0 text-capitalize"><strong>{{::locationDetail.PlaceName }}</strong><br></div>
+                            <div style="word-wrap:break-word;" class="text-capitalize" ng-bind-html="::locationDetail.Placeaddress"></div>
                             {{::locationDetail.PhoneNo}}
                             <div ng-if="locationDetail.AttractionType == 'hotels'">
                                 <div class="row">

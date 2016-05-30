@@ -1709,10 +1709,6 @@ ul .stop-line {
         .mddisplay1 .fa-bed {
             font-size: 17px;
         }
-
-    .hotel-wrapper {
-        max-width: 250px;
-    }
 }
 
 @media only screen and (max-width:769px) and (orientation:landscape) {
@@ -1800,10 +1796,6 @@ ul .stop-line {
 
     .fare-box {
         text-align: right;
-    }
-
-    .hotel-wrapper .fare-box {
-        text-align: left;
     }
 }
 

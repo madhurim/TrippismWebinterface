@@ -4,7 +4,8 @@
             <h4 class="md-title mdtitle">{{::destinationData.originName}} to {{::destinationData.destinationName}}</h4>
             <p class="md-body-1" ng-if="destinationData.departureDate">{{::destinationData.departureDate}} - {{::destinationData.returnDate}}</p>
         </div>
-        <img class="mdimage" ng-src="{{imageUrl}}" class="md-card-image" alt="{{::destinationData.destination}}" src-error="../images/destination/default.jpg">
+        <!--<img class="mdimage" ng-src="{{imageUrl}}" class="md-card-image" alt="{{::destinationData.destination}}" src-error="../images/destination/default.jpg">-->
+        <img class="mdimage md-card-image" ng-src="{{imageUrl}}" alt="{{::destinationData.destination}}" src-error="http://content.trippism.com/images/destinations/default.jpg">
     </a>
     <div class="mdcontent">
         <div class="mdattimg">

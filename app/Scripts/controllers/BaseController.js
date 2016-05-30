@@ -2,9 +2,9 @@
     'use strict';
     var controllerId = 'BaseController';
     angular.module('TrippismUIApp').controller(controllerId,
-        ['$scope', '$modal', '$rootScope', '$location', BaseController]);
+        ['$scope', '$modal', '$rootScope', '$location', 'UtilFactory', BaseController]);
 
-    function BaseController($scope, $modal, $rootScope, $location) {
+    function BaseController($scope, $modal, $rootScope, $location, UtilFactory) {
         //var hostName = "http://api.trippism.com";
         var hostName = 'http://' + $location.host();
         if (angular.lowercase($location.host()) == "localhost") {
@@ -24,6 +24,13 @@
         $rootScope.apiURLForHotelRange = hostName + '/api/sabre/hotels';
 
         $rootScope.isShowAlerityMessage = true;
+
+        init();
+        function init() {
+            UtilFactory.ReadAirportJson();
+            UtilFactory.GetCurrencySymbols();
+            UtilFactory.ReadHighRankedAirportsJson();
+        }
 
         $scope.aboutUs = function () {
             var GetFeedbackPopupInstance = $modal.open({

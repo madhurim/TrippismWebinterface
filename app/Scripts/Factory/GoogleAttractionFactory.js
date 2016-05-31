@@ -30,7 +30,7 @@
             var attractionList = [
                 //{ name: 'Attractions', Types: &types=restaurant|cafe, ExcludeTypes: null, Keywords: null, attractionText: 'Attractions', isSetMapCenter: true, markerImage: 'images/mapicon-small.png' },
                   {
-                      rank: 8,
+                      rank: 1,
                       name: 'hotels',
                       attractionText: 'Hotels',
                       markerImage: 'images/attraction-marker/hotels-icon.png',

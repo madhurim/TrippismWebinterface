@@ -727,21 +727,25 @@ i.calendar.active, .input-box:hover i.calendar {
         border-left: 1px dashed #a8abb0;
     }
 
-        .attractions-found .destinations-list:first-child {
-            margin-left: 0;
-            padding-left: 0;
-            border-left: 0px;
-        }
+.hotels.destinations-list {
+    width: 160px;
+}
 
-    .attractions-found .placeaddress-list {
-        color: #cfcfcf;
-        font-size: 12px;
-    }
+.attractions-found .destinations-list:first-child {
+    margin-left: 0;
+    padding-left: 0;
+    border-left: 0px;
+}
 
-    .attractions-found .destinations-list h6 {
-        color: #fff;
-        font-size: 12px;
-    }
+.attractions-found .placeaddress-list {
+    color: #cfcfcf;
+    font-size: 12px;
+}
+
+.attractions-found .destinations-list h6 {
+    color: #fff;
+    font-size: 12px;
+}
 
 .atractions-nav-tabs {
     display: inline-block;

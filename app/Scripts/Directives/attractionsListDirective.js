@@ -16,7 +16,13 @@ angular.module('TrippismUIApp').directive('attractionList', ['$sce', '$rootScope
 
             //create attraction object from factory object
             attractionsData.forEach(function (item) {
-                scope.attractionsData.push({ name: item.name, displayName: item.attractionText, data: null, isActive: item.isDefault, htmlClass: item.htmlClass });
+                scope.attractionsData.push({
+                    name: item.name, displayName: item.attractionText, data: null, isActive: item.isDefault, htmlClass: item.htmlClass, isDisplay: item.name == "hotels" ? null : true
+                });
+            });
+
+            scope.$on('HotelData', function (event, data) {
+                _.findWhere(scope.attractionsData, { name: 'hotels' }).isDisplay = true;
             });
 
             scope.isAttractionCollapsed = true;

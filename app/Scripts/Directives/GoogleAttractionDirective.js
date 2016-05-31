@@ -221,7 +221,7 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, TrippismConsta
                             var marker = new MarkerWithLabel({
                                 position: iconlatlng,
                                 map: $scope.googleattractionsMap,
-                                title: '' + maps[x].name + '',
+                                title: type == "hotels" ? (maps[x].name).toUpperCase() : maps[x].name,
                                 labelAnchor: new google.maps.Point(12, 35),
                                 labelInBackground: false,
                                 visible: true,

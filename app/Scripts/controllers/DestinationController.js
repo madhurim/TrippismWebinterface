@@ -133,6 +133,13 @@
         $scope.$on('showHotelDetails', function () {
             $scope.$broadcast('showHotelDetailsOnMap');
         });
+
+        $scope.$on('hotelDataFound', function (event, data) {
+            if (!data)
+                angular.element('#divhotel').remove();
+            else
+                $scope.$broadcast('HotelData', data);
+        });
     }
 
 })();

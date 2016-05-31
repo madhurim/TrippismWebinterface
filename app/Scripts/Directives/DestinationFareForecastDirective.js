@@ -12,12 +12,7 @@
                 }
                 $scope.formats = Dateformat();
                 $scope.format = $scope.formats[5];
-                $scope.$on('hotelDataFound', function (event, data) {
-                    if (!data)
-                        angular.element('#divhotel').remove();
-                    else
-                        $scope.HotelData = data;
-                });
+                
                 $scope.amountBifurcation = function (value) { return UtilFactory.amountBifurcation(value); };
             },
             link: function ($scope, elem, attrs) {
@@ -237,9 +232,9 @@
                         { state: 'destination', name: 'Destination', active: true, className: "active" }
                     ];
                 }
-                $scope.totalFare = function () {
-                    return (2 * parseFloat($scope.LowestFare.Fare) + parseFloat($scope.HotelData.Fare)).toFixed(2);
-                }
+                //$scope.totalFare = function () {
+                //    return (2 * parseFloat($scope.LowestFare.Fare) + parseFloat($scope.HotelData.Fare)).toFixed(2);
+                //}
             }
         }
     }]);

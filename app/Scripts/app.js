@@ -43,67 +43,6 @@ TrippismUIApp.run(['$route', '$rootScope', '$location', function ($route, $rootS
     };
 }]);
 
-TrippismUIApp.directive("reportMyHeight", ['$timeout', '$window', function ($timeout, $window) {
-    return {
-        restrict: 'A',
-        scope: {
-            param: '=',
-            paramtab: '=',
-            isShowSearchIcon: '='
-        },
-        link: function (scope, element, attr) {
-            scope.$watchCollection('param', function (newValue, oldValue) {
-                return $timeout(function () {
-                    var mapid = angular.element(document.getElementById('mainmap'));
-                    mapid.css({
-                        top: element[0].offsetHeight > 1000 ? 0 + 'px' : element[0].offsetHeight + 'px',
-                    });
-                    scope.isShowSearchIcon = false;
-                    scope.isShowSearchIcon = true;
-                }, false);
-            });
-            scope.$watchCollection('paramtab.tabItems', function (newValue, oldValue) {
-                return $timeout(function () {
-                    var mapid = angular.element(document.getElementById('mainmap'));
-                    mapid.css({
-                        top: newValue.length > oldValue.length ? 0 + 'px' : element[0].offsetHeight + 'px',
-                    });
-                }, false);
-            });
-
-            var w = angular.element($window);
-            w.bind('resize', function () {
-                setMapPosition();
-                setIwCloseButtonPositionFn();
-            });
-
-            scope.$watchGroup(['refineSearchValues.Theme', 'refineSearchValues.Region', 'refineSearchValues.Maxfare', 'refineSearchValues.Minfare'], function () {
-                setMapPosition();
-            });
-
-            function setMapPosition() {
-                return $timeout(function () {
-                    var mapid = angular.element(document.getElementById('mainmap'));
-                    var top = mapid.css('top');
-                    if (top != element[0].offsetHeight + 'px') {
-                        mapid.css({
-                            top: element[0].offsetHeight + 'px',
-                        });
-                    }
-                }, false);
-            }
-
-            // set position of infowindow close button
-            function setIwCloseButtonPositionFn() {
-                return $timeout(function () {
-                    var iwOuter = angular.element(document.getElementsByClassName('gm-style-iw'));
-                    iwOuter.parent().css({ width: iwOuter.css('width'), maxWidth: iwOuter.css('width') });
-                }, 100, false);
-            }
-        }
-    };
-}]);
-
 // filter for getting floor value
 TrippismUIApp.filter('floor', function () {
     return function (input) {
@@ -142,6 +81,17 @@ angular.module('TrippismUIApp').directive('allowOnlyDateInputs', function () {
                     // to stop others  
                     return false;
                 }
+            });
+        }
+    }
+});
+
+angular.module('TrippismUIApp').directive('srcError', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, elm, attrs) {
+            elm.bind('error', function () {
+                angular.element(this).attr("src", attrs.srcError);
             });
         }
     }

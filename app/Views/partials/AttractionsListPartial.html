@@ -10,7 +10,7 @@
                         </span>
                     </a>
                 </li>
-                <li ng-repeat="item in attractionsData" ng-class="item.isActive ? 'active' : ''">
+                <li ng-repeat="item in attractionsData" ng-class="item.isActive ? 'active' : ''" ng-show="item.isDisplay">
                     <a ng-click="loadAttractions(item.name)" title="{{item.displayName}}" class="{{item.htmlClass}}">
                     </a>
                 </li>
@@ -20,10 +20,24 @@
     <div class="attractions-found" collapse="!isAttractionCollapsed">
         <div id="examples">
             <div class="content contentHorizontal">
-                <div ng-click="SelectPlace(item)" ng-repeat="item in attractionstoDisp" class="destinations-list">
-                    <h6>{{item.name}}</h6>
+                <div ng-click="SelectPlace(item)" ng-repeat="item in attractionstoDisp" class="destinations-list {{::item.type}}">
+                    <h6 class="text-capitalize">{{::item.name}}</h6>
                     <div class="placeaddress-list">
-                        <span ng-bind-html="item.Placeaddress"></span>
+                        <!--<span ng-bind-html="item.Placeaddress"></span>-->
+                        <span ng-hide="::item.type=='hotels'" class="text-capitalize">{{::item.Placeaddress}}</span>
+                        <h6 class="margin-0 line-20 font-14" ng-if="::item.type=='hotels'">
+                            <span ng-if="::item.details.RateRange">
+                                <span ng-init="amtbifercation1=amountBifurcation(item.details.RateRange.Min);">
+                                    <span>{{::GetCurrencySymbol(item.details.RateRange.CurrencyCode)}}</span>
+                                    {{amtbifercation1.BeforeDecimal}}<span class="text-super vertical-top font-11">{{amtbifercation1.AfterDecimal}}</span>
+                                </span>
+                                -
+                                <span ng-init="amtbifercation=amountBifurcation(item.details.RateRange.Max);">
+                                    <span>{{::GetCurrencySymbol(item.details.RateRange.CurrencyCode)}}</span>
+                                    {{amtbifercation.BeforeDecimal}}<span class="text-super vertical-top font-11">{{amtbifercation.AfterDecimal}}</span>
+                                </span>
+                            </span>
+                        </h6>
                         <div ng-bind-html="item.raitingToAppend"></div>
                     </div>
                 </div>

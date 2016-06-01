@@ -15,7 +15,8 @@
                 UtilFactory.GetCurrencySymbols();
                 init();
                 function init() {
-                    DestinationFactory.clearDestinationData();
+                    DestinationFactory.DestinationDataStorage.fare.clear();
+                    DestinationFactory.DestinationDataStorage.hotel.clear();
                     UtilFactory.ReadHighRankedAirportsJson().then(function (airports) {
                         var originAirport = _.findWhere(airports, { airport_Code: $scope.origin });
                         var destinationAirport = _.findWhere(airports, { airport_Code: $scope.destination });
@@ -53,7 +54,7 @@
                                 $scope.destinationData.returnDate = ConvertToRequiredDate(data.ReturnDateTime, 'UI'),
                                 $scope.destinationData.currencyCode = getCurrencyCode(data.PricedItineraries[0])
                                 $scope.destinationData.currencySymbol = UtilFactory.GetCurrencySymbol($scope.destinationData.currencyCode);
-                                DestinationFactory.setDestinationData(
+                                DestinationFactory.DestinationDataStorage.fare.set(
                                    {
                                        Origin: $scope.origin,
                                        Destination: $scope.destination,
@@ -79,6 +80,11 @@
                 $scope.amountBifurcation = function (value) { return UtilFactory.amountBifurcation(value); };
             }],
             link: function (scope, elem, attrs) {
+
+                scope.$on('hotelDataFound', function (event, data) {
+                    if (!data)
+                        elem.find('.mdhotel').remove();
+                });
             }
         }
     }

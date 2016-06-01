@@ -8,6 +8,7 @@
         var highRankedAirportsPromise;
         var CurrencySymbolsPromise;
         var airportJsonPromise;
+        var airportsCurrencyPromise;
         var airportsCurrency = [];
         var service = {
             ReadAirportJson: ReadAirportJson,
@@ -198,14 +199,14 @@
                 return data.data;
             });
         }
-        function ReadAirportsCurrency(url) {
-            if (airportsCurrency.length > 0) {
-                var d = $q.defer();
-                d.resolve(airportsCurrency);
-                return d.promise;
+        function ReadAirportsCurrency() {
+            if (airportsCurrencyPromise) {
+                return $q.when(airportsCurrencyPromise).then(function (value) {
+                    return value;
+                });
             }
             else
-                return getAirportCurrencyJson($rootScope.apiURLForConstant + '/GetAirportsCurrency').then(function (data) {
+                return airportsCurrencyPromise = getAirportCurrencyJson($rootScope.apiURLForConstant + '/GetAirportsCurrency').then(function (data) {
                     airportsCurrency = data;
                     return data;
                 });
@@ -221,6 +222,7 @@
         }
 
         function GetAirportCurrency(airportCode) {
+
             var cacheResult = _.findWhere(airportsCurrency, { aCode: airportCode });
             if (cacheResult) {
                 return cacheResult.cCode;
@@ -228,6 +230,7 @@
             else {
                 return '';
             }
+
         }
 
         function amountBifurcation(TotalfareAmount) {

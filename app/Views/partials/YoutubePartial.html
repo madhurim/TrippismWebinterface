@@ -2,7 +2,7 @@
     <div class="right-sidebar">
         <div class="news-wp">
             <div class="news-title popup-header">
-                <h6 class="widget-popup-title">  {{youtubeParams.DestinationAirport.airport_CityName}} attraction videos in 30 Miles radius</h6>
+                <h6 class="widget-popup-title">{{youtubeParams.DestinationAirport.airport_CityName}} attraction videos in 30 Miles radius</h6>
             </div>
             <div class="news-list">
                 <div class="news-pagination" ng-show="isDataLoadedFirstTime">
@@ -14,16 +14,16 @@
                     </nav>
                 </div>
                 <div id="examples" class="news-block">
-                    <div class="content contentVertical">
+                    <div class="contentHorizontal">
                         <ul>
-                            <li ng-repeat="data in youtubeData.items | limitTo: pageSize ">
+                            <li ng-repeat="data in youtubeData.items | limitTo: pageSize">
                                 <div class="news-img-block">
                                     <a ng-click="open(data.id.videoId)" style="cursor:pointer;">
                                         <span class="play"><img src="/images/play-icon.png" alt="" /></span>
-                                        <img ng-src="{{data.snippet.thumbnails.default.url}}" alt="" />
+                                        <img ng-src="{{data.snippet.thumbnails.default.url}}" alt="" width="120" height="90" />
                                     </a>
                                 </div>
-                                <div class="news-content-block">
+                                <div class="news-content-block font-light" style="margin-top:5px;">
                                     <p>{{data.snippet.title}}</p>
                                 </div>
                             </li>

@@ -141,6 +141,7 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory)
             function GetCurrencySymbol(code) {
                 return UtilFactory.GetCurrencySymbol(code);
             }
+            $scope.amountBifurcation = function (value) { return UtilFactory.amountBifurcation(value); };
         },
         link: function (scope, elem, attrs) {
             scope.$on('destinationFareInfo', function (event, data) {
@@ -247,7 +248,7 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory)
 
                 $('#fareRageChart').highcharts({
                     chart: {
-                        height: 80,
+                        height: 85,
                         type: 'lineargauge',
                         inverted: true,
                         marginTop: 10
@@ -285,11 +286,11 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory)
                             formatter: function () {
                                 var value = $filter('number')(this.value);
                                 if (this.value == 0)
-                                    return '<div class="gauge-label">Low<br/>' + scope.FareRangeWidgetData.CurrencyCode + ' ' + chartFareObj.MinimumFare + '</div>';
+                                    return '<div class="gauge-label">Low<br/><span class="font-imp">' + scope.FareRangeWidgetData.CurrencyCode + ' ' + chartFareObj.MinimumFare + '</span></div>';
                                 else if (this.value == 50)
-                                    return '<div class="gauge-label">Median<br/>' + scope.FareRangeWidgetData.CurrencyCode + ' ' + chartFareObj.MedianFare + '</div>';
+                                    return '<div class="gauge-label">Median<br/><span class="font-imp">' + scope.FareRangeWidgetData.CurrencyCode + ' ' + chartFareObj.MedianFare + '</span></div>';
                                 else if (this.value == 100)
-                                    return '<div class="gauge-label">High<br/>' + scope.FareRangeWidgetData.CurrencyCode + ' ' + chartFareObj.MaximumFare + '</div>';
+                                    return '<div class="gauge-label">High<br/><span class="font-imp">' + scope.FareRangeWidgetData.CurrencyCode + ' ' + chartFareObj.MaximumFare + '</span></div>';
                             }
                         },
                         plotBands: [{

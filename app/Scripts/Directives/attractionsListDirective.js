@@ -23,11 +23,14 @@ angular.module('TrippismUIApp').directive('attractionList', ['$sce', '$rootScope
 
             scope.$on('HotelData', function (event, data) {
                 _.findWhere(scope.attractionsData, { name: 'hotels' }).isDisplay = true;
+                if (!isTabClicked)
+                    scope.loadAttractions('hotels', true);
             });
 
             scope.isAttractionCollapsed = true;
             scope.isAttractions = true;
             scope.attractionstoDisp = [];
+            var isTabClicked = false;
 
             scope.getAttractionsList = function () {
                 scope.isAttractionFound = true;
@@ -112,11 +115,13 @@ angular.module('TrippismUIApp').directive('attractionList', ['$sce', '$rootScope
             scope.loadMoreAttractions = function () {
                 scope.loadMoreAttractionInfo();
             }
+
             scope.loadAttractions = function (type, keepOpen) {
+                isTabClicked = true;
                 // for setting <li> tag active class            
                 if (type == 'btn')
                     scope.isAttractionCollapsed = !scope.isAttractionCollapsed;
-                else {
+                else {                    
                     // find attraction with same type from attractionData
                     var attraction = _.find(scope.attractionsData, function (item) { return item.name === type; });
                     if (attraction) {

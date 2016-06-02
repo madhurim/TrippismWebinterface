@@ -8,6 +8,7 @@
             'UtilFactory',
             'InstaFlightSearchFactory',
             '$window',
+            'TrippismConstants',
              DestinationController]);
     function DestinationController(
         $scope,
@@ -15,7 +16,8 @@
         DestinationFactory,
         UtilFactory,
         InstaFlightSearchFactory,
-        $window) {
+        $window,
+        TrippismConstants) {
 
         $scope.$emit('bodyClass', 'otherpage destination-page');
         var w = angular.element($window);
@@ -32,7 +34,8 @@
                 boxwrap.height((w.height() * 70) / 100);    // make image height 70% of the screen height
         }
 
-        $scope.Origin = $scope.DestinationLocation = '';
+        $scope.Origin = $scope.DestinationLocation = undefined;
+        $scope.DestinationImagePath = TrippismConstants.DestinationImagePath;
         init();
 
         function init() {

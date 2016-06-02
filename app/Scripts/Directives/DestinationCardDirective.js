@@ -11,7 +11,7 @@
                 imageUrl: '@'
             },
             templateUrl: '/Views/partials/DestinationCard.html',
-            controller: ['$scope', '$parse', '$filter', 'UtilFactory', 'InstaFlightSearchFactory', 'DestinationFactory', function ($scope, $parse, $filter, UtilFactory, InstaFlightSearchFactory, DestinationFactory) {
+            controller: ['$scope', '$parse', '$filter', 'UtilFactory', 'InstaFlightSearchFactory', 'DestinationFactory', 'TrippismConstants', function ($scope, $parse, $filter, UtilFactory, InstaFlightSearchFactory, DestinationFactory, TrippismConstants) {
                 UtilFactory.GetCurrencySymbols();
                 init();
                 function init() {
@@ -20,6 +20,7 @@
                     UtilFactory.ReadHighRankedAirportsJson().then(function (airports) {
                         var originAirport = _.findWhere(airports, { airport_Code: $scope.origin });
                         var destinationAirport = _.findWhere(airports, { airport_Code: $scope.destination });
+                        $scope.DestinationImagePath = TrippismConstants.DestinationImagePath;
                         if (!originAirport && !destinationAirport) return;
                         var request = {
                             origin: $scope.origin,

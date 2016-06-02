@@ -256,7 +256,8 @@ input.form-control[type="number"] {
     left: 0;
     position: absolute;
     right: 0;
-    top: 75px;
+    /*top: 75px;*/
+    top: 0;
     overflow: hidden;
 }
 

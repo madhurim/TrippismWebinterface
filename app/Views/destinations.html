@@ -1,11 +1,8 @@
-﻿
-
-
-
-<style type="text/css">
+﻿<style type="text/css">
     .container-fluid {
-        padding-left:0 ;
+        padding-left: 0;
     }
+
     .dd-container {
         width: 100% !important;
     }
@@ -26,53 +23,38 @@
 </style>
 
 
-<div id="content-wrapper" class="container-fluid col-lg-12 col-md-12 col-sm-12 col-xs-12">
-    <section id="header_top">
-       <!-- <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                 <div class="logo">
-                    <img src="http://www.trippism.com/images/trippism-logo.png" style="height: 40px; margin-left: 35px; margin-top: 5px; padding-bottom: 5px; cursor: pointer;" />
-                </div>
-            </div>
-
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                <div class="menu">
-                    <span class="fa fa-bars" aria-hidden="true"></span>
-                </div>
-            </div>
-        </div>-->
-    </section>
-
-
-
+<div id="content-wrapper" class="container-fluid col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-controller="DestinationsController">
+    <section id="header_top"></section>
     <section id="container_1" class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
-
         <div class="container">
-
-
             <div class="container-fluid">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <!--<section id="Modification">-->
                     <div class="row" style="margin-top:5px;">
-
                         <div class="col-lg-8 col-md-8 col-sm-5 col-xs-5">
                             <div class="form" style="">
-                                <label class="search_list">NYC Jun-02-2016 To  Jun-06-2016 $ 156 To $ 2368 DISNEY Europe</label>
+                                <label class="search_list">
+                                    <span ng-show="refineSearchValues && refineSearchValues.OrigintoDisp">{{refineSearchValues.OrigintoDisp}} </span>
+                                    <span ng-show="refineSearchValues && refineSearchValues.FromDate">{{refineSearchValues.FromDate | date:'MMM-dd-yyyy'}} </span>
+                                    <span ng-show="refineSearchValues && refineSearchValues.ToDate">To {{refineSearchValues.ToDate | date:'MMM-dd-yyyy'}}</span>
+                                    <span ng-show="refineSearchValues && refineSearchValues.Minfare > 0">{{fareCurrencySymbol}} {{refineSearchValues.Minfare}}</span>
+                                    <span ng-show="refineSearchValues && refineSearchValues.Maxfare > 0"> To {{fareCurrencySymbol}} {{refineSearchValues.Maxfare}}</span>
+                                    <span ng-show="refineSearchValues && refineSearchValues.Theme"> {{refineSearchValues.Theme}}</span>
+                                    <span ng-show="refineSearchValues && refineSearchValues.Region"> {{refineSearchValues.Region}} </span>
+                                </label>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-7 col-xs-7">
                             <div class="Modify">
-                                <div class="btn btn-danger">Modify</div>
-                                <div class="btn btn-danger">Help</div>
+                                <div class="btn btn-danger" ng-click="isModified=!isModified;isRefineSeachCollapsed=false;">Modify</div>
+                                <div class="btn btn-danger" video-popup-directive>Help</div>
                             </div>
                         </div>
                     </div>
-                    <!--</section>-->
 
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                             <div class="row" style="">
-                                <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12">
+                                <!--<div class="col-lg-11 col-md-11 col-sm-12 col-xs-12">
                                     <div class="Filter_option">
                                         <div class="price_start col-lg-4 col-md-4 col-sm-4 col-xs-4">
                                             <span class="">75</span>
@@ -84,6 +66,17 @@
                                             <span class="">1209</span>
                                         </div>
                                     </div>
+                                </div>-->
+                                <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12">
+
+                                    <div class="rs-wrapper">
+                                        <div class="rs-lbl-left">{{priceSliderValues.originalRange.min}}</div>
+                                        <div class="rs-lbl-midd">Air Fare/Person</div>
+                                        <div class="rs-lbl-right">{{priceSliderValues.originalRange.max}}</div>
+                                        <div class="clear"></div>
+                                    </div>
+                                    <div class="range-slider" range-slider on-handle-up="handleUp(true)" min="priceSliderValues.range.min" max="priceSliderValues.range.max" model-min="priceSliderValues.values.min" model-max="priceSliderValues.values.max" show-values="true" attach-handle-values="true" disabled="priceSliderValues.values.max == 0 && priceSliderValues.values.min == 0"></div>
+
                                 </div>
                             </div>
                             <div class="row" style="margin-bottom:-26px;">
@@ -93,7 +86,6 @@
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-
                             <div class="row" style=" background-color:#fff;">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="theme_option">
@@ -115,15 +107,9 @@
                                         <div class="spacer"></div>
                                     </div>
                                 </div>
-
-
-
-
                             </div>
-
                         </div>
                         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
-
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="theme_option">
@@ -145,124 +131,19 @@
                     </div>
                 </div>
             </div>
-
-
-
-            <!--image_section-->
-
             <div class="row" style=" background-color:#FAFBFC; border-top:2px solid #ccc; overflow-y:inherit;">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 thumbnail_box_1" style="margin-top:25px; margin-bottom:50px; ">
                     <div class="thumbnail_box">
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6" ng-repeat="item in destinationlist">
                             <div class="thumbnail_img img-responsive">
-                                <img src="https://s3-eu-west-1.amazonaws.com/images.skypicker.com/photos/220x165/mumbai_in.jpg" style="width:99.99%;" />
-
-                                <span class="Price_list">$ 100000</span>
-
-
+                                <img ng-src="../images/destination/{{::item.DestinationLocation}}.jpg" style="width:99.99%;" />
+                                <span class="Price_list">{{::GetCurrencySymbol(item.CurrencyCode)}} {{::GetLowFare(item)}}</span>
                                 <div class="city_name">
-                                    <span class="" style="font-size:18px; font-weight:normal; color:#565a5c;">Mumbai</span>
+                                    <span class="" style="font-size:18px; font-weight:normal; color:#565a5c;">{{::item.DestinationLocation}}</span>
                                 </div>
                                 <div class="Airport_name">
                                     <span class="" style="font-size:12px; font-weight:500; color:#333;">Mumbai International Airport</span>
                                 </div>
-
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                            <div class="thumbnail_img img-responsive">
-                                <img src="https://s3-eu-west-1.amazonaws.com/images.skypicker.com/photos/220x165/mumbai_in.jpg" style="width:99.99%;" />
-
-                                <span class="Price_list">$ 100000</span>
-
-
-                                <div class="city_name">
-                                    <span class="" style="font-size:18px; font-weight:normal; color:#565a5c;">Mumbai</span>
-                                </div>
-                                <div class="Airport_name">
-                                    <span class="" style="font-size:12px; font-weight:500; color:#333;">Mumbai International Airport</span>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                            <div class="thumbnail_img img-responsive">
-                                <img src="https://s3-eu-west-1.amazonaws.com/images.skypicker.com/photos/220x165/mumbai_in.jpg" style="width:99.99%;" />
-
-                                <span class="Price_list">$ 100000</span>
-
-
-                                <div class="city_name">
-                                    <span class="" style="font-size:18px; font-weight:normal; color:#565a5c;">Mumbai</span>
-                                </div>
-                                <div class="Airport_name">
-                                    <span class="" style="font-size:12px; font-weight:500; color:#333;">Mumbai International Airport</span>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                            <div class="thumbnail_img img-responsive">
-                                <img src="https://s3-eu-west-1.amazonaws.com/images.skypicker.com/photos/220x165/mumbai_in.jpg" style="width:99.99%;" />
-
-                                <span class="Price_list">$ 100000</span>
-
-
-                                <div class="city_name">
-                                    <span class="" style="font-size:18px; font-weight:normal; color:#565a5c;">Mumbai</span>
-                                </div>
-                                <div class="Airport_name">
-                                    <span class="" style="font-size:12px; font-weight:500; color:#333;">Mumbai International Airport</span>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                            <div class="thumbnail_img img-responsive">
-                                <img src="https://s3-eu-west-1.amazonaws.com/images.skypicker.com/photos/220x165/mumbai_in.jpg" style="width:99.99%;" />
-
-                                <span class="Price_list">$ 100000</span>
-
-
-                                <div class="city_name">
-                                    <span class="" style="font-size:18px; font-weight:normal; color:#565a5c;">Mumbai</span>
-                                </div>
-                                <div class="Airport_name">
-                                    <span class="" style="font-size:12px; font-weight:500; color:#333;">Mumbai International Airport</span>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                            <div class="thumbnail_img img-responsive">
-                                <img src="https://s3-eu-west-1.amazonaws.com/images.skypicker.com/photos/220x165/mumbai_in.jpg" style="width:99.99%;" />
-
-                                <span class="Price_list">$ 100000</span>
-
-
-                                <div class="city_name">
-                                    <span class="" style="font-size:18px; font-weight:normal; color:#565a5c;">Mumbai</span>
-                                </div>
-                                <div class="Airport_name">
-                                    <span class="" style="font-size:12px; font-weight:500; color:#333;">Mumbai International Airport</span>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
-                            <div class="thumbnail_img img-responsive">
-                                <img src="https://s3-eu-west-1.amazonaws.com/images.skypicker.com/photos/220x165/mumbai_in.jpg" style="width:99.99%;" />
-
-                                <span class="Price_list">$ 100000</span>
-
-
-                                <div class="city_name">
-                                    <span class="" style="font-size:18px; font-weight:normal; color:#565a5c;">Mumbai</span>
-                                </div>
-                                <div class="Airport_name">
-                                    <span class="" style="font-size:12px; font-weight:500; color:#333;">Mumbai International Airport</span>
-                                </div>
-
                             </div>
                         </div>
                     </div>
@@ -272,10 +153,17 @@
     </section>
 
     <section id="container_2" class="col-lg-5 col-md-5 hidden-sm hidden-xs">
-        <div id="googleMap" style="width:100%; height:98vh;"></div>
+        <!--<div id="googleMap" style="width:100%; height:98vh;"></div>-->
+        <div class="map-box" id="mainmap" style="width:100%; height:98vh;">
+            <div class="" style="height:100%;width:auto;" cg-busy="{promise:mappromise,message:'Please wait...'}">
+                <div id="wrapper" cg-busy="{promise:destinationmappromise,message:'Please wait...'}">
+                    <div google-map ng-show="isShowSearchIcon || ShowDestinationView" airlinejsondata="airlineJsonData" airportlist="AvailableAirports" class="map"></div>   <!--destinations="destinationlist" defaultlat="20" defaultlng="0"-->
+                </div>
+            </div>
+        </div>
     </section>
-
-
-
+    <div ng-show="isModified">
+        <search-box is-popup="isModified"></search-box>
+    </div>
 </div>
 

@@ -1,6 +1,6 @@
 ﻿<div ng-controller="DestinationController" cg-busy="{promise:mappromise,message:'Please wait...'}">
-    <div id="destination-imgwrap"><img ng-show="DestinationLocation" ng-src="../images/destination/{{DestinationLocation}}.jpg" src-error="../images/destination/default.jpg" /></div>
-    <!--<div id="destination-imgwrap"><img ng-show="DestinationLocation" ng-src="http://content.trippism.com/images/destinations/{{DestinationLocation}}.jpg" src-error="http://content.trippism.com/images/destinations/default.jpg" /></div>-->
+    <!--<div id="destination-imgwrap"><img ng-show="DestinationLocation" ng-src="../images/destination/{{DestinationLocation}}.jpg" src-error="../images/destination/default.jpg" /></div>-->
+    <div id="destination-imgwrap"><img ng-show="DestinationLocation" ng-src="http://content.trippism.com/images/destinations/{{DestinationLocation}}.jpg" src-error="http://content.trippism.com/images/destinations/default.jpg" /></div>
     <div class="row" title="" id="destination-content">
         <div class="tab-content-wp col-xs-12">
             <destination-fare-forecast fare-params="params"></destination-fare-forecast>

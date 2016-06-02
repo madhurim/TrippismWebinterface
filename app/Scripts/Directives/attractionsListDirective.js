@@ -50,7 +50,7 @@ angular.module('TrippismUIApp').directive('attractionList', ['$sce', '$rootScope
                                         geometry: results[i].geometry,
                                         name: results[i].name,
                                         //Placeaddress: $sce.trustAsHtml(results[i].vicinity),
-                                        Placeaddress: results[i].vicinity,
+                                        vicinity: results[i].vicinity,
                                         place_id: results[i].place_id,
                                         raitingToAppend: raitingToAppend,
                                         type: scope.attractions.type,

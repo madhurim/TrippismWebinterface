@@ -102,6 +102,7 @@
         $scope.destinationlist = "";
         $scope.AvailableThemes = AvailableTheme();
         $scope.AvailableRegions = AvailableRegions();
+        $scope.GetLowFare = GetLowFare;
 
         $scope.PointOfsalesCountry;
 
@@ -122,18 +123,18 @@
             var destinationstodisp = [];
             for (var x = 0; x < destinations.length; x++) {
                 var LowestFarePrice = "N/A";
-                var LowestNonStopeFare = "N/A";
+                var LowestNonStopFare = "N/A";
                 if (destinations[x].LowestNonStopFare != undefined && destinations[x].LowestNonStopFare.Fare != "N/A") {
-                    LowestNonStopeFare = parseFloat(destinations[x].LowestNonStopFare.Fare).toFixed(2);
-                    if (LowestNonStopeFare == 0)
-                        LowestNonStopeFare = "N/A";
+                    LowestNonStopFare = parseFloat(destinations[x].LowestNonStopFare.Fare).toFixed(2);
+                    if (LowestNonStopFare == 0)
+                        LowestNonStopFare = "N/A";
                 }
                 if (destinations[x].LowestFare != undefined && destinations[x].LowestFare.Fare != "N/A") {
                     LowestFarePrice = parseFloat(destinations[x].LowestFare.Fare).toFixed(2);
                     if (LowestFarePrice == 0)
                         LowestFarePrice = "N/A";
                 }
-                if (LowestNonStopeFare != "N/A" || LowestFarePrice != "N/A")
+                if (LowestNonStopFare != "N/A" || LowestFarePrice != "N/A")
                     destinationstodisp.push(destinations[x]);
             }
             return destinationstodisp;
@@ -446,5 +447,9 @@
         function SetToDate(fromDate) {
             $scope.ToDate = ConvertToRequiredDate(GetToDate($scope.FromDate), 'UI');
         };
+
+        function GetLowFare(item) {
+            return Math.ceil(UtilFactory.GetLowFareForMap(item));
+        }
     }
 })();

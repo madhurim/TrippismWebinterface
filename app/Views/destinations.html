@@ -93,7 +93,7 @@
                     <div class="thumbnail_box">
                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6" ng-repeat="item in destinationlist">
                             <div class="thumbnail_img img-responsive">
-                                <img ng-src="../images/destination/{{::item.DestinationLocation}}.jpg" style="width:99.99%;" />
+                                <img ng-src="{{::DestinationImagePath}}{{::item.DestinationLocation}}.jpg" src-error="{{::DestinationImagePath}}default.jpg" style="width:99.99%;" />
                                 <span class="Price_list">{{::GetCurrencySymbol(item.CurrencyCode)}} {{::GetLowFare(item)}}</span>
                                 <div class="city_name">
                                     <span class="" style="font-size:18px; font-weight:normal; color:#565a5c;">{{::item.DestinationLocation}}</span>

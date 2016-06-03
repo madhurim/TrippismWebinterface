@@ -1791,6 +1791,10 @@ ul .stop-line {
         width: auto;
         margin-right: 30px;
     }
+
+        .col-fare .invisible {
+            display: inline-block!important;
+        }
 }
 
 @media only screen and (max-width:520px) {

@@ -928,6 +928,7 @@ i.calendar.active, .input-box:hover i.calendar {
 
     .news-pagination .pager li.next span {
         margin-left: 5px;
+        vertical-align: text-top;
     }
 
     .news-pagination .pager li > a, .news-pagination .pager li > span {
@@ -937,8 +938,9 @@ i.calendar.active, .input-box:hover i.calendar {
         display: inline;
         color: #585858;
         padding: 0;
-        font-size: 12px;
         text-transform: uppercase;
+        font-weight: bold;
+        font-size: 14px;
     }
 
         .news-pagination .pager li > a:hover, .news-pagination .pager li > a:focus {

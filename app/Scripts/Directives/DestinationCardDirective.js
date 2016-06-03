@@ -15,6 +15,7 @@
                 UtilFactory.GetCurrencySymbols();
                 init();
                 function init() {
+                    $scope.url = 'f=' + $scope.origin + ';t=' + $scope.destination + ';d=' + $scope.departureDate + ';r=' + $scope.returnDate;
                     DestinationFactory.DestinationDataStorage.fare.clear();
                     DestinationFactory.DestinationDataStorage.hotel.clear();
                     UtilFactory.ReadHighRankedAirportsJson().then(function (airports) {
@@ -63,7 +64,6 @@
                                        ReturnDate: $scope.returnDate
                                    }, data);
                             }
-                            $scope.url = 'f=' + $scope.destinationData.origin + ';t=' + $scope.destinationData.destination + ';d=' + $scope.departureDate + ';r=' + $scope.returnDate;
                         });
                     });
                 }

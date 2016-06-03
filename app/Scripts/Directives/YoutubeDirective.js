@@ -55,6 +55,7 @@ angular.module('TrippismUIApp').directive('youtubeInfo', ['YouTubeFactory',
                                 scope.youtubeInfoDataFound = true;
 
                                 loadScrollbars();
+                                angular.element('.news-block .contentHorizontal').mCustomScrollbar('scrollTo', 'top');
                             });
                         }
                         scope.youtubeInfoLoaded = true;

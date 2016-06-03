@@ -11,14 +11,16 @@
                 imageUrl: '@'
             },
             templateUrl: '/Views/partials/DestinationCard.html',
-            controller: ['$scope', '$parse', '$filter', 'UtilFactory', 'InstaFlightSearchFactory', 'DestinationFactory', function ($scope, $parse, $filter, UtilFactory, InstaFlightSearchFactory, DestinationFactory) {
+            controller: ['$scope', '$parse', '$filter', 'UtilFactory', 'InstaFlightSearchFactory', 'DestinationFactory', 'TrippismConstants', function ($scope, $parse, $filter, UtilFactory, InstaFlightSearchFactory, DestinationFactory, TrippismConstants) {
                 UtilFactory.GetCurrencySymbols();
                 init();
                 function init() {
-                    DestinationFactory.clearDestinationData();
+                    DestinationFactory.DestinationDataStorage.fare.clear();
+                    DestinationFactory.DestinationDataStorage.hotel.clear();
                     UtilFactory.ReadHighRankedAirportsJson().then(function (airports) {
                         var originAirport = _.findWhere(airports, { airport_Code: $scope.origin });
                         var destinationAirport = _.findWhere(airports, { airport_Code: $scope.destination });
+                        $scope.DestinationImagePath = TrippismConstants.DestinationImagePath;
                         if (!originAirport && !destinationAirport) return;
                         var request = {
                             origin: $scope.origin,
@@ -53,7 +55,7 @@
                                 $scope.destinationData.returnDate = ConvertToRequiredDate(data.ReturnDateTime, 'UI'),
                                 $scope.destinationData.currencyCode = getCurrencyCode(data.PricedItineraries[0])
                                 $scope.destinationData.currencySymbol = UtilFactory.GetCurrencySymbol($scope.destinationData.currencyCode);
-                                DestinationFactory.setDestinationData(
+                                DestinationFactory.DestinationDataStorage.fare.set(
                                    {
                                        Origin: $scope.origin,
                                        Destination: $scope.destination,
@@ -79,6 +81,11 @@
                 $scope.amountBifurcation = function (value) { return UtilFactory.amountBifurcation(value); };
             }],
             link: function (scope, elem, attrs) {
+
+                scope.$on('hotelDataFound', function (event, data) {
+                    if (!data)
+                        elem.find('.mdhotel').remove();
+                });
             }
         }
     }

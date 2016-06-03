@@ -226,7 +226,7 @@ img {
     left: 0;
     position: relative !important;
     right: 0;
-    top: -10px !important;
+    top: 10px;
     height: 24px;
 }
 
@@ -403,6 +403,10 @@ a {
     margin-bottom: 15px;
 }
 
+.margin-top-15 {
+    margin-top: 15px;
+}
+
 .cross-btn {
     position: absolute;
     right: 0;
@@ -508,6 +512,10 @@ ul .stop-line {
 
 .vertical-top {
     vertical-align: top;
+}
+
+.vertical-bottom {
+    vertical-align: bottom;
 }
 
 .paddingtop7 {
@@ -758,9 +766,19 @@ ul .stop-line {
     content: 'History and Culture';
 }
 
+.attr-hotels:before {
+    content: 'Hotels';
+}
+
 .attr-foods, .attr-beaches, .attr-casinos, .attr-outdoors, .attr-shops, .attr-theme-parks, .attr-history {
     width: auto;
     height: auto;
+}
+
+.attr-top {
+    min-height: 100px;
+    color: #333;
+    padding: 20px;
 }
 /* #endregion attraction */
 
@@ -811,7 +829,7 @@ ul .stop-line {
     font-size: 16px;
 }
 
-.homepage .header {
+.homepage .header, .destination-page .header-box {
     position: absolute;
     left: 0;
     right: 0;
@@ -822,7 +840,7 @@ ul .stop-line {
     background-color: transparent;
 }
 
-.homepage .destination-boxwrap {
+.homepage .destination-boxwrap, .destination-page .destination-boxwrap {
     height: 100%;
     width: 100%;
 }
@@ -905,9 +923,10 @@ ul .stop-line {
     border: none;
     box-shadow: none;
     float: none;
-    padding-right: 0px;
+    /*padding-right: 0px;
     padding-top: 5px;
-    padding-bottom: 5px;
+    padding-bottom: 5px;*/
+    padding: 5px 0px;
 }
 
 .ibox-box .fare-info {
@@ -965,16 +984,17 @@ ul .stop-line {
     word-spacing: -2px;
 }
 
-.fare-pred {
-    font-weight: bold;
-}
-
-    .fare-pred p {
-        font-weight: normal;
+    .gauge-label .font-imp {
+        font-size: 14px;
+        font-weight: 600;
     }
 
 .font-16 {
     font-size: 16px;
+}
+
+.font-18 {
+    font-size: 18px;
 }
 
 .book-wrapper a {
@@ -1227,7 +1247,7 @@ ul .stop-line {
 }
 
 .mdcard img.mdimage {
-    height: 300px;
+    height: 250px;
     cursor: pointer;
     width: 100%;
 }
@@ -1333,14 +1353,9 @@ ul .stop-line {
     }
 
 /*#region Hotels*/
-.col-hotel {
+.col-hotel .popup-content {
     padding: 5px;
-    margin-top: 10px;
 }
-
-    .col-hotel .popup-content {
-        padding: 5px;
-    }
 
 .hotel-wrapper {
     color: #585858;
@@ -1377,21 +1392,33 @@ ul .stop-line {
     .hotel-wrapper table tbody {
         font-weight: 500;
         font-size: 17px;
+        color: #333;
     }
 
 .hotel-wrapper .fa-star {
     color: #f6ab02;
 }
 
-/*.hotel-wrapper tbody td {
-    width: 120px;
-    text-align: right;
+.mddisplay1 {
+    font-size: 23px;
+    color: #333;
 }
 
-    .hotel-wrapper tbody td:last-child {
-        width: 60px;
-        min-width: 40px;
-    }*/
+    .mddisplay1 .fa {
+        width: 25px;
+    }
+
+    .mddisplay1 .fa-bed {
+        font-size: 20px;
+    }
+
+.margin-left-30 {
+    margin-left: 30px;
+}
+
+.fare-box-inner a:hover {
+    text-decoration: underline;
+}
 /*#endregion Hotels*/
 
 .col-dest-title {
@@ -1399,9 +1426,9 @@ ul .stop-line {
     color: #b90005;
 }
 
-.col-fare-title.col-dest-title {
+/*.col-fare-title.col-dest-title {
     margin-left: 10px;
-}
+}*/
 
 .col-hotel-title.col-dest-title {
     padding-left: 0px;
@@ -1415,14 +1442,10 @@ ul .stop-line {
     font-size: 15px;
 }
 
-    .avg-high h5, .avg-low h5 {
-        font-size: 22px;
+    .avg-high h5 span, .avg-low h5 span {
+        font-size: 12px;
+        vertical-align: top;
     }
-
-        .avg-high h5 span, .avg-low h5 span {
-            font-size: 12px;
-            vertical-align: top;
-        }
 
 .avg .title {
     font-size: 14px;
@@ -1440,6 +1463,103 @@ ul .stop-line {
         width: 50px;
         margin-top: -10px;
     }
+
+/*#region md-hotel*/
+.mdhotel .col-hotel-title h4, .mdhotel table tbody {
+    font-size: 15px;
+}
+
+.mdhotel tbody td {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.display-block {
+    display: inline-block;
+}
+/*#endregion md-hotel*/
+
+.font-light {
+    color: #565a5c;
+    font-weight: normal;
+}
+
+.fare-calc {
+    font-size: 14px;
+}
+
+    .fare-calc .box {
+        background-color: #ccc;
+        padding: 3px 5px;
+        border-radius: 3px;
+        display: inline-block;
+    }
+
+.font-11 {
+    font-size: 11px;
+}
+
+.margin-lr-3 {
+    margin: 0px 3px;
+}
+
+.margin-right-3 {
+    margin-right: 3px;
+}
+
+.font-700 {
+    font-weight: 700;
+}
+
+.font-normal {
+    font-weight: normal;
+}
+
+.fare-font {
+    font-size: 22px;
+    font-weight: 500;
+    color: #333;
+}
+
+.font-imp {
+    font-weight: 500;
+    color: #333;
+}
+
+/*#region destination-layout*/
+.destination-page #destination-imgwrap img {
+    width: 100%;
+    height: 100%;
+}
+
+#destination-content {
+    width: 80%;
+    margin: auto;
+    background-color: #fff;
+}
+
+.tab-content-wp {
+    box-shadow: 1px 1px 12px #aaa;
+    padding-top: 10px;
+}
+
+#destination-breadcrumb .ibox-title {
+    border: 1px solid #ccc;
+}
+
+.pad-bot-10 {
+    padding-bottom: 10px;
+}
+
+.line-20 {
+    line-height: 20px;
+}
+
+.font-14 {
+    font-size: 14px;
+}
+/*#endregion destination-layout*/
+
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {
@@ -1478,7 +1598,7 @@ ul .stop-line {
     }
 
     /* #region attraction */
-    .attr-foods:before, .attr-beaches:before, .attr-casinos:before, .attr-outdoors:before, .attr-shops:before, .attr-theme-parks:before, .attr-history:before {
+    .attr-foods:before, .attr-beaches:before, .attr-casinos:before, .attr-outdoors:before, .attr-shops:before, .attr-theme-parks:before, .attr-history:before, .attr-hotels:before {
         content: '';
     }
 
@@ -1515,7 +1635,11 @@ ul .stop-line {
         background-image: url("/images/attraction-marker/bank-icon.png");
     }
 
-    .attr-foods, .attr-beaches, .attr-casinos, .attr-outdoors, .attr-shops, .attr-theme-parks, .attr-history {
+    .attr-hotels {
+        background-image: url("/images/attraction-marker/hotels-icon.png");
+    }
+
+    .attr-foods, .attr-beaches, .attr-casinos, .attr-outdoors, .attr-shops, .attr-theme-parks, .attr-history, .attr-hotels {
         background-repeat: no-repeat;
         background-position: center;
         width: 42px;
@@ -1575,8 +1699,16 @@ ul .stop-line {
     }
 
     .mddisplay1 {
-        font-size: 21px;
+        font-size: 20px;
     }
+
+        .mddisplay1 .fa {
+            width: 20px;
+        }
+
+        .mddisplay1 .fa-bed {
+            font-size: 17px;
+        }
 }
 
 @media only screen and (max-width:769px) and (orientation:landscape) {
@@ -1585,7 +1717,7 @@ ul .stop-line {
     }
 
     .mddisplay1 {
-        font-size: 25px;
+        font-size: 23px;
     }
 }
 
@@ -1601,6 +1733,12 @@ ul .stop-line {
     .video {
         width: 80%;
         height: 283px;
+    }
+
+    #destination-content {
+        width: 100%;
+        padding: 0px;
+        box-shadow: none;
     }
 }
 
@@ -1645,6 +1783,13 @@ ul .stop-line {
 @media only screen and (max-width:667px) and (orientation : landscape) {
     .refine-btn-group {
         float: right;
+    }
+}
+
+@media only screen and (max-width:620px) and (min-width:521px) {
+    .col-fare {
+        width: auto;
+        margin-right: 30px;
     }
 }
 

@@ -6,27 +6,33 @@
     function DestinationFactory($http, $rootScope, $filter, $q) {
         var DestinationsData = [];
         var DestinationData = [];
+        var DestinationHotelData = [];
+
+        var DestinationDataStorage = {
+            fare: {
+                get: function (key) { return $filter('filter')(DestinationData, { key: key }, true)[0]; },
+                set: function (key, data) { DestinationData.push({ key: key, data: data }); },
+                clear: function () { DestinationData = []; }
+            },
+            hotel: {
+                get: function (key) { return $filter('filter')(DestinationHotelData, { key: key }, true)[0]; },
+                set: function (key, data) { DestinationHotelData.push({ key: key, data: data }); },
+                clear: function () { DestinationHotelData = []; }
+            }
+        }
+
+
         var service = {
             findDestinations: findDestinations,
             findInstFlightDestination: findInstFlightDestination,
             ShowDestinationView: true,
             GetDestinationFareInfo: GetDestinationFareInfo,
-            getDestinationData: getDestinationData,
-            setDestinationData: setDestinationData,
-            clearDestinationData: clearDestinationData
+            DestinationDataStorage: DestinationDataStorage
+            //getDestinationData: getDestinationData,
+            //setDestinationData: setDestinationData,
+            //clearDestinationData: clearDestinationData,
         };
         return service;
-
-        function serialize(obj) {
-            var str = [];
-            for (var p in obj)
-                if (obj.hasOwnProperty(p)) {
-                    var propval = encodeURIComponent(obj[p]);
-                    if (propval != "undefined" && propval != "null" && propval != '')
-                        str.push(encodeURIComponent(p) + "=" + propval);
-                }
-            return str.join("&");
-        }
         function findDestinations(paramdata) {
             var resultdata = $filter('filter')(DestinationsData, { Criteria: paramdata.Origin + paramdata.DepartureDate + paramdata.ReturnDate })[0];
             if (resultdata != undefined && resultdata != "") {
@@ -69,16 +75,6 @@
            }, function (e) {
                return e;
            });
-        }
-        function getDestinationData(key) {
-            return $filter('filter')(DestinationData, { key: key }, true)[0];
-
-        }
-        function setDestinationData(key, data) {
-            DestinationData.push({ key: key, data: data });
-        }
-        function clearDestinationData() {
-            DestinationData = [];
         }
     }
 })();

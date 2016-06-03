@@ -60,31 +60,30 @@
         };
 
         function activate() {
-            var basicDetinationDetlist = _.filter($scope.eMailData.DestinationList, function (item) {
+            var destinationList = _.filter($scope.eMailData.DestinationList, function (item) {
                 return item.LowestNonStopFare && item.LowestNonStopFare.Fare !== 'N/A';
             });
-            var basicDetinationDetlist = basicDetinationDetlist.sort(function (a, b) { return (parseFloat(a.LowestNonStopFare.Fare) < parseFloat(b.LowestNonStopFare.Fare)) ? 1 : -1; }).reverse().slice(0, 20);
+            var destinationList = destinationList.sort(function (a, b) { return (parseFloat(a.LowestNonStopFare.Fare) < parseFloat(b.LowestNonStopFare.Fare)) ? 1 : -1; }).reverse().slice(0, 20);
 
             var airportlist = $scope.eMailData.AvailableAirports;
 
             var Origin = $scope.eMailData.SearchCriteria.Origin.toUpperCase();
 
-            var OriginairportName = _.find(airportlist, function (airport) {
+            var OriginAirportName = _.find(airportlist, function (airport) {
                 return airport.airport_Code == Origin
             });
-            var destinationfareinfo = _.find($scope.eMailData.DestinationList, function (Destination) {
+            var destinationFareInfo = _.find($scope.eMailData.DestinationList, function (Destination) {
                 return Destination.DestinationLocation == $scope.eMailData.DestinationAirport.airport_Code.toUpperCase()
             });
 
-            var sortedObjs = _.filter(basicDetinationDetlist, function (item) {
+            var sortedObjs = _.filter(destinationList, function (item) {
                 return item.LowestFare && item.LowestFare.Fare !== 'N/A';
             });
             sortedObjs = _(sortedObjs).sortBy(function (obj) { return parseInt(obj.LowestFare.Fare, 10) });
 
             var FromDate = ConvertToRequiredDate($scope.eMailData.SearchCriteria.FromDate, 'API');
             var ToDate = ConvertToRequiredDate($scope.eMailData.SearchCriteria.ToDate, 'API');
-            var OriginName = OriginairportName.airport_CityCode.toUpperCase();
-            $scope.eMailData.Destinatrion
+            var OriginName = OriginAirportName.airport_CityCode.toUpperCase();
 
             var url = 'http://' + window.document.location.host;
             var tripissm_rdrURL = '<a href="' + url + '/#/destination/' + $stateParams.path + '">www.trippism.com</a>';

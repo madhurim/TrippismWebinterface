@@ -4,7 +4,7 @@
             <h4 class="md-title mdtitle">{{::destinationData.originName}} to {{::destinationData.destinationName}}</h4>
             <p class="md-body-1" ng-if="destinationData.departureDate">{{::destinationData.departureDate}} - {{::destinationData.returnDate}}</p>
         </div>
-        <img class="mdimage" ng-src="{{imageUrl}}" class="md-card-image" alt="{{::destinationData.destination}}">
+        <img class="mdimage md-card-image" ng-src="{{imageUrl}}" alt="{{::destinationData.destination}}" src-error="{{::DestinationImagePath}}default.jpg">
     </a>
     <div class="mdcontent">
         <div class="mdattimg">
@@ -25,6 +25,7 @@
         <div class="pull-left">
             <span ng-show="!isDataFound" class="glyphicon glyphicon-refresh glyphicon-spin"></span>
             <h3 class="md-display-1 mddisplay1 mdfare" ng-if="destinationData.lowestFare" ng-init="::amount = amountBifurcation(destinationData.lowestFare);">
+                <i class="fa fa-plane"></i>
                 <span class="cursor-help" data-toggle="tooltip" popover="{{::destinationData.currencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{::destinationData.currencySymbol}}</span>
                 {{amount.BeforeDecimal}}<span class="text-super vertical-top">{{amount.AfterDecimal}}</span>
             </h3>
@@ -33,5 +34,8 @@
             <a ui-sref="destination(::{path:url})">Explore</a>
         </div>
         <div class="clear"></div>
+        <!--<div class="mdhotel">
+            <hotel-range origin="origin" destination="destination" departure-date="departureDate" return-date="returnDate" template-url="Views/Partials/HotelRangeCardPartial.html"></hotel-range>
+        </div>-->
     </div>
 </div>

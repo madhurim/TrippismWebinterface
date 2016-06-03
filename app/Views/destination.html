@@ -1,25 +1,32 @@
-﻿<div ng-controller="DestinationController" cg-busy="{promise:mappromise,message:'Please wait...'}">
-    <div class="row" title="">
+﻿<div ng-controller="DestinationController" cg-busy="{promise:mappromise,message:'Please wait...'}">    
+    <div id="destination-imgwrap"><img ng-show="DestinationLocation" ng-src="{{::DestinationImagePath}}{{DestinationLocation}}.jpg" src-error="{{::DestinationImagePath}}default.jpg" /></div>
+    <div class="row" title="" id="destination-content">
         <div class="tab-content-wp col-xs-12">
             <destination-fare-forecast fare-params="params"></destination-fare-forecast>
-            <div class=" col-md-9 col-sm-12 col-xs-12">
-                <div class="" reset-dimentions>
-                    <div class="row outerDiv" id="outerDiv">
-                        <div class="col-md-12 col-sm-12 col-xs-12 column-2">
-                            <farerangewidget-info widget-params="params" fare-info=""></farerangewidget-info>
-                        </div>
-                        <div class="col-md-12 col-sm-12 col-xs-12 column-1">
-                            <weather-info weather-params="params"></weather-info>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="" reset-dimentions>
+                        <div class="row outerDiv" id="outerDiv">
+                            <div class="col-md-12 col-sm-12 col-xs-12 column-2">
+                                <farerangewidget-info widget-params="params" fare-info=""></farerangewidget-info>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12 column-1">
+                                <weather-info weather-params="params"></weather-info>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <googleattraction-info googleattraction-params="params" class="hidden-xs googleattraction" style="clear:both;"></googleattraction-info>
-                <div class="col-md-12 col-sm-12 col-xs-12 lastDiv" id="lastDiv" style="clear:both;">
-                    <seasonality-info seasonality-params="params"></seasonality-info>
+                    <googleattraction-info googleattraction-params="params" class="hidden-xs googleattraction" style="clear:both;"></googleattraction-info>
+                    <div class="col-md-12 col-sm-12 col-xs-12 lastDiv" id="lastDiv" style="clear:both;">
+                        <seasonality-info seasonality-params="params"></seasonality-info>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-12 col-xs-12 padleft0">
-                <youtube-info youtube-params="params"></youtube-info>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-md-12 col-sm-12 col-xs-12 newouterDiv">
+                        <youtube-info youtube-params="params"></youtube-info>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

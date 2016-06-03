@@ -59,9 +59,8 @@
         </div>
         <div class="container md-container border-bottom pad-top-20 pad-bot-20">
             <div class="row" ng-repeat="item in rowArr track by $index">
-                <div class="col-sm-4" ng-repeat="item in ::destinationRequestList[$index]">
-                    <destination-card-directive origin="item.origin" destination="item.destination" departure-date="item.departureDate" return-date="item.returnDate" image-url="../images/destination/{{::item.destination}}.jpg"></destination-card-directive>
-                    <!--<destination-card-directive origin="item.origin" destination="item.destination" departure-date="item.departureDate" return-date="item.returnDate" image-url="http://content.trippism.com/images/destinations/{{::item.destination}}.jpg"></destination-card-directive>-->                    
+                <div class="col-sm-4" ng-repeat="item in ::destinationRequestList[$index]">                    
+                    <destination-card-directive origin="item.origin" destination="item.destination" departure-date="item.departureDate" return-date="item.returnDate" image-url="{{::DestinationImagePath}}{{::item.destination}}.jpg"></destination-card-directive>                    
                 </div>
             </div>
         </div>

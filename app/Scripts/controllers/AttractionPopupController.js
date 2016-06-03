@@ -81,7 +81,7 @@
                     }
                     if ($scope.locationDetail.AttractionType == 'hotels') {
                         $scope.locationDetail.PlaceName = attractionData.name;
-                        $scope.locationDetail.Placeaddress = $sce.trustAsHtml(attractionData.Placeaddress);
+                        $scope.locationDetail.Placeaddress = $sce.trustAsHtml(attractionData.vicinity);
                     }
                     else {
                         $scope.locationDetail.PlaceName = place.name;

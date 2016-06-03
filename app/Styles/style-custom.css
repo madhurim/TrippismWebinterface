@@ -1786,6 +1786,13 @@ ul .stop-line {
     }
 }
 
+@media only screen and (max-width:620px) and (min-width:521px) {
+    .col-fare {
+        width: auto;
+        margin-right: 30px;
+    }
+}
+
 @media only screen and (max-width:520px) {
     .col-fare {
         margin: 0 auto;

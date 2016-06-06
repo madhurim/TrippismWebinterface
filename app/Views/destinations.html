@@ -1,17 +1,16 @@
 ﻿<style>
-    body,html {
+    body, html {
         background-color: #fff;
-    height: 100vh;
-    display: block;
-    /*overflow-x: hidden;
+        height: 100vh;
+        display: block;
+        /*overflow-x: hidden;
     overflow-y:hidden;*/
-    overflow:hidden;
-    position: absolute;
-    width: 100%;
-    margin: 0;
-    padding:0;
+        overflow: hidden;
+        position: absolute;
+        width: 100%;
+        margin: 0;
+        padding: 0;
     }
-
 </style>
 <div id="content-wrapper" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-controller="DestinationsController" style="padding:0; position:fixed;">
     <section id="container_1" class="col-lg-7 col-md-7 col-sm-12 col-xs-12" scroll scroll-callback="loadMoreDestinations();">
@@ -62,7 +61,7 @@
                         <div class="row1">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="theme_option">
-                                    <select id="demo-htmlselect-basic" style="width:100% !important;">
+                                    <select id="select-theme" style="width:100% !important;">
                                         <option value="" disabled selected>Theme</option>
                                         <option data-imagesrc="../images/themes/palm-tree-icon.png" value="0">Beach</option>
                                         <option data-imagesrc="../images/themes/paris-icon.png" value="1">Disney</option>
@@ -77,7 +76,6 @@
                                         <option data-imagesrc="../images/themes/sport-icon.png" value="3">Skiing</option>
                                         <option data-imagesrc="../images/themes/holidays-icon.png" value="3">Caribbean</option>
                                     </select>
-                                    <div class="spacer"></div>
                                 </div>
                             </div>
                         </div>
@@ -86,7 +84,7 @@
                         <div class="row1">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="theme_option">
-                                    <select id="demo-htmlselect-basic1" style="width:100% !important;">
+                                    <select id="select-region" style="width:100% !important;">
                                         <option value="" disabled selected>Region</option>
                                         <option data-imagesrc="../images/regions/africa-icon.png" value="0">Africa</option>
                                         <option data-imagesrc="../images/regions/europe-icon.png" value="1">Europe</option>
@@ -95,7 +93,6 @@
                                         <option data-imagesrc="../images/regions/icon-middle-east-icon.png" value="3">Middle East</option>
                                         <option data-imagesrc="../images/regions/asia-icon.png" value="3">Asia Pacific</option>
                                     </select>
-                                    <div class="spacer"></div>
                                 </div>
                             </div>
                         </div>
@@ -107,16 +104,18 @@
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 thumbnail_box_1" style="margin-top:25px; margin-bottom:50px;">
                     <div class="thumbnail_box">
                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6" ng-repeat="item in destinationCardList|limitTo:limitDestinationCards">
-                            <div class="thumbnail_img img-responsive">
-                                <img ng-src="{{::DestinationImagePath}}{{::item.DestinationLocation}}.jpg" src-error="{{::DestinationImagePath}}default.jpg" style="width:99.99%;" />
-                                <span class="Price_list">{{::GetCurrencySymbol(item.CurrencyCode)}} {{::GetLowFare(item)}}</span>
-                                <div class="city_name">
-                                    <span class="" style="font-size:18px; font-weight:normal; color:#565a5c;">{{::item.CityName}}</span>
+                            <a ng-href="{{::getlink(item)}}">
+                                <div class="thumbnail_img img-responsive">
+                                    <img ng-src="{{::DestinationImagePath}}{{::item.DestinationLocation}}.jpg" src-error="{{::DestinationImagePath}}default.jpg" style="width:99.99%;" />
+                                    <span class="Price_list">{{::GetCurrencySymbol(item.CurrencyCode)}} {{::GetLowFare(item)}}</span>
+                                    <div class="city_name">
+                                        <span class="" style="font-size:18px; font-weight:normal; color:#565a5c;">{{::item.CityName}}</span>
+                                    </div>
+                                    <div class="Airport_name">
+                                        <span class="" style="font-size:12px; font-weight:500; color:#333;">{{::item.FullName}}</span>
+                                    </div>
                                 </div>
-                                <div class="Airport_name">
-                                    <span class="" style="font-size:12px; font-weight:500; color:#333;">{{::item.FullName}}</span>
-                                </div>
-                            </div>
+                            </a>
                         </div>
                     </div>
                 </div>

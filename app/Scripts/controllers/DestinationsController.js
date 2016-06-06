@@ -11,6 +11,7 @@
             'UtilFactory',
             'TrippismConstants',
             'LocalStorageFactory',
+            '$location',
              DestinationsController]);
     function DestinationsController(
         $scope,
@@ -21,7 +22,8 @@
         DestinationFactory,
         UtilFactory,
         TrippismConstants,
-        LocalStorageFactory
+        LocalStorageFactory,
+        $location
         ) {
         $scope.$emit('bodyClass', 'mappage');   // for changing <body> class        
         $scope.DestinationImagePath = TrippismConstants.DestinationImagePath;
@@ -460,5 +462,17 @@
         $scope.loadMoreDestinations = function () {
             $scope.limitDestinationCards += 6;
         }
+
+        $('#select-theme').ddslick({
+            onSelected: function (data) { }
+        });
+
+        $('#select-region').ddslick({
+            onSelected: function (data) { }
+        });
+
+        $scope.getlink = function (data) {
+            return '/#/destination/f=' + $scope.Origin.toUpperCase() + ';t=' + data.DestinationLocation + ';d=' + ConvertToRequiredDate(data.DepartureDateTime, 'API') + ';r=' + ConvertToRequiredDate(data.ReturnDateTime, 'API');
+        };
     }
 })();

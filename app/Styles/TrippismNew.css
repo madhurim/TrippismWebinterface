@@ -23,8 +23,8 @@
     position: absolute;
     height: 89vh;
     margin-top: 0px;
-    overflow:auto;
-    overflow-y:scroll;
+    overflow: auto;
+    overflow-y: scroll;
     box-sizing: border-box;
 }
 
@@ -293,9 +293,11 @@ i.fa.fa-caret-down {
         box-shadow: 0px 2px 7px 0px rgba(0,0,0,0.32);
         transition: box-shadow 0.3s ease-in-out;
     }
+
     .thumbnail_img img {
-        height:165px;
+        height: 165px;
     }
+
 .Price_list {
     background-color: #b90005;
     padding: 15px;
@@ -401,12 +403,6 @@ section#Modification {
 
 .dd-container {
     width: 100% !important;
-}
-
-.spacer {
-    clear: both;
-    height: 20px;
-    width: 100%;
 }
 
 .dd-option {

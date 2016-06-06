@@ -97,6 +97,7 @@
                               //selected = maps;                              
                               $scope.destinationMarkers = [];
                               maps = _.sortBy(maps, 'rank');
+                              $scope.$emit('RenderMap', maps);
                               for (var x = 0; x < maps.length; x++) {
                                   var latlng1 = new google.maps.LatLng(maps[x].lat, maps[x].lng);
                                   // Moved code for getting LowFare into UtilFactory because same logic needs to apply in DestinationController.js for pre setting min/max fare refine search textbox
@@ -253,6 +254,8 @@
                               airportCode.lat = originairport.airport_Lat;
                               airportCode.lng = originairport.airport_Lng;
                               airportCode.rank = originairport.rank;
+                              airportCode.CityName = originairport.airport_CityName;
+                              airportCode.FullName = originairport.airport_FullName;
                               d.resolve(airportCode);
                           } else {
                               //Missing Airport Details log 
@@ -284,20 +287,6 @@
 
               directive.link = function (scope, elm, attrs) {
                   var w = angular.element($window);
-                  w.bind('resize', setIwCloseButtonPositionFn);
-
-                  // set position of infowindow close button
-                  function setIwCloseButtonPositionFn() {
-                      $timeout(function () {
-                          if (!angular.element('#mainmap').length) w.unbind('resize', setIwCloseButtonPositionFn);
-                          var iwOuter = angular.element('.gm-style-iw');
-                          iwOuter.parent().css({ width: iwOuter.css('width'), maxWidth: iwOuter.css('width') });
-                      }, 100, false);
-
-                      var iwOuter = angular.element('.clustermarkerpopup');
-                      angular.element('.gm-style-iw').css({ width: iwOuter.css('width'), maxWidth: iwOuter.css('width') });
-                  }
-
                   setAirportMarkerOnMap();
                   //Convert watch code into brodcast method                   
                   scope.$on('setMarkeronMap', function (event, args) {
@@ -409,9 +398,8 @@
 
                   function showMessagePosition() {
                       var alertBoxElement = angular.element(".ajs-message.ajs-warning.ajs-visible");
-                      var searchBoxElement = angular.element("#search-box")[0];
                       var headerElement = angular.element("#header")[0];
-                      alertBoxElement.css({ "top": searchBoxElement.offsetHeight + headerElement.offsetHeight - 9 });
+                      alertBoxElement.css({ "top": headerElement.offsetHeight - 9 });
                   }
 
                   function displayBlankMap() {

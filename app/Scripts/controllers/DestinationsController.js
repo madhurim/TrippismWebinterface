@@ -104,7 +104,7 @@
         $scope.AvailableThemes = AvailableTheme();
         $scope.AvailableRegions = AvailableRegions();
         $scope.GetLowFare = GetLowFare;
-
+        $scope.limitDestinationCards = 9;
         $scope.PointOfsalesCountry;
 
         initFareSliderValues();
@@ -451,6 +451,14 @@
 
         function GetLowFare(item) {
             return Math.ceil(UtilFactory.GetLowFareForMap(item));
+        }
+
+        $scope.$on('RenderMap', function (event, data) {
+            $scope.destinationCardList = data;
+        })
+
+        $scope.loadMoreDestinations = function () {
+            $scope.limitDestinationCards += 6;
         }
     }
 })();

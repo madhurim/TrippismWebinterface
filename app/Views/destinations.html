@@ -1,22 +1,8 @@
-﻿<style>
-    body, html {
-        background-color: #fff;
-        height: 100vh;
-        display: block;
-        /*overflow-x: hidden;
-    overflow-y:hidden;*/
-        overflow: hidden;
-        position: absolute;
-        width: 100%;
-        margin: 0;
-        padding: 0;
-    }
-</style>
-<div id="content-wrapper" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-controller="DestinationsController" style="padding:0; position:fixed;">
+﻿<div id="content-wrapper destinations-wrapper" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-controller="DestinationsController">
     <section id="container_1" class="col-lg-7 col-md-7 col-sm-12 col-xs-12" scroll scroll-callback="loadMoreDestinations();">
         <div class="container-fluid">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="row1" style="margin-top:5px;">
+                <div class="row margin-top-5">
                     <div class="col-lg-8 col-md-8 col-sm-5 col-xs-5">
                         <div class="form" style="">
                             <label class="search_list">
@@ -38,9 +24,9 @@
                     </div>
                 </div>
 
-                <div class="row1">
+                <div class="row margin-top-10">
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                        <div class="row1" style="">
+                        <div class="row1">
                             <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12">
                                 <div class="rs-wrapper">
                                     <div class="rs-lbl-left">{{priceSliderValues.originalRange.min}}</div>
@@ -51,7 +37,7 @@
                                 <div class="range-slider" range-slider on-handle-up="handleUp(true)" min="priceSliderValues.range.min" max="priceSliderValues.range.max" model-min="priceSliderValues.values.min" model-max="priceSliderValues.values.max" show-values="true" attach-handle-values="true" disabled="priceSliderValues.values.max == 0 && priceSliderValues.values.min == 0"></div>
                             </div>
                         </div>
-                        <div class="row1" style="margin-bottom:-26px;">
+                        <div class="row1">
                             <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12">
                                 <div id="slider"></div>
                             </div>
@@ -61,7 +47,7 @@
                         <div class="row1">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="theme_option">
-                                    <select id="select-theme" style="width:100% !important;">
+                                    <select id="select-theme">
                                         <option value="" disabled selected>Theme</option>
                                         <option data-imagesrc="../images/themes/palm-tree-icon.png" value="0">Beach</option>
                                         <option data-imagesrc="../images/themes/paris-icon.png" value="1">Disney</option>
@@ -84,7 +70,7 @@
                         <div class="row1">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                 <div class="theme_option">
-                                    <select id="select-region" style="width:100% !important;">
+                                    <select id="select-region">
                                         <option value="" disabled selected>Region</option>
                                         <option data-imagesrc="../images/regions/africa-icon.png" value="0">Africa</option>
                                         <option data-imagesrc="../images/regions/europe-icon.png" value="1">Europe</option>
@@ -100,19 +86,19 @@
                 </div>
             </div>
 
-            <div class="row1" style=" background-color:#FAFBFC; border-top:2px solid #ccc; overflow-y:inherit;">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 thumbnail_box_1" style="margin-top:25px; margin-bottom:50px;">
+            <div class="row1 row-card">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 thumbnail_box_1">
                     <div class="thumbnail_box">
                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6" ng-repeat="item in destinationCardList|limitTo:limitDestinationCards">
                             <a ng-href="{{::getlink(item)}}">
                                 <div class="thumbnail_img img-responsive">
-                                    <img ng-src="{{::DestinationImagePath}}{{::item.DestinationLocation}}.jpg" src-error="{{::DestinationImagePath}}default.jpg" style="width:99.99%;" />
+                                    <img ng-src="{{::DestinationImagePath}}{{::item.DestinationLocation}}.jpg" src-error="{{::DestinationImagePath}}default.jpg" />
                                     <span class="Price_list">{{::GetCurrencySymbol(item.CurrencyCode)}} {{::GetLowFare(item)}}</span>
                                     <div class="city_name">
-                                        <span class="" style="font-size:18px; font-weight:normal; color:#565a5c;">{{::item.CityName}}</span>
+                                        <span class="font-imp">{{::item.CityName}}</span>
                                     </div>
                                     <div class="Airport_name">
-                                        <span class="" style="font-size:12px; font-weight:500; color:#333;">{{::item.FullName}}</span>
+                                        <span class="font-light">{{::item.FullName}}</span>
                                     </div>
                                 </div>
                             </a>
@@ -124,8 +110,8 @@
     </section>
 
     <section id="container_2" class="col-lg-5 col-md-5 hidden-sm hidden-xs">
-        <div class="map-box" id="mainmap" style="width:100%; height:98vh;">
-            <div class="" style="height:100%;width:98%;" cg-busy="{promise:mappromise,message:'Please wait...'}">
+        <div class="map-box" id="mainmap">
+            <div class="map-container" cg-busy="{promise:mappromise,message:'Please wait...'}">
                 <div id="wrapper" cg-busy="{promise:destinationmappromise,message:'Please wait...'}">
                     <div google-map ng-show="isShowSearchIcon || ShowDestinationView" airlinejsondata="airlineJsonData" airportlist="AvailableAirports" class="map"></div>
                 </div>

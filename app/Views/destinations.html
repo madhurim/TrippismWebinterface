@@ -1,9 +1,9 @@
-﻿<div id="content-wrapper destinations-wrapper" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" ng-controller="DestinationsController">
+﻿<div id="content-wrapper" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 destinations-wrapper" ng-controller="DestinationsController">
     <section id="container_1" class="col-lg-7 col-md-7 col-sm-12 col-xs-12" scroll scroll-callback="loadMoreDestinations();">
         <div class="container-fluid">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="row margin-top-5">
-                    <div class="col-lg-8 col-md-8 col-sm-5 col-xs-5">
+                <div class="row1 margin-top-5">
+                    <div class="col-lg-8 col-md-8 col-sm-7 col-xs-12">
                         <div class="form" style="">
                             <label class="search_list">
                                 <span ng-show="refineSearchValues && refineSearchValues.OrigintoDisp">{{refineSearchValues.OrigintoDisp}} </span>
@@ -16,15 +16,16 @@
                             </label>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-4 col-sm-7 col-xs-7">
+                    <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12">
                         <div class="Modify">
                             <div class="btn btn-danger" ng-click="isModified=!isModified;isRefineSeachCollapsed=false;">Modify</div>
                             <div class="btn btn-danger" video-popup-directive>Help</div>
                         </div>
                     </div>
+                    <div class="clear"></div>
                 </div>
 
-                <div class="row margin-top-10">
+                <div class="row1 margin-top-10">
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                         <div class="row1">
                             <div class="col-lg-11 col-md-11 col-sm-12 col-xs-12">
@@ -49,18 +50,18 @@
                                 <div class="theme_option">
                                     <select id="select-theme">
                                         <option value="" disabled selected>Theme</option>
-                                        <option data-imagesrc="../images/themes/palm-tree-icon.png" value="0">Beach</option>
-                                        <option data-imagesrc="../images/themes/paris-icon.png" value="1">Disney</option>
-                                        <option data-imagesrc="../images/themes/dice-icon.png" value="2">Gambling</option>
-                                        <option data-imagesrc="../images/themes/bank-icon.png" value="3">Historic</option>
-                                        <option data-imagesrc="../images/themes/camera-icon.png" value="3">Mountains</option>
-                                        <option data-imagesrc="../images/themes/park-icon.png" value="3">National Parks</option>
-                                        <option data-imagesrc="../images/themes/climbing-icon.png" value="3">Outdoors</option>
-                                        <option data-imagesrc="../images/themes/hearts-icon.png" value="3">Romantic</option>
-                                        <option data-imagesrc="../images/themes/full-icon.png" value="3">Shopping</option>
-                                        <option data-imagesrc="../images/themes/cruise-icon.png" value="3">Theme Park</option>
-                                        <option data-imagesrc="../images/themes/sport-icon.png" value="3">Skiing</option>
-                                        <option data-imagesrc="../images/themes/holidays-icon.png" value="3">Caribbean</option>
+                                        <option value="BEACH" data-imagesrc="../images/themes/palm-tree-icon.png">Beach</option>
+                                        <option value="DISNEY" data-imagesrc="../images/themes/paris-icon.png">Disney</option>
+                                        <option value="GAMBLING" data-imagesrc="../images/themes/dice-icon.png">Gambling</option>
+                                        <option value="HISTORIC" data-imagesrc="../images/themes/bank-icon.png">Historic</option>
+                                        <option value="MOUNTAINS" data-imagesrc="../images/themes/camera-icon.png">Mountains</option>
+                                        <option value="NATIONAL-PARKS" data-imagesrc="../images/themes/park-icon.png">National Parks</option>
+                                        <option value="OUTDOORS" data-imagesrc="../images/themes/climbing-icon.png">Outdoors</option>
+                                        <option value="ROMANTIC" data-imagesrc="../images/themes/hearts-icon.png">Romantic</option>
+                                        <option value="SHOPPING" data-imagesrc="../images/themes/full-icon.png">Shopping</option>
+                                        <option value="THEME-PARK" data-imagesrc="../images/themes/cruise-icon.png">Theme Park</option>
+                                        <option value="SKIING" data-imagesrc="../images/themes/sport-icon.png">Skiing</option>
+                                        <option value="CARIBBEAN" data-imagesrc="../images/themes/holidays-icon.png">Caribbean</option>
                                     </select>
                                 </div>
                             </div>
@@ -72,33 +73,37 @@
                                 <div class="theme_option">
                                     <select id="select-region">
                                         <option value="" disabled selected>Region</option>
-                                        <option data-imagesrc="../images/regions/africa-icon.png" value="0">Africa</option>
-                                        <option data-imagesrc="../images/regions/europe-icon.png" value="1">Europe</option>
-                                        <option data-imagesrc="../images/regions/south-america.png" value="2">South America</option>
-                                        <option data-imagesrc="../images/regions/north-america-icon.png" value="3">North America</option>
-                                        <option data-imagesrc="../images/regions/icon-middle-east-icon.png" value="3">Middle East</option>
-                                        <option data-imagesrc="../images/regions/asia-icon.png" value="3">Asia Pacific</option>
+                                        <option value="Africa" data-imagesrc="../images/regions/africa-icon.png">Africa</option>
+                                        <option value="Europe" data-imagesrc="../images/regions/europe-icon.png">Europe</option>
+                                        <option value="South America" data-imagesrc="../images/regions/south-america.png">South America</option>
+                                        <option value="North America" data-imagesrc="../images/regions/north-america-icon.png">North America</option>
+                                        <option value="Middle East" data-imagesrc="../images/regions/icon-middle-east-icon.png">Middle East</option>
+                                        <option value="Asia Pacific" data-imagesrc="../images/regions/asia-icon.png">Asia Pacific</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="clear"></div>
                 </div>
             </div>
 
             <div class="row1 row-card">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 thumbnail_box_1">
                     <div class="thumbnail_box">
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6" ng-repeat="item in destinationCardList|limitTo:limitDestinationCards">
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 animate-card" ng-repeat="item in destinationCardList|limitTo:limitDestinationCards">
                             <a ng-href="{{::getlink(item)}}">
                                 <div class="thumbnail_img img-responsive">
-                                    <img ng-src="{{::DestinationImagePath}}{{::item.DestinationLocation}}.jpg" src-error="{{::DestinationImagePath}}default.jpg" />
-                                    <span class="Price_list">{{::GetCurrencySymbol(item.CurrencyCode)}} {{::GetLowFare(item)}}</span>
+                                    <div>
+                                        <img ng-src="{{::DestinationImagePath}}{{::item.DestinationLocation}}.jpg" src-error="{{::DestinationImagePath}}default.jpg" />
+                                        <span class="Price_list">{{::GetCurrencySymbol(item.CurrencyCode)}} {{::GetLowFare(item)}}</span>
+                                    </div>
                                     <div class="city_name">
-                                        <span class="font-imp">{{::item.CityName}}</span>
+                                        <span class="font-imp font-16">{{::item.CityName}}</span>
                                     </div>
                                     <div class="Airport_name">
-                                        <span class="font-light">{{::item.FullName}}</span>
+                                        <span class="font-light font-12">{{::item.FullName}}</span>
+                                        <p class="font-light font-12">{{::item.rank}}</p>
                                     </div>
                                 </div>
                             </a>
@@ -108,7 +113,6 @@
             </div>
         </div>
     </section>
-
     <section id="container_2" class="col-lg-5 col-md-5 hidden-sm hidden-xs">
         <div class="map-box" id="mainmap">
             <div class="map-container" cg-busy="{promise:mappromise,message:'Please wait...'}">
@@ -122,4 +126,3 @@
         <search-box is-popup="isModified"></search-box>
     </div>
 </div>
-

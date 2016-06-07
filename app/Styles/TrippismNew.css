@@ -287,6 +287,11 @@ i.fa.fa-caret-down {
     box-shadow: 0 1px 3px rgba(0,0,0,0.14), inset 0 1px 0 #edeff2;
 }
 
+    .thumbnail_img div:first-child {
+        height: 165px;
+        position: relative;
+    }
+
     .thumbnail_img:hover {
         -webkit-box-shadow: 0px 2px 7px 0px rgba(0,0,0,0.32);
         -moz-box-shadow: 0px 2px 7px 0px rgba(0,0,0,0.32);
@@ -295,18 +300,19 @@ i.fa.fa-caret-down {
     }
 
     .thumbnail_img img {
-        height: 165px;
         width: 100%;
+        height: 100%;
     }
 
 .Price_list {
     background-color: #b90005;
-    padding: 15px;
+    padding: 3px 10px;
     position: absolute;
     bottom: 44px;
     color: #fff;
     font-weight: 500;
-    left: 15px;
+    left: 0px;
+    bottom: 0px;
     opacity: 0.8;
 }
 
@@ -371,9 +377,8 @@ section#Modification {
 }
 
 .Modify {
-    padding-left: 35px;
-    padding-top: 3px;
     float: right;
+    margin-top: 5px;
 }
 
 .btn {
@@ -442,25 +447,35 @@ section#Modification {
 .destinations-wrapper {
     padding: 0;
     position: fixed;
+    height: 100%;
+}
+
+/*#region media queries*/
+@media only screen and (max-width:769px) {
+    .Modify {
+        float: left;
+    }
 }
 
 @media only screen and (min-width: 320px) {
-    span.Price_list {
+    /*span.Price_list {
         padding: 10px;
         bottom: 65px;
-    }
+    }*/
 }
 
 @media only screen and (min-width: 375px) {
-    span.Price_list {
+    /*span.Price_list {
         padding: 10px;
         bottom: 43px;
-    }
+    }*/
 }
 
 @media only screen and (min-width: 360px) {
-    span.Price_list {
+    /*span.Price_list {
         padding: 10px;
         bottom: 42px !important;
-    }
+    }*/
 }
+/*#endregion media queries*/
+

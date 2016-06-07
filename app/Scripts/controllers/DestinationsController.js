@@ -456,19 +456,24 @@
         }
 
         $scope.$on('RenderMap', function (event, data) {
-            $scope.destinationCardList = data;
+            $timeout(function () { $scope.destinationCardList = data; }, 0, true);
         })
 
         $scope.loadMoreDestinations = function () {
-            $scope.limitDestinationCards += 6;
+            if ($scope.limitDestinationCards >= $scope.destinationCardList.length) return;
+            $scope.$apply(function () { $scope.limitDestinationCards += 6; });
         }
 
         $('#select-theme').ddslick({
-            onSelected: function (data) { }
+            onSelected: function (data) {
+                $scope.displayTheme(data.selectedData.value);
+            }
         });
 
         $('#select-region').ddslick({
-            onSelected: function (data) { }
+            onSelected: function (data) {
+                $scope.displayRegion(data.selectedData.value);
+            }
         });
 
         $scope.getlink = function (data) {

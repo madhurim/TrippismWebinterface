@@ -6,10 +6,11 @@
 
     function BaseController($scope, $modal, $rootScope, $location, UtilFactory) {
         //var hostName = "http://api.trippism.com";
-        var hostName = 'http://' + $location.host();
-        if (angular.lowercase($location.host()) == "localhost") {
-            hostName = 'http://localhost:14606';
-        }
+        //var hostName = 'http://' + $location.host();
+        //if (angular.lowercase($location.host()) == "localhost") {
+          //  hostName = 'http://localhost:14606';
+        //}
+        var hostName = 'http://dev.trippism.com';
 
         $rootScope.apiURL = hostName + '/api/Sabre/';
         $rootScope.apiURLForEmail = hostName + '/api/Email/SendEmailtoUser';

@@ -272,7 +272,7 @@ input.form-control[type="number"] {
 
 .header-box {
     background-color: #f5f5f5;
-    /*padding: 15px 0;*/
+    padding: 15px 0;
     position: relative;
 }
 
@@ -555,6 +555,7 @@ i.calendar.active, .input-box:hover i.calendar {
 .selector-box.region-box li { /*width: 16.66%;*/
     width: 33.33%;
 }
+
 .mappage .footer-box {
     position: fixed;
 }
@@ -1323,8 +1324,10 @@ i.calendar.active, .input-box:hover i.calendar {
     }
 
     .destination-box-popup.destination-popup .container {
-        display: table-cell;
+        /*display: table-cell;*/
         vertical-align: middle;
+        margin-top: 10px;
+        z-index: 9999;
     }
 
 .destination-popup-close {

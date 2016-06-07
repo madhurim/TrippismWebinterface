@@ -396,9 +396,9 @@
 
                   function showMessage() {
                       alertify.dismissAll();
-                      var message = "<div class='alert-box'><p>The bigger markers are our top ranked destinations based on popularity from the Origin airport.</p>"
-                          + "<input type='button' class='btn btn-primary' value='Got It' />"
-                        + "</div><div class='clear'></div>";
+                      var message = "<div class='alert-box'><p>Click on any of the numbered clusters to see destinations. Numbers represent how many destinations fall into a nearby radius.</p>"
+                           + "<input type='button' class='btn btn-primary' value='Got It' />"
+                         + "</div><div class='clear'></div>";
                       alertify.set('notifier', 'position', 'top-right');
                       alertify.warning(message, 15, function () { $rootScope.isShowAlerityMessage = false; });
                       showMessagePosition();

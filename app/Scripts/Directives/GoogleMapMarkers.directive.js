@@ -32,42 +32,14 @@
                       $scope.mapOptions = {
                           zoom: 3,
                           minZoom: 3,
+                          maxZoom: 7,
                           zoomControl: true,
                           zoomControlOptions: {
                               position: google.maps.ControlPosition.RIGHT_CENTER,
                               style: google.maps.ZoomControlStyle.LARGE
                           },
                           backgroundColor: "#BCCFDE",
-                          //styles: TrippismConstants.destinationSearchMapSyle,                          
-                          styles: [{ featureType: "all", elementType: "all", stylers: [{ visibility: "on" }] },
-                              { featureType: "administrative", elementType: "all", stylers: [{ visibility: "on" }] },
-                              { featureType: "administrative.country", elementType: "all", stylers: [{ visibility: "on" }] },
-                              { featureType: "administrative.country", elementType: "geometry", stylers: [{ lightness: "1" }, { visibility: "on" }, { color: "#bbbbbb" }] },
-                              { featureType: "administrative.country", elementType: "labels", stylers: [{ lightness: "65" }, { visibility: "on" }] },
-                              { featureType: "administrative.country", elementType: "labels.text", stylers: [{ weight: "1" }, { visibility: "simplified" }, { saturation: "0" }, { lightness: "40" }] },
-                              { featureType: "administrative.province", elementType: "all", stylers: [{ visibility: "off" }] },
-                              { featureType: "administrative.locality", elementType: "all", stylers: [{ hue: "#0049ff" }, { saturation: 7 }, { lightness: "0" }, { visibility: "off" }] },
-                              { featureType: "administrative.locality", elementType: "geometry", stylers: [{ visibility: "on" }] },
-                              { featureType: "administrative.neighborhood", elementType: "all", stylers: [{ visibility: "off" }] },
-                              { featureType: "administrative.land_parcel", elementType: "all", stylers: [{ visibility: "off" }] },
-                              { featureType: "landscape", elementType: "all", stylers: [{ saturation: -100 }, { lightness: "100" }, { visibility: "off" }, { color: "#fcfcfc" }, { weight: "1" }] },
-                              { featureType: "landscape.man_made", elementType: "all", stylers: [{ visibility: "off" }] },
-                              { featureType: "landscape.natural", elementType: "all", stylers: [{ visibility: "on" }] },
-                              { featureType: "poi", elementType: "all", stylers: [{ hue: "#ff0000" }, { saturation: -100 }, { lightness: 100 }, { visibility: "off" }] },
-                              { featureType: "road", elementType: "all", stylers: [{ visibility: "off" }] },
-                              { featureType: "road", elementType: "geometry", stylers: [{ hue: "#bbc0c4" }, { saturation: -93 }, { lightness: 31 }, { visibility: "simplified" }] },
-                              { featureType: "road", elementType: "labels", stylers: [{ hue: "#bbc0c4" }, { saturation: -93 }, { lightness: 31 }, { visibility: "on" }] },
-                              { featureType: "road.highway", elementType: "all", stylers: [{ visibility: "off" }] },
-                              { featureType: "road.arterial", elementType: "labels", stylers: [{ hue: "#bbc0c4" }, { saturation: -93 }, { lightness: -2 }, { visibility: "simplified" }] },
-                              { featureType: "road.local", elementType: "geometry", stylers: [{ hue: "#e9ebed" }, { saturation: -90 }, { lightness: -8 }, { visibility: "simplified" }] },
-                              { featureType: "transit", elementType: "all", stylers: [{ hue: "#007fff" }, { saturation: 10 }, { lightness: 69 }, { visibility: "off" }] },
-                              { featureType: "transit.line", elementType: "all", stylers: [{ visibility: "off" }] },
-                              { featureType: "transit.station", elementType: "all", stylers: [{ visibility: "off" }] },
-                              { featureType: "transit.station.airport", elementType: "all", stylers: [{ visibility: "on" }] },
-                              { featureType: "transit.station.bus", elementType: "all", stylers: [{ visibility: "on" }] },
-                              { featureType: "transit.station.rail", elementType: "all", stylers: [{ visibility: "off" }] },
-                              { featureType: "water", elementType: "all", stylers: [{ saturation: -78 }, { lightness: 67 }, { visibility: "simplified" }, { color: "#91B7CF" }] }
-                          ],
+                          styles: TrippismConstants.destinationSearchMapSyle,
                           mapTypeId: google.maps.MapTypeId.ROADMAP,
                       };
 
@@ -108,14 +80,13 @@
                                   if (LowRate != "N/A") {
                                       maps[x].CityName = airportName.airport_CityName;
                                       maps[x].airport_FullName = airportName.airport_FullName;
-                                      //maps[x].rate = LowRate;
                                       var marker = new MarkerWithLabel({
                                           position: latlng1,
                                           map: $scope.destinationMap,
                                           title: airportName.airport_FullName + ', ' + airportName.airport_CityName,
                                           CustomMarkerInfo: maps[x],
-                                          //labelContent: '<div style="color:black;font-weight:700;white-space:nowrap;">' + airportName.airport_CityName + '<br/><span>' + UtilFactory.GetCurrencySymbol(maps[x].CurrencyCode) + ' ' + Math.ceil(LowRate) + '</span><br/>' + airportName.rank + '</div>',
-                                          labelContent: '<div style="color:black;font-weight:500;white-space:nowrap;font-size:13px;line-height:15px;">' + airportName.airport_CityName + '<br/><span style="color:#2f86cd;font-weight:900;font-size:11px;">' + UtilFactory.GetCurrencySymbol(maps[x].CurrencyCode) + ' ' + Math.ceil(LowRate) + '</span></div>',
+                                          //labelContent: '<div style="color:#333;font-weight:500;white-space:nowrap;font-size:13px;line-height:15px;">' + airportName.airport_CityName + '<br/><span style="color:#2f86cd;font-weight:900;font-size:11px;">' + UtilFactory.GetCurrencySymbol(maps[x].CurrencyCode) + ' ' + Math.ceil(LowRate) + '</span><br/>' + airportName.rank + '</div>',
+                                          labelContent: '<div style="color:#333;font-weight:500;white-space:nowrap;font-size:13px;line-height:15px;">' + airportName.airport_CityName + '<br/><span style="color:#2f86cd;font-weight:900;font-size:11px;">' + UtilFactory.GetCurrencySymbol(maps[x].CurrencyCode) + ' ' + Math.ceil(LowRate) + '</span></div>',
                                           labelAnchor: new google.maps.Point(-11, 15),
                                           icon: {
                                               url: "/images/big-point.png", // url                                          
@@ -185,7 +156,7 @@
                           // loop through all markers and compare it's distance with others.
                           // If distance is lower than specified value then mark high rank marker as a big icon and others as a small icons.
                           for (var i = 0; i < highRankedMarkers.length; i++) {
-                              if (highRankedMarkers[i].isRemoved) continue;
+                              if (highRankedMarkers[i].isRemoved || !highRankedMarkers[i].map) continue;
                               var markers = [];
                               markers.push(highRankedMarkers[i]);
                               for (var j = 0; j < highRankedMarkers.length; j++) {
@@ -226,6 +197,7 @@
                                   addMarkerListerners(highLowArr[j]);
                               }
                           }
+                          //$timeout(function () { google.maps.event.trigger($scope.destinationMap, 'resize'); }, 0, true);
                       }
 
                       var distanceBetweenPoints = function (p1, p2) {
@@ -272,9 +244,9 @@
                       });
 
                       $scope.resetMarker = function (zoomLevel) {
-                          $timeout(function () {
-                              $scope.destinationMap.setZoom(zoomLevel);
-                          }, 0, false);
+                          //$timeout(function () {
+                          //    $scope.destinationMap.setZoom(zoomLevel);
+                          //}, 0, false);
 
                           $timeout(function () {
                               if ($scope.destinationMarkers.length > 0) {
@@ -300,7 +272,8 @@
 
                           scope.destinations = args.destinationlist;
                           scope.highRankedAirportlist = args.highRankedAirportlist;
-                          scope.resetMarker(args.Region || args.Theme ? 3 : 4);
+                          //scope.resetMarker(args.Region || args.Theme ? 3 : 4);
+                          scope.resetMarker();
                           if (scope.destinations != undefined && scope.destinations.length > 0) {
                               scope.displayDestinations(scope.destinations);
                               if ($rootScope.isShowAlerityMessage && w.width() >= 768) {
@@ -309,9 +282,10 @@
                                   }, 0, false);
                               }
                           }
-                          else
+                          else {
                               scope.clusterFlag = true;    // flag for solving cluster issue if theme/region multiple time clicked
-
+                              scope.$emit('RenderMap', []);
+                          }
 
                           var originairport = _.find(scope.airportlist, function (airport) {
                               return airport.airport_Code == scope.origin.toUpperCase()
@@ -334,21 +308,6 @@
                                   { airportLoc = new google.maps.LatLng(49.8380, 105.8203); break; }
                               default: { airportLoc = new google.maps.LatLng(originairport.airport_Lat, originairport.airport_Lng); break; }
                           }
-
-                          if (args.Region == "Africa")
-                              airportLoc = new google.maps.LatLng(7.1881, 21.0936);
-                          else if (args.Region == "Europe")
-                              airportLoc = new google.maps.LatLng(53.0000, 9.0000);
-                          else if (args.Region == "South America")
-                              airportLoc = new google.maps.LatLng(-14.6048, -59.0625);
-                          else if (args.Region == "North America")
-                              airportLoc = new google.maps.LatLng(48.1667, -100.1667);
-                          else if (args.Region == "Middle East")
-                              airportLoc = new google.maps.LatLng(31.268205, 29.995368);
-                          else if (args.Region == "Asia Pacific")
-                              airportLoc = new google.maps.LatLng(49.8380, 105.8203);
-                          else
-                              airportLoc = new google.maps.LatLng(originairport.airport_Lat, originairport.airport_Lng);
 
                           $timeout(function () {
                               scope.destinationMap.panTo(airportLoc);
@@ -388,9 +347,9 @@
 
                   function showMessage() {
                       alertify.dismissAll();
-                      var message = "<div class='alert-box'><p>Click on any of the numbered clusters to see destinations. Numbers represent how many destinations fall into a nearby radius.</p>"
-                          + "<input type='button' class='btn btn-primary' value='Got It' />"
-                        + "</div><div class='clear'></div>";
+                      var message = "<div class='alert-box'><p>The bigger markers are our top ranked destinations based on popularity from the Origin airport.</p>"
+                         + "<input type='button' class='btn btn-primary' value='Got It' />"
+                       + "</div><div class='clear'></div>";
                       alertify.set('notifier', 'position', 'top-right');
                       alertify.warning(message, 15, function () { $rootScope.isShowAlerityMessage = false; });
                       showMessagePosition();

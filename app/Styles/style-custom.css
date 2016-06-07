@@ -1499,6 +1499,10 @@ ul .stop-line {
     font-size: 11px;
 }
 
+.font-12 {
+    font-size: 12px;
+}
+
 .margin-lr-3 {
     margin: 0px 3px;
 }
@@ -1793,7 +1797,7 @@ ul .stop-line {
     }
 
         .col-fare .invisible {
-            display: inline-block!important;
+            display: inline-block !important;
         }
 }
 

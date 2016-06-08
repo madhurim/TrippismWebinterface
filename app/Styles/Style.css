@@ -556,6 +556,10 @@ i.calendar.active, .input-box:hover i.calendar {
     width: 33.33%;
 }
 
+.homepage .footer-box, .otherpage .footer-box {
+    display: block;
+}
+
 .mappage .footer-box {
     position: fixed;
 }
@@ -568,6 +572,7 @@ i.calendar.active, .input-box:hover i.calendar {
     padding: 5px 0;
     background-color: rgba(34, 34, 33, 0.75);
     z-index: 1;
+    display: none;
 }
 
 .footer-menu ul li {

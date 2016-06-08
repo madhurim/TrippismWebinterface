@@ -639,7 +639,7 @@ ul .stop-line {
 }
 
 .rs-wrapper {
-    padding: 0 11px 0 15px;
+    padding: 0 15px 0 19px;
     font-size: 12px;
     color: #000;
 }
@@ -662,7 +662,7 @@ ul .stop-line {
 }
 
 .range-slider {
-    margin: 0 10px;
+    margin: 0 15px;
 }
 
 /* making range slider thick */
@@ -1181,6 +1181,7 @@ ul .stop-line {
 
 .faqpage .footer-box {
     position: fixed;
+    display: block;
 }
 
 .ico-social {

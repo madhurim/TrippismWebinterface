@@ -101,8 +101,8 @@
         $scope.activate = activate;
         $scope.findDestinations = findDestinations;
         $scope.AvailableAirports = [];
-        var destinationlistOriginal = '';   // used for filtering data on refine search click
-        $scope.destinationlist = "";
+        var destinationlistOriginal;   // used for filtering data on refine search click
+        $scope.destinationlist;
         $scope.AvailableThemes = AvailableTheme();
         $scope.AvailableRegions = AvailableRegions();
         $scope.GetLowFare = GetLowFare;
@@ -226,8 +226,8 @@
 
         function findDestinations() {
             $scope.isModified = false;
-            $scope.destinationlist = "";
-            destinationlistOriginal = '';
+            $scope.destinationlist = null;
+            destinationlistOriginal = null;
             $scope.faresList = [];
             $scope.IsRefineSearchShow = true;
             $scope.isSearching = true;
@@ -322,7 +322,6 @@
             $scope.previousRegion = $scope.Region = null;
         }
 
-
         function getMinMaxFare(destinationList) {
             var max = 0, min = 0;
             if (destinationList.length) {
@@ -372,7 +371,6 @@
             };
             return data;
         }
-
 
         function GetCurrencySymbols() {
             UtilFactory.GetCurrencySymbols();

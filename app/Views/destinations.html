@@ -1,6 +1,6 @@
 ﻿<div id="content-wrapper" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 destinations-wrapper" ng-controller="DestinationsController">
     <section id="container_1" class="col-lg-7 col-md-7 col-sm-12 col-xs-12" scroll scroll-callback="loadMoreDestinations();">
-        <div class="container-fluid">
+        <div class="container-fluid padding-0">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="row1 margin-top-5">
                     <div class="col-lg-9 col-md-9 col-sm-7 col-xs-12">
@@ -91,8 +91,12 @@
             <div class="row1 row-card">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 thumbnail_box_1">
                     <div class="thumbnail_box">
+                        <div class="divloader" ng-show="!destinationCardList">
+                            <span class="glyphicon glyphicon-refresh glyphicon-spin margin-lr-3"></span>
+                            <span>Getting destinations...</span>
+                        </div>
                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 animate-card" ng-repeat="item in destinationCardList|limitTo:limitDestinationCards">
-                            <a ng-href="{{::getlink(item)}}">
+                            <a ng-href="{{::getlink(item)}}" title="{{::item.FullName}}">
                                 <div class="thumbnail_img img-responsive">
                                     <div>
                                         <img ng-src="{{::DestinationImagePath}}{{::item.DestinationLocation}}.jpg" src-error="{{::DestinationImagePath}}default.jpg" />

@@ -1,19 +1,6 @@
 ﻿@charset "utf-8";
 /* CSS Document */
 
-/*.Main-content {
-    background-color: #fff;
-    overflow: hidden;
-    height: 100vh;
-    display: block;
-    overflow-x: hidden;
-    overflow-y:hidden;
-    position: absolute;
-    width: 100%;
-    margin: 0;
-    padding:0;
-}*/
-
 .row1 {
     margin-right: -30px;
     margin-left: -30px;
@@ -26,6 +13,7 @@
     overflow: auto;
     overflow-y: scroll;
     box-sizing: border-box;
+    overflow-x: hidden;
 }
 
 #container_2 {
@@ -83,6 +71,7 @@ div#slider {
     font-weight: 500;
     margin-top: 15px;
     padding-right: 15px;
+    padding-left: 15px;
 }
 
 .passanger {
@@ -115,28 +104,6 @@ label.radio-inline {
         color: #0097a9;
     }
 
-.head {
-    height: 50px;
-    float: left;
-    border-radius: 3px;
-    background-clip: content-box;
-    border: 1px solid rgba(216,217,220,1);
-    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.13);
-    padding: 5px;
-    margin: 10px;
-}
-
-#head {
-    height: 50px;
-    border-radius: 2px;
-    float: left;
-    background-clip: content-box;
-    padding: 10px;
-    border: 1px solid rgba(0,113,137,0.73);
-    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.13);
-    margin: 10px;
-}
-
 row.PickerClickCheck {
     background-clip: content-box;
     padding: 15px;
@@ -155,10 +122,6 @@ row.PickerClickCheck {
 
 #location_from, #location_to {
     margin-left: 10px;
-}
-
-span:hover {
-    color: #0097a9;
 }
 
 .nav > li > a:hover, .nav > li > a:focus {
@@ -248,11 +211,14 @@ ul.nav.nav-pills {
 
 .city_name {
     padding-top: 2px;
-    margin-left: 15px;
+    margin-left: 10px;
 }
 
 .Airport_name {
-    margin-left: 15px;
+    margin-left: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 input[type="datetime"] {
@@ -278,6 +244,7 @@ i.fa.fa-caret-down {
 }
 
 .thumbnail_img {
+    overflow: hidden;
     background-color: #fff;
     cursor: pointer;
     margin-top: 10px;
@@ -393,20 +360,6 @@ section#Modification {
     margin-top: 25px;
 }
 
-.btn-default {
-    color: #bebebe;
-    background-color: #fff;
-    border-color: #ccc;
-    width: 50%;
-    font-weight: 500;
-    font-family: inherit;
-    font-size: 18px;
-}
-
-    .btn-default:hover {
-        color: #3D8782 !important;
-    }
-
 .dd-container {
     width: 100% !important;
 }
@@ -448,6 +401,14 @@ section#Modification {
     padding: 0;
     position: fixed;
     height: 100%;
+}
+
+.divloader {
+    text-align: center;
+    font-size: 20px;
+    font-weight: normal;
+    margin: 10px 0px;
+    color: #999;
 }
 
 /*#region media queries*/

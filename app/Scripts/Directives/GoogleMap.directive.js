@@ -2,7 +2,7 @@
     //var selected;
     'use strict';
     angular.module('TrippismUIApp')
-      .directive('googleMap', ['$timeout', '$rootScope', '$window', 'UtilFactory',
+      .directive('googleMap1', ['$timeout', '$rootScope', '$window', 'UtilFactory',
           function ($timeout, $rootScope, $window, UtilFactory) {
               var directive = {};
               directive.templateUrl = '/Views/GoogleMap.html',

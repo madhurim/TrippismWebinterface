@@ -69,6 +69,9 @@
                     $scope.Maxfare = data.hf;
                 }
 
+                angular.element('#select-theme').val($scope.Theme);
+                angular.element('#select-region').val($scope.Region);
+
                 $scope.mappromise = UtilFactory.ReadAirportJson().then(function (data) {
                     $scope.AvailableAirports = data;
 
@@ -380,8 +383,8 @@
                 $scope.previousTheme = name;
                 $scope.Theme = name;
             }
-            else
-                $scope.previousTheme = $scope.Theme = undefined;
+            //else
+            //$scope.previousTheme = $scope.Theme = undefined;
             $scope.handleUp(true);
         }
         $scope.displayRegion = function (name) {
@@ -389,8 +392,8 @@
                 $scope.previousRegion = name;
                 $scope.Region = name;
             }
-            else
-                $scope.previousRegion = $scope.Region = undefined;
+            //else
+            //$scope.previousRegion = $scope.Region = undefined;
             $scope.handleUp(true);
         }
 

@@ -243,6 +243,10 @@ i.fa.fa-caret-down {
     color: #333;
 }
 
+#select-region option, #select-theme option {
+    display: none;
+}
+
 .thumbnail_img {
     overflow: hidden;
     background-color: #fff;

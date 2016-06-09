@@ -95,6 +95,10 @@
                             <span class="glyphicon glyphicon-refresh glyphicon-spin margin-lr-3"></span>
                             <span>Getting destinations...</span>
                         </div>
+                        <div class="divloader" ng-show="destinationCardList.length == 0">
+                            We didn't find any destinations based on your current search.<br />
+                            Please try searching with different parameters.
+                        </div>
                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 animate-card" ng-repeat="item in destinationCardList|limitTo:limitDestinationCards">
                             <a ng-href="{{::getlink(item)}}" title="{{::item.FullName}}">
                                 <div class="thumbnail_img img-responsive">

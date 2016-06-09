@@ -29,7 +29,7 @@
 
                       //sets the map options
                       $scope.mapOptions = {
-                          zoom: 3,
+                          zoom: 4,
                           minZoom: 3,
                           maxZoom: 7,
                           zoomControl: true,
@@ -133,7 +133,7 @@
                           }, 0, false);
                       };
                       // distance in KM per zoom level
-                      var zoomLvlArr = [{ zoom: 3, dis: 1000 }, { zoom: 4, dis: 700 }, { zoom: 5, dis: 500 }, { zoom: 6, dis: 400 }, { zoom: 7, dis: 300 }];
+                      var zoomLvlArr = [{ zoom: 3, dis: 1000 }, { zoom: 4, dis: 700 }, { zoom: 5, dis: 500 }, { zoom: 6, dis: 400 }, { zoom: 7, dis: 200 }];
                       function addMarkerListerners(marker) {
                           google.maps.event.clearListeners(marker, 'mouseover');
                           google.maps.event.clearListeners(marker, 'mouseout');
@@ -247,6 +247,21 @@
                               }
                           }, 0, true);
                       }
+
+                      $scope.$on('gotoMap', function (event, data) {
+                          var latLng = new google.maps.LatLng(data.lat, data.lng);
+                          for (var i = 0; i < $scope.destinationMarkers.length; i++) {
+                              if ($scope.destinationMarkers[i].CustomMarkerInfo.DestinationLocation == data.DestinationLocation) {
+                                  $scope.destinationMarkers[i].setIcon(markerImageObj.bigOver);
+                                  $scope.destinationMarkers[i].labelVisible = true;
+                                  $scope.destinationMarkers[i].label.draw();
+                                  break;
+                              }
+                          }
+                          $timeout(function () {
+                              $scope.destinationMap.panTo(latLng);
+                          }, 0, false);
+                      });
                   }];
 
               directive.link = function (scope, elm, attrs) {
@@ -366,13 +381,6 @@
                           scope.destinationMap.panTo(latLng);
                       }, 0, false);
                   }
-
-                  scope.$on('gotoMap', function (event, data) {
-                      var latLng = new google.maps.LatLng(data.lat, data.lng);
-                      $timeout(function () {
-                          scope.destinationMap.panTo(latLng);
-                      }, 0, false);
-                  });
               }
               return directive;
           }]);

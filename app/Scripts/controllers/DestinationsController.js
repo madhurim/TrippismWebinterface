@@ -111,7 +111,6 @@
         $scope.GetLowFare = GetLowFare;
         $scope.limitDestinationCards = 9;
         $scope.PointOfsalesCountry;
-
         initFareSliderValues();
         $scope.isModified = false;
         function LoadAirlineJson() {
@@ -288,11 +287,13 @@
                     alertify.alert(CList).set('onok', function (closeEvent) { });
                     $scope.IscalledFromIknowMyDest = false;
                     $scope.isShowSearchIcon = true;     // used for showing main search slider icon when user search first time
+                    $scope.destinationCardList = [];
                 }
                 else {
                     alertify.alert("Destination Finder", "");
                     alertify.alert('Sorry , we do not have destinations to suggest for this search combination. This can also happen sometimes if the origin airport is not a popular airport. We suggest you try a different search combination or a more popular airport in your area to get destinations.').set('onok', function (closeEvent) { });
                     $scope.isShowSearchIcon = true;     // used for showing main search slider icon when user search first time
+                    $scope.destinationCardList = [];
                 }
 
                 $scope.inProgress = false;
@@ -479,7 +480,7 @@
 
         $scope.gotoMap = function ($event, data) {
             $event.preventDefault();
-            $scope.$broadcast('gotoMap', { lat: data.lat, lng: data.lng });
+            $scope.$broadcast('gotoMap', { DestinationLocation: data.DestinationLocation, lat: data.lat, lng: data.lng });
         }
 
         $scope.getlink = function (data) {

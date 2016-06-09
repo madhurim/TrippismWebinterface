@@ -332,7 +332,7 @@ img.dd-selected-image {
 
 label.dd-option-text:first-child {
     margin-left: 15px;
-    cursor: not-allowed;
+    cursor: pointer;
 }
 
 section#Modification {
@@ -419,7 +419,6 @@ section#Modification {
     cursor: pointer;
     width: 26px;
     height: 26px;
-    z-index: 999;
     opacity: 0.8;
 }
 

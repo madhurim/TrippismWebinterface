@@ -1567,16 +1567,20 @@ ul .stop-line {
 
 .Maplabel div {
     color: #333;
-    font-weight: 500;
+    font-weight: bold;
     white-space: nowrap;
-    font-size: 13px;
+    font-size: 11px;
     line-height: 15px;
+    text-shadow: 0px 0px 1px #f1efe8, 0px 0px 1px #f1efe8, 0px 0px 2px #f1efe8, 1px 1px 5px rgba(0,0,0,0.4);
+    -webkit-font-smoothing: antialiased;
 }
 
 .Maplabel span {
     color: #2f86cd;
-    font-weight: 900;
-    font-size: 11px;
+    font-weight: bold;
+    font-size: 13px;
+    text-shadow: 0px 0px 1px #f1efe8, 0px 0px 1px #f1efe8, 0px 0px 2px #f1efe8, 1px 1px 5px rgba(0,0,0,0.4);
+    -webkit-font-smoothing: antialiased;
 }
 
 /*#region Media queries */

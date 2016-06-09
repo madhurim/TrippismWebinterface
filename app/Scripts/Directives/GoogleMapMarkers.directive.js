@@ -19,13 +19,12 @@
                       $scope.markerCluster;
                       $scope.clusterFlag = true;    // flag for solving cluster issue if theme/region multiple time clicked                      
                       var highRankedMarkers;
-                      var params = $stateParams.path.split(";");
-                      for (var i = 0; i < params.length; i++) {
-                          var para = params[i].split("=");
-                          if (para[0].trim() === "f") {
-                              $scope.origin = para[1].trim().toUpperCase();
-                              break;
-                          }
+                      $scope.origin = getParam("f");
+
+                      var markerImageObj = {
+                          big: new google.maps.MarkerImage("/images/big-point-over.png", new google.maps.Size(21, 21), new google.maps.Point(0, 0), new google.maps.Point(10, 10), new google.maps.Size(20, 20)),
+                          bigOver: new google.maps.MarkerImage("/images/big-point-over.png", new google.maps.Size(21, 21), new google.maps.Point(0, 0), new google.maps.Point(10, 10), new google.maps.Size(20, 20)),
+                          small: new google.maps.MarkerImage("/images/big-point.png", new google.maps.Size(21, 21), new google.maps.Point(0, 0), new google.maps.Point(7, 7), new google.maps.Size(14, 14))
                       }
 
                       //sets the map options
@@ -42,6 +41,16 @@
                           styles: TrippismConstants.destinationSearchMapSyle,
                           mapTypeId: google.maps.MapTypeId.ROADMAP,
                       };
+
+                      function getParam(name) {
+                          var params = $stateParams.path.split(";");
+                          for (var i = 0; i < params.length; i++) {
+                              var para = params[i].split("=");
+                              if (para[0].trim() === name) {
+                                  return para[1].trim().toUpperCase();
+                              }
+                          }
+                      }
 
                       $scope.showPosition = function (destinations) {
                           $scope.destinationslist = destinations;
@@ -85,9 +94,10 @@
                                           map: $scope.destinationMap,
                                           title: airportName.airport_FullName + ', ' + airportName.airport_CityName,
                                           CustomMarkerInfo: maps[x],
-                                          //labelContent: '<div style="color:#333;font-weight:500;white-space:nowrap;font-size:13px;line-height:15px;">' + airportName.airport_CityName + '<br/><span style="color:#2f86cd;font-weight:900;font-size:11px;">' + UtilFactory.GetCurrencySymbol(maps[x].CurrencyCode) + ' ' + Math.ceil(LowRate) + '</span><br/>' + airportName.rank + '</div>',
-                                          labelContent: '<div style="color:#333;font-weight:500;white-space:nowrap;font-size:13px;line-height:15px;">' + airportName.airport_CityName + '<br/><span style="color:#2f86cd;font-weight:900;font-size:11px;">' + UtilFactory.GetCurrencySymbol(maps[x].CurrencyCode) + ' ' + Math.ceil(LowRate) + '</span></div>',
+                                          //labelContent: '<div>' + airportName.airport_CityName + '<br/><span>' + UtilFactory.GetCurrencySymbol(maps[x].CurrencyCode) + ' ' + Math.ceil(LowRate) + '</span><br/>' + airportName.rank + '</div>',
+                                          labelContent: '<div>' + airportName.airport_CityName + '<br/><span>' + UtilFactory.GetCurrencySymbol(maps[x].CurrencyCode) + ' ' + Math.ceil(LowRate) + '</span></div>',
                                           labelAnchor: new google.maps.Point(-11, 15),
+                                          labelClass: 'Maplabel',
                                           icon: {
                                               url: "/images/big-point.png", // url                                          
                                               scaledSize: new google.maps.Size(14, 14),
@@ -97,22 +107,14 @@
                                           labelVisible: false
                                       });
 
-                                      var contentString = '<div style="min-width:100px;padding-top:5px;" id="content">' +
-                                                              '<div class="col-sm-12 padleft0"><strong>'
-                                                                + "(" + maps[x].DestinationLocation + ") " + airportName.airport_FullName + ', ' + airportName.airport_CityName + '</strong></div>' +
-                                                                '<br /><div class="col-sm-12 padleft0">' +
-                                                                '<label>Lowest fare: </label><strong class="text-success"> ' + maps[x].CurrencyCode + ' ' + maps[x].LowestFare + '</strong>' +
-                                                        '</div> ';
-
-                                      $scope.InfoWindow = new google.maps.InfoWindow();
                                       $scope.destinationMarkers.push(marker);
 
-                                      google.maps.event.addListener(marker, 'click', (function (marker, contentString, infowindow) {
+                                      google.maps.event.addListener(marker, 'click', (function (marker) {
                                           return function () {
                                               var finalpath = 'destination/f=' + $scope.origin.toUpperCase() + ';t=' + marker.CustomMarkerInfo.DestinationLocation + ';d=' + ConvertToRequiredDate(marker.CustomMarkerInfo.DepartureDateTime, 'API') + ';r=' + ConvertToRequiredDate(marker.CustomMarkerInfo.ReturnDateTime, 'API');
                                               $location.path(finalpath);
                                           };
-                                      })(marker, contentString, $scope.InfoWindow));
+                                      })(marker));
                                   }
                               }
 
@@ -136,12 +138,12 @@
                           google.maps.event.clearListeners(marker, 'mouseover');
                           google.maps.event.clearListeners(marker, 'mouseout');
                           marker.addListener('mouseover', function () {
-                              this.setIcon(new google.maps.MarkerImage("/images/big-point-over.png", new google.maps.Size(21, 21), new google.maps.Point(0, 0), new google.maps.Point(10, 10), new google.maps.Size(20, 20)));
+                              this.setIcon(markerImageObj.bigOver);
                               this.labelVisible = true;
                               this.label.draw();
                           });
                           marker.addListener('mouseout', function () {
-                              this.setIcon(new google.maps.MarkerImage("/images/big-point.png", new google.maps.Size(21, 21), new google.maps.Point(0, 0), new google.maps.Point(7, 7), new google.maps.Size(14, 14)));
+                              this.setIcon(markerImageObj.small);
                               this.labelVisible = false;
                               this.label.draw();
                           });
@@ -161,7 +163,7 @@
                               markers.push(highRankedMarkers[i]);
                               for (var j = 0; j < highRankedMarkers.length; j++) {
                                   if (i == j || highRankedMarkers[j].isRemoved) continue;
-                                  var distance = distanceBetweenPoints(highRankedMarkers[i].position, highRankedMarkers[j].position);
+                                  var distance = UtilFactory.DistanceBetweenPoints(highRankedMarkers[i].position, highRankedMarkers[j].position);
                                   if (distance < dist)
                                       markers.push(highRankedMarkers[j]);
                               }
@@ -169,52 +171,34 @@
                               var highLowArr = _.sortBy(markers, function (i) { return i.CustomMarkerInfo.rank; });
 
                               // updating high rank marker
-                              highLowArr[0].setIcon(new google.maps.MarkerImage("/images/big-point.png", new google.maps.Size(21, 21), new google.maps.Point(0, 0), new google.maps.Point(10, 10), new google.maps.Size(20, 20)));
+                              highLowArr[0].setIcon(markerImageObj.big);
                               highLowArr[0].labelVisible = true;
                               //if ($scope.destinationMap.zoom == 3) {
-                              //    debugger;
-                              //    highLowArr[0].labelContent = '<div style="color:black;font-weight:500;white-space:nowrap;font-size:12px;line-height:15px;">' + highLowArr[0].CustomMarkerInfo.CityName + '<br/><span style="color:#2f86cd;font-weight:900;font-size:10px;">' + UtilFactory.GetCurrencySymbol(highLowArr[0].CustomMarkerInfo.CurrencyCode) + ' ' + Math.ceil(highLowArr[0].CustomMarkerInfo.rate) + '</span></div>';
+                              //    highLowArr[0].labelContent = '<div>' + highLowArr[0].CustomMarkerInfo.CityName + '<br/><span style="font-size:10px;">' + UtilFactory.GetCurrencySymbol(highLowArr[0].CustomMarkerInfo.CurrencyCode) + ' ' + Math.ceil(highLowArr[0].CustomMarkerInfo.rate) + '</span></div>';
                               //}
                               //else {
-                              //    highLowArr[0].labelContent = '<div style="color:black;font-weight:500;white-space:nowrap;font-size:13px;line-height:15px;">' + highLowArr[0].CustomMarkerInfo.CityName + '<br/><span style="color:#2f86cd;font-weight:900;font-size:11px;">' + UtilFactory.GetCurrencySymbol(highLowArr[0].CustomMarkerInfo.CurrencyCode) + ' ' + Math.ceil(highLowArr[0].CustomMarkerInfo.rate) + '</span></div>';
+                              //    highLowArr[0].labelContent = '<div>' + highLowArr[0].CustomMarkerInfo.CityName + '<br/><span style="font-size:11px;">' + UtilFactory.GetCurrencySymbol(highLowArr[0].CustomMarkerInfo.CurrencyCode) + ' ' + Math.ceil(highLowArr[0].CustomMarkerInfo.rate) + '</span></div>';
                               //}
                               highLowArr[0].label.draw();
                               highLowArr[0].setOptions({ zIndex: 999 });
                               google.maps.event.clearListeners(highLowArr[0], 'mouseover');
                               google.maps.event.clearListeners(highLowArr[0], 'mouseout');
                               highLowArr[0].addListener('mouseover', function () {
-                                  this.setIcon(new google.maps.MarkerImage("/images/big-point-over.png", new google.maps.Size(21, 21), new google.maps.Point(0, 0), new google.maps.Point(10, 10), new google.maps.Size(20, 20)));
+                                  this.setIcon(markerImageObj.bigOver);
                               });
                               highLowArr[0].addListener('mouseout', function () {
-                                  this.setIcon(new google.maps.MarkerImage("/images/big-point.png", new google.maps.Size(21, 21), new google.maps.Point(0, 0), new google.maps.Point(10, 10), new google.maps.Size(20, 20)));
+                                  this.setIcon(markerImageObj.big);
                               });
 
                               // updating low rank markers
                               for (var j = 1; j < highLowArr.length; j++) {
                                   highLowArr[j].isRemoved = true;
-                                  highLowArr[j].setIcon(new google.maps.MarkerImage("/images/big-point.png", new google.maps.Size(21, 21), new google.maps.Point(0, 0), new google.maps.Point(7, 7), new google.maps.Size(14, 14)));
+                                  highLowArr[j].setIcon(markerImageObj.small);
                                   highLowArr[j].labelVisible = false;
                                   addMarkerListerners(highLowArr[j]);
                               }
                           }
-                          //$timeout(function () { google.maps.event.trigger($scope.destinationMap, 'resize'); }, 0, true);
                       }
-
-                      var distanceBetweenPoints = function (p1, p2) {
-                          if (!p1 || !p2) {
-                              return 0;
-                          }
-
-                          var R = 6371; // Radius of the Earth in km
-                          var dLat = (p2.lat() - p1.lat()) * Math.PI / 180;
-                          var dLon = (p2.lng() - p1.lng()) * Math.PI / 180;
-                          var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                            Math.cos(p1.lat() * Math.PI / 180) * Math.cos(p2.lat() * Math.PI / 180) *
-                            Math.sin(dLon / 2) * Math.sin(dLon / 2);
-                          var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-                          var d = R * c;
-                          return d;
-                      };
 
                       var getMapUrlData = function (airportCode) {
                           var d = $q.defer();
@@ -291,8 +275,8 @@
                               return airport.airport_Code == scope.origin.toUpperCase()
                           });
                           var airportLoc;
-                          // lat lon information taken from http://www.mapsofworld.com/
 
+                          // lat lon information taken from http://www.mapsofworld.com/
                           switch (args.Region) {
                               case "Africa":
                                   { airportLoc = new google.maps.LatLng(7.1881, 21.0936); break; }

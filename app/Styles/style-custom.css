@@ -1565,6 +1565,20 @@ ul .stop-line {
 }
 /*#endregion destination-layout*/
 
+.Maplabel div {
+    color: #333;
+    font-weight: 500;
+    white-space: nowrap;
+    font-size: 13px;
+    line-height: 15px;
+}
+
+.Maplabel span {
+    color: #2f86cd;
+    font-weight: 900;
+    font-size: 11px;
+}
+
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {

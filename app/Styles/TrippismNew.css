@@ -267,7 +267,7 @@ i.fa.fa-caret-down {
         transition: box-shadow 0.3s ease-in-out;
     }
 
-    .thumbnail_img img {
+    .thumbnail_img img.thumb-img {
         width: 100%;
         height: 100%;
     }
@@ -411,6 +411,21 @@ section#Modification {
     margin: 10px 0px;
     color: #999;
 }
+
+.ico-map {
+    position: absolute;
+    right: 1px;
+    bottom: 1px;
+    cursor: pointer;
+    width: 26px;
+    height: 26px;
+    z-index: 999;
+    opacity: 0.8;
+}
+
+    .ico-map:hover {
+        opacity: 1;
+    }
 
 /*#region media queries*/
 @media only screen and (max-width:769px) {

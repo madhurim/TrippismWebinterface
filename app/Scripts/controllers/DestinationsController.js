@@ -477,6 +477,11 @@
             }
         });
 
+        $scope.gotoMap = function ($event, data) {
+            $event.preventDefault();
+            $scope.$broadcast('gotoMap', { lat: data.lat, lng: data.lng });
+        }
+
         $scope.getlink = function (data) {
             return '/#/destination/f=' + $scope.Origin.toUpperCase() + ';t=' + data.DestinationLocation + ';d=' + ConvertToRequiredDate(data.DepartureDateTime, 'API') + ';r=' + ConvertToRequiredDate(data.ReturnDateTime, 'API');
         };

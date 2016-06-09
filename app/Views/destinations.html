@@ -99,8 +99,9 @@
                             <a ng-href="{{::getlink(item)}}" title="{{::item.FullName}}">
                                 <div class="thumbnail_img img-responsive">
                                     <div>
-                                        <img ng-src="{{::DestinationImagePath}}{{::item.DestinationLocation}}.jpg" src-error="{{::DestinationImagePath}}default.jpg" />
+                                        <img class="thumb-img" ng-src="{{::DestinationImagePath}}{{::item.DestinationLocation}}.jpg" src-error="{{::DestinationImagePath}}default.jpg" />
                                         <span class="Price_list">{{::GetCurrencySymbol(item.CurrencyCode)}} {{::GetLowFare(item)}}</span>
+                                        <img title="Show on map" alt="map" class="ico-map" src="../images/map.png" width="26" height="26" ng-click="gotoMap($event,item);" />
                                     </div>
                                     <div class="city_name">
                                         <span class="font-imp font-16">{{::item.CityName}}</span>

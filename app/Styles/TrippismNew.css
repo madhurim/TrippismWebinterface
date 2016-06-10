@@ -1,4 +1,5 @@
-﻿.row1 {
+﻿/* TrippismNew.css */
+.row1 {
     margin-right: -30px;
     margin-left: -30px;
 }
@@ -431,27 +432,6 @@ section#Modification {
     .Modify {
         float: left;
     }
-}
-
-@media only screen and (min-width: 320px) {
-    /*span.Price_list {
-        padding: 10px;
-        bottom: 65px;
-    }*/
-}
-
-@media only screen and (min-width: 375px) {
-    /*span.Price_list {
-        padding: 10px;
-        bottom: 43px;
-    }*/
-}
-
-@media only screen and (min-width: 360px) {
-    /*span.Price_list {
-        padding: 10px;
-        bottom: 42px !important;
-    }*/
 }
 /*#endregion media queries*/
 

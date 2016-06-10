@@ -108,7 +108,6 @@
         $scope.destinationlist;
         $scope.AvailableThemes = AvailableTheme();
         $scope.AvailableRegions = AvailableRegions();
-        $scope.GetLowFare = GetLowFare;
         $scope.limitDestinationCards = 9;
         $scope.PointOfsalesCountry;
         initFareSliderValues();
@@ -441,9 +440,7 @@
                 $scope.Maxfare = isNaN(newVal.max) ? 0 : newVal.max;
             }
         });
-        $scope.GetCurrencySymbol = function (code) {
-            return UtilFactory.GetCurrencySymbol(code);
-        }
+
         activate();
 
         function SetFromDate() {
@@ -453,13 +450,9 @@
             $scope.ToDate = ConvertToRequiredDate(GetToDate($scope.FromDate), 'UI');
         };
 
-        function GetLowFare(item) {
-            return Math.ceil(UtilFactory.GetLowFareForMap(item));
+        $scope.GetCurrencySymbol = function (code) {
+            return UtilFactory.GetCurrencySymbol(code);
         }
-
-        $scope.$on('RenderMap', function (event, data) {
-            $timeout(function () { $scope.destinationCardList = data; }, 0, true);
-        })
 
         $scope.loadMoreDestinations = function () {
             if ($scope.limitDestinationCards >= $scope.destinationCardList.length) return;
@@ -478,13 +471,12 @@
             }
         });
 
-        $scope.gotoMap = function ($event, data) {
-            $event.preventDefault();
-            $scope.$broadcast('gotoMap', { DestinationLocation: data.DestinationLocation, lat: data.lat, lng: data.lng });
-        }
+        $scope.$on('RenderMap', function (event, data) {
+            $timeout(function () { $scope.destinationCardList = data; }, 0, true);
+        })
 
-        $scope.getlink = function (data) {
-            return '/#/destination/f=' + $scope.Origin.toUpperCase() + ';t=' + data.DestinationLocation + ';d=' + ConvertToRequiredDate(data.DepartureDateTime, 'API') + ';r=' + ConvertToRequiredDate(data.ReturnDateTime, 'API');
-        };
+        $scope.$on('displayOnMap', function (event, data) {
+            $scope.$broadcast('gotoMap', data);
+        });
     }
 })();

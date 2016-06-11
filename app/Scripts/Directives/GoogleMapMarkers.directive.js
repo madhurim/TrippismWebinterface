@@ -63,7 +63,7 @@
                           $scope.destinationslist = destinations;
                           var promises = [];
                           for (var i = 0; i < $scope.destinationslist.length; i++) {
-                              promises.push(createObject($scope.destinationslist[i]));
+                              promises.push(updateObject($scope.destinationslist[i]));
                           }
                           $q.all(promises).then(function (data) {
                               if (data.length > 0) {
@@ -129,10 +129,16 @@
                               google.maps.event.addListener($scope.destinationMap, "zoom_changed", function () {
                                   redrawMarkers();
                               });
+
+                              google.maps.event.clearListeners($scope.destinationMap, 'dragend');
+                              google.maps.event.addListener($scope.destinationMap, "dragend", function () {
+                                  if ($scope.destinationMap.zoom == 6 || $scope.destinationMap.zoom == 7)
+                                      redrawMarkers();
+                              });
                           }, 0, false);
                       };
                       // distance in KM per zoom level
-                      var zoomLvlArr = [{ zoom: 3, dis: 1000 }, { zoom: 4, dis: 700 }, { zoom: 5, dis: 500 }, { zoom: 6, dis: 200 }, { zoom: 7, dis: 100 }];
+                      var zoomLvlArr = [{ zoom: 3, dis: 1000 }, { zoom: 4, dis: 700 }, { zoom: 5, dis: 500 }, { zoom: 6, dis: 200 }, { zoom: 7, dis: 65 }];
                       function addMarkerListerners(marker) {
                           google.maps.event.clearListeners(marker, 'mouseover');
                           google.maps.event.clearListeners(marker, 'mouseout');
@@ -149,21 +155,32 @@
                       }
 
                       function redrawMarkers() {
-                          var partition = _.partition(_.sortBy($scope.destinationMarkers, function (i) { return i.markerInfo.rank; }), function (item, index) { return index < $scope.destinationMap.zoom * 10 });
-                          highRankedMarkers = partition[0];
-
-                          // mark all low ranked destinations as a small markers
-                          for (var i = 0; i < partition[1].length; i++) {
-                              partition[1][i].setIcon(markerImageObj.small);
-                              partition[1][i].labelVisible = false;
-                              addMarkerListerners(partition[1][i]);
-                          }
-
-                          highRankedMarkers = _.each(highRankedMarkers, function (i) { i.isRemoved = false; });
+                          var highRankedMarkers = [];
                           // get distance by zoom level
                           var dist = _.find(zoomLvlArr, function (i) { return i.zoom == $scope.destinationMap.zoom; }) || 0;
                           dist = dist.dis || dist;
 
+                          if ($scope.destinationMap.zoom == 6 || $scope.destinationMap.zoom == 7) {
+                              var bounds = $scope.destinationMap.getBounds();
+                              for (var i = 0; i < $scope.destinationMarkers.length; i++) {
+                                  if ($scope.destinationMarkers[i].map && bounds.contains($scope.destinationMarkers[i].getPosition()))
+                                      highRankedMarkers.push($scope.destinationMarkers[i]);
+                              }
+                              highRankedMarkers = _.sortBy(highRankedMarkers, function (i) { return i.markerInfo.rank; });
+                          }
+                          else {
+                              var partition = _.partition(_.sortBy($scope.destinationMarkers, function (i) { return i.markerInfo.rank; }), function (item, index) { return index < $scope.destinationMap.zoom * 10 });
+                              highRankedMarkers = partition[0];
+
+                              // mark all low ranked destinations as a small markers
+                              for (var i = 0; i < partition[1].length; i++) {
+                                  partition[1][i].setIcon(markerImageObj.small);
+                                  partition[1][i].labelVisible = false;
+                                  addMarkerListerners(partition[1][i]);
+                              }
+                          }
+
+                          highRankedMarkers = _.each(highRankedMarkers, function (i) { i.isRemoved = false; });
                           // loop through all markers and compare it's distance with others.
                           // If distance is lower than specified value then mark high rank marker as a big icon and others as a small icons.
                           for (var i = 0; i < highRankedMarkers.length; i++) {
@@ -203,8 +220,8 @@
                           }
                       }
 
-                      // create object to set it on marker object
-                      var createObject = function (obj) {
+                      // update destination object to set it on marker object
+                      var updateObject = function (obj) {
                           var d = $q.defer();
                           var originairport = _.find($scope.highRankedAirportlist, function (airport) {
                               return airport.airport_Code == obj.DestinationLocation
@@ -226,7 +243,11 @@
                       // used to highlight a perticular marker on the map
                       $scope.$on('gotoMap', function (event, data) {
                           var selectedMarker;
+                          // get distance by zoom level                          
+                          var dist = _.find(zoomLvlArr, function (i) { return i.zoom == $scope.destinationMap.zoom; }) || 0;
+                          dist = dist.dis || dist;
                           var bounds = $scope.destinationMap.getBounds();
+                          var markerList = [];
                           for (var i = 0; i < $scope.destinationMarkers.length; i++) {
                               if ($scope.destinationMarkers[i].markerInfo.DestinationLocation == data.DestinationLocation) {
                                   selectedMarker = $scope.destinationMarkers[i];
@@ -248,21 +269,32 @@
                                   $scope.destinationMarkers[i].lastIcon = null;
                                   $scope.destinationMarkers[i].lastLabelVisible = null;
                               }
-                          }
-                          // get distance by zoom level                          
-                          var dist = _.find(zoomLvlArr, function (i) { return i.zoom == $scope.destinationMap.zoom; }) || 0;
-                          dist = dist.dis || dist;
-                          for (var i = 0; i < highRankedMarkers.length; i++) {
-                              if (!highRankedMarkers.isRemoved && bounds.contains(highRankedMarkers[i].getPosition()) && data.DestinationLocation != highRankedMarkers[i].markerInfo.DestinationLocation) {
-                                  var distance = UtilFactory.DistanceBetweenPoints(selectedMarker.position, highRankedMarkers[i].position);
-                                  if (distance < dist) {
-                                      highRankedMarkers[i].setIcon(markerImageObj.small);
-                                      highRankedMarkers[i].labelVisible = false;
-                                      highRankedMarkers[i].label.draw();
-                                      addMarkerListerners(highRankedMarkers[i]);
-                                  }
+                              else if (!$scope.destinationMarkers[i].isRemoved && bounds.contains($scope.destinationMarkers[i].getPosition())) {
+                                  markerList.push($scope.destinationMarkers[i]);
                               }
                           }
+
+                          for (var i = 0; i < markerList.length; i++) {
+                              var distance = UtilFactory.DistanceBetweenPoints(selectedMarker.position, markerList[i].position);
+                              if (distance < dist) {
+                                  markerList[i].setIcon(markerImageObj.small);
+                                  markerList[i].labelVisible = false;
+                                  markerList[i].label.draw();
+                                  addMarkerListerners(markerList[i]);
+                              }
+                          }
+
+                          //for (var i = 0; i < highRankedMarkers.length; i++) {
+                          //    if (!highRankedMarkers[i].isRemoved && bounds.contains(highRankedMarkers[i].getPosition()) && data.DestinationLocation != highRankedMarkers[i].markerInfo.DestinationLocation) {
+                          //        var distance = UtilFactory.DistanceBetweenPoints(selectedMarker.position, highRankedMarkers[i].position);
+                          //        if (distance < dist) {
+                          //            highRankedMarkers[i].setIcon(markerImageObj.small);
+                          //            highRankedMarkers[i].labelVisible = false;
+                          //            highRankedMarkers[i].label.draw();
+                          //            addMarkerListerners(highRankedMarkers[i]);
+                          //        }
+                          //    }
+                          //}
 
                           $timeout(function () {
                               $scope.destinationMap.panTo(new google.maps.LatLng(data.lat, data.lng));

@@ -6,8 +6,7 @@
               var directive = {};
               directive.templateUrl = '/Views/GoogleMap.html',
               directive.scope = {
-                  airportlist: "=airportlist",
-                  airlineJsonData: "=airlinejsondata",
+                  airportlist: "=airportlist"
               }
 
               directive.controller = ['$scope', '$q', '$compile', '$location', 'TrippismConstants', '$stateParams',
@@ -17,15 +16,23 @@
                       $scope.destinationMarkers = [];
                       $scope.bounds;
                       $scope.markerCluster;
-                      $scope.clusterFlag = true;    // flag for solving cluster issue if theme/region multiple time clicked                      
                       var highRankedMarkers;
                       $scope.origin = getParam("f");
+                      // setting marker icon properties
                       var markerImageObj = {
-                          big: new google.maps.MarkerImage("/images/big-point.png", new google.maps.Size(21, 21), new google.maps.Point(0, 0), new google.maps.Point(10, 10), new google.maps.Size(20, 20)),
-                          bigOver: new google.maps.MarkerImage("/images/big-point-over.png", new google.maps.Size(21, 21), new google.maps.Point(0, 0), new google.maps.Point(10, 10), new google.maps.Size(20, 20)),
-                          bigOverSelect: new google.maps.MarkerImage("/images/big-point-over-select.png", new google.maps.Size(21, 21), new google.maps.Point(0, 0), new google.maps.Point(10, 10), new google.maps.Size(20, 20)),
-                          small: new google.maps.MarkerImage("/images/big-point.png", new google.maps.Size(21, 21), new google.maps.Point(0, 0), new google.maps.Point(7, 7), new google.maps.Size(14, 14))
-                      }
+                          marker: {
+                              size: new google.maps.Size(21, 21),
+                              origin: new google.maps.Point(0, 0),
+                              anchorBig: new google.maps.Point(10, 10),
+                              scaledSizeBig: new google.maps.Size(20, 20),
+                              anchorSmall: new google.maps.Point(7, 7),
+                              scaledSizeSmall: new google.maps.Size(14, 14),
+                          }
+                      };
+                      markerImageObj.big = new google.maps.MarkerImage("/images/big-point.png", markerImageObj.marker.size, markerImageObj.marker.origin, markerImageObj.marker.anchorBig, markerImageObj.marker.scaledSizeBig);
+                      markerImageObj.bigOver = new google.maps.MarkerImage("/images/big-point-over.png", markerImageObj.marker.size, markerImageObj.marker.origin, markerImageObj.marker.anchorBig, markerImageObj.marker.scaledSizeBig);
+                      markerImageObj.bigOverSelect = new google.maps.MarkerImage("/images/big-point-over-select.png", markerImageObj.marker.size, markerImageObj.marker.origin, markerImageObj.marker.anchorBig, markerImageObj.marker.scaledSizeBig);
+                      markerImageObj.small = new google.maps.MarkerImage("/images/big-point.png", markerImageObj.marker.size, markerImageObj.marker.origin, markerImageObj.marker.anchorSmall, markerImageObj.marker.scaledSizeSmall);
 
                       //sets the map options
                       $scope.mapOptions = {
@@ -56,13 +63,13 @@
                           $scope.destinationslist = destinations;
                           var promises = [];
                           for (var i = 0; i < $scope.destinationslist.length; i++) {
-                              promises.push(getMapUrlData($scope.destinationslist[i]));
+                              promises.push(createObject($scope.destinationslist[i]));
                           }
-                          $q.all(promises).then(function (maps) {
-                              if (maps.length > 0) {
-                                  maps = _.compact(maps);
+                          $q.all(promises).then(function (data) {
+                              if (data.length > 0) {
+                                  data = _.compact(data);
                               }
-                              RenderMap(maps);
+                              RenderMap(data);
                           }.bind(this));
                       }
 
@@ -75,7 +82,6 @@
                           $timeout(function () {
                               $scope.InfoWindow;
                               $scope.bounds = new google.maps.LatLngBounds();
-                              //selected = maps;                              
                               $scope.destinationMarkers = [];
                               maps = _.sortBy(maps, 'rank');
                               $scope.$emit('RenderMap', maps);
@@ -93,16 +99,16 @@
                                           position: latlng1,
                                           map: $scope.destinationMap,
                                           title: airportName.airport_FullName + ', ' + airportName.airport_CityName,
-                                          CustomMarkerInfo: maps[x],
+                                          markerInfo: maps[x],
                                           //labelContent: '<div>' + airportName.airport_CityName + '<br/><span>' + UtilFactory.GetCurrencySymbol(maps[x].CurrencyCode) + ' ' + Math.ceil(LowRate) + '</span><br/>' + airportName.rank + '</div>',
                                           labelContent: '<div>' + airportName.airport_CityName + '<br/><span>' + UtilFactory.GetCurrencySymbol(maps[x].CurrencyCode) + ' ' + Math.ceil(LowRate) + '</span></div>',
                                           labelAnchor: new google.maps.Point(-11, 15),
                                           labelClass: 'Maplabel',
                                           icon: {
-                                              url: "/images/big-point.png", // url                                          
-                                              scaledSize: new google.maps.Size(14, 14),
-                                              origin: new google.maps.Point(0, 0),
-                                              anchor: new google.maps.Point(7, 7)
+                                              url: "/images/big-point.png",
+                                              scaledSize: markerImageObj.marker.scaledSizeSmall,
+                                              origin: markerImageObj.marker.origin,
+                                              anchor: markerImageObj.marker.anchorSmall
                                           },
                                           labelVisible: false
                                       });
@@ -111,7 +117,7 @@
 
                                       google.maps.event.addListener(marker, 'click', (function (marker) {
                                           return function () {
-                                              var finalpath = 'destination/f=' + $scope.origin.toUpperCase() + ';t=' + marker.CustomMarkerInfo.DestinationLocation + ';d=' + ConvertToRequiredDate(marker.CustomMarkerInfo.DepartureDateTime, 'API') + ';r=' + ConvertToRequiredDate(marker.CustomMarkerInfo.ReturnDateTime, 'API');
+                                              var finalpath = 'destination/f=' + $scope.origin.toUpperCase() + ';t=' + marker.markerInfo.DestinationLocation + ';d=' + ConvertToRequiredDate(marker.markerInfo.DepartureDateTime, 'API') + ';r=' + ConvertToRequiredDate(marker.markerInfo.ReturnDateTime, 'API');
                                               $location.path(finalpath);
                                           };
                                       })(marker));
@@ -123,7 +129,6 @@
                               google.maps.event.addListener($scope.destinationMap, "zoom_changed", function () {
                                   redrawMarkers();
                               });
-                              $scope.clusterFlag = true;
                           }, 0, false);
                       };
                       // distance in KM per zoom level
@@ -144,8 +149,10 @@
                       }
 
                       function redrawMarkers() {
-                          var partition = _.partition(_.sortBy($scope.destinationMarkers, function (i) { return i.CustomMarkerInfo.rank; }), function (item, index) { return index < $scope.destinationMap.zoom * 10 });
+                          var partition = _.partition(_.sortBy($scope.destinationMarkers, function (i) { return i.markerInfo.rank; }), function (item, index) { return index < $scope.destinationMap.zoom * 10 });
                           highRankedMarkers = partition[0];
+
+                          // mark all low ranked destinations as a small markers
                           for (var i = 0; i < partition[1].length; i++) {
                               partition[1][i].setIcon(markerImageObj.small);
                               partition[1][i].labelVisible = false;
@@ -170,17 +177,11 @@
                                       markers.push(highRankedMarkers[j]);
                               }
 
-                              var highLowArr = _.sortBy(markers, function (i) { return i.CustomMarkerInfo.rank; });
+                              var highLowArr = _.sortBy(markers, function (i) { return i.markerInfo.rank; });
 
                               // updating high rank marker
                               highLowArr[0].setIcon(markerImageObj.big);
                               highLowArr[0].labelVisible = true;
-                              //if ($scope.destinationMap.zoom == 3) {
-                              //    highLowArr[0].labelContent = '<div>' + highLowArr[0].CustomMarkerInfo.CityName + '<br/><span style="font-size:10px;">' + UtilFactory.GetCurrencySymbol(highLowArr[0].CustomMarkerInfo.CurrencyCode) + ' ' + Math.ceil(highLowArr[0].CustomMarkerInfo.rate) + '</span></div>';
-                              //}
-                              //else {
-                              //    highLowArr[0].labelContent = '<div>' + highLowArr[0].CustomMarkerInfo.CityName + '<br/><span style="font-size:11px;">' + UtilFactory.GetCurrencySymbol(highLowArr[0].CustomMarkerInfo.CurrencyCode) + ' ' + Math.ceil(highLowArr[0].CustomMarkerInfo.rate) + '</span></div>';
-                              //}
                               highLowArr[0].label.draw();
                               highLowArr[0].setOptions({ zIndex: 1 });
                               google.maps.event.clearListeners(highLowArr[0], 'mouseover');
@@ -202,52 +203,32 @@
                           }
                       }
 
-                      var getMapUrlData = function (airportCode) {
+                      // create object to set it on marker object
+                      var createObject = function (obj) {
                           var d = $q.defer();
                           var originairport = _.find($scope.highRankedAirportlist, function (airport) {
-                              return airport.airport_Code == airportCode.DestinationLocation
+                              return airport.airport_Code == obj.DestinationLocation
                           });
 
                           if (originairport != undefined) {
-                              airportCode.lat = originairport.airport_Lat;
-                              airportCode.lng = originairport.airport_Lng;
-                              airportCode.rank = originairport.rank;
-                              airportCode.CityName = originairport.airport_CityName;
-                              airportCode.FullName = originairport.airport_FullName;
-                              d.resolve(airportCode);
+                              obj.lat = originairport.airport_Lat;
+                              obj.lng = originairport.airport_Lng;
+                              obj.rank = originairport.rank;
+                              obj.CityName = originairport.airport_CityName;
+                              obj.FullName = originairport.airport_FullName;
+                              d.resolve(obj);
                           } else {
-                              //Missing Airport Details log 
-                              //UtilFactory.AirportCodeLog(airportCode.DestinationLocation);
                               d.resolve();
                           }
                           return d.promise;
                       }
 
-                      $scope.$on('eventDestinationMapresize', function (event, args) {
-                          google.maps.event.addListenerOnce($scope.destinationMap, 'idle', function () {
-                              google.maps.event.trigger($scope.destinationMap, 'resize');
-                          });
-                      });
-
-                      $scope.resetMarker = function (zoomLevel) {
-                          //$timeout(function () {
-                          //    $scope.destinationMap.setZoom(zoomLevel);
-                          //}, 0, false);
-
-                          $timeout(function () {
-                              if ($scope.destinationMarkers.length > 0) {
-                                  for (var i = 0; i < $scope.destinationMarkers.length; i++)
-                                      $scope.destinationMarkers[i].setMap(null);
-                              }
-                          }, 0, true);
-                      }
-
-                      var selectedMarker;
+                      // used to highlight a perticular marker on the map
                       $scope.$on('gotoMap', function (event, data) {
+                          var selectedMarker;
                           var bounds = $scope.destinationMap.getBounds();
-                          var latLng = new google.maps.LatLng(data.lat, data.lng);
                           for (var i = 0; i < $scope.destinationMarkers.length; i++) {
-                              if ($scope.destinationMarkers[i].CustomMarkerInfo.DestinationLocation == data.DestinationLocation) {
+                              if ($scope.destinationMarkers[i].markerInfo.DestinationLocation == data.DestinationLocation) {
                                   selectedMarker = $scope.destinationMarkers[i];
 
                                   if (!selectedMarker.lastIcon) {
@@ -272,7 +253,7 @@
                           var dist = _.find(zoomLvlArr, function (i) { return i.zoom == $scope.destinationMap.zoom; }) || 0;
                           dist = dist.dis || dist;
                           for (var i = 0; i < highRankedMarkers.length; i++) {
-                              if (!highRankedMarkers.isRemoved && bounds.contains(highRankedMarkers[i].getPosition()) && data.DestinationLocation != highRankedMarkers[i].CustomMarkerInfo.DestinationLocation) {
+                              if (!highRankedMarkers.isRemoved && bounds.contains(highRankedMarkers[i].getPosition()) && data.DestinationLocation != highRankedMarkers[i].markerInfo.DestinationLocation) {
                                   var distance = UtilFactory.DistanceBetweenPoints(selectedMarker.position, highRankedMarkers[i].position);
                                   if (distance < dist) {
                                       highRankedMarkers[i].setIcon(markerImageObj.small);
@@ -284,68 +265,78 @@
                           }
 
                           $timeout(function () {
-                              $scope.destinationMap.panTo(latLng);
+                              $scope.destinationMap.panTo(new google.maps.LatLng(data.lat, data.lng));
                           }, 0, false);
                       });
                   }];
 
-              directive.link = function (scope, elm, attrs) {
+              directive.link = function (scope, elm, attr) {
                   var w = angular.element($window);
                   setAirportMarkerOnMap();
-                  //Convert watch code into brodcast method                   
+
                   scope.$on('setMarkeronMap', function (event, args) {
                       if (!args) {
                           displayBlankMap();
                           return;
                       }
 
-                      if (scope.clusterFlag) {
-                          scope.clusterFlag = false;    // flag for solving cluster issue if theme/region multiple time clicked
+                      scope.destinations = args.destinationlist;
+                      scope.highRankedAirportlist = args.highRankedAirportlist;
+                      resetMarker();
 
-                          scope.destinations = args.destinationlist;
-                          scope.highRankedAirportlist = args.highRankedAirportlist;
-                          //scope.resetMarker(args.Region || args.Theme ? 3 : 4);
-                          scope.resetMarker();
-                          if (scope.destinations != undefined && scope.destinations.length > 0) {
-                              scope.displayDestinations(scope.destinations);
-                              if ($rootScope.isShowAlerityMessage && w.width() >= 768) {
-                                  $timeout(function () {
-                                      showMessage();
-                                  }, 0, false);
-                              }
+                      if (scope.destinations != undefined && scope.destinations.length > 0) {
+                          scope.displayDestinations(scope.destinations);
+                          if ($rootScope.isShowAlerityMessage && w.width() >= 768) {
+                              $timeout(function () {
+                                  showMessage();
+                              }, 0, false);
                           }
-                          else {
-                              scope.clusterFlag = true;    // flag for solving cluster issue if theme/region multiple time clicked
-                              scope.$emit('RenderMap', []);
-                          }
-
-                          var originairport = _.find(scope.airportlist, function (airport) {
-                              return airport.airport_Code == scope.origin.toUpperCase()
-                          });
-                          var airportLoc;
-
-                          // lat lon information taken from http://www.mapsofworld.com/
-                          switch (args.Region) {
-                              case "Africa":
-                                  { airportLoc = new google.maps.LatLng(7.1881, 21.0936); break; }
-                              case "Europe":
-                                  { airportLoc = new google.maps.LatLng(53.0000, 9.0000); break; }
-                              case "South America":
-                                  { airportLoc = new google.maps.LatLng(-14.6048, -59.0625); break; }
-                              case "North America":
-                                  { airportLoc = new google.maps.LatLng(48.1667, -100.1667); break; }
-                              case "Middle East":
-                                  { airportLoc = new google.maps.LatLng(31.268205, 29.995368); break; }
-                              case "Asia Pacific":
-                                  { airportLoc = new google.maps.LatLng(49.8380, 105.8203); break; }
-                              default: { airportLoc = new google.maps.LatLng(originairport.airport_Lat, originairport.airport_Lng); break; }
-                          }
-
-                          $timeout(function () {
-                              scope.destinationMap.panTo(airportLoc);
-                          }, 0, false);
                       }
+                      else {
+                          scope.$emit('RenderMap', []);
+                      }
+
+                      centerMap(args);
                   });
+
+                  // remove all markers from map
+                  function resetMarker(zoomLevel) {
+                      $timeout(function () {
+                          if (scope.destinationMarkers.length > 0) {
+                              for (var i = 0; i < scope.destinationMarkers.length; i++)
+                                  scope.destinationMarkers[i].setMap(null);
+                          }
+                      }, 0, true);
+                  }
+
+                  function centerMap(args) {
+                      var airportLoc;
+                      // lat lon information taken from http://www.mapsofworld.com/
+                      switch (args.Region) {
+                          case "Africa":
+                              { airportLoc = new google.maps.LatLng(7.1881, 21.0936); break; }
+                          case "Europe":
+                              { airportLoc = new google.maps.LatLng(53.0000, 9.0000); break; }
+                          case "South America":
+                              { airportLoc = new google.maps.LatLng(-14.6048, -59.0625); break; }
+                          case "North America":
+                              { airportLoc = new google.maps.LatLng(48.1667, -100.1667); break; }
+                          case "Middle East":
+                              { airportLoc = new google.maps.LatLng(31.268205, 29.995368); break; }
+                          case "Asia Pacific":
+                              { airportLoc = new google.maps.LatLng(49.8380, 105.8203); break; }
+                          default: {
+                              var originairport = _.find(scope.airportlist, function (airport) {
+                                  return airport.airport_Code == scope.origin.toUpperCase();
+                              });
+                              airportLoc = new google.maps.LatLng(originairport.airport_Lat, originairport.airport_Lng); break;
+                          }
+                      }
+
+                      $timeout(function () {
+                          scope.destinationMap.panTo(airportLoc);
+                      }, 0, false);
+                  }
 
                   function setAirportMarkerOnMap() {
                       UtilFactory.ReadAirportJson().then(function (data) {
@@ -368,7 +359,6 @@
                               icon: 'images/dot.png',
                               options:
                                   { zIndex: -1 }
-
                           });
 
                           $timeout(function () {
@@ -384,10 +374,10 @@
                        + "</div><div class='clear'></div>";
                       alertify.set('notifier', 'position', 'top-right');
                       alertify.warning(message, 15, function () { $rootScope.isShowAlerityMessage = false; });
-                      showMessagePosition();
+                      setMessagePosition();
                   }
 
-                  function showMessagePosition() {
+                  function setMessagePosition() {
                       var alertBoxElement = angular.element(".ajs-message.ajs-warning.ajs-visible");
                       var headerElement = angular.element("#header")[0];
                       alertBoxElement.css({ "top": headerElement.offsetHeight - 9 });

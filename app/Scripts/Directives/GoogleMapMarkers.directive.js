@@ -123,8 +123,9 @@
                                       })(marker));
                                   }
                               }
-
-                              redrawMarkers();
+                              google.maps.event.addListenerOnce($scope.destinationMap, 'tilesloaded', function () {
+                                  redrawMarkers();
+                              });
                               google.maps.event.clearListeners($scope.destinationMap, 'zoom_changed');
                               google.maps.event.addListener($scope.destinationMap, "zoom_changed", function () {
                                   redrawMarkers();

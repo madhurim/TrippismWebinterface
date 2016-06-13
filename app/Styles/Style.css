@@ -306,7 +306,7 @@ input.form-control[type="number"] {
         .dropdown-menu > li > a {
             color: #585858;
             font-weight: inherit;
-            padding: 10px 20px;
+            padding: 10px 10px;
             cursor: pointer;
         }
 
@@ -1104,12 +1104,11 @@ i.calendar.active, .input-box:hover i.calendar {
 .destination-form .input-control {
     color: #000;
     font-weight: 300;
-    padding-left: 25px;
     border: 0 none;
     border-radius: 0 4px 4px 0;
     background-color: #fff;
     width: 100%;
-    padding: 10px 10px 10px 25px;
+    padding: 10px 10px 10px 15px;
 }
 
 .destination-form .input-group-addon {

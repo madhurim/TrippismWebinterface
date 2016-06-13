@@ -400,6 +400,7 @@
                   }
 
                   function showMessage() {
+                      if (w.width() <= 767) return;
                       alertify.dismissAll();
                       var message = "<div class='alert-box'><p>The bigger markers are our top ranked destinations based on popularity from the Origin airport.</p>"
                          + "<input type='button' class='btn btn-primary' value='Got It' />"

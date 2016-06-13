@@ -1566,7 +1566,7 @@ ul .stop-line {
 /*#endregion destination-layout*/
 
 .Maplabel div {
-    color: #333;    
+    color: #333;
     font-weight: bold;
     white-space: nowrap;
     font-size: 11px;
@@ -1582,6 +1582,19 @@ ul .stop-line {
     font-size: 13px;
     text-shadow: 0px 0px 1px #f1efe8, 0px 0px 1px #f1efe8, 0px 0px 2px #f1efe8, 1px 1px 5px rgba(0,0,0,0.4);
     -webkit-font-smoothing: antialiased;
+}
+
+.dropdown-tag {
+    padding: 1px 5px;
+    background: #ddd;
+    border-radius: 2px;
+    width: 55px;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    color: #585858;
+    font-weight: 400;
+    margin-right: 4px;
 }
 
 /*#region Media queries */

@@ -1,0 +1,14 @@
+﻿<div class="attractions-found advanced-search top-dest-slide" ng-hide="!destinationsParams">
+    <div id="examples">
+        <div class="content contentHorizontal" ng-show="topdestinationflg">
+            <div ng-repeat="item in topdestinationlist" ng-click="topdestinationclick(item)" class="destinations-list">
+                <h6>{{::item.AirportCode}} [{{::item.Cityname}}]</h6>
+                <ul class="destinations-details-list">
+                    <li ng-if="item.LowestNonStopFare != null && item.LowestNonStopFare.Fare != 'N/A' && item.LowestNonStopFare.Fare != 0"><p>Lowest Non Stop Fare  : <span title="{{::item.topdestinationFareInfo.CurrencyCode}} {{::item.LowestNonStopFare.Fare | number : 2}}"> {{::GetCurrencySymbol(item.topdestinationFareInfo.CurrencyCode)}} {{::item.LowestNonStopFare.Fare | number : 2}}</span></p></li>
+                    <li ng-if="item.LowestFare != null && item.LowestFare.Fare != 'N/A' && item.LowestFare.Fare != 0"><p>Lowest Fare : <span title="{{::item.topdestinationFareInfo.CurrencyCode}} {{::item.LowestFare.Fare | number : 2}}">{{::GetCurrencySymbol(item.topdestinationFareInfo.CurrencyCode)}} {{::item.LowestFare.Fare | number : 2}}</span></p></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+

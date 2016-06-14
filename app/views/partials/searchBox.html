@@ -1,0 +1,165 @@
+﻿<div class="destination-box-popup" ng-class="isPopup ? 'destination-popup' :''">
+    <div class="container">
+        <div class="row" ng-hide="isPopup">
+            <div class="col-md-12 text-center">
+                <h3 class="destination-title">
+                    Find a fly away vacation destination
+                    <strong>In your Budget,Timeline and Taste</strong>
+                </h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <span class="destination-popup-close" ng-click="isPopup=!isPopup;isRefineSeachCollapsed=!isRefineSeachCollapsed;hasError = false;" ng-show="isPopup">x</span>
+                <div class="destination-boxwrap-nav-tabs">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" ng-class="{'active' : selectedform == 'SuggestDestination'}"><a ng-click="selectedform = 'SuggestDestination'; hasError = false;" aria-controls="suggest-destinations" role="tab" data-toggle="tab">Suggest Destinations</a></li>
+                        <li role="presentation" ng-class="{'active' : selectedform == 'KnowMyDestination'}"><a ng-click="selectedform = 'KnowMyDestination'; hasError = false" aria-controls="i-know-my-destination" role="tab" data-toggle="tab">I Know My Destination</a></li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="suggest-destination">
+                            <form class="destination-form" name="frmdestfinder">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><img src="images/destination.png" alt="" /></div>
+                                            <div class="form-group dropdown-box">
+                                                <input ng-model="Origin"
+                                                       id="Origin"
+                                                       typeahead-min-length="2"
+                                                       required
+                                                       typeahead-input-formatter="formatInput($model)"
+                                                       typeahead-editable="true"
+                                                       typeahead-on-select="onSelect($item)"
+                                                       typeahead-template-url="airportDropdownTemplate.html"
+                                                       name="Origin"
+                                                       tabindex="1"
+                                                       placeholder="Which airport are you leaving from?"
+                                                       typeahead="state as state for AvailableCodes in airportsAutocomplete($viewValue)"
+                                                       type="text"
+                                                       class="input-control input-novalidate airport-dropdown"
+                                                       ng-class="hasError && frmdestfinder.$invalid  && (frmdestfinder.Origin.$error.required || frmdestfinder.Origin.$invalid) ? 'Errorbox' :''"
+                                                       autocomplete="off" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12" ng-show="selectedform == 'KnowMyDestination'">
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><img src="images/destination.png" alt="" /></div>
+                                            <div class="form-group dropdown-box">
+                                                <input type="text"
+                                                       id="KnownDestinationAirport"
+                                                       ng-model="KnownDestinationAirport"
+                                                       typeahead-min-length="2"
+                                                       ng-required="selectedform == 'KnowMyDestination'"
+                                                       typeahead-input-formatter="formatInput($model)"
+                                                       typeahead-editable="true"
+                                                       typeahead-on-select="onKnowDestinationSelect($item)"
+                                                       typeahead-template-url="airportDropdownTemplate.html"
+                                                       name="KnownDestinationAirport"
+                                                       tabindex="2"
+                                                       placeholder="Enter Destination City or Airport Code"
+                                                       typeahead="state as state for AvailableCodes in airportsAutocomplete($viewValue)"
+                                                       class="input-control input-novalidate airport-dropdown"
+                                                       ng-class="hasError && frmdestfinder.$invalid  && (frmdestfinder.KnownDestinationAirport.$error.required || frmdestfinder.KnownDestinationAirport.$invalid) ? 'Errorbox' :''"
+                                                       autocomplete="off">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6 pr7px">
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><img src="images/calendar.png" alt="#" ng-click="openFromDate($event)" /></div>
+                                            <div class="form-group calendar-size form-fromDate" ng-class="isPopup ? '' :'calendar-position'">
+                                                <input type="text"
+                                                       id="txtFromDate"
+                                                       ng-click="openFromDate($event)"
+                                                       class="input-control input-novalidate"
+                                                       ng-model="FromDate"
+                                                       datepicker-popup="{{format}}"
+                                                       ng-disabled="false"
+                                                       min-date="minTodayDate"
+                                                       max-date="MaximumFromDate"
+                                                       name="FromDate"
+                                                       is-open="openedFromDate"
+                                                       on-open-focus="true"
+                                                       datepicker-options="dateOptions"
+                                                       ng-required="!LenghtOfStay || ToDate"
+                                                       close-text="Close"
+                                                       placeholder="Start date"
+                                                       tabindex="3"
+                                                       maxlength="10"
+                                                       allow-only-date-inputs
+                                                       autocomplete="off"
+                                                       ng-blur="SetFromDate()"
+                                                       ng-class="hasError && isSearchbuttonClicked  && frmdestfinder.FromDate.$error.required ? 'Errorbox' :''" />
+                                            </div>
+                                        </div>
+                                        <span class="dateDisplay">{{FromDateDisplay}}</span>
+                                        <div class="alert alert-danger" role="alert" ng-show="!isSearchbuttonClicked"></div>
+                                    </div>
+
+                                    <div class="col-xs-6 pl7px">
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><img src="images/calendar.png" alt="#" ng-click="openToDate($event)" /></div>
+                                            <div class="form-group calendar-size form-toDate" ng-class="isPopup ? '' :'calendar-position'">
+                                                <input type="text"
+                                                       id="txtToDate"
+                                                       ng-click="openToDate($event)"
+                                                       class="input-control input-novalidate"
+                                                       datepicker-popup="{{format}}"
+                                                       min-date="minFromDate"
+                                                       max-date="MaximumToDate"
+                                                       ng-model="ToDate"
+                                                       name="ToDate"
+                                                       is-open="openedToDate"
+                                                       on-open-focus="true"
+                                                       datepicker-options="dateOptions"
+                                                       ng-required="!LenghtOfStay || FromDate" close-text="Close"
+                                                       placeholder="End date "
+                                                       ng-disabled="false"
+                                                       tabindex="4"
+                                                       maxlength="10"
+                                                       allow-only-date-inputs
+                                                       autocomplete="off"
+                                                       ng-blur="SetToDate()"
+                                                       ng-class="hasError && isSearchbuttonClicked && frmdestfinder.ToDate.$error.required ? 'Errorbox' :''" />
+                                            </div>
+                                        </div>
+                                        <span class="dateDisplay">{{ToDateDisplay}}</span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 text-center" ng-if="selectedform == 'SuggestDestination'">
+                                        <button type="submit"
+                                                class="btn btn-danger btn-search"
+                                                ng-click="GetDestinationClick('/destinations')"
+                                                tabindex="6">
+                                            <i ng-if="SearchbuttonIsLoading" style="margin-right:5px;" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>{{SearchbuttonText}}
+                                        </button>
+                                    </div>
+                                    <div class="col-md-12 text-center" ng-if="selectedform == 'KnowMyDestination'">
+                                        <button type="submit"
+                                                class="btn btn-danger btn-search"
+                                                ng-click="GetDestinationClick('/destination')"
+                                                tabindex="7">
+                                            <i ng-if="KnowSearchbuttonIsLoading" style="margin-right:5px;" class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></i>{{KnowSearchbuttonText}}
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="my-destination">...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -12,6 +12,7 @@
     <title>Trippism: Art of Destination Discovery</title>
     <meta name="description" content="Expore and Discover your next vacation destination with Trippism. Flight exploration and destination discovery combined. Fare evolution and intelligence combined with weather , seasonality , attractions and videos !">
     <meta name="keywords" content="Trippism, Travel, Trip, Vacation, destinations, Prices, Low Fares, Weather, Cheap Airfare, Insights, Weather, Things to do, attraction videos, seasonality, fare forecast, fare range">
+
     <link href="https://www.trippism.com/" rel="canonical" />
     <!--<script type="text/javascript">
     (new Image()).src = "../images/Mainpagebg2.jpg";
@@ -30,6 +31,7 @@
     <link href="styles/Style.css" rel="stylesheet" />
     <link href="styles/alertify.min.css" rel="stylesheet" />
     <link href="styles/style-custom.css" rel="stylesheet" />
+    <link href="styles/TrippismNew.css" rel="stylesheet" />
     <!--Use Awesome css for Attraction rating-->
     <link href="styles/font-awesome.css" rel="stylesheet" />
     <!-- endbuild -->
@@ -55,7 +57,7 @@
                     <div class="col-md-2 col-sm-2 col-xs-7">
                         <div class="logo">
                             <a ui-sref="home">
-                                <img src="images/trippism-logo.png" alt="" ng-click="" />
+                                <img src="images/trippism-logo.png" alt="Trippism" />
                             </a>
                         </div>
                     </div>
@@ -122,6 +124,7 @@
             </div>
         </div>
     </footer>
+
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -158,6 +161,9 @@
     <script src="scripts/libs/markerwithlabel.js"></script>
     <script src="scripts/libs/markerclusterer.js"></script>
     <script src="Scripts/libs/highcharts.js"></script>
+    <script src="Scripts/libs/ddselectclick.js"></script>
+
+    <script src="scripts/constants.js"></script>
 
     <script src="scripts/Factory/DestinationFactory.js"></script>
     <script src="scripts/Factory/FareforecastFactory.js"></script>
@@ -186,7 +192,8 @@
     <script src="Scripts/controllers/FAQsController.js"></script>
     <script src="Scripts/controllers/AttractionPopupController.js"></script>
 
-    <script src="scripts/Directives/GoogleMap.directive.js"></script>
+    <!--<script src="scripts/Directives/GoogleMap.directive.js"></script>-->
+    <script src="scripts/Directives/GoogleMapMarkers.directive.js"></script>
     <script src="scripts/Directives/SearchBoxDirective.js"></script>
     <script src="scripts/Directives/SeasonalityDirective.js"></script>
 
@@ -203,6 +210,8 @@
     <script src="Scripts/Directives/VideoPopupDirective.js"></script>
     <script src="Scripts/Directives/DestinationCardDirective.js"></script>
     <script src="Scripts/Directives/HotelRangeDirective.js"></script>
+    <script src="Scripts/Directives/scrollDirective.js"></script>
+    <script src="Scripts/Directives/DestinationsCardDirective.js"></script>
     <!-- endbuild -->
 
 </body>

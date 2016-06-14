@@ -2,7 +2,7 @@
     //var selected;
     'use strict';
     angular.module('TrippismUIApp')
-      .directive('googleMap', ['$timeout', '$rootScope', '$window', 'UtilFactory',
+      .directive('googleMap1', ['$timeout', '$rootScope', '$window', 'UtilFactory',
           function ($timeout, $rootScope, $window, UtilFactory) {
               var directive = {};
               directive.templateUrl = '/Views/GoogleMap.html',
@@ -397,8 +397,8 @@
                   function showMessage() {
                       alertify.dismissAll();
                       var message = "<div class='alert-box'><p>Click on any of the numbered clusters to see destinations. Numbers represent how many destinations fall into a nearby radius.</p>"
-                          + "<input type='button' class='btn btn-primary' value='Got It' />"
-                        + "</div><div class='clear'></div>";
+                           + "<input type='button' class='btn btn-primary' value='Got It' />"
+                         + "</div><div class='clear'></div>";
                       alertify.set('notifier', 'position', 'top-right');
                       alertify.warning(message, 15, function () { $rootScope.isShowAlerityMessage = false; });
                       showMessagePosition();
@@ -406,9 +406,8 @@
 
                   function showMessagePosition() {
                       var alertBoxElement = angular.element(".ajs-message.ajs-warning.ajs-visible");
-                      var searchBoxElement = angular.element("#search-box")[0];
                       var headerElement = angular.element("#header")[0];
-                      alertBoxElement.css({ "top": searchBoxElement.offsetHeight + headerElement.offsetHeight - 9 });
+                      alertBoxElement.css({ "top": headerElement.offsetHeight - 9 });
                   }
 
                   function displayBlankMap() {

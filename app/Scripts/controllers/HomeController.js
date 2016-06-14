@@ -20,7 +20,7 @@
         alertify.dismissAll();
         $scope.Name = "Home Page";
         $scope.$emit('bodyClass', 'homepage'); // also used to stop image slider
-        $scope.DestinationImagePath = TrippismConstants.DestinationImagePath;
+        $scope.DestinationImagePath = TrippismConstants.DestinationMediumImagePath;
         LocalStorageFactory.clear(TrippismConstants.refineSearchLocalStorage);
 
         // set page height based on window's height

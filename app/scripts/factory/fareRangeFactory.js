@@ -1,9 +1,9 @@
 ﻿(function () {
     'use strict';
     var serviceId = 'FareRangeFactory';
-    angular.module('TrippismUIApp').factory(serviceId, ['$http', '$rootScope', '$filter', '$q', FareRangeFactory]);
+    angular.module('TrippismUIApp').factory(serviceId, ['$http', 'urlConstant', '$filter', '$q', FareRangeFactory]);
 
-    function FareRangeFactory($http, $rootScope, $filter, $q) {
+    function FareRangeFactory($http, urlConstant, $filter, $q) {
         // Define the functions and properties to reveal.
         var FareRangeData = [];
         var service = {
@@ -24,7 +24,7 @@
                     data: null
                 }
                 var dataURL = 'FareRange?' + serialize(data);
-                var url = $rootScope.apiURL + dataURL;
+                var url = urlConstant.apiURL + dataURL;
                 return $http.get(url)
                     .then(function (data) {
                         result.data = angular.copy(data.data);

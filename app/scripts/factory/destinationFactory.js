@@ -1,9 +1,9 @@
 ﻿(function () {
     'use strict';
     var serviceId = 'DestinationFactory';
-    angular.module('TrippismUIApp').factory(serviceId, ['$http', '$rootScope', '$filter', '$q', DestinationFactory]);
+    angular.module('TrippismUIApp').factory(serviceId, ['$http', 'urlConstant', '$filter', '$q', DestinationFactory]);
 
-    function DestinationFactory($http, $rootScope, $filter, $q) {
+    function DestinationFactory($http, urlConstant, $filter, $q) {
         var DestinationsData = [];
         var DestinationData = [];
         var DestinationHotelData = [];
@@ -46,7 +46,7 @@
                     data: null
                 }
                 var dataURL = 'Destinations?' + serialize(paramdata);
-                var RequestedURL = $rootScope.apiURL + dataURL;
+                var RequestedURL = urlConstant.apiURL + dataURL;
                 return $http.get(RequestedURL)
                 .then(function (data) {
                     result.data = data.data;
@@ -68,7 +68,7 @@
 
         function findInstFlightDestination(paramdata) {
             var dataURL = '?' + serialize(paramdata);
-            var RequestedURL = $rootScope.apiURLForInstaFlightSearch + '/GetDestination' + dataURL;
+            var RequestedURL = urlConstant.apiURLForInstaFlightSearch + '/GetDestination' + dataURL;
             return $http.get(RequestedURL)
            .then(function (data) {
                return data.data;

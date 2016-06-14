@@ -1,9 +1,9 @@
 ﻿(function () {
     'use strict';
     var serviceId = 'WeatherFactory';
-    angular.module('TrippismUIApp').factory(serviceId, ['$http', '$rootScope','$filter', WeatherFactory]);
+    angular.module('TrippismUIApp').factory(serviceId, ['$http', 'urlConstant', '$filter', WeatherFactory]);
 
-    function WeatherFactory($http, $rootScope,$filter) {
+    function WeatherFactory($http, urlConstant, $filter) {
         var storedata = [];
         var service = {
             GetData: GetData,
@@ -14,7 +14,7 @@
 
         function GetData(paramdata) {
             var dataURL = '?' + serialize(paramdata);
-            var url = (paramdata.CountryCode == 'US' ? $rootScope.apiURLForUSWeather : $rootScope.apiURLForWeather) + dataURL;
+            var url = (paramdata.CountryCode == 'US' ? urlConstant.apiURLForUSWeather : urlConstant.apiURLForWeather) + dataURL;
             return $http.get(url)
                 .then(function (data) {
                     //If response with okay status but data not found then no required to save that data

@@ -1,6 +1,6 @@
 ﻿(function () {
-    angular.module('TrippismUIApp').directive('destinationCardDirective', [DestinationMaterialCardsDirective]);
-    function DestinationMaterialCardsDirective() {
+    angular.module('TrippismUIApp').directive('destinationCardDirective', ['urlConstant', DestinationMaterialCardsDirective]);
+    function DestinationMaterialCardsDirective(urlConstant) {
         return {
             restrict: 'E',
             scope: {
@@ -10,8 +10,8 @@
                 returnDate: '=',
                 imageUrl: '@'
             },
-            templateUrl: '/Views/partials/DestinationCard.html',
-            controller: ['$scope', '$parse', '$filter', 'UtilFactory', 'InstaFlightSearchFactory', 'DestinationFactory', 'TrippismConstants', function ($scope, $parse, $filter, UtilFactory, InstaFlightSearchFactory, DestinationFactory, TrippismConstants) {
+            templateUrl: urlConstant.partialViewsPath + 'destinationCard.html',
+            controller: ['$scope', '$parse', '$filter', 'UtilFactory', 'InstaFlightSearchFactory', 'DestinationFactory', 'urlConstant', function ($scope, $parse, $filter, UtilFactory, InstaFlightSearchFactory, DestinationFactory, urlConstant) {
                 UtilFactory.GetCurrencySymbols();
                 init();
                 function init() {
@@ -21,7 +21,7 @@
                     UtilFactory.ReadHighRankedAirportsJson().then(function (airports) {
                         var originAirport = _.findWhere(airports, { airport_Code: $scope.origin });
                         var destinationAirport = _.findWhere(airports, { airport_Code: $scope.destination });
-                        $scope.DestinationImagePath = TrippismConstants.DestinationMediumImagePath;
+                        $scope.destinationImagePath = urlConstant.destinationMediumImagePath;
                         if (!originAirport && !destinationAirport) return;
                         var request = {
                             origin: $scope.origin,

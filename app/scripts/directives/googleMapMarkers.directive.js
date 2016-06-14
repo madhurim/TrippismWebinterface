@@ -1,16 +1,16 @@
 (function () {
     'use strict';
     angular.module('TrippismUIApp')
-      .directive('googleMap', ['$timeout', '$rootScope', '$window', 'UtilFactory',
-          function ($timeout, $rootScope, $window, UtilFactory) {
+      .directive('googleMap', ['$timeout', '$rootScope', '$window', 'UtilFactory', 'urlConstant',
+          function ($timeout, $rootScope, $window, UtilFactory, urlConstant) {
               var directive = {};
-              directive.templateUrl = '/Views/GoogleMap.html',
+              directive.templateUrl = urlConstant.viewsPath + 'GoogleMap.html',
               directive.scope = {
                   airportlist: "=airportlist"
               }
 
-              directive.controller = ['$scope', '$q', '$compile', '$location', 'TrippismConstants', '$stateParams',
-                  function ($scope, $q, $compile, $location, TrippismConstants, $stateParams) {
+              directive.controller = ['$scope', '$q', '$compile', '$location', 'dataConstant', '$stateParams',
+                  function ($scope, $q, $compile, $location, dataConstant, $stateParams) {
                       $scope.highRankedAirportlist = [];
                       $scope.destinationMap = undefined;
                       $scope.destinationMarkers = [];
@@ -45,7 +45,7 @@
                               style: google.maps.ZoomControlStyle.LARGE
                           },
                           backgroundColor: "#BCCFDE",
-                          styles: TrippismConstants.destinationSearchMapSyle,
+                          styles: dataConstant.destinationSearchMapSyle,
                           mapTypeId: google.maps.MapTypeId.ROADMAP,
                       };
 

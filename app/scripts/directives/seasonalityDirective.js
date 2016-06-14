@@ -3,14 +3,15 @@
                                                     '$timeout',
                                                     '$filter',
                                                     'SeasonalityFactory',
-                                                    'TrippismConstants',
-    function ($compile, $timeout, $filter, SeasonalityFactory, TrippismConstants) {
+                                                    'dataConstant',
+                                                    'urlConstant',
+    function ($compile, $timeout, $filter, SeasonalityFactory, dataConstant, urlConstant) {
         return {
             restrict: 'E',
             scope: {
                 seasonalityParams: '=',
             },
-            templateUrl: '/Views/Partials/SeasonalityPartial.html',
+            templateUrl: urlConstant.partialViewsPath + 'seasonalityPartial.html',
             controller: ['$scope', function (scope) {
                 scope.loadSeasonalityInfo = function () {
                     scope.loadSeasonalityInfoLoaded = false;
@@ -242,7 +243,7 @@
                             },
                             tooltip: {
                                 headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-                                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>' + TrippismConstants.HighChartTwoDecimalCurrencyFormat + '$</b><br/>',
+                                pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>' + dataConstant.highChartTwoDecimalCurrencyFormat + '$</b><br/>',
                                 formatter: function () {
                                     var yresult = '';
 
@@ -258,7 +259,7 @@
                                     else
                                         yresult = '<span> </span>';
 
-                                    return '<span style="color:#87ceeb">Year Week: </span> <b> [#' + this.point.YearWeekNumber + ' of ' + Highcharts.dateFormat('%Y', new Date(this.point.startdate)) + '], [ ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.x)) + ' / ' + Highcharts.dateFormat(TrippismConstants.HighChartDateFormat, new Date(this.point.enddate)) + ' ] </b><br>' +
+                                    return '<span style="color:#87ceeb">Year Week: </span> <b> [#' + this.point.YearWeekNumber + ' of ' + Highcharts.dateFormat('%Y', new Date(this.point.startdate)) + '], [ ' + Highcharts.dateFormat('%m-%e-%Y', new Date(this.x)) + ' / ' + Highcharts.dateFormat(dataConstant.highChartDateFormat, new Date(this.point.enddate)) + ' ] </b><br>' +
                                         '<span style="color:#87ceeb">Traffic Category: </span> <b> ' + yresult + '</b>';
 
                                 }

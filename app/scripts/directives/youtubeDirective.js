@@ -1,12 +1,12 @@
 ﻿
-angular.module('TrippismUIApp').directive('youtubeInfo', ['YouTubeFactory',
-    function (YouTubeFactory) {
+angular.module('TrippismUIApp').directive('youtubeInfo', ['YouTubeFactory', 'urlConstant',
+    function (YouTubeFactory, urlConstant) {
         return {
             restrict: 'E',
             scope: {
                 youtubeParams: '=',
             },
-            templateUrl: '/Views/Partials/YoutubePartial.html',
+            templateUrl: urlConstant.partialViewsPath + 'youtubePartial.html',
             controller: ['$scope', function (scope) {
                 scope.curPage = 0;
                 scope.pageSize = 10;

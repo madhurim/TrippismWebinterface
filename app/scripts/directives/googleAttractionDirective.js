@@ -3,14 +3,15 @@
                                                 'GoogleAttractionFactory',
                                                 '$timeout',
                                                 '$filter',
-                                                'TrippismConstants',
+                                                'dataConstant',
                                                 'DestinationFactory',
                                                 '$modal',
-function ($rootScope, GoogleAttractionFactory, $timeout, $filter, TrippismConstants, DestinationFactory, $modal) {
+                                                'urlConstant',
+function ($rootScope, GoogleAttractionFactory, $timeout, $filter, dataConstant, DestinationFactory, $modal, urlConstant) {
     return {
         restrict: 'E',
         scope: { googleattractionParams: '=', isOpen: '=' },
-        templateUrl: '/Views/Partials/GoogleAttractionPartial.html',
+        templateUrl: urlConstant.partialViewsPath + 'googleAttractionPartial.html',
         controller: function ($scope) {
             $scope.$watch('googleattractionParams', function (newValue, oldValue) {
                 if (newValue != undefined && newValue.DestinationAirport != undefined) {
@@ -53,7 +54,7 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, TrippismConsta
                 $scope.googleattractionsMap.fitBounds($scope.bounds);
             }
 
-            var mapStyle = TrippismConstants.attractionTabMapStyle;
+            var mapStyle = dataConstant.attractionTabMapStyle;
             // setting map option, used into view
             $scope.attractionmapOptions = {
                 center: new google.maps.LatLng(0, 0),

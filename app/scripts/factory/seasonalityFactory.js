@@ -1,9 +1,9 @@
 ﻿(function () {
     'use strict';
     var serviceId = 'SeasonalityFactory';
-    angular.module('TrippismUIApp').factory(serviceId, ['$http', '$rootScope', '$filter', '$q', SeasonalityFactory]);
+    angular.module('TrippismUIApp').factory(serviceId, ['$http', 'urlConstant', '$filter', '$q', SeasonalityFactory]);
 
-    function SeasonalityFactory($http, $rootScope, $filter, $q) {
+    function SeasonalityFactory($http, urlConstant, $filter, $q) {
         // Define the functions and properties to reveal.
         var SeasonalityData = [];
         var service = {
@@ -25,7 +25,7 @@
                     data: null
                 }
                 var dataURL = 'Seasonality?' + serialize(data);
-                var url = $rootScope.apiURL + dataURL;
+                var url = urlConstant.apiURL + dataURL;
                 return $http.get(url)
                     .then(function (data) {
                         result.data = angular.copy(data.data);

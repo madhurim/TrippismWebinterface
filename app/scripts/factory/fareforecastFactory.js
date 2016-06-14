@@ -1,9 +1,9 @@
 ﻿(function () {
     'use strict';
     var serviceId = 'FareforecastFactory';
-    angular.module('TrippismUIApp').factory(serviceId, ['$http', '$rootScope', '$filter', '$q', FareforecastFactory]);
+    angular.module('TrippismUIApp').factory(serviceId, ['$http', 'urlConstant', '$filter', '$q', FareforecastFactory]);
 
-    function FareforecastFactory($http, $rootScope,$filter, $q) {
+    function FareforecastFactory($http, urlConstant, $filter, $q) {
         var FareForecastData = [];
         // Define the functions and properties to reveal.
         var service = {
@@ -21,7 +21,7 @@
             }
             else {
                 var dataURL = 'FareForecast?' + serialize(data);
-                var url = $rootScope.apiURL + dataURL;
+                var url = urlConstant.apiURL + dataURL;
                 return $http.get(url)
                  .then(function (data) {
                      var result = {

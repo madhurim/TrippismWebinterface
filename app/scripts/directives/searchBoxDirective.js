@@ -4,14 +4,15 @@
             '$filter',
             '$stateParams',
             'UtilFactory',
-            'TrippismConstants',
-function ($location, $timeout, $filter, $stateParams, UtilFactory, TrippismConstants) {
+            'dataConstant',
+            'urlConstant',
+function ($location, $timeout, $filter, $stateParams, UtilFactory, dataConstant, urlConstant) {
     return {
         restrict: 'E',
         scope: {
             isPopup: '=?isPopup'
         },
-        templateUrl: '/Views/Partials/SearchBox.html',
+        templateUrl: urlConstant.partialViewsPath + 'searchBox.html',
         controller: function ($scope) {
             $scope.selectedform = 'SuggestDestination';
             $scope.SearchbuttonText = "Suggest Destinations";
@@ -392,7 +393,7 @@ function ($location, $timeout, $filter, $stateParams, UtilFactory, TrippismConst
 
                 //SET MINIMUN SELECTED DATE for TODATE
                 minFromDate = new Date(newValue);
-                $scope.MaximumToDate = addDays(minFromDate, TrippismConstants.MaxLOS);
+                $scope.MaximumToDate = addDays(minFromDate, dataConstant.maxLOS);
                 minFromDate = minFromDate.setDate(minFromDate.getDate() + 1);
 
                 var maxToDate = new Date($scope.MaximumToDate);

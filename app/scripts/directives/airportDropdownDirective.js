@@ -1,9 +1,9 @@
 ﻿(function () {
     'use strict';
-    angular.module('TrippismUIApp').directive('airportDropdown', ['$filter', function ($filter) {
+    angular.module('TrippismUIApp').directive('airportDropdown', ['$filter', 'urlConstant', function ($filter, urlConstant) {
         return {
             restrict: 'C',
-            templateUrl: '/Views/Partials/AirportDropdownPartial.html',
+            templateUrl: urlConstant.partialViewsPath + 'airportDropdownPartial.html',
             controller: function ($scope) {
                 var orderby = ['rank', 'airport_Code'];
                 $scope.airportsAutocomplete = function (keyedinValue) {

@@ -1,9 +1,9 @@
 ﻿(function () {
     'use strict';
     var serviceId = 'UtilFactory';
-    angular.module('TrippismUIApp').factory(serviceId, ['$http', '$location', '$anchorScroll', '$rootScope', '$q', 'TrippismConstants', '$sce', UtilFactory]);
+    angular.module('TrippismUIApp').factory(serviceId, ['$http', '$location', '$anchorScroll', 'urlConstant', '$q', 'dataConstant', '$sce', UtilFactory]);
 
-    function UtilFactory($http, $location, $anchorScroll, $rootScope, $q, TrippismConstants, $sce) {
+    function UtilFactory($http, $location, $anchorScroll, urlConstant, $q, dataConstant, $sce) {
         var LastSearch;
         var highRankedAirportsPromise;
         var CurrencySymbolsPromise;
@@ -35,7 +35,7 @@
                 });
             }
             else
-                return airportJsonPromise = getAirportJson($rootScope.apiURLForConstant + 'GetAirports').then(function (data) {
+                return airportJsonPromise = getAirportJson(urlConstant.apiURLForConstant + 'GetAirports').then(function (data) {
                     return data;
                 });
         }
@@ -47,7 +47,7 @@
                 });
             }
             else {
-                return highRankedAirportsPromise = getAirportJson($rootScope.apiURLForConstant + 'GetHighRankedAirports').then(function (data) {
+                return highRankedAirportsPromise = getAirportJson(urlConstant.apiURLForConstant + 'GetHighRankedAirports').then(function (data) {
                     return data;
                 });
             }
@@ -104,7 +104,7 @@
 
         function AirportCodeLog(AirportCode) {
             var dataURL = 'MissingAirportLog?Airportcode=' + AirportCode;
-            var url = $rootScope.apiURLForConstant + dataURL;
+            var url = urlConstant.apiURLForConstant + dataURL;
             $http.jsonp(url);
         }
 
@@ -119,7 +119,7 @@
         function GetCurrencySymbols() {
             if (CurrencySymbolsPromise)
                 return;
-            CurrencySymbolsPromise = $http.get($rootScope.apiURLForConstant + 'GetCurrencySymbols').then(function (data) {
+            CurrencySymbolsPromise = $http.get(urlConstant.apiURLForConstant + 'GetCurrencySymbols').then(function (data) {
                 if (data.status == 200)
                     service.currencySymbol.currencySymbolsList = data.data.Currency;
             });
@@ -189,7 +189,7 @@
             }
             else if (toDate <= fromDate)
                 obj.ToDate = SetToDate(fromDate);
-            else if (toDate > addDays(fromDate, TrippismConstants.MaxLOS)) {
+            else if (toDate > addDays(fromDate, dataConstant.maxLOS)) {
                 obj.ToDate = SetToDate(fromDate);
             }
 
@@ -207,7 +207,7 @@
                 });
             }
             else
-                return airportsCurrencyPromise = getAirportCurrencyJson($rootScope.apiURLForConstant + '/GetAirportsCurrency').then(function (data) {
+                return airportsCurrencyPromise = getAirportCurrencyJson(urlConstant.apiURLForConstant + '/GetAirportsCurrency').then(function (data) {
                     airportsCurrency = data;
                     return data;
                 });

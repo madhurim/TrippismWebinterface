@@ -1,11 +1,11 @@
-﻿angular.module('TrippismUIApp').directive('destinationFareForecast', ['$rootScope', '$compile', '$modal', 'DestinationFactory', 'UtilFactory', '$stateParams', '$state', '$timeout', 'InstaFlightSearchFactory',
-    function ($rootScope, $compile, $modal, DestinationFactory, UtilFactory, $stateParams, $state, $timeout, InstaFlightSearchFactory) {
+﻿angular.module('TrippismUIApp').directive('destinationFareForecast', ['$rootScope', '$compile', '$modal', 'DestinationFactory', 'UtilFactory', '$stateParams', '$state', '$timeout', 'InstaFlightSearchFactory', 'urlConstant',
+    function ($rootScope, $compile, $modal, DestinationFactory, UtilFactory, $stateParams, $state, $timeout, InstaFlightSearchFactory, urlConstant) {
         return {
             restrict: 'E',
             scope: {
                 fareParams: '='
             },
-            templateUrl: '/Views/Partials/DestinationFareForecastPartial.html',
+            templateUrl: urlConstant.partialViewsPath + 'destinationFareForecastPartial.html',
             controller: function ($scope) {
                 $scope.GetCurrencySymbol = function (code) {
                     return UtilFactory.GetCurrencySymbol(code);
@@ -29,7 +29,7 @@
                 function SendEmailToUser() {
                     if (!$scope.fareParams) return;
                     var GetEmailDetPopupInstance = $modal.open({
-                        templateUrl: '/Views/Partials/EmailDetFormPartial.html',
+                        templateUrl: urlConstant.partialViewsPath + 'emailDetFormPartial.html',
                         controller: 'EmailForDestinationDet',
                         scope: $scope,
                         resolve: {

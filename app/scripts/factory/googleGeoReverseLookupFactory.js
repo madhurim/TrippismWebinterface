@@ -1,9 +1,9 @@
 ﻿(function () {
     'use strict';
     var serviceId = 'GoogleGeoReverseLookupFactory';
-    angular.module('TrippismUIApp').factory(serviceId, ['$http', '$rootScope', GoogleGeoReverseLookupFactory]);
+    angular.module('TrippismUIApp').factory(serviceId, ['$http', 'urlConstant', GoogleGeoReverseLookupFactory]);
 
-    function GoogleGeoReverseLookupFactory($http, $rootScope) {
+    function GoogleGeoReverseLookupFactory($http, urlConstant) {
         var service = {
             googleGeoReverseLookup: googleGeoReverseLookup,
         };
@@ -11,7 +11,7 @@
 
         function googleGeoReverseLookup(data) {
             var dataURL = '?' + serialize(data);
-            var url = $rootScope.apiURLForGoogleGeoReverseLookup + dataURL;
+            var url = urlConstant.apiURLForGoogleGeoReverseLookup + dataURL;
             return $http.get(url)
                 .then(function (data) {
                     return data.data;

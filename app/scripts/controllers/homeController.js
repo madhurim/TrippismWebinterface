@@ -5,23 +5,25 @@
          ['$scope',
             '$window',
             'LocalStorageFactory',
-            'TrippismConstants',
+            'dataConstant',
             '$interval',
             'UtilFactory',
+            'urlConstant',
              HomeController]);
     function HomeController(
        $scope,
        $window,
        LocalStorageFactory,
-       TrippismConstants,
+       dataConstant,
        $interval,
-       UtilFactory
+       UtilFactory,
+       urlConstant
        ) {
         alertify.dismissAll();
         $scope.Name = "Home Page";
         $scope.$emit('bodyClass', 'homepage'); // also used to stop image slider
-        $scope.DestinationImagePath = TrippismConstants.DestinationMediumImagePath;
-        LocalStorageFactory.clear(TrippismConstants.refineSearchLocalStorage);
+        $scope.destinationImagePath = urlConstant.destinationMediumImagePath;
+        LocalStorageFactory.clear(dataConstant.refineSearchLocalStorage);
 
         // set page height based on window's height
         var w = angular.element($window);

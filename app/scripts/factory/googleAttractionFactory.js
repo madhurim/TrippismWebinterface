@@ -1,9 +1,9 @@
 ﻿(function () {
     'use strict';
     var serviceId = 'GoogleAttractionFactory';
-    angular.module('TrippismUIApp').factory(serviceId, ['$http', '$rootScope', GoogleAttractionFactory]);
+    angular.module('TrippismUIApp').factory(serviceId, ['$http', 'urlConstant', GoogleAttractionFactory]);
 
-    function GoogleAttractionFactory($http, $rootScope) {
+    function GoogleAttractionFactory($http, urlConstant) {
         // Define the functions and properties to reveal.
         var service = {
             googleAttraction: googleAttraction,
@@ -13,7 +13,7 @@
 
         function googleAttraction(data) {
             var dataURL = 'locationsearch?' + serialize(data);
-            var url = $rootScope.apiURLForGoogleAttraction + dataURL;
+            var url = urlConstant.apiURLForGoogleAttraction + dataURL;
             return $http.get(url)
                 .then(function (data) {
                     return data.data;

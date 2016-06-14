@@ -1,16 +1,16 @@
 ﻿(function () {
     'use strict';
-    angular.module('TrippismUIApp').directive('destinationsCard', destinationsCard);
-    function destinationsCard() {
+    angular.module('TrippismUIApp').directive('destinationsCard', ['urlConstant', destinationsCard]);
+    function destinationsCard(urlConstant) {
         return {
             restrict: 'E',
             scope: {
                 Origin: '=origin',
                 Destination: '=destination'
             },
-            templateUrl: '../views/partials/DestinationsCard.html',
-            controller: ['$scope', 'UtilFactory', 'TrippismConstants', function ($scope, UtilFactory, TrippismConstants) {
-                $scope.DestinationImagePath = TrippismConstants.DestinationSmallImagePath;
+            templateUrl: urlConstant.partialViewsPath + 'destinationsCard.html',
+            controller: ['$scope', 'UtilFactory', 'urlConstant', function ($scope, UtilFactory, urlConstant) {
+                $scope.destinationImagePath = urlConstant.destinationSmallImagePath;
                 $scope.GetLowFare = GetLowFare;
                 $scope.GetCurrencySymbol = GetCurrencySymbol;
 

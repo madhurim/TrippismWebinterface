@@ -1,11 +1,11 @@
-﻿angular.module('TrippismUIApp').directive('weatherInfo', ['$filter', 'WeatherFactory',
-    function ($filter, WeatherFactory) {
+﻿angular.module('TrippismUIApp').directive('weatherInfo', ['$filter', 'WeatherFactory', 'urlConstant',
+    function ($filter, WeatherFactory, urlConstant) {
         return {
             restrict: 'E',
             scope: {
                 weatherParams: '=',
             },
-            templateUrl: '/Views/Partials/WeatherPartial.html',
+            templateUrl: urlConstant.partialViewsPath + 'weatherPartial.html',
             controller: ['$scope', function ($scope) {
                 $scope.initWeatherSummary = function () {
                     $scope.WeatherDataFound = false;

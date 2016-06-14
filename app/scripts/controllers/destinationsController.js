@@ -9,7 +9,7 @@
             '$stateParams',
             'DestinationFactory',
             'UtilFactory',
-            'TrippismConstants',
+            'dataConstant',
             'LocalStorageFactory',
             '$location',
              DestinationsController]);
@@ -21,7 +21,7 @@
         $stateParams,
         DestinationFactory,
         UtilFactory,
-        TrippismConstants,
+        dataConstant,
         LocalStorageFactory,
         $location
         ) {
@@ -60,7 +60,7 @@
                 };
 
 
-                var data = LocalStorageFactory.get(TrippismConstants.refineSearchLocalStorage, data);
+                var data = LocalStorageFactory.get(dataConstant.refineSearchLocalStorage, data);
                 if (data) {
                     $scope.previousTheme = $scope.Theme = data.th;
                     $scope.previousRegion = $scope.Region = data.a;
@@ -202,7 +202,7 @@
                         lf: $scope.Minfare,
                         hf: $scope.Maxfare
                     };
-                    LocalStorageFactory.save(TrippismConstants.refineSearchLocalStorage, data, {
+                    LocalStorageFactory.save(dataConstant.refineSearchLocalStorage, data, {
                         f: $scope.Origin,
                         d: $scope.FromDate,
                         r: $scope.ToDate

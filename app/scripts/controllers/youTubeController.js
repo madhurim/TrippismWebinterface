@@ -2,9 +2,9 @@
     'use strict';
     var controllerId = 'YouTubeController';
     angular.module('TrippismUIApp').controller(controllerId,
-        ['$scope', '$modal', '$sce', 'TrippismConstants', YouTubeController]);
+        ['$scope', '$modal', '$sce', 'dataConstant', YouTubeController]);
 
-    function YouTubeController($scope, $modal, $sce, TrippismConstants) {
+    function YouTubeController($scope, $modal, $sce, dataConstant) {
 
         $scope.open = function (videoID) {
 

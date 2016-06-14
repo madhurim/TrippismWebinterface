@@ -8,7 +8,7 @@
             'UtilFactory',
             'InstaFlightSearchFactory',
             '$window',
-            'TrippismConstants',
+            'urlConstant',
              DestinationController]);
     function DestinationController(
         $scope,
@@ -17,7 +17,7 @@
         UtilFactory,
         InstaFlightSearchFactory,
         $window,
-        TrippismConstants) {
+        urlConstant) {
 
         $scope.$emit('bodyClass', 'otherpage destination-page');
         var w = angular.element($window);
@@ -35,7 +35,7 @@
         }
 
         $scope.Origin = $scope.DestinationLocation = undefined;
-        $scope.DestinationImagePath = TrippismConstants.DestinationImagePath;
+        $scope.destinationImagePath = urlConstant.destinationImagePath;
         init();
 
         function init() {

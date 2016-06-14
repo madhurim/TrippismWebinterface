@@ -1,6 +1,6 @@
 ﻿(function () {
-    angular.module('TrippismUIApp').directive('videoPopupDirective', ['$modal', VideoPopupDirective]);
-    function VideoPopupDirective($modal) {
+    angular.module('TrippismUIApp').directive('videoPopupDirective', ['$modal', 'urlConstant', VideoPopupDirective]);
+    function VideoPopupDirective($modal, urlConstant) {
         return {
             restrict: 'A',
             link: function (scope, element, attrs) {
@@ -9,7 +9,7 @@
                 });
                 scope.videoModel = function () {
                     scope.videoModelInstance = $modal.open({
-                        templateUrl: '/Views/Partials/VideoPopupPartial.html',
+                        templateUrl: urlConstant.partialViewsPath + 'videoPopupPartial.html',
                         scope: scope,
                     });
                 }

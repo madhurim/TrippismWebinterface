@@ -1,12 +1,12 @@
 ﻿angular.module('TrippismUIApp').directive('farerangewidgetInfo',
-                ['FareRangeFactory', '$filter', '$timeout', 'UtilFactory', 'FareforecastFactory',
-function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory) {
+                ['FareRangeFactory', '$filter', '$timeout', 'UtilFactory', 'FareforecastFactory', 'urlConstant',
+function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory, urlConstant) {
     return {
         restrict: 'E',
         scope: {
             widgetParams: '=',
         },
-        templateUrl: '/Views/Partials/FarerangePartial.html',
+        templateUrl: urlConstant.partialViewsPath + 'farerangePartial.html',
         controller: function ($scope) {
             $scope.GetCurrencySymbol = GetCurrencySymbol;
             $scope.initFarerangeSummary = function () {
@@ -15,7 +15,7 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory)
                 $scope.formats = Dateformat();
                 $scope.format = $scope.formats[5];
 
-                $scope.FareRangeWidgetDataFound = false;                
+                $scope.FareRangeWidgetDataFound = false;
                 $scope.DepartDate = new Date($scope.widgetParams.Fareforecastdata.DepartureDate);
                 $scope.ReturnDate = new Date($scope.widgetParams.Fareforecastdata.ReturnDate);
 

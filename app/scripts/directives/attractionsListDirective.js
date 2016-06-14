@@ -1,5 +1,5 @@
 ﻿
-angular.module('TrippismUIApp').directive('attractionList', ['$sce', '$rootScope', '$timeout', 'GoogleAttractionFactory', 'UtilFactory', function ($sce, $rootScope, $timeout, GoogleAttractionFactory, UtilFactory) {
+angular.module('TrippismUIApp').directive('attractionList', ['$sce', '$rootScope', '$timeout', 'GoogleAttractionFactory', 'UtilFactory', 'urlConstant', function ($sce, $rootScope, $timeout, GoogleAttractionFactory, UtilFactory, urlConstant) {
     return {
         restrict: 'E',
         scope: {
@@ -9,7 +9,7 @@ angular.module('TrippismUIApp').directive('attractionList', ['$sce', '$rootScope
             loadMoreAttractionInfo: "&",
             loadAttractionInfo: "&"
         },
-        templateUrl: '/Views/Partials/AttractionsListPartial.html',
+        templateUrl: urlConstant.partialViewsPath + 'attractionsListPartial.html',
         link: function (scope, elem, attrs) {
             scope.attractionsData = [];
             var attractionsData = _.sortBy(GoogleAttractionFactory.getAttractionList(), 'rank');

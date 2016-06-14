@@ -1,9 +1,9 @@
 (function () {
     'use strict';
     var serviceId = 'HotelRangeFactory';
-    angular.module('TrippismUIApp').factory(serviceId, ['$http', '$rootScope', HotelRangeFactory]);
+    angular.module('TrippismUIApp').factory(serviceId, ['$http', 'urlConstant', HotelRangeFactory]);
 
-    function HotelRangeFactory($http, $rootScope) {
+    function HotelRangeFactory($http, urlConstant) {
         var service = {
             GetHotelRange: GetHotelRange,
             GetAllHotelRange: GetAllHotelRange
@@ -12,7 +12,7 @@
 
         function GetHotelRange(data) {
             var dataURL = serialize(data);
-            var RequestedURL = $rootScope.apiURLForHotelRange + '?' + dataURL;
+            var RequestedURL = urlConstant.apiURLForHotelRange + '?' + dataURL;
             return $http.get(RequestedURL)
             .then(function (data) {
                 return data;
@@ -23,7 +23,7 @@
 
         function GetAllHotelRange(data) {
             var dataURL = serialize(data);
-            var RequestedURL = $rootScope.apiURLForHotelRange + '/all' + '?' + dataURL;
+            var RequestedURL = urlConstant.apiURLForHotelRange + '/all' + '?' + dataURL;
             return $http.get(RequestedURL)
             .then(function (data) {
                 return data;

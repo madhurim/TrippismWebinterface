@@ -1,9 +1,9 @@
 ﻿(function () {
     'use strict';
     var serviceId = 'YouTubeFactory';
-    angular.module('TrippismUIApp').factory(serviceId, ['$http', '$rootScope', YouTubeFactory]);
+    angular.module('TrippismUIApp').factory(serviceId, ['$http', 'urlConstant', YouTubeFactory]);
 
-    function YouTubeFactory($http, $rootScope) {
+    function YouTubeFactory($http, urlConstant) {
         // Define the functions and properties to reveal.
         var service = {
             youTube: youTube,
@@ -12,7 +12,7 @@
        
         function youTube(data) {
             var dataURL = 'locationsearch?' + serialize(data);
-            var url = $rootScope.apiURLForYouTube + dataURL;
+            var url = urlConstant.apiURLForYouTube + dataURL;
             return $http.get(url)
                 .then(function (data) {
                     return data.data;

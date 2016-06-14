@@ -26,7 +26,6 @@
         $location
         ) {
         $scope.$emit('bodyClass', 'mappage');   // for changing <body> class        
-        $scope.DestinationImagePath = TrippismConstants.DestinationImagePath;
         function activate() {
             if ($stateParams.path != undefined) {
 

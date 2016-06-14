@@ -123,9 +123,9 @@
                                       })(marker));
                                   }
                               }
-                              google.maps.event.addListenerOnce($scope.destinationMap, 'tilesloaded', function () {
-                                  redrawMarkers();
-                              });
+                              //google.maps.event.addListenerOnce($scope.destinationMap, 'tilesloaded', function () {
+                              redrawMarkers();
+                              //});
                               google.maps.event.clearListeners($scope.destinationMap, 'zoom_changed');
                               google.maps.event.addListener($scope.destinationMap, "zoom_changed", function () {
                                   redrawMarkers();
@@ -241,64 +241,53 @@
                           return d.promise;
                       }
 
+                      var maxZindex = google.maps.Marker.MAX_ZINDEX;
                       // used to highlight a perticular marker on the map
                       $scope.$on('gotoMap', function (event, data) {
                           var selectedMarker;
                           // get distance by zoom level                          
                           var dist = _.find(zoomLvlArr, function (i) { return i.zoom == $scope.destinationMap.zoom; }) || 0;
                           dist = dist.dis || dist;
-                          var bounds = $scope.destinationMap.getBounds();
-                          var markerList = [];
-                          for (var i = 0; i < $scope.destinationMarkers.length; i++) {
-                              if ($scope.destinationMarkers[i].markerInfo.DestinationLocation == data.DestinationLocation) {
-                                  selectedMarker = $scope.destinationMarkers[i];
-
-                                  if (!selectedMarker.lastIcon) {
-                                      selectedMarker.lastIcon = selectedMarker.icon;
-                                      selectedMarker.lastLabelVisible = selectedMarker.labelVisible;
-                                  }
-
-                                  selectedMarker.setIcon(markerImageObj.bigOverSelect);
-                                  selectedMarker.labelVisible = true;
-                                  selectedMarker.label.draw();
-                                  selectedMarker.setOptions({ zIndex: google.maps.Marker.MAX_ZINDEX + 1 });
-                              }
-                              else if ($scope.destinationMarkers[i].lastIcon) {
-                                  $scope.destinationMarkers[i].setIcon($scope.destinationMarkers[i].lastIcon);
-                                  $scope.destinationMarkers[i].labelVisible = $scope.destinationMarkers[i].lastLabelVisible;
-                                  $scope.destinationMarkers[i].label.draw();
-                                  $scope.destinationMarkers[i].lastIcon = null;
-                                  $scope.destinationMarkers[i].lastLabelVisible = null;
-                              }
-                              else if (!$scope.destinationMarkers[i].isRemoved && bounds.contains($scope.destinationMarkers[i].getPosition())) {
-                                  markerList.push($scope.destinationMarkers[i]);
-                              }
-                          }
-
-                          for (var i = 0; i < markerList.length; i++) {
-                              var distance = UtilFactory.DistanceBetweenPoints(selectedMarker.position, markerList[i].position);
-                              if (distance < dist) {
-                                  markerList[i].setIcon(markerImageObj.small);
-                                  markerList[i].labelVisible = false;
-                                  markerList[i].label.draw();
-                                  addMarkerListerners(markerList[i]);
-                              }
-                          }
-
-                          //for (var i = 0; i < highRankedMarkers.length; i++) {
-                          //    if (!highRankedMarkers[i].isRemoved && bounds.contains(highRankedMarkers[i].getPosition()) && data.DestinationLocation != highRankedMarkers[i].markerInfo.DestinationLocation) {
-                          //        var distance = UtilFactory.DistanceBetweenPoints(selectedMarker.position, highRankedMarkers[i].position);
-                          //        if (distance < dist) {
-                          //            highRankedMarkers[i].setIcon(markerImageObj.small);
-                          //            highRankedMarkers[i].labelVisible = false;
-                          //            highRankedMarkers[i].label.draw();
-                          //            addMarkerListerners(highRankedMarkers[i]);
-                          //        }
-                          //    }
-                          //}
 
                           $timeout(function () {
                               $scope.destinationMap.panTo(new google.maps.LatLng(data.lat, data.lng));
+                              var bounds = $scope.destinationMap.getBounds();
+                              var markerList = [];
+                              for (var i = 0; i < $scope.destinationMarkers.length; i++) {
+                                  if ($scope.destinationMarkers[i].markerInfo.DestinationLocation == data.DestinationLocation) {
+                                      selectedMarker = $scope.destinationMarkers[i];
+
+                                      if (!selectedMarker.lastIcon) {
+                                          selectedMarker.lastIcon = selectedMarker.icon;
+                                          selectedMarker.lastLabelVisible = selectedMarker.labelVisible;
+                                      }
+
+                                      selectedMarker.setIcon(markerImageObj.bigOverSelect);
+                                      selectedMarker.labelVisible = true;
+                                      selectedMarker.label.draw();
+                                      selectedMarker.setOptions({ zIndex: maxZindex++ });
+                                  }
+                                  else if ($scope.destinationMarkers[i].lastIcon) {
+                                      $scope.destinationMarkers[i].setIcon($scope.destinationMarkers[i].lastIcon);
+                                      $scope.destinationMarkers[i].labelVisible = $scope.destinationMarkers[i].lastLabelVisible;
+                                      $scope.destinationMarkers[i].label.draw();
+                                      $scope.destinationMarkers[i].lastIcon = null;
+                                      $scope.destinationMarkers[i].lastLabelVisible = null;
+                                  }
+                                  else if (!$scope.destinationMarkers[i].isRemoved && bounds.contains($scope.destinationMarkers[i].getPosition())) {
+                                      markerList.push($scope.destinationMarkers[i]);
+                                  }
+                              }
+
+                              for (var i = 0; i < markerList.length; i++) {
+                                  var distance = UtilFactory.DistanceBetweenPoints(selectedMarker.position, markerList[i].position);
+                                  if (distance < dist) {
+                                      markerList[i].setIcon(markerImageObj.small);
+                                      markerList[i].labelVisible = false;
+                                      markerList[i].label.draw();
+                                      addMarkerListerners(markerList[i]);
+                                  }
+                              }
                           }, 0, false);
                       });
                   }];
@@ -401,7 +390,7 @@
                   }
 
                   function showMessage() {
-                      if (w.width() <= 767) return;
+                      if (w.width() <= 991) return;
                       alertify.dismissAll();
                       var message = "<div class='alert-box'><p>The bigger markers are our top ranked destinations based on popularity from the Origin airport.</p>"
                          + "<input type='button' class='btn btn-primary' value='Got It' />"

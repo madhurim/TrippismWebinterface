@@ -1593,8 +1593,8 @@ ul .stop-line {
     display: inline-block;
     text-align: center;
     color: #585858;
-    font-weight: 400;
     margin-right: 4px;
+    float: right;
 }
 
 /*#region Media queries */

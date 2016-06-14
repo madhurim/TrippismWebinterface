@@ -10,7 +10,7 @@
             },
             templateUrl: '../views/partials/DestinationsCard.html',
             controller: ['$scope', 'UtilFactory', 'TrippismConstants', function ($scope, UtilFactory, TrippismConstants) {
-                $scope.DestinationImagePath = TrippismConstants.DestinationImagePath;
+                $scope.DestinationImagePath = TrippismConstants.DestinationSmallImagePath;
                 $scope.GetLowFare = GetLowFare;
                 $scope.GetCurrencySymbol = GetCurrencySymbol;
 

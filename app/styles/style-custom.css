@@ -1594,7 +1594,7 @@ ul .stop-line {
     text-align: center;
     color: #585858;
     margin-right: 4px;
-    float: right;
+    margin-left: 10px;
 }
 
 /*#region Media queries */

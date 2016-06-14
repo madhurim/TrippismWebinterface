@@ -1,15 +1,18 @@
 ﻿<script type="text/ng-template" id="airportDropdownTemplate.html">
     <a tabindex="-1" class="airport_row">
-        <div>
+        <div class="pull-left">
             <i class="hidden-lg hidden-md glyphicon margin-right-3" ng-class="match.model.airport_IsMAC  ? 'glyphicon-send' :'glyphicon-plane'"></i>
             <span ng-show="match.model.searchby == 'C'" ng-bind-html="match.model.airport_Code | typeaheadHighlight:query"></span>
             <span ng-show="(match.model.searchby == 'CN' || match.model.searchby == 'ALL')" ng-bind-html="match.model.airport_Code | typeaheadHighlight"></span>,
             <span ng-show="match.model.searchby == 'CN'" ng-bind-html="match.model.airport_CityName | typeaheadHighlight:query"></span>
             <span ng-show="match.model.searchby != 'CN'" ng-bind-html="match.model.airport_CityName | typeaheadHighlight"></span>,
             <span ng-show="match.model.searchby == 'ALL'" ng-bind-html="match.model.airport_CountryName | typeaheadHighlight:query"></span>
-            <span ng-show="match.model.searchby != 'ALL'" ng-bind-html="match.model.airport_CountryName | typeaheadHighlight"></span>
+            <span ng-show="match.model.searchby != 'ALL'" ng-bind-html="match.model.airport_CountryName | typeaheadHighlight"></span>           
+        </div>
+        <div class="pull-right">
             <span class="hidden-sm hidden-xs dropdown-tag font-700" ng-if="match.model.airport_IsMAC">City</span>
             <span class="hidden-sm hidden-xs dropdown-tag" ng-if="!match.model.airport_IsMAC">Airport</span>
         </div>
+        <div class="clear"></div>
     </a>
 </script>

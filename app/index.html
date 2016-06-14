@@ -26,19 +26,17 @@
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
-    <link href="styles/bootstrap.css" rel="stylesheet">
-    <link href="styles/jquery.mCustomScrollbar.css" rel="stylesheet">
-    <link href="styles/Style.css" rel="stylesheet" />
+    <link href="styles/bootstrap.css" rel="stylesheet" />
+    <link href="styles/jquery.mCustomScrollbar.css" rel="stylesheet" />
+    <link href="styles/style.css" rel="stylesheet" />
     <link href="styles/alertify.min.css" rel="stylesheet" />
     <link href="styles/style-custom.css" rel="stylesheet" />
-    <link href="styles/TrippismNew.css" rel="stylesheet" />
-    <!--Use Awesome css for Attraction rating-->
+    <link href="styles/trippismNew.css" rel="stylesheet" />
     <link href="styles/font-awesome.css" rel="stylesheet" />
     <!-- endbuild -->
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,900italic,900,700italic,700,500italic,500,400italic,300italic,300,100italic,100' rel='stylesheet' type='text/css'>
 </head>
 <body ng-controller="BaseController" class="{{bodyClass}}">
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <script>
         !function (A, n, g, u, l, a, r) {
             A.GoogleAnalyticsObject = l, A[l] = A[l] || function () {
@@ -153,65 +151,60 @@
 
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
-    <script src="scripts/libs/alertify.js"></script>
-    <script src="scripts/libs/underscore.js"></script>
-    <script src="scripts/libs/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="scripts/libs/Utility.js"></script>
-    <script src="scripts/libs/angular-youtube-embed.js"></script>
-    <script src="scripts/libs/markerwithlabel.js"></script>
-    <script src="scripts/libs/markerclusterer.js"></script>
-    <script src="Scripts/libs/highcharts.js"></script>
-    <script src="Scripts/libs/ddselectclick.js"></script>
-
     <script src="scripts/constants.js"></script>
 
-    <script src="scripts/Factory/DestinationFactory.js"></script>
-    <script src="scripts/Factory/FareforecastFactory.js"></script>
-    <script src="scripts/Factory/UtilFactory.js"></script>
-    <script src="scripts/Factory/FareRangeFactory.js"></script>
-    <script src="scripts/Factory/SeasonalityFactory.js"></script>
-    <script src="scripts/Factory/WeatherFactory.js"></script>
-    <script src="scripts/Factory/GoogleAttractionFactory.js"></script>
-    <script src="scripts/Factory/YouTubeFactory.js"></script>
-    <script src="scripts/Factory/GoogleGeoReverseLookupFactory.js"></script>
-    <script src="scripts/Factory/EmailForDestinationDetFactory.js"></script>
-    <script src="scripts/Factory/InstaFlightSearchFactory.js"></script>
-    <script src="scripts/Factory/FeedbackFactory.js"></script>
-    <script src="scripts/Factory/LocalStorageFactory.js"></script>
-    <script src="scripts/Factory/HotelRangeFactory.js"></script>
+    <script src="scripts/libs/alertify.js"></script>
+    <script src="scripts/libs/ddselectclick.js"></script>
+    <script src="scripts/libs/highcharts.js"></script>
+    <script src="scripts/libs/markerclusterer.js"></script>
+    <script src="scripts/libs/markerwithlabel.js"></script>
+    <script src="scripts/libs/underscore.js"></script>
+    <script src="scripts/libs/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="scripts/libs/utility.js"></script>
 
-    <script src="scripts/Controllers/BaseController.js"></script>
-    <script src="scripts/Controllers/HomeController.js"></script>
-    <script src="Scripts/Controllers/DestinationController.js"></script>
+    <script src="scripts/factory/youTubeFactory.js"></script>
+    <script src="scripts/factory/destinationFactory.js"></script>
+    <script src="scripts/factory/emailForDestinationDetFactory.js"></script>
+    <script src="scripts/factory/fareforecastFactory.js"></script>
+    <script src="scripts/factory/fareRangeFactory.js"></script>
+    <script src="scripts/factory/feedbackFactory.js"></script>
+    <script src="scripts/factory/googleAttractionFactory.js"></script>
+    <script src="scripts/factory/googleGeoReverseLookupFactory.js"></script>
+    <script src="scripts/factory/hotelRangeFactory.js"></script>
+    <script src="scripts/factory/instaFlightSearchFactory.js"></script>
+    <script src="scripts/factory/localStorageFactory.js"></script>
+    <script src="scripts/factory/seasonalityFactory.js"></script>
+    <script src="scripts/factory/utilFactory.js"></script>
+    <script src="scripts/factory/weatherFactory.js"></script>
 
-    <script src="scripts/Controllers/DestinationsController.js"></script>
-    <script src="scripts/Controllers/YouTubeController.js"></script>
-    <script src="scripts/Controllers/EmailForDestinationDetController.js"></script>
-    <script src="scripts/Controllers/InstaFlightSearchController.js"></script>
-    <script src="scripts/Controllers/FeedbackController.js"></script>
-    <script src="Scripts/controllers/FAQsController.js"></script>
-    <script src="Scripts/controllers/AttractionPopupController.js"></script>
+    <script src="scripts/controllers/youTubeController.js"></script>
+    <script src="scripts/controllers/attractionPopupController.js"></script>
+    <script src="scripts/controllers/baseController.js"></script>
+    <script src="scripts/controllers/destinationController.js"></script>
+    <script src="scripts/controllers/destinationsController.js"></script>
+    <script src="scripts/controllers/emailForDestinationDetController.js"></script>
+    <script src="scripts/controllers/faqsController.js"></script>
+    <script src="scripts/controllers/feedbackController.js"></script>
+    <script src="scripts/controllers/homeController.js"></script>
+    <script src="scripts/controllers/instaFlightSearchController.js"></script>
 
-    <!--<script src="scripts/Directives/GoogleMap.directive.js"></script>-->
-    <script src="scripts/Directives/GoogleMapMarkers.directive.js"></script>
-    <script src="scripts/Directives/SearchBoxDirective.js"></script>
-    <script src="scripts/Directives/SeasonalityDirective.js"></script>
-
-    <script src="scripts/Directives/GoogleAttractionDirective.js"></script>
-    <script src="scripts/Directives/YoutubeDirective.js"></script>
-
-    <script src="scripts/Directives/DestinationFareForecastDirective.js"></script>
-    <script src="scripts/Directives/AttractionsListDirective.js"></script>
-    <script src="scripts/Directives/WeatherDirective.js"></script>
-    <script src="scripts/Directives/FarerangeWidgetDirective.js"></script>
-    <script src="scripts/Directives/ResetDimentionsDirective.js"></script>
-    <script src="scripts/Directives/AirportDropdownDirective.js"></script>
-    <script src="Scripts/Directives/BreadcrumbDirective.js"></script>
-    <script src="Scripts/Directives/VideoPopupDirective.js"></script>
-    <script src="Scripts/Directives/DestinationCardDirective.js"></script>
-    <script src="Scripts/Directives/HotelRangeDirective.js"></script>
-    <script src="Scripts/Directives/scrollDirective.js"></script>
-    <script src="Scripts/Directives/DestinationsCardDirective.js"></script>
+    <script src="scripts/directives/youtubeDirective.js"></script>
+    <script src="scripts/directives/airportDropdownDirective.js"></script>
+    <script src="scripts/directives/attractionsListDirective.js"></script>
+    <script src="scripts/directives/breadcrumbDirective.js"></script>
+    <script src="scripts/directives/destinationCardDirective.js"></script>
+    <script src="scripts/directives/destinationFareForecastDirective.js"></script>
+    <script src="scripts/directives/destinationsCardDirective.js"></script>
+    <script src="scripts/directives/farerangeWidgetDirective.js"></script>
+    <script src="scripts/directives/googleAttractionDirective.js"></script>
+    <script src="scripts/directives/googleMapMarkers.directive.js"></script>
+    <script src="scripts/directives/hotelRangeDirective.js"></script>
+    <script src="scripts/directives/resetDimentionsDirective.js"></script>
+    <script src="scripts/directives/scrollDirective.js"></script>
+    <script src="scripts/directives/searchBoxDirective.js"></script>
+    <script src="scripts/directives/seasonalityDirective.js"></script>
+    <script src="scripts/directives/videoPopupDirective.js"></script>
+    <script src="scripts/directives/weatherDirective.js"></script>
     <!-- endbuild -->
 
 </body>

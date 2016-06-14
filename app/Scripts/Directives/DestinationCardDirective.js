@@ -21,7 +21,7 @@
                     UtilFactory.ReadHighRankedAirportsJson().then(function (airports) {
                         var originAirport = _.findWhere(airports, { airport_Code: $scope.origin });
                         var destinationAirport = _.findWhere(airports, { airport_Code: $scope.destination });
-                        $scope.DestinationImagePath = TrippismConstants.DestinationImagePath;
+                        $scope.DestinationImagePath = TrippismConstants.DestinationMediumImagePath;
                         if (!originAirport && !destinationAirport) return;
                         var request = {
                             origin: $scope.origin,

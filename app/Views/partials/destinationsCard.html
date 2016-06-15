@@ -1,0 +1,16 @@
+﻿<!-- card on destinations page -->
+<a ng-href="{{::getlink(Destination)}}" title="{{::Destination.FullName}}">
+    <div class="thumbnail_img img-responsive">
+        <div>
+            <img class="thumb-img" ng-src="{{::destinationImagePath}}{{::Destination.DestinationLocation}}.jpg" src-error="{{::destinationImagePath}}default.jpg" />
+            <span class="Price_list">{{::GetCurrencySymbol(Destination.CurrencyCode)}} {{::GetLowFare(Destination)}}</span>
+            <img title="Show on map" alt="map" class="ico-map hidden-sm hidden-xs" src="../images/map.png" width="26" height="26" ng-click="::gotoMap($event,Destination);" />
+        </div>
+        <div class="city_name">
+            <span class="font-imp font-16">{{::Destination.CityName}}</span>
+        </div>
+        <div class="Airport_name">
+            <span class="font-light font-12">{{::Destination.FullName}}</span>
+        </div>
+    </div>
+</a>

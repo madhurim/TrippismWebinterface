@@ -118,7 +118,7 @@
                                       google.maps.event.addListener(marker, 'click', (function (marker) {
                                           return function () {
                                               var finalpath = 'destination/f=' + $scope.origin.toUpperCase() + ';t=' + marker.markerInfo.DestinationLocation + ';d=' + ConvertToRequiredDate(marker.markerInfo.DepartureDateTime, 'API') + ';r=' + ConvertToRequiredDate(marker.markerInfo.ReturnDateTime, 'API');
-                                              $location.path(finalpath);
+                                              $timeout(function () { $location.path(finalpath); }, 0, true);
                                           };
                                       })(marker));
                                   }

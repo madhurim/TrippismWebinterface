@@ -256,7 +256,8 @@ input.form-control[type="number"] {
     left: 0;
     position: absolute;
     right: 0;
-    top: 75px;
+    /*top: 75px;*/
+    top: 0;
     overflow: hidden;
 }
 
@@ -305,7 +306,7 @@ input.form-control[type="number"] {
         .dropdown-menu > li > a {
             color: #585858;
             font-weight: inherit;
-            padding: 10px 20px;
+            padding: 10px 10px;
             cursor: pointer;
         }
 
@@ -555,6 +556,10 @@ i.calendar.active, .input-box:hover i.calendar {
     width: 33.33%;
 }
 
+.homepage .footer-box, .otherpage .footer-box {
+    display: block;
+}
+
 .mappage .footer-box {
     position: fixed;
 }
@@ -567,6 +572,7 @@ i.calendar.active, .input-box:hover i.calendar {
     padding: 5px 0;
     background-color: rgba(34, 34, 33, 0.75);
     z-index: 1;
+    display: none;
 }
 
 .footer-menu ul li {
@@ -1098,12 +1104,11 @@ i.calendar.active, .input-box:hover i.calendar {
 .destination-form .input-control {
     color: #000;
     font-weight: 300;
-    padding-left: 25px;
     border: 0 none;
     border-radius: 0 4px 4px 0;
     background-color: #fff;
     width: 100%;
-    padding: 10px 10px 10px 25px;
+    padding: 10px 10px 10px 15px;
 }
 
 .destination-form .input-group-addon {
@@ -1323,8 +1328,10 @@ i.calendar.active, .input-box:hover i.calendar {
     }
 
     .destination-box-popup.destination-popup .container {
-        display: table-cell;
+        /*display: table-cell;*/
         vertical-align: middle;
+        margin-top: 10px;
+        z-index: 9999;
     }
 
 .destination-popup-close {

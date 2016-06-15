@@ -34,10 +34,15 @@
                     <div class="service_inner text-center">
                         <div class="service_title">Discover</div>
                         <div class="service_content">
-                            <div class="ico-youtube" video-popup-directive title="Click to watch our video"></div>
+                            <!--<div class="ico-youtube" video-popup-directive title="Click to watch our video"></div>-->
+                            <img src="../images/discovre_icon.png" />
                             <p>
-                                Watch our video on how to discover a destination in few minutes.
-                                Find air fares, fare analysis, attractions, videos, reviews and ratings.
+                                Discover a destination in few
+                                minutes with relevant
+                                information like air fares, fare
+                                analysis, attractions, videos,
+                                reviews and ratings.
+                                All in one place.
                             </p>
                         </div>
                     </div>
@@ -48,7 +53,7 @@
                         <div class="service_content">
                             <img src="../images/escape_icon.png" />
                             <p>
-                                Hit the Book button & Go!
+                                Then just hit the Book button & Go!
                                 Painless journey from
                                 exploration to book.
                             </p>
@@ -60,7 +65,7 @@
         <div class="container md-container border-bottom pad-top-20 pad-bot-20">
             <div class="row" ng-repeat="item in rowArr track by $index">
                 <div class="col-sm-4" ng-repeat="item in ::destinationRequestList[$index]">                    
-                    <destination-card-directive origin="item.origin" destination="item.destination" departure-date="item.departureDate" return-date="item.returnDate" image-url="{{::DestinationImagePath}}{{::item.destination}}.jpg"></destination-card-directive>                    
+                    <destination-card-directive origin="item.origin" destination="item.destination" departure-date="item.departureDate" return-date="item.returnDate" image-url="{{::destinationImagePath}}{{::item.destination}}.jpg"></destination-card-directive>                    
                 </div>
             </div>
         </div>

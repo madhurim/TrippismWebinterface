@@ -639,7 +639,7 @@ ul .stop-line {
 }
 
 .rs-wrapper {
-    padding: 0 11px 0 15px;
+    padding: 0 15px 0 19px;
     font-size: 12px;
     color: #000;
 }
@@ -662,7 +662,7 @@ ul .stop-line {
 }
 
 .range-slider {
-    margin: 0 10px;
+    margin: 0 15px;
 }
 
 /* making range slider thick */
@@ -1181,6 +1181,7 @@ ul .stop-line {
 
 .faqpage .footer-box {
     position: fixed;
+    display: block;
 }
 
 .ico-social {
@@ -1499,6 +1500,10 @@ ul .stop-line {
     font-size: 11px;
 }
 
+.font-12 {
+    font-size: 12px;
+}
+
 .margin-lr-3 {
     margin: 0px 3px;
 }
@@ -1559,6 +1564,38 @@ ul .stop-line {
     font-size: 14px;
 }
 /*#endregion destination-layout*/
+
+.Maplabel div {
+    color: #333;
+    font-weight: bold;
+    white-space: nowrap;
+    font-size: 11px;
+    line-height: 15px;
+    text-shadow: 0px 0px 1px #f1efe8, 0px 0px 1px #f1efe8, 0px 0px 2px #f1efe8, 1px 1px 5px rgba(0,0,0,0.4);
+    -webkit-font-smoothing: antialiased;
+}
+
+.Maplabel span {
+    /*color: #2f86cd;*/
+    color: #000;
+    font-weight: bold;
+    font-size: 13px;
+    text-shadow: 0px 0px 1px #f1efe8, 0px 0px 1px #f1efe8, 0px 0px 2px #f1efe8, 1px 1px 5px rgba(0,0,0,0.4);
+    -webkit-font-smoothing: antialiased;
+}
+
+.dropdown-tag {
+    padding: 1px 5px;
+    background: #ddd;
+    border-radius: 2px;
+    width: 55px;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    color: #585858;
+    margin-right: 4px;
+    margin-left: 10px;
+}
 
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
@@ -1793,7 +1830,7 @@ ul .stop-line {
     }
 
         .col-fare .invisible {
-            display: inline-block!important;
+            display: inline-block !important;
         }
 }
 

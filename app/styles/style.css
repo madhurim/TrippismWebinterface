@@ -728,13 +728,13 @@ i.calendar.active, .input-box:hover i.calendar {
         width: 300px;
         min-height: 75px;
         padding: 0;
-        padding-left: 15px;
-        margin-left: 15px;
+        padding-left: 10px;
+        margin-left: 10px;
         border-left: 1px dashed #a8abb0;
     }
 
 .hotels.destinations-list {
-    width: 160px;
+    width: 180px;
 }
 
 .attractions-found .destinations-list:first-child {

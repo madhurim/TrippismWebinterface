@@ -1,6 +1,7 @@
 ﻿(function () {
     'use strict';
     //var hostName = "http://api.trippism.com";
+    //var hostName = "http://www.trippism.com";
     //var hostName = 'http://dev.trippism.com';
 
     var hostName = 'http://' + window.location.host;

@@ -28,10 +28,10 @@
                             {{::locationDetail.PhoneNo}}
                             <div ng-if="locationDetail.AttractionType == 'hotels'">
                                 <div class="row">
-                                    <div class="col-md-6 col-sm-6" ng-if="::locationDetail.RateRange">
+                                    <div class="col-md-7 col-sm-6" ng-if="::locationDetail.RateRange">
                                         <h4>
                                             <span ng-init="amtbifercation1=amountBifurcation(locationDetail.RateRange.Min);">
-                                                <span class="cursor-help" data-toggle="tooltip" popover="{{locationDetail.RateRange.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{::GetCurrencySymbol(locationDetail.RateRange.CurrencyCode)}}</span>
+                                                <span class="cursor-help" data-toggle="tooltip" popover="{{::locationDetail.RateRange.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{::GetCurrencySymbol(locationDetail.RateRange.CurrencyCode)}}</span>
                                                 {{amtbifercation1.BeforeDecimal}}<span class="text-super vertical-top">{{amtbifercation1.AfterDecimal}}</span>
                                             </span>
                                             -
@@ -41,7 +41,7 @@
                                             </span>
                                         </h4>
                                     </div>
-                                    <div class="col-md-2 col-sm-2" ng-if="locationDetail.FreeWifiInRooms"><h4><i title="Free Wi-Fi in rooms" class="fa fa-wifi cursor-help" aria-hidden="true" style="color:green"></i></h4></div>
+                                    <div class="col-md-2 col-sm-2" ng-show="locationDetail.FreeWifiInRooms"><h4><i title="Free Wi-Fi in rooms" class="fa fa-wifi cursor-help" aria-hidden="true" style="color:green"></i></h4></div>
                                 </div>
                             </div>
                             <div ng-show="locationDetail.AttractionType != 'hotels'" ng-bind-html="::locationDetail.raitingToAppend"></div>

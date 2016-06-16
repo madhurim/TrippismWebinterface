@@ -64,8 +64,8 @@
         </div>
         <div class="container md-container border-bottom pad-top-20 pad-bot-20">
             <div class="row" ng-repeat="item in rowArr track by $index">
-                <div class="col-sm-4" ng-repeat="item in ::destinationRequestList[$index]">                    
-                    <destination-card-directive origin="item.origin" destination="item.destination" departure-date="item.departureDate" return-date="item.returnDate" image-url="{{::destinationImagePath}}{{::item.destination}}.jpg"></destination-card-directive>                    
+                <div class="col-sm-4" ng-repeat="item in ::destinationRequestList[$index]">
+                    <destination-card-directive origin="item.origin" destination="item.destination" departure-date="item.departureDate" return-date="item.returnDate"></destination-card-directive>
                 </div>
             </div>
         </div>

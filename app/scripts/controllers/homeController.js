@@ -8,7 +8,6 @@
             'dataConstant',
             '$interval',
             'UtilFactory',
-            'urlConstant',
              HomeController]);
     function HomeController(
        $scope,
@@ -16,13 +15,11 @@
        LocalStorageFactory,
        dataConstant,
        $interval,
-       UtilFactory,
-       urlConstant
+       UtilFactory
        ) {
         alertify.dismissAll();
         $scope.Name = "Home Page";
-        $scope.$emit('bodyClass', 'homepage'); // also used to stop image slider
-        $scope.destinationImagePath = urlConstant.destinationMediumImagePath;
+        $scope.$emit('bodyClass', 'homepage'); // also used to stop image slider        
         LocalStorageFactory.clear(dataConstant.refineSearchLocalStorage);
 
         // set page height based on window's height

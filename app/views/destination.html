@@ -1,5 +1,5 @@
-﻿<div ng-controller="DestinationController" cg-busy="{promise:mappromise,message:'Please wait...'}">    
-    <div id="destination-imgwrap"><img ng-show="DestinationLocation" ng-src="{{::destinationImagePath}}{{DestinationLocation}}.jpg" src-error="{{::destinationImagePath}}default.jpg" /></div>
+﻿<div ng-controller="DestinationController" cg-busy="{promise:mappromise,message:'Please wait...'}">
+    <div id="destination-imgwrap"><img ng-src="{{::destinationImagePath}}{{DestinationCity}}.jpg" src-error="{{::destinationImagePath}}default.jpg" /></div>
     <div class="row" title="" id="destination-content">
         <div class="tab-content-wp col-xs-12">
             <destination-fare-forecast fare-params="params"></destination-fare-forecast>

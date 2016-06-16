@@ -68,6 +68,7 @@
                         return airport.airport_Code == $scope.DestinationLocation
                     });
 
+                    $scope.DestinationCity = $scope.DestinationairportName ? $scope.DestinationairportName.airport_CityCode : 'default.jpg';
                     var dates = UtilFactory.GetValidDates($scope.FromDate, $scope.ToDate);
                     $scope.FromDate = dates.FromDate;
                     $scope.ToDate = dates.ToDate;

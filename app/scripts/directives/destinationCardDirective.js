@@ -15,7 +15,6 @@
                 UtilFactory.GetCurrencySymbols();
                 init();
                 function init() {
-                    $scope.url = 'f=' + $scope.origin + ';t=' + $scope.destination + ';d=' + $scope.departureDate + ';r=' + $scope.returnDate;
                     DestinationFactory.DestinationDataStorage.fare.clear();
                     DestinationFactory.DestinationDataStorage.hotel.clear();
                     UtilFactory.ReadHighRankedAirportsJson().then(function (airports) {
@@ -41,6 +40,9 @@
                             var multiAirports = $filter('filter')(airports, { airport_IsMAC: false, airport_CityCode: destinationAirport.airport_CityCode }, true);
                             destinationAirport.themes = _.unique(_.flatten(_.map(multiAirports, function (i) { if (i.themes.length) return i.themes; }), true));
                         }
+
+                        $scope.url = 'f=' + $scope.origin + ';t=' + destinationAirport.airport_CityCode + ';d=' + $scope.departureDate + ';r=' + $scope.returnDate;
+
                         // creating $scope element from theme name (for displaying theme icon on page)
                         _.each(destinationAirport.themes, function (item) {
                             if (item) {

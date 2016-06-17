@@ -28,9 +28,9 @@
                     scope.$emit('displayOnMap', { DestinationLocation: data.DestinationLocation, lat: data.lat, lng: data.lng });
                 }
 
-                scope.sortCards = function ($event, sortBy) {
+                scope.sortCardsByPrice = function ($event) {
                     $event.preventDefault();
-                    scope.$emit('sortCards', sortBy);
+                    scope.$emit('sortCardsByPrice');
                 }
 
                 scope.getlink = function (data) {

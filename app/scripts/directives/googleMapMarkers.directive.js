@@ -5,16 +5,12 @@
           function ($timeout, $rootScope, $window, UtilFactory, urlConstant) {
               var directive = {};
               directive.templateUrl = urlConstant.viewsPath + 'GoogleMap.html',
-              directive.scope = {
-              }
+              directive.scope = {}
               directive.controller = ['$scope', '$q', '$compile', '$location', 'dataConstant', '$stateParams',
                   function ($scope, $q, $compile, $location, dataConstant, $stateParams) {
-                      $scope.highRankedAirportlist = [];
                       $scope.destinationMap = undefined;
                       $scope.destinationMarkers = [];
                       $scope.airportList = [];
-                      $scope.bounds;
-                      $scope.markerCluster;
                       var highRankedMarkers;
                       $scope.origin = getParam("f");
                       // setting marker icon properties
@@ -61,9 +57,9 @@
                           }
                       }
 
-                      $scope.RenderMap = function (maps) {
+                      $scope.RenderMap = function (maps, sortByPrice) {
                           $timeout(function () {
-                              $scope.bounds = new google.maps.LatLngBounds();
+                              var bounds = new google.maps.LatLngBounds();
                               $scope.destinationMarkers = [];
                               for (var x = 0; x < maps.length; x++) {
                                   var latlng1 = new google.maps.LatLng(maps[x].lat, maps[x].lng);
@@ -93,20 +89,21 @@
                                   })(marker));
                               }
 
-                              redrawMarkers();
+                              redrawMarkers(sortByPrice);
 
                               google.maps.event.clearListeners($scope.destinationMap, 'zoom_changed');
                               google.maps.event.addListener($scope.destinationMap, "zoom_changed", function () {
-                                  redrawMarkers();
+                                  redrawMarkers(sortByPrice);
                               });
 
                               google.maps.event.clearListeners($scope.destinationMap, 'dragend');
                               google.maps.event.addListener($scope.destinationMap, "dragend", function () {
                                   if ($scope.destinationMap.zoom == 6 || $scope.destinationMap.zoom == 7)
-                                      redrawMarkers();
+                                      redrawMarkers(sortByPrice);
                               });
                           }, 0, false);
                       };
+
                       // distance in KM per zoom level
                       var zoomLvlArr = [{ zoom: 3, dis: 1000 }, { zoom: 4, dis: 700 }, { zoom: 5, dis: 500 }, { zoom: 6, dis: 200 }, { zoom: 7, dis: 65 }];
                       function addMarkerListerners(marker) {
@@ -124,7 +121,7 @@
                           });
                       }
 
-                      function redrawMarkers() {
+                      function redrawMarkers(sortByPrice) {
                           var highRankedMarkers = [];
                           // get distance by zoom level
                           var dist = _.find(zoomLvlArr, function (i) { return i.zoom == $scope.destinationMap.zoom; }) || 0;
@@ -136,10 +133,20 @@
                                   if ($scope.destinationMarkers[i].map && bounds.contains($scope.destinationMarkers[i].getPosition()))
                                       highRankedMarkers.push($scope.destinationMarkers[i]);
                               }
-                              highRankedMarkers = _.sortBy(highRankedMarkers, function (i) { return i.markerInfo.rank; });
+
+                              if (sortByPrice) {
+                                  highRankedMarkers = sortByPrice == 'asc' ? _.sortBy(highRankedMarkers, i.markerInfo.LowRate) : _.sortBy(arr, function (item) { return i.markerInfo.LowRate * -1; });
+                              }
+                              else {
+                                  highRankedMarkers = _.sortBy(highRankedMarkers, function (i) {
+                                      return i.markerInfo.rank;
+                                  });
+                              }
                           }
                           else {
-                              var partition = _.partition(_.sortBy($scope.destinationMarkers, function (i) { return i.markerInfo.rank; }), function (item, index) { return index < $scope.destinationMap.zoom * 10 });
+                              var partition = _.partition(_.sortBy($scope.destinationMarkers, function (i) {
+                                  return sortByPrice ? (sortByPrice == 'asc' ? i.markerInfo.LowRate : i.markerInfo.LowRate * -1) : i.markerInfo.rank;
+                              }), function (item, index) { return index < $scope.destinationMap.zoom * 10 });
                               highRankedMarkers = partition[0];
 
                               // mark all low ranked destinations as a small markers
@@ -164,7 +171,7 @@
                                       markers.push(highRankedMarkers[j]);
                               }
 
-                              var highLowArr = _.sortBy(markers, function (i) { return i.markerInfo.rank; });
+                              var highLowArr = _.sortBy(markers, function (i) { return sortByPrice ? (sortByPrice == 'asc' ? i.markerInfo.LowRate : i.markerInfo.LowRate * -1) : i.markerInfo.rank; });
 
                               // updating high rank marker
                               highLowArr[0].setIcon(markerImageObj.big);
@@ -252,11 +259,10 @@
                       }
 
                       scope.destinations = args.destinationlist;
-                      scope.highRankedAirportlist = args.highRankedAirportlist;
                       resetMarker();
 
                       if (scope.destinations != undefined && scope.destinations.length > 0) {
-                          scope.RenderMap(scope.destinations);
+                          scope.RenderMap(scope.destinations, args.sortByPrice);
                           if ($rootScope.isShowAlerityMessage && w.width() >= 768) {
                               $timeout(function () {
                                   showMessage();

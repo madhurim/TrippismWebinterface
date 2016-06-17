@@ -13,19 +13,19 @@ TrippismUIApp.config(['$stateProvider', '$urlRouterProvider', function ($statePr
     $stateProvider
         .state('home', {
             url: '/home',
-            templateUrl: 'Views/Home.html'
+            templateUrl: 'views/home.html'
         })
         .state('destinations', {
             url: '/destinations/*path',
-            templateUrl: 'Views/destinations.html'
+            templateUrl: 'views/destinations.html'
         })
         .state('destination', {
             url: '/destination/*path',
-            templateUrl: 'Views/destination.html'
+            templateUrl: 'views/destination.html'
         })
         .state('FAQs', {
             url: '/FAQs',
-            templateUrl: 'Views/FAQs.html'
+            templateUrl: 'views/faqs.html'
         });
 }]);
 

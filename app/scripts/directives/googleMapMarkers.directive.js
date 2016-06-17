@@ -4,7 +4,7 @@
       .directive('googleMap', ['$timeout', '$rootScope', '$window', 'UtilFactory', 'urlConstant',
           function ($timeout, $rootScope, $window, UtilFactory, urlConstant) {
               var directive = {};
-              directive.templateUrl = urlConstant.viewsPath + 'GoogleMap.html',
+              directive.templateUrl = urlConstant.viewsPath + 'googleMap.html',
               directive.scope = {
                   airportlist: "=airportlist"
               }

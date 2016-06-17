@@ -274,7 +274,7 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, dataConstant, 
         link: function ($scope, elem, attr) {
             $scope.attractionPopup = function (attractionData) {
                 var attractionPopupInstance = $modal.open({
-                    templateUrl: 'Views/Partials/AttractionPopupPartial.html',
+                    templateUrl: 'views/partials/attractionPopupPartial.html',
                     controller: 'AttractionPopupController',
                     scope: $scope,
                     size: 'lg',

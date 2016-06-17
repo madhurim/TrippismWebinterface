@@ -8,7 +8,6 @@
                 destination: '=',
                 departureDate: '=',
                 returnDate: '=',
-                imageUrl: '@'
             },
             templateUrl: urlConstant.partialViewsPath + 'destinationCard.html',
             controller: ['$scope', '$parse', '$filter', 'UtilFactory', 'InstaFlightSearchFactory', 'DestinationFactory', 'urlConstant', function ($scope, $parse, $filter, UtilFactory, InstaFlightSearchFactory, DestinationFactory, urlConstant) {
@@ -31,16 +30,22 @@
                             pointOfSaleCountry: originAirport.airport_CountryCode,
                             limit: 1
                         };
+
                         $scope.destinationData = {
                             origin: request.origin,
                             destination: request.destination,
                             originName: originAirport.airport_CityName,
-                            destinationName: destinationAirport.airport_CityName
+                            destinationName: destinationAirport.airport_CityName,
+                            cityCode: destinationAirport.airport_CityCode
                         }
+
+                        $scope.imageUrl = $scope.destinationImagePath + $scope.destinationData.cityCode + '.jpg';
+
                         if (destinationAirport.airport_IsMAC) {
                             var multiAirports = $filter('filter')(airports, { airport_IsMAC: false, airport_CityCode: destinationAirport.airport_CityCode }, true);
                             destinationAirport.themes = _.unique(_.flatten(_.map(multiAirports, function (i) { if (i.themes.length) return i.themes; }), true));
                         }
+
                         // creating $scope element from theme name (for displaying theme icon on page)
                         _.each(destinationAirport.themes, function (item) {
                             if (item) {

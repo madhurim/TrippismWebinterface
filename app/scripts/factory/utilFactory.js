@@ -183,7 +183,7 @@
             var fromDate = ConvertToDateObject(obj.FromDate);
             var toDate = ConvertToDateObject(obj.ToDate);
 
-            if (fromDate <= new Date(new Date().setHours(0, 0, 0))) {
+            if (fromDate.setHours(0, 0, 0, 0) < new Date().setHours(0, 0, 0, 0)) {
                 obj.FromDate = SetFromDate();
                 obj.ToDate = SetToDate(obj.FromDate);
             }

@@ -224,16 +224,17 @@
                       // update destination object to set it on marker object
                       var updateObject = function (obj) {
                           var d = $q.defer();
-                          var originairport = _.find($scope.highRankedAirportlist, function (airport) {
+                          var originAirport = _.find($scope.highRankedAirportlist, function (airport) {
                               return airport.airport_Code == obj.DestinationLocation
                           });
 
-                          if (originairport != undefined) {
-                              obj.lat = originairport.airport_Lat;
-                              obj.lng = originairport.airport_Lng;
-                              obj.rank = originairport.rank;
-                              obj.CityName = originairport.airport_CityName;
-                              obj.FullName = originairport.airport_FullName;
+                          if (originAirport != undefined) {
+                              obj.lat = originAirport.airport_Lat;
+                              obj.lng = originAirport.airport_Lng;
+                              obj.rank = originAirport.rank;
+                              obj.CityName = originAirport.airport_CityName;
+                              obj.CityCode = originAirport.airport_CityCode;
+                              obj.FullName = originAirport.airport_FullName;
                               d.resolve(obj);
                           } else {
                               d.resolve();

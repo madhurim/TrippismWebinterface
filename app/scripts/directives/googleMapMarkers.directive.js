@@ -6,14 +6,13 @@
               var directive = {};
               directive.templateUrl = urlConstant.viewsPath + 'GoogleMap.html',
               directive.scope = {
-                  airportlist: "=airportlist"
               }
-
               directive.controller = ['$scope', '$q', '$compile', '$location', 'dataConstant', '$stateParams',
                   function ($scope, $q, $compile, $location, dataConstant, $stateParams) {
                       $scope.highRankedAirportlist = [];
                       $scope.destinationMap = undefined;
                       $scope.destinationMarkers = [];
+                      $scope.airportList = [];
                       $scope.bounds;
                       $scope.markerCluster;
                       var highRankedMarkers;
@@ -29,6 +28,9 @@
                               scaledSizeSmall: new google.maps.Size(14, 14),
                           }
                       };
+                      UtilFactory.ReadAirportJson().then(function (data) {
+                          $scope.airportList = data;
+                      });
                       markerImageObj.big = new google.maps.MarkerImage("/images/big-point.png", markerImageObj.marker.size, markerImageObj.marker.origin, markerImageObj.marker.anchorBig, markerImageObj.marker.scaledSizeBig);
                       markerImageObj.bigOver = new google.maps.MarkerImage("/images/big-point-over.png", markerImageObj.marker.size, markerImageObj.marker.origin, markerImageObj.marker.anchorBig, markerImageObj.marker.scaledSizeBig);
                       markerImageObj.bigOverSelect = new google.maps.MarkerImage("/images/big-point-over-select.png", markerImageObj.marker.size, markerImageObj.marker.origin, markerImageObj.marker.anchorBig, markerImageObj.marker.scaledSizeBig);
@@ -59,73 +61,40 @@
                           }
                       }
 
-                      $scope.showPosition = function (destinations) {
-                          $scope.destinationslist = destinations;
-                          var promises = [];
-                          for (var i = 0; i < $scope.destinationslist.length; i++) {
-                              promises.push(updateObject($scope.destinationslist[i]));
-                          }
-                          $q.all(promises).then(function (data) {
-                              if (data.length > 0) {
-                                  data = _.compact(data);
-                              }
-                              RenderMap(data);
-                          }.bind(this));
-                      }
-
-                      $scope.displayDestinations = function (destinations) {
-                          var faresList = angular.copy(destinations);
-                          $scope.showPosition(_.uniq(faresList, function (destination) { return destination.DestinationLocation; }))
-                      }
-
-                      var RenderMap = function (maps) {
+                      $scope.RenderMap = function (maps) {
                           $timeout(function () {
-                              $scope.InfoWindow;
                               $scope.bounds = new google.maps.LatLngBounds();
                               $scope.destinationMarkers = [];
-                              maps = _.sortBy(maps, 'rank');
-                              $scope.$emit('RenderMap', maps);
                               for (var x = 0; x < maps.length; x++) {
                                   var latlng1 = new google.maps.LatLng(maps[x].lat, maps[x].lng);
-                                  // Moved code for getting LowFare into UtilFactory because same logic needs to apply in DestinationController.js for pre setting min/max fare refine search textbox
-                                  var LowRate = UtilFactory.GetLowFareForMap(maps[x]);
-                                  var airportName = _.find($scope.airportlist, function (airport) {
-                                      return airport.airport_Code == maps[x].DestinationLocation
+                                  var marker = new MarkerWithLabel({
+                                      position: latlng1,
+                                      map: $scope.destinationMap,
+                                      title: maps[x].FullName + ', ' + maps[x].CityName,
+                                      markerInfo: maps[x],
+                                      labelContent: '<div>' + maps[x].CityName + '<br/><span>' + UtilFactory.GetCurrencySymbol(maps[x].CurrencyCode) + ' ' + Math.ceil(maps[x].LowRate) + '</span></div>',
+                                      labelAnchor: new google.maps.Point(-11, 15),
+                                      labelClass: 'Maplabel',
+                                      icon: {
+                                          url: "/images/big-point.png",
+                                          scaledSize: markerImageObj.marker.scaledSizeSmall,
+                                          origin: markerImageObj.marker.origin,
+                                          anchor: markerImageObj.marker.anchorSmall
+                                      },
+                                      labelVisible: false
                                   });
-                                  if (LowRate != "N/A") {
-                                      maps[x].CityName = airportName.airport_CityName;
-                                      maps[x].airport_FullName = airportName.airport_FullName;
-                                      var marker = new MarkerWithLabel({
-                                          position: latlng1,
-                                          map: $scope.destinationMap,
-                                          title: airportName.airport_FullName + ', ' + airportName.airport_CityName,
-                                          markerInfo: maps[x],
-                                          //labelContent: '<div>' + airportName.airport_CityName + '<br/><span>' + UtilFactory.GetCurrencySymbol(maps[x].CurrencyCode) + ' ' + Math.ceil(LowRate) + '</span><br/>' + airportName.rank + '</div>',
-                                          labelContent: '<div>' + airportName.airport_CityName + '<br/><span>' + UtilFactory.GetCurrencySymbol(maps[x].CurrencyCode) + ' ' + Math.ceil(LowRate) + '</span></div>',
-                                          labelAnchor: new google.maps.Point(-11, 15),
-                                          labelClass: 'Maplabel',
-                                          icon: {
-                                              url: "/images/big-point.png",
-                                              scaledSize: markerImageObj.marker.scaledSizeSmall,
-                                              origin: markerImageObj.marker.origin,
-                                              anchor: markerImageObj.marker.anchorSmall
-                                          },
-                                          labelVisible: false
-                                      });
 
-                                      $scope.destinationMarkers.push(marker);
-
-                                      google.maps.event.addListener(marker, 'click', (function (marker) {
-                                          return function () {
-                                              var finalpath = 'destination/f=' + $scope.origin.toUpperCase() + ';t=' + marker.markerInfo.DestinationLocation + ';d=' + ConvertToRequiredDate(marker.markerInfo.DepartureDateTime, 'API') + ';r=' + ConvertToRequiredDate(marker.markerInfo.ReturnDateTime, 'API');
-                                              $timeout(function () { $location.path(finalpath); }, 0, true);
-                                          };
-                                      })(marker));
-                                  }
+                                  $scope.destinationMarkers.push(marker);
+                                  google.maps.event.addListener(marker, 'click', (function (marker) {
+                                      return function () {
+                                          var finalpath = 'destination/f=' + $scope.origin.toUpperCase() + ';t=' + marker.markerInfo.DestinationLocation + ';d=' + ConvertToRequiredDate(marker.markerInfo.DepartureDateTime, 'API') + ';r=' + ConvertToRequiredDate(marker.markerInfo.ReturnDateTime, 'API');
+                                          $timeout(function () { $location.path(finalpath); }, 0, true);
+                                      };
+                                  })(marker));
                               }
-                              //google.maps.event.addListenerOnce($scope.destinationMap, 'tilesloaded', function () {
+
                               redrawMarkers();
-                              //});
+
                               google.maps.event.clearListeners($scope.destinationMap, 'zoom_changed');
                               google.maps.event.addListener($scope.destinationMap, "zoom_changed", function () {
                                   redrawMarkers();
@@ -221,27 +190,6 @@
                           }
                       }
 
-                      // update destination object to set it on marker object
-                      var updateObject = function (obj) {
-                          var d = $q.defer();
-                          var originAirport = _.find($scope.highRankedAirportlist, function (airport) {
-                              return airport.airport_Code == obj.DestinationLocation
-                          });
-
-                          if (originAirport != undefined) {
-                              obj.lat = originAirport.airport_Lat;
-                              obj.lng = originAirport.airport_Lng;
-                              obj.rank = originAirport.rank;
-                              obj.CityName = originAirport.airport_CityName;
-                              obj.CityCode = originAirport.airport_CityCode;
-                              obj.FullName = originAirport.airport_FullName;
-                              d.resolve(obj);
-                          } else {
-                              d.resolve();
-                          }
-                          return d.promise;
-                      }
-
                       var maxZindex = google.maps.Marker.MAX_ZINDEX;
                       // used to highlight a perticular marker on the map
                       $scope.$on('gotoMap', function (event, data) {
@@ -297,7 +245,7 @@
                   var w = angular.element($window);
                   setAirportMarkerOnMap();
 
-                  scope.$on('setMarkeronMap', function (event, args) {
+                  scope.$on('setMarkerOnMap', function (event, args) {
                       if (!args) {
                           displayBlankMap();
                           return;
@@ -308,15 +256,12 @@
                       resetMarker();
 
                       if (scope.destinations != undefined && scope.destinations.length > 0) {
-                          scope.displayDestinations(scope.destinations);
+                          scope.RenderMap(scope.destinations);
                           if ($rootScope.isShowAlerityMessage && w.width() >= 768) {
                               $timeout(function () {
                                   showMessage();
                               }, 0, false);
                           }
-                      }
-                      else {
-                          scope.$emit('RenderMap', []);
                       }
 
                       centerMap(args);
@@ -349,7 +294,7 @@
                           case "Asia Pacific":
                               { airportLoc = new google.maps.LatLng(49.8380, 105.8203); break; }
                           default: {
-                              var originairport = _.find(scope.airportlist, function (airport) {
+                              var originairport = _.find(scope.airportList, function (airport) {
                                   return airport.airport_Code == scope.origin.toUpperCase();
                               });
                               airportLoc = new google.maps.LatLng(originairport.airport_Lat, originairport.airport_Lng); break;

@@ -25,7 +25,24 @@
         LocalStorageFactory,
         $location
         ) {
-        $scope.$emit('bodyClass', 'mappage');   // for changing <body> class        
+
+        $scope.$emit('bodyClass', 'mappage');   // for changing <body> class    
+        $scope.isSearching = true;
+        $scope.activate = activate;
+        $scope.findDestinations = findDestinations;
+        var highRankedAirportlist = [], AvailableAirports = [];
+        var destinationlistOriginal;   // used for filtering data on refine search click
+        var destinationlist;
+        $scope.AvailableThemes = AvailableTheme();
+        $scope.AvailableRegions = AvailableRegions();
+        $scope.limitDestinationCards = 9;
+        $scope.PointOfsalesCountry;
+        $scope.isModified = false;
+
+        initFareSliderValues();
+        LoadAirlineJson();
+        GetCurrencySymbols();
+
         function activate() {
             if ($stateParams.path != undefined) {
 
@@ -71,46 +88,36 @@
                 angular.element('#select-theme').val($scope.Theme);
                 angular.element('#select-region').val($scope.Region);
 
+                var highRankedAirportsJsonPromise = UtilFactory.ReadHighRankedAirportsJson();
                 $scope.mappromise = UtilFactory.ReadAirportJson().then(function (data) {
-                    $scope.AvailableAirports = data;
-
-                    var OriginAirport = _.find($scope.AvailableAirports, function (airport) {
+                    AvailableAirports = data;
+                    var OriginAirport = _.find(data, function (airport) {
                         return airport.airport_Code == $scope.Origin
                     });
 
                     if (OriginAirport == undefined) {
                         alertify.alert("Destination Finder", "");
-                        alertify.alert('Sorry , we do not have destinations to suggest for this search combination. This can also happen sometimes if the origin airport is not a popular airport. We suggest you try a different search combination or a more popular airport in your area to get destinations.');
+                        alertify.alert('Sorry, we do not have destinations to suggest for this search combination. This can also happen sometimes if the origin airport is not a popular airport. We suggest you try a different search combination or a more popular airport in your area to get destinations.');
 
                         // for displaying blank map and search popup
-                        $scope.isShowSearchIcon = true;
                         updateSearchCriteria();
-                        $timeout(function () { $scope.$broadcast('setMarkeronMap'); }, 0, false)
+                        $timeout(function () { $scope.$broadcast('setMarkerOnMap'); }, 0, false)
                         $scope.isModified = true;
                         return false;
                     }
 
-                    if ($scope.Origin != undefined && $scope.Origin != "") {
-                        $scope.LastSelectedOrigin = $scope.Origin;
-                        updateSearchCriteria();
-                        findDestinations();
-                    }
+                    highRankedAirportsJsonPromise.then(function (data) {
+                        highRankedAirportlist = data;
+                        if ($scope.Origin != undefined && $scope.Origin != "") {
+                            $scope.LastSelectedOrigin = $scope.Origin;
+                            updateSearchCriteria();
+                            findDestinations();
+                        }
+                    });
                 });
             }
         }
-        $scope.ShowDestinationView = DestinationFactory.ShowDestinationView; // true;
-        $scope.isSearching = true;
-        $scope.activate = activate;
-        $scope.findDestinations = findDestinations;
-        $scope.AvailableAirports = [];
-        var destinationlistOriginal;   // used for filtering data on refine search click
-        $scope.destinationlist;
-        $scope.AvailableThemes = AvailableTheme();
-        $scope.AvailableRegions = AvailableRegions();
-        $scope.limitDestinationCards = 9;
-        $scope.PointOfsalesCountry;
-        initFareSliderValues();
-        $scope.isModified = false;
+
         function LoadAirlineJson() {
             // commented for the time being
             //UtilFactory.ReadAirlinesJson().then(function (data) {
@@ -118,43 +125,49 @@
             //});
 
             $scope.airlineJsonData = [];
-
         }
-        LoadAirlineJson();
-        GetCurrencySymbols();
-        function FilterDestinations(destinations) {
-            var destinationstodisp = [];
+        function filterDestinations(destinations) {
+            var destinationsToDisp = [];
             for (var x = 0; x < destinations.length; x++) {
-                var LowestFarePrice = "N/A";
-                var LowestNonStopFare = "N/A";
-                if (destinations[x].LowestNonStopFare != undefined && destinations[x].LowestNonStopFare.Fare != "N/A") {
-                    LowestNonStopFare = parseFloat(destinations[x].LowestNonStopFare.Fare).toFixed(2);
-                    if (LowestNonStopFare == 0)
-                        LowestNonStopFare = "N/A";
+                var destination = destinations[x];
+                var airport = _.find(highRankedAirportlist, function (airport) {
+                    return airport.airport_Code == destination.DestinationLocation
+                });
+
+                if (airport != undefined) {
+                    var LowestFarePrice = "N/A";
+                    var LowestNonStopFare = "N/A";
+                    if (destination.LowestNonStopFare != undefined && destination.LowestNonStopFare.Fare != "N/A") {
+                        LowestNonStopFare = parseFloat(destination.LowestNonStopFare.Fare).toFixed(2);
+                        if (LowestNonStopFare == 0)
+                            LowestNonStopFare = "N/A";
+                    }
+                    if (destination.LowestFare != undefined && destination.LowestFare.Fare != "N/A") {
+                        LowestFarePrice = parseFloat(destination.LowestFare.Fare).toFixed(2);
+                        if (LowestFarePrice == 0)
+                            LowestFarePrice = "N/A";
+                    }
+                    if (LowestNonStopFare != "N/A" || LowestFarePrice != "N/A") {
+                        destination.LowRate = UtilFactory.GetLowFareForMap(destination);
+                        destination.lat = airport.airport_Lat;
+                        destination.lng = airport.airport_Lng;
+                        destination.rank = airport.rank;
+                        destination.CityName = airport.airport_CityName;
+                        destination.CityCode = airport.airport_CityCode;
+                        destination.FullName = airport.airport_FullName;
+                        destinationsToDisp.push(destination);
+                    }
                 }
-                if (destinations[x].LowestFare != undefined && destinations[x].LowestFare.Fare != "N/A") {
-                    LowestFarePrice = parseFloat(destinations[x].LowestFare.Fare).toFixed(2);
-                    if (LowestFarePrice == 0)
-                        LowestFarePrice = "N/A";
-                }
-                if (LowestNonStopFare != "N/A" || LowestFarePrice != "N/A")
-                    destinationstodisp.push(destinations[x]);
             }
-            return destinationstodisp;
+            return destinationsToDisp;
         }
 
-        $scope.$watch(function () { return DestinationFactory.ShowDestinationView }, function (newVal, oldVal) {
-            if (typeof newVal !== 'undefined') {
-                $scope.ShowDestinationView = newVal;
-            }
-        });
-
-        $scope.handleUp = function (isSelected) {
+        $scope.refineDestinations = function (isSelected) {
             if (destinationlistOriginal && destinationlistOriginal.length > 0) {
                 var arr = [];
                 for (var i = 0; i < destinationlistOriginal.length; i++) {
                     var destination = destinationlistOriginal[i];
-                    var airport = $filter('filter')($scope.AvailableAirports, { airport_Code: destination.DestinationLocation });
+                    var airport = $filter('filter')(AvailableAirports, { airport_Code: destination.DestinationLocation });
                     if (airport.length > 1)
                         airport = _.find(airport, function (item) { return item.airport_IsMAC == false; });
                     else
@@ -210,10 +223,10 @@
                 }
 
                 $timeout(function () {
-                    $scope.destinationlist = arr;
+                    destinationlist = arr;
                     $scope.mappromise = UtilFactory.ReadHighRankedAirportsJson().then(function (data) {
-                        $rootScope.$broadcast('setMarkeronMap', {
-                            destinationlist: $scope.destinationlist,
+                        $rootScope.$broadcast('setMarkerOnMap', {
+                            destinationlist: destinationlist,
                             Region: $scope.Region,
                             Theme: $scope.Theme,
                             highRankedAirportlist: data
@@ -226,7 +239,7 @@
 
         function findDestinations() {
             $scope.isModified = false;
-            $scope.destinationlist = null;
+            destinationlist = null;
             destinationlistOriginal = null;
             $scope.faresList = [];
             $scope.IsRefineSearchShow = true;
@@ -241,16 +254,16 @@
                 $scope.SearchbuttonIsLoading = false;
                 $scope.fareCurrencySymbol = undefined;
                 if (data.FareInfo != null) {
-                    $scope.destinationlist = FilterDestinations(data.FareInfo);
+                    destinationlist = filterDestinations(data.FareInfo);
                     // getting currency symbol from currency code
-                    var destination = _.find($scope.destinationlist, function (item) { return item.CurrencyCode && item.CurrencyCode != 'N/A'; });
+                    var destination = _.find(destinationlist, function (item) { return item.CurrencyCode && item.CurrencyCode != 'N/A'; });
                     if (destination)
                         $scope.fareCurrencySymbol = $scope.GetCurrencySymbol(destination.CurrencyCode);
 
-                    destinationlistOriginal = $scope.destinationlist;
+                    destinationlistOriginal = destinationlist;
                     // for displaying default min/max fare values into refine search                    
 
-                    var minMaxFare = getMinMaxFare($scope.destinationlist);
+                    var minMaxFare = getMinMaxFare(destinationlist);
                     var Maxfare = 0, Minfare = 0;
                     if (minMaxFare.MaxFare && minMaxFare.MaxFare != 0)
                         Maxfare = Math.ceil(minMaxFare.MaxFare);
@@ -261,7 +274,6 @@
 
                     UtilFactory.MapscrollTo('wrapper');
                     $scope.isRefineSeachCollapsed = true;
-                    $scope.isShowSearchIcon = true;     // used for showing main search slider icon when user search first time                    
                 }
                 else if (data != null && typeof data == 'string') {
                     var POSCountriesList = [];
@@ -284,22 +296,19 @@
                     alertify.alert("Trippism", "");
                     alertify.alert(CList).set('onok', function (closeEvent) { });
                     $scope.IscalledFromIknowMyDest = false;
-                    $scope.isShowSearchIcon = true;     // used for showing main search slider icon when user search first time
                     $scope.destinationCardList = [];
                 }
                 else {
                     alertify.alert("Destination Finder", "");
                     alertify.alert('Sorry , we do not have destinations to suggest for this search combination. This can also happen sometimes if the origin airport is not a popular airport. We suggest you try a different search combination or a more popular airport in your area to get destinations.').set('onok', function (closeEvent) { });
-                    $scope.isShowSearchIcon = true;     // used for showing main search slider icon when user search first time
                     $scope.destinationCardList = [];
                 }
 
                 $scope.inProgress = false;
                 loadScrollbars();
-                $scope.handleUp();
+                $scope.refineDestinations();
             });
 
-            paramdata.TopDestinations = 50;
             $scope.selectedform = 'SuggestDestination';
             loadScrollbars();
         }
@@ -384,7 +393,7 @@
             }
             //else
             //$scope.previousTheme = $scope.Theme = undefined;
-            $scope.handleUp(true);
+            $scope.refineDestinations(true);
         }
         $scope.displayRegion = function (name) {
             if ($scope.previousRegion != name) {
@@ -393,7 +402,7 @@
             }
             //else
             //$scope.previousRegion = $scope.Region = undefined;
-            $scope.handleUp(true);
+            $scope.refineDestinations(true);
         }
 
         // used for max/min refine search slider
@@ -468,14 +477,14 @@
             onSelected: function (data) {
                 $scope.displayRegion(data.selectedData.value);
             }
-        });
-
-        $scope.$on('RenderMap', function (event, data) {
-            $timeout(function () { $scope.destinationCardList = data; }, 0, true);
-        })
+        });        
 
         $scope.$on('displayOnMap', function (event, data) {
             $scope.$broadcast('gotoMap', data);
+        });
+
+        $scope.$on('sortCards', function (event, data) {
+            $scope.$broadcast('sortMarkers', data);
         });
     }
 })();

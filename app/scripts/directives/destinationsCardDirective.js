@@ -28,6 +28,11 @@
                     scope.$emit('displayOnMap', { DestinationLocation: data.DestinationLocation, lat: data.lat, lng: data.lng });
                 }
 
+                scope.sortCards = function ($event, sortBy) {
+                    $event.preventDefault();
+                    scope.$emit('sortCards', sortBy);
+                }
+
                 scope.getlink = function (data) {
                     return '/#/destination/f=' + scope.Origin.toUpperCase() + ';t=' + data.DestinationLocation + ';d=' + ConvertToRequiredDate(data.DepartureDateTime, 'API') + ';r=' + ConvertToRequiredDate(data.ReturnDateTime, 'API');
                 };

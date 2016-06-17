@@ -35,7 +35,7 @@
                                     <div class="rs-lbl-right">{{priceSliderValues.originalRange.max}}</div>
                                     <div class="clear"></div>
                                 </div>
-                                <div class="range-slider" range-slider on-handle-up="handleUp(true)" min="priceSliderValues.range.min" max="priceSliderValues.range.max" model-min="priceSliderValues.values.min" model-max="priceSliderValues.values.max" show-values="true" attach-handle-values="true" disabled="priceSliderValues.values.max == 0 && priceSliderValues.values.min == 0"></div>
+                                <div class="range-slider" range-slider on-handle-up="refineDestinations(true)" min="priceSliderValues.range.min" max="priceSliderValues.range.max" model-min="priceSliderValues.values.min" model-max="priceSliderValues.values.max" show-values="true" attach-handle-values="true" disabled="priceSliderValues.values.max == 0 && priceSliderValues.values.min == 0"></div>
                             </div>
                         </div>
                         <div class="row1">
@@ -111,7 +111,7 @@
         <div class="map-box" id="mainmap">
             <div class="map-container" cg-busy="{promise:mappromise,message:'Please wait...'}">
                 <div id="wrapper" cg-busy="{promise:destinationmappromise,message:'Please wait...'}">
-                    <div google-map ng-show="isShowSearchIcon || ShowDestinationView" airlinejsondata="airlineJsonData" airportlist="AvailableAirports" class="map"></div>
+                    <div google-map class="map"></div>
                 </div>
             </div>
         </div>

@@ -135,7 +135,7 @@
                               }
 
                               if (sortByPrice) {
-                                  highRankedMarkers = sortByPrice == 'asc' ? _.sortBy(highRankedMarkers, i.markerInfo.LowRate) : _.sortBy(arr, function (item) { return i.markerInfo.LowRate * -1; });
+                                  highRankedMarkers = sortByPrice == 'asc' ? _.sortBy(highRankedMarkers, function (i) { return i.markerInfo.LowRate }) : _.sortBy(highRankedMarkers, function (i) { return i.markerInfo.LowRate * -1; });
                               }
                               else {
                                   highRankedMarkers = _.sortBy(highRankedMarkers, function (i) {
@@ -145,7 +145,7 @@
                           }
                           else {
                               var partition = _.partition(_.sortBy($scope.destinationMarkers, function (i) {
-                                  return sortByPrice ? (sortByPrice == 'asc' ? i.markerInfo.LowRate : i.markerInfo.LowRate * -1) : i.markerInfo.rank;
+                                  return sortByPrice == 'asc' ? i.markerInfo.LowRate : (sortByPrice == 'dsc' ? i.markerInfo.LowRate * -1 : i.markerInfo.rank);
                               }), function (item, index) { return index < $scope.destinationMap.zoom * 10 });
                               highRankedMarkers = partition[0];
 

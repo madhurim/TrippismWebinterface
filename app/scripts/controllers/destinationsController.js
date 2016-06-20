@@ -38,7 +38,7 @@
         $scope.limitDestinationCards = 9;
         $scope.PointOfsalesCountry;
         $scope.isModified = false;
-        var sortByPrice;
+        var sortByPrice = 'asc';
         $scope.refineDestinations = refineDestinations;
 
         initFareSliderValues();
@@ -223,7 +223,7 @@
                 }
 
                 $timeout(function () {
-                    $scope.destinationCardList = sortByPrice ? (sortByPrice == 'asc' ? _.sortBy(arr, 'LowRate') : _.sortBy(arr, function (item) { return item.LowRate * -1; })) : _.sortBy(arr, 'rank');
+                    $scope.destinationCardList = sortByPrice == 'asc' ? _.sortBy(arr, 'LowRate') : (sortByPrice == 'dsc' ? _.sortBy(arr, function (item) { return item.LowRate * -1; }) : _.sortBy(arr, 'rank'));
                     $rootScope.$broadcast('setMarkerOnMap', {
                         destinationlist: arr,
                         Region: $scope.Region,
@@ -282,7 +282,7 @@
                             CList += "<span class='lblpos'>" + POSCountriesList[i].toString() + "." + "</span><br/>";
                         }
                         else {
-                            CList += "<span class='lblpos'>" + POSCountriesList[i].toString() + "," + "</span><br/>";//+ "(" + POSList.Countries[i].CountryCode.toString() + ")"
+                            CList += "<span class='lblpos'>" + POSCountriesList[i].toString() + "," + "</span><br/>";
                         }
                     }
                     CList += "</div>";
@@ -468,7 +468,7 @@
         });
 
         $scope.$on('sortCardsByPrice', function () {
-            sortByPrice = sortByPrice == undefined ? 'asc' : sortByPrice == 'asc' ? 'dsc' : 'asc';
+            sortByPrice = sortByPrice == 'asc' ? 'dsc' : 'asc';
             refineDestinations(false, sortByPrice);
         });
     }

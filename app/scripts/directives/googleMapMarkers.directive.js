@@ -98,8 +98,7 @@
 
                               google.maps.event.clearListeners($scope.destinationMap, 'dragend');
                               google.maps.event.addListener($scope.destinationMap, "dragend", function () {
-                                  if ($scope.destinationMap.zoom == 6 || $scope.destinationMap.zoom == 7)
-                                      redrawMarkers(sortByPrice);
+                                  redrawMarkers(sortByPrice);
                               });
                           }, 0, false);
                       };
@@ -127,39 +126,49 @@
                           var dist = _.find(zoomLvlArr, function (i) { return i.zoom == $scope.destinationMap.zoom; }) || 0;
                           dist = dist.dis || dist;
 
-                          if ($scope.destinationMap.zoom == 6 || $scope.destinationMap.zoom == 7) {
-                              var bounds = $scope.destinationMap.getBounds();
-                              for (var i = 0; i < $scope.destinationMarkers.length; i++) {
-                                  if ($scope.destinationMarkers[i].map && bounds.contains($scope.destinationMarkers[i].getPosition()))
-                                      highRankedMarkers.push($scope.destinationMarkers[i]);
+                          var bounds = $scope.destinationMap.getBounds();
+                          //var len = $scope.destinationMarkers.length;
+                          for (var i = 0; i < $scope.destinationMarkers.length; i++) {
+                              if (bounds.contains($scope.destinationMarkers[i].getPosition())) {
+                                  $scope.destinationMarkers[i].isRemoved = false;
+                                  highRankedMarkers.push($scope.destinationMarkers[i]);
                               }
-
-                              if (sortByPrice) {
-                                  highRankedMarkers = sortByPrice == 'asc' ? _.sortBy(highRankedMarkers, function (i) { return i.markerInfo.LowRate }) : _.sortBy(highRankedMarkers, function (i) { return i.markerInfo.LowRate * -1; });
-                              }
-                              else {
-                                  highRankedMarkers = _.sortBy(highRankedMarkers, function (i) {
-                                      return i.markerInfo.rank;
-                                  });
+                              else if ($scope.destinationMarkers[i].labelVisible) {
+                                  $scope.destinationMarkers[i].setIcon(markerImageObj.small);
+                                  $scope.destinationMarkers[i].labelVisible = false;
+                                  $scope.destinationMarkers[i].label.draw();
+                                  addMarkerListerners($scope.destinationMarkers[i]);
                               }
                           }
+
+                          if (sortByPrice) {
+                              highRankedMarkers = sortByPrice == 'asc' ? _.sortBy(highRankedMarkers, function (i) { return i.markerInfo.LowRate }) : _.sortBy(highRankedMarkers, function (i) { return i.markerInfo.LowRate * -1; });
+                          }
                           else {
-                              var partition = _.partition(_.sortBy($scope.destinationMarkers, function (i) {
-                                  return sortByPrice == 'asc' ? i.markerInfo.LowRate : (sortByPrice == 'dsc' ? i.markerInfo.LowRate * -1 : i.markerInfo.rank);
-                              }), function (item, index) { return index < $scope.destinationMap.zoom * 10 });
+                              highRankedMarkers = _.sortBy(highRankedMarkers, function (i) {
+                                  return i.markerInfo.rank;
+                              });
+                          }
+
+                          $scope.$emit('redrawMarkers', highRankedMarkers);
+
+                          if ($scope.destinationMap.zoom < 6) {
+                              var partition = _.partition(highRankedMarkers, function (item, index) { return index < $scope.destinationMap.zoom * 10 });
                               highRankedMarkers = partition[0];
 
                               // mark all low ranked destinations as a small markers
+                              //var len = partition[1].length;
                               for (var i = 0; i < partition[1].length; i++) {
                                   partition[1][i].setIcon(markerImageObj.small);
                                   partition[1][i].labelVisible = false;
+                                  partition[1][i].label.draw();
                                   addMarkerListerners(partition[1][i]);
                               }
                           }
 
-                          highRankedMarkers = _.each(highRankedMarkers, function (i) { i.isRemoved = false; });
                           // loop through all markers and compare it's distance with others.
                           // If distance is lower than specified value then mark high rank marker as a big icon and others as a small icons.
+                          //var len = highRankedMarkers.length;
                           for (var i = 0; i < highRankedMarkers.length; i++) {
                               if (highRankedMarkers[i].isRemoved || !highRankedMarkers[i].map) continue;
                               var markers = [];
@@ -188,10 +197,12 @@
                               });
 
                               // updating low rank markers
+                              //var len = highLowArr.length;
                               for (var j = 1; j < highLowArr.length; j++) {
                                   highLowArr[j].isRemoved = true;
                                   highLowArr[j].setIcon(markerImageObj.small);
                                   highLowArr[j].labelVisible = false;
+                                  highLowArr[j].label.draw();
                                   addMarkerListerners(highLowArr[j]);
                               }
                           }
@@ -270,7 +281,8 @@
                           }
                       }
 
-                      centerMap(args);
+                      if (!args.sortByPrice)
+                          centerMap(args);
                   });
 
                   // remove all markers from map

@@ -390,7 +390,8 @@ section#Modification {
 
 .map-box {
     width: 100%;
-    height: 98vh;
+    /*height: 98vh;*/
+    height: 100%;
 }
 
 .map-container {

@@ -38,7 +38,7 @@
         $scope.limitDestinationCards = 9;
         $scope.PointOfsalesCountry;
         $scope.isModified = false;
-        var sortByPrice = 'asc';
+        var sortByPrice = 'dsc';
         $scope.refineDestinations = refineDestinations;
 
         initFareSliderValues();
@@ -223,7 +223,7 @@
                 }
 
                 $timeout(function () {
-                    $scope.destinationCardList = sortByPrice == 'asc' ? _.sortBy(arr, 'LowRate') : (sortByPrice == 'dsc' ? _.sortBy(arr, function (item) { return item.LowRate * -1; }) : _.sortBy(arr, 'rank'));
+                    //$scope.destinationCardList = sortByPrice == 'asc' ? _.sortBy(arr, 'LowRate') : (sortByPrice == 'dsc' ? _.sortBy(arr, function (item) { return item.LowRate * -1; }) : _.sortBy(arr, 'rank'));
                     $rootScope.$broadcast('setMarkerOnMap', {
                         destinationlist: arr,
                         Region: $scope.Region,
@@ -289,12 +289,12 @@
                     alertify.alert("Trippism", "");
                     alertify.alert(CList).set('onok', function (closeEvent) { });
                     $scope.IscalledFromIknowMyDest = false;
-                    $scope.destinationCardList = [];
+                    // $scope.destinationCardList = [];
                 }
                 else {
                     alertify.alert("Destination Finder", "");
                     alertify.alert('Sorry , we do not have destinations to suggest for this search combination. This can also happen sometimes if the origin airport is not a popular airport. We suggest you try a different search combination or a more popular airport in your area to get destinations.').set('onok', function (closeEvent) { });
-                    $scope.destinationCardList = [];
+                    //  $scope.destinationCardList = [];
                 }
 
                 $scope.inProgress = false;
@@ -461,6 +461,10 @@
             onSelected: function (data) {
                 $scope.displayRegion(data.selectedData.value);
             }
+        });
+
+        $scope.$on('redrawMarkers', function (event, data) {
+            $timeout(function () { $scope.destinationCardList = _.map(data, function (i) { return i.markerInfo; }); }, 0, true)
         });
 
         $scope.$on('displayOnMap', function (event, data) {

@@ -10,6 +10,13 @@
         var airportJsonPromise;
         var airportsCurrencyPromise;
         var airportsCurrency = [];
+
+        var w = angular.element(window);
+        var Device = {
+            small: function () { return w.width() <= 991; },
+            medium: function () { return w.width() > 991; }
+        }
+
         var service = {
             ReadAirportJson: ReadAirportJson,
             MapscrollTo: MapscrollTo,
@@ -24,7 +31,8 @@
             ReadAirportsCurrency: ReadAirportsCurrency,
             GetAirportCurrency: GetAirportCurrency,
             amountBifurcation: amountBifurcation,
-            DistanceBetweenPoints: DistanceBetweenPoints
+            DistanceBetweenPoints: DistanceBetweenPoints,
+            Device: Device
         };
         return service;
 

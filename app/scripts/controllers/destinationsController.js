@@ -35,7 +35,7 @@
         var destinationlistOriginal;   // used for filtering data on refine search click        
         $scope.AvailableThemes = AvailableTheme();
         $scope.AvailableRegions = AvailableRegions();
-        $scope.limitDestinationCards = 9;
+        $scope.limitDestinationCards = 15;
         $scope.PointOfsalesCountry;
         $scope.isModified = false;
         var sortByPrice = 'dsc';

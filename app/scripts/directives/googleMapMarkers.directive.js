@@ -13,7 +13,8 @@
                 $scope.airportList = [];
                 var highRankedMarkers;
                 $scope.origin = getParam("f");
-                var isCardClicked = false;  // isCardClicked for preventing 'idle' event when destination card is click and we highlight clicked destination on map
+                var isCardClicked = false;  // isCardClicked for preventing 'idle' event when destination card is click and we highlight clicked destination on map                
+
                 // setting marker icon properties
                 var markerImageObj = {
                     marker: {
@@ -104,7 +105,7 @@
                 };
 
                 // distance in KM per zoom level
-                var zoomLvlArr = [{ zoom: 3, dis: 1000 }, { zoom: 4, dis: 700 }, { zoom: 5, dis: 500 }, { zoom: 6, dis: 200 }, { zoom: 7, dis: 65 }];
+                var zoomLvlArr = dataConstant.zoomLevel;
                 function addMarkerListerners(marker) {
                     google.maps.event.clearListeners(marker, 'mouseover');
                     google.maps.event.clearListeners(marker, 'mouseout');
@@ -122,26 +123,31 @@
 
                 function redrawMarkers(sortByPrice) {
                     var highRankedMarkers = [];
-                    // get distance by zoom level
-                    var dist = _.find(zoomLvlArr, function (i) { return i.zoom == $scope.destinationMap.zoom; }) || 0;
-                    dist = dist.dis || dist;
+                    if (UtilFactory.Device.medium()) {
+                        // get distance by zoom level
+                        var dist = _.find(zoomLvlArr, function (i) { return i.zoom == $scope.destinationMap.zoom; }) || 0;
+                        dist = dist.dis || dist;
 
-                    var bounds = $scope.destinationMap.getBounds();
-                    //var len = $scope.destinationMarkers.length;
-                    for (var i = 0; i < $scope.destinationMarkers.length; i++) {
-                        if (!$scope.destinationMarkers[i].map) continue;
-                        if (bounds.contains($scope.destinationMarkers[i].getPosition())) {
-                            $scope.destinationMarkers[i].isRemoved = false;
-                            highRankedMarkers.push($scope.destinationMarkers[i]);
-                        }
-                        else if ($scope.destinationMarkers[i].labelVisible) {
-                            $scope.destinationMarkers[i].setIcon(markerImageObj.small);
-                            $scope.destinationMarkers[i].labelVisible = false;
-                            $scope.destinationMarkers[i].label.draw();
-                            addMarkerListerners($scope.destinationMarkers[i]);
+                        // get markers on current map view port
+                        var bounds = $scope.destinationMap.getBounds();
+                        for (var i = 0; i < $scope.destinationMarkers.length; i++) {
+                            if (!$scope.destinationMarkers[i].map) continue;
+                            if (bounds.contains($scope.destinationMarkers[i].getPosition())) {
+                                $scope.destinationMarkers[i].isRemoved = false;
+                                highRankedMarkers.push($scope.destinationMarkers[i]);
+                            }
+                            else if ($scope.destinationMarkers[i].labelVisible) {
+                                $scope.destinationMarkers[i].setIcon(markerImageObj.small);
+                                $scope.destinationMarkers[i].labelVisible = false;
+                                $scope.destinationMarkers[i].label.draw();
+                                addMarkerListerners($scope.destinationMarkers[i]);
+                            }
                         }
                     }
+                    else
+                        highRankedMarkers = $scope.destinationMarkers;
 
+                    // sort markers by rank or price
                     if (sortByPrice) {
                         highRankedMarkers = sortByPrice == 'asc' ? _.sortBy(highRankedMarkers, function (i) { return i.markerInfo.LowRate }) : _.sortBy(highRankedMarkers, function (i) { return i.markerInfo.LowRate * -1; });
                     }
@@ -151,14 +157,16 @@
                         });
                     }
 
+                    // send data to controller for destination cards render
                     $scope.$emit('redrawMarkers', highRankedMarkers);
+                    if (UtilFactory.Device.small()) return;   // if small device, do not execute map code
 
+                    // for low zoom level pick up some high ranked markers
                     if ($scope.destinationMap.zoom < 6) {
                         var partition = _.partition(highRankedMarkers, function (item, index) { return index < $scope.destinationMap.zoom * 10 });
                         highRankedMarkers = partition[0];
 
                         // mark all low ranked destinations as a small markers
-                        //var len = partition[1].length;
                         for (var i = 0; i < partition[1].length; i++) {
                             partition[1][i].setIcon(markerImageObj.small);
                             partition[1][i].labelVisible = false;
@@ -168,8 +176,7 @@
                     }
 
                     // loop through all markers and compare it's distance with others.
-                    // If distance is lower than specified value then mark high rank marker as a big icon and others as a small icons.
-                    //var len = highRankedMarkers.length;
+                    // If distance is lower than specified value then mark high rank marker as a big icon and others as a small icons.                    
                     for (var i = 0; i < highRankedMarkers.length; i++) {
                         if (highRankedMarkers[i].isRemoved || !highRankedMarkers[i].map) continue;
                         var markers = [];
@@ -197,8 +204,7 @@
                             this.setIcon(markerImageObj.big);
                         });
 
-                        // updating low rank markers
-                        //var len = highLowArr.length;
+                        // updating low rank markers                        
                         for (var j = 1; j < highLowArr.length; j++) {
                             highLowArr[j].isRemoved = true;
                             highLowArr[j].setIcon(markerImageObj.small);
@@ -261,7 +267,6 @@
                 });
             }],
             link: function (scope, elm, attr) {
-                var w = angular.element($window);
                 setAirportMarkerOnMap();
 
                 scope.$on('setMarkerOnMap', function (event, args) {
@@ -274,7 +279,7 @@
 
                     if (args.destinationlist != undefined && args.destinationlist.length > 0) {
                         scope.RenderMap(args.destinationlist, args.sortByPrice);
-                        if ($rootScope.isShowAlerityMessage && w.width() >= 768) {
+                        if ($rootScope.isShowAlerityMessage && UtilFactory.Device.medium()) {
                             $timeout(function () {
                                 showMessage();
                             }, 0, false);
@@ -354,7 +359,6 @@
                 }
 
                 function showMessage() {
-                    if (w.width() <= 991) return;
                     alertify.dismissAll();
                     var message = "<div class='alert-box'><p>The bigger markers are our top ranked destinations based on popularity from the Origin airport.</p>"
                        + "<input type='button' class='btn btn-primary' value='Got It' />"

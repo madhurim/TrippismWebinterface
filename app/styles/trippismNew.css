@@ -317,12 +317,18 @@ a.dd-option {
 }
 
 label.dd-option-text {
-    line-height: 45px !important;
+    line-height: 12px !important;
+    display: block;
+    margin-top: 14px;
 }
 
 label.dd-selected-text {
-    line-height: 38px !important;
+    /*line-height: 38px !important;
+    margin-left: 10px;*/
     margin-left: 10px;
+    line-height: 10px !important;
+    display: block;
+    margin-top: 12px;
 }
 
 .dd-select {

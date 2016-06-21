@@ -157,8 +157,7 @@
                         });
                     }
 
-                    // send data to controller for destination cards render
-                    debugger;
+                    // send data to controller for destination cards render                    
                     $scope.$emit('redrawMarkers', highRankedMarkers);
                     if (UtilFactory.Device.small()) return;   // if small device, do not execute map code
 
@@ -288,7 +287,7 @@
                                 showMessage();
                             }, 0, false);
                         }
-                    }                 
+                    }
                 });
 
                 // remove all markers from map

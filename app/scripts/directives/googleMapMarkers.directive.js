@@ -158,6 +158,7 @@
                     }
 
                     // send data to controller for destination cards render
+                    debugger;
                     $scope.$emit('redrawMarkers', highRankedMarkers);
                     if (UtilFactory.Device.small()) return;   // if small device, do not execute map code
 
@@ -277,6 +278,9 @@
 
                     resetMarker();
 
+                    if (!args.sortByPrice)
+                        centerMap(args);
+
                     if (args.destinationlist != undefined && args.destinationlist.length > 0) {
                         scope.RenderMap(args.destinationlist, args.sortByPrice);
                         if ($rootScope.isShowAlerityMessage && UtilFactory.Device.medium()) {
@@ -284,10 +288,7 @@
                                 showMessage();
                             }, 0, false);
                         }
-                    }
-
-                    if (!args.sortByPrice)
-                        centerMap(args);
+                    }                 
                 });
 
                 // remove all markers from map

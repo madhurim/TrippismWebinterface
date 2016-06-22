@@ -143,6 +143,8 @@
                                 $scope.destinationMarkers[i].label.draw();
                                 addMarkerListerners($scope.destinationMarkers[i]);
                             }
+                            else
+                                addMarkerListerners($scope.destinationMarkers[i]);
                         }
                     }
                     else
@@ -226,7 +228,6 @@
                     dist = dist.dis || dist;
 
                     $timeout(function () {
-                        $scope.destinationMap.panTo(new google.maps.LatLng(data.lat, data.lng));
                         var bounds = $scope.destinationMap.getBounds();
                         var markerList = [];
                         if (selectedMarker && selectedMarker.map) {
@@ -238,9 +239,8 @@
                         }
                         selectedMarker = null;
                         for (var i = 0; i < highRankedMarkers.length; i++) {
-                            if (highRankedMarkers[i].markerInfo.DestinationLocation == data.DestinationLocation) {
-                                selectedMarker = highRankedMarkers[i];
-
+                            selectedMarker = highRankedMarkers[i];
+                            if (selectedMarker.markerInfo.DestinationLocation == data.DestinationLocation) {
                                 if (!selectedMarker.lastIcon) {
                                     selectedMarker.lastIcon = selectedMarker.icon;
                                     selectedMarker.lastLabelVisible = selectedMarker.labelVisible;
@@ -251,20 +251,17 @@
                                 selectedMarker.label.draw();
                                 selectedMarker.setOptions({ zIndex: maxZindex++ });
                             }
-                            else if (!highRankedMarkers[i].isRemoved && bounds.contains(highRankedMarkers[i].getPosition())) {
-                                markerList.push(highRankedMarkers[i]);
+                            else {
+                                var distance = UtilFactory.DistanceBetweenPoints(selectedMarker.position, selectedMarker.position);
+                                if (distance < dist) {
+                                    selectedMarker.setIcon(markerImageObj.small);
+                                    selectedMarker.labelVisible = false;
+                                    selectedMarker.label.draw();
+                                    addMarkerListerners(selectedMarker);
+                                }
                             }
                         }
-
-                        for (var i = 0; i < markerList.length; i++) {
-                            var distance = UtilFactory.DistanceBetweenPoints(selectedMarker.position, markerList[i].position);
-                            if (distance < dist) {
-                                markerList[i].setIcon(markerImageObj.small);
-                                markerList[i].labelVisible = false;
-                                markerList[i].label.draw();
-                                addMarkerListerners(markerList[i]);
-                            }
-                        }
+                        $scope.destinationMap.panTo(new google.maps.LatLng(data.lat, data.lng));
                     }, 0, false);
                 });
             }],

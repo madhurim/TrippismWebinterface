@@ -239,26 +239,28 @@
                         }
                         selectedMarker = null;
                         for (var i = 0; i < highRankedMarkers.length; i++) {
-                            selectedMarker = highRankedMarkers[i];
-                            if (selectedMarker.markerInfo.DestinationLocation == data.DestinationLocation) {
-                                if (!selectedMarker.lastIcon) {
-                                    selectedMarker.lastIcon = selectedMarker.icon;
-                                    selectedMarker.lastLabelVisible = selectedMarker.labelVisible;
+                            if (highRankedMarkers[i].markerInfo.DestinationLocation == data.DestinationLocation) {
+                                selectedMarker = highRankedMarkers[i];
+                                if (!highRankedMarkers[i].lastIcon) {
+                                    highRankedMarkers[i].lastIcon = highRankedMarkers[i].icon;
+                                    highRankedMarkers[i].lastLabelVisible = highRankedMarkers[i].labelVisible;
                                 }
 
-                                selectedMarker.setIcon(markerImageObj.bigOverSelect);
-                                selectedMarker.labelVisible = true;
-                                selectedMarker.label.draw();
-                                selectedMarker.setOptions({ zIndex: maxZindex++ });
+                                highRankedMarkers[i].setIcon(markerImageObj.bigOverSelect);
+                                highRankedMarkers[i].labelVisible = true;
+                                highRankedMarkers[i].label.draw();
+                                highRankedMarkers[i].setOptions({ zIndex: maxZindex++ });
+                                break;
                             }
-                            else {
-                                var distance = UtilFactory.DistanceBetweenPoints(selectedMarker.position, selectedMarker.position);
-                                if (distance < dist) {
-                                    selectedMarker.setIcon(markerImageObj.small);
-                                    selectedMarker.labelVisible = false;
-                                    selectedMarker.label.draw();
-                                    addMarkerListerners(selectedMarker);
-                                }
+                        }
+                        for (var i = 0; i < highRankedMarkers.length; i++) {
+                            if (selectedMarker == highRankedMarkers[i]) continue;
+                            var distance = UtilFactory.DistanceBetweenPoints(selectedMarker.position, highRankedMarkers[i].position);
+                            if (distance < dist) {
+                                highRankedMarkers[i].setIcon(markerImageObj.small);
+                                highRankedMarkers[i].labelVisible = false;
+                                highRankedMarkers[i].label.draw();
+                                addMarkerListerners(highRankedMarkers[i]);
                             }
                         }
                         $scope.destinationMap.panTo(new google.maps.LatLng(data.lat, data.lng));
@@ -274,7 +276,8 @@
                         return;
                     }
 
-                    resetMarker();
+                    // remove all markers from map
+                    removeMarkers();
 
                     if (!args.sortByPrice)
                         centerMap(args);
@@ -290,7 +293,7 @@
                 });
 
                 // remove all markers from map
-                function resetMarker(zoomLevel) {
+                function removeMarkers(zoomLevel) {
                     $timeout(function () {
                         if (scope.destinationMarkers.length > 0) {
                             for (var i = 0; i < scope.destinationMarkers.length; i++)

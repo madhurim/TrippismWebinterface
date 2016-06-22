@@ -121,8 +121,9 @@
                     });
                 }
 
+                var highRankedMarkers = [];
                 function redrawMarkers(sortByPrice) {
-                    var highRankedMarkers = [];
+                    highRankedMarkers = [];
                     if (UtilFactory.Device.medium()) {
                         // get distance by zoom level
                         var dist = _.find(zoomLvlArr, function (i) { return i.zoom == $scope.destinationMap.zoom; }) || 0;
@@ -217,8 +218,8 @@
 
                 var maxZindex = google.maps.Marker.MAX_ZINDEX;
                 // used to highlight a perticular marker on the map
+                var selectedMarker;
                 $scope.$on('gotoMap', function (event, data) {
-                    var selectedMarker;
                     isCardClicked = true;
                     // get distance by zoom level                          
                     var dist = _.find(zoomLvlArr, function (i) { return i.zoom == $scope.destinationMap.zoom; }) || 0;
@@ -228,9 +229,17 @@
                         $scope.destinationMap.panTo(new google.maps.LatLng(data.lat, data.lng));
                         var bounds = $scope.destinationMap.getBounds();
                         var markerList = [];
-                        for (var i = 0; i < $scope.destinationMarkers.length; i++) {
-                            if ($scope.destinationMarkers[i].markerInfo.DestinationLocation == data.DestinationLocation) {
-                                selectedMarker = $scope.destinationMarkers[i];
+                        if (selectedMarker && selectedMarker.map) {
+                            selectedMarker.setIcon(selectedMarker.lastIcon);
+                            selectedMarker.labelVisible = selectedMarker.lastLabelVisible;
+                            selectedMarker.label.draw();
+                            selectedMarker.lastIcon = null;
+                            selectedMarker.lastLabelVisible = null;
+                        }
+                        selectedMarker = null;
+                        for (var i = 0; i < highRankedMarkers.length; i++) {
+                            if (highRankedMarkers[i].markerInfo.DestinationLocation == data.DestinationLocation) {
+                                selectedMarker = highRankedMarkers[i];
 
                                 if (!selectedMarker.lastIcon) {
                                     selectedMarker.lastIcon = selectedMarker.icon;
@@ -242,15 +251,8 @@
                                 selectedMarker.label.draw();
                                 selectedMarker.setOptions({ zIndex: maxZindex++ });
                             }
-                            else if ($scope.destinationMarkers[i].lastIcon) {
-                                $scope.destinationMarkers[i].setIcon($scope.destinationMarkers[i].lastIcon);
-                                $scope.destinationMarkers[i].labelVisible = $scope.destinationMarkers[i].lastLabelVisible;
-                                $scope.destinationMarkers[i].label.draw();
-                                $scope.destinationMarkers[i].lastIcon = null;
-                                $scope.destinationMarkers[i].lastLabelVisible = null;
-                            }
-                            else if (!$scope.destinationMarkers[i].isRemoved && bounds.contains($scope.destinationMarkers[i].getPosition())) {
-                                markerList.push($scope.destinationMarkers[i]);
+                            else if (!highRankedMarkers[i].isRemoved && bounds.contains(highRankedMarkers[i].getPosition())) {
+                                markerList.push(highRankedMarkers[i]);
                             }
                         }
 

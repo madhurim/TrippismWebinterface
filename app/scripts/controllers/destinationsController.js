@@ -224,6 +224,7 @@
 
                 $timeout(function () {
                     //$scope.destinationCardList = sortByPrice == 'asc' ? _.sortBy(arr, 'LowRate') : (sortByPrice == 'dsc' ? _.sortBy(arr, function (item) { return item.LowRate * -1; }) : _.sortBy(arr, 'rank'));
+                    if (!arr.length) $scope.destinationCardList = [];
                     $rootScope.$broadcast('setMarkerOnMap', {
                         destinationlist: arr,
                         Region: $scope.Region,

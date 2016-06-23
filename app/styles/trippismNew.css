@@ -215,13 +215,6 @@ ul.nav.nav-pills {
     margin-left: 10px;
 }
 
-.Airport_name {
-    margin-left: 10px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-
 input[type="datetime"] {
     border: none;
     margin-left: 10px;

@@ -13,7 +13,7 @@
                 $scope.airportList = [];
                 var highRankedMarkers;
                 $scope.origin = getParam("f");
-                var isCardClicked = false;  // isCardClicked for preventing 'idle' event when destination card is click and we highlight clicked destination on map                
+                var isStopRedrawMarkers = false;  // isStopRedrawMarkers for preventing 'idle' event when destination card is click and we highlight clicked destination on map                
 
                 // setting marker icon properties
                 var markerImageObj = {
@@ -59,7 +59,9 @@
                     }
                 }
 
-                $scope.RenderMap = function (maps, sortByPrice) {
+                $scope.RenderMap = function (args) {
+                    var maps = args.destinationlist;
+                    var sortByPrice = args.sortByPrice;
                     $timeout(function () {
                         var bounds = new google.maps.LatLngBounds();
                         $scope.destinationMarkers = [];
@@ -91,15 +93,15 @@
                             })(marker));
                         }
 
-                        redrawMarkers(sortByPrice);
+                        redrawMarkers(args);
 
                         google.maps.event.clearListeners($scope.destinationMap, 'idle');
                         google.maps.event.addListener($scope.destinationMap, 'idle', function () {
-                            // isCardClicked for preventing 'idle' event when destination card is click and we highlight clicked destination on map
-                            if (!isCardClicked)
-                                redrawMarkers(sortByPrice);
+                            // isStopRedrawMarkers for preventing 'idle' event when destination card is click and we highlight clicked destination on map
+                            if (!isStopRedrawMarkers)
+                                redrawMarkers({ sortByPrice: args.sortByPrice });
                             else
-                                isCardClicked = false;
+                                isStopRedrawMarkers = null;
                         });
                     }, 0, false);
                 };
@@ -122,7 +124,8 @@
                 }
 
                 var highRankedMarkers = [];
-                function redrawMarkers(sortByPrice) {
+                function redrawMarkers(args) {
+                    var sortByPrice = args.sortByPrice;
                     highRankedMarkers = [];
                     if (UtilFactory.Device.medium()) {
                         // get distance by zoom level
@@ -160,8 +163,13 @@
                         });
                     }
 
-                    // send data to controller for destination cards render                    
+                    if (!highRankedMarkers.length && $scope.destinationMarkers.length && (args.Region || args.Theme || args.Price))
+                        highRankedMarkers = $scope.destinationMarkers;
+
+                    // send data to controller for destination cards render
                     $scope.$emit('redrawMarkers', highRankedMarkers);
+
+                    $scope.consoleMessage = ('Markers: ' + highRankedMarkers.length);
                     if (UtilFactory.Device.small()) return;   // if small device, do not execute map code
 
                     // for low zoom level pick up some high ranked markers
@@ -222,7 +230,7 @@
                 // used to highlight a perticular marker on the map
                 var selectedMarker;
                 $scope.$on('gotoMap', function (event, data) {
-                    isCardClicked = true;
+                    isStopRedrawMarkers = true;
                     // get distance by zoom level                          
                     var dist = _.find(zoomLvlArr, function (i) { return i.zoom == $scope.destinationMap.zoom; }) || 0;
                     dist = dist.dis || dist;
@@ -279,11 +287,12 @@
                     // remove all markers from map
                     removeMarkers();
 
-                    if (!args.sortByPrice)
+                    //if (!args.sortByPrice)
+                    if (args.Region || (!args.sortByPrice && !args.Price))
                         centerMap(args);
 
                     if (args.destinationlist != undefined && args.destinationlist.length > 0) {
-                        scope.RenderMap(args.destinationlist, args.sortByPrice);
+                        scope.RenderMap(args);
                         if ($rootScope.isShowAlerityMessage && UtilFactory.Device.medium()) {
                             $timeout(function () {
                                 showMessage();

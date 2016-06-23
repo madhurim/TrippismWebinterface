@@ -1597,6 +1597,16 @@ ul .stop-line {
     margin-left: 10px;
 }
 
+.text-ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.margin-left-10 {
+    margin-left: 10px;
+}
+
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {
@@ -1867,6 +1877,10 @@ ul .stop-line {
     .video {
         width: 100%;
         height: 172px;
+    }
+
+    .gauge-label .font-imp {
+        font-size: 12px;
     }
 }
 /*#endregion Media queries */

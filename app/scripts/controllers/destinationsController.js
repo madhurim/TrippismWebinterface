@@ -229,6 +229,7 @@
                         destinationlist: arr,
                         Region: $scope.Region,
                         Theme: $scope.Theme,
+                        Price: $scope.priceSliderValues.values.max != $scope.priceSliderValues.range.max || $scope.priceSliderValues.values.min != $scope.priceSliderValues.range.min,
                         sortByPrice: sortByPrice
                     });
                 }, 0, true);
@@ -448,6 +449,7 @@
         }
 
         $scope.loadMoreDestinations = function () {
+            $scope.consoleMessage = (($scope.limitDestinationCards + 6 >= $scope.destinationCardList.length ? $scope.destinationCardList.length : $scope.limitDestinationCards + 6) + ' out of ' + $scope.destinationCardList.length);
             if ($scope.limitDestinationCards >= $scope.destinationCardList.length) return;
             $scope.$apply(function () { $scope.limitDestinationCards += 6; });
         }
@@ -465,7 +467,10 @@
         });
 
         $scope.$on('redrawMarkers', function (event, data) {
-            $timeout(function () { $scope.destinationCardList = _.map(data, function (i) { return i.markerInfo; }); }, 0, true)
+            $timeout(function () {
+                $scope.destinationCardList = _.map(data, function (i) { return i.markerInfo; });
+                $scope.consoleMessage = (($scope.limitDestinationCards >= $scope.destinationCardList.length ? $scope.destinationCardList.length : $scope.limitDestinationCards) + ' out of ' + $scope.destinationCardList.length);
+            }, 0, true)
         });
 
         $scope.$on('displayOnMap', function (event, data) {

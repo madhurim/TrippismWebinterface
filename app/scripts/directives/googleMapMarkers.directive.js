@@ -97,9 +97,9 @@
 
                         google.maps.event.clearListeners($scope.destinationMap, 'idle');
                         google.maps.event.addListener($scope.destinationMap, 'idle', function () {
-                            // isStopRedrawMarkers for preventing 'idle' event when destination card is click and we highlight clicked destination on map
+                            // isStopRedrawMarkers for preventing 'idle' event when destination card is click and we highlight clicked destination on map                            
                             if (!isStopRedrawMarkers)
-                                redrawMarkers({ sortByPrice: args.sortByPrice });
+                                console.log('idle'), redrawMarkers({ sortByPrice: args.sortByPrice });
                             else
                                 isStopRedrawMarkers = null;
                         });
@@ -163,8 +163,14 @@
                         });
                     }
 
-                    if (!highRankedMarkers.length && $scope.destinationMarkers.length && (args.Region || args.Theme || args.Price))
-                        highRankedMarkers = $scope.destinationMarkers;
+                    if (!highRankedMarkers.length && $scope.destinationMarkers.length && (args.Region || args.Theme || args.Price)) {
+                        var bounds = new google.maps.LatLngBounds();
+                        for (var i = 0; i < $scope.destinationMarkers.length; i++) {
+                            bounds.extend($scope.destinationMarkers[i].getPosition());
+                        }
+                        $scope.destinationMap.fitBounds(bounds);
+                        return;
+                    }
 
                     // send data to controller for destination cards render
                     $scope.$emit('redrawMarkers', highRankedMarkers);
@@ -287,7 +293,6 @@
                     // remove all markers from map
                     removeMarkers();
 
-                    //if (!args.sortByPrice)
                     if (args.Region || (!args.sortByPrice && !args.Price))
                         centerMap(args);
 
@@ -336,6 +341,7 @@
                     }
 
                     $timeout(function () {
+                        scope.destinationMap.setZoom(3);
                         scope.destinationMap.panTo(airportLoc);
                     }, 0, false);
                 }

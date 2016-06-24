@@ -99,6 +99,7 @@
                         google.maps.event.clearListeners($scope.destinationMap, 'idle');
                         google.maps.event.addListener($scope.destinationMap, 'idle', function () {
                             // isStopRedrawMarkers for preventing 'idle' event when destination card is click and we highlight clicked destination on map                            
+                            if (UtilFactory.Device.small()) return;
                             if (!isStopRedrawMarkers)
                                 redrawMarkers({ sortByPrice: args.sortByPrice });
                             else
@@ -165,23 +166,29 @@
                         });
                     }
 
-                    if (!highRankedMarkers.length && $scope.destinationMarkers.length && (args.Region || args.Theme || args.Price)) {
-                        var bounds = new google.maps.LatLngBounds();
-                        for (var i = 0; i < $scope.destinationMarkers.length; i++) {
-                            bounds.extend($scope.destinationMarkers[i].getPosition());
+                    var isDestinations = false;
+                    if (!highRankedMarkers.length && $scope.destinationMarkers.length) {
+                        if (args.Region || args.Theme || args.Price) {
+                            var bounds = new google.maps.LatLngBounds();
+                            for (var i = 0; i < $scope.destinationMarkers.length; i++) {
+                                bounds.extend($scope.destinationMarkers[i].getPosition());
+                            }
+                            $scope.destinationMap.fitBounds(bounds);
+                            return;
                         }
-                        $scope.destinationMap.fitBounds(bounds);
-                        return;
+                        else {
+                            isDestinations = true;
+                        }
                     }
 
                     // send data to controller for destination cards render
-                    $scope.$emit('redrawMarkers', highRankedMarkers);
+                    $scope.$emit('redrawMarkers', { markers: highRankedMarkers, isDestinations: isDestinations });
 
-                    $scope.consoleMessage = ('Markers: ' + highRankedMarkers.length);
+                    //$scope.consoleMessage = ('Markers: ' + highRankedMarkers.length);
                     if (UtilFactory.Device.small()) return;   // if small device, do not execute map code
 
                     // for low zoom level pick up some high ranked markers
-                    if ($scope.destinationMap.zoom < 6) {
+                    if ($scope.destinationMap.zoom < 5) {
                         var partition = _.partition(highRankedMarkers, function (item, index) { return index < $scope.destinationMap.zoom * 10 });
                         highRankedMarkers = partition[0];
 
@@ -321,6 +328,7 @@
                             for (var i = 0; i < scope.destinationMarkers.length; i++)
                                 scope.destinationMarkers[i].setMap(null);
                         }
+                        scope.destinationMarkers = [];
                     }, 0, true);
                 }
 

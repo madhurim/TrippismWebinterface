@@ -223,7 +223,7 @@
                 }
 
                 $timeout(function () {
-                    if (!arr.length) $scope.destinationCardList = [];
+                    if (!arr.length) $scope.destinationCardList = [], $scope.isDestinations = false;
                     $rootScope.$broadcast('setMarkerOnMap', {
                         destinationlist: arr,
                         Region: $scope.Region,
@@ -291,11 +291,13 @@
                     alertify.alert(CList).set('onok', function (closeEvent) { });
                     $scope.IscalledFromIknowMyDest = false;
                     $scope.destinationCardList = [];
+                    $scope.isDestinations = false;
                 }
                 else {
                     alertify.alert("Destination Finder", "");
                     alertify.alert('Sorry , we do not have destinations to suggest for this search combination. This can also happen sometimes if the origin airport is not a popular airport. We suggest you try a different search combination or a more popular airport in your area to get destinations.').set('onok', function (closeEvent) { });
                     $scope.destinationCardList = [];
+                    $scope.isDestinations = false;
                 }
 
                 $scope.inProgress = false;
@@ -448,7 +450,7 @@
         }
 
         $scope.loadMoreDestinations = function () {
-            $scope.consoleMessage = (($scope.limitDestinationCards + 6 >= $scope.destinationCardList.length ? $scope.destinationCardList.length : $scope.limitDestinationCards + 6) + ' out of ' + $scope.destinationCardList.length);
+            //$scope.consoleMessage = (($scope.limitDestinationCards + 6 >= $scope.destinationCardList.length ? $scope.destinationCardList.length : $scope.limitDestinationCards + 6) + ' out of ' + $scope.destinationCardList.length);
             if ($scope.limitDestinationCards >= $scope.destinationCardList.length) return;
             $scope.$apply(function () { $scope.limitDestinationCards += 6; });
         }
@@ -467,8 +469,9 @@
 
         $scope.$on('redrawMarkers', function (event, data) {
             $timeout(function () {
-                $scope.destinationCardList = _.map(data, function (i) { return i.markerInfo; });
-                $scope.consoleMessage = (($scope.limitDestinationCards >= $scope.destinationCardList.length ? $scope.destinationCardList.length : $scope.limitDestinationCards) + ' out of ' + $scope.destinationCardList.length);
+                $scope.isDestinations = data.isDestinations;
+                $scope.destinationCardList = _.map(data.markers, function (i) { return i.markerInfo; });
+                //$scope.consoleMessage = (($scope.limitDestinationCards >= $scope.destinationCardList.length ? $scope.destinationCardList.length : $scope.limitDestinationCards) + ' out of ' + $scope.destinationCardList.length);
             }, 0, true)
         });
 
@@ -480,5 +483,10 @@
             sortByPrice = sortByPrice == 'asc' ? 'dsc' : 'asc';
             refineDestinations(false, sortByPrice);
         });
+        //$scope.resetFilter = function () {
+        //    $('#select-theme,#select-region').ddslick('select', { index: 0, disableTrigger: true });
+        //    setFareSliderValues($scope.priceSliderValues.range.min, $scope.priceSliderValues.range.max, $scope.priceSliderValues.range.min, $scope.priceSliderValues.range.max);
+        //    refineDestinations(true);
+        //}
     }
 })();

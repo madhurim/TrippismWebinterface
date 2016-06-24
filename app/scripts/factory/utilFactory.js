@@ -31,7 +31,6 @@
             ReadAirportsCurrency: ReadAirportsCurrency,
             GetAirportCurrency: GetAirportCurrency,
             amountBifurcation: amountBifurcation,
-            DistanceBetweenPoints: DistanceBetweenPoints,
             Device: Device
         };
         return service;
@@ -250,21 +249,5 @@
             };
             return result;
         }
-
-        function DistanceBetweenPoints(p1, p2) {
-            if (!p1 || !p2) {
-                return 0;
-            }
-
-            var R = 6371; // Radius of the Earth in km
-            var dLat = (p2.lat() - p1.lat()) * Math.PI / 180;
-            var dLon = (p2.lng() - p1.lng()) * Math.PI / 180;
-            var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-              Math.cos(p1.lat() * Math.PI / 180) * Math.cos(p2.lat() * Math.PI / 180) *
-              Math.sin(dLon / 2) * Math.sin(dLon / 2);
-            var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-            var d = R * c;
-            return d;
-        };
     }
 })();

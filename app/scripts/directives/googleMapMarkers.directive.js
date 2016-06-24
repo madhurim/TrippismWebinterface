@@ -60,19 +60,20 @@
                 }
 
                 $scope.RenderMap = function (args) {
-                    var maps = args.destinationlist;
+                    var destinations = args.destinationlist;
                     var sortByPrice = args.sortByPrice;
                     $timeout(function () {
                         var bounds = new google.maps.LatLngBounds();
                         $scope.destinationMarkers = [];
-                        for (var x = 0; x < maps.length; x++) {
-                            var latlng1 = new google.maps.LatLng(maps[x].lat, maps[x].lng);
+                        for (var x = 0; x < destinations.length; x++) {
+                            var destination = destinations[x];
+                            var latlng1 = new google.maps.LatLng(destination.lat, destination.lng);
                             var marker = new MarkerWithLabel({
                                 position: latlng1,
                                 map: $scope.destinationMap,
-                                title: maps[x].FullName + ', ' + maps[x].CityName,
-                                markerInfo: maps[x],
-                                labelContent: '<div>' + maps[x].CityName + '<br/><span>' + UtilFactory.GetCurrencySymbol(maps[x].CurrencyCode) + ' ' + Math.ceil(maps[x].LowRate) + '</span></div>',
+                                title: destination.FullName + ', ' + destination.CityName,
+                                markerInfo: destination,
+                                labelContent: '<div>' + destination.CityName + '<br/><span>' + UtilFactory.GetCurrencySymbol(destination.CurrencyCode) + ' ' + Math.ceil(destination.LowRate) + '</span></div>',
                                 labelAnchor: new google.maps.Point(-11, 15),
                                 labelClass: 'Maplabel',
                                 icon: {
@@ -99,7 +100,7 @@
                         google.maps.event.addListener($scope.destinationMap, 'idle', function () {
                             // isStopRedrawMarkers for preventing 'idle' event when destination card is click and we highlight clicked destination on map                            
                             if (!isStopRedrawMarkers)
-                                console.log('idle'), redrawMarkers({ sortByPrice: args.sortByPrice });
+                                redrawMarkers({ sortByPrice: args.sortByPrice });
                             else
                                 isStopRedrawMarkers = null;
                         });
@@ -135,19 +136,20 @@
                         // get markers on current map view port
                         var bounds = $scope.destinationMap.getBounds();
                         for (var i = 0; i < $scope.destinationMarkers.length; i++) {
-                            if (!$scope.destinationMarkers[i].map) continue;
-                            if (bounds.contains($scope.destinationMarkers[i].getPosition())) {
-                                $scope.destinationMarkers[i].isRemoved = false;
-                                highRankedMarkers.push($scope.destinationMarkers[i]);
+                            var marker = $scope.destinationMarkers[i];
+                            if (!marker.map) continue;
+                            if (bounds.contains(marker.getPosition())) {
+                                marker.isRemoved = false;
+                                highRankedMarkers.push(marker);
                             }
-                            else if ($scope.destinationMarkers[i].labelVisible) {
-                                $scope.destinationMarkers[i].setIcon(markerImageObj.small);
-                                $scope.destinationMarkers[i].labelVisible = false;
-                                $scope.destinationMarkers[i].label.draw();
-                                addMarkerListerners($scope.destinationMarkers[i]);
+                            else if (marker.labelVisible) {
+                                marker.setIcon(markerImageObj.small);
+                                marker.labelVisible = false;
+                                marker.label.draw();
+                                addMarkerListerners(marker);
                             }
                             else
-                                addMarkerListerners($scope.destinationMarkers[i]);
+                                addMarkerListerners(marker);
                         }
                     }
                     else
@@ -185,49 +187,54 @@
 
                         // mark all low ranked destinations as a small markers
                         for (var i = 0; i < partition[1].length; i++) {
-                            partition[1][i].setIcon(markerImageObj.small);
-                            partition[1][i].labelVisible = false;
-                            partition[1][i].label.draw();
-                            addMarkerListerners(partition[1][i]);
+                            var obj = partition[1][i];
+                            obj.setIcon(markerImageObj.small);
+                            obj.labelVisible = false;
+                            obj.label.draw();
+                            addMarkerListerners(obj);
                         }
                     }
 
                     // loop through all markers and compare it's distance with others.
                     // If distance is lower than specified value then mark high rank marker as a big icon and others as a small icons.                    
                     for (var i = 0; i < highRankedMarkers.length; i++) {
-                        if (highRankedMarkers[i].isRemoved || !highRankedMarkers[i].map) continue;
+                        var parentMarker = highRankedMarkers[i];
+                        if (parentMarker.isRemoved || !parentMarker.map) continue;
                         var markers = [];
-                        markers.push(highRankedMarkers[i]);
+                        markers.push(parentMarker);
                         for (var j = 0; j < highRankedMarkers.length; j++) {
-                            if (i == j || highRankedMarkers[j].isRemoved) continue;
-                            var distance = UtilFactory.DistanceBetweenPoints(highRankedMarkers[i].position, highRankedMarkers[j].position);
+                            var childMarker = highRankedMarkers[j];
+                            if (i == j || childMarker.isRemoved) continue;
+                            var distance = google.maps.geometry.spherical.computeDistanceBetween(parentMarker.position, childMarker.position) / 1000;
                             if (distance < dist)
-                                markers.push(highRankedMarkers[j]);
+                                markers.push(childMarker);
                         }
 
                         var highLowArr = _.sortBy(markers, function (i) { return sortByPrice ? (sortByPrice == 'asc' ? i.markerInfo.LowRate : i.markerInfo.LowRate * -1) : i.markerInfo.rank; });
 
+                        var highMarker = highLowArr[0];
                         // updating high rank marker
-                        highLowArr[0].setIcon(markerImageObj.big);
-                        highLowArr[0].labelVisible = true;
-                        highLowArr[0].label.draw();
-                        highLowArr[0].setOptions({ zIndex: 1 });
-                        google.maps.event.clearListeners(highLowArr[0], 'mouseover');
-                        google.maps.event.clearListeners(highLowArr[0], 'mouseout');
-                        highLowArr[0].addListener('mouseover', function () {
+                        highMarker.setIcon(markerImageObj.big);
+                        highMarker.labelVisible = true;
+                        highMarker.label.draw();
+                        highMarker.setOptions({ zIndex: 1 });
+                        google.maps.event.clearListeners(highMarker, 'mouseover');
+                        google.maps.event.clearListeners(highMarker, 'mouseout');
+                        highMarker.addListener('mouseover', function () {
                             this.setIcon(markerImageObj.bigOver);
                         });
-                        highLowArr[0].addListener('mouseout', function () {
+                        highMarker.addListener('mouseout', function () {
                             this.setIcon(markerImageObj.big);
                         });
 
                         // updating low rank markers                        
                         for (var j = 1; j < highLowArr.length; j++) {
-                            highLowArr[j].isRemoved = true;
-                            highLowArr[j].setIcon(markerImageObj.small);
-                            highLowArr[j].labelVisible = false;
-                            highLowArr[j].label.draw();
-                            addMarkerListerners(highLowArr[j]);
+                            var lowMarker = highLowArr[j];
+                            lowMarker.isRemoved = true;
+                            lowMarker.setIcon(markerImageObj.small);
+                            lowMarker.labelVisible = false;
+                            lowMarker.label.draw();
+                            addMarkerListerners(lowMarker);
                         }
                     }
                 }
@@ -255,26 +262,27 @@
                         for (var i = 0; i < highRankedMarkers.length; i++) {
                             if (highRankedMarkers[i].markerInfo.DestinationLocation == data.DestinationLocation) {
                                 selectedMarker = highRankedMarkers[i];
-                                if (!highRankedMarkers[i].lastIcon) {
-                                    highRankedMarkers[i].lastIcon = highRankedMarkers[i].icon;
-                                    highRankedMarkers[i].lastLabelVisible = highRankedMarkers[i].labelVisible;
+                                if (!selectedMarker.lastIcon) {
+                                    selectedMarker.lastIcon = selectedMarker.icon;
+                                    selectedMarker.lastLabelVisible = selectedMarker.labelVisible;
                                 }
 
-                                highRankedMarkers[i].setIcon(markerImageObj.bigOverSelect);
-                                highRankedMarkers[i].labelVisible = true;
-                                highRankedMarkers[i].label.draw();
-                                highRankedMarkers[i].setOptions({ zIndex: maxZindex++ });
+                                selectedMarker.setIcon(markerImageObj.bigOverSelect);
+                                selectedMarker.labelVisible = true;
+                                selectedMarker.label.draw();
+                                selectedMarker.setOptions({ zIndex: maxZindex++ });
                                 break;
                             }
                         }
                         for (var i = 0; i < highRankedMarkers.length; i++) {
-                            if (selectedMarker == highRankedMarkers[i]) continue;
-                            var distance = UtilFactory.DistanceBetweenPoints(selectedMarker.position, highRankedMarkers[i].position);
+                            var marker = highRankedMarkers[i];
+                            if (selectedMarker == marker) continue;
+                            var distance = google.maps.geometry.spherical.computeDistanceBetween(selectedMarker.position, marker.position) / 1000;
                             if (distance < dist) {
-                                highRankedMarkers[i].setIcon(markerImageObj.small);
-                                highRankedMarkers[i].labelVisible = false;
-                                highRankedMarkers[i].label.draw();
-                                addMarkerListerners(highRankedMarkers[i]);
+                                marker.setIcon(markerImageObj.small);
+                                marker.labelVisible = false;
+                                marker.label.draw();
+                                addMarkerListerners(marker);
                             }
                         }
                         $scope.destinationMap.panTo(new google.maps.LatLng(data.lat, data.lng));

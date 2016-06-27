@@ -2,12 +2,12 @@
     'use strict';
     //var hostName = "http://api.trippism.com";
     //var hostName = "http://www.trippism.com";
-    var hostName = 'http://dev.trippism.com';
+    //var hostName = 'http://dev.trippism.com';
 
-    //var hostName = 'http://' + window.location.host;
-    //if (angular.lowercase(window.location.host) == "localhost:9000") {
-    //    hostName = 'http://localhost:14606';
-    //}
+    var hostName = 'http://' + window.location.host;
+    if (angular.lowercase(window.location.host) == "localhost:9000") {
+        hostName = 'http://localhost:14606';
+    }
 
     var constants = {
         //destinationImagePath: 'http://content.trippism.com/images/destinations/',
@@ -28,7 +28,8 @@
         apiURLForFeedback: hostName + '/api/Email/SendFeedback',
         apiURLForInstaFlightSearch: hostName + '/api/instaflight',
         apiURLForConstant: hostName + '/api/Constants/',
-        apiURLForHotelRange: hostName + '/api/sabre/hotels'
+        apiURLForHotelRange: hostName + '/api/sabre/hotels',
+        apiURLForTAAttraction: hostName + '/api/tripadvisor/attractions',
     };
     angular.module('TrippismUIApp').constant('urlConstant', constants);
 })();

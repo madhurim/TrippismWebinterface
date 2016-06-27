@@ -35,11 +35,13 @@
         var destinationlistOriginal;   // used for filtering data on refine search click        
         $scope.AvailableThemes = AvailableTheme();
         $scope.AvailableRegions = AvailableRegions();
-        $scope.limitDestinationCards = 15;
+        var limitDestinationCards = 15;
         $scope.PointOfsalesCountry;
         $scope.isModified = false;
         var sortByPrice = 'dsc';
         $scope.refineDestinations = refineDestinations;
+        var destinationCardList = [];
+        var stopEvent = false;  // flag for stopping refineDestinations call
 
         initFareSliderValues();
         LoadAirlineJson();
@@ -164,6 +166,7 @@
         }
 
         function refineDestinations(isSelected, sortByPrice) {
+            if (stopEvent) return;
             if (destinationlistOriginal && destinationlistOriginal.length > 0) {
                 var arr = [];
                 for (var i = 0; i < destinationlistOriginal.length; i++) {
@@ -223,7 +226,7 @@
                 }
 
                 $timeout(function () {
-                    if (!arr.length) $scope.destinationCardList = [], $scope.isDestinations = false;
+                    if (!arr.length) setDestinationCards([]), $scope.isDestinations = false;
                     $rootScope.$broadcast('setMarkerOnMap', {
                         destinationlist: arr,
                         Region: $scope.Region,
@@ -290,13 +293,13 @@
                     alertify.alert("Trippism", "");
                     alertify.alert(CList).set('onok', function (closeEvent) { });
                     $scope.IscalledFromIknowMyDest = false;
-                    $scope.destinationCardList = [];
+                    setDestinationCards([]);
                     $scope.isDestinations = false;
                 }
                 else {
                     alertify.alert("Destination Finder", "");
                     alertify.alert('Sorry , we do not have destinations to suggest for this search combination. This can also happen sometimes if the origin airport is not a popular airport. We suggest you try a different search combination or a more popular airport in your area to get destinations.').set('onok', function (closeEvent) { });
-                    $scope.destinationCardList = [];
+                    setDestinationCards([]);
                     $scope.isDestinations = false;
                 }
 
@@ -450,9 +453,9 @@
         }
 
         $scope.loadMoreDestinations = function () {
-            //$scope.consoleMessage = (($scope.limitDestinationCards + 6 >= $scope.destinationCardList.length ? $scope.destinationCardList.length : $scope.limitDestinationCards + 6) + ' out of ' + $scope.destinationCardList.length);
-            if ($scope.limitDestinationCards >= $scope.destinationCardList.length) return;
-            $scope.$apply(function () { $scope.limitDestinationCards += 6; });
+            if (limitDestinationCards >= destinationCardList.length) return;
+            limitDestinationCards += 6;
+            setDestinationCards(destinationCardList);
         }
 
         $('#select-theme').ddslick({
@@ -468,11 +471,9 @@
         });
 
         $scope.$on('redrawMarkers', function (event, data) {
-            $timeout(function () {
-                $scope.isDestinations = data.isDestinations;
-                $scope.destinationCardList = _.map(data.markers, function (i) { return i.markerInfo; });
-                //$scope.consoleMessage = (($scope.limitDestinationCards >= $scope.destinationCardList.length ? $scope.destinationCardList.length : $scope.limitDestinationCards) + ' out of ' + $scope.destinationCardList.length);
-            }, 0, true)
+            $scope.isDestinations = data.isDestinations;
+            data = _.map(data.markers, function (i) { return i.markerInfo; });
+            setDestinationCards(data);
         });
 
         $scope.$on('displayOnMap', function (event, data) {
@@ -483,10 +484,19 @@
             sortByPrice = sortByPrice == 'asc' ? 'dsc' : 'asc';
             refineDestinations(false, sortByPrice);
         });
-        //$scope.resetFilter = function () {
-        //    $('#select-theme,#select-region').ddslick('select', { index: 0, disableTrigger: true });
-        //    setFareSliderValues($scope.priceSliderValues.range.min, $scope.priceSliderValues.range.max, $scope.priceSliderValues.range.min, $scope.priceSliderValues.range.max);
-        //    refineDestinations(true);
-        //}
+
+        function setDestinationCards(data) {
+            $timeout(function () {
+                destinationCardList = data;
+                $scope.destinationCardListDisp = $filter('limitTo')(data, limitDestinationCards);
+            }, 0, true)
+        }
+        $scope.resetFilter = function () {
+            stopEvent = true;
+            $('#select-theme,#select-region').ddslick('select', { index: 0 });
+            setFareSliderValues($scope.priceSliderValues.range.min, $scope.priceSliderValues.range.max, $scope.priceSliderValues.range.min, $scope.priceSliderValues.range.max);
+            stopEvent = false;
+            $timeout(function () { refineDestinations(true); }, 0, false);
+        }
     }
 })();

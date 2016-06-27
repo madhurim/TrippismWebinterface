@@ -41,6 +41,7 @@
         var sortByPrice = 'dsc';
         $scope.refineDestinations = refineDestinations;
         var destinationCardList = [];
+        var stopEvent = false;  // flag for stopping refineDestinations call
 
         initFareSliderValues();
         LoadAirlineJson();
@@ -165,6 +166,7 @@
         }
 
         function refineDestinations(isSelected, sortByPrice) {
+            if (stopEvent) return;
             if (destinationlistOriginal && destinationlistOriginal.length > 0) {
                 var arr = [];
                 for (var i = 0; i < destinationlistOriginal.length; i++) {
@@ -489,10 +491,12 @@
                 $scope.destinationCardListDisp = $filter('limitTo')(data, limitDestinationCards);
             }, 0, true)
         }
-        //$scope.resetFilter = function () {
-        //    $('#select-theme,#select-region').ddslick('select', { index: 0, disableTrigger: true });
-        //    setFareSliderValues($scope.priceSliderValues.range.min, $scope.priceSliderValues.range.max, $scope.priceSliderValues.range.min, $scope.priceSliderValues.range.max);
-        //    refineDestinations(true);
-        //}
+        $scope.resetFilter = function () {
+            stopEvent = true;
+            $('#select-theme,#select-region').ddslick('select', { index: 0 });
+            setFareSliderValues($scope.priceSliderValues.range.min, $scope.priceSliderValues.range.max, $scope.priceSliderValues.range.min, $scope.priceSliderValues.range.max);
+            stopEvent = false;
+            $timeout(function () { refineDestinations(true); }, 0, false);
+        }
     }
 })();

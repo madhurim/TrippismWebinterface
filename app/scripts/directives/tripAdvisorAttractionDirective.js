@@ -1,13 +1,13 @@
-﻿angular.module('TrippismUIApp').directive('taattractionInfo',
-                                            ['$rootScope',
+﻿angular.module('TrippismUIApp').directive('tripAdvisorAttractions', ['$rootScope',
                                                 '$timeout',
                                                 '$filter',
                                                 '$sce',
-                                                'TAAttractionFactory',
+                                                '$modal',
+                                                'TripAdvisorAttractionFactory',
                                                 'DestinationFactory',
                                                 'dataConstant',
                                                 'urlConstant',
-    function ($rootScope, $timeout, $filter, $sce, TAAttractionFactory, DestinationFactory, dataConstant, urlConstant) {
+    function ($rootScope, $timeout, $filter, $sce, $modal, TripAdvisorAttractionFactory, DestinationFactory, dataConstant, urlConstant) {
         return {
             restrict: 'E',
             scope: { googleattractionParams: '=', isOpen: '=' },
@@ -29,7 +29,7 @@
                 $scope.MapLoaded = false;
                 var airportMarkerLatLog;    //for storing airport marker's lat/lon
                 // get attraction object from factory
-                var attractionsData = TAAttractionFactory.getAttractionList();
+                var attractionsData = TripAdvisorAttractionFactory.getAttractionList();
                 var markerList = [];
                 $scope.$on('ontabClicked', function (event, args) {
                     if ($scope.MapLoaded) {
@@ -135,8 +135,7 @@
 
                         var attractionDetail = _.find(attractionsData, function (item) { return type === item.name; });
                         if (attractionDetail) {
-                            // setting parameters for requested attraction 
-                            data.subCategory = attractionDetail.subCategory;
+                            // setting parameters for requested attraction                            
                             var isSetCenter = attractionDetail.isDefault;
 
                             // setting map option, used into view
@@ -148,24 +147,28 @@
                                 mapTypeId: google.maps.MapTypeId.ROADMAP
                             };
                             $scope.attractionMessage = 'Getting things to do in ' + $scope.googleattractionParams.DestinationAirport.airport_CityName;
-                            $scope.googleattractionpromise = TAAttractionFactory.googleAttraction(data).then(function (data) {
-                                debugger
+                            if (type == 'Restaurants') {
+                                $scope.googleattractionpromise = TripAdvisorAttractionFactory.getRestaurants(data);
+                            }
+                            else {
+                                data.subCategory = attractionDetail.subCategory;
+                                $scope.googleattractionpromise = TripAdvisorAttractionFactory.getAttractions(data);
+                            }
+
+                            $scope.googleattractionpromise.then(function (data) {
                                 // set airport marker only first time.
                                 if (isSetCenter)
                                     setAirportMarkerOnMap();
 
-                                //{"Address":{"Street1":"2100 NW 42nd Ave","Street2":"Concourse D, near Gate D12, on the 4th floor","City":"Miami","State":"Florida","Country":"United States"},
-                                //    "Distance":".35","Latitude":"25.79852","Rating":"4.0","LocationId":"8811385",
-                                //    "Ranking":{"RankingInfo":"#59 of 227 things to do in Miami","RankingOutOf":"227","GeoLocationId":"34438","Ranking":"59","GeoLocationName":"Miami"},
-                                //    "Location":"Miami, Florida","WebUrl":"https://www.tripadvisor.com/Attraction_Review-g34438-d8811385-Reviews-m34853-The_Centurion_Lounge-Miami_Florida.html","RatingImageUrl":"http://www.tripadvisor.com/img/cdsi/img2/ratings/traveler/4.0-34853-5.png",
-                                //    "Name":"The Centurion Lounge","NumReviews":"55","Category":{"Name":"attraction","LocalizedName":"Attraction"},
-                                //    "SeeAllPhotos":"https://www.tripadvisor.com/Attraction_Review-g34438-d8811385-m34853-Reviews-The_Centurion_Lounge-Miami_Florida.html#photos","Longitude":"-80.27337",
-                                //    "AttractionTypes":[{"Name":"airport lounges","LocalizedName":"Airport Lounges"}]}"
-
                                 if (data && data.Attractions && data.Attractions.length > 0) {
                                     data.Attractions = _.map(data.Attractions, function (i) {
                                         return {
-
+                                            geometry: { location: { lat: i.Latitude, lng: i.Longitude } },
+                                            id: i.Ranking ? i.Ranking.GeoLocationId : null,
+                                            place_id: i.Ranking ? i.Ranking.GeoLocationId : null,
+                                            name: i.Name,
+                                            rating: i.Rating,
+                                            vicinity: i.Address.Street1
                                         }
                                     });
                                     markerList.push({ results: data.Attractions, type: type });
@@ -175,22 +178,6 @@
                                 $scope.attractionsplaces = { type: type, results: data.Attractions };
                             });
                         }
-                    }
-                };
-
-                // used to load more attractions from next_page_token
-                $scope.loadMoreGoogleAttractionInfo = function () {
-                    if ($scope.googleattractionParams != undefined && $scope.attractionsplaces.next_page_token) {
-                        var data = {
-                            "NextPageToken": $scope.attractionsplaces.next_page_token
-                        };
-                        $scope.googleattractionpromise = TAAttractionFactory.googleAttraction(data).then(function (data) {
-                            setAirportMarkerOnMap();
-                            if (data.status != 404) {
-                                $scope.attractionsplaces = { next_page_token: data.next_page_token, results: data.results };
-                                RenderMap(data.results, type);
-                            }
-                        });
                     }
                 };
 
@@ -282,5 +269,18 @@
                         return attraction.markerImage;
                 }
             },
+            link: function ($scope, elem, attr) {
+                $scope.attractionPopup = function (attractionData) {
+                    var attractionPopupInstance = $modal.open({
+                        templateUrl: urlConstant.partialViewsPath + 'attractionPopupPartial.html',
+                        controller: 'AttractionPopupController',
+                        scope: $scope,
+                        size: 'lg',
+                        resolve: {
+                            attractionData: function () { return attractionData; }
+                        }
+                    });
+                };
+            }
         }
     }]);

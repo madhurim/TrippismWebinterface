@@ -1,56 +1,6 @@
-﻿<div class="attr-wrapper">
-    <div class="" style="clear:both;" cg-busy="{promise:googleattractionpromise,message:'Getting things to do in '+ googleattractionParams.DestinationairportName.airport_CityName}">
+﻿<div class="attr-wrapper" id="attrmapwrapper">
+    <div class="" style="clear:both;" cg-busy="{promise:googleattractionpromise,message:attractionMessage}">
         <div ui-map="googleattractionsMap" id="gMapId_" ui-options="attractionmapOptions" style="width:100%;min-height:200px;" class="map-canvas"></div>
     </div>
-    <attraction-list class="attraction-slide" attractiontabindex="googleattractionParams.tabIndex" attractionmap="googleattractionsMap" attractions="attractionsplaces" load-more-attraction-info="loadMoreGoogleAttractionInfo()" load-attraction-info="loadgoogleattractionInfo(type)"></attraction-list>
-    <div ng-show="IsMarkerSelected" id="googleMapId_" class="popupmarker" ng-class="attractionReviews.length > 0 ? 'popupmarker-lg' : 'popupmarker-md'">
-        <div class="modal-content">
-            <div class="modal-header head ng-scope" style="padding-bottom: 24px !important;">
-                <button class="close closebutton" style="margin-top:2px !important;" ng-click="cancel()" type="button">×</button>
-            </div>
-            <div ng-show="IsMapPopupLoading" class="sqrloadclass" style="padding-top:10px;padding-bottom:0px;">
-            </div>
-            <div class="modal-body" style="padding:0px;" ng-show="!IsMapPopupLoading">
-                <div class="col-md-12">
-                    <div ng-class="attractionReviews.length > 0 ? 'col-md-8' : 'col-md-12 padding-0'">
-                        <div style="height:400px;overflow:auto;" ng-if="slides.length == 0">
-                            <img height="300" width="500" src="../images/noimageavailable.png">
-                        </div>
-                        <div style="height:400px;overflow:auto;" ng-if="slides.length > 0">
-                            <carousel no-wrap="false" class="slidercarsoul">
-                                <slide ng-repeat="slide in slides" active="slide.active">
-                                    <img ng-src="{{slide.image}}" style="margin:auto;max-width:570px;max-height:400px;display:inline-block;">
-                                    <div class="carousel-caption">
-                                    </div>
-                                </slide>
-                            </carousel>
-                        </div>
-                        <div style="color:black;font-size:14px;margin-top:5px;margin-bottom:5px;">
-                            <div class="col-md-12 padleft0"><strong>{{PlaceName }}</strong><br></div>
-                            <div style="word-wrap:break-word;" ng-bind-html="Placeaddress"></div>
-                            {{PhoneNo}}
-                            <div ng-bind-html="raitingToAppend"></div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 review-wrapper">
-                        <div class="attr-title" ng-if="attractionReviews.length > 0">Google+ reviews</div>
-                        <div class="contentVertical review">
-                            <div ng-if="attractionReviews.length > 0">
-                                <div class="col-md-12 review-inner" ng-repeat="item in attractionReviews">
-                                    <p class="margin-bottom-0 p-text-align">{{item.text}}</p>
-                                    <div class="review-repeat">
-                                        <span>Overall rating :</span>
-                                        <div ng-bind-html="item.rating"></div>
-                                    </div>
-                                    <p class="review-author">- {{item.author_name}}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clear"></div>
-                    </div>
-                </div>
-                <div class="clear"></div>
-            </div>
-        </div>
-    </div>
+    <attraction-list class="attraction-slide" attractiontabindex="googleattractionParams.tabIndex" attractionmap="googleattractionsMap" attractions="attractionsplaces" load-more-attraction-info="loadMoreGoogleAttractionInfo()" load-attraction-info="loadgoogleattractionInfo(type,obj)"></attraction-list>
 </div>

@@ -25,12 +25,8 @@
         var service = {
             findDestinations: findDestinations,
             findInstFlightDestination: findInstFlightDestination,
-            ShowDestinationView: true,
             GetDestinationFareInfo: GetDestinationFareInfo,
             DestinationDataStorage: DestinationDataStorage
-            //getDestinationData: getDestinationData,
-            //setDestinationData: setDestinationData,
-            //clearDestinationData: clearDestinationData,
         };
         return service;
         function findDestinations(paramdata) {

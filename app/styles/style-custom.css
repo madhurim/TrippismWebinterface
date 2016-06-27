@@ -1572,7 +1572,6 @@ ul .stop-line {
     font-size: 11px;
     line-height: 15px;
     text-shadow: 0px 0px 1px #f1efe8, 0px 0px 1px #f1efe8, 0px 0px 2px #f1efe8, 1px 1px 5px rgba(0,0,0,0.4);
-    -webkit-font-smoothing: antialiased;
 }
 
 .Maplabel span {
@@ -1581,7 +1580,6 @@ ul .stop-line {
     font-weight: bold;
     font-size: 13px;
     text-shadow: 0px 0px 1px #f1efe8, 0px 0px 1px #f1efe8, 0px 0px 2px #f1efe8, 1px 1px 5px rgba(0,0,0,0.4);
-    -webkit-font-smoothing: antialiased;
 }
 
 .dropdown-tag {
@@ -1594,6 +1592,16 @@ ul .stop-line {
     text-align: center;
     color: #585858;
     margin-right: 4px;
+    margin-left: 10px;
+}
+
+.text-ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.margin-left-10 {
     margin-left: 10px;
 }
 
@@ -1867,6 +1875,10 @@ ul .stop-line {
     .video {
         width: 100%;
         height: 172px;
+    }
+
+    .gauge-label .font-imp {
+        font-size: 12px;
     }
 }
 /*#endregion Media queries */

@@ -39,7 +39,6 @@
         $scope.PointOfsalesCountry;
         $scope.isModified = false;
         var sortByPrice = 'dsc';
-        $scope.refineDestinations = refineDestinations;
         var destinationCardList = [];
         var stopEvent = false;  // flag for stopping refineDestinations call
 
@@ -166,10 +165,10 @@
             return destinationsToDisp;
         }
 
-        function refineDestinations(isSelected, sortByPrice) {
+        $scope.refineDestinations = function (isSelected, sortByPrice) {
             if (stopEvent) return;
-            $scope.destinationCardListDisp = null;
             if (destinationlistOriginal && destinationlistOriginal.length > 0) {
+                $scope.destinationCardListDisp = null;
                 $scope.isReset = true;
                 var arr = [];
                 for (var i = 0; i < destinationlistOriginal.length; i++) {
@@ -227,17 +226,14 @@
                         r: $scope.ToDate
                     });
                 }
-
-                $timeout(function () {
-                    if (!arr.length) setDestinationCards([]), $scope.isDestinations = false;
-                    $rootScope.$broadcast('setMarkerOnMap', {
-                        destinationlist: arr,
-                        Region: $scope.Region,
-                        Theme: $scope.Theme,
-                        Price: $scope.priceSliderValues.values.max != $scope.priceSliderValues.range.max || $scope.priceSliderValues.values.min != $scope.priceSliderValues.range.min,
-                        sortByPrice: sortByPrice
-                    });
-                }, 0, true);
+                if (!arr.length) setDestinationCards([]), $scope.isDestinations = false;
+                $rootScope.$broadcast('setMarkerOnMap', {
+                    destinationlist: arr,
+                    Region: $scope.Region,
+                    Theme: $scope.Theme,
+                    Price: $scope.priceSliderValues.values.max != $scope.priceSliderValues.range.max || $scope.priceSliderValues.values.min != $scope.priceSliderValues.range.min,
+                    sortByPrice: sortByPrice
+                });
             }
         }
 
@@ -308,7 +304,7 @@
 
                 $scope.inProgress = false;
                 loadScrollbars();
-                refineDestinations();
+                $scope.refineDestinations();
             });
 
             $scope.selectedform = 'SuggestDestination';
@@ -388,14 +384,14 @@
                 $scope.previousTheme = name;
                 $scope.Theme = name;
             }
-            refineDestinations(true);
+            $scope.refineDestinations(true);
         }
         $scope.displayRegion = function (name) {
             if ($scope.previousRegion != name) {
                 $scope.previousRegion = name;
                 $scope.Region = name;
             }
-            refineDestinations(true);
+            $scope.refineDestinations(true);
         }
 
         // used for max/min refine search slider
@@ -463,13 +459,13 @@
 
         $('#select-theme').ddslick({
             onSelected: function (data) {
-                $scope.displayTheme(data.selectedData.value);
+                $timeout(function () { $scope.displayTheme(data.selectedData.value); }, 0, true);
             }
         });
 
         $('#select-region').ddslick({
             onSelected: function (data) {
-                $scope.displayRegion(data.selectedData.value);
+                $timeout(function () { $scope.displayRegion(data.selectedData.value); }, 0, true);
             }
         });
 
@@ -485,7 +481,7 @@
 
         $scope.$on('sortCardsByPrice', function () {
             sortByPrice = sortByPrice == 'asc' ? 'dsc' : 'asc';
-            refineDestinations(false, sortByPrice);
+            $scope.refineDestinations(false, sortByPrice);
         });
 
         function setDestinationCards(data) {
@@ -498,8 +494,7 @@
             stopEvent = true;
             $('#select-theme,#select-region').ddslick('select', { index: 0 });
             setFareSliderValues($scope.priceSliderValues.range.min, $scope.priceSliderValues.range.max, $scope.priceSliderValues.range.min, $scope.priceSliderValues.range.max);
-            stopEvent = false;
-            $timeout(function () { refineDestinations(true); }, 0, false);
+            $timeout(function () { stopEvent = false; $scope.refineDestinations(true); }, 0, false);
         }
     }
 })();

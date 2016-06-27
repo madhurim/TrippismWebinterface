@@ -105,6 +105,7 @@
                         updateSearchCriteria();
                         $timeout(function () { $scope.$broadcast('setMarkerOnMap'); }, 0, false)
                         $scope.isModified = true;
+                        setDestinationCards([]);
                         return false;
                     }
 
@@ -167,7 +168,9 @@
 
         function refineDestinations(isSelected, sortByPrice) {
             if (stopEvent) return;
+            $scope.destinationCardListDisp = null;
             if (destinationlistOriginal && destinationlistOriginal.length > 0) {
+                $scope.isReset = true;
                 var arr = [];
                 for (var i = 0; i < destinationlistOriginal.length; i++) {
                     var destination = destinationlistOriginal[i];

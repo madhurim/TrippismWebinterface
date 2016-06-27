@@ -13,7 +13,7 @@
             template: '<ng-include src="getsrc();" />',
             controller: ['$scope', function ($scope) {
                 $scope.getsrc = function () {
-                    return $scope.templateUrl || 'Views/Partials/HotelRangePartial.html';
+                    return $scope.templateUrl || 'views/partials/hotelRangePartial.html';
                 }
                 $scope.hotelRequestComplete = false;
                 UtilFactory.ReadAirportsCurrency().then(function (response) {

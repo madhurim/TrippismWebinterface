@@ -98,7 +98,7 @@
                             <div ng-show="!isDestinations">
                                 We didn't find any destinations based on your current search.<br />
                                 Please try searching with different parameters.
-                                <div class="margin-top-15"><input type="button" class="btn btn-default font-16" ng-click="resetFilter();" value="Reset" /></div>
+                                <div class="margin-top-15" ng-show="isReset"><input type="button" class="btn btn-default font-16" ng-click="resetFilter();" value="Reset" style="color:inherit;" /></div>
                             </div>
                             <div ng-show="isDestinations">
                                 There are no destinations in this map view.<br />

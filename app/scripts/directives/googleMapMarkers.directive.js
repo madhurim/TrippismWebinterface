@@ -266,9 +266,9 @@
                             selectedMarker.lastLabelVisible = null;
                         }
                         selectedMarker = null;
-                        for (var i = 0; i < highRankedMarkers.length; i++) {
-                            if (highRankedMarkers[i].markerInfo.DestinationLocation == data.DestinationLocation) {
-                                selectedMarker = highRankedMarkers[i];
+                        for (var i = 0; i < $scope.destinationMarkers.length; i++) {
+                            if ($scope.destinationMarkers[i].markerInfo.DestinationLocation == data.DestinationLocation) {
+                                selectedMarker = $scope.destinationMarkers[i];
                                 if (!selectedMarker.lastIcon) {
                                     selectedMarker.lastIcon = selectedMarker.icon;
                                     selectedMarker.lastLabelVisible = selectedMarker.labelVisible;

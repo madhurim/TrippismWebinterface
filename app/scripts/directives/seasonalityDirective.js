@@ -24,7 +24,7 @@
                             $timeout(function () {
                                 scope.seasonalitypromise = SeasonalityFactory.Seasonality(Seasonalitydata).then(function (data) {
 
-                                    if (data.status == 404) {
+                                    if (data.status != 200) {
                                         scope.SeasonalityNoDataFound = true;
                                         return;
                                     }

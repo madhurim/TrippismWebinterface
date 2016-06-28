@@ -55,7 +55,8 @@ angular.module('TrippismUIApp').directive('attractionList', ['$sce', '$rootScope
                                         raitingToAppend: raitingToAppend,
                                         type: scope.attractions.type,
                                         details: results[i].details,
-                                        provider: results[i].provider
+                                        provider: results[i].provider,
+                                        locationId: results[i].locationId
                                     };
                                     scope.attractionstoDisp.push(placedetails);
                                 }
@@ -70,7 +71,7 @@ angular.module('TrippismUIApp').directive('attractionList', ['$sce', '$rootScope
                 }
             }
 
-            scope.SelectPlace = function (place) {
+            scope.selectPlace = function (place) {
                 var sliderdata = {
                     tabIndex: scope.attractiontabindex,
                     place: place,

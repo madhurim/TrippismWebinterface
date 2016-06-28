@@ -37,7 +37,7 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory,
                 //Coding for get fareforcast data
                 $scope.fareinfopromise = FareforecastFactory.fareforecast($scope.widgetParams.Fareforecastdata).then(function (data) {
                     $scope.IsRequestCompleted = true;
-                    if (data.status == 404 || data.status == 400) {
+                    if (data.status != 200) {
                         $scope.FareNoDataFound = true;
                         $scope.$emit('widgetLoaded', { name: "fareforcastinfo", isVisible: false });
                         return;

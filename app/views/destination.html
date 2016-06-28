@@ -18,8 +18,8 @@
                     <tabset class="cust-tab hidden-xs">
                         <tab ng-repeat="tab in attractionTabs" heading="{{tab.title}}" active="tab.isActive">
                             <div class="attr-container">
-                                <googleattraction-info ng-if="tab.title=='Google' && tab.isActive" googleattraction-params="params" class="googleattraction" style="clear:both;"></googleattraction-info>
-                                <trip-advisor-attractions ng-if="tab.title=='TripAdvisor' && tab.isActive" googleattraction-params="params" class="googleattraction" style="clear:both;"></trip-advisor-attractions>
+                                <google-attractions ng-if="tab.title=='Google' && tab.isActive" google-attraction-params="params" class="googleattraction" style="clear:both;"></google-attractions>
+                                <trip-advisor-attractions ng-if="tab.title=='TripAdvisor' && tab.isActive" google-attraction-params="params" class="googleattraction" style="clear:both;"></trip-advisor-attractions>
                             </div>
                         </tab>
                     </tabset>

@@ -1,5 +1,4 @@
-﻿angular.module('TrippismUIApp').directive('googleattractionInfo',
-                                            ['$rootScope',
+﻿angular.module('TrippismUIApp').directive('googleAttractions', ['$rootScope',
                                                 'GoogleAttractionFactory',
                                                 '$timeout',
                                                 '$filter',
@@ -10,53 +9,40 @@
 function ($rootScope, GoogleAttractionFactory, $timeout, $filter, dataConstant, DestinationFactory, $modal, urlConstant) {
     return {
         restrict: 'E',
-        scope: { googleattractionParams: '=', isOpen: '=' },
+        scope: { googleAttractionParams: '=' },
         templateUrl: urlConstant.partialViewsPath + 'googleAttractionPartial.html',
         controller: function ($scope) {
-            $scope.$watch('googleattractionParams', function (newValue, oldValue) {
+            $scope.$watch('googleAttractionParams', function (newValue, oldValue) {
                 if (newValue != undefined && newValue.DestinationAirport != undefined) {
                     var defaultAttractionTab = _.find(attractionsData, function (item) { return item.isDefault == true; });
                     if (defaultAttractionTab)
-                        $scope.loadgoogleattractionInfo(defaultAttractionTab.name);
+                        $scope.loadAttractionInfo(defaultAttractionTab.name);
                 }
             });
 
-            $scope.RenderMap = RenderMap;
+            $scope.renderMap = renderMap;
             $scope.setAirportMarkerOnMap = setAirportMarkerOnMap;
-            $scope.googleattractionsMap = undefined;
-            $scope.AttractionMarkers = [];
+            $scope.attractionsMap = undefined;
+            $scope.attractionMarkers = [];
             $scope.bounds = new google.maps.LatLngBounds();
-            $scope.MapLoaded = false;
+            $scope.mapLoaded = false;
             var airportMarkerLatLog;    //for storing airport marker's lat/lon
             // get attraction object from factory
             var attractionsData = GoogleAttractionFactory.getAttractionList();
             var markerList = [];
-            $scope.$on('ontabClicked', function (event, args) {
-                if ($scope.MapLoaded) {
-                    $timeout(function () {
-                        $scope.FittoScreen();
-                    }, 100, false);
-                }
-                else {
-                    var defaultAttractionTab = _.find(attractionsData, function (item) { return item.isDefault == true; });
-                    if (defaultAttractionTab)
-                        $scope.loadgoogleattractionInfo(defaultAttractionTab.name);
-                }
-            });
 
             $scope.$on('onMarkerPopup', function (event, args) {
                 $scope.attractionPopup(args.place);
             });
 
             // resize google map and fit all the bounds into viewport
-            $scope.FittoScreen = function () {
-                google.maps.event.trigger($scope.googleattractionsMap, 'resize');
-                $scope.googleattractionsMap.fitBounds($scope.bounds);
+            $scope.fitToScreen = function () {
+                google.maps.event.trigger($scope.attractionsMap, 'resize');
+                $scope.attractionsMap.fitBounds($scope.bounds);
             }
 
-            var mapStyle = dataConstant.attractionTabMapStyle;
             // setting map option, used into view
-            $scope.attractionmapOptions = {
+            $scope.attractionMapOptions = {
                 center: new google.maps.LatLng(0, 0),
                 zoom: 11,
                 minZoom: 4,
@@ -65,7 +51,7 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, dataConstant, 
                     position: google.maps.ControlPosition.RIGHT_CENTER,
                     style: google.maps.ZoomControlStyle.LARGE
                 },
-                styles: mapStyle,
+                styles: dataConstant.attractionTabMapStyle,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
 
@@ -79,56 +65,32 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, dataConstant, 
             }
 
             $timeout(function () {
-                google.maps.event.trigger($scope.googleattractionsMap, 'resize');
-            }, 1000, false);
+                google.maps.event.trigger($scope.attractionsMap, 'resize');
+            }, 0, false);
 
             // get attractions from API
-            $scope.loadgoogleattractionInfo = function (type) {
+            $scope.loadAttractionInfo = function (type) {
                 $scope.attractionsplaces = [];
-                if ($scope.googleattractionParams != undefined) {
+                if ($scope.googleAttractionParams != undefined) {
                     var data = {
-                        Latitude: $scope.googleattractionParams.DestinationAirport.airport_Lat,
-                        Longitude: $scope.googleattractionParams.DestinationAirport.airport_Lng,
+                        Latitude: $scope.googleAttractionParams.DestinationAirport.airport_Lat,
+                        Longitude: $scope.googleAttractionParams.DestinationAirport.airport_Lng,
                         radius: 48300
                     };
 
                     var markerObj = _(markerList).find(function (item) { return item.type == type });
                     if (markerObj) {
-                        RenderMap(markerObj.results, type);
+                        renderMap(markerObj.results, type);
                         return;
                     }
 
                     if (type == 'hotels') {
-                        var key = {
-                            Origin: $scope.googleattractionParams.SearchCriteria.Origin,
-                            Destination: $scope.googleattractionParams.SearchCriteria.DestinationLocation,
-                            StartDate: ConvertToRequiredDate($scope.googleattractionParams.SearchCriteria.FromDate, 'API'),
-                            EndDate: ConvertToRequiredDate($scope.googleattractionParams.SearchCriteria.ToDate, 'API'),
-                        };
-                        var object;
-                        var cacheData = DestinationFactory.DestinationDataStorage.hotel.get(key);
-                        if (cacheData) {
-                            object = _.chain(cacheData.data).map(function (item) {
-                                var itemData = item.HotelDetail;
-                                var rating = itemData.HotelRating ? itemData.HotelRating[0].RatingText.substring(0, 1) : 0;
-                                return {
-                                    geometry:
-                                       itemData.Latitude ? {
-                                           location: { lat: itemData.Latitude, lng: itemData.Longitude }
-                                       } : null,
-                                    name: itemData.HotelName.toLowerCase(),
-                                    vicinity: (itemData.Address[0] + ', ' + itemData.Address[1]).toLowerCase(),
-                                    rating: rating,
-                                    type: 'hotels',
-                                    details: { FreeWifiInRooms: itemData.PropertyOptionInfo.FreeWifiInRooms, RateRange: itemData.RateRange, Rating: rating }
-                                }
-                            }).compact().sortBy(function (item) { return item.details.RateRange ? parseFloat(item.details.RateRange.Min) : Infinity; }).value();
-                            if (object && object.length)
-                                markerList.push({ results: object, type: type });
-                        }
+                        var object = getHotelData();
+                        if (object && object.length)
+                            markerList.push({ results: object, type: type });
 
-                        RenderMap(object, type);
-                        $scope.MapLoaded = true;
+                        renderMap(object, type);
+                        $scope.mapLoaded = true;
                         $scope.attractionsplaces = { type: type, next_page_token: null, results: object && object.length > 0 ? object : null };
                         return;
                     }
@@ -141,14 +103,14 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, dataConstant, 
                         var isSetCenter = attractionDetail.isDefault;
 
                         // setting map option, used into view
-                        $scope.attractionmapOptions = {
-                            center: new google.maps.LatLng($scope.googleattractionParams.DestinationAirport.airport_Lat, $scope.googleattractionParams.DestinationAirport.airport_Lng),
+                        $scope.attractionMapOptions = {
+                            center: new google.maps.LatLng($scope.googleAttractionParams.DestinationAirport.airport_Lat, $scope.googleAttractionParams.DestinationAirport.airport_Lng),
                             zoom: 12,
                             minZoom: 4,
                             backgroundColor: "#BCCFDE",
                             mapTypeId: google.maps.MapTypeId.ROADMAP
                         };
-                        $scope.attractionMessage = 'Getting things to do in ' + $scope.googleattractionParams.DestinationAirport.airport_CityName;
+                        $scope.attractionMessage = 'Getting things to do in ' + $scope.googleAttractionParams.DestinationAirport.airport_CityName;
                         $scope.googleAttractionPromise = GoogleAttractionFactory.googleAttraction(data).then(function (data) {
                             // set airport marker only first time.
                             if (isSetCenter)
@@ -159,8 +121,8 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, dataConstant, 
                             }
                             if (data.results && data.results.length > 0)
                                 markerList.push({ results: data.results, type: type });
-                            RenderMap(data.results, type);
-                            $scope.MapLoaded = true;
+                            renderMap(data.results, type);
+                            $scope.mapLoaded = true;
                             $scope.attractionsplaces = { type: type, next_page_token: data.next_page_token, results: data.results };
                         });
                     }
@@ -169,7 +131,7 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, dataConstant, 
 
             // used to load more attractions from next_page_token
             $scope.loadMoreGoogleAttractionInfo = function () {
-                if ($scope.googleattractionParams != undefined && $scope.attractionsplaces.next_page_token) {
+                if ($scope.googleAttractionParams != undefined && $scope.attractionsplaces.next_page_token) {
                     var data = {
                         "NextPageToken": $scope.attractionsplaces.next_page_token
                     };
@@ -177,7 +139,7 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, dataConstant, 
                         setAirportMarkerOnMap();
                         if (data.status != 404) {
                             $scope.attractionsplaces = { next_page_token: data.next_page_token, results: data.results };
-                            RenderMap(data.results, type);
+                            renderMap(data.results, type);
                         }
                     });
                 }
@@ -186,11 +148,11 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, dataConstant, 
             // set airport marker on map
             function setAirportMarkerOnMap() {
                 createMapLabelControl();
-                airportMarkerLatLog = new google.maps.LatLng($scope.googleattractionParams.DestinationAirport.airport_Lat, $scope.googleattractionParams.DestinationAirport.airport_Lng);
+                airportMarkerLatLog = new google.maps.LatLng($scope.googleAttractionParams.DestinationAirport.airport_Lat, $scope.googleAttractionParams.DestinationAirport.airport_Lng);
                 var marker = new MarkerWithLabel({
                     position: airportMarkerLatLog,
-                    map: $scope.googleattractionsMap,
-                    title: $scope.googleattractionParams.DestinationAirport.airport_FullName,
+                    map: $scope.attractionsMap,
+                    title: $scope.googleAttractionParams.DestinationAirport.airport_FullName,
                     labelAnchor: new google.maps.Point(12, 35),
                     labelInBackground: false,
                     visible: true,
@@ -202,8 +164,8 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, dataConstant, 
                 $scope.bounds.extend(airportMarkerLatLog);
             }
             // set markers
-            function RenderMap(maps, type) {
-                $scope.AttractionMarkers.forEach(function (marker) {
+            function renderMap(maps, type) {
+                $scope.attractionMarkers.forEach(function (marker) {
                     marker.setMap(null);
                 });
                 if (maps != undefined && maps.length > 0) {
@@ -214,7 +176,7 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, dataConstant, 
                     if (airportMarkerLatLog)
                         $scope.bounds.extend(airportMarkerLatLog);
 
-                    $scope.AttractionMarkers = [];
+                    $scope.attractionMarkers = [];
                     // used for clearing all markers
                     for (var x = 0; x < maps.length; x++) {
                         var map = maps[x];
@@ -222,7 +184,7 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, dataConstant, 
                             var iconlatlng = new google.maps.LatLng(map.geometry.location.lat, map.geometry.location.lng);
                             var marker = new MarkerWithLabel({
                                 position: iconlatlng,
-                                map: $scope.googleattractionsMap,
+                                map: $scope.attractionsMap,
                                 title: type == "hotels" ? (map.name).toUpperCase() : map.name,
                                 labelAnchor: new google.maps.Point(12, 35),
                                 labelInBackground: false,
@@ -241,16 +203,16 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, dataConstant, 
                                     $scope.attractionPopup(MapDet);
                                 };
                             })(MapDet));
-                            $scope.AttractionMarkers.push(marker);
+                            $scope.attractionMarkers.push(marker);
                         }
                     }
                 }
-                $timeout(function () { $scope.FittoScreen(); }, 1000, false);
+                $timeout(function () { $scope.fitToScreen(); }, 1000, false);
             };
 
             // bind label control to map on right-top of map.
             function createMapLabelControl() {
-                if ($scope.googleattractionsMap) {
+                if ($scope.attractionsMap) {
                     var label = document.createElement("Label");
                     label.innerHTML = "Points of interest in 30 miles radius of Airport";
                     label.style.fontSize = '11px';
@@ -262,7 +224,7 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, dataConstant, 
                     label.style.padding = "3px 5px";
                     label.style.opacity = "0.8";
                     label.style.zIndex = "1";
-                    $scope.googleattractionsMap.controls[google.maps.ControlPosition.TOP_RIGHT].push(label);
+                    $scope.attractionsMap.controls[google.maps.ControlPosition.TOP_RIGHT].push(label);
                 }
             }
 
@@ -270,6 +232,35 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, dataConstant, 
                 var attraction = _.find(attractionsData, function (item) { return item.name == type; });
                 if (attraction)
                     return attraction.markerImage;
+            }
+
+            function getHotelData() {
+                var key = {
+                    Origin: $scope.googleAttractionParams.SearchCriteria.Origin,
+                    Destination: $scope.googleAttractionParams.SearchCriteria.DestinationLocation,
+                    StartDate: ConvertToRequiredDate($scope.googleAttractionParams.SearchCriteria.FromDate, 'API'),
+                    EndDate: ConvertToRequiredDate($scope.googleAttractionParams.SearchCriteria.ToDate, 'API'),
+                };
+                var object;
+                var cacheData = DestinationFactory.DestinationDataStorage.hotel.get(key);
+                if (cacheData) {
+                    object = _.chain(cacheData.data).map(function (item) {
+                        var itemData = item.HotelDetail;
+                        var rating = itemData.HotelRating ? itemData.HotelRating[0].RatingText.substring(0, 1) : 0;
+                        return {
+                            geometry:
+                               itemData.Latitude ? {
+                                   location: { lat: itemData.Latitude, lng: itemData.Longitude }
+                               } : null,
+                            name: itemData.HotelName.toLowerCase(),
+                            vicinity: (itemData.Address[0] + ', ' + itemData.Address[1]).toLowerCase(),
+                            rating: rating,
+                            type: 'hotels',
+                            details: { FreeWifiInRooms: itemData.PropertyOptionInfo.FreeWifiInRooms, RateRange: itemData.RateRange, Rating: rating }
+                        }
+                    }).compact().sortBy(function (item) { return item.details.RateRange ? parseFloat(item.details.RateRange.Min) : Infinity; }).value();
+                }
+                return object;
             }
         },
         link: function ($scope, elem, attr) {

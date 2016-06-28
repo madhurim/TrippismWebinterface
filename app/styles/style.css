@@ -1615,9 +1615,6 @@ i.calendar.active, .input-box:hover i.calendar {
 }
 
 @media only screen and (max-width: 767px) {
-    .lastDiv {
-        margin-bottom: 0px;
-    }
 
     .slide-bottom {
         margin-bottom: 71px;
@@ -1976,18 +1973,6 @@ em.ng-binding {
     padding: 0px;
 }
 
-.lastDiv {
-    clear: both;
-    margin-right: 0px;
-    margin-left: 0px;
-    border: 1px solid #ADAAAA;
-    padding-top: 8px;
-    padding-bottom: 14px;
-    border-radius: 2px;
-    margin-top: 14px;
-    margin-bottom: 50px;
-}
-
 .no-border {
     border: none;
 }
@@ -2007,10 +1992,6 @@ em.ng-binding {
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
     .overview-weather-content p {
         font-size: 8px;
-    }
-
-    .lastDiv {
-        margin-bottom: 0px;
     }
 
     .padleft0 {
@@ -2033,10 +2014,6 @@ em.ng-binding {
         font-size: 8px;
     }
 
-    .lastDiv {
-        margin-bottom: 0px;
-    }
-
     .padleft0 {
         padding-left: 12px !important;
     }
@@ -2049,21 +2026,6 @@ em.ng-binding {
         font-size: 37px;
     }
 }
-/* css rules for ipad landscape starts*/
-
-/* Smartphones (portrait and landscape)  starts */
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : portrait) {
-    .lastDiv {
-        margin-bottom: 0px;
-    }
-}
-
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : landscape) {
-    .lastDiv {
-        margin-bottom: 0px;
-    }
-}
-/* Smartphones (portrait and landscape)  ends */
 
 /*iPhone 5 & 5S in landscape starts*/
 @media only screen and (min-device-width : 320px) and (max-device-width : 568px) and (orientation : landscape) {
@@ -2106,10 +2068,6 @@ em.ng-binding {
         font-size: 12px;
     }
 
-    .lastDiv {
-        margin-bottom: 0px;
-    }
-
     .padleft0 {
         padding-left: 12px !important;
     }
@@ -2128,10 +2086,6 @@ em.ng-binding {
 @media only screen and (min-device-width : 375px) and (max-device-width : 667px) and (orientation : portrait) {
     .overview-weather-content p {
         font-size: 12px;
-    }
-
-    .lastDiv {
-        margin-bottom: 0px;
     }
 
     .padleft0 {
@@ -2154,10 +2108,6 @@ em.ng-binding {
         font-size: 12px;
     }
 
-    .lastDiv {
-        margin-bottom: 0px;
-    }
-
     .padleft0 {
         padding-left: 12px !important;
     }
@@ -2178,10 +2128,6 @@ em.ng-binding {
 
     .map-box {
         top: 75px;
-    }
-
-    .lastDiv {
-        margin-bottom: 0px;
     }
 
     .padleft0 {

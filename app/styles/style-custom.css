@@ -1605,6 +1605,35 @@ ul .stop-line {
     margin-left: 10px;
 }
 
+/*#region attraction tabs*/
+.attr-container {
+    border: 1px solid #ccc;
+    border-top: none;
+    padding: 5px;
+    background: whitesmoke;
+    margin-bottom: 14px;
+    border-radius: 3px;
+}
+
+.cust-tab .nav-tabs {
+    border-color: #ccc;
+    border-radius: 3px;
+}
+
+    .cust-tab .nav-tabs li.active > a {
+        color: #333;
+        font-weight: 500;
+        border-color: #ccc;
+        border-bottom-color: transparent;
+    }
+
+.cust-tab .nav > li > a {
+    padding: 5px 10px;
+    color: #565a5c;
+    font-weight: normal;
+}
+/*#endregion attraction tabs*/
+
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {

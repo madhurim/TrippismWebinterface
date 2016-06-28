@@ -132,6 +132,8 @@
                 });
             });
         }
+
+        $scope.attractionTabs = [{ title: 'Google', isActive: true }, { title: 'TripAdvisor', isActive: false }];
         $scope.PageName = "Destination Page";
 
         $scope.$on('showHotelDetails', function () {

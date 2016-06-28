@@ -7,7 +7,8 @@
         var service = {
             getAttractions: getAttractions,
             getAttractionList: getAttractionList,
-            getRestaurants: getRestaurants
+            getRestaurants: getRestaurants,
+            getLocation: getLocation
         };
         return service;
 

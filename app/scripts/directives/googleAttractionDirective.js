@@ -149,7 +149,7 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, dataConstant, 
                             mapTypeId: google.maps.MapTypeId.ROADMAP
                         };
                         $scope.attractionMessage = 'Getting things to do in ' + $scope.googleattractionParams.DestinationAirport.airport_CityName;
-                        $scope.googleattractionpromise = GoogleAttractionFactory.googleAttraction(data).then(function (data) {
+                        $scope.googleAttractionPromise = GoogleAttractionFactory.googleAttraction(data).then(function (data) {
                             // set airport marker only first time.
                             if (isSetCenter)
                                 setAirportMarkerOnMap();
@@ -173,7 +173,7 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, dataConstant, 
                     var data = {
                         "NextPageToken": $scope.attractionsplaces.next_page_token
                     };
-                    $scope.googleattractionpromise = GoogleAttractionFactory.googleAttraction(data).then(function (data) {
+                    $scope.googleAttractionPromise = GoogleAttractionFactory.googleAttraction(data).then(function (data) {
                         setAirportMarkerOnMap();
                         if (data.status != 404) {
                             $scope.attractionsplaces = { next_page_token: data.next_page_token, results: data.results };
@@ -215,26 +215,27 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, dataConstant, 
                         $scope.bounds.extend(airportMarkerLatLog);
 
                     $scope.AttractionMarkers = [];
-                    // used for clearing all markers                        
+                    // used for clearing all markers
                     for (var x = 0; x < maps.length; x++) {
-                        if (maps[x].geometry) {
-                            var iconlatlng = new google.maps.LatLng(maps[x].geometry.location.lat, maps[x].geometry.location.lng);
+                        var map = maps[x];
+                        if (map.geometry) {
+                            var iconlatlng = new google.maps.LatLng(map.geometry.location.lat, map.geometry.location.lng);
                             var marker = new MarkerWithLabel({
                                 position: iconlatlng,
                                 map: $scope.googleattractionsMap,
-                                title: type == "hotels" ? (maps[x].name).toUpperCase() : maps[x].name,
+                                title: type == "hotels" ? (map.name).toUpperCase() : map.name,
                                 labelAnchor: new google.maps.Point(12, 35),
                                 labelInBackground: false,
                                 visible: true,
                                 animation: google.maps.Animation.DROP,
-                                CustomMarkerInfo: maps[x],
+                                CustomMarkerInfo: map,
                                 labelStyle: { opacity: 0.75 },
                                 icon: getMarker(type)
                             });
 
                             $scope.bounds.extend(marker.position);
                             var contentString = "";
-                            var MapDet = maps[x];
+                            var MapDet = map;
                             google.maps.event.addListener(marker, 'click', (function (MapDet) {
                                 return function () {
                                     $scope.attractionPopup(MapDet);

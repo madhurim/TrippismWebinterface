@@ -13,7 +13,7 @@
             $scope.slides = [];
             $scope.IsMapPopupLoading = true;
             $scope.isAttrDataFound = true;
-            if (attractionData.type == "hotels") {
+            if (attractionData.type == "hotels" || attractionData.provider == 'TripAdvisor') {
                 if (attractionData.geometry) {
                     var data = {
                         Latitude: attractionData.geometry.location.lat,
@@ -49,6 +49,10 @@
                 $scope.locationDetail.PlaceName = attractionData.name.toLowerCase();
                 $scope.locationDetail.Placeaddress = $sce.trustAsHtml(attractionData.Placeaddress);
             }
+            else if (attractionData.provider == 'TripAdvisor') {
+                $scope.locationDetail.PlaceName = attractionData.name.toLowerCase();
+                $scope.locationDetail.Placeaddress = $sce.trustAsHtml(attractionData.vicinity);
+            }
         }
 
         function getPlaceDetails(attractionData) {
@@ -79,7 +83,7 @@
                         }
                         $scope.addSlides(photos);
                     }
-                    if ($scope.locationDetail.AttractionType == 'hotels') {
+                    if ($scope.locationDetail.AttractionType == 'hotels' || attractionData.provider == 'TripAdvisor') {
                         $scope.locationDetail.PlaceName = attractionData.name;
                         $scope.locationDetail.Placeaddress = $sce.trustAsHtml(attractionData.vicinity);
                     }

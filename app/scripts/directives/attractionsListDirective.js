@@ -54,7 +54,8 @@ angular.module('TrippismUIApp').directive('attractionList', ['$sce', '$rootScope
                                         place_id: results[i].place_id,
                                         raitingToAppend: raitingToAppend,
                                         type: scope.attractions.type,
-                                        details: results[i].details
+                                        details: results[i].details,
+                                        provider: results[i].provider
                                     };
                                     scope.attractionstoDisp.push(placedetails);
                                 }
@@ -121,7 +122,7 @@ angular.module('TrippismUIApp').directive('attractionList', ['$sce', '$rootScope
                 // for setting <li> tag active class            
                 if (type == 'btn')
                     scope.isAttractionCollapsed = !scope.isAttractionCollapsed;
-                else {                    
+                else {
                     // find attraction with same type from attractionData
                     var attraction = _.find(scope.attractionsData, function (item) { return item.name === type; });
                     if (attraction) {

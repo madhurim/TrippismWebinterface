@@ -15,9 +15,15 @@
                             </div>
                         </div>
                     </div>
-                    <!--<googleattraction-info googleattraction-params="params" class="hidden-xs googleattraction" style="clear:both;"></googleattraction-info>-->
-                    <trip-advisor-attractions googleattraction-params="params" class="hidden-xs googleattraction" style="clear:both;"></trip-advisor-attractions>
-                    <div class="col-md-12 col-sm-12 col-xs-12 lastDiv" id="lastDiv" style="clear:both;">
+                    <tabset class="cust-tab hidden-xs">
+                        <tab ng-repeat="tab in attractionTabs" heading="{{tab.title}}" active="tab.isActive">
+                            <div class="attr-container">
+                                <googleattraction-info ng-if="tab.title=='Google' && tab.isActive" googleattraction-params="params" class="googleattraction" style="clear:both;"></googleattraction-info>
+                                <trip-advisor-attractions ng-if="tab.title=='TripAdvisor' && tab.isActive" googleattraction-params="params" class="googleattraction" style="clear:both;"></trip-advisor-attractions>
+                            </div>
+                        </tab>
+                    </tabset>
+                    <div class="col-md-12 col-sm-12 col-xs-12" id="lastDiv" style="clear:both;">
                         <seasonality-info seasonality-params="params"></seasonality-info>
                     </div>
                 </div>

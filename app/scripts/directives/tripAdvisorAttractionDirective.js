@@ -148,14 +148,15 @@
                             };
                             $scope.attractionMessage = 'Getting things to do in ' + $scope.googleattractionParams.DestinationAirport.airport_CityName;
                             if (type == 'Restaurants') {
-                                $scope.googleattractionpromise = TripAdvisorAttractionFactory.getRestaurants(data);
+                                $scope.googleAttractionPromise = TripAdvisorAttractionFactory.getRestaurants(data);
                             }
                             else {
                                 data.subCategory = attractionDetail.subCategory;
-                                $scope.googleattractionpromise = TripAdvisorAttractionFactory.getAttractions(data);
+                                $scope.googleAttractionPromise = TripAdvisorAttractionFactory.getAttractions(data);
                             }
 
-                            $scope.googleattractionpromise.then(function (data) {
+                            $scope.googleAttractionPromise.then(function (data) {
+
                                 // set airport marker only first time.
                                 if (isSetCenter)
                                     setAirportMarkerOnMap();
@@ -168,9 +169,23 @@
                                             place_id: i.Ranking ? i.Ranking.GeoLocationId : null,
                                             name: i.Name,
                                             rating: i.Rating,
-                                            vicinity: i.Address.Street1
+                                            vicinity: i.Address.Street1,
+                                            locationId: i.LocationId,
+                                            provider: 'TripAdvisor'
                                         }
                                     });
+
+                                    //var test = _.find(data.Attractions, function (i) { return i.name == 'Black Dog'; });
+                                    //if (test) {
+                                    //    var request = {
+                                    //        Latitude: test.geometry.location.lat,
+                                    //        Longitude: test.geometry.location.lng,
+                                    //        Name: test.name,
+                                    //        LocationId: test.locationId
+                                    //    };
+                                    //    TripAdvisorAttractionFactory.getLocation(request).then(function (data) {                                            
+                                    //    });
+                                    //}
                                     markerList.push({ results: data.Attractions, type: type });
                                 }
                                 RenderMap(data.Attractions, type);
@@ -183,7 +198,6 @@
 
                 // set airport marker on map
                 function setAirportMarkerOnMap() {
-                    createMapLabelControl();
                     airportMarkerLatLog = new google.maps.LatLng($scope.googleattractionParams.DestinationAirport.airport_Lat, $scope.googleattractionParams.DestinationAirport.airport_Lng);
                     var marker = new MarkerWithLabel({
                         position: airportMarkerLatLog,
@@ -215,24 +229,25 @@
                         $scope.AttractionMarkers = [];
                         // used for clearing all markers                        
                         for (var x = 0; x < maps.length; x++) {
-                            if (maps[x].geometry) {
-                                var iconlatlng = new google.maps.LatLng(maps[x].geometry.location.lat, maps[x].geometry.location.lng);
+                            var map = maps[x];
+                            if (map.geometry) {
+                                var iconlatlng = new google.maps.LatLng(map.geometry.location.lat, map.geometry.location.lng);
                                 var marker = new MarkerWithLabel({
                                     position: iconlatlng,
                                     map: $scope.googleattractionsMap,
-                                    title: type == "hotels" ? (maps[x].name).toUpperCase() : maps[x].name,
+                                    title: type == "hotels" ? (map.name).toUpperCase() : map.name,
                                     labelAnchor: new google.maps.Point(12, 35),
                                     labelInBackground: false,
                                     visible: true,
                                     animation: google.maps.Animation.DROP,
-                                    CustomMarkerInfo: maps[x],
+                                    CustomMarkerInfo: map,
                                     labelStyle: { opacity: 0.75 },
                                     icon: getMarker(type)
                                 });
 
                                 $scope.bounds.extend(marker.position);
                                 var contentString = "";
-                                var MapDet = maps[x];
+                                var MapDet = map;
                                 google.maps.event.addListener(marker, 'click', (function (MapDet) {
                                     return function () {
                                         $scope.attractionPopup(MapDet);
@@ -244,24 +259,6 @@
                     }
                     $timeout(function () { $scope.FittoScreen(); }, 1000, false);
                 };
-
-                // bind label control to map on right-top of map.
-                function createMapLabelControl() {
-                    if ($scope.googleattractionsMap) {
-                        var label = document.createElement("Label");
-                        label.innerHTML = "Points of interest in 30 miles radius of Airport";
-                        label.style.fontSize = '11px';
-                        label.style.color = "rgb(68, 68, 68)";
-                        label.style.whiteSpace = "nowrap";
-                        label.style.fontFamily = "Roboto, Arial, sans-serif";
-                        label.style.textAlign = "right";
-                        label.style.backgroundColor = "#fbf7ee";
-                        label.style.padding = "3px 5px";
-                        label.style.opacity = "0.8";
-                        label.style.zIndex = "1";
-                        $scope.googleattractionsMap.controls[google.maps.ControlPosition.TOP_RIGHT].push(label);
-                    }
-                }
 
                 function getMarker(type) {
                     var attraction = _.find(attractionsData, function (item) { return item.name == type; });

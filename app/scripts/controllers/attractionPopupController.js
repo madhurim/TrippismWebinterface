@@ -4,7 +4,7 @@
         $scope.IsMapPopupLoading = false;
         $scope.slides = [];
         $scope.addSlides = addSlides;
-
+        $scope.provider = "Google+";
         init(attractionData);
 
         function addSlides(photos) {
@@ -38,6 +38,7 @@
                     setDefaultPopupDetails(attractionData);
             }
             else if (attractionData.provider == "TripAdvisor") {
+                $scope.provider = "TripAdvisor";
                 var request = {
                     LocationId: attractionData.locationId,
                     Name: attractionData.name,
@@ -45,11 +46,7 @@
                     Longitude: attractionData.geometry.location.lng
                 };
                 TripAdvisorAttractionFactory.getLocation(request).then(function (data) {
-                    if (data.status == 200) {
-                        $scope.locationDetail.PlaceName = data.Name.toLowerCase();
-                        $scope.locationDetail.Placeaddress = $sce.trustAsHtml(data.LocationDetail);
-                        $scope.locationDetail.raitingToAppend = $sce.trustAsHtml(getRatings(parseFloat(data.Rating)));
-
+                    if (data) {
                         var service = new google.maps.places.PlacesService($scope.attractionsMap);
                         var request = { placeId: data.GooglePlaceId };
                         service.getDetails(request, function (place, status) {
@@ -64,17 +61,23 @@
                                     $scope.addSlides(photos);
                                 }
                             }
+                            $scope.IsMapPopupLoading = false;
+                            $scope.locationDetail = {};
+                            $scope.attractionReviews = [];
+                            $scope.locationDetail.PlaceName = data.Name.toLowerCase();
+                            $scope.locationDetail.Placeaddress = $sce.trustAsHtml(data.LocationDetail);
+                            $scope.locationDetail.raitingToAppend = $sce.trustAsHtml(getRatings(parseFloat(data.Rating)));
+                            for (var i = 0; i < data.Reviews.length; i++) {
+                                var review = data.Reviews[i];
+                                $scope.attractionReviews.push({
+                                    author_name: '',
+                                    text: review.Text,
+                                    rating: $sce.trustAsHtml(getRatings(review.Rating)),
+                                    time: review.PublishedDate
+                                });
+                            }
+                            $scope.$apply();
                         });
-
-                        for (var i = 0; i < data.Reviews.length; i++) {
-                            var review = data.Reviews[i];
-                            $scope.attractionReviews.push({
-                                author_name: '',
-                                text: review.Text,
-                                rating: $sce.trustAsHtml(getRatings(review.Rating)),
-                                time: review.PublishedDate
-                            });
-                        }
                     }
                 });
             }

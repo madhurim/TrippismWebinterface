@@ -33,7 +33,7 @@ angular.module('TrippismUIApp').directive('youtubeInfo', ['YouTubeFactory', 'url
 
                         if (scope.youtubeInfoLoaded == false) {
                             scope.youtubepromise = YouTubeFactory.youTube(data).then(function (data) {
-                                if (data.status != 200) {
+                                if (data.status == 404) {
                                     scope.youtubeInfoDataFound = false;
                                     return;
                                 }

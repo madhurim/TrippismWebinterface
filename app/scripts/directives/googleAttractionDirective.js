@@ -1,4 +1,5 @@
-﻿angular.module('TrippismUIApp').directive('googleAttractions', ['$rootScope',
+﻿(function () {
+    angular.module('TrippismUIApp').directive('googleAttractions', ['$rootScope',
                                                 'GoogleAttractionFactory',
                                                 '$timeout',
                                                 '$filter',
@@ -278,3 +279,12 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, dataConstant, 
         }
     }
 }]);
+})();
+
+
+//(function () {
+//    angular.module('TrippismUIApp').controller('AttractionController', ['$scope', AttractionController]);
+//    function AttractionController() {
+
+//    }
+//})();

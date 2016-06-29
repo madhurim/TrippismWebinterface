@@ -4,13 +4,17 @@
             <button class="close closebutton" style="margin-top:2px !important;" ng-click="dismiss();" type="button">×</button>
         </div>
         <div class="modal-body" style="padding:0px;">
-            <div class="attr-top" ng-if="IsMapPopupLoading">
+            <div class="attr-top" ng-if="IsMapPopupLoading" style="height:400px;">
                 <div ng-show="IsMapPopupLoading" ng-hide="!isAttrDataFound" class="sqrloadclass" style="padding-top:10px;padding-bottom:0px;"></div>
             </div>
             <div ng-show="!IsMapPopupLoading">
                 <div class="col-md-12">
                     <div ng-class="attractionReviews.length > 0 ? 'col-md-8' : 'col-md-12 padding-0'">
-                        <div style="height:400px;overflow:hidden;" ng-if="slides.length == 0">
+                        <div class="col-md-12 attr-loader" ng-show="isPhotoLoading">
+                            <h4 class="glyphicon glyphicon-refresh glyphicon-spin"></h4>
+                            <h4>Bringing photos...</h4>
+                        </div>
+                        <div style="height:400px;overflow:hidden;" ng-if="slides.length == 0 && !isPhotoLoading">
                             <img height="300" width="500" src="../images/noimageavailable.png">
                         </div>
                         <div style="height:400px;overflow:auto;" ng-if="slides.length > 0">
@@ -57,7 +61,7 @@
                                         <span>Overall rating :</span>
                                         <div ng-bind-html="::item.rating"></div>
                                     </div>
-                                    <p class="review-author">- {{::item.author_name}}</p>
+                                    <p class="review-author" ng-show="item.author_name">- {{::item.author_name}}</p>
                                 </div>
                             </div>
                         </div>

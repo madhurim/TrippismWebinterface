@@ -1632,6 +1632,15 @@ ul .stop-line {
     color: #565a5c;
     font-weight: normal;
 }
+
+.attr-loader {
+    text-align: center;
+    float: left;
+    height: 400px;
+    overflow: hidden;
+    color: #aaa;
+    margin-top: 30px;
+}
 /*#endregion attraction tabs*/
 
 /*#region Media queries */

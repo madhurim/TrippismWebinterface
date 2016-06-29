@@ -21,7 +21,7 @@
                     });
                 });
 
-                scope.$on('HotelData', function (event, data) {
+                scope.$on('HotelData', function (event) {
                     _.findWhere(scope.attractionsData, { name: 'hotels' }).isDisplay = true;
                     if (!isTabClicked)
                         scope.loadAttractions('hotels', true);
@@ -80,7 +80,7 @@
                 };
 
                 scope.$watch('attractions', function (newValue, oldValue) {
-                    if (newValue != oldValue) {
+                    if (newValue != oldValue || (newValue && newValue.type == "hotels")) {
                         scope.service = new google.maps.places.PlacesService(scope.attractionmap);
                         scope.getAttractionsList();
                         loadScrollbars();

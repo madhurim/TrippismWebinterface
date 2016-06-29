@@ -15,9 +15,15 @@
             controller: function ($scope) {
                 $scope.$watch('googleAttractionParams', function (newValue, oldValue) {
                     if (newValue != undefined && newValue.DestinationAirport != undefined) {
-                        var defaultAttractionTab = _.find(attractionsData, function (item) { return item.isDefault == true; });
-                        if (defaultAttractionTab)
-                            $scope.loadAttractionInfo(defaultAttractionTab.name);
+                        var hotelData = getHotelData();
+                        if (hotelData) {
+                            $scope.$broadcast('HotelData');
+                        }
+                        else {
+                            var defaultAttractionTab = _.find(attractionsData, function (item) { return item.isDefault == true; });
+                            if (defaultAttractionTab)
+                                $scope.loadAttractionInfo(defaultAttractionTab.name);
+                        }
                     }
                 });
 

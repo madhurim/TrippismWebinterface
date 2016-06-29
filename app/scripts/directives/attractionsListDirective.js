@@ -7,18 +7,21 @@
                 attractionmap: '=',
                 attractiontabindex: '=',
                 loadMoreAttractionInfo: "&",
-                loadAttractionInfo: "&"
+                loadAttractionInfo: "&",
+                attractionTabs: '='
             },
             templateUrl: urlConstant.partialViewsPath + 'attractionsListPartial.html',
             link: function (scope, elem, attrs) {
-                scope.attractionsData = [];
-                var attractionsData = _.sortBy(GoogleAttractionFactory.getAttractionList(), 'rank');
-
-                //create attraction object from factory object
-                attractionsData.forEach(function (item) {
-                    scope.attractionsData.push({
-                        name: item.name, displayName: item.attractionText, data: null, isActive: item.isDefault, htmlClass: item.htmlClass, isDisplay: item.name == "hotels" ? null : true
-                    });
+                scope.attractionsData = _.sortBy(angular.copy(scope.attractionTabs), 'rank');
+                scope.attractionsData = _(scope.attractionsData).map(function (item) {
+                    return {
+                        name: item.name,
+                        displayName: item.attractionText,
+                        data: null,
+                        isActive: item.isDefault,
+                        htmlClass: item.htmlClass,
+                        isDisplay: item.name == "hotels" ? null : true
+                    }
                 });
 
                 scope.$on('HotelData', function (event) {

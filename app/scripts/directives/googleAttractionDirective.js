@@ -18,9 +18,10 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, dataConstant, 
                     var hotelData = getHotelData();
                     if (hotelData) {
                         $scope.$broadcast('HotelData');
+                        setAirportMarkerOnMap();
                     }
                     else {
-                        var defaultAttractionTab = _.find(attractionsData, function (item) { return item.isDefault == true; });
+                        var defaultAttractionTab = _.find($scope.attractionsData, function (item) { return item.isDefault == true; });
                         if (defaultAttractionTab)
                             $scope.loadAttractionInfo(defaultAttractionTab.name);
                     }
@@ -35,7 +36,7 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, dataConstant, 
             $scope.mapLoaded = false;
             var airportMarkerLatLog;    //for storing airport marker's lat/lon
             // get attraction object from factory
-            var attractionsData = GoogleAttractionFactory.getAttractionList();
+            $scope.attractionsData = GoogleAttractionFactory.getAttractionList();
             var markerList = [];
 
             $scope.$on('onMarkerPopup', function (event, args) {
@@ -92,17 +93,18 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, dataConstant, 
                     }
 
                     if (type == 'hotels') {
-                        var object = getHotelData();
-                        if (object && object.length)
-                            markerList.push({ results: object, type: type });
+                        var hotelData = getHotelData();
+                        hotelData = filterHotelData(hotelData);
+                        if (hotelData && hotelData.length)
+                            markerList.push({ results: hotelData, type: type });
 
-                        renderMap(object, type);
+                        renderMap(hotelData, type);
                         $scope.mapLoaded = true;
-                        $scope.attractionsplaces = { type: type, next_page_token: null, results: object && object.length > 0 ? object : null };
+                        $scope.attractionsplaces = { type: type, next_page_token: null, results: hotelData && hotelData.length > 0 ? hotelData : null };
                         return;
                     }
 
-                    var attractionDetail = _.find(attractionsData, function (item) { return type === item.name; });
+                    var attractionDetail = _.find($scope.attractionsData, function (item) { return type === item.name; });
                     if (attractionDetail) {
                         // setting parameters for requested attraction 
                         data.Types = attractionDetail.Types;
@@ -236,7 +238,7 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, dataConstant, 
             }
 
             function getMarker(type) {
-                var attraction = _.find(attractionsData, function (item) { return item.name == type; });
+                var attraction = _.find($scope.attractionsData, function (item) { return item.name == type; });
                 if (attraction)
                     return attraction.markerImage;
             }
@@ -248,8 +250,11 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, dataConstant, 
                     StartDate: ConvertToRequiredDate($scope.googleAttractionParams.SearchCriteria.FromDate, 'API'),
                     EndDate: ConvertToRequiredDate($scope.googleAttractionParams.SearchCriteria.ToDate, 'API'),
                 };
+                return DestinationFactory.DestinationDataStorage.hotel.get(key);
+            }
+
+            function filterHotelData(cacheData) {
                 var object;
-                var cacheData = DestinationFactory.DestinationDataStorage.hotel.get(key);
                 if (cacheData) {
                     object = _.chain(cacheData.data).map(function (item) {
                         var itemData = item.HotelDetail;

@@ -770,7 +770,11 @@ ul .stop-line {
     content: 'Hotels';
 }
 
-.attr-foods, .attr-beaches, .attr-casinos, .attr-outdoors, .attr-shops, .attr-theme-parks, .attr-history {
+.attr-tours:before {
+    content: 'Tours';
+}
+
+.attr-foods, .attr-beaches, .attr-casinos, .attr-outdoors, .attr-shops, .attr-theme-parks, .attr-history, .attr-tours {
     width: auto;
     height: auto;
 }
@@ -1681,7 +1685,7 @@ ul .stop-line {
     }
 
     /* #region attraction */
-    .attr-foods:before, .attr-beaches:before, .attr-casinos:before, .attr-outdoors:before, .attr-shops:before, .attr-theme-parks:before, .attr-history:before, .attr-hotels:before {
+    .attr-foods:before, .attr-beaches:before, .attr-casinos:before, .attr-outdoors:before, .attr-shops:before, .attr-theme-parks:before, .attr-history:before, .attr-hotels:before, .attr-tours:before {
         content: '';
     }
 
@@ -1722,7 +1726,11 @@ ul .stop-line {
         background-image: url("/images/attraction-marker/hotels-icon.png");
     }
 
-    .attr-foods, .attr-beaches, .attr-casinos, .attr-outdoors, .attr-shops, .attr-theme-parks, .attr-history, .attr-hotels {
+    .attr-tours {
+        background-image: url("/images/attraction-marker/camera-icon-1.png");
+    }
+
+    .attr-foods, .attr-beaches, .attr-casinos, .attr-outdoors, .attr-shops, .attr-theme-parks, .attr-history, .attr-hotels, .attr-tours {
         background-repeat: no-repeat;
         background-position: center;
         width: 42px;

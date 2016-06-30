@@ -140,7 +140,7 @@
                                             place_id: i.Ranking ? i.Ranking.GeoLocationId : null,
                                             name: i.Name,
                                             rating: i.Rating || Infinity,
-                                            vicinity: i.Address.Street1,
+                                            vicinity: i.Address.Street1 + ', ' + i.Address.City,
                                             locationId: i.LocationId,
                                             provider: 'TripAdvisor'
                                         }

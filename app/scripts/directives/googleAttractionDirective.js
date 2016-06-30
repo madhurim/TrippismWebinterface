@@ -216,7 +216,11 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, dataConstant, 
                         }
                     }
                 }
-                $timeout(function () { $scope.fitToScreen(); }, 1000, false);
+                $timeout(function () {
+                    $scope.fitToScreen();
+                    if ($scope.attractionMarkers.length == 0)
+                        $scope.attractionsMap.setZoom(10);
+                }, 1000, false);
             };
 
             // bind label control to map on right-top of map.

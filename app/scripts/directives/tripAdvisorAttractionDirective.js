@@ -142,7 +142,8 @@
                                             rating: i.Rating || Infinity,
                                             vicinity: i.Address.Street1 + ', ' + i.Address.City,
                                             locationId: i.LocationId,
-                                            provider: 'TripAdvisor'
+                                            provider: 'TripAdvisor',
+                                            ratingImage: i.RatingImageUrl
                                         }
                                     }).sortBy(function (i) { return parseFloat(i.rating) * -1; }).value();
 
@@ -217,7 +218,11 @@
                             }
                         }
                     }
-                    $timeout(function () { $scope.fitToScreen(); }, 1000, false);
+                    $timeout(function () {
+                        $scope.fitToScreen();
+                        if ($scope.attractionMarkers.length == 0)
+                            $scope.attractionsMap.setZoom(10);
+                    }, 1000, false);
                 };
 
                 function getMarker(type) {

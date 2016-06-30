@@ -63,33 +63,43 @@ a, a:hover, a:focus, label, form-control, .form-control:focus, .btn, button, .po
 }
 
 .google-img {
-    height: 23px;
-    width: 67px;
-    background-position: left top;
+    height: 26px;
+    width: 80px;
+    background-position: -10px 3px;
 }
 
 .sabre-img {
     height: 23px;
     width: 95px;
-    background-position: -70px top;
+    background-position: -89px top;
 }
 
 .underground-img {
     height: 23px;
     width: 97px;
-    background-position: -168px top;
+    background-position: -187px top;
+}
+
+.tripAdvisor-img {
+    height: 23px;
+    width: 112px;
+    background-position: -289px top;
 }
 
 .google-img:hover {
-    background-position: left bottom;
+    background-position: -10px -24px;
 }
 
 .sabre-img:hover {
-    background-position: -70px bottom;
+    background-position: -89px bottom;
 }
 
 .underground-img:hover {
-    background-position: -168px bottom;
+    background-position: -187px bottom;
+}
+
+.tripAdvisor-img:hover {
+    background-position: -289px bottom;
 }
 
 .destination-form .input-group {

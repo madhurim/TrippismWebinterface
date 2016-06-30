@@ -38,7 +38,8 @@
                                 </span>
                             </span>
                         </h6>
-                        <div ng-bind-html="item.raitingToAppend"></div>
+                        <div ng-if="::!item.ratingImage" ng-bind-html="item.raitingToAppend"></div>
+                        <div ng-if="::item.ratingImage"><img class="margin-top-5" style="opacity:0.7;" width="90" height="16" ng-src="{{item.ratingImage}}" /></div>
                     </div>
                 </div>
                 <div ng-show="isAttractionFound == false" style="color: #ccc;">Sorry, we did not find anything in this category!</div>

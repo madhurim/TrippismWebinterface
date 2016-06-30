@@ -983,6 +983,15 @@ ul .stop-line {
     margin-top: 5px;
 }
 
+.margin-tb-5 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.margin-bottom-5 {
+    margin-bottom: 5px;
+}
+
 .gauge-label {
     text-align: center;
     word-spacing: -2px;
@@ -1620,21 +1629,7 @@ ul .stop-line {
 }
 
 .cust-tab .nav-tabs {
-    border-color: #ccc;
     border-radius: 3px;
-}
-
-    .cust-tab .nav-tabs li.active > a {
-        color: #333;
-        font-weight: 500;
-        border-color: #ccc;
-        border-bottom-color: transparent;
-    }
-
-.cust-tab .nav > li > a {
-    padding: 5px 10px;
-    color: #565a5c;
-    font-weight: normal;
 }
 
 .attr-loader {

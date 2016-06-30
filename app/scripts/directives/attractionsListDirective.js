@@ -52,14 +52,14 @@
                                         var placedetails = {
                                             geometry: results[i].geometry,
                                             name: results[i].name,
-                                            //Placeaddress: $sce.trustAsHtml(results[i].vicinity),
                                             vicinity: results[i].vicinity,
                                             place_id: results[i].place_id,
                                             raitingToAppend: raitingToAppend,
                                             type: scope.attractions.type,
                                             details: results[i].details,
                                             provider: results[i].provider,
-                                            locationId: results[i].locationId
+                                            locationId: results[i].locationId,
+                                            ratingImage: results[i].ratingImage
                                         };
                                         scope.attractionstoDisp.push(placedetails);
                                     }

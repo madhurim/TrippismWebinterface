@@ -79,14 +79,18 @@
                             var street2 = data.Address.Street2;
                             var address = data.Address.Street1 + (street2 ? ', ' + street2 : '');
                             $scope.locationDetail.Placeaddress = $sce.trustAsHtml(address + ', ' + data.LocationDetail);
-                            $scope.locationDetail.raitingToAppend = $sce.trustAsHtml(getRatings(parseFloat(data.Rating)));
+                            $scope.locationDetail.raitingToAppend = data.RatingImageUrl;
+                            $scope.locationDetail.NumReviews = data.NumReviews;
+                            $scope.locationDetail.WebUrl = data.WebUrl;
                             for (var i = 0; i < data.Reviews.length; i++) {
                                 var review = data.Reviews[i];
                                 $scope.attractionReviews.push({
                                     author_name: null,
                                     text: review.Text,
                                     rating: $sce.trustAsHtml(getRatings(review.Rating)),
-                                    time: review.PublishedDate
+                                    time: review.PublishedDate,
+                                    raitingToAppend: review.RatingImageUrl,
+                                    author_name: review.User.UserName
                                 });
                             }
                         }, 0, true);

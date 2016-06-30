@@ -23,11 +23,11 @@
                             };
                             $timeout(function () {
                                 scope.seasonalitypromise = SeasonalityFactory.Seasonality(Seasonalitydata).then(function (data) {
-
                                     if (data.status != 200) {
                                         scope.SeasonalityNoDataFound = true;
                                         return;
                                     }
+                                    data = data.data;
                                     scope.SeasonalityData = data.Seasonality;
                                     var now = new Date();
                                     var NextDate = addDays(now, 30);

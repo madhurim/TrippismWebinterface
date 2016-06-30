@@ -42,6 +42,7 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory,
                         $scope.$emit('widgetLoaded', { name: "fareforcastinfo", isVisible: false });
                         return;
                     }
+                    data = data.data;
                     $scope.$emit('widgetLoaded', { name: "fareforcastinfo", isVisible: true });
                     $scope.FareNoDataFound = false;
                     $scope.FareforecastData = data;
@@ -62,11 +63,12 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory,
                     };
 
                     $scope.farerangepromise = FareRangeFactory.fareRange(data).then(function (data) {
-                        if (data.status == 404 || data.status == 400) {
+                        if (data.status != 200) {
                             ////No Data Found then return                            
                             $scope.$emit('widgetLoaded', { name: "farerangeInfo", isVisible: false });
                             return;
                         }
+                        data = data.data;
                         var originairport = _.find($scope.widgetParams.AvailableAirports, function (airport) { return airport.airport_Code == $scope.widgetParams.Fareforecastdata.Origin });
                         var destinationairport = _.find($scope.widgetParams.AvailableAirports, function (airport) { return airport.airport_Code == $scope.widgetParams.Fareforecastdata.Destination });
 

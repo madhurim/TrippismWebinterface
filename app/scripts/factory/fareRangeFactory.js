@@ -13,7 +13,7 @@
 
         function fareRange(data) {
             var resultdata = $filter('filter')(FareRangeData, { Criteria: data.Origin + data.EarliestDepartureDate + data.LatestDepartureDate + data.Destination + data.Lengthofstay })[0];
-            if (resultdata != undefined && resultdata != "") {
+            if (resultdata != undefined) {
                 var d = $q.defer();
                 d.resolve(angular.copy(resultdata.data));//angular.copy used because at directive side we manipulate into data so second time when we call method for data then return original result which was return from api
                 return d.promise;
@@ -27,9 +27,9 @@
                 var url = urlConstant.apiURL + dataURL;
                 return $http.get(url)
                     .then(function (data) {
-                        result.data = angular.copy(data.data);
+                        result.data = angular.copy(data);
                         FareRangeData.push(result);
-                        return data.data;
+                        return data;
                     }, function (e) {
                         return e;
                     });

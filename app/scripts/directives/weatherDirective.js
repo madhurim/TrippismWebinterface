@@ -16,28 +16,19 @@
                     $scope.WeatherFor = $scope.weatherParams.DestinationAirport.airport_CityName + "_" + $filter('date')($scope.weatherParams.Fareforecastdata.DepartureDate, $scope.format, null);
                     $scope.getWeatherInformation = function (data) {
                         if ($scope.WeatherInfoLoaded == false) {
-                            $scope.WeatherData = angular.copy(WeatherFactory.ResultData($scope.WeatherFor));
-                            if ($scope.WeatherData == "" || $scope.WeatherData == undefined) {
-                                WeatherFactory.GetData(data).then(function (data) {
-                                    $scope.WeatherInfoLoaded = false;
-                                    if (data == "" || data.status == 404 || data.WeatherChances == undefined || data.WeatherChances.length == 0) {
+                            WeatherFactory.GetData(data).then(function (data) {
+                                $scope.WeatherInfoLoaded = false;
+                                if (data.status != 200) {
+                                    data = data.data;
+                                    if (data.WeatherChances == undefined || data.WeatherChances.length == 0) {
                                         $scope.WeatherInfoLoaded = false;
                                         $scope.$emit('widgetLoaded', { name: "WeatherData", isVisible: $scope.WeatherInfoLoaded });
                                         return;
                                     }
-                                    $scope.WeatherInfoLoaded = true;
-                                    $scope.WeatherData = angular.copy(data);
-                                });
-                            }
-                            else {
-                                if ($scope.WeatherData.length != 0) {
-                                    $scope.WeatherDataFound = true;
-                                    $scope.WeatherInfoLoaded = true;
                                 }
-                                else {
-                                    $scope.$emit('widgetLoaded', { name: "WeatherData", isVisible: $scope.WeatherInfoLoaded });
-                                }
-                            }
+                                $scope.WeatherInfoLoaded = true;
+                                $scope.WeatherData = data.data;
+                            });
                         }
                     }
                     $scope.WeatherRangeInfo = function () {

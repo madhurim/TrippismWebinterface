@@ -15,7 +15,6 @@ angular.module('TrippismUIApp').directive('youtubeInfo', ['YouTubeFactory', 'url
                 scope.loadyoutubeInfo = function (nextTokenID, prevTokenID) {
                     scope.youtubeInfoLoaded = false;
                     scope.youtubeInfoDataFound = false;
-                    // scope.youtubeData = "";
                     if (scope.youtubeParams != undefined) {
                         var parameters = scope.youtubeParams.DestinationAirport.airport_Lat + "," + scope.youtubeParams.DestinationAirport.airport_Lng;
                         if (nextTokenID != null) {
@@ -33,10 +32,11 @@ angular.module('TrippismUIApp').directive('youtubeInfo', ['YouTubeFactory', 'url
 
                         if (scope.youtubeInfoLoaded == false) {
                             scope.youtubepromise = YouTubeFactory.youTube(data).then(function (data) {
-                                if (data.status == 404) {
+                                if (data.status != 200) {
                                     scope.youtubeInfoDataFound = false;
                                     return;
                                 }
+                                data = data.data;
                                 scope.isDataLoadedFirstTime = true;
                                 scope.youtubeData = data;
 

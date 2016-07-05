@@ -14,6 +14,9 @@
                             <h4 class="glyphicon glyphicon-refresh glyphicon-spin"></h4>
                             <h4>Bringing photos...</h4>
                         </div>
+                        <div class="attr-title margin-right-0" ng-if="slides.length > 0 && !isPhotoLoading && provider==attractionProviders.TripAdvisor">
+                            <span>Google+ Photos</span>
+                        </div>
                         <div style="height:400px;overflow:hidden;" ng-if="slides.length == 0 && !isPhotoLoading">
                             <img height="300" width="500" src="../images/noimageavailable.png">
                         </div>

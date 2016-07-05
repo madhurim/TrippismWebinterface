@@ -1653,6 +1653,10 @@ ul .stop-line {
     font-size: 16px;
     padding: 2px 0px;
 }
+
+.margin-right-0 {
+    margin-right: 0px;
+}
 /*#endregion attraction tabs*/
 
 /*#region Media queries */

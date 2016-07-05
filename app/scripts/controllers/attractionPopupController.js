@@ -1,11 +1,12 @@
 ﻿(function () {
-    angular.module('TrippismUIApp').controller('AttractionPopupController', ['$scope', '$sce', '$timeout', 'attractionData', 'UtilFactory', 'GoogleAttractionFactory', 'TripAdvisorAttractionFactory', AttractionPopupController]);
-    function AttractionPopupController($scope, $sce, $timeout, attractionData, UtilFactory, GoogleAttractionFactory, TripAdvisorAttractionFactory) {
+    angular.module('TrippismUIApp').controller('AttractionPopupController', ['$scope', '$sce', '$timeout', 'attractionData', 'UtilFactory', 'GoogleAttractionFactory', 'TripAdvisorAttractionFactory', 'dataConstant', AttractionPopupController]);
+    function AttractionPopupController($scope, $sce, $timeout, attractionData, UtilFactory, GoogleAttractionFactory, TripAdvisorAttractionFactory, dataConstant) {
         $scope.IsMapPopupLoading = false;
         $scope.slides = [];
         $scope.addSlides = addSlides;
         $scope.provider = "Google+";
         $scope.isPhotoLoading = false;
+        $scope.attractionProviders = dataConstant.attractionProviders;
         var service = new google.maps.places.PlacesService($scope.attractionsMap);
         init(attractionData);
         function addSlides(photos) {
@@ -37,8 +38,8 @@
                 else
                     setDefaultPopupDetails(attractionData);
             }
-            else if (attractionData.provider == "TripAdvisor") {
-                $scope.provider = "TripAdvisor";
+            else if (attractionData.provider == dataConstant.attractionProviders.TripAdvisor) {
+                $scope.provider = dataConstant.attractionProviders.TripAdvisor;
                 var request = {
                     LocationId: attractionData.locationId,
                     Name: attractionData.name,
@@ -116,7 +117,7 @@
                 $scope.locationDetail.PlaceName = attractionData.name.toLowerCase();
                 $scope.locationDetail.Placeaddress = $sce.trustAsHtml(attractionData.Placeaddress);
             }
-            else if (attractionData.provider == 'TripAdvisor') {
+            else if (attractionData.provider == dataConstant.attractionProviders.TripAdvisor) {
                 $scope.locationDetail.PlaceName = attractionData.name.toLowerCase();
                 $scope.locationDetail.Placeaddress = $sce.trustAsHtml(attractionData.vicinity);
                 $scope.locationDetail.raitingToAppend = attractionData.raitingToAppend;

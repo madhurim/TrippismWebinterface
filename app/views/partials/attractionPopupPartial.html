@@ -48,8 +48,8 @@
                                     <div class="col-md-2 col-sm-2" ng-show="locationDetail.FreeWifiInRooms"><h4><i title="Free Wi-Fi in rooms" class="fa fa-wifi cursor-help" aria-hidden="true" style="color:green"></i></h4></div>
                                 </div>
                             </div>
-                            <div ng-if="locationDetail.AttractionType != 'hotels' && provider != 'TripAdvisor'" ng-bind-html="::locationDetail.raitingToAppend"></div>
-                            <div class="margin-tb-5" ng-show="provider=='TripAdvisor' && locationDetail.raitingToAppend">
+                            <div ng-if="locationDetail.AttractionType != 'hotels' && provider != attractionProviders.TripAdvisor" ng-bind-html="::locationDetail.raitingToAppend"></div>
+                            <div class="margin-tb-5" ng-show="provider==attractionProviders.TripAdvisor && locationDetail.raitingToAppend">
                                 <div class="font-light" style="color:#599642;">TripAdvisor Traveler Rating</div>
                                 <div>
                                     <img ng-src="{{locationDetail.raitingToAppend}}" class="margin-bottom-5" width="100" height="17" />
@@ -60,8 +60,8 @@
                     </div>
                     <div class="col-md-4 review-wrapper">
                         <div class="attr-title" ng-if="attractionReviews.length > 0">
-                            <span ng-if="::provider=='TripAdvisor'">TripAdvisor&copy; Traveler Reviews</span>
-                            <span ng-if="::provider=='Google+'">{{provider}} Reviews</span>
+                            <span ng-if="::provider==attractionProviders.TripAdvisor">TripAdvisor&reg; Traveler Reviews</span>
+                            <span ng-if="::provider==attractionProviders.Google">Google+ Reviews</span>
                         </div>
                         <div class="contentVertical review">
                             <div ng-if="attractionReviews.length > 0">
@@ -69,8 +69,8 @@
                                     <p class="margin-bottom-0 p-text-align">{{::item.text}}</p>
                                     <div class="review-repeat">
                                         <span>Overall rating :</span>
-                                        <div ng-if="provider != 'TripAdvisor'" ng-bind-html="::item.rating"></div>
-                                        <div ng-show="provider=='TripAdvisor' && item.raitingToAppend"><img ng-src="{{item.raitingToAppend}}" class="margin-tb-5" width="70" height="16" /></div>
+                                        <div ng-if="provider != attractionProviders.TripAdvisor" ng-bind-html="::item.rating"></div>
+                                        <div ng-show="provider==attractionProviders.TripAdvisor && item.raitingToAppend"><img ng-src="{{item.raitingToAppend}}" class="margin-tb-5" width="70" height="16" /></div>
                                     </div>
                                     <p class="review-author">- {{::item.author_name}}</p>
                                 </div>

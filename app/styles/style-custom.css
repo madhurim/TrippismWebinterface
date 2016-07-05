@@ -1630,6 +1630,7 @@ ul .stop-line {
 
 .cust-tab .nav-tabs {
     border-radius: 3px;
+    padding-left: 23px;
 }
 
 .attr-loader {
@@ -1639,6 +1640,18 @@ ul .stop-line {
     overflow: hidden;
     color: #aaa;
     margin-top: 30px;
+}
+
+.padding-left-23 {
+    padding-left: 23px;
+}
+
+.attr-tab-hotel {
+    height: 25px;
+    font-weight: 500;
+    color: #333;
+    font-size: 16px;
+    padding: 2px 0px;
 }
 /*#endregion attraction tabs*/
 

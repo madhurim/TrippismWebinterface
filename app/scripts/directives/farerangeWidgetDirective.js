@@ -43,7 +43,7 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory,
                         return;
                     }
                     data = data.data;
-                    $scope.$emit('widgetLoaded', { name: "fareforcastinfo", isVisible: true });
+                    $scope.$emit('widgetLoaded', { name: "fareforcastinfo", isVisible: data.LowestFare ? true : false });
                     $scope.FareNoDataFound = false;
                     $scope.FareforecastData = data;
                 });

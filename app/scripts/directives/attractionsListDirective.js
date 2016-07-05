@@ -5,7 +5,6 @@
             scope: {
                 attractions: '=',
                 attractionmap: '=',
-                attractiontabindex: '=',
                 loadMoreAttractionInfo: "&",
                 loadAttractionInfo: "&",
                 attractionTabs: '='
@@ -20,14 +19,8 @@
                         data: null,
                         isActive: item.isDefault,
                         htmlClass: item.htmlClass,
-                        isDisplay: item.name == "hotels" ? null : true
+                        isDisplay: true
                     }
-                });
-
-                scope.$on('HotelData', function (event) {
-                    _.findWhere(scope.attractionsData, { name: 'hotels' }).isDisplay = true;
-                    if (!isTabClicked)
-                        scope.loadAttractions('hotels', true);
                 });
 
                 scope.isAttractionCollapsed = true;
@@ -75,10 +68,7 @@
                 }
 
                 scope.selectPlace = function (place) {
-                    var sliderdata = {
-                        tabIndex: scope.attractiontabindex,
-                        place: place,
-                    };
+                    var sliderdata = { place: place };
                     $rootScope.$broadcast('onMarkerPopup', sliderdata);
                 };
 
@@ -163,10 +153,6 @@
                         }
                     }
                 }
-
-                scope.$on('showHotelDetailsOnMap', function () {
-                    scope.loadAttractions('hotels', true);
-                });
 
                 scope.amountBifurcation = function (value) { return UtilFactory.amountBifurcation(value); };
                 scope.GetCurrencySymbol = function (code) {

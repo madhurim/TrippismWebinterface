@@ -18,16 +18,20 @@
                         if ($scope.WeatherInfoLoaded == false) {
                             WeatherFactory.GetData(data).then(function (data) {
                                 $scope.WeatherInfoLoaded = false;
-                                if (data.status != 200) {
+                                if (data.status == 200) {
                                     data = data.data;
                                     if (data.WeatherChances == undefined || data.WeatherChances.length == 0) {
                                         $scope.WeatherInfoLoaded = false;
-                                        $scope.$emit('widgetLoaded', { name: "WeatherData", isVisible: $scope.WeatherInfoLoaded });
-                                        return;
                                     }
+                                    else {
+                                        $scope.WeatherInfoLoaded = true;
+                                        $scope.WeatherData = data;
+                                    }
+                                    $scope.$emit('widgetLoaded', { name: "WeatherData", isVisible: $scope.WeatherInfoLoaded });
                                 }
-                                $scope.WeatherInfoLoaded = true;
-                                $scope.WeatherData = data.data;
+                                else {
+                                    $scope.$emit('widgetLoaded', { name: "WeatherData", isVisible: false });
+                                }
                             });
                         }
                     }

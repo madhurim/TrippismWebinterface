@@ -1130,7 +1130,7 @@ ul .stop-line {
 }
 /*#endregion Jassor image slider */
 
-.footer-blog-wp ul li {
+.footer-blog-2 ul li {
     display: inline-block;
     margin: 0 3px;
     vertical-align: top;
@@ -1773,8 +1773,12 @@ ul .stop-line {
         float: right;
     }
 
-    .footer-blog-wp {
+    .footer-blog-2 {
         width: auto;
+        float: left;
+    }
+
+    .footer-blog-3 {
         float: right;
     }
 

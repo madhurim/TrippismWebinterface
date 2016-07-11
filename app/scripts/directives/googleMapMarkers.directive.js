@@ -5,7 +5,7 @@
 
     function googleMap($timeout, $rootScope, $window, UtilFactory, urlConstant) {
         return {
-            templateUrl: urlConstant.viewsPath + 'GoogleMap.html',
+            templateUrl: urlConstant.viewsPath + 'googleMap.html',
             scope: {},
             controller: ['$scope', '$q', '$compile', '$location', 'dataConstant', '$stateParams', function ($scope, $q, $compile, $location, dataConstant, $stateParams) {
                 $scope.destinationMap = undefined;

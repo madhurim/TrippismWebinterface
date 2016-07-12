@@ -1678,6 +1678,15 @@ ul .stop-line {
 .margin-bottom-3 {
     margin-bottom: 3px !important;
 }
+
+.trip-copy {
+    position: absolute;
+    font-size: 10px;
+    color: #cfcfcf !important;
+    bottom: 0px;
+    right: 15px;
+    cursor: pointer;
+}
 /*#endregion attraction tabs*/
 
 /* #region Media queries ------------------------------------------------ */

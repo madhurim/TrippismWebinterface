@@ -2,12 +2,12 @@
     'use strict';
     //var hostName = "http://api.trippism.com";
     //var hostName = "http://www.trippism.com";
-    //var hostName = 'http://dev.trippism.com';
+    var hostName = 'http://dev.trippism.com';
 
-    var hostName = 'http://' + window.location.host;
-    if (angular.lowercase(window.location.host) == "localhost:9000") {
-        hostName = 'http://localhost:14606';
-    }
+    //var hostName = 'http://' + window.location.host;
+    //if (angular.lowercase(window.location.host) == "localhost:9000") {
+    //    hostName = 'http://localhost:14606';
+    //}
 
     var constants = {
         //destinationImagePath: 'http://content.trippism.com/images/destinations/',

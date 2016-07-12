@@ -76,11 +76,20 @@
                                         <div ng-show="provider==attractionProviders.TripAdvisor && item.raitingToAppend"><img ng-src="{{item.raitingToAppend}}" class="margin-tb-5" width="70" height="16" /></div>
                                     </div>
                                     <p class="review-author">- {{::item.author_name}}</p>
+                                    <p class="trip-review-link" ng-if="::provider==attractionProviders.TripAdvisor">
+                                        <a ng-href="{{::item.reviewURL}}" target="_blank">Read Full Review</a>
+                                    </p>
                                 </div>
                             </div>
                         </div>
+                        <p class="trip-review-link" ng-if="attractionReviews.length > 0 && provider==attractionProviders.TripAdvisor" style="margin-right:25px;">
+                            <a class="font-14" ng-href="{{::locationDetail.WebUrl}}" target="_blank">Read All Reviews</a>
+                        </p>
                         <div class="clear"></div>
                     </div>
+                </div>
+                <div ng-if="::provider==attractionProviders.TripAdvisor" class="col-md-12 text-center">
+                    <p class="font-12 margin-0 margin-bottom-3"><a class="hover-line" href="http://www.tripadvisor.com/pages/terms.html" target="_blank">© TripAdvisor {{::year}}</a></p>
                 </div>
                 <div class="clear"></div>
             </div>

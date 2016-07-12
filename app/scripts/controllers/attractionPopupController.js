@@ -6,6 +6,7 @@
         $scope.addSlides = addSlides;
         $scope.provider = "Google+";
         $scope.isPhotoLoading = false;
+        $scope.year = new Date().getFullYear();
         $scope.attractionProviders = dataConstant.attractionProviders;
         var service = new google.maps.places.PlacesService($scope.attractionsMap);
         init(attractionData);
@@ -91,10 +92,12 @@
                                     rating: $sce.trustAsHtml(getRatings(review.Rating)),
                                     time: review.PublishedDate,
                                     raitingToAppend: review.RatingImageUrl,
-                                    author_name: review.User.UserName
+                                    author_name: review.User.UserName,
+                                    reviewURL: review.Url
                                 });
                             }
                         }, 0, true);
+                        window.setTimeout(function () { loadScrollbars(); }, 0);
                     }
                     else {
                         setDefaultPopupDetails(attractionData);

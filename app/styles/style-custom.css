@@ -1657,9 +1657,30 @@ ul .stop-line {
 .margin-right-0 {
     margin-right: 0px;
 }
+
+.trip-review-link {
+    background: #599642;
+    float: right;
+    border-bottom: 1px solid #ccc;
+    border-radius: 2px;
+    color: white;
+}
+
+    .trip-review-link a {
+        padding: 5px;
+        color: inherit;
+    }
+
+        .trip-review-link a:hover {
+            text-decoration: underline;
+        }
+
+.margin-bottom-3 {
+    margin-bottom: 3px !important;
+}
 /*#endregion attraction tabs*/
 
-/*#region Media queries */
+/* #region Media queries ------------------------------------------------ */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {
         text-align: center;
@@ -1682,6 +1703,10 @@ ul .stop-line {
 
     .menu-btn {
         top: 15px;
+    }
+
+    .footer-blog-3 {
+        float: right;
     }
 }
 

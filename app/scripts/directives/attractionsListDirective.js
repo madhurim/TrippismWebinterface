@@ -1,5 +1,5 @@
 ﻿(function () {
-    angular.module('TrippismUIApp').directive('attractionList', ['$sce', '$rootScope', '$timeout', 'GoogleAttractionFactory', 'UtilFactory', 'urlConstant', function ($sce, $rootScope, $timeout, GoogleAttractionFactory, UtilFactory, urlConstant) {
+    angular.module('TrippismUIApp').directive('attractionList', ['$sce', '$rootScope', '$timeout', 'GoogleAttractionFactory', 'UtilFactory', 'urlConstant', 'dataConstant', function ($sce, $rootScope, $timeout, GoogleAttractionFactory, UtilFactory, urlConstant, dataConstant) {
         return {
             restrict: 'E',
             scope: {
@@ -11,6 +11,7 @@
             },
             templateUrl: urlConstant.partialViewsPath + 'attractionsListPartial.html',
             link: function (scope, elem, attrs) {
+                scope.year = new Date().getFullYear();
                 scope.attractionsData = _.sortBy(angular.copy(scope.attractionTabs), 'rank');
                 scope.attractionsData = _(scope.attractionsData).map(function (item) {
                     return {
@@ -27,7 +28,7 @@
                 scope.isAttractions = true;
                 scope.attractionstoDisp = [];
                 var isTabClicked = false;
-
+                scope.attractionProviders = dataConstant.attractionProviders;
                 scope.getAttractionsList = function () {
                     scope.isAttractionFound = true;
                     if (scope.attractions != undefined && scope.attractions.length != 0) {
@@ -38,6 +39,7 @@
                                 scope.attractionstoDisp = [];
                                 var results = scope.attractions.results;
                                 if (results.length > 0) {
+                                    scope.provider = results[0].provider;
                                     for (var i = 0; i < results.length; i++) {
                                         var raitingToAppend = "";
                                         if (results[i].rating != undefined)
@@ -52,7 +54,9 @@
                                             details: results[i].details,
                                             provider: results[i].provider,
                                             locationId: results[i].locationId,
-                                            ratingImage: results[i].ratingImage
+                                            ratingImage: results[i].ratingImage,
+                                            NumReviews: results[i].NumReviews,
+                                            WebUrl: results[i].WebUrl
                                         };
                                         scope.attractionstoDisp.push(placedetails);
                                     }

@@ -122,7 +122,9 @@
                                             vicinity: i.Address.Street1 + ', ' + i.Address.City,
                                             locationId: i.LocationId,
                                             provider: dataConstant.attractionProviders.TripAdvisor,
-                                            ratingImage: i.RatingImageUrl
+                                            ratingImage: i.RatingImageUrl,
+                                            NumReviews: i.NumReviews,
+                                            WebUrl: i.WebUrl
                                         }
                                     }).sortBy(function (i) { return parseFloat(i.rating) * -1; }).value();
 

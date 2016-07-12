@@ -9,7 +9,7 @@ angular.module('TrippismUIApp').directive('youtubeInfo', ['YouTubeFactory', 'url
             templateUrl: urlConstant.partialViewsPath + 'youtubePartial.html',
             controller: ['$scope', function (scope) {
                 scope.curPage = 0;
-                scope.pageSize = 10;
+                var pageSize = 10;
                 scope.isDataLoadedFirstTime = false;
 
                 scope.loadyoutubeInfo = function (nextTokenID, prevTokenID) {
@@ -40,13 +40,20 @@ angular.module('TrippismUIApp').directive('youtubeInfo', ['YouTubeFactory', 'url
                                 scope.isDataLoadedFirstTime = true;
                                 scope.youtubeData = data;
 
+                                if (!data || data.items.length == 0)
+                                    scope.isYoutubeData = false;
+                                else
+                                    scope.isYoutubeData = true;
+
+                                scope.currentIndex = scope.curPage;    // needed to create new variable to not update UI before API call.
+
                                 if (scope.youtubeData.nextPageToken != null)
                                     scope.nextToken = scope.youtubeData.nextPageToken;
 
                                 if (scope.youtubeData.prevPageToken != null)
                                     scope.prevToken = scope.youtubeData.prevPageToken;
 
-                                scope.numberOfPages = Math.ceil(scope.youtubeData.pageInfo.totalResults / scope.pageSize);
+                                scope.numberOfPages = Math.ceil(scope.youtubeData.pageInfo.totalResults / pageSize);
                                 if ((scope.curPage + 1) >= scope.numberOfPages)
                                     scope.isdisabled = 0;
                                 else

@@ -107,6 +107,7 @@
             }
             else
                 getPlaceDetails(attractionData);
+            window.setTimeout(function () { angular.element('.modal-content').css('border', 'none'); }, 0);
         }
 
         function setDefaultPopupDetails(attractionData) {

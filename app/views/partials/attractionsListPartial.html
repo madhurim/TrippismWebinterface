@@ -38,8 +38,8 @@
                                 </span>
                             </span>
                         </h6>
-                        <div ng-if="::!item.ratingImage" ng-bind-html="item.raitingToAppend"></div>
-                        <div ng-if="::item.ratingImage" class="margin-top-5">
+                        <div ng-if="provider != attractionProviders.TripAdvisor" ng-bind-html="item.raitingToAppend"></div>
+                        <div ng-if="provider == attractionProviders.TripAdvisor && item.ratingImage" class="margin-top-5">
                             <p class="font-13 margin-0 font-imp" style="color:#cfcfcf">TripAdvisor Traveller Rating</p>
                             <img class="pull-left" style="opacity:0.7;" width="90" height="16" ng-src="{{item.ratingImage}}" />
                             <span class="margin-left-5 font-light pull-left" style="color:white;margin-top:1px;">

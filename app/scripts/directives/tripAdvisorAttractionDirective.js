@@ -118,14 +118,14 @@
                                             id: i.Ranking ? i.Ranking.GeoLocationId : null,
                                             place_id: i.Ranking ? i.Ranking.GeoLocationId : null,
                                             name: i.Name,
-                                            rating: i.Rating || Infinity,
+                                            rating: i.Rating,
                                             vicinity: i.Address.Street1 + ', ' + i.Address.City,
                                             locationId: i.LocationId,
                                             provider: dataConstant.attractionProviders.TripAdvisor,
                                             ratingImage: i.RatingImageUrl,
                                             NumReviews: i.NumReviews,
                                             WebUrl: i.WebUrl
-                                        }
+                                        };
                                     }).sortBy(function (i) { return parseFloat(i.rating) * -1; }).value();
 
                                     markerList.push({ results: data.Attractions, type: type });

@@ -199,7 +199,8 @@
                         // [E] region
                         // [S] min-max fare
                         if (isFound && $scope.Minfare > 0 && $scope.Maxfare > 0) {
-                            if (destination.LowRate >= $scope.Minfare && destination.LowRate <= $scope.Maxfare)
+                            var fare = Math.ceil(destination.LowRate);
+                            if (fare >= $scope.Minfare && fare <= $scope.Maxfare)                            
                                 isFound = true;
                             else
                                 isFound = false;

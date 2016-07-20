@@ -6,12 +6,14 @@
          'EmailForDestinationDetFactory',
          'eMailData',
          '$stateParams',
+         'DestinationFactory',
         EmailForDestinationDet]);
 
     function EmailForDestinationDet($scope,
         EmailForDestinationDetFactory,
         eMailData,
-        $stateParams
+        $stateParams,
+        DestinationFactory
         ) {
         $scope.fromEmail = '';
         $scope.toEmail = '';
@@ -59,6 +61,11 @@
             $scope.$dismiss('cancel')
         };
 
+        var Origin = $scope.eMailData.SearchCriteria.Origin.toUpperCase();
+        var Destination = $scope.eMailData.DestinationAirport.airport_Code.toUpperCase()
+        var FromDate = ConvertToRequiredDate($scope.eMailData.SearchCriteria.FromDate, 'API');
+        var ToDate = ConvertToRequiredDate($scope.eMailData.SearchCriteria.ToDate, 'API');
+
         function activate() {
             var destinationList = _.filter($scope.eMailData.DestinationList, function (item) {
                 return item.LowestNonStopFare && item.LowestNonStopFare.Fare !== 'N/A';
@@ -66,8 +73,6 @@
             var destinationList = destinationList.sort(function (a, b) { return (parseFloat(a.LowestNonStopFare.Fare) < parseFloat(b.LowestNonStopFare.Fare)) ? 1 : -1; }).reverse().slice(0, 20);
 
             var airportlist = $scope.eMailData.AvailableAirports;
-
-            var Origin = $scope.eMailData.SearchCriteria.Origin.toUpperCase();
 
             var OriginAirportName = _.find(airportlist, function (airport) {
                 return airport.airport_Code == Origin
@@ -81,8 +86,6 @@
             });
             sortedObjs = _(sortedObjs).sortBy(function (obj) { return parseInt(obj.LowestFare.Fare, 10) });
 
-            var FromDate = ConvertToRequiredDate($scope.eMailData.SearchCriteria.FromDate, 'API');
-            var ToDate = ConvertToRequiredDate($scope.eMailData.SearchCriteria.ToDate, 'API');
             var OriginName = OriginAirportName.airport_CityCode.toUpperCase();
 
             var url = 'http://' + window.document.location.host;
@@ -95,12 +98,12 @@
 
             // contentString += ' <p style="clear:both;padding-top:20px;">Please explore  <a href="' + url +'">www.trippism.com</a> for more details to plan vacation, trip.</p><p>Thanks,</p><p>via Trippism - new generation trip planner!</p>';
             contentString += ' <p style="clear:both;padding-top:20px;">Share on :  ' + fblink + ', ' + twitterlink + ', ' + gpluslink + ' </p></div>';
-
             var email = {
                 From: $scope.fromEmail,
                 To: $scope.toEmail,
                 subject: $scope.Subject,
-                body: contentString
+                //body: contentString
+                body: angular.element('#email-template').html()
             };
 
             $scope.sendmailPromise = EmailForDestinationDetFactory.SendEmail(email).then(function (data) {
@@ -116,6 +119,25 @@
 
             });
         }
+
+        $scope.setEmailTemplateData = function () {
+            debugger;
+            //"{"fare":{"LowestNonStopFare":{"AirlineCodes":["DL"],"Fare":256.19,"outboundflightstops":0,"inboundflightstops":0},
+            //"LowestFare":{"AirlineCodes":["DL"],"Fare":256.19}},"hotel":{"CurrencyCode":"USD","CurrencySymbol":"$","Fare":"109.99","Star":null},
+            //"weather":{"HighTempratureF":"98","HighTempratureC":"36","LowTempratureC":"25","LowTempratureF":"77",
+            //"WeatherChances":[{"ChanceType":"chanceofsultryday","Name":"Sweltering","Description":"dew point over 70&deg;F / 21&deg;C","Percentage":100,
+            //"$$hashKey":"object:226"}]},"fareForecast":{"OriginLocation":"ATL","DestinationLocation":"HOU","DepartureDateTime":"2016-08-03T00:00:00",
+            //"ReturnDateTime":"2016-08-08T00:00:00","Forecast":{"HighestPredictedFare":274,"CurrencyCode":"USD","LowestPredictedFare":257},
+            //"Recommendation":"buy","LowestFare":256.19,"CurrencyCode":"USD"}}"
+            $scope.emailTemplateInfo = {
+                weather: DestinationFactory.DestinationDataStorage.currentPage.weather,
+                fareForecast: DestinationFactory.DestinationDataStorage.currentPage.fareForecast,
+                hotel: DestinationFactory.DestinationDataStorage.currentPage.hotel,
+                fare: DestinationFactory.DestinationDataStorage.currentPage.fare,
+                details: DestinationFactory.DestinationDataStorage.currentPage.details
+            }
+        }
+        $scope.setEmailTemplateData();
     }
 })();
 

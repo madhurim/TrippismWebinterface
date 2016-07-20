@@ -1,5 +1,5 @@
-﻿angular.module('TrippismUIApp').directive('destinationFareForecast', ['$rootScope', '$compile', '$modal', 'DestinationFactory', 'UtilFactory', '$stateParams', '$state', '$timeout', 'InstaFlightSearchFactory', 'urlConstant',
-    function ($rootScope, $compile, $modal, DestinationFactory, UtilFactory, $stateParams, $state, $timeout, InstaFlightSearchFactory, urlConstant) {
+﻿angular.module('TrippismUIApp').directive('destinationFareForecast', ['$rootScope', '$compile', '$modal', '$filter', 'DestinationFactory', 'UtilFactory', '$stateParams', '$state', '$timeout', 'InstaFlightSearchFactory', 'urlConstant',
+    function ($rootScope, $compile, $modal, $filter, DestinationFactory, UtilFactory, $stateParams, $state, $timeout, InstaFlightSearchFactory, urlConstant) {
         return {
             restrict: 'E',
             scope: {
@@ -12,7 +12,7 @@
                 }
                 $scope.formats = Dateformat();
                 $scope.format = $scope.formats[5];
-                
+
                 $scope.amountBifurcation = function (value) { return UtilFactory.amountBifurcation(value); };
             },
             link: function ($scope, elem, attrs) {
@@ -40,18 +40,25 @@
 
                 function activate() {
                     var param = $scope.fareParams.Fareforecastdata;
-                    $scope.FareInfo = DestinationFactory.GetDestinationFareInfo(param);
 
                     $scope.Origin = $scope.fareParams.SearchCriteria.Origin;
                     $scope.DestinationLocation = $scope.fareParams.SearchCriteria.DestinationLocation;
                     $scope.FromDate = $scope.fareParams.SearchCriteria.FromDate;
                     $scope.ToDate = $scope.fareParams.SearchCriteria.ToDate;
-                    $scope.Theme = $scope.fareParams.SearchCriteria.Theme;
-                    $scope.Region = $scope.fareParams.SearchCriteria.Region;
-                    $scope.Minfare = $scope.fareParams.SearchCriteria.Minfare;
-                    $scope.Maxfare = $scope.fareParams.SearchCriteria.Maxfare;
                     var PointOfsalesCountry = $scope.fareParams.OriginAirport.airport_CountryCode;
 
+                    $scope.airportDetail = $scope.fareParams.DestinationAirport.airport_FullName + ', ' + $scope.fareParams.DestinationAirport.airport_CityName + ', ' + $scope.fareParams.DestinationAirport.airport_CountryName;
+
+                    $scope.search = $scope.fareParams.OriginAirport.airport_CityName + '-' + $scope.fareParams.DestinationAirport.airport_CityName
+                        + ' ' + $filter('date')($scope.fareParams.SearchCriteria.FromDate, 'MMM-dd-yyyy')
+                        + ' To ' + $filter('date')($scope.fareParams.SearchCriteria.ToDate, 'MMM-dd-yyyy')
+
+                    DestinationFactory.DestinationDataStorage.currentPage.details = {
+                        airportDetail: $scope.airportDetail,
+                        search: $scope.search
+                    }
+
+                    $scope.FareInfo = DestinationFactory.GetDestinationFareInfo(param);
                     if ($scope.FareInfo == null) {
                         var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
                         var secondDate = new Date($scope.ToDate);
@@ -169,7 +176,6 @@
                         initFares($scope.FareInfo);
                         $timeout(function () { $scope.$emit('destinationFare', $scope.FareInfo) }, 0, false);
                     }
-                    $scope.airportDetail = $scope.fareParams.DestinationAirport.airport_FullName + ', ' + $scope.fareParams.DestinationAirport.airport_CityName + ', ' + $scope.fareParams.DestinationAirport.airport_CountryName;
                 };
 
                 function initFares(FareInfo) {
@@ -184,6 +190,11 @@
                     if (FareInfo.LowestFare && FareInfo.LowestFare.Fare != 'N/A' && FareInfo.LowestFare.Fare != 0)
                         $scope.LowestFare = FareInfo.LowestFare;
 
+                    DestinationFactory.DestinationDataStorage.currentPage.fare = {
+                        CurrencySymbol: $scope.fareCurrencySymbol,
+                        LowestNonStopFare: $scope.amountBifurcation($scope.LowestNonStopFare.Fare),
+                        LowestFare: $scope.amountBifurcation($scope.LowestFare.Fare)
+                    };
                 }
 
                 function FilterDestinations(destinations) {

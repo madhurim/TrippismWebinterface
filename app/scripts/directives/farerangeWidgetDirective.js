@@ -1,6 +1,6 @@
 ﻿angular.module('TrippismUIApp').directive('farerangewidgetInfo',
-                ['FareRangeFactory', '$filter', '$timeout', 'UtilFactory', 'FareforecastFactory', 'urlConstant',
-function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory, urlConstant) {
+                ['FareRangeFactory', '$filter', '$timeout', 'UtilFactory', 'FareforecastFactory', 'urlConstant', 'DestinationFactory',
+function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory, urlConstant, DestinationFactory) {
     return {
         restrict: 'E',
         scope: {
@@ -45,6 +45,12 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory,
                     $scope.$emit('widgetLoaded', { name: "fareforcastinfo", isVisible: true });
                     $scope.FareNoDataFound = false;
                     $scope.FareforecastData = data;
+                    DestinationFactory.DestinationDataStorage.currentPage.fareForecast = {
+                        HighestPredictedFare: $scope.amountBifurcation(data.Forecast.HighestPredictedFare),
+                        LowestPredictedFare: $scope.amountBifurcation(data.Forecast.LowestPredictedFare),
+                        CurrencySymbol: GetCurrencySymbol(data.Forecast.CurrencyCode),
+                        Recommendation: data.Recommendation
+                    };
                 });
             }
 

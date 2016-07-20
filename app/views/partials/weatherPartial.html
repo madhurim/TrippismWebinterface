@@ -23,157 +23,79 @@
                         </div>
                         <div class="col-md-8 col-sm-12 col-xs-12 avg-box padding-0 font-light">
                             <div ng-repeat="item in  WeatherwidgetData.WeatherChances">
-                                <div class="avg" ng-if="item.Name=='Cloudy' && item.Percentage >= 60">
+                                <div class="avg" ng-if="item.Name=='Cloudy'">
                                     <img src="../images/weather/Cloudy.png" alt="" />
                                     <span class="title">{{item.Name}}</span>
                                 </div>
-                                <div class="avg" ng-if="item.Name=='Humid' && item.Percentage >= 60">
+                                <div class="avg" ng-if="item.Name=='Humid'">
                                     <img src="../images/weather/Humid.png" alt="" />
                                     <span class="title">{{item.Name}}</span>
                                 </div>
-                                <div class="avg" ng-if="item.Name=='Partly Cloudy' && item.Percentage >= 60">
+                                <div class="avg" ng-if="item.Name=='Partly Cloudy'">
                                     <img src="../images/weather/Partly Cloudy.png" alt="" />
                                     <span class="title">{{item.Name}}</span>
                                 </div>
-                                <div class="avg" ng-if="item.Name=='Precipitation' && item.Percentage >= 60 && IsparticipationDisplay">
+                                <div class="avg" ng-if="item.Name=='Precipitation'">
                                     <img src="../images/weather/Precipitation.png" alt="" />
                                     <span class="title">{{item.Name}}</span>
                                 </div>
-                                <div class="avg" ng-if="item.Name=='Rain' && item.Percentage >= 60">
+                                <div class="avg" ng-if="item.Name=='Rain'">
                                     <img src="../images/weather/Rain.png" alt="" />
                                     <span class="title">Rainy</span>
                                 </div>
-                                <div class="avg" ng-if="item.Name=='Sweltering' && item.Percentage >= 60">
+                                <div class="avg" ng-if="item.Name=='Sweltering'">
                                     <img src="../images/weather/Sweltering.png" alt="" />
                                     <span class="title">Very Hot</span>
                                 </div>
-                                <div class="avg" ng-if="item.Name=='Thunderstorms' && item.Percentage >= 60">
+                                <div class="avg" ng-if="item.Name=='Thunderstorms'">
                                     <img src="../images/weather/Thunderstorms.png" alt="" />
                                     <span class="title">{{item.Name}}</span>
                                 </div>
-                                <div class="avg" ng-if="item.Name=='Warm' && item.Percentage >= 60">
+                                <div class="avg" ng-if="item.Name=='Warm'">
                                     <img src="../images/weather/warm.png" alt="" />
                                     <span class="title">{{item.Name}}</span>
                                 </div>
-                                <div class="avg" ng-if="item.Name=='Sunny' && item.Percentage >= 60">
+                                <div class="avg" ng-if="item.Name=='Sunny'">
                                     <img src="../images/weather/Sunny.png" alt="" />
                                     <span class="title">{{item.Name}}</span>
                                 </div>
-                                <div class="avg" ng-if="item.Name=='Hot' && item.Percentage >= 60">
+                                <div class="avg" ng-if="item.Name=='Hot'">
                                     <img src="../images/weather/Hot.png" alt="" />
                                     <span class="title">{{item.Name}}</span>
                                 </div>
-                                <div class="avg" ng-if="item.Name=='Windy' && item.Percentage >= 60">
+                                <div class="avg" ng-if="item.Name=='Windy'">
                                     <img src="../images/weather/Windy.png" alt="" />
                                     <span class="title">{{item.Name}}</span>
                                 </div>
-                                <div class="avg" ng-if="item.Name=='Fog' && item.Percentage >= 60">
+                                <div class="avg" ng-if="item.Name=='Fog'">
                                     <img src="../images/weather/Fog.png" alt="" />
                                     <span class="title">{{item.Name}}</span>
                                 </div>
-                                <div class="avg" ng-if="item.Name=='Ground Snow' && item.Percentage >= 60">
+                                <div class="avg" ng-if="item.Name=='Ground Snow'">
                                     <img src="../images/weather/Ground Snow.png" alt="" />
                                     <span class="title">{{item.Name}}</span>
                                 </div>
-                                <div class="avg" ng-if="item.Name=='Tornado' && item.Percentage >= 60">
+                                <div class="avg" ng-if="item.Name=='Tornado'">
                                     <img src="../images/weather/Tornado.png" alt="" />
                                     <span class="title">{{item.Name}}</span>
                                 </div>
-                                <div class="avg" ng-if="item.Name=='Freezing' && item.Percentage >= 60">
+                                <div class="avg" ng-if="item.Name=='Freezing'">
                                     <img src="../images/weather/Freezing.png" alt="" />
                                     <span class="title">{{item.Name}}</span>
                                 </div>
-                                <div class="avg" ng-if="item.Name=='Cool' && item.Percentage >= 60">
+                                <div class="avg" ng-if="item.Name=='Cool'">
                                     <img src="../images/weather/Cool.png" alt="" />
                                     <span class="title">{{item.Name}}</span>
                                 </div>
-                                <div class="avg" ng-if="item.Name=='Hail' && item.Percentage >= 60">
+                                <div class="avg" ng-if="item.Name=='Hail'">
                                     <img src="../images/weather/Hail.png" alt="" />
                                     <span class="title">{{item.Name}}</span>
                                 </div>
-                                <div class="avg" ng-if="item.Name=='Snow' && item.Percentage >= 60">
+                                <div class="avg" ng-if="item.Name=='Snow'">
                                     <img src="../images/weather/Snow.png" alt="" />
                                     <span class="title">{{item.Name}}</span>
                                 </div>
                             </div>
-
-
-
-                            <!--<div class="avg">
-                                <img src="../images/weather/Cloudy.png" alt="" />
-                                <span class="title">Cloudy</span>
-                            </div>
-                            <div class="avg">
-                                <img src="../images/weather/Humid.png" alt="" />
-                                <span class="title">Humid</span>
-                            </div>
-                            <div class="avg">
-                                <img src="../images/weather/Partly Cloudy.png" alt="" />
-                                <span class="title">Partly Cloudy</span>
-                            </div>
-                            <div class="avg">
-                                <img src="../images/weather/Precipitation.png" alt="" />
-                                <span class="title">Precipitation</span>
-                            </div>
-                            <div class="avg">
-                                <img src="../images/weather/Rain.png" alt="" />
-                                <span class="title">Rainy</span>
-                            </div>
-                            <div class="avg">
-                                <img src="../images/weather/Sweltering.png" alt="" />
-                                <span class="title">Very Hot</span>
-                            </div>
-                            <div class="avg">
-                                <img src="../images/weather/Thunderstorms.png" alt="" />
-                                <span class="title">Thunderstorms</span>
-                            </div>
-                            <div class="avg">
-                                <img src="../images/weather/warm.png" alt="" />
-                                <span class="title">Warm</span>
-                            </div>
-                            <div class="avg">
-                                <img src="../images/weather/Sunny.png" alt="" />
-                                <span class="title">Sunny</span>
-                            </div>
-                            <div class="avg">
-                                <img src="../images/weather/Hot.png" alt="" />
-                                <span class="title">Hot</span>
-                            </div>
-                            <div class="avg">
-                                <img src="../images/weather/Windy.png" alt="" />
-                                <span class="title">Windy</span>
-                            </div>
-                            <div class="avg">
-                                <img src="../images/weather/Fog.png" alt="" />
-                                <span class="title">Fog</span>
-                            </div>
-                            <div class="avg">
-                                <img src="../images/weather/Ground Snow.png" alt="" />
-                                <span class="title">Ground Snow</span>
-                            </div>
-                            <div class="avg">
-                                <img src="../images/weather/Tornado.png" alt="" />
-                                <span class="title">Tornado</span>
-                            </div>
-                            <div class="avg">
-                                <img src="../images/weather/Freezing.png" alt="" />
-                                <span class="title">Freezing</span>
-                            </div>
-                            <div class="avg">
-                                <img src="../images/weather/Cool.png" alt="" />
-                                <span class="title">Cool</span>
-                            </div>
-                            <div class="avg">
-                                <img src="../images/weather/Hail.png" alt="" />
-                                <span class="title">Hail</span>
-                            </div>
-                            <div class="avg">
-                                <img src="../images/weather/Snow.png" alt="" />
-                                <span class="title">Snow</span>
-                            </div>-->
-
-                        </div>
-                        <div class="avg-box" ng-if="WeatherwidgetData.WeatherChances">
                         </div>
                     </li>
                 </ul>

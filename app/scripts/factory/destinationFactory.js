@@ -7,7 +7,6 @@
         var DestinationsData = [];
         var DestinationData = [];
         var DestinationHotelData = [];
-
         var DestinationDataStorage = {
             fare: {
                 get: function (key) { return $filter('filter')(DestinationData, { key: key }, true)[0]; },
@@ -18,6 +17,13 @@
                 get: function (key) { return $filter('filter')(DestinationHotelData, { key: key }, true)[0]; },
                 set: function (key, data) { DestinationHotelData.push({ key: key, data: data }); },
                 clear: function () { DestinationHotelData = []; }
+            },
+            currentPage: {
+                fare: null,
+                hotel: null,
+                weather: null,
+                fareForecast: null,
+                details: null
             }
         }
 

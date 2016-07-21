@@ -23,7 +23,14 @@
                 hotel: null,
                 weather: null,
                 fareForecast: null,
-                details: null
+                details: null,
+                clear: function () {
+                    this.fare = null;
+                    this.hotel = null;
+                    this.weather = null;
+                    this.fareForecast = null;
+                    this.details = null;
+                }
             }
         }
 

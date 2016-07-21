@@ -20,7 +20,7 @@
                             if ($scope.WeatherData == "" || $scope.WeatherData == undefined) {
                                 WeatherFactory.GetData(data).then(function (data) {
                                     $scope.WeatherInfoLoaded = false;
-                                    if (data == "" || data.status == 404 || data.WeatherChances == undefined || data.WeatherChances.length == 0) {
+                                    if (data == "" || data.status == 404) {
                                         $scope.WeatherInfoLoaded = false;
                                         $scope.$emit('widgetLoaded', { name: "WeatherData", isVisible: $scope.WeatherInfoLoaded });
                                         return;

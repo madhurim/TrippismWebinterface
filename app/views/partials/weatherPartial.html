@@ -22,77 +22,9 @@
                             </div>
                         </div>
                         <div class="col-md-8 col-sm-12 col-xs-12 avg-box padding-0 font-light">
-                            <div ng-repeat="item in  WeatherwidgetData.WeatherChances">
-                                <div class="avg" ng-if="item.Name=='Cloudy'">
-                                    <img src="../images/weather/Cloudy.png" alt="" />
-                                    <span class="title">{{item.Name}}</span>
-                                </div>
-                                <div class="avg" ng-if="item.Name=='Humid'">
-                                    <img src="../images/weather/Humid.png" alt="" />
-                                    <span class="title">{{item.Name}}</span>
-                                </div>
-                                <div class="avg" ng-if="item.Name=='Partly Cloudy'">
-                                    <img src="../images/weather/Partly Cloudy.png" alt="" />
-                                    <span class="title">{{item.Name}}</span>
-                                </div>
-                                <div class="avg" ng-if="item.Name=='Precipitation'">
-                                    <img src="../images/weather/Precipitation.png" alt="" />
-                                    <span class="title">{{item.Name}}</span>
-                                </div>
-                                <div class="avg" ng-if="item.Name=='Rain'">
-                                    <img src="../images/weather/Rain.png" alt="" />
-                                    <span class="title">Rainy</span>
-                                </div>
-                                <div class="avg" ng-if="item.Name=='Sweltering'">
-                                    <img src="../images/weather/Sweltering.png" alt="" />
-                                    <span class="title">Very Hot</span>
-                                </div>
-                                <div class="avg" ng-if="item.Name=='Thunderstorms'">
-                                    <img src="../images/weather/Thunderstorms.png" alt="" />
-                                    <span class="title">{{item.Name}}</span>
-                                </div>
-                                <div class="avg" ng-if="item.Name=='Warm'">
-                                    <img src="../images/weather/warm.png" alt="" />
-                                    <span class="title">{{item.Name}}</span>
-                                </div>
-                                <div class="avg" ng-if="item.Name=='Sunny'">
-                                    <img src="../images/weather/Sunny.png" alt="" />
-                                    <span class="title">{{item.Name}}</span>
-                                </div>
-                                <div class="avg" ng-if="item.Name=='Hot'">
-                                    <img src="../images/weather/Hot.png" alt="" />
-                                    <span class="title">{{item.Name}}</span>
-                                </div>
-                                <div class="avg" ng-if="item.Name=='Windy'">
-                                    <img src="../images/weather/Windy.png" alt="" />
-                                    <span class="title">{{item.Name}}</span>
-                                </div>
-                                <div class="avg" ng-if="item.Name=='Fog'">
-                                    <img src="../images/weather/Fog.png" alt="" />
-                                    <span class="title">{{item.Name}}</span>
-                                </div>
-                                <div class="avg" ng-if="item.Name=='Ground Snow'">
-                                    <img src="../images/weather/Ground Snow.png" alt="" />
-                                    <span class="title">{{item.Name}}</span>
-                                </div>
-                                <div class="avg" ng-if="item.Name=='Tornado'">
-                                    <img src="../images/weather/Tornado.png" alt="" />
-                                    <span class="title">{{item.Name}}</span>
-                                </div>
-                                <div class="avg" ng-if="item.Name=='Freezing'">
-                                    <img src="../images/weather/Freezing.png" alt="" />
-                                    <span class="title">{{item.Name}}</span>
-                                </div>
-                                <div class="avg" ng-if="item.Name=='Cool'">
-                                    <img src="../images/weather/Cool.png" alt="" />
-                                    <span class="title">{{item.Name}}</span>
-                                </div>
-                                <div class="avg" ng-if="item.Name=='Hail'">
-                                    <img src="../images/weather/Hail.png" alt="" />
-                                    <span class="title">{{item.Name}}</span>
-                                </div>
-                                <div class="avg" ng-if="item.Name=='Snow'">
-                                    <img src="../images/weather/Snow.png" alt="" />
+                            <div ng-repeat="item in WeatherwidgetData.WeatherChances">
+                                <div class="avg">
+                                    <img ng-src="../images/weather/{{item.Name}}.png" alt="" />
                                     <span class="title">{{item.Name}}</span>
                                 </div>
                             </div>

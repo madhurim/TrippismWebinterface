@@ -20,6 +20,8 @@
         urlConstant) {
 
         $scope.$emit('bodyClass', 'otherpage destination-page');
+        DestinationFactory.DestinationDataStorage.currentPage.clear();
+
         var w = angular.element($window);
         w.bind('resize', setImageHeight);
 

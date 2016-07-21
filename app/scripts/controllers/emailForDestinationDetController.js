@@ -6,6 +6,7 @@
          'EmailForDestinationDetFactory',
          'eMailData',
          '$stateParams',
+         '$filter',
          'DestinationFactory',
         EmailForDestinationDet]);
 
@@ -13,6 +14,7 @@
         EmailForDestinationDetFactory,
         eMailData,
         $stateParams,
+        $filter,
         DestinationFactory
         ) {
         $scope.fromEmail = '';
@@ -134,7 +136,9 @@
                 fareForecast: DestinationFactory.DestinationDataStorage.currentPage.fareForecast,
                 hotel: DestinationFactory.DestinationDataStorage.currentPage.hotel,
                 fare: DestinationFactory.DestinationDataStorage.currentPage.fare,
-                details: DestinationFactory.DestinationDataStorage.currentPage.details
+                details: DestinationFactory.DestinationDataStorage.currentPage.details,
+                dateString: $filter('date')($scope.eMailData.SearchCriteria.FromDate, 'MMM-dd-yyyy') + ' To ' + $filter('date')($scope.eMailData.SearchCriteria.ToDate, 'MMM-dd-yyyy'),
+                href: window.location.href
             }
         }
         $scope.setEmailTemplateData();

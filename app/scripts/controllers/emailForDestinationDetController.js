@@ -86,19 +86,10 @@
                     alertify.alert("Error", "");
                     alertify.alert(data.Data.status).set('onok', function (closeEvent) { });
                 }
-
             });
         }
 
         $scope.setEmailTemplateData = function () {
-            debugger;
-            //"{"fare":{"LowestNonStopFare":{"AirlineCodes":["DL"],"Fare":256.19,"outboundflightstops":0,"inboundflightstops":0},
-            //"LowestFare":{"AirlineCodes":["DL"],"Fare":256.19}},"hotel":{"CurrencyCode":"USD","CurrencySymbol":"$","Fare":"109.99","Star":null},
-            //"weather":{"HighTempratureF":"98","HighTempratureC":"36","LowTempratureC":"25","LowTempratureF":"77",
-            //"WeatherChances":[{"ChanceType":"chanceofsultryday","Name":"Sweltering","Description":"dew point over 70&deg;F / 21&deg;C","Percentage":100,
-            //"$$hashKey":"object:226"}]},"fareForecast":{"OriginLocation":"ATL","DestinationLocation":"HOU","DepartureDateTime":"2016-08-03T00:00:00",
-            //"ReturnDateTime":"2016-08-08T00:00:00","Forecast":{"HighestPredictedFare":274,"CurrencyCode":"USD","LowestPredictedFare":257},
-            //"Recommendation":"buy","LowestFare":256.19,"CurrencyCode":"USD"}}"
             $scope.emailTemplateInfo = {
                 weather: DestinationFactory.DestinationDataStorage.currentPage.weather,
                 fareForecast: DestinationFactory.DestinationDataStorage.currentPage.fareForecast,

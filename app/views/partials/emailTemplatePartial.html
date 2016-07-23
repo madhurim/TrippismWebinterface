@@ -10,7 +10,7 @@
                 <div style='margin-right: -15px;margin-left: -15px;clear:both;width: 100%;margin: auto;background-color: #fff;box-sizing: border-box'>
                     <div style='box-shadow: 1px 1px 12px #aaa;margin-top:10px;width: 100%;float: left;position: relative;box-sizing: border-box'>
                         <div style='position: relative;box-sizing: border-box'>
-                            <div style='padding: 18px 18px 18px 41px;width: 100%;box-shadow: 0 0 0 rgba(0,0,0,.1);background-color: #fff;float: left;box-sizing: border-box'>
+                            <div style='padding: 5px 5px 5px 17px;width: 100%;box-shadow: 0 0 0 rgba(0,0,0,.1);background-color: #fff;float: left;box-sizing: border-box'>
                                 <div style='padding: 0 16px 22px 0;padding-bottom:10px;'>
                                     <h6 style='font-size: 17px;color: #b90005!important;margin: 0;text-align: left;'>What is the likely cost?</h6>
                                 </div>
@@ -20,7 +20,7 @@
                                             <p style='margin-bottom: 0px;color: rgb(88, 88, 88);font-size: 14px;'>
                                                 <span ng-if="::emailTemplateInfo.details.search">{{::emailTemplateInfo.details.search}}</span>
                                             </p>
-                                            <div class='clear'></div>
+                                            <div style="clear:both"></div>
                                         </div>
                                         <div style='padding: 0px;color: rgb(86, 90, 92);font-weight: normal;float: none;background: none;padding: 5px 0px;'>
                                             <h4 style='color: rgb(88, 88, 88);font-size: 15px;font-weight: normal;margin: 0px;'>
@@ -48,7 +48,7 @@
                                                     </a>
                                                 </p>
                                             </div>
-                                            <div class='clear'></div>
+                                            <div style="clear:both"></div>
                                         </div>
                                     </div>
                                     <div style='max-width: 260px;width:50%;padding:0px;float:left;'>
@@ -66,7 +66,7 @@
                                                     </a>
                                                 </p>
                                             </div>
-                                            <div class='clear'></div>
+                                            <div style="clear:both"></div>
                                         </div>
                                     </div>
                                     <div style='clear:both;'></div>
@@ -91,22 +91,22 @@
                                                     <h4 style='margin-top: 0;margin-bottom: 4px;font-size: 22px;font-weight: 500;color: #333;'>
                                                         {{::emailTemplateInfo.hotel.CurrencySymbol}} {{::emailTemplateInfo.hotel.Fare.BeforeDecimal}}<span style='vertical-align: top;font-size: 14px;'>{{::emailTemplateInfo.hotel.Fare.AfterDecimal}}</span>
                                                     </h4>
-                                                    <p style='margin:0px;'>Lowest</p>
+                                                    <p style='margin:0px 0px 0px 4.37em'>Lowest</p>
                                                 </div>
-                                                <div class='clear'></div>
+                                                <div style="clear:both"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class='clear'></div>
+                            <div style="clear:both"></div>
                         </div>
-                        <div class='clear'></div>
-                        <div style='padding:18px;box-sizing:border-box;'>
+                        <div style="clear:both"></div>
+                        <div style='padding:5px;box-sizing:border-box;'>
                             <div style='margin-right: 0px;margin-left: 0px;padding-top: 8px;padding-bottom: 14px;border-radius: 2px;padding: 0px;box-sizing:border-box;'>
-                                <div ng-if="::emailTemplateInfo.fareForecast" style='float:left;width:100%;padding: 5px;background: whitesmoke;border: 1px solid #ccc;border-radius: 3px;margin-bottom: 14px;box-sizing:border-box;overflow:hidden;'>
-                                    <div style='padding: 18px;background-color: #fff;float: left;width: 100%;box-shadow: 0 0 0px rgba(0, 0, 0, 0.1);box-sizing:border-box;'>
-                                        <div style='text-align: left;padding: 0px 16px 22px 0px;position: relative;'>
+                                <div ng-if="::emailTemplateInfo.fareForecast" style='padding: 5px;background: whitesmoke;border: 1px solid #ccc;border-radius: 3px;margin-bottom: 14px;box-sizing:border-box;overflow:hidden;'>
+                                    <div style='padding: 5px;background-color: #fff;box-shadow: 0 0 0px rgba(0, 0, 0, 0.1);box-sizing:border-box;'>
+                                        <div style='text-align: left;position: relative;'>
                                             <h6 style='font-size: 17px;color: #b90005 !important;margin: 0;text-align: left;'>
                                                 How good is today's price?
                                             </h6>
@@ -125,30 +125,28 @@
                                                 <p style='color: #565a5c;font-weight: normal;margin:0 0 10px;'>Highest Predicted Fare for Next Week</p>
                                             </div>
                                             <div style='width: 33.33333333%;float:left;font-weight: 500;color: #333;font-size: 18px;margin-top: 15px;margin-bottom: 15px;'>
-                                                <img ng-if="::emailTemplateInfo.fareForecast.Recommendation == 'buy'" title="Go ahead, Buy!" src='http://www.dev.trippism.com/images/like-icon.png' style='max-width: 100%;vertical-align:middle;border:0;width:22px;height:20px;'>
-                                                <img ng-if="::emailTemplateInfo.fareForecast.Recommendation == 'wait'" title="Wait, price may drop!" src='http://www.dev.trippism.com/images/wait-icon.png' style='max-width: 100%;vertical-align:middle;border:0;width:22px;height:20px;'>
+                                                <img ng-if="::emailTemplateInfo.fareForecast.Recommendation == 'buy'" src='http://www.dev.trippism.com/images/like-icon.png' style='max-width: 100%;vertical-align:middle;border:0;width:22px;height:20px;'>
+                                                <img ng-if="::emailTemplateInfo.fareForecast.Recommendation == 'wait'" src='http://www.dev.trippism.com/images/wait-icon.png' style='max-width: 100%;vertical-align:middle;border:0;width:22px;height:20px;'>
                                                 <span style='vertical-align: bottom;' ng-if="::emailTemplateInfo.fareForecast.Recommendation == 'buy'"> We recommend buy</span>
                                                 <span style='vertical-align: bottom;' ng-if="::emailTemplateInfo.fareForecast.Recommendation == 'wait'">We recommend wait to buy</span>
                                                 <span style='vertical-align: bottom;' ng-if="::emailTemplateInfo.fareForecast.Recommendation == 'unknown'">Wait or buy</span>
                                             </div>
+                                            <div style="clear:both"></div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class='clear'></div>
-                                <div ng-if="::emailTemplateInfo.weather" style='float:left;width:100%;padding: 5px;background: whitesmoke;border: 1px solid #ccc;border-radius: 3px;margin-bottom: 14px;box-sizing:border-box;overflow:hidden;'>
-                                    <div style='padding: 18px;background-color: #fff;float: left;width: 100%;box-shadow: 0 0 0px rgba(0, 0, 0, 0.1);box-sizing:border-box;'>
+                                <div ng-if="::emailTemplateInfo.weather" style='padding: 5px;background: whitesmoke;border: 1px solid #ccc;border-radius: 3px;margin-bottom: 14px;box-sizing:border-box;overflow:hidden;'>
+                                    <div style='padding: 5px;background-color: #fff;box-shadow: 0 0 0px rgba(0, 0, 0, 0.1);box-sizing:border-box;'>
                                         <div style='text-align: left;padding: 0px 16px 22px 0px;position: relative;'>
                                             <h6 style='font-size: 17px;color: #b90005 !important;margin: 0;text-align: left;'>
                                                 How is the weather historically?
                                             </h6>
                                         </div>
-                                        <ul style='list-style: none;margin: 0;padding: 0;'>
-                                            <li style='float: left;width: 100%;margin:0px;'>
-                                                <div style='width: 100%;float:left'>
-                                                    <h6 style='font-size: 14px;margin-top: 0;margin-bottom:10px;color: #565a5c;font-weight: normal;'> {{::emailTemplateInfo.dateString}}  </h6>
-                                                </div>
-                                                <div style='float:left;max-width: 300px;margin-top: 5px;padding:0px;width: 33.33333333%;'>
-                                                    <div style='font-size: 15px;padding:0;width: 50%;float:left'>
+                                        <h6 style='font-size: 14px;margin-top: 0;margin-bottom:10px;color: #565a5c;font-weight: normal;'> {{::emailTemplateInfo.dateString}}  </h6>
+                                        <table style="width:100%">
+                                            <tr>
+                                                <td style="width: 18%;">
+                                                    <div style='font-size: 15px;padding:0;'>
                                                         <span style='color: #565a5c;font-weight: normal;'>Avg. High </span>
                                                         <h5 style='font-size: 22px;font-weight: 500;color: #333;margin:10px 0px'>
                                                             {{::emailTemplateInfo.weather.HighTempratureF}}
@@ -156,7 +154,9 @@
                                                             {{::emailTemplateInfo.weather.HighTempratureC}}<span style='font-size: 12px;vertical-align: top;'>&#8451;</span>
                                                         </h5>
                                                     </div>
-                                                    <div style='font-size: 15px;padding:0;width: 50%;float:left'>
+                                                </td>
+                                                <td style="width: 18%;">
+                                                    <div style='font-size: 15px;padding:0;'>
                                                         <span style='color: #565a5c;font-weight: normal;'>Avg. Low </span>
                                                         <h5 style='font-size: 22px;font-weight: 500;color: #333;margin:10px 0px'>
                                                             {{::emailTemplateInfo.weather.LowTempratureF}}
@@ -164,15 +164,41 @@
                                                             {{::emailTemplateInfo.weather.LowTempratureC}}<span style='font-size: 12px;vertical-align: top;'>&#8451;</span>
                                                         </h5>
                                                     </div>
-                                                </div>
-                                                <div ng-if="::emailTemplateInfo.weather.WeatherChances" style='color: #565a5c;font-weight: normal;padding:0;width: 66.66666667%;float: left;margin-top:5px;'>
-                                                    <div ng-repeat="item in ::emailTemplateInfo.weather.WeatherChances" ng-if="item.Name" style='float: left;width: 15%;text-align: center;height: 78px;vertical-align: -webkit-baseline-middle;'>
-                                                        <img ng-src='http://www.dev.trippism.com/images/weather/{{::item.Name.replace(" ","%20")}}.png' alt='' style='display: block;margin: 0 auto;vertical-align:middle' />
-                                                        <span style='font-size: 14px;vertical-align:middle'>{{::item.Name}}</span>
+                                                </td>
+                                                <td style="width: 64%;">
+                                                    <div ng-if="::emailTemplateInfo.weather.WeatherChances" style='color: #565a5c;font-weight: normal;padding:0;'>
+                                                        <div ng-repeat="item in ::emailTemplateInfo.weather.WeatherChances" ng-if="item.Name" style='float: left;width: 15%;text-align: center;height: 78px;vertical-align: -webkit-baseline-middle;'>
+                                                            <img ng-src='http://www.dev.trippism.com/images/weather/{{::item.Name.replace(" ","%20")}}.png' alt='' style='display: block;margin: 0 auto;vertical-align:middle' />
+                                                            <span style='font-size: 14px;vertical-align:middle'>{{::item.Name}}</span>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </li>
-                                        </ul>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <!--<div style='float:left;max-width: 300px;margin-top: 5px;padding:0px;width: 33.33333333%;'>
+                                            <div style='font-size: 15px;padding:0;width: 50%;float:left'>
+                                                <span style='color: #565a5c;font-weight: normal;'>Avg. High </span>
+                                                <h5 style='font-size: 22px;font-weight: 500;color: #333;margin:10px 0px'>
+                                                    {{::emailTemplateInfo.weather.HighTempratureF}}
+                                                    <span style='font-size: 12px;vertical-align: top;'>&#8457;</span>&nbsp;&nbsp;
+                                                    {{::emailTemplateInfo.weather.HighTempratureC}}<span style='font-size: 12px;vertical-align: top;'>&#8451;</span>
+                                                </h5>
+                                            </div>
+                                            <div style='font-size: 15px;padding:0;width: 50%;float:left'>
+                                                <span style='color: #565a5c;font-weight: normal;'>Avg. Low </span>
+                                                <h5 style='font-size: 22px;font-weight: 500;color: #333;margin:10px 0px'>
+                                                    {{::emailTemplateInfo.weather.LowTempratureF}}
+                                                    <span style='font-size: 12px;vertical-align: top;'>&#8457;</span>&nbsp;&nbsp;
+                                                    {{::emailTemplateInfo.weather.LowTempratureC}}<span style='font-size: 12px;vertical-align: top;'>&#8451;</span>
+                                                </h5>
+                                            </div>
+                                        </div>
+                                        <div ng-if="::emailTemplateInfo.weather.WeatherChances" style='color: #565a5c;font-weight: normal;padding:0;width: 66.66666667%;float: left;margin-top:5px;'>
+                                            <div ng-repeat="item in ::emailTemplateInfo.weather.WeatherChances" ng-if="item.Name" style='float: left;width: 15%;text-align: center;height: 78px;vertical-align: -webkit-baseline-middle;'>
+                                                <img ng-src='http://www.dev.trippism.com/images/weather/{{::item.Name.replace(" ","%20")}}.png' alt='' style='display: block;margin: 0 auto;vertical-align:middle' />
+                                                <span style='font-size: 14px;vertical-align:middle'>{{::item.Name}}</span>
+                                            </div>
+                                        </div>-->
                                     </div>
                                 </div>
                             </div>

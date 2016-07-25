@@ -23,13 +23,7 @@
                     <div class="row">
                         <div class="ibox-box searched search-det font-light">
                             <p>
-                                <span ng-show="fareParams.OriginAirport && fareParams.DestinationAirport">{{fareParams.OriginAirport.airport_CityName}}-{{fareParams.DestinationAirport.airport_CityName}}</span>
-                                <span ng-show="fareParams.SearchCriteria.FromDate"> {{fareParams.SearchCriteria.FromDate | date:'MMM-dd-yyyy'}} </span>
-                                <span ng-show="fareParams.SearchCriteria.ToDate">To {{fareParams.SearchCriteria.ToDate | date:'MMM-dd-yyyy'}}</span>
-                                <span ng-show="fareParams.SearchCriteria.Minfare > 0"><br />{{fareCurrencySymbol}} {{fareParams.SearchCriteria.Minfare}}</span>
-                                <span ng-show="fareParams.SearchCriteria.Maxfare > 0"> To {{fareCurrencySymbol}} {{fareParams.SearchCriteria.Maxfare}}</span>
-                                <span ng-show="fareParams.SearchCriteria.Region "> {{fareParams.SearchCriteria.Region}}</span>
-                                <span ng-show="fareParams.SearchCriteria.Theme"> {{fareParams.SearchCriteria.Theme}}</span>
+                                <span ng-show="search">{{search}}</span>
                             </p>
                             <div class="clear"></div>
                         </div>

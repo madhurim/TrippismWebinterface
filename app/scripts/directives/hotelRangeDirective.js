@@ -21,8 +21,8 @@
                     var key = {
                         Origin: $scope.origin,
                         Destination: $scope.destination,
-                        StartDate: ConvertToRequiredDate($scope.departureDate, 'API'),
-                        EndDate: ConvertToRequiredDate($scope.returnDate, 'API'),
+                        DepartureDate: ConvertToRequiredDate($scope.departureDate, 'API'),
+                        ReturnDate: ConvertToRequiredDate($scope.returnDate, 'API'),
                     };
 
                     var cacheData = DestinationFactory.DestinationDataStorage.hotel.get(key);
@@ -66,6 +66,11 @@
                             Star: hotelRange.HotelRating ? hotelRange.HotelRating[0].RatingText.substring(0, 1) : null
                         };
                         $scope.$emit('hotelDataFound', $scope.HotelRangeData);
+                        DestinationFactory.DestinationDataStorage.currentPage.hotel = {
+                            CurrencyCode: $scope.HotelRangeData.CurrencyCode,
+                            CurrencySymbol: $scope.HotelRangeData.CurrencySymbol,
+                            Fare: $scope.amountBifurcation(hotelRange.RateRange.Min),
+                        };
                     }
                     else
                         $scope.$emit('hotelDataFound', false);

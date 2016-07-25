@@ -20,6 +20,8 @@
         urlConstant) {
 
         $scope.$emit('bodyClass', 'otherpage destination-page');
+        DestinationFactory.DestinationDataStorage.currentPage.clear();
+
         var w = angular.element($window);
         w.bind('resize', setImageHeight);
 
@@ -101,18 +103,12 @@
                             DestinationLocation: $scope.DestinationLocation,
                             FromDate: (typeof $scope.FromDate == 'string') ? new Date($scope.FromDate) : $scope.FromDate,
                             ToDate: (typeof $scope.ToDate == 'string') ? new Date($scope.ToDate) : $scope.ToDate,
-                            Theme: $scope.Theme,
-                            Region: $scope.Region,
-                            Minfare: $scope.Minfare,
-                            Maxfare: $scope.Maxfare
                         },
                         instaFlightSearchData: {
                             OriginAirportName: $scope.Origin,
                             DestinationaArportName: $scope.DestinationLocation,
                             FromDate: $scope.FromDate,
                             ToDate: $scope.ToDate,
-                            Minfare: $scope.Minfare,
-                            Maxfare: $scope.Maxfare,
                             PointOfSaleCountry: $scope.OriginairportName.airport_CountryCode
                         },
                         AvailableAirline: $scope.airlineJsonData

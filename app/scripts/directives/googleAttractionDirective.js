@@ -102,8 +102,8 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, dataConstant, 
                         var key = {
                             Origin: $scope.googleattractionParams.SearchCriteria.Origin,
                             Destination: $scope.googleattractionParams.SearchCriteria.DestinationLocation,
-                            StartDate: ConvertToRequiredDate($scope.googleattractionParams.SearchCriteria.FromDate, 'API'),
-                            EndDate: ConvertToRequiredDate($scope.googleattractionParams.SearchCriteria.ToDate, 'API'),
+                            DepartureDate: ConvertToRequiredDate($scope.googleattractionParams.SearchCriteria.FromDate, 'API'),
+                            ReturnDate: ConvertToRequiredDate($scope.googleattractionParams.SearchCriteria.ToDate, 'API'),
                         };
                         var object;
                         var cacheData = DestinationFactory.DestinationDataStorage.hotel.get(key);

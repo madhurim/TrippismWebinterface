@@ -9,26 +9,30 @@
         function getLocale() {
             //"{"ip":"43.243.38.6","hostname":"No Hostname","city":"Sarkhej","region":"Gujarat","country":"IN","loc":"22.9833,72.5000"
             //,"org":"AS133226 VISION SMARTLINK NETWORKING PRIVATE LIMITED"}"
+
+            // if already in local storage then return data
             var localData = LocalStorageFactory.get(dataConstant.userLocaleLocalStorage);
             if (localData) {
-                return localData;
+                return $q(function (resolve) { resolve(localData); });
             }
 
+            // if already requested sent then wait for result and return data
             if (localPromise) {
-                $q.when(localPromise).then(function (data) { return data });
+                return $q.when(localPromise).then(function (data) { return data });
             }
             return localPromise = $http.get('http://ipinfo.io').then(function (data) {
                 if (data.status == 200) {
+                    data = data.data;
                     data = {
                         ip: data.ip,
                         hostName: data.hostname,
                         city: data.city,
                         region: data.region,
                         country: data.country,
-                        location: {
-                            lat: data.loc ? data.loc.split(',')[0] : null,
-                            lng: data.loc ? data.loc.split(',')[1] : null
-                        }
+                        location: data.loc ? {
+                            lat: data.loc.split(',')[0],
+                            lng: data.loc.split(',')[1]
+                        } : null
                     };
                     LocalStorageFactory.save(dataConstant.userLocaleLocalStorage, data);
                     return data;

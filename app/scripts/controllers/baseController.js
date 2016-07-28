@@ -7,7 +7,7 @@
     function BaseController($scope, $modal, $rootScope, $timeout, tmhDynamicLocale, UtilFactory, urlConstant, BaseFactory) {
         $rootScope.isShowAlerityMessage = true;
         init();
-        //getLocale();
+        getLocale();
         function init() {
             UtilFactory.ReadAirportJson();
             UtilFactory.GetCurrencySymbols();
@@ -15,6 +15,7 @@
         }
         function getLocale() {
             BaseFactory.getLocale().then(function (data) {
+                console.log(data);
             });
         }
 

@@ -1605,6 +1605,16 @@ ul .stop-line {
     margin-left: 10px;
 }
 
+#select-i18n {
+    width: 105px !important;
+}
+
+    #select-i18n img.dd-selected-image, #select-i18n .dd-option-image, .dd-selected-image {
+        width: 30px;
+        height: auto !important;
+        margin-left: 5px;
+    }
+
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {

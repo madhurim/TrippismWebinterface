@@ -15,7 +15,7 @@
         }
         function getLocale() {
             BaseFactory.getLocale().then(function (data) {
-                console.log(data);
+                $rootScope.PointOfSaleCountry = data.country;
             });
         }
 

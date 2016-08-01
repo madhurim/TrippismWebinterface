@@ -2,11 +2,12 @@
             '$location',
             '$timeout',
             '$filter',
+            '$locale',
             '$stateParams',
             'UtilFactory',
             'dataConstant',
             'urlConstant',
-function ($location, $timeout, $filter, $stateParams, UtilFactory, dataConstant, urlConstant) {
+function ($location, $timeout, $filter, $locale, $stateParams, UtilFactory, dataConstant, urlConstant) {
     return {
         restrict: 'E',
         scope: {
@@ -23,8 +24,10 @@ function ($location, $timeout, $filter, $stateParams, UtilFactory, dataConstant,
             $scope.Destination = '';
             $scope.FromDate;
             $scope.ToDate;
-            $scope.formats = Dateformat();
-            $scope.format = $scope.formats[5];
+            //$scope.formats = Dateformat();
+            //$scope.format = $scope.formats[5];
+            $scope.format = $locale.DATETIME_FORMATS.mediumDate;
+
             $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
             $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
 

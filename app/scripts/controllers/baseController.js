@@ -40,7 +40,7 @@
 
         $('#select-i18n').ddslick({
             onSelected: function (data) {
-                $timeout(function () { tmhDynamicLocale.set(data.selectedData.value); }, 0, true);
+                tmhDynamicLocale.set(data.selectedData.value);
             }
         });
     }

@@ -73,7 +73,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div style="color:red;font-weight:bold;">{{FromDate}}</div>
+                                <div class="row">
+                                    <div style="color:red;font-weight:bold;" class="pull-left">{{FromDate}}</div>
+                                    <div style="color:red;font-weight:bold;" class="pull-right">{{ToDate}}</div>
+                                </div>
                                 <div class="row">
                                     <div class="col-xs-6 pr7px">
                                         <div class="input-group">
@@ -106,7 +109,6 @@
                                         <span class="dateDisplay">{{FromDateDisplay}}</span>
                                         <div class="alert alert-danger" role="alert" ng-show="!isSearchbuttonClicked"></div>
                                     </div>
-
                                     <div class="col-xs-6 pl7px">
                                         <div class="input-group">
                                             <div class="input-group-addon"><img src="images/calendar.png" alt="#" ng-click="openToDate($event)" /></div>

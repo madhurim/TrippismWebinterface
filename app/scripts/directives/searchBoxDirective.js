@@ -29,6 +29,12 @@ function ($location, $timeout, $filter, $locale, $stateParams, UtilFactory, data
             $scope.format = $locale.DATETIME_FORMATS.mediumDate;
             //$scope.format = 'MM dd yyyy';
 
+            $scope.$on('$localeChangeSuccess', function () {
+                $timeout(function () {
+                    $scope.format = $locale.DATETIME_FORMATS.mediumDate;
+                }, 0, true);
+            });
+
             $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
             $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
 
@@ -320,8 +326,7 @@ function ($location, $timeout, $filter, $locale, $stateParams, UtilFactory, data
 
             // watch FromDate textbox value
             $scope.$watch('frmdestfinder.FromDate.$viewValue', function (newVal, OldVal) {
-
-                $scope.FromDate = $scope.frmdestfinder.FromDate.$$rawModelValue;
+                $scope.FromDate = $scope.frmdestfinder.FromDate.$modelValue;
                 if (angular.isDate($scope.FromDate)) {
                     $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
                 }
@@ -427,7 +432,7 @@ function ($location, $timeout, $filter, $locale, $stateParams, UtilFactory, data
 
             // watch ToDate textbox value
             $scope.$watch('frmdestfinder.ToDate.$viewValue', function (newVal) {
-                $scope.ToDate = $scope.frmdestfinder.ToDate.$$rawModelValue;
+                $scope.ToDate = $scope.frmdestfinder.ToDate.$modelValue;
                 if (angular.isDate($scope.ToDate)) {
                     $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
                 }

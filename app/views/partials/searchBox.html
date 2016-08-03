@@ -73,10 +73,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
+                                <!--<div class="row">
                                     <div style="color:red;font-weight:bold;" class="pull-left">{{FromDate}}</div>
                                     <div style="color:red;font-weight:bold;" class="pull-right">{{ToDate}}</div>
-                                </div>
+                                </div>-->
                                 <div class="row">
                                     <div class="col-xs-6 pr7px">
                                         <div class="input-group">
@@ -87,6 +87,7 @@
                                                        ng-click="openFromDate($event)"
                                                        class="input-control input-novalidate"
                                                        ng-model="FromDate"
+                                                       ng-model-options="{ allowInvalid: true }"
                                                        datepicker-popup="{{format}}"
                                                        ng-disabled="false"
                                                        min-date="minTodayDate"
@@ -98,8 +99,7 @@
                                                        ng-required="!LenghtOfStay || ToDate"
                                                        close-text="Close"
                                                        placeholder="Start date"
-                                                       tabindex="3"
-                                                       maxlength="10"
+                                                       tabindex="3"                                                       
                                                        allow-only-date-inputs
                                                        autocomplete="off"
                                                        ng-blur="SetFromDate()"
@@ -121,6 +121,7 @@
                                                        min-date="minFromDate"
                                                        max-date="MaximumToDate"
                                                        ng-model="ToDate"
+                                                       ng-model-options="{ allowInvalid: true }"
                                                        name="ToDate"
                                                        is-open="openedToDate"
                                                        on-open-focus="true"
@@ -129,7 +130,6 @@
                                                        placeholder="End date "
                                                        ng-disabled="false"
                                                        tabindex="4"
-                                                       maxlength="10"
                                                        allow-only-date-inputs
                                                        autocomplete="off"
                                                        ng-blur="SetToDate()"

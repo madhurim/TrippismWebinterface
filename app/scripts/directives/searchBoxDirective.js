@@ -339,11 +339,10 @@ function ($location, $timeout, $filter, $locale, $stateParams, UtilFactory, data
                                 var mm = dtStr.substring(0, 2);
                                 var dd = dtStr.substring(3, 5);
                                 var yyyy = dtStr.substring(6, 11);
-                                var newDt = mm + "/" + dd + "/" + yyyy;
-                                $scope.FromDate = newDt;
+                                $scope.FromDate = new Date(yyyy, mm, dd);
                                 $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
                                 if ($scope.FromDateDisplay == "Invalid Date !!") {
-                                    $scope.FromDate = ConvertToRequiredDate(GetFromDate(), 'UI');
+                                    $scope.FromDate = GetFromDate();
                                     $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
                                 }
                             }
@@ -351,14 +350,13 @@ function ($location, $timeout, $filter, $locale, $stateParams, UtilFactory, data
                         if (!isNaN(frmdate)) {
                             if (frmdate.length == 8) {
                                 var dtStr = frmdate;
-                                var mm = dtStr.substring(0, 2);
-                                var dd = dtStr.substring(2, 4);
-                                var yyyy = dtStr.substring(4, 8);
-                                var newDt = mm + "/" + dd + "/" + yyyy;
-                                $scope.FromDate = newDt;
+                                var mm = parseInt(dtStr.substring(0, 2));
+                                var dd = parseInt(dtStr.substring(2, 4));
+                                var yyyy = parseInt(dtStr.substring(4, 8));
+                                $scope.FromDate = new Date(yyyy, mm, dd);
                                 $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
                                 if ($scope.FromDateDisplay == "Invalid Date !!") {
-                                    $scope.FromDate = ConvertToRequiredDate(GetFromDate(), 'UI');
+                                    $scope.FromDate = GetFromDate();
                                     $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
                                 }
                             }
@@ -445,8 +443,7 @@ function ($location, $timeout, $filter, $locale, $stateParams, UtilFactory, data
                                 var mm = dtStr.substring(0, 2);
                                 var dd = dtStr.substring(3, 5);
                                 var yyyy = dtStr.substring(6, 11);
-                                var newDt = mm + "/" + dd + "/" + yyyy;
-                                $scope.ToDate = newDt;
+                                $scope.ToDate = new Date(yyyy, mm, dd);
                                 $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
                                 if ($scope.ToDateDisplay == "Invalid Date !!") {
                                     //$scope.ToDate = ConvertToRequiredDate(GetToDate($scope.FromDate), 'UI');
@@ -458,11 +455,10 @@ function ($location, $timeout, $filter, $locale, $stateParams, UtilFactory, data
                         if (!isNaN(todate)) {
                             if (todate.length == 8) {
                                 var dtStr = todate;
-                                var mm = dtStr.substring(0, 2);
-                                var dd = dtStr.substring(2, 4);
-                                var yyyy = dtStr.substring(4, 8);
-                                var newDt = mm + "/" + dd + "/" + yyyy;
-                                $scope.ToDate = newDt;
+                                var mm = parseInt(dtStr.substring(0, 2));
+                                var dd = parseInt(dtStr.substring(2, 4));
+                                var yyyy = parseInt(dtStr.substring(4, 8));
+                                $scope.ToDate = new Date(yyyy, mm, dd);
                                 $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
                                 if ($scope.ToDateDisplay == "Invalid Date !!") {
                                     //$scope.ToDate = ConvertToRequiredDate(GetToDate($scope.FromDate), 'UI');

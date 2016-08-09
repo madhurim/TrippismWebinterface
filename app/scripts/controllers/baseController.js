@@ -16,6 +16,8 @@
         function getLocale() {
             BaseFactory.getLocale().then(function (data) {
                 $rootScope.PointOfSaleCountry = data.country;
+				tmhDynamicLocale.set("en-" + data.country);
+				angular.element('#select-i18n').val("en-" + data.country.toLowerCase());
             });
         }
 
@@ -39,9 +41,16 @@
         });
 
         $('#select-i18n').ddslick({
+            
             onSelected: function (data) {
                 tmhDynamicLocale.set(data.selectedData.value);
             }
+        });
+        $scope.$on('$localeChangeError', function () {
+            $timeout(function () {
+                tmhDynamicLocale.set("en-us");
+                $('#select-i18n').ddslick('select', { index: 0 });
+            }, 0, true);
         });
     }
 })();

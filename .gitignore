@@ -4,3 +4,6 @@ dist
 .sass-cache
 bower_components
 /nbproject/private/
+/app/images/destination-medium
+/app/images/destination-small
+/app/images/destination

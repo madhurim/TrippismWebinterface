@@ -16,8 +16,32 @@
                             </div>
                         </div>
                     </div>
-                    <googleattraction-info googleattraction-params="params" class="hidden-xs googleattraction" style="clear:both;"></googleattraction-info>
-                    <div class="col-md-12 col-sm-12 col-xs-12 lastDiv" id="lastDiv" style="clear:both;">
+                    <div class="popup-header hidden-xs">
+                        <h6 class="widget-popup-title padding-left-23"><span ng-show="isHotelFound">Hotels and</span> Things to do in {{DestinationAirport.airport_CityName}}</h6>
+                    </div>
+                    <tabset class="cust-tab hidden-xs">
+                        <tab ng-repeat="tab in attractionTabs" active="tab.isActive">
+                            <tab-heading>
+                                <div ng-if="tab.title=='Hotels' && isHotelFound" class="attr-tab-hotel">
+                                    <i class="fa fa-bed"></i>
+                                    <span>Hotels</span>
+                                </div>
+                                <div ng-if="tab.title==attractionProviders.Google">
+                                    <img src="../images/google-icon.png" width="80" height="25" />
+                                </div>
+                                <div ng-if="tab.title==attractionProviders.TripAdvisor">
+                                    <img src="https://developer-tripadvisor.s3.amazonaws.com/uploads/.thumbnails/220x50_ta_logo_color.png/220x50_ta_logo_color-220x50.png" width="100" height="25" />
+                                </div>
+                            </tab-heading>
+                            <div class="attr-container">
+                                <hotels-attractions ng-if="tab.title=='Hotels' && tab.isActive" attraction-params="params" class="googleattraction"></hotels-attractions>
+                                <google-attractions ng-if="tab.title == attractionProviders.Google && tab.isActive" attraction-params="params" class="googleattraction"></google-attractions>
+                                <trip-advisor-attractions ng-if="tab.title== attractionProviders.TripAdvisor && tab.isActive" attraction-params="params" class="googleattraction"></trip-advisor-attractions>
+                            </div>
+                        </tab>
+                    </tabset>
+
+                    <div class="col-md-12 col-sm-12 col-xs-12" id="lastDiv" style="clear:both;">
                         <seasonality-info seasonality-params="params"></seasonality-info>
                     </div>
                 </div>

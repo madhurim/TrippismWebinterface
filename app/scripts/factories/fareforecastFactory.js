@@ -14,7 +14,7 @@
         function fareforecast(data) {
             var criteria = data.Origin + data.DepartureDate + data.ReturnDate + data.Destination;
             var resultdata = $filter('filter')(FareForecastData, { Criteria: criteria })[0];
-            if (resultdata != undefined && resultdata != "") {
+            if (resultdata != undefined) {
                 var d = $q.defer();
                 d.resolve(angular.copy(resultdata.data));//angular.copy used because at directive side we manipulate into data so second time when we call method for data then return original result which was return from api
                 return d.promise;
@@ -29,11 +29,11 @@
                          data: null
                      }
                      var resultdata = $filter('filter')(FareForecastData, { Criteria: criteria })[0];
-                     if (resultdata == undefined || resultdata == "") {
-                         result.data = angular.copy(data.data);
+                     if (resultdata == undefined) {
+                         result.data = angular.copy(data);
                          FareForecastData.push(result);
                      }
-                     return data.data;
+                     return data;
                  }, function (e) {
                      return e;
                  });

@@ -16,7 +16,7 @@
                 <div id="examples" class="news-block">
                     <div class="contentHorizontal">
                         <ul>
-                            <li ng-repeat="data in youtubeData.items | limitTo: pageSize">
+                            <li ng-repeat="data in youtubeData.items">
                                 <div class="news-img-block">
                                     <a ng-click="open(data.id.videoId)" style="cursor:pointer;">
                                         <span class="play"><img src="/images/play-icon.png" alt="" /></span>
@@ -27,7 +27,10 @@
                                     <p>{{data.snippet.title}}</p>
                                 </div>
                             </li>
-                        </ul>
+                        </ul>                        
+                    </div>
+                    <div ng-if="isYoutubeData==false">
+                        <h4 class="font-light text-center">No {{currentIndex > 0? 'more' : ''}} videos found for {{youtubeParams.DestinationAirport.airport_CityName}}</h4>
                     </div>
                 </div>
             </div>

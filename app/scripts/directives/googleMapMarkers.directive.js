@@ -5,7 +5,7 @@
 
     function googleMap($timeout, $rootScope, $window, UtilFactory, urlConstant) {
         return {
-            templateUrl: urlConstant.viewsPath + 'GoogleMap.html',
+            templateUrl: urlConstant.viewsPath + 'googleMap.html',
             scope: {},
             controller: ['$scope', '$q', '$compile', '$location', 'dataConstant', '$stateParams', function ($scope, $q, $compile, $location, dataConstant, $stateParams) {
                 $scope.destinationMap = undefined;
@@ -59,7 +59,7 @@
                     }
                 }
 
-                $scope.RenderMap = function (args) {
+                $scope.renderMap = function (args) {
                     var destinations = args.destinationlist;
                     var sortByPrice = args.sortByPrice;
                     $timeout(function () {
@@ -312,7 +312,7 @@
                         centerMap(args);
 
                     if (args.destinationlist != undefined && args.destinationlist.length > 0) {
-                        scope.RenderMap(args);
+                        scope.renderMap(args);
                         if ($rootScope.isShowAlerityMessage && UtilFactory.Device.medium()) {
                             $timeout(function () {
                                 showMessage();

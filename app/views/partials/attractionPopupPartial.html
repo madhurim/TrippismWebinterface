@@ -4,13 +4,20 @@
             <button class="close closebutton" style="margin-top:2px !important;" ng-click="dismiss();" type="button">×</button>
         </div>
         <div class="modal-body" style="padding:0px;">
-            <div class="attr-top" ng-if="IsMapPopupLoading">
+            <div class="attr-top" ng-if="IsMapPopupLoading" style="height:400px;">
                 <div ng-show="IsMapPopupLoading" ng-hide="!isAttrDataFound" class="sqrloadclass" style="padding-top:10px;padding-bottom:0px;"></div>
             </div>
             <div ng-show="!IsMapPopupLoading">
                 <div class="col-md-12">
                     <div ng-class="attractionReviews.length > 0 ? 'col-md-8' : 'col-md-12 padding-0'">
-                        <div style="height:400px;overflow:hidden;" ng-if="slides.length == 0">
+                        <div class="col-md-12 attr-loader" ng-show="isPhotoLoading">
+                            <h4 class="glyphicon glyphicon-refresh glyphicon-spin"></h4>
+                            <h4>Bringing photos...</h4>
+                        </div>
+                        <div class="attr-title margin-right-0" ng-if="slides.length > 0 && !isPhotoLoading && provider==attractionProviders.TripAdvisor">
+                            <span>Google+ Photos</span>
+                        </div>
+                        <div style="height:400px;overflow:hidden;" ng-if="slides.length == 0 && !isPhotoLoading">
                             <img height="300" width="500" src="../images/noimageavailable.png">
                         </div>
                         <div style="height:400px;overflow:auto;" ng-if="slides.length > 0">
@@ -44,25 +51,45 @@
                                     <div class="col-md-2 col-sm-2" ng-show="locationDetail.FreeWifiInRooms"><h4><i title="Free Wi-Fi in rooms" class="fa fa-wifi cursor-help" aria-hidden="true" style="color:green"></i></h4></div>
                                 </div>
                             </div>
-                            <div ng-show="locationDetail.AttractionType != 'hotels'" ng-bind-html="::locationDetail.raitingToAppend"></div>
+                            <div ng-if="locationDetail.AttractionType != 'hotels' && provider != attractionProviders.TripAdvisor" ng-bind-html="::locationDetail.raitingToAppend"></div>
+                            <div class="margin-tb-5" ng-if="provider==attractionProviders.TripAdvisor && locationDetail.raitingToAppend">
+                                <div class="font-light" style="color:#599642;">TripAdvisor Traveler Rating</div>
+                                <div>
+                                    <img ng-src="{{locationDetail.raitingToAppend}}" class="margin-bottom-5" width="100" height="17" />
+                                    <span class="margin-left-5 font-light"><span class="font-11">based on</span> <a ng-href="{{locationDetail.WebUrl}}" target="_blank" class="underline">{{locationDetail.NumReviews}} reviews</a></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-4 review-wrapper">
-                        <div class="attr-title" ng-if="attractionReviews.length > 0">Google+ reviews</div>
+                        <div class="attr-title" ng-if="attractionReviews.length > 0">
+                            <span ng-if="::provider==attractionProviders.TripAdvisor">TripAdvisor&reg; Traveler Reviews</span>
+                            <span ng-if="::provider==attractionProviders.Google">Google+ Reviews</span>
+                        </div>
                         <div class="contentVertical review">
                             <div ng-if="attractionReviews.length > 0">
                                 <div class="col-md-12 review-inner" ng-repeat="item in ::attractionReviews">
                                     <p class="margin-bottom-0 p-text-align">{{::item.text}}</p>
                                     <div class="review-repeat">
                                         <span>Overall rating :</span>
-                                        <div ng-bind-html="::item.rating"></div>
+                                        <div ng-if="provider != attractionProviders.TripAdvisor" ng-bind-html="::item.rating"></div>
+                                        <div ng-show="provider==attractionProviders.TripAdvisor && item.raitingToAppend"><img ng-src="{{item.raitingToAppend}}" class="margin-tb-5" width="70" height="16" /></div>
                                     </div>
                                     <p class="review-author">- {{::item.author_name}}</p>
+                                    <p class="trip-review-link" ng-if="::provider==attractionProviders.TripAdvisor">
+                                        <a ng-href="{{::item.reviewURL}}" target="_blank">Read Full Review</a>
+                                    </p>
                                 </div>
                             </div>
                         </div>
+                        <p class="trip-review-link" ng-if="attractionReviews.length > 0 && provider==attractionProviders.TripAdvisor" style="margin-right:25px;">
+                            <a class="font-14" ng-href="{{::locationDetail.WebUrl}}" target="_blank">Read All Reviews</a>
+                        </p>
                         <div class="clear"></div>
                     </div>
+                </div>
+                <div ng-if="::provider==attractionProviders.TripAdvisor" class="col-md-12 text-center">
+                    <p class="font-12 margin-0 margin-bottom-3"><a class="hover-line" href="http://www.tripadvisor.com/pages/terms.html" target="_blank">© TripAdvisor {{::year}}</a></p>
                 </div>
                 <div class="clear"></div>
             </div>

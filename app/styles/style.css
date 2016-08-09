@@ -62,34 +62,80 @@ a, a:hover, a:focus, label, form-control, .form-control:focus, .btn, button, .po
     display: block;
 }
 
-.google-img {
-    height: 23px;
-    width: 67px;
-    background-position: left top;
+/*.google-img {
+    height: 26px;
+    width: 80px;
+    background-position: -10px 3px;
 }
 
 .sabre-img {
     height: 23px;
     width: 95px;
-    background-position: -70px top;
+    background-position: -89px top;
 }
 
 .underground-img {
     height: 23px;
     width: 97px;
-    background-position: -168px top;
+    background-position: -187px top;
 }
 
-.google-img:hover {
-    background-position: left bottom;
+.tripAdvisor-img {
+    height: 23px;
+    width: 112px;
+    background-position: -289px top;
+}*/
+
+.google-img {
+    height: 26px;
+    width: 80px;
+    background-position: -10px -24px;
 }
 
-.sabre-img:hover {
-    background-position: -70px bottom;
+.sabre-img {
+    height: 23px;
+    width: 95px;
+    background-position: -89px bottom;
 }
 
-.underground-img:hover {
-    background-position: -168px bottom;
+.underground-img {
+    height: 23px;
+    width: 97px;
+    background-position: -187px bottom;
+}
+
+.trip-logo-container {
+    display: block;
+    margin-top: 7px;
+}
+
+.trip-left {
+    float: left;
+    font-size: 10px;
+    color: white;
+    margin-right: 5px;
+}
+
+.trip-right {
+    float: right;
+}
+
+.line-10 {
+    line-height: 10px;
+}
+
+.margin-top-3 {
+    margin-top: 3px;
+}
+
+.tripAdvisor-img {
+    height: 27px;
+    width: 121px;
+    display: block;
+    background-image: url('https://developer-tripadvisor.s3.amazonaws.com/uploads/.thumbnails/220x50_ta_logo_color.png/220x50_ta_logo_color-220x50.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-top: -2px;
 }
 
 .destination-form .input-group {
@@ -1615,9 +1661,6 @@ i.calendar.active, .input-box:hover i.calendar {
 }
 
 @media only screen and (max-width: 767px) {
-    .lastDiv {
-        margin-bottom: 0px;
-    }
 
     .slide-bottom {
         margin-bottom: 71px;
@@ -1976,18 +2019,6 @@ em.ng-binding {
     padding: 0px;
 }
 
-.lastDiv {
-    clear: both;
-    margin-right: 0px;
-    margin-left: 0px;
-    border: 1px solid #ADAAAA;
-    padding-top: 8px;
-    padding-bottom: 14px;
-    border-radius: 2px;
-    margin-top: 14px;
-    margin-bottom: 50px;
-}
-
 .no-border {
     border: none;
 }
@@ -2007,10 +2038,6 @@ em.ng-binding {
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
     .overview-weather-content p {
         font-size: 8px;
-    }
-
-    .lastDiv {
-        margin-bottom: 0px;
     }
 
     .padleft0 {
@@ -2033,10 +2060,6 @@ em.ng-binding {
         font-size: 8px;
     }
 
-    .lastDiv {
-        margin-bottom: 0px;
-    }
-
     .padleft0 {
         padding-left: 12px !important;
     }
@@ -2049,21 +2072,6 @@ em.ng-binding {
         font-size: 37px;
     }
 }
-/* css rules for ipad landscape starts*/
-
-/* Smartphones (portrait and landscape)  starts */
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : portrait) {
-    .lastDiv {
-        margin-bottom: 0px;
-    }
-}
-
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : landscape) {
-    .lastDiv {
-        margin-bottom: 0px;
-    }
-}
-/* Smartphones (portrait and landscape)  ends */
 
 /*iPhone 5 & 5S in landscape starts*/
 @media only screen and (min-device-width : 320px) and (max-device-width : 568px) and (orientation : landscape) {
@@ -2106,10 +2114,6 @@ em.ng-binding {
         font-size: 12px;
     }
 
-    .lastDiv {
-        margin-bottom: 0px;
-    }
-
     .padleft0 {
         padding-left: 12px !important;
     }
@@ -2128,10 +2132,6 @@ em.ng-binding {
 @media only screen and (min-device-width : 375px) and (max-device-width : 667px) and (orientation : portrait) {
     .overview-weather-content p {
         font-size: 12px;
-    }
-
-    .lastDiv {
-        margin-bottom: 0px;
     }
 
     .padleft0 {
@@ -2154,10 +2154,6 @@ em.ng-binding {
         font-size: 12px;
     }
 
-    .lastDiv {
-        margin-bottom: 0px;
-    }
-
     .padleft0 {
         padding-left: 12px !important;
     }
@@ -2178,10 +2174,6 @@ em.ng-binding {
 
     .map-box {
         top: 75px;
-    }
-
-    .lastDiv {
-        margin-bottom: 0px;
     }
 
     .padleft0 {

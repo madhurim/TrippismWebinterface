@@ -173,8 +173,8 @@
                     var key = {
                         Origin: $scope.attractionParams.SearchCriteria.Origin,
                         Destination: $scope.attractionParams.SearchCriteria.DestinationLocation,
-                        StartDate: ConvertToRequiredDate($scope.attractionParams.SearchCriteria.FromDate, 'API'),
-                        EndDate: ConvertToRequiredDate($scope.attractionParams.SearchCriteria.ToDate, 'API'),
+                        DepartureDate: ConvertToRequiredDate($scope.attractionParams.SearchCriteria.FromDate, 'API'),
+                        ReturnDate: ConvertToRequiredDate($scope.attractionParams.SearchCriteria.ToDate, 'API'),
                     };
                     return DestinationFactory.DestinationDataStorage.hotel.get(key);
                 }

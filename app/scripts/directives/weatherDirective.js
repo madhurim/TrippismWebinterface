@@ -26,6 +26,7 @@
                                     else {
                                         $scope.WeatherInfoLoaded = true;
                                         $scope.WeatherData = data;
+                                        $scope.filterWeatherData();
                                     }
                                     $scope.$emit('widgetLoaded', { name: "WeatherData", isVisible: $scope.WeatherInfoLoaded });
                                 }

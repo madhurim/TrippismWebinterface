@@ -1,4 +1,4 @@
-﻿<div id="email-template" style="display:none;height:0px;width:0px;">
+﻿<div id="email-template">
 <!--<div id="email-template">-->
     <body style='margin:0px;padding:0px;box-sizing: border-box' ng-if="::emailTemplateInfo">
         <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900' rel='stylesheet' type='text/css'>
@@ -111,28 +111,32 @@
                                                 How good is today's price?
                                             </h6>
                                         </div>
-                                        <div style='color: #565a5c;font-weight: normal;'>
-                                            <div style='width: 33.33333333%;float:left;'>
-                                                <h4 style='font-size: 22px;font-weight: 500;color: #333;margin:10px 0px;'>
-                                                    {{::emailTemplateInfo.fareForecast.CurrencySymbol}} {{::emailTemplateInfo.fareForecast.LowestPredictedFare.BeforeDecimal}}<span style='vertical-align: top;font-size:14px;'>{{::emailTemplateInfo.fareForecast.LowestPredictedFare.AfterDecimal}}</span>
-                                                </h4>
-                                                <p style='color: #565a5c;font-weight: normal;margin:0 0 10px;'>Lowest Predicted Fare for Next Week</p>
-                                            </div>
-                                            <div style='width: 33.33333333%;float:left;'>
-                                                <h4 style='font-size: 22px;font-weight: 500;color: #333;margin:10px 0px;'>
-                                                    {{::emailTemplateInfo.fareForecast.CurrencySymbol}} {{::emailTemplateInfo.fareForecast.HighestPredictedFare.BeforeDecimal}}<span style='vertical-align: top;font-size:14px;'>{{::emailTemplateInfo.fareForecast.HighestPredictedFare.AfterDecimal}}</span>
-                                                </h4>
-                                                <p style='color: #565a5c;font-weight: normal;margin:0 0 10px;'>Highest Predicted Fare for Next Week</p>
-                                            </div>
-                                            <div style='width: 33.33333333%;float:left;font-weight: 500;color: #333;font-size: 18px;margin-top: 15px;margin-bottom: 15px;'>
-                                                <img ng-if="::emailTemplateInfo.fareForecast.Recommendation == 'buy'" src='http://www.dev.trippism.com/images/like-icon.png' style='max-width: 100%;vertical-align:middle;border:0;width:22px;height:20px;'>
-                                                <img ng-if="::emailTemplateInfo.fareForecast.Recommendation == 'wait'" src='http://www.dev.trippism.com/images/wait-icon.png' style='max-width: 100%;vertical-align:middle;border:0;width:22px;height:20px;'>
-                                                <span style='vertical-align: bottom;' ng-if="::emailTemplateInfo.fareForecast.Recommendation == 'buy'"> We recommend buy</span>
-                                                <span style='vertical-align: bottom;' ng-if="::emailTemplateInfo.fareForecast.Recommendation == 'wait'">We recommend wait to buy</span>
-                                                <span style='vertical-align: bottom;' ng-if="::emailTemplateInfo.fareForecast.Recommendation == 'unknown'">Wait or buy</span>
-                                            </div>
-                                            <div style="clear:both"></div>
-                                        </div>
+                                        <table style='width:100%;color: #565a5c;font-weight: normal;'>
+                                            <tr>
+                                                <td style='width: 33.33333333%;'>
+                                                    <h4 style='font-size: 22px;font-weight: 500;color: #333;margin:10px 0px;'>
+                                                        {{::emailTemplateInfo.fareForecast.CurrencySymbol}} {{::emailTemplateInfo.fareForecast.LowestPredictedFare.BeforeDecimal}}<span style='vertical-align: top;font-size:14px;'>{{::emailTemplateInfo.fareForecast.LowestPredictedFare.AfterDecimal}}</span>
+                                                    </h4>
+                                                    <p style='color: #565a5c;font-weight: normal;margin:0 0 10px;'>Lowest Predicted Fare for Next Week</p>
+                                                </td>
+                                                <td style='width: 33.33333333%;'>
+                                                    <h4 style='font-size: 22px;font-weight: 500;color: #333;margin:10px 0px;'>
+                                                        {{::emailTemplateInfo.fareForecast.CurrencySymbol}} {{::emailTemplateInfo.fareForecast.HighestPredictedFare.BeforeDecimal}}<span style='vertical-align: top;font-size:14px;'>{{::emailTemplateInfo.fareForecast.HighestPredictedFare.AfterDecimal}}</span>
+                                                    </h4>
+                                                    <p style='color: #565a5c;font-weight: normal;margin:0 0 10px;'>Highest Predicted Fare for Next Week</p>
+                                                </td>
+                                                <td style='width: 33.33333333%;font-weight: 500;color: #333;font-size: 18px;margin-top: 15px;margin-bottom: 15px;'>
+                                                    <p style="margin-top:10px">
+                                                        <img ng-if="::emailTemplateInfo.fareForecast.Recommendation == 'buy'" src='http://www.dev.trippism.com/images/like-icon.png' style='max-width: 100%;vertical-align:middle;border:0;width:22px;height:20px;'>
+                                                        <img ng-if="::emailTemplateInfo.fareForecast.Recommendation == 'wait'" src='http://www.dev.trippism.com/images/wait-icon.png' style='max-width: 100%;vertical-align:middle;border:0;width:22px;height:20px;'>
+                                                        <span style='vertical-align: bottom;' ng-if="::emailTemplateInfo.fareForecast.Recommendation == 'buy'"> We recommend buy</span>
+                                                        <span style='vertical-align: bottom;' ng-if="::emailTemplateInfo.fareForecast.Recommendation == 'wait'">We recommend wait to buy</span>
+                                                        <span style='vertical-align: bottom;' ng-if="::emailTemplateInfo.fareForecast.Recommendation == 'unknown'">Wait or buy</span>
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <div style="clear:both"></div>
                                     </div>
                                 </div>
                                 <div ng-if="::emailTemplateInfo.weather" style='padding: 5px;background: whitesmoke;border: 1px solid #ccc;border-radius: 3px;margin-bottom: 14px;box-sizing:border-box;overflow:hidden;'>

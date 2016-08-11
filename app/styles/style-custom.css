@@ -1978,4 +1978,13 @@ ul .stop-line {
         font-size: 12px;
     }
 }
+.Beta-Tripadvisor-logo{
+    -ms-transform: rotate(7deg);
+    font-size: 8px;
+    display: inline-block;
+    vertical-align: super;
+    position: absolute;
+    right: 93px;
+    top: 5px;
+}
 /*#endregion Media queries */

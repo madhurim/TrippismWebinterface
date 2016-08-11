@@ -63,11 +63,6 @@
             $scope.$dismiss('cancel')
         };
 
-        var Origin = $scope.eMailData.SearchCriteria.Origin.toUpperCase();
-        var Destination = $scope.eMailData.DestinationAirport.airport_Code.toUpperCase()
-        var FromDate = ConvertToRequiredDate($scope.eMailData.SearchCriteria.FromDate, 'API');
-        var ToDate = ConvertToRequiredDate($scope.eMailData.SearchCriteria.ToDate, 'API');
-
         function activate() {
             var email = {
                 From: $scope.fromEmail,
@@ -98,7 +93,7 @@
                 details: DestinationFactory.DestinationDataStorage.currentPage.details,
                 dateString: $filter('date')($scope.eMailData.SearchCriteria.FromDate, 'MMM-dd-yyyy') + ' To ' + $filter('date')($scope.eMailData.SearchCriteria.ToDate, 'MMM-dd-yyyy'),
                 href: window.location.href,
-                destination: Destination
+                destination: $scope.eMailData.DestinationAirport.airport_CityCode.toUpperCase()
             }
         }
         $scope.setEmailTemplateData();

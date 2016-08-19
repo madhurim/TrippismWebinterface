@@ -2,9 +2,9 @@
     'use strict';
     var controllerId = 'BaseController';
     angular.module('TrippismUIApp').controller(controllerId,
-        ['$scope', '$modal', '$rootScope', 'UtilFactory', 'urlConstant', BaseController]);
+        ['$scope', '$modal', '$rootScope', 'UtilFactory', 'urlConstant', 'dataConstant', 'LocalStorageFactory', 'baseFactory', BaseController]);
 
-    function BaseController($scope, $modal, $rootScope, UtilFactory, urlConstant) {
+    function BaseController($scope, $modal, $rootScope, UtilFactory, urlConstant, dataConstant, LocalStorageFactory, baseFactory) {
         $rootScope.isShowAlerityMessage = true;
 
         init();
@@ -32,6 +32,25 @@
         $scope.$on('bodyClass', function (event, args) {
             $scope.bodyClass = args;
         });
+
+        // Create and store Guid into Localstorage
+        function storeGuid() {
+            var guid = LocalStorageFactory.get(dataConstant.GuidLocalstorage);
+            if (!guid) {
+
+                var browserName = Browser_Name();
+                var device = User_Device();
+                var anonymousData = {
+                    Browser: browserName,
+                    Device: device
+                };
+                baseFactory.storeAnonymousData(anonymousData).then(function (data) {
+                    LocalStorageFactory.save(dataConstant.GuidLocalstorage, data + "");
+                    
+                });
+            }
+        }
+        storeGuid();       
     }
 })();
 

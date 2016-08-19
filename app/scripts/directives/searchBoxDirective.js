@@ -6,7 +6,9 @@
             'UtilFactory',
             'dataConstant',
             'urlConstant',
-function ($location, $timeout, $filter, $stateParams, UtilFactory, dataConstant, urlConstant) {
+            'LocalStorageFactory',
+            'baseFactory',
+function ($location, $timeout, $filter, $stateParams, UtilFactory, dataConstant, urlConstant, LocalStorageFactory, baseFactory) {
     return {
         restrict: 'E',
         scope: {
@@ -517,14 +519,30 @@ function ($location, $timeout, $filter, $stateParams, UtilFactory, dataConstant,
 
             $scope.CallDestiantionsview = function (path, origin, fromDate, toDate, destination) {
                 if ($scope.selectedform == "SuggestDestination") {
+                    SaveSearchCriteria(path, origin, fromDate, toDate, destination);
                     $location.path(path + '/f=' + origin + ';d=' + ConvertToRequiredDate(fromDate, 'API') + ';r=' + ConvertToRequiredDate(toDate, 'API'));
                     destination = null;
                 }
                 else {
+                    SaveSearchCriteria(path, origin, fromDate, toDate, destination);
                     $location.path(path + '/f=' + origin + ';t=' + destination + ';d=' + ConvertToRequiredDate(fromDate, 'API') + ';r=' + ConvertToRequiredDate(toDate, 'API'));
                 }
                 UtilFactory.LastSearch = { origin: origin, fromDate: fromDate, toDate: toDate, destination: destination };
                 $scope.isPopup = false;
+            }
+
+            function SaveSearchCriteria(path,origin,fromDate,toDate,destination)
+            {
+                var guid = LocalStorageFactory.get(dataConstant.GuidLocalstorage);
+                
+                var data = {
+                    RefGuid: guid,
+                    Origin: origin,
+                    Destination: destination,
+                    FromDate: ConvertToRequiredDate(fromDate, 'API'),
+                    ToDate: ConvertToRequiredDate(toDate, 'API')
+                }
+                baseFactory.storeSerachCriteria(data);
             }
         }
     }

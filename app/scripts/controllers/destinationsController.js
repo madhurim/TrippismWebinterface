@@ -12,6 +12,7 @@
             'dataConstant',
             'LocalStorageFactory',
             '$location',
+            'baseFactory',
              DestinationsController]);
     function DestinationsController(
         $scope,
@@ -22,8 +23,9 @@
         DestinationFactory,
         UtilFactory,
         dataConstant,
-        LocalStorageFactory,
-        $location
+        LocalStorageFactory,        
+        $location,
+        baseFactory
         ) {
 
         $scope.$emit('bodyClass', 'mappage');   // for changing <body> class    
@@ -226,6 +228,18 @@
                         d: $scope.FromDate,
                         r: $scope.ToDate
                     });
+
+                    var serachData = {
+                        RefGuid: LocalStorageFactory.get(dataConstant.GuidLocalstorage),
+                        Origin: $scope.Origin,
+                        FromDate: ConvertToRequiredDate($scope.FromDate, 'API'),
+                        ToDate: ConvertToRequiredDate($scope.ToDate, 'API'),
+                        Theme: $scope.Theme,
+                        Region: $scope.Region,
+                        MinFate: $scope.Minfare,
+                        MaxFare: $scope.Maxfare
+                    }
+                    baseFactory.storeSerachCriteria(serachData);
                 }
                 if (!arr.length) setDestinationCards([]), $scope.isDestinations = false;
                 $rootScope.$broadcast('setMarkerOnMap', {

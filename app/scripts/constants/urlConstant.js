@@ -5,8 +5,11 @@
     //var hostName = 'http://dev.trippism.com';
 
     var hostName = 'http://' + window.location.host;
+    var profileHostname = 'http://' + window.location.host;
+
     if (angular.lowercase(window.location.host) == "localhost:9000") {
         hostName = 'http://localhost:14606';
+        profileHostname = 'http://localhost:1161';
     }
 
     var constants = {
@@ -28,7 +31,9 @@
         apiURLForFeedback: hostName + '/api/Email/SendFeedback',
         apiURLForInstaFlightSearch: hostName + '/api/instaflight',
         apiURLForConstant: hostName + '/api/Constants/',
-        apiURLForHotelRange: hostName + '/api/sabre/hotels'
+        apiURLForHotelRange: hostName + '/api/sabre/hotels',
+        apiURLforProfileAnonymous: profileHostname + '/api/profiles/anonymous',
+        apiURLforProfileActivity: profileHostname + '/api/profile/activity'
     };
     angular.module('TrippismUIApp').constant('urlConstant', constants);
 })();

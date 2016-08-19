@@ -13,7 +13,7 @@
                     <p>
                         Fares that were paid in the last 4 weeks for
                         <span>{{FareRangeWidgetData.OriginLocation}}-{{FareRangeWidgetData.DestinationLocation}}</span>
-                        <span>{{DepartDate | date:'MMM-dd-yyyy'}} To {{ReturnDate | date:'MMM-dd-yyyy'}}</span>
+                        <span>{{DepartDate | date: $root.format}} To {{ReturnDate | date: $root.format}}</span>
                     </p>
 
                     <div class="col-md-7 col-sm-12 col-xs-12 padleft0" id="fareRageChart"></div>

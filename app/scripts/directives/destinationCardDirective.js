@@ -57,8 +57,8 @@
                             $scope.isDataFound = true;
                             if (data && data.PricedItineraries && data.PricedItineraries.length) {
                                 $scope.destinationData.lowestFare = getLowestFare(data.PricedItineraries[0]);
-                                $scope.destinationData.departureDate = ConvertToRequiredDate(data.DepartureDateTime, 'UI'),
-                                $scope.destinationData.returnDate = ConvertToRequiredDate(data.ReturnDateTime, 'UI'),
+                                $scope.destinationData.departureDate = data.DepartureDateTime,
+                                $scope.destinationData.returnDate = data.ReturnDateTime,
                                 $scope.destinationData.currencyCode = getCurrencyCode(data.PricedItineraries[0])
                                 $scope.destinationData.currencySymbol = UtilFactory.GetCurrencySymbol($scope.destinationData.currencyCode);
                                 DestinationFactory.DestinationDataStorage.fare.set(

@@ -23,13 +23,13 @@
                     <div class="row">
                         <div class="ibox-box searched search-det font-light">
                             <p>
-                                <span ng-show="search">{{search}}</span>
+                                <span ng-show="search">{{search}} {{fareParams.SearchCriteria.FromDate | date: $root.format}} To {{fareParams.SearchCriteria.ToDate | date: $root.format}}</span>
                             </p>
                             <div class="clear"></div>
                         </div>
                         <div class="ibox-title ibox-title-new font-light">
                             <h4>
-                                {{airportDetail}}
+                                {{airportDetail}} 
                             </h4>
                         </div>
                     </div>

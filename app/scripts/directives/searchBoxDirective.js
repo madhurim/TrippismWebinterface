@@ -24,17 +24,7 @@ function ($location, $timeout, $filter, $locale, $stateParams, UtilFactory, data
             $scope.Destination;
             $scope.FromDate;
             $scope.ToDate;
-            //$scope.formats = Dateformat();
-            //$scope.format = $scope.formats[5];
-            $scope.format = $locale.DATETIME_FORMATS.mediumDate;
-            //$scope.format = 'MM dd yyyy';
-
-            $scope.$on('$localeChangeSuccess', function () {
-                $timeout(function () {
-                    $scope.format = $locale.DATETIME_FORMATS.mediumDate;
-                }, 0, true);
-            });
-
+            
             $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
             $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
 
@@ -100,6 +90,7 @@ function ($location, $timeout, $filter, $locale, $stateParams, UtilFactory, data
             activate();
 
             function SetFromDate() {
+                debugger
                 if ($scope.FromDate == "" || $scope.FromDate == undefined || $scope.FromDate == null) {
                     //$scope.FromDate = ConvertToRequiredDate(GetFromDate(), 'UI');
                     $scope.FromDate = GetFromDate();

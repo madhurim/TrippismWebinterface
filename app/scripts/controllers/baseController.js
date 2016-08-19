@@ -2,9 +2,9 @@
     'use strict';
     var controllerId = 'BaseController';
     angular.module('TrippismUIApp').controller(controllerId,
-        ['$scope', '$modal', '$rootScope', '$timeout', 'tmhDynamicLocale', 'UtilFactory', 'urlConstant', 'BaseFactory', BaseController]);
+        ['$scope', '$modal', '$rootScope', '$timeout', 'tmhDynamicLocale', 'UtilFactory', 'urlConstant', 'BaseFactory', '$locale',BaseController]);
 
-    function BaseController($scope, $modal, $rootScope, $timeout, tmhDynamicLocale, UtilFactory, urlConstant, BaseFactory) {
+    function BaseController($scope, $modal, $rootScope, $timeout, tmhDynamicLocale, UtilFactory, urlConstant, BaseFactory, $locale) {
         $rootScope.isShowAlerityMessage = true;
         init();
         getLocale();
@@ -15,9 +15,9 @@
         }
         function getLocale() {
             BaseFactory.getLocale().then(function (data) {
+                
                 $rootScope.PointOfSaleCountry = data.country;
-				tmhDynamicLocale.set("en-" + data.country);
-				angular.element('#select-i18n').val("en-" + data.country.toLowerCase());
+                tmhDynamicLocale.set("en-" + data.country);
             });
         }
 
@@ -50,6 +50,12 @@
             $timeout(function () {
                 tmhDynamicLocale.set("en-us");
                 $('#select-i18n').ddslick('select', { index: 0 });
+            }, 0, true);
+        });
+        $rootScope.format = $locale.DATETIME_FORMATS.mediumDate;
+        $scope.$on('$localeChangeSuccess', function () {
+            $timeout(function () {
+                $rootScope.format = $locale.DATETIME_FORMATS.mediumDate;
             }, 0, true);
         });
     }

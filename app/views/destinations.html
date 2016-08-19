@@ -7,8 +7,8 @@
                         <div class="form" style="">
                             <label class="search_list">
                                 <span ng-show="refineSearchValues && refineSearchValues.OrigintoDisp">{{refineSearchValues.OrigintoDisp}} </span>
-                                <span ng-show="refineSearchValues && refineSearchValues.FromDate">{{refineSearchValues.FromDate | date:'MMM-dd-yyyy'}} </span>
-                                <span ng-show="refineSearchValues && refineSearchValues.ToDate">To {{refineSearchValues.ToDate | date:'MMM-dd-yyyy'}}</span>
+                                <span ng-show="refineSearchValues && refineSearchValues.FromDate">{{refineSearchValues.FromDate | date : $root.format}} </span>
+                                <span ng-show="refineSearchValues && refineSearchValues.ToDate">To {{refineSearchValues.ToDate | date : $root.format}}</span>
                                 <span ng-show="refineSearchValues && refineSearchValues.Minfare > 0">{{fareCurrencySymbol}} {{refineSearchValues.Minfare}}</span>
                                 <span ng-show="refineSearchValues && refineSearchValues.Maxfare > 0"> To {{fareCurrencySymbol}} {{refineSearchValues.Maxfare}}</span>
                                 <span ng-show="refineSearchValues && refineSearchValues.Theme"> {{refineSearchValues.Theme}}</span>

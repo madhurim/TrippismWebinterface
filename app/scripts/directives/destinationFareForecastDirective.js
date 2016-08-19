@@ -50,8 +50,7 @@
                     $scope.airportDetail = $scope.fareParams.DestinationAirport.airport_FullName + ', ' + $scope.fareParams.DestinationAirport.airport_CityName + ', ' + $scope.fareParams.DestinationAirport.airport_CountryName;
 
                     $scope.search = $scope.fareParams.OriginAirport.airport_CityName + '-' + $scope.fareParams.DestinationAirport.airport_CityName
-                        + ' ' + $filter('date')($scope.fareParams.SearchCriteria.FromDate, 'MMM-dd-yyyy')
-                        + ' To ' + $filter('date')($scope.fareParams.SearchCriteria.ToDate, 'MMM-dd-yyyy')
+                        + ' ';
 
                     DestinationFactory.DestinationDataStorage.currentPage.details = {
                         airportDetail: $scope.airportDetail,

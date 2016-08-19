@@ -41,5 +41,22 @@
                     return null;
             }, function () { return null; });
         }
+
+        function getExchangeRate(fromCurrency, toCurrency) {
+
+            //Free API call 
+            var url = "https://openexchangerates.org/api/latest.json?app_id=abf70ba2e328428c9cef7e4f058ffc21";
+
+            //premium API call
+            //var url = "https://openexchangerates.org/api/latest.json?app_id=abf70ba2e328428c9cef7e4f058ffc21&base=" + existCurrency + "&symbols=" + convertCurrency;
+
+            $http.get(url)
+                    .then(function (data) {
+                        return data.data;
+                    },
+                    function (e) {
+                        return e;
+                    });
+        }
     }
 })();

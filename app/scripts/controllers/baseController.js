@@ -37,14 +37,7 @@
         function storeGuid() {
             var guid = LocalStorageFactory.get(dataConstant.GuidLocalstorage);
             if (!guid) {
-
-                var browserName = Browser_Name();
-                var device = User_Device();
-                var anonymousData = {
-                    Browser: browserName,
-                    Device: device
-                };
-                baseFactory.storeAnonymousData(anonymousData).then(function (data) {
+                baseFactory.storeAnonymousData().then(function (data) {
                     LocalStorageFactory.save(dataConstant.GuidLocalstorage, data + "");
                     
                 });

@@ -1,10 +1,11 @@
 ﻿(function () {
     'use strict';
-    angular.module('TrippismUIApp').factory('BaseFactory', ['$http', '$q', 'LocalStorageFactory', 'dataConstant', BaseFactory]);
-    function BaseFactory($http, $q, LocalStorageFactory, dataConstant) {
+    angular.module('TrippismUIApp').factory('BaseFactory', ['$http', '$q', 'LocalStorageFactory', 'dataConstant','urlConstant', BaseFactory]);
+    function BaseFactory($http, $q, LocalStorageFactory, dataConstant, urlConstant) {
         var localPromise;
         return {
-            getLocale: getLocale
+            getLocale: getLocale,
+            getExchangeRate: getExchangeRate
         }
         function getLocale() {
             //"{"ip":"43.243.38.6","hostname":"No Hostname","city":"Sarkhej","region":"Gujarat","country":"IN","loc":"22.9833,72.5000"
@@ -45,14 +46,15 @@
         function getExchangeRate(fromCurrency, toCurrency) {
 
             //Free API call 
-            var url = "https://openexchangerates.org/api/latest.json?app_id=abf70ba2e328428c9cef7e4f058ffc21";
+            ///var url = "https://openexchangerates.org/api/latest.json?app_id=abf70ba2e328428c9cef7e4f058ffc21";
 
             //premium API call
             //var url = "https://openexchangerates.org/api/latest.json?app_id=abf70ba2e328428c9cef7e4f058ffc21&base=" + existCurrency + "&symbols=" + convertCurrency;
 
-            $http.get(url)
+            var url = urlConstant.apiURLForCurrencyConversion + "?CurrencyCode=" + fromCurrency + "&ExchangeCurrencyCode=" + toCurrency;
+            return $http.get(url)
                     .then(function (data) {
-                        return data.data;
+                        return data;
                     },
                     function (e) {
                         return e;

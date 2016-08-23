@@ -21,6 +21,18 @@
             });
         }
 
+        // Get currency Exchange Rate
+
+        function getCurrencyExchangeRate() {
+            var curremcy = "USD";
+            var Convert = "INR";
+            BaseFactory.getExchangeRate(curremcy,Convert).then(function (data) {
+
+                debugger
+                
+                var rates = data;
+            });
+        }
         $scope.aboutUs = function () {
             var GetFeedbackPopupInstance = $modal.open({
                 templateUrl: urlConstant.partialViewsPath + 'aboutUsPartial.html',
@@ -58,5 +70,6 @@
                 $rootScope.format = $locale.DATETIME_FORMATS.mediumDate;
             }, 0, true);
         });
+
     }
 })();

@@ -157,38 +157,3 @@ function serialize(obj) {
         }
     return str.join("&");
 }
-
-function Browser_Name() {
-    var User_Browser_Info = navigator.userAgent;
-    var browserName = navigator.appName;
-
-    var OthorBrowser, AppInfo, ix;
-
-    if ((AppInfo = User_Browser_Info.indexOf("OPR/")) != -1) {
-        browserName = "Opera";
-    }
-    else if ((AppInfo = User_Browser_Info.indexOf("Opera")) != -1) {
-        browserName = "Opera";
-    }
-    else if ((AppInfo = User_Browser_Info.indexOf("MSIE")) != -1) {
-        browserName = "Microsoft Internet Explorer";
-    }
-    else if ((AppInfo = User_Browser_Info.indexOf("Chrome")) != -1) {
-        browserName = "Google Chrome";
-    }
-    else if ((AppInfo = User_Browser_Info.indexOf("Safari")) != -1) {
-        browserName = "Safari";
-    }
-    else if ((AppInfo = User_Browser_Info.indexOf("Firefox")) != -1) {
-        browserName = "Firefox";
-    }
-    else if ((OthorBrowser = User_Browser_Info.lastIndexOf(' ') + 1) <
-              (AppInfo = User_Browser_Info.lastIndexOf('/'))) {
-        browserName = User_Browser_Info.substring(OthorBrowser, AppInfo);
-    }
-    return browserName;
-}
-
-function User_Device() {
-    return window.navigator.platform;    
-}

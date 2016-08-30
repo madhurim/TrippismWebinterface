@@ -69,16 +69,19 @@
                         </ul>
                     </div>
                     <div class="col-md-1 col-sm-2 col-xs-2 pull-right top-5 z-999">
-                        <select id="select-i18n">
-                            <option value="en-us" data-imagesrc="../images/flags/us.png">en-US</option>
-                            <option value="en-gb" data-imagesrc="../images/flags/gb.png">en-GB</option>
-                            <option value="ar-ae" data-imagesrc="../images/flags/ae.png">ar-AE</option>
-                            <option value="en-in" data-imagesrc="../images/flags/in.png">en-IN</option>
-                        </select>
+                        <div class="form-group">
+                            <select class="form-control"
+                                    style="color:black;padding:0px;background-color:whitesmoke;"
+                                    ng-model="currencyCode"
+                                    ng-options="currency.code as currency.symbol for currency in currencyList"
+                                    ng-change="currencyChange()" >                                
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <div ui-view class="content-wrapper" id="content-wrapper"></div>
     <footer>
@@ -205,6 +208,8 @@
     <script src="scripts/directives/seasonalityDirective.js"></script>
     <script src="scripts/directives/videoPopupDirective.js"></script>
     <script src="scripts/directives/weatherDirective.js"></script>
+
+
     <!-- endbuild -->
 
 </body>

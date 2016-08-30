@@ -124,12 +124,17 @@
         }
 
         function GetCurrencySymbols() {
-            if (CurrencySymbolsPromise)
-                return;
-            CurrencySymbolsPromise = $http.get(urlConstant.apiURLForConstant + 'GetCurrencySymbols').then(function (data) {
-                if (data.status == 200)
-                    service.currencySymbol.currencySymbolsList = data.data.Currency;
-            });
+            if (CurrencySymbolsPromise) {
+                return $q.when(CurrencySymbolsPromise).then(function (value) {
+                    return value;
+                });
+            }
+            else {
+                return CurrencySymbolsPromise = $http.get(urlConstant.apiURLForConstant + 'GetCurrencySymbols').then(function (data) {
+                    if (data.status == 200)
+                        return service.currencySymbol.currencySymbolsList = data.data.Currency;
+                });
+            }
         }
         function GetCurrencySymbol(currencyCode) {
             var cacheResult = _.findWhere(service.currencySymbol.currencySymbolsListCache, { code: currencyCode });

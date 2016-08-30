@@ -2,37 +2,37 @@
     'use strict';
     var controllerId = 'BaseController';
     angular.module('TrippismUIApp').controller(controllerId,
-        ['$scope', '$modal', '$rootScope', '$timeout', 'tmhDynamicLocale', 'UtilFactory', 'urlConstant', 'BaseFactory', '$locale',BaseController]);
+        ['$scope', '$modal', '$rootScope', '$timeout', 'tmhDynamicLocale', 'UtilFactory', 'urlConstant', 'BaseFactory', '$locale', 'dataConstant', 'LocalStorageFactory', BaseController]);
 
-    function BaseController($scope, $modal, $rootScope, $timeout, tmhDynamicLocale, UtilFactory, urlConstant, BaseFactory, $locale) {
+    function BaseController($scope, $modal, $rootScope, $timeout, tmhDynamicLocale, UtilFactory, urlConstant, BaseFactory, $locale, dataConstant, LocalStorageFactory) {
         $rootScope.isShowAlerityMessage = true;
+        $scope.currencyList;
+        $scope.currencyCode = "USD";
         init();
-        getLocale();
         function init() {
             UtilFactory.ReadAirportJson();
             UtilFactory.GetCurrencySymbols();
             UtilFactory.ReadHighRankedAirportsJson();
+
+            UtilFactory.GetCurrencySymbols().then(function (data) {
+                getfilterCurrencyInfo(data);                
+            });            
         }
-        function getLocale() {
-            BaseFactory.getLocale().then(function (data) {
-                
-                $rootScope.PointOfSaleCountry = data.country;
-                tmhDynamicLocale.set("en-" + data.country);
+        // filter Currecncy data on based Currency List
+
+        function getfilterCurrencyInfo(currencyData) {
+            var currencyList = dataConstant.currencyList;
+            $scope.currencyList = [];
+            _.each(currencyList, function (item) {
+                var currency = _.find(currencyData, function (i) { return i.code == item; });
+                if (currency)
+                    $scope.currencyList.push({
+                        code: item,
+                        symbol: item + " - " + currency.symbol
+                    });
             });
         }
 
-        // Get currency Exchange Rate
-
-        function getCurrencyExchangeRate() {
-            var curremcy = "USD";
-            var Convert = "INR";
-            BaseFactory.getExchangeRate(curremcy,Convert).then(function (data) {
-
-                debugger
-                
-                var rates = data;
-            });
-        }
         $scope.aboutUs = function () {
             var GetFeedbackPopupInstance = $modal.open({
                 templateUrl: urlConstant.partialViewsPath + 'aboutUsPartial.html',
@@ -50,26 +50,20 @@
         // also used to stop image slider [HomeController]
         $scope.$on('bodyClass', function (event, args) {
             $scope.bodyClass = args;
-        });
+        });            
 
-        $('#select-i18n').ddslick({
-            
-            onSelected: function (data) {
-                tmhDynamicLocale.set(data.selectedData.value);
-            }
-        });
-        $scope.$on('$localeChangeError', function () {
-            $timeout(function () {
-                tmhDynamicLocale.set("en-us");
-                $('#select-i18n').ddslick('select', { index: 0 });
-            }, 0, true);
-        });
-        $rootScope.format = $locale.DATETIME_FORMATS.mediumDate;
-        $scope.$on('$localeChangeSuccess', function () {
-            $timeout(function () {
-                $rootScope.format = $locale.DATETIME_FORMATS.mediumDate;
-            }, 0, true);
-        });
+        $rootScope.format = $locale.DATETIME_FORMATS.mediumDate;        
 
+        function getConversionRate(currentCurrencyCode, exchangeCurrencyCode, fareRate) {            
+            var currencyConversionDetail = {
+                base: currentCurrencyCode,
+                target: exchangeCurrencyCode,
+                rate: fareRate,
+                timestamp: new Date()
+            };
+            return BaseFactory.getCurrencyConversion(currencyConversionDetail, fareRate).then(function (data) {
+                return data;
+                });
+        }        
     }
 })();

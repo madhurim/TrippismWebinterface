@@ -7,7 +7,7 @@
     function BaseController($scope, $modal, $rootScope, $timeout, tmhDynamicLocale, UtilFactory, urlConstant, $locale, dataConstant,BaseFactory) {
         $rootScope.isShowAlerityMessage = true;
         $scope.currencyList;
-        $scope.currencyCode = "INR";
+        $scope.currencyCode = "USD";
         $rootScope.rate = 1;
         $rootScope.currencyCode = $scope.currencyCode;
         init();
@@ -72,7 +72,6 @@
         })
 
         function changeCurrency(base, target) {
-            console.log(base + "," + target);
             $scope.currencyConversionRate = getConversionRate(base, target).then(function (data) {
                 var currencyConversionRate = data;
                 $rootScope.rate = currencyConversionRate.rate;

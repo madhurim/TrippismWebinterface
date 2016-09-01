@@ -58,13 +58,15 @@
                         }
                     }
                 }
-
+                
                 $scope.RenderMap = function (args) {
-                    var destinations = args.destinationlist;
+
+                    var destinations = args.destinationlist;;
                     var sortByPrice = args.sortByPrice;
                     $timeout(function () {
                         var bounds = new google.maps.LatLngBounds();
                         $scope.destinationMarkers = [];
+                        
                         for (var x = 0; x < destinations.length; x++) {
                             var destination = destinations[x];
                             var latlng1 = new google.maps.LatLng(destination.lat, destination.lng);
@@ -73,7 +75,7 @@
                                 map: $scope.destinationMap,
                                 title: destination.FullName + ', ' + destination.CityName,
                                 markerInfo: destination,
-                                labelContent: '<div>' + destination.CityName + '<br/><span>' + UtilFactory.GetCurrencySymbol(destination.CurrencyCode) + ' ' + Math.ceil(destination.LowRate) + '</span></div>',
+                                labelContent: '<div>' + destination.CityName + '<br/><span>' + $rootScope.symbol + ' ' + parseFloat(Math.ceil(destination.LowRate) * $rootScope.rate).toFixed(0) + '</span></div>',
                                 labelAnchor: new google.maps.Point(-11, 15),
                                 labelClass: 'Maplabel',
                                 icon: {
@@ -84,7 +86,6 @@
                                 },
                                 labelVisible: false
                             });
-
                             $scope.destinationMarkers.push(marker);
                             google.maps.event.addListener(marker, 'click', (function (marker) {
                                 return function () {
@@ -248,7 +249,7 @@
 
                 var maxZindex = google.maps.Marker.MAX_ZINDEX;
                 // used to highlight a perticular marker on the map
-                var selectedMarker;
+                var selectedMarker;                
                 $scope.$on('gotoMap', function (event, data) {
                     isStopRedrawMarkers = true;
                     // get distance by zoom level                          
@@ -299,6 +300,8 @@
             link: function (scope, elm, attr) {
                 setAirportMarkerOnMap();
 
+                var destinations;
+                var sortByPrice;
                 scope.$on('setMarkerOnMap', function (event, args) {
                     if (!args) {
                         displayBlankMap();
@@ -313,6 +316,8 @@
 
                     if (args.destinationlist != undefined && args.destinationlist.length > 0) {
                         scope.RenderMap(args);
+                        destinations = args.destinationlist;
+                        sortByPrice = args.sortByPrice;
                         if ($rootScope.isShowAlerityMessage && UtilFactory.Device.medium()) {
                             $timeout(function () {
                                 showMessage();
@@ -331,6 +336,15 @@
                         scope.destinationMarkers = [];
                     }, 0, true);
                 }
+
+                scope.$on('setExchangeRate', function (event, args) {
+                    args = {
+                        destinationlist: destinations,
+                        sortByPrice: sortByPrice
+                    }
+                    removeMarkers();
+                    scope.RenderMap(args);
+                });
 
                 function centerMap(args) {
                     var airportLoc;

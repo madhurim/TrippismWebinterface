@@ -1,74 +1,45 @@
 ﻿(function () {
     'use strict';
-    angular.module('TrippismUIApp').factory('BaseFactory', ['$http', '$q', 'LocalStorageFactory', 'dataConstant','urlConstant','UtilFactory', BaseFactory]);
-    function BaseFactory($http, $q, LocalStorageFactory, dataConstant, urlConstant, UtilFactory) {
+    angular.module('TrippismUIApp').factory('BaseFactory', ['$http', '$q', 'LocalStorageFactory', 'dataConstant', 'urlConstant', 'UtilFactory', 'tmhDynamicLocale', '$locale', BaseFactory]);
+    function BaseFactory($http, $q, LocalStorageFactory, dataConstant, urlConstant, UtilFactory, tmhDynamicLocale,$locale) {
         var localPromise;
         return {            
-            getExchangeRate: getExchangeRate,
-            getCurrencyConversion: getCurrencyConversion,
-            calculateRate: calculateRate
+            getLocale: getLocale
         }
-        
-        function getExchangeRate(fromCurrency, toCurrency) {
 
-            //Free API call 
-            ///var url = "https://openexchangerates.org/api/latest.json?app_id=abf70ba2e328428c9cef7e4f058ffc21";
+        function getLocale() {
 
-            //premium API call
-            //var url = "https://openexchangerates.org/api/latest.json?app_id=abf70ba2e328428c9cef7e4f058ffc21&base=" + existCurrency + "&symbols=" + convertCurrency;
-
-            var url = urlConstant.apiURLForCurrencyConversion + "?Base=" + fromCurrency + "&Target=" + toCurrency;
-            return $http.get(url)
-                    .then(function (data) {
-                        return data;
-                    },
-                    function (e) {
-                        return e;
-                    });
-        }
-        
-        function getCurrencyConversion(currencyConversionDetail, rate) {
-            var getLocalStorageCurrencyInfo = LocalStorageFactory.get(dataConstant.currencyConversion, { base: currencyConversionDetail.base, target: currencyConversionDetail.target});
-            if (!getLocalStorageCurrencyInfo) {
-                return saveRate(currencyConversionDetail).then(function (result) {
-                    return calculateRate(result, rate);
-                });
+            // if already in local storage then return data
+            var localData = LocalStorageFactory.get(dataConstant.userLocaleLocalStorage);
+            if (localData) {
+                return $q(function (resolve) { resolve(localData); });
             }
-            else {
-                var timestamp = new Date(getLocalStorageCurrencyInfo.timestamp).getTime();
-                var currentTime = (new Date()).getTime();
-                var dateDiffInHours = (currentTime - timestamp) / 6000000;
-                if (dateDiffInHours > 1) {
-                    return saveRate(currencyConversionDetail).then(function (result) {
-                        return calculateRate(result, rate);
-                    });
+
+            // if already requested sent then wait for result and return data
+            if (localPromise) {
+                return $q.when(localPromise).then(function (data) { return data });
+            }
+            return localPromise = $http.get('http://ipinfo.io').then(function (data) {
+                if (data.status == 200) {
+                    data = data.data;
+                    data = {
+                        ip: data.ip,
+                        hostName: data.hostname,
+                        city: data.city,
+                        region: data.region,
+                        country: data.country,
+                        location: data.loc ? {
+                            lat: data.loc.split(',')[0],
+                            lng: data.loc.split(',')[1]
+                        } : null
+                    };
+                    LocalStorageFactory.save(dataConstant.userLocaleLocalStorage, data);
+                    return data;
                 }
-                else {
-                    var defer = $q.defer();
-                    defer.resolve(calculateRate(getLocalStorageCurrencyInfo, rate));
-                    return defer.promise;
-                }
-            }            
+                else
+                    return null;
+            }, function () { return null; });
         }
 
-        function saveRate(currencyConversionDetail) {
-            return getExchangeRate(currencyConversionDetail.base, currencyConversionDetail.target).then(function (data) {
-                currencyConversionDetail = {
-                    base: data.data.Base,
-                    target: data.data.Target,
-                    rate: data.data.Rate,
-                    timestamp: new Date()
-                };
-                LocalStorageFactory.save(dataConstant.currencyConversion, currencyConversionDetail, { base: currencyConversionDetail.base, target: currencyConversionDetail.target });
-                return currencyConversionDetail;
-            });
-        }
-        function calculateRate(result, rate) {
-            debugger;
-            return {
-                currencySymbol: UtilFactory.GetCurrencySymbol(result.target),
-                rate: rate * result.rate
-            }
-        }
     }
 })();

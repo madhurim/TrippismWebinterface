@@ -259,6 +259,7 @@
                     var destination = _.find(destinationlistOriginal, function (item) { return item.CurrencyCode && item.CurrencyCode != 'N/A'; });
                     if (destination)
                         $scope.fareCurrencySymbol = $scope.GetCurrencySymbol(destination.CurrencyCode);
+                        $scope.$emit('currencyChange', { currencyCode: destination.CurrencyCode});
 
                     // for displaying default min/max fare values into refine search
                     var minMaxFare = getMinMaxFare(destinationlistOriginal);

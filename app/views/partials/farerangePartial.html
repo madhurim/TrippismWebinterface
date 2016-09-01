@@ -37,15 +37,15 @@
                         <div class="fare-pred" ng-show="!FareNoDataFound" ng-if="FareforecastData.Forecast.LowestPredictedFare != 'N/A' && FareforecastData.Forecast.LowestPredictedFare != 0">
                             <div class="col-md-4 col-sm-12 col-xs-12" ng-init="::amtbifercation=amountBifurcation(FareforecastData.Forecast.LowestPredictedFare);">
                                 <h4 class="fare-font">
-                                    <span class="cursor-help" data-toggle="tooltip" popover="{{FareforecastData.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(FareforecastData.CurrencyCode)}}</span>
-                                    {{amtbifercation.BeforeDecimal}}<span class="text-super vertical-top">{{amtbifercation.AfterDecimal}}</span>
+                                    <span class="cursor-help" data-toggle="tooltip" popover="{{FareforecastData.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{$root.symbol || GetCurrencySymbol(FareforecastData.CurrencyCode)}}</span>
+                                    {{amtbifercation.BeforeDecimal * $root.rate | number :0}}<span class="text-super vertical-top">{{amtbifercation.AfterDecimal}}</span>
                                 </h4>
                                 <p class="font-light">Lowest Predicted Fare for Next Week</p>
                             </div>
                             <div class="col-md-4 col-sm-12 col-xs-12" ng-init="::amtbifercation1=amountBifurcation(FareforecastData.Forecast.HighestPredictedFare);">
                                 <h4 class="fare-font">
-                                    <span class="cursor-help" data-toggle="tooltip" popover="{{FareforecastData.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(FareforecastData.CurrencyCode)}}</span>
-                                    {{amtbifercation1.BeforeDecimal}}<span class="text-super vertical-top">{{amtbifercation1.AfterDecimal}}</span>
+                                    <span class="cursor-help" data-toggle="tooltip" popover="{{FareforecastData.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{$root.symbol || GetCurrencySymbol(FareforecastData.CurrencyCode)}}</span>
+                                    {{amtbifercation1.BeforeDecimal * $root.rate | number :0}}<span class="text-super vertical-top">{{amtbifercation1.AfterDecimal}}</span>
                                 </h4>
                                 <p class="font-light">Highest Predicted Fare for Next Week</p>
                             </div>

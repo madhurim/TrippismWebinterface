@@ -41,8 +41,8 @@
                             <div class="ibox-box fare-box">
                                 <div class="fare-box-inner text-right">
                                     <h4 class="fare-font" ng-init="::amtbifercation=amountBifurcation(LowestNonStopFare.Fare);">
-                                        <span class="cursor-help" data-toggle="tooltip" popover="{{fareParams.FareInfo.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(fareParams.FareInfo.CurrencyCode)}}</span>
-                                        {{amtbifercation.BeforeDecimal}}<span class="text-super vertical-top">{{amtbifercation.AfterDecimal}}</span>
+                                        <span class="cursor-help" data-toggle="tooltip" popover="{{fareParams.FareInfo.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{ $root.symbol ||GetCurrencySymbol(fareParams.FareInfo.CurrencyCode)}}</span>
+                                        {{amtbifercation.BeforeDecimal * $root.rate | number :0}}<span class="text-super vertical-top">{{amtbifercation.AfterDecimal}}</span>
                                     </h4>
                                     <p>Lowest Non Stop</p>
                                 </div>
@@ -60,8 +60,8 @@
                             <div class="ibox-box fare-box">
                                 <div class="fare-box-inner text-right">
                                     <h4 class="fare-font" ng-init="::amtbifercation=amountBifurcation(LowestFare.Fare);">
-                                        <span class="cursor-help" data-toggle="tooltip" popover="{{fareParams.FareInfo.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{GetCurrencySymbol(fareParams.FareInfo.CurrencyCode)}}</span>
-                                        {{amtbifercation.BeforeDecimal}}<span class="text-super vertical-top">{{amtbifercation.AfterDecimal}}</span>
+                                        <span class="cursor-help" data-toggle="tooltip" popover="{{fareParams.FareInfo.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{ $root.symbol ||GetCurrencySymbol(fareParams.FareInfo.CurrencyCode)}}</span>
+                                        {{amtbifercation.BeforeDecimal * $root.rate | number :0}}<span class="text-super vertical-top">{{amtbifercation.AfterDecimal}}</span>
                                     </h4>
                                     <p><span class="invisible hidden">Non Stop </span> Lowest</p>
                                 </div>

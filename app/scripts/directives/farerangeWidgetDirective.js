@@ -1,6 +1,6 @@
 ﻿angular.module('TrippismUIApp').directive('farerangewidgetInfo',
-                ['FareRangeFactory', '$filter', '$timeout', 'UtilFactory', 'FareforecastFactory', 'urlConstant', 'DestinationFactory',
-function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory, urlConstant, DestinationFactory) {
+                ['FareRangeFactory', '$filter', '$timeout', 'UtilFactory', 'FareforecastFactory', 'urlConstant', 'DestinationFactory','$rootScope',
+function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory, urlConstant, DestinationFactory, $rootScope) {
     return {
         restrict: 'E',
         scope: {
@@ -170,7 +170,9 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory,
                     PreparHtmldata();
                 }
             })
-
+            scope.$on('setExchangeRate', function (event, args) {
+                PreparHtmldata();
+            });
             function PreparHtmldata() {
                 if (scope.fareRangeData != undefined && scope.fareRangeData != "") {
                     // replace(/-/g, "/") used because of safari date convert problem
@@ -184,10 +186,11 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory,
                                 break;
 
                             scope.FareRangeWidgetData = {
-                                MinimumFare: scope.fareRangeData.FareData[i].MinimumFare,
-                                MaximumFare: scope.fareRangeData.FareData[i].MaximumFare,
-                                MedianFare: scope.fareRangeData.FareData[i].MedianFare,
-                                CurrencyCode: UtilFactory.GetCurrencySymbol(scope.fareRangeData.FareData[i].CurrencyCode),
+                                MinimumFare: (scope.fareRangeData.FareData[i].MinimumFare) * $rootScope.rate ,
+                                MaximumFare: (scope.fareRangeData.FareData[i].MaximumFare) * $rootScope.rate,
+                                MedianFare: (scope.fareRangeData.FareData[i].MedianFare) * $rootScope.rate,
+                                //CurrencyCode: UtilFactory.GetCurrencySymbol(scope.fareRangeData.FareData[i].CurrencyCode),
+                                CurrencyCode: $rootScope.symbol,
                                 Count: scope.fareRangeData.FareData[i].Count,
                                 IsMacOrigin: scope.fareRangeData.IsMacOrigin,
                                 IsMacDestination: scope.fareRangeData.IsMacDestination,

@@ -13,8 +13,8 @@
             <div class="col-md-2 col-sm-12 text-center">
                 <span ng-if="!lowestFare && isInstaFlightDataFound != false" class="glyphicon glyphicon-refresh glyphicon-spin margin-left-5"></span>
                 <span ng-if="lowestFare" class="insta-num" ng-init="::amtbifercation = amountBifurcation(lowestFare);">
-                    <span class="cursor-help" data-toggle="tooltip" popover="{{::currencyCode}}" popover-trigger="mouseenter" popover-placement="bottom">{{::GetCurrencySymbol(currencyCode)}}</span>
-                    {{amtbifercation.BeforeDecimal}}<span class="text-super vertical-top">{{amtbifercation.AfterDecimal}}</span>
+                    <span class="cursor-help" data-toggle="tooltip" popover="{{::currencyCode}}" popover-trigger="mouseenter" popover-placement="bottom">{{$root.symbol || GetCurrencySymbol(currencyCode)}}</span>
+                    {{amtbifercation.BeforeDecimal * $root.rate | number:0}}<span class="text-super vertical-top">{{amtbifercation.AfterDecimal}}</span>
                 </span>
 
             </div>
@@ -49,8 +49,8 @@
                     <accordion-heading>
                         <div class="col-md-12 acc-heading">
                             <div class="col-md-2 insta-num-big" ng-init="::amtbifercation = amountBifurcation(pricedItineraries.AirItineraryPricingInfo[0].TotalFare.Amount);">
-                                <span class="cursor-help" data-toggle="tooltip" popover="{{::pricedItineraries.AirItineraryPricingInfo[0].TotalFare.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="bottom">{{::GetCurrencySymbol(pricedItineraries.AirItineraryPricingInfo[0].TotalFare.CurrencyCode)}}</span>
-                                {{amtbifercation.BeforeDecimal}}<span class="text-super">{{amtbifercation.AfterDecimal}}</span>
+                                <span class="cursor-help" data-toggle="tooltip" popover="{{::pricedItineraries.AirItineraryPricingInfo[0].TotalFare.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="bottom">{{$root.symbol || GetCurrencySymbol(pricedItineraries.AirItineraryPricingInfo[0].TotalFare.CurrencyCode)}}</span>
+                                {{amtbifercation.BeforeDecimal * $root.rate | number:0}}<span class="text-super">{{amtbifercation.AfterDecimal}}</span>
                             </div>
                             <div class="col-md-8 insta-padding">
                                 <div class="col-md-12" ng-repeat="originDestinationOption in ::pricedItineraries.OriginDestinationOption">

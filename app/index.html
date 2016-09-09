@@ -74,8 +74,7 @@
                                     style="color:black;padding:0px;background-color:whitesmoke;"
                                     ng-model="currencyCode"
                                     ng-options="currency.code as currency.symbol for currency in currencyList"
-                                    ng-change="hasChange()" >                                
-                            </select>
+                                    ng-change="currencyCodeChange()"></select>
                         </div>
                     </div>
                 </div>

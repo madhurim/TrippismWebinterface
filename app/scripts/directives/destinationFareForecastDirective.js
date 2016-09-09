@@ -104,7 +104,7 @@
 
                                     $scope.fareParams.FareInfo = FareInfo;
                                     $scope.FareInfo = FareInfo;
-                                    $scope.fareCurrencySymbol = $scope.GetCurrencySymbol($scope.fareParams.FareInfo.CurrencyCode);
+                                    $scope.fareCurrencySymbol = $rootScope.currencyInfo.symbol; //$scope.GetCurrencySymbol($scope.fareParams.FareInfo.CurrencyCode);
                                     initFares($scope.FareInfo);
                                     $scope.airlineJsonData = [];
                                     $scope.$emit('destinationFare', $scope.FareInfo);
@@ -114,7 +114,7 @@
                                 FareInfo.LowestNonStopFare = FareInfo.LowestFare;
                                 $scope.fareParams.FareInfo = FareInfo;
                                 $scope.FareInfo = FareInfo;
-                                $scope.fareCurrencySymbol = $scope.GetCurrencySymbol($scope.fareParams.FareInfo.CurrencyCode);
+                                $scope.fareCurrencySymbol = $rootScope.currencyInfo.symbol;//$scope.GetCurrencySymbol($scope.fareParams.FareInfo.CurrencyCode);
                                 initFares($scope.FareInfo);
                                 $scope.airlineJsonData = [];
                                 $timeout(function () { $scope.$emit('destinationFare', $scope.FareInfo) }, 0, false);
@@ -128,16 +128,17 @@
 
                                     var objDestinationairport = $scope.destinationlist[0];
                                     if (objDestinationairport != undefined) {
-                                        objDestinationairport.objDestinationairport = $scope.DestinationLocation.toUpperCase();
-                                        $scope.destinationlist.forEach(function (item) { item.DestinationLocation = item.objDestinationairport; });
-                                        $scope.FareInfo = response.FareInfo[0];
-                                        $scope.airlineJsonData = [];
-                                        $scope.fareParams.FareInfo = $scope.FareInfo;
-                                        $scope.$emit('currencyChange', { currencyCode: $scope.fareParams.FareInfo.CurrencyCode });
-                                        $scope.fareCurrencySymbol = $scope.GetCurrencySymbol($scope.fareParams.FareInfo.CurrencyCode);
-                                        initFares($scope.FareInfo);
-                                        UtilFactory.MapscrollTo('wrapper');
-                                        $scope.$emit('destinationFare', $scope.FareInfo);
+                                        $rootScope.changeRate(response.FareInfo[0].CurrencyCode).then(function (currency) {
+                                            objDestinationairport.objDestinationairport = $scope.DestinationLocation.toUpperCase();
+                                            $scope.destinationlist.forEach(function (item) { item.DestinationLocation = item.objDestinationairport; });
+                                            $scope.FareInfo = response.FareInfo[0];
+                                            $scope.airlineJsonData = [];
+                                            $scope.fareParams.FareInfo = $scope.FareInfo;
+                                            $scope.fareCurrencySymbol = $rootScope.currencyInfo.symbol;//$scope.GetCurrencySymbol($scope.fareParams.FareInfo.CurrencyCode);
+                                            initFares($scope.FareInfo);
+                                            UtilFactory.MapscrollTo('wrapper');
+                                            $scope.$emit('destinationFare', $scope.FareInfo);
+                                        });
                                     }
                                     else {
                                         $scope.airlineJsonData = [];
@@ -172,7 +173,7 @@
                     else {
                         $scope.airlineJsonData = [];
                         $scope.fareParams.FareInfo = $scope.FareInfo;
-                        $scope.fareCurrencySymbol = $scope.GetCurrencySymbol($scope.fareParams.FareInfo.CurrencyCode);
+                        $scope.fareCurrencySymbol = $rootScope.currencyInfo.symbol;//$scope.GetCurrencySymbol($scope.fareParams.FareInfo.CurrencyCode);
                         initFares($scope.FareInfo);
                         $timeout(function () { $scope.$emit('destinationFare', $scope.FareInfo) }, 0, false);
                     }
@@ -181,14 +182,25 @@
                 function initFares(FareInfo) {
                     if (FareInfo.LowestNonStopFare && FareInfo.LowestNonStopFare.Fare != 'N/A' && FareInfo.LowestNonStopFare.Fare != 0) {
                         $scope.LowestNonStopFare = FareInfo.LowestNonStopFare;
+                        $scope.LowestNonStopFare.Fare = (FareInfo.LowestNonStopFare.Fare * $rootScope.currencyInfo.rate).toFixed(2);
+
+                        $scope.LowestNonStopFare.amountBifurcation = $scope.amountBifurcation($scope.LowestNonStopFare.Fare);
+
                         $scope.LowestNonStopFare.outboundflightstops = 0;
                         $scope.LowestNonStopFare.inboundflightstops = 0;
                     }
-                    else if (FareInfo.LowestFare && FareInfo.LowestFare.Fare != 'N/A' && FareInfo.LowestFare.Fare != 0)
+                    else if (FareInfo.LowestFare && FareInfo.LowestFare.Fare != 'N/A' && FareInfo.LowestFare.Fare != 0) {
                         $scope.LowestNonStopFare = FareInfo.LowestFare;
+                        $scope.LowestNonStopFare.Fare = (FareInfo.LowestFare.Fare * $rootScope.currencyInfo.rate).toFixed(2);
 
-                    if (FareInfo.LowestFare && FareInfo.LowestFare.Fare != 'N/A' && FareInfo.LowestFare.Fare != 0)
+                        $scope.LowestNonStopFare.amountBifurcation = $scope.amountBifurcation($scope.LowestNonStopFare.Fare);
+                    }
+                    if (FareInfo.LowestFare && FareInfo.LowestFare.Fare != 'N/A' && FareInfo.LowestFare.Fare != 0) {
                         $scope.LowestFare = FareInfo.LowestFare;
+                        $scope.LowestFare.Fare = (FareInfo.LowestFare.Fare * $rootScope.currencyInfo.rate).toFixed(2);
+
+                        $scope.LowestFare.amountBifurcation = $scope.amountBifurcation($scope.LowestNonStopFare.Fare);
+                    }
 
                     DestinationFactory.DestinationDataStorage.currentPage.fare = {
                         CurrencySymbol: $scope.fareCurrencySymbol,
@@ -243,9 +255,10 @@
                         { state: 'destination', name: 'Destination', active: true, className: "active" }
                     ];
                 }
-                //$scope.totalFare = function () {
-                //    return (2 * parseFloat($scope.LowestFare.Fare) + parseFloat($scope.HotelData.Fare)).toFixed(2);
-                //}
+
+                $scope.$on('setExchangeRate', function (event, args) {
+                    activate();
+                });
             }
         }
     }]);

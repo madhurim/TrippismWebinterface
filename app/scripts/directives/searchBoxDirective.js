@@ -90,7 +90,6 @@ function ($location, $timeout, $filter, $locale, $stateParams, UtilFactory, data
             activate();
 
             function SetFromDate() {
-                debugger
                 if ($scope.FromDate == "" || $scope.FromDate == undefined || $scope.FromDate == null) {
                     //$scope.FromDate = ConvertToRequiredDate(GetFromDate(), 'UI');
                     $scope.FromDate = GetFromDate();

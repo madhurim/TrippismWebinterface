@@ -33,7 +33,8 @@
             amountBifurcation: amountBifurcation,
             Device: Device,
             getExchangeRate: getExchangeRate,
-            getCurrencyConversion: getCurrencyConversion
+            getCurrencyConversion: getCurrencyConversion,
+            GetCurrecyCode: GetCurrecyCode
         };
         return service;
 
@@ -140,6 +141,7 @@
         }
         function GetCurrencySymbol(currencyCode) {
             var cacheResult = _.findWhere(service.currencySymbol.currencySymbolsListCache, { code: currencyCode });
+            var cacheResult = _.findWhere(service.currencySymbol.currencySymbolsListCache, { code: currencyCode });
             if (cacheResult)
                 return cacheResult.symbol;
 
@@ -151,6 +153,21 @@
             else {
                 service.currencySymbol.currencySymbolsListCache.push({ symbol: currencyCode, code: currencyCode });
                 return currencyCode;
+            }
+        }
+        function GetCurrecyCode(currencySymbol) {
+            var cacheResult = _.findWhere(service.currencySymbol.currencySymbolsListCache, { symbol: currencySymbol });
+            if (cacheResult)
+                return cacheResult.code;
+
+            var result = _.findWhere(service.currencySymbol.currencySymbolsList, { symbol: currencySymbol });
+            if (result) {
+                service.currencySymbol.currencySymbolsListCache.push({ symbol: result.symbol, code: result.code });
+                return result.code;
+            }
+            else {
+                service.currencySymbol.currencySymbolsListCache.push({ symbol: currencySymbol, code: currencySymbol });
+                return currencySymbol;
             }
         }
         function GetLowFareForMap(destination) {
@@ -277,11 +294,11 @@
         }
 
         function getCurrencyConversion(currencyConversionDetail) {
-            if ((currencyConversionDetail.base == currencyConversionDetail.target) || currencyConversionDetail.base == undefined || currencyConversionDetail.target == undefined) {
+            if ((currencyConversionDetail.base == currencyConversionDetail.target) || currencyConversionDetail.base == undefined || currencyConversionDetail.target == undefined) {                
                 var defer = $q.defer();
                 defer.resolve({
-                    currencyCode: currencyConversionDetail.target,
-                    currencySymbol: GetCurrencySymbol(currencyConversionDetail.target),
+                    currencyCode: currencyConversionDetail.base,
+                    currencySymbol: GetCurrencySymbol(currencyConversionDetail.base),
                     rate: 1
                 });
                 return defer.promise;

@@ -137,27 +137,17 @@
                     return airport.airport_Code == destination.DestinationLocation
                 });
 
-                if (airport != undefined) {
-                    var LowestFarePrice = "N/A";
-                    var LowestNonStopFare = "N/A";
-                    if (destination.LowestNonStopFare != undefined && destination.LowestNonStopFare.Fare != "N/A") {
-                        LowestNonStopFare = parseFloat(destination.LowestNonStopFare.Fare).toFixed(2);
-                        if (LowestNonStopFare == 0)
-                            LowestNonStopFare = "N/A";
-                    }
-                    if (destination.LowestFare != undefined && destination.LowestFare.Fare != "N/A") {
-                        LowestFarePrice = parseFloat(destination.LowestFare.Fare).toFixed(2);
-                        if (LowestFarePrice == 0)
-                            LowestFarePrice = "N/A";
-                    }
-                    if (LowestNonStopFare != "N/A" || LowestFarePrice != "N/A") {
-                        destination.LowRate = parseFloat(UtilFactory.GetLowFareForMap(destination));
+                if (airport != undefined) {                    
+                    var LowRate = parseFloat(UtilFactory.GetLowFareForMap(destination));
+                    if (LowRate != "N/A" ) {
+                        destination.LowRate = parseFloat(UtilFactory.GetLowFareForMap(destination) * $rootScope.currencyInfo.rate).toFixed();
                         destination.lat = airport.airport_Lat;
                         destination.lng = airport.airport_Lng;
                         destination.rank = airport.rank;
                         destination.CityName = airport.airport_CityName;
                         destination.CityCode = airport.airport_CityCode;
                         destination.FullName = airport.airport_FullName;
+                        destination.CurrencySymbol = $rootScope.currencyInfo.symbol;
                         destinationsToDisp.push(destination);
                     }
                 }
@@ -254,25 +244,33 @@
                 $scope.SearchbuttonIsLoading = false;
                 $scope.fareCurrencySymbol = undefined;
                 if (data.FareInfo != null) {
-                    destinationlistOriginal = filterDestinations(data.FareInfo);
-                    // getting currency symbol from currency code
-                    var destination = _.find(destinationlistOriginal, function (item) { return item.CurrencyCode && item.CurrencyCode != 'N/A'; });
-                    if (destination)
-                        $scope.fareCurrencySymbol = $scope.GetCurrencySymbol(destination.CurrencyCode);
-                        $scope.$emit('currencyChange', { currencyCode: destination.CurrencyCode});
+                    $rootScope.changeRate(data.FareInfo[0].CurrencyCode).then(function (currency) {
 
-                    // for displaying default min/max fare values into refine search
-                    var minMaxFare = getMinMaxFare(destinationlistOriginal);
-                    var Maxfare = 0, Minfare = 0;
-                    if (minMaxFare.MaxFare && minMaxFare.MaxFare != 0)
-                        Maxfare = Math.ceil(minMaxFare.MaxFare);
-                    if (minMaxFare.MinFare && minMaxFare.MinFare != 0)
-                        Minfare = Math.floor(minMaxFare.MinFare);
+                        destinationlistOriginal = filterDestinations(data.FareInfo);
+                        // getting currency symbol from currency code
+                        var destination = _.find(destinationlistOriginal, function (item) { return item.CurrencyCode && item.CurrencyCode != 'N/A'; });
+                        if (destination)
+                            $scope.fareCurrencySymbol = $rootScope.currencyInfo.symbol;
 
-                    setFareSliderValues(Minfare, Maxfare, $scope.Minfare || Minfare, $scope.Maxfare || Maxfare);
+                        // for displaying default min/max fare values into refine search
+                        var minMaxFare = getMinMaxFare(destinationlistOriginal);
+                        var Maxfare = 0, Minfare = 0;
+                        if (minMaxFare.MaxFare && minMaxFare.MaxFare != 0)
+                            Maxfare = Math.ceil(minMaxFare.MaxFare * $rootScope.currencyInfo.rate);                        
+                        if (minMaxFare.MinFare && minMaxFare.MinFare != 0)
+                            Minfare = Math.floor(minMaxFare.MinFare * $rootScope.currencyInfo.rate);
+                        //$scope.Minfare = Minfare;
+                        //$scope.Maxfare = Maxfare;
 
-                    UtilFactory.MapscrollTo('wrapper');
-                    $scope.isRefineSeachCollapsed = true;
+                        setFareSliderValues(Minfare, Maxfare, $scope.Minfare || Minfare, $scope.Maxfare || Maxfare);
+
+                        UtilFactory.MapscrollTo('wrapper');
+                        $scope.isRefineSeachCollapsed = true;
+                        $scope.inProgress = false;
+                        loadScrollbars();
+                        $scope.refineDestinations(true);
+                    });
+
                 }
                 else if (data != null && typeof data == 'string') {
                     var POSCountriesList = [];
@@ -296,17 +294,21 @@
                     $scope.IscalledFromIknowMyDest = false;
                     setDestinationCards([]);
                     $scope.isDestinations = false;
+
+                    $scope.inProgress = false;
+                    loadScrollbars();
+                    $scope.refineDestinations();
                 }
                 else {
                     alertify.alert("Destination Finder", "");
                     alertify.alert('Sorry , we do not have destinations to suggest for this search combination. This can also happen sometimes if the origin airport is not a popular airport. We suggest you try a different search combination or a more popular airport in your area to get destinations.').set('onok', function (closeEvent) { });
                     setDestinationCards([]);
                     $scope.isDestinations = false;
-                }
 
-                $scope.inProgress = false;
-                loadScrollbars();
-                $scope.refineDestinations();
+                    $scope.inProgress = false;
+                    loadScrollbars();
+                    $scope.refineDestinations();
+                }                
             });
 
             $scope.selectedform = 'SuggestDestination';
@@ -498,5 +500,23 @@
             setFareSliderValues($scope.priceSliderValues.range.min, $scope.priceSliderValues.range.max, $scope.priceSliderValues.range.min, $scope.priceSliderValues.range.max);
             $timeout(function () { stopEvent = false; $scope.refineDestinations(true); }, 0, false);
         }
+        $scope.$on('setExchangeRate', function (event, args) {
+            debugger;
+            if (destinationlistOriginal) {
+                filterDestinations(destinationlistOriginal);
+                $scope.fareCurrencySymbol = $rootScope.currencyInfo.symbol;
+
+                var minMaxFare = getMinMaxFare(destinationlistOriginal);
+                var Maxfare = 0, Minfare = 0;
+                if (minMaxFare.MaxFare && minMaxFare.MaxFare != 0)
+                    Maxfare = Math.ceil(minMaxFare.MaxFare * $rootScope.currencyInfo.rate);
+                if (minMaxFare.MinFare && minMaxFare.MinFare != 0)
+                    Minfare = Math.floor(minMaxFare.MinFare * $rootScope.currencyInfo.rate);
+                
+                loadScrollbars();
+                setFareSliderValues(Minfare, Maxfare, Minfare, Maxfare);
+                $timeout(function () { stopEvent = false; $scope.refineDestinations(true); }, 0, false);                
+            }
+        });
     }
 })();

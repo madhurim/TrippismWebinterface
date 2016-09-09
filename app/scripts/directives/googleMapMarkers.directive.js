@@ -75,7 +75,7 @@
                                 map: $scope.destinationMap,
                                 title: destination.FullName + ', ' + destination.CityName,
                                 markerInfo: destination,
-                                labelContent: '<div>' + destination.CityName + '<br/><span>' + $rootScope.symbol + ' ' + parseFloat(Math.ceil(destination.LowRate) * $rootScope.rate).toFixed(0) + '</span></div>',
+                                labelContent: '<div>' + destination.CityName + '<br/><span>' + destination.CurrencySymbol + ' ' + parseFloat(Math.ceil(destination.LowRate)).toFixed(0) + '</span></div>',
                                 labelAnchor: new google.maps.Point(-11, 15),
                                 labelClass: 'Maplabel',
                                 icon: {
@@ -336,15 +336,6 @@
                         scope.destinationMarkers = [];
                     }, 0, true);
                 }
-
-                scope.$on('setExchangeRate', function (event, args) {
-                    args = {
-                        destinationlist: destinations,
-                        sortByPrice: sortByPrice
-                    }
-                    removeMarkers();
-                    scope.RenderMap(args);
-                });
 
                 function centerMap(args) {
                     var airportLoc;

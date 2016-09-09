@@ -7,11 +7,7 @@
     function BaseController($scope, $modal, $rootScope, $timeout, tmhDynamicLocale, UtilFactory, urlConstant, $locale, dataConstant,BaseFactory) {
         $rootScope.isShowAlerityMessage = true;
         $scope.currencyList;
-        $scope.currencyCode = "USD";
-        $rootScope.rate = 1;
-        $rootScope.currencyCode = $scope.currencyCode;
         init();
-        getLocale();
         function init() {
             UtilFactory.ReadAirportJson();
             UtilFactory.GetCurrencySymbols();
@@ -19,15 +15,17 @@
 
             UtilFactory.GetCurrencySymbols().then(function (data) {
                 getfilterCurrencyInfo(data);
-                $rootScope.symbol = UtilFactory.GetCurrencySymbol($scope.currencyCode);
-            });            
+                getLocale();
+            });
         }
         // filter Currecncy data on based Currency List
 
         function getLocale() {
             BaseFactory.getLocale().then(function (data) {
-                tmhDynamicLocale.set("en-" + (data.country).toLowerCase());
-            });
+                if (data) {
+                    tmhDynamicLocale.set("en-" + (data.country).toLowerCase());
+                }
+            });                        
         }
 
 
@@ -59,34 +57,23 @@
         }
 
         var base;
-        $scope.hasChange = function () {
-            base = base;
-            var target = $scope.currencyCode;
-            changeCurrency(base, target);
-        }
-
-        $scope.$on('currencyChange', function (event, args) {
-            base = args.currencyCode;
-            var target = $scope.currencyCode;
-            changeCurrency(base, target);
-        })
-
-        function changeCurrency(base, target) {
-            $scope.currencyConversionRate = getConversionRate(base, target).then(function (data) {
-                var currencyConversionRate = data;
-                $rootScope.rate = currencyConversionRate.rate;
-                $rootScope.symbol = currencyConversionRate.currencySymbol;
-                $rootScope.currencyCode = currencyConversionRate.currencyCode;
+        $scope.currencyCodeChange = function () {
+            $rootScope.changeRate(base).then(function (data) {
                 $scope.$broadcast('setExchangeRate');
             });
         }
 
+        $scope.$on('currencyChange', function (event, args) {
+            base = args.currencyCode;
+            $rootScope.changeRate(base);
+        })
+
         // also used to stop image slider [HomeController]
         $scope.$on('bodyClass', function (event, args) {
             $scope.bodyClass = args;
-        });                    
+        });
 
-        function getConversionRate(currentCurrencyCode, exchangeCurrencyCode) {            
+        function getConversionRate(currentCurrencyCode, exchangeCurrencyCode) {
             var currencyConversionDetail = {
                 base: currentCurrencyCode,
                 target: exchangeCurrencyCode,
@@ -94,13 +81,26 @@
             };
             return UtilFactory.getCurrencyConversion(currencyConversionDetail).then(function (data) {
                 return data;
-                });
+            });
         }
-        
+        $rootScope.changeRate = function (baseCode) {
+            base = baseCode;
+            var target = $scope.currencyCode;
+            return getConversionRate(base, target).then(function (data) {
+                var currencyConversionRate = data;
+                $rootScope.currencyInfo = {
+                    rate: currencyConversionRate.rate,
+                    symbol: currencyConversionRate.currencySymbol,
+                    currencyCode: currencyConversionRate.currencyCode
+                }                
+                return currencyConversionRate;
+            });
+        };
         $scope.$on('$localeChangeSuccess', function () {
             $rootScope.format = $locale.DATETIME_FORMATS.mediumDate;
-            var symbol = UtilFactory.GetCurrencySymbol($locale.NUMBER_FORMATS.CURRENCY_SYM);
-            return symbol;
+            var code = UtilFactory.GetCurrecyCode($locale.NUMBER_FORMATS.CURRENCY_SYM);
+            $scope.currencyCode = code;
+            $scope.$emit('currencyChange', { currencyCode: code });
         });
     }
 })();

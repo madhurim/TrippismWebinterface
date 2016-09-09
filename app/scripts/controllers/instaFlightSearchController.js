@@ -1,8 +1,8 @@
 ﻿(function () {
     'use strict';
     var controllerId = 'InstaFlightSearchController';
-    angular.module('TrippismUIApp').controller(controllerId, ['$scope', '$filter', 'InstaFlightSearchFactory', 'UtilFactory', 'instaFlightSearchData', InstaFlightSearchController]);
-    function InstaFlightSearchController($scope, $filter, InstaFlightSearchFactory, UtilFactory, instaFlightSearchData) {
+    angular.module('TrippismUIApp').controller(controllerId, ['$scope', '$filter', 'InstaFlightSearchFactory', 'UtilFactory', 'instaFlightSearchData','$rootScope', InstaFlightSearchController]);
+    function InstaFlightSearchController($scope, $filter, InstaFlightSearchFactory, UtilFactory, instaFlightSearchData,$rootScope) {
         $scope.isInstaFlightDataFound = null;
         $scope.instaFlightSearchData = instaFlightSearchData;
         var airportNameCache = [];
@@ -33,11 +33,16 @@
                         $scope.isInstaFlightDataFound = true;
                         $scope.isSearchingFlights = false;
                         $scope.instaFlightSearchResult = data;
+                        //_.each($scope.instaFlightSearchResult, function (item) {
+                        //    item.details.RateRange.Min = $scope.amountBifurcation((item.PricedItineraries.AirItineraryPricingInfo[0].TotalFare.Amount * $rootScope.currencyInfo.rate).toFixed(2));
+                        //    item.details.RateRange.Min = $scope.amountBifurcation((item.details.RateRange.OriginalMax * $rootScope.currencyInfo.rate).toFixed(2));
+                        //    item.details.RateRange.CurrencyCode = $rootScope.currencyInfo.currencyCode;
+                        //});
                         $scope.DepartureDate = $scope.instaFlightSearchResult.DepartureDateTime;
                         $scope.ReturnDate = $scope.instaFlightSearchResult.ReturnDateTime;
                         $scope.instaFlightSearchLimit = 10;
-                        $scope.currencyCode = getCurrencyCode($scope.instaFlightSearchResult.PricedItineraries[0]);
-                        $scope.lowestFare = getLowestFare($scope.instaFlightSearchResult.PricedItineraries[0]);
+                        $scope.currencyCode = $rootScope.currencyInfo.symbol;// getCurrencyCode($scope.instaFlightSearchResult.PricedItineraries[0]);
+                        $scope.lowestFare = (getLowestFare($scope.instaFlightSearchResult.PricedItineraries[0]) * $rootScope.currencyInfo.rate).toFixed(2);
                     }
                     else {
                         $scope.isInstaFlightDataFound = false;
@@ -142,7 +147,7 @@
         var getLowestFare = function (pricedItinerary) {
             if (pricedItinerary == undefined)
                 return undefined;
-            return pricedItinerary.AirItineraryPricingInfo[0].TotalFare.Amount;
+            return pricedItinerary.AirItineraryPricingInfo[0].TotalFare.Amount ;
         }
         var getCurrencyCode = function (pricedItinerary) {
             var pricingInfo = $scope.instaFlightSearchResult.PricedItineraries[0].AirItineraryPricingInfo[0];

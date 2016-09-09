@@ -186,11 +186,11 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory,
                                 break;
 
                             scope.FareRangeWidgetData = {
-                                MinimumFare: (scope.fareRangeData.FareData[i].MinimumFare) * $rootScope.rate ,
-                                MaximumFare: (scope.fareRangeData.FareData[i].MaximumFare) * $rootScope.rate,
-                                MedianFare: (scope.fareRangeData.FareData[i].MedianFare) * $rootScope.rate,
+                                MinimumFare: (scope.fareRangeData.FareData[i].MinimumFare) * $rootScope.currencyInfo.rate,
+                                MaximumFare: (scope.fareRangeData.FareData[i].MaximumFare) * $rootScope.currencyInfo.rate,
+                                MedianFare: (scope.fareRangeData.FareData[i].MedianFare) * $rootScope.currencyInfo.rate,
                                 //CurrencyCode: UtilFactory.GetCurrencySymbol(scope.fareRangeData.FareData[i].CurrencyCode),
-                                CurrencyCode: $rootScope.symbol,
+                                CurrencyCode: $rootScope.currencyInfo.symbol,
                                 Count: scope.fareRangeData.FareData[i].Count,
                                 IsMacOrigin: scope.fareRangeData.IsMacOrigin,
                                 IsMacDestination: scope.fareRangeData.IsMacDestination,

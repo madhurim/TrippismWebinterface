@@ -6,7 +6,7 @@
         <h3 class="md-display-1 mddisplay1 mdfare"> <!--ng-init="::amount = amountBifurcation(HotelRangeData.Fare);">-->
             <i class="fa fa-bed"></i>
             <span class="cursor-help" data-toggle="tooltip" popover="{{HotelRangeData.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{HotelRangeData.CurrencySymbol}}</span>
-            {{HotelRangeData.Fare.BeforeDecimal}}<span class="text-super vertical-top">{{HotelRangeData.Fare.AfterDecimal}}</span>
+            {{HotelRangeData.Fare.BeforeDecimal | number : 0}}<span class="text-super vertical-top">{{HotelRangeData.Fare.AfterDecimal}}</span>
             <span class="margin-left-5 display-block" ng-if="::HotelRangeData.Star == '3'" title="3 star hotels"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
             <span class="margin-left-5 display-block" ng-if="::HotelRangeData.Star == '4'" title="4 star hotels"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>
             <span class="margin-left-5 display-block" ng-if="::HotelRangeData.Star == '5'" title="5 star hotels"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span>

@@ -1,4 +1,4 @@
-﻿<div ng-controller="DestinationController" cg-busy="{promise:mappromise,message:'Please wait...'}">
+﻿<div ng-controller="DestinationController" cg-busy="{promise:$root.currencypromise || mappromise,message:'Please wait...'}">
     <div id="destination-imgwrap"><img ng-src="{{::destinationImagePath}}{{DestinationCity}}.jpg" src-error="{{::destinationImagePath}}default.jpg" /></div>
     <div class="row" title="" id="destination-content">
         <div class="tab-content-wp col-xs-12">

@@ -65,12 +65,13 @@
 
                     if (hotelRange != Infinity) {
                         $scope.HotelRangeData = {
-                            CurrencyCode: hotelRange.RateRange.CurrencyCode,
+                            CurrencyCode: $rootScope.currencyInfo.currencyCode,
                             CurrencySymbol: $rootScope.currencyInfo.symbol,//UtilFactory.GetCurrencySymbol(hotelRange.RateRange.CurrencyCode),
                             Fare: $scope.amountBifurcation((hotelRange.RateRange.Min * $rootScope.currencyInfo.rate).toFixed(2)),
                             Star: hotelRange.HotelRating ? hotelRange.HotelRating[0].RatingText.substring(0, 1) : null
                         };
                         $scope.$emit('hotelDataFound', $scope.HotelRangeData);
+
                         DestinationFactory.DestinationDataStorage.currentPage.hotel = {
                             CurrencyCode: $scope.HotelRangeData.CurrencyCode,
                             CurrencySymbol: $scope.HotelRangeData.CurrencySymbol,

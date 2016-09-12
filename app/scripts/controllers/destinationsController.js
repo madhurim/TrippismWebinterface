@@ -137,8 +137,8 @@
                     return airport.airport_Code == destination.DestinationLocation
                 });
 
-                if (airport != undefined) {                    
-                    var LowRate = parseFloat(UtilFactory.GetLowFareForMap(destination));
+                if (airport != undefined) {
+                    var LowRate = UtilFactory.GetLowFareForMap(destination);
                     if (LowRate != "N/A" ) {
                         destination.LowRate = parseFloat(UtilFactory.GetLowFareForMap(destination) * $rootScope.currencyInfo.rate).toFixed();
                         destination.lat = airport.airport_Lat;
@@ -501,7 +501,6 @@
             $timeout(function () { stopEvent = false; $scope.refineDestinations(true); }, 0, false);
         }
         $scope.$on('setExchangeRate', function (event, args) {
-            debugger;
             if (destinationlistOriginal) {
                 filterDestinations(destinationlistOriginal);
                 $scope.fareCurrencySymbol = $rootScope.currencyInfo.symbol;

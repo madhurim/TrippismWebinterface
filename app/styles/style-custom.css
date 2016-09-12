@@ -1632,7 +1632,9 @@ ul .stop-line {
     background: none !important;
     border: none !important;
 }
-
+.homepage #currencyCode {
+    visibility:hidden;
+}
 #select-i18n .dd-options {
     box-shadow: none;
 }

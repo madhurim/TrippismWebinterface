@@ -33,16 +33,15 @@
                         $scope.isInstaFlightDataFound = true;
                         $scope.isSearchingFlights = false;
                         $scope.instaFlightSearchResult = data;
-                        //_.each($scope.instaFlightSearchResult, function (item) {
-                        //    item.details.RateRange.Min = $scope.amountBifurcation((item.PricedItineraries.AirItineraryPricingInfo[0].TotalFare.Amount * $rootScope.currencyInfo.rate).toFixed(2));
-                        //    item.details.RateRange.Min = $scope.amountBifurcation((item.details.RateRange.OriginalMax * $rootScope.currencyInfo.rate).toFixed(2));
-                        //    item.details.RateRange.CurrencyCode = $rootScope.currencyInfo.currencyCode;
-                        //});
+                        _.each($scope.instaFlightSearchResult.PricedItineraries, function (item) {
+                            item.AirItineraryPricingInfo[0].TotalFare.Amount = (item.AirItineraryPricingInfo[0].TotalFare.Amount * $rootScope.currencyInfo.rate).toFixed(2);
+                            item.AirItineraryPricingInfo[0].TotalFare.CurrencyCode = $rootScope.currencyInfo.currencyCode;
+                        });
                         $scope.DepartureDate = $scope.instaFlightSearchResult.DepartureDateTime;
                         $scope.ReturnDate = $scope.instaFlightSearchResult.ReturnDateTime;
                         $scope.instaFlightSearchLimit = 10;
-                        $scope.currencyCode = $rootScope.currencyInfo.symbol;// getCurrencyCode($scope.instaFlightSearchResult.PricedItineraries[0]);
-                        $scope.lowestFare = (getLowestFare($scope.instaFlightSearchResult.PricedItineraries[0]) * $rootScope.currencyInfo.rate).toFixed(2);
+                        $scope.currencyCode = $rootScope.currencyInfo.currencyCode;// getCurrencyCode($scope.instaFlightSearchResult.PricedItineraries[0]);
+                        $scope.lowestFare = getLowestFare($scope.instaFlightSearchResult.PricedItineraries[0]);
                     }
                     else {
                         $scope.isInstaFlightDataFound = false;

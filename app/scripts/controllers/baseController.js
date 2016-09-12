@@ -56,17 +56,18 @@
             });
         }
 
-        var base;
+        $rootScope.base;
         $scope.currencyCodeChange = function () {
-            $rootScope.changeRate(base).then(function (data) {
+            $rootScope.currencypromise = '';
+            $rootScope.currencypromise = $rootScope.changeRate($rootScope.base).then(function (data) {
                 $scope.$broadcast('setExchangeRate');
             });
         }
 
         $scope.$on('currencyChange', function (event, args) {
-            base = args.currencyCode;
-            $rootScope.changeRate(base);
-        })
+            $rootScope.base = args.currencyCode;
+            $rootScope.changeRate($rootScope.base);
+        });
 
         // also used to stop image slider [HomeController]
         $scope.$on('bodyClass', function (event, args) {
@@ -84,9 +85,9 @@
             });
         }
         $rootScope.changeRate = function (baseCode) {
-            base = baseCode;
+            $rootScope.base = baseCode;
             var target = $scope.currencyCode;
-            return getConversionRate(base, target).then(function (data) {
+            return getConversionRate($rootScope.base, target).then(function (data) {
                 var currencyConversionRate = data;
                 $rootScope.currencyInfo = {
                     rate: currencyConversionRate.rate,

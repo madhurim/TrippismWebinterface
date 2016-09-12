@@ -37,7 +37,7 @@
                                         <div style='min-height: 5px;margin-top: 10px;padding-right: 0; text-align:left;'>
                                             <div style='display: inline-block;vertical-align: top;text-align:right;'>
                                                 <h4 style='margin-top: 0;margin-bottom: 4px;font-size: 22px;font-weight: 500;color: #333;'>
-                                                    {{$root.symbol || emailTemplateInfo.fare.CurrencySymbol}} {{emailTemplateInfo.fare.LowestNonStopFare.BeforeDecimal * $root.rate | number:0}}<span style='vertical-align: top;font-size: 14px;'>{{::emailTemplateInfo.fare.LowestNonStopFare.AfterDecimal}}</span>
+                                                    {{emailTemplateInfo.fare.CurrencySymbol}} {{emailTemplateInfo.fare.LowestNonStopFare.BeforeDecimal | number : 0}}<span style='vertical-align: top;font-size: 14px;'>{{::emailTemplateInfo.fare.LowestNonStopFare.AfterDecimal}}</span>
                                                 </h4>
                                                 <p style='margin:0px;'>Lowest Non Stop</p>
                                             </div>
@@ -55,7 +55,7 @@
                                         <div style='min-height: 5px;margin-top: 10px;padding-right: 0; text-align:left;'>
                                             <div style='display: inline-block;vertical-align: top;text-align:right;'>
                                                 <h4 style='margin-top: 0;margin-bottom: 4px;font-size: 22px;font-weight: 500;color: #333;'>
-                                                    {{$root.symbol || emailTemplateInfo.fare.CurrencySymbol}} {{emailTemplateInfo.fare.LowestFare.BeforeDecimal * $root.rate | number:0}}<span style='vertical-align: top;font-size: 14px;'>{{::emailTemplateInfo.fare.LowestFare.AfterDecimal}}</span>
+                                                    {{emailTemplateInfo.fare.CurrencySymbol}} {{emailTemplateInfo.fare.LowestFare.BeforeDecimal | number : 0}}<span style='vertical-align: top;font-size: 14px;'>{{::emailTemplateInfo.fare.LowestFare.AfterDecimal}}</span>
                                                 </h4>
                                                 <p style='margin:0px;'>Lowest</p>
                                             </div>
@@ -89,7 +89,7 @@
                                             <div style='min-height: 5px;margin-top: 10px;padding-right: 0; text-align:left;'>
                                                 <div style='display: inline-block;vertical-align: top;text-align:right;'>
                                                     <h4 style='margin-top: 0;margin-bottom: 4px;font-size: 22px;font-weight: 500;color: #333;'>
-                                                        {{$root.symbol || emailTemplateInfo.hotel.CurrencySymbol}} {{emailTemplateInfo.hotel.Fare.BeforeDecimal * $root.rate | number:0}}<span style='vertical-align: top;font-size: 14px;'>{{::emailTemplateInfo.hotel.Fare.AfterDecimal}}</span>
+                                                        {{emailTemplateInfo.hotel.CurrencySymbol}} {{emailTemplateInfo.hotel.Fare.BeforeDecimal | number : 0}}<span style='vertical-align: top;font-size: 14px;'>{{::emailTemplateInfo.hotel.Fare.AfterDecimal}}</span>
                                                     </h4>
                                                     <p style='margin:0px 0px 0px 4.37em'>Lowest</p>
                                                 </div>
@@ -114,13 +114,13 @@
                                         <div style='color: #565a5c;font-weight: normal;'>
                                             <div style='width: 33.33333333%;float:left;'>
                                                 <h4 style='font-size: 22px;font-weight: 500;color: #333;margin:10px 0px;'>
-                                                    {{$root.symbol || emailTemplateInfo.fareForecast.CurrencySymbol}} {{emailTemplateInfo.fareForecast.LowestPredictedFare.BeforeDecimal * $root.rate | number:0}}<span style='vertical-align: top;font-size:14px;'>{{::emailTemplateInfo.fareForecast.LowestPredictedFare.AfterDecimal}}</span>
+                                                    {{emailTemplateInfo.fareForecast.CurrencySymbol}} {{emailTemplateInfo.fareForecast.LowestPredictedFare.BeforeDecimal | number : 0}}<span style='vertical-align: top;font-size:14px;'>{{::emailTemplateInfo.fareForecast.LowestPredictedFare.AfterDecimal}}</span>
                                                 </h4>
                                                 <p style='color: #565a5c;font-weight: normal;margin:0 0 10px;'>Lowest Predicted Fare for Next Week</p>
                                             </div>
                                             <div style='width: 33.33333333%;float:left;'>
                                                 <h4 style='font-size: 22px;font-weight: 500;color: #333;margin:10px 0px;'>
-                                                    {{$root.symbol || emailTemplateInfo.fareForecast.CurrencySymbol}} {{emailTemplateInfo.fareForecast.HighestPredictedFare.BeforeDecimal * $root.rate  | number:0}}<span style='vertical-align: top;font-size:14px;'>{{::emailTemplateInfo.fareForecast.HighestPredictedFare.AfterDecimal}}</span>
+                                                    {{emailTemplateInfo.fareForecast.CurrencySymbol}} {{emailTemplateInfo.fareForecast.HighestPredictedFare.BeforeDecimal | number : 0}}<span style='vertical-align: top;font-size:14px;'>{{::emailTemplateInfo.fareForecast.HighestPredictedFare.AfterDecimal}}</span>
                                                 </h4>
                                                 <p style='color: #565a5c;font-weight: normal;margin:0 0 10px;'>Highest Predicted Fare for Next Week</p>
                                             </div>

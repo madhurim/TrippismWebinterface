@@ -100,9 +100,11 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, dataConstant, 
                         if (markerObj.type == 'hotels')
                         {
                             _.each(markerObj.results, function (item) {
-                                item.details.RateRange.Min = $scope.amountBifurcation((item.details.RateRange.OriginalMin * $rootScope.currencyInfo.rate).toFixed(2));
-                                item.details.RateRange.Min = $scope.amountBifurcation((item.details.RateRange.OriginalMax * $rootScope.currencyInfo.rate).toFixed(2));
-                                item.details.RateRange.CurrencyCode = $rootScope.currencyInfo.currencyCode;
+                                if (item.details.RateRange != undefined) {
+                                    item.details.RateRange.Min = $scope.amountBifurcation((item.details.RateRange.OriginalMin * $rootScope.currencyInfo.rate).toFixed(2));
+                                    item.details.RateRange.Max = $scope.amountBifurcation((item.details.RateRange.OriginalMax * $rootScope.currencyInfo.rate).toFixed(2));
+                                    item.details.RateRange.CurrencyCode = $rootScope.currencyInfo.currencyCode;
+                                }
                             });
                         }
                         RenderMap(markerObj.results, type);

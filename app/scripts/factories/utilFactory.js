@@ -34,7 +34,8 @@
             Device: Device,
             getExchangeRate: getExchangeRate,
             getCurrencyConversion: getCurrencyConversion,
-            GetCurrecyCode: GetCurrecyCode
+            GetCurrecyCode: GetCurrecyCode,
+            getSelectedCurrencyCode: getSelectedCurrencyCode
         };
         return service;
 
@@ -348,8 +349,15 @@
                     timestamp: new Date()
                 };
                 LocalStorageFactory.save(dataConstant.currencyConversion, currencyConversionDetail, { base: currencyConversionDetail.base, target: currencyConversionDetail.target });
+                LocalStorageFactory.save(dataConstant.selectedCurrencyCode, currencyConversionDetail.target);
                 return currencyConversionDetail;
             });
+        }
+
+        // Get User Last selected CurrencyCode
+        function getSelectedCurrencyCode()
+        {
+            return LocalStorageFactory.get(dataConstant.selectedCurrencyCode);
         }
         // End Code Getting currency Exchange Rate        
     }

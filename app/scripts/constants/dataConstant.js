@@ -10,7 +10,8 @@
         refineSearchLocalStorage: 'refineSearch',
         userLocaleLocalStorage: 'userLocale',
         currencyList: ["INR", "USD", "AED", "GBP"],
-        currencyConversion: "currencyConversion"
+        currencyConversion: "currencyConversion",
+        selectedCurrencyCode: "selectedCurrencyCode"
     };
     angular.module('TrippismUIApp').constant('dataConstant', constants);
 })();

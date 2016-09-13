@@ -16,6 +16,7 @@
             UtilFactory.GetCurrencySymbols().then(function (data) {
                 getfilterCurrencyInfo(data);
                 getLocale();
+                setCurrencyCode();
             });
         }
         // filter Currecncy data on based Currency List
@@ -25,9 +26,19 @@
                 if (data) {
                     tmhDynamicLocale.set("en-" + (data.country).toLowerCase());
                 }
-            });                        
+            });            
         }
+        
+        function setCurrencyCode()
+        {
+            // Code for set default selected currency Code on user Last selection
 
+            var code = UtilFactory.getSelectedCurrencyCode();
+            if (code) {
+                $scope.currencyCode = code;
+                $scope.$emit('currencyChange', { currencyCode: code });
+            }
+        }
 
         function getfilterCurrencyInfo(currencyData) {
             var currencyList = dataConstant.currencyList;
@@ -84,6 +95,7 @@
                 return data;
             });
         }
+
         $rootScope.changeRate = function (baseCode) {
             $rootScope.base = baseCode;
             var target = $scope.currencyCode;
@@ -97,11 +109,9 @@
                 return currencyConversionRate;
             });
         };
+
         $scope.$on('$localeChangeSuccess', function () {
             $rootScope.format = $locale.DATETIME_FORMATS.mediumDate;
-            var code = UtilFactory.GetCurrecyCode($locale.NUMBER_FORMATS.CURRENCY_SYM);
-            $scope.currencyCode = code;
-            $scope.$emit('currencyChange', { currencyCode: code });
         });
     }
 })();

@@ -56,7 +56,12 @@
                         airportDetail: $scope.airportDetail,
                         search: $scope.search
                     }
-                    $scope.FareInfo = DestinationFactory.GetDestinationFareInfo(param);
+
+                    // Check on currecnyCode selection change
+                    if (!$scope.FareInfo) {
+                        $scope.FareInfo = DestinationFactory.GetDestinationFareInfo(param); // store From destinations Page
+                    }
+                    
                     if ($scope.FareInfo == null) {
                         var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
                         var secondDate = new Date($scope.ToDate);
@@ -72,7 +77,6 @@
                             "Destination": $scope.DestinationLocation,
                             "PointOfSaleCountry": PointOfsalesCountry
                         }
-
                         var destinationData = DestinationFactory.DestinationDataStorage.fare.get(param);
                         if (destinationData) {
                             var FareInfo =

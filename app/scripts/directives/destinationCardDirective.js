@@ -68,8 +68,8 @@
                                        Origin: $scope.origin,
                                        Destination: $scope.destination,
                                        DepartureDate: $scope.departureDate,
-                                       ReturnDate: $scope.returnDate
-                                   }, data);                                                             
+                                       ReturnDate: $scope.returnDate,
+                                   }, data);                                
                             }
                             else
                             {

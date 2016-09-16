@@ -59,7 +59,7 @@
         }
         $scope.getStopsFromFlightSegment = function (flightSegment) {
             var arrivalAirportList = [];
-            for (i = 0; i < flightSegment.length - 1; i++) {
+            for (var i = 0; i < flightSegment.length - 1; i++) {
                 var locationCode = flightSegment[i].ArrivalAirport.LocationCode;
                 arrivalAirportList.push({ locationCode: locationCode, title: getAirportNameFromCode(locationCode) });
             }

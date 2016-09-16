@@ -19,8 +19,7 @@
        ) {
         alertify.dismissAll();
         $scope.Name = "Home Page";
-        $scope.$emit('bodyClass', 'homepage'); // also used to stop image slider        
-        LocalStorageFactory.clear(dataConstant.refineSearchLocalStorage);
+        $scope.$emit('bodyClass', 'homepage'); // also used to stop image slider  
 
         // set page height based on window's height
         var w = angular.element($window);

@@ -34,8 +34,7 @@
             Device: Device,
             getExchangeRate: getExchangeRate,
             getCurrencyConversion: getCurrencyConversion,
-            GetCurrecyCode: GetCurrecyCode,
-            getSelectedCurrencyCode: getSelectedCurrencyCode
+            GetCurrecyCode: GetCurrecyCode
         };
         return service;
 
@@ -295,7 +294,7 @@
         }
 
         function getCurrencyConversion(currencyConversionDetail) {
-            if ((currencyConversionDetail.base == currencyConversionDetail.target) || currencyConversionDetail.base == undefined || currencyConversionDetail.target == undefined) {                
+            if ((currencyConversionDetail.base == currencyConversionDetail.target) || currencyConversionDetail.base == undefined || currencyConversionDetail.target == undefined || currencyConversionDetail.target == "Default") {
                 var defer = $q.defer();
                 defer.resolve({
                     currencyCode: currencyConversionDetail.base,
@@ -349,16 +348,10 @@
                     timestamp: new Date()
                 };
                 LocalStorageFactory.save(dataConstant.currencyConversion, currencyConversionDetail, { base: currencyConversionDetail.base, target: currencyConversionDetail.target });
-                LocalStorageFactory.save(dataConstant.selectedCurrencyCode, currencyConversionDetail.target);
                 return currencyConversionDetail;
             });
         }
-
-        // Get User Last selected CurrencyCode
-        function getSelectedCurrencyCode()
-        {
-            return LocalStorageFactory.get(dataConstant.selectedCurrencyCode);
-        }
+        
         // End Code Getting currency Exchange Rate        
     }
 })();

@@ -41,7 +41,7 @@
                             <div class="ibox-box fare-box">
                                 <div class="fare-box-inner text-right">
                                     <h4 class="fare-font">                                        
-                                        <span class="cursor-help" data-toggle="tooltip" popover="{{$root.currencyInfo.currencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{fareCurrencySymbol}}</span>
+                                        <span class="cursor-help" data-toggle="tooltip" popover="{{fareCurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{fareCurrencySymbol}}</span>
                                         {{LowestNonStopFare.amountBifurcation.BeforeDecimal | number :0}}<span class="text-super vertical-top">{{LowestNonStopFare.amountBifurcation.AfterDecimal}}</span>
                                     </h4>
                                     <p>Lowest Non Stop</p>
@@ -60,7 +60,7 @@
                             <div class="ibox-box fare-box">
                                 <div class="fare-box-inner text-right">
                                     <h4 class="fare-font" >
-                                        <span class="cursor-help" data-toggle="tooltip" popover="{{$root.currencyInfo.currencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{fareCurrencySymbol}}<!--{{GetCurrencySymbol(fareParams.FareInfo.CurrencyCode)}}--></span>
+                                        <span class="cursor-help" data-toggle="tooltip" popover="{{fareCurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{fareCurrencySymbol}}<!--{{GetCurrencySymbol(fareParams.FareInfo.CurrencyCode)}}--></span>
                                         {{LowestFare.amountBifurcation.BeforeDecimal | number :0}}<span class="text-super vertical-top">{{LowestFare.amountBifurcation.AfterDecimal}}</span>
                                     </h4>
                                     <p><span class="invisible hidden">Non Stop </span> Lowest</p>

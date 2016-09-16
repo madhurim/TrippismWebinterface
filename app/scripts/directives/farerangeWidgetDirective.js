@@ -45,9 +45,8 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory,
                     $scope.$emit('widgetLoaded', { name: "fareforcastinfo", isVisible: true });
                     $scope.FareNoDataFound = false;
                     $scope.FareforecastData = data;
-
                     if ($scope.FareforecastData.Forecast != undefined && $scope.FareforecastData.Forecast != undefined) {
-                        $rootScope.changeRate($scope.FareforecastData.CurrencyCode).then(function (currency) {
+                        $rootScope.changeRate($scope.FareforecastData.Forecast.CurrencyCode).then(function (currency) {
                             $scope.FareforecastData.Forecast.LowRateAmountBifurcation = $scope.amountBifurcation(($scope.FareforecastData.Forecast.LowestPredictedFare * $rootScope.currencyInfo.rate).toFixed(2));
                             $scope.FareforecastData.CurrencyCode = $rootScope.currencyInfo.currencyCode;
                             $scope.FareforecastData.Forecast.HigestRateAmountBifurcation = $scope.amountBifurcation(($scope.FareforecastData.Forecast.HighestPredictedFare * $rootScope.currencyInfo.rate).toFixed(2));

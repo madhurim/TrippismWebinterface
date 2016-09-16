@@ -2,9 +2,9 @@
     'use strict';
     var controllerId = 'BaseController';
     angular.module('TrippismUIApp').controller(controllerId,
-        ['$scope', '$modal', '$rootScope', '$timeout', 'tmhDynamicLocale', 'UtilFactory', 'urlConstant', '$locale', 'dataConstant','BaseFactory', BaseController]);
+        ['$scope', '$modal', '$rootScope', '$timeout', 'tmhDynamicLocale', 'UtilFactory', 'urlConstant', '$locale', 'dataConstant', 'BaseFactory', 'LocalStorageFactory', BaseController]);
 
-    function BaseController($scope, $modal, $rootScope, $timeout, tmhDynamicLocale, UtilFactory, urlConstant, $locale, dataConstant,BaseFactory) {
+    function BaseController($scope, $modal, $rootScope, $timeout, tmhDynamicLocale, UtilFactory, urlConstant, $locale, dataConstant, BaseFactory, LocalStorageFactory) {
         $rootScope.isShowAlerityMessage = true;
         $scope.currencyList;
         init();
@@ -16,33 +16,33 @@
             UtilFactory.GetCurrencySymbols().then(function (data) {
                 getfilterCurrencyInfo(data);
                 getLocale();
-                setCurrencyCode();
+               // setCurrencyCode();
             });
         }
-        // filter Currecncy data on based Currency List
 
+        // Gettinh user loacle
         function getLocale() {
             BaseFactory.getLocale().then(function (data) {
                 if (data) {
                     tmhDynamicLocale.set("en-" + (data.country).toLowerCase());
                 }
+                else {
+                    $rootScope.format = 'MM/dd/yyyy';
+                }                
             });            
-        }
+        }      
         
-        function setCurrencyCode()
-        {
-            // Code for set default selected currency Code on user Last selection
 
-            var code = UtilFactory.getSelectedCurrencyCode();
-            if (code) {
-                $scope.currencyCode = code;
-                $scope.$emit('currencyChange', { currencyCode: code });
-            }
-        }
-
+        // filter Currecncy data on based Currency List
         function getfilterCurrencyInfo(currencyData) {
             var currencyList = dataConstant.currencyList;
             $scope.currencyList = [];
+
+            $scope.currencyList.push({
+                code: 'Default',
+                symbol: 'Default'
+            })
+
             _.each(currencyList, function (item) {
                 var currency = _.find(currencyData, function (i) { return i.code == item; });
                 if (currency)
@@ -70,9 +70,12 @@
         $rootScope.base;
         $scope.currencyCodeChange = function () {
             $rootScope.currencypromise = '';
+
             $rootScope.currencypromise = $rootScope.changeRate($rootScope.base).then(function (data) {
                 $scope.$broadcast('setExchangeRate');
             });
+
+            $rootScope.currencyCode = $scope.currencyCode;
         }
 
         $scope.$on('currencyChange', function (event, args) {
@@ -113,5 +116,11 @@
         $scope.$on('$localeChangeSuccess', function () {
             $rootScope.format = $locale.DATETIME_FORMATS.mediumDate;
         });
+
+        $rootScope.setdefaultcurrency = function(target)
+        {
+            $scope.currencyCode = (target) ? target : "Default";
+            $rootScope.currencyCode = $scope.currencyCode;
+        }
     }
 })();

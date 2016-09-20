@@ -308,20 +308,20 @@
                         return;
                     }
 
-                    if (scope.airportList.length > 0) {
-                        // remove all markers from map
-                        removeMarkers();
+                    // remove all markers from map
+                    removeMarkers();
 
-                        if (args.Region || (!args.sortByPrice && !args.Price))
-                            centerMap(args);
+                    if (args.Region || (!args.sortByPrice && !args.Price))
+                        centerMap(args);
 
-                        if (args.destinationlist != undefined && args.destinationlist.length > 0) {
-                            scope.RenderMap(args);
-                            if ($rootScope.isShowAlerityMessage && UtilFactory.Device.medium()) {
-                                $timeout(function () {
-                                    showMessage();
-                                }, 0, false);
-                            }
+                    if (args.destinationlist != undefined && args.destinationlist.length > 0) {
+                        scope.RenderMap(args);
+                        destinations = args.destinationlist;
+                        sortByPrice = args.sortByPrice;
+                        if ($rootScope.isShowAlerityMessage && UtilFactory.Device.medium()) {
+                            $timeout(function () {
+                                showMessage();
+                            }, 0, false);
                         }
                     }
                 });

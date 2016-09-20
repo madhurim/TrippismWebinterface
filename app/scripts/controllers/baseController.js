@@ -11,12 +11,13 @@
         function init() {
             UtilFactory.ReadAirportJson();
             UtilFactory.GetCurrencySymbols();
-            UtilFactory.ReadHighRankedAirportsJson();
+            UtilFactory.ReadHighRankedAirportsJson();            
+        }
 
+        function buidCurrencyDropDown()
+        {
             UtilFactory.GetCurrencySymbols().then(function (data) {
-                getfilterCurrencyInfo(data);
-                getLocale();
-               // setCurrencyCode();
+                getfilterCurrencyInfo(data);                
             });
         }
 
@@ -35,22 +36,36 @@
 
         // filter Currecncy data on based Currency List
         function getfilterCurrencyInfo(currencyData) {
+            // Get Base CurrencyCode
+            var currencyCode = $rootScope.base;
+
             var currencyList = dataConstant.currencyList;
-            $scope.currencyList = [];
+            $scope.currencyList = [];            
 
-            $scope.currencyList.push({
-                code: 'Default',
-                symbol: 'Default'
-            })
+            // Check currency into CurrencyList exits or not 
+            var exitsCurrency = _.find(currencyList, function (i) { return i.CurrencyCode == currencyCode });
 
+            //iF New currencyCode Find then set or Add into drop down as a Default
+            if (!exitsCurrency) {
+                // Find currencuCode from CurrencyData
+                var currency = _.find(currencyData, function (i) { return i.code == currencyCode; });
+                $scope.currencyList.push({
+                    code: 'Default',
+                    symbol: currency.code + " - " + currency.symbol
+                })                
+            }
+
+            // Bind CurrencyList into CurrencyCode DropDown
             _.each(currencyList, function (item) {
-                var currency = _.find(currencyData, function (i) { return i.code == item; });
-                if (currency)
-                    $scope.currencyList.push({
-                        code: item,
-                        symbol: item + " - " + currency.symbol
-                    });
+                var currencycode = (item.CurrencyCode == $rootScope.base) ? "Default" : item.CurrencyCode;
+                $scope.currencyList.push({
+                    code: currencycode,
+                    symbol: item.CurrencyCode + " - " + item.CurrencySymbol
+                });
             });
+
+            // Set Selected CurrencyCode
+            $scope.currencyCode = (currencyCode == $rootScope.currencyInfo.currencyCode) ? "Default" : $rootScope.currencyInfo.currencyCode;
         }
 
         $scope.aboutUs = function () {
@@ -109,6 +124,7 @@
                     symbol: currencyConversionRate.currencySymbol,
                     currencyCode: currencyConversionRate.currencyCode
                 }                
+                buidCurrencyDropDown();
                 return currencyConversionRate;
             });
         };

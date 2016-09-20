@@ -141,9 +141,7 @@
             $scope.lastselectedcurrency = ($rootScope.currencyCode) ? $rootScope.currencyCode : "Default";
 
             var data = {
-                f: $scope.Origin,
-                d: $scope.FromDate,
-                r: $scope.ToDate
+                f: $scope.Origin
             };
 
             var data = LocalStorageFactory.get(dataConstant.refineSearchLocalStorage, data);
@@ -156,7 +154,7 @@
                     f: $scope.Origin,
                     d: $scope.FromDate,
                     r: $scope.ToDate,
-                    ncu: $scope.lastselectedcurrency
+                    ncu: "Default"
                 };
                 $scope.lastselectedcurrency = "Default";
                 LocalStorageFactory.save(dataConstant.refineSearchLocalStorage, data);
@@ -176,7 +174,8 @@
                 $scope.$broadcast('HotelData', data);
         });
         $scope.$on('setExchangeRate', function (event, args) {
-            var data = LocalStorageFactory.get(dataConstant.refineSearchLocalStorage, data);
+
+            var data = LocalStorageFactory.get(dataConstant.refineSearchLocalStorage, { f: $scope.Origin });
             var updateData = {
                 f: data.f,
                 d: data.d,
@@ -189,9 +188,7 @@
                 ncu: $rootScope.currencyCode
             };
             LocalStorageFactory.save(dataConstant.refineSearchLocalStorage, updateData, {
-                f: $scope.Origin,
-                d: $scope.FromDate,
-                r: $scope.ToDate
+                f: $scope.Origin
             });
         });
     }

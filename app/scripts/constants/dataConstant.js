@@ -9,7 +9,24 @@
         zoomLevel: [{ zoom: 3, dis: 1000 }, { zoom: 4, dis: 700 }, { zoom: 5, dis: 500 }, { zoom: 6, dis: 200 }, { zoom: 7, dis: 65 }],
         refineSearchLocalStorage: 'refineSearch',
         userLocaleLocalStorage: 'userLocale',
-        currencyList: ["INR", "USD", "AED", "GBP"],
+        currencyList: [
+                          {
+                              "CurrencySymbol": "€",
+                              "CurrencyCode": "EUR"
+                          },
+                          {
+                              "CurrencySymbol": "£",
+                              "CurrencyCode": "GBP"
+                          },
+                          {
+                              "CurrencySymbol": "$",
+                              "CurrencyCode": "USD"
+                          },
+                          {
+                              "CurrencySymbol": "₹",
+                              "CurrencyCode": "INR"
+                          }
+        ],
         currencyConversion: "currencyConversion",
         selectedCurrencyCode: "selectedCurrencyCode"
     };

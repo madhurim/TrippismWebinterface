@@ -73,11 +73,8 @@
 
                 // store into local storage
                 var data = {
-                    f: $scope.Origin,
-                    d: $scope.FromDate,
-                    r: $scope.ToDate
+                    f: $scope.Origin
                 };
-
                 $scope.lastselectedcurrency = ($rootScope.currencyCode) ? $rootScope.currencyCode : "Default";
 
                 var data = LocalStorageFactory.get(dataConstant.refineSearchLocalStorage, data);
@@ -96,8 +93,8 @@
                         f: $scope.Origin,
                         d: $scope.FromDate,
                         r: $scope.ToDate,                        
-                        pcu: $scope.lastselectedcurrency,
-                        ncu: $scope.lastselectedcurrency
+                        pcu: "Default",
+                        ncu: "Default"
                     };
                     $scope.lastselectedcurrency = "Default";
                     LocalStorageFactory.save(dataConstant.refineSearchLocalStorage, data);
@@ -113,7 +110,6 @@
                     OriginAirport = _.find(data, function (airport) {
                         return airport.airport_Code == $scope.Origin
                     });
-
                     if (OriginAirport == undefined) {
                         alertify.alert("Destination Finder", "");
                         alertify.alert('Sorry, we do not have destinations to suggest for this search combination. This can also happen sometimes if the origin airport is not a popular airport. We suggest you try a different search combination or a more popular airport in your area to get destinations.');
@@ -232,9 +228,7 @@
                         ncu: $scope.lastselectedcurrency
                     };
                     LocalStorageFactory.save(dataConstant.refineSearchLocalStorage, data, {
-                        f: $scope.Origin,
-                        d: $scope.FromDate,
-                        r: $scope.ToDate
+                        f: $scope.Origin
                     });
                 }
                 if (!arr.length) setDestinationCards([]), $scope.isDestinations = false;
@@ -529,7 +523,7 @@
 
                 loadScrollbars();
                 setFareSliderValues(Minfare, Maxfare, Minfare, Maxfare);
-                $timeout(function () { stopEvent = false; $scope.refineDestinations(true); }, 0, false);
+                $timeout(function () { stopEvent = false; $scope.refineDestinations(true); }, 0, true);
                 $scope.lastselectedcurrency = $rootScope.currencyCode;
             }
         });

@@ -311,17 +311,19 @@
                     // remove all markers from map
                     removeMarkers();
 
-                    if (args.Region || (!args.sortByPrice && !args.Price))
-                        centerMap(args);
+                    if (scope.airportList.length > 0) {
+                        if (args.Region || (!args.sortByPrice && !args.Price))
+                            centerMap(args);
 
-                    if (args.destinationlist != undefined && args.destinationlist.length > 0) {
-                        scope.RenderMap(args);
-                        destinations = args.destinationlist;
-                        sortByPrice = args.sortByPrice;
-                        if ($rootScope.isShowAlerityMessage && UtilFactory.Device.medium()) {
-                            $timeout(function () {
-                                showMessage();
-                            }, 0, false);
+                        if (args.destinationlist != undefined && args.destinationlist.length > 0) {
+                            scope.RenderMap(args);
+                            destinations = args.destinationlist;
+                            sortByPrice = args.sortByPrice;
+                            if ($rootScope.isShowAlerityMessage && UtilFactory.Device.medium()) {
+                                $timeout(function () {
+                                    showMessage();
+                                }, 0, false);
+                            }
                         }
                     }
                 });
@@ -352,7 +354,7 @@
                         case "Middle East":
                             { airportLoc = new google.maps.LatLng(31.268205, 29.995368); break; }
                         case "Asia Pacific":
-                            { airportLoc = new google.maps.LatLng(49.8380, 105.8203); break; }
+                            { airportLoc = new google.maps.LatLng(18.8532199, 87.6277645); break; }
                         default: {
                             var originairport = _.find(scope.airportList, function (airport) {
                                 return airport.airport_Code == scope.origin.toUpperCase();

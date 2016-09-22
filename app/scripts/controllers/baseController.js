@@ -11,7 +11,8 @@
         function init() {
             UtilFactory.ReadAirportJson();
             UtilFactory.GetCurrencySymbols();
-            UtilFactory.ReadHighRankedAirportsJson();            
+            UtilFactory.ReadHighRankedAirportsJson();
+            getLocale();
         }
 
         function buidCurrencyDropDown()
@@ -40,7 +41,7 @@
             var currencyCode = $rootScope.base;
 
             var currencyList = dataConstant.currencyList;
-            $scope.currencyList = [];            
+            $scope.currencyList = [];
 
             // Check currency into CurrencyList exits or not 
             var exitsCurrency = _.find(currencyList, function (i) { return i.CurrencyCode == currencyCode });
@@ -49,9 +50,10 @@
             if (!exitsCurrency) {
                 // Find currencuCode from CurrencyData
                 var currency = _.find(currencyData, function (i) { return i.code == currencyCode; });
+                var symbol = (currency) ? (currency.code + " - " + currency.symbol) : currencyCode;
                 $scope.currencyList.push({
                     code: 'Default',
-                    symbol: currency.code + " - " + currency.symbol
+                    symbol: symbol
                 })                
             }
 

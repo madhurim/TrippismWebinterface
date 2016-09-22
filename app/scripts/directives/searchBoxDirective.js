@@ -7,7 +7,8 @@
             'UtilFactory',
             'dataConstant',
             'urlConstant',
-function ($location, $timeout, $filter, $locale, $stateParams, UtilFactory, dataConstant, urlConstant) {
+            'LocalStorageFactory',
+function ($location, $timeout, $filter, $locale, $stateParams, UtilFactory, dataConstant, urlConstant, LocalStorageFactory) {
     return {
         restrict: 'E',
         scope: {
@@ -24,7 +25,6 @@ function ($location, $timeout, $filter, $locale, $stateParams, UtilFactory, data
             $scope.Destination;
             $scope.FromDate;
             $scope.ToDate;
-            
             $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
             $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
 
@@ -64,8 +64,8 @@ function ($location, $timeout, $filter, $locale, $stateParams, UtilFactory, data
                     });
 
                     var dates = UtilFactory.GetValidDates($scope.FromDate, $scope.ToDate);
-                    $scope.FromDate = dates.FromDate;
-                    $scope.ToDate = dates.ToDate;
+                    $scope.FromDate = new Date(dates.FromDate);
+                    $scope.ToDate = new Date(dates.ToDate);
 
                     $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
                     $scope.urlParam.FromDate = $scope.FromDate;
@@ -164,7 +164,6 @@ function ($location, $timeout, $filter, $locale, $stateParams, UtilFactory, data
             });
 
             $scope.$watch('Origin', function (newValue, oldval) {
-
                 // return if new value same as url's origin.
                 // fix for FromDate and ToDate do not get null value because of $scope.setSearchCriteria()
                 if (oldval == '' && newValue == $scope.urlParam.Origin)
@@ -526,11 +525,18 @@ function ($location, $timeout, $filter, $locale, $stateParams, UtilFactory, data
             }
 
             $scope.CallDestiantionsview = function (path, origin, fromDate, toDate, destination) {
+          
                 if ($scope.selectedform == "SuggestDestination") {
+                    if (!$scope.isPopup) {
+                        LocalStorageFactory.clear(dataConstant.refineSearchLocalStorage);
+                    }
                     $location.path(path + '/f=' + origin + ';d=' + ConvertToRequiredDate(fromDate, 'API') + ';r=' + ConvertToRequiredDate(toDate, 'API'));
                     destination = null;
                 }
                 else {
+                    if (!$scope.isPopup) {
+                        LocalStorageFactory.clear(dataConstant.refineSearchLocalStorage);
+                    }
                     $location.path(path + '/f=' + origin + ';t=' + destination + ';d=' + ConvertToRequiredDate(fromDate, 'API') + ';r=' + ConvertToRequiredDate(toDate, 'API'));
                 }
                 UtilFactory.LastSearch = { origin: origin, fromDate: fromDate, toDate: toDate, destination: destination };

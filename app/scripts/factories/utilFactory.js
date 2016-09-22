@@ -341,13 +341,24 @@
 
         function saveRate(currencyConversionDetail) {
             return getExchangeRate(currencyConversionDetail.base, currencyConversionDetail.target).then(function (data) {
-                currencyConversionDetail = {
-                    base: data.data.Base,
-                    target: data.data.Target,
-                    rate: data.data.Rate,
-                    timestamp: new Date()
-                };
-                LocalStorageFactory.save(dataConstant.currencyConversion, currencyConversionDetail, { base: currencyConversionDetail.base, target: currencyConversionDetail.target });
+                if (data.status == 200) {
+                    currencyConversionDetail = {
+                        base: data.data.Base,
+                        target: data.data.Target,
+                        rate: data.data.Rate,
+                        timestamp: new Date()
+                    };
+                    LocalStorageFactory.save(dataConstant.currencyConversion, currencyConversionDetail, { base: currencyConversionDetail.base, target: currencyConversionDetail.target });
+                }
+                else
+                {
+                    currencyConversionDetail = {
+                        base: currencyConversionDetail.base,
+                        target: currencyConversionDetail.base,
+                        rate: 1
+                    };
+                }
+                
                 return currencyConversionDetail;
             });
         }

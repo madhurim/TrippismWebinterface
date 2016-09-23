@@ -4,7 +4,8 @@
                                                 'DestinationFactory',
                                                 'dataConstant',
                                                 'urlConstant',
-    function ($rootScope, $timeout, $modal, DestinationFactory, dataConstant, urlConstant) {
+                                                'UtilFactory',
+    function ($rootScope, $timeout, $modal, DestinationFactory, dataConstant, urlConstant, UtilFactory) {
         return {
             restrict: 'E',
             scope: { attractionParams: '=' },
@@ -78,17 +79,12 @@
 
                         setAirportMarkerOnMap();
 
-                        var markerObj = _(markerList).find(function (item) { return item.type == type });
-                        if (markerObj) {
-                            renderMap(markerObj.results, type);
-                            return;
-                        }
-
                         if (type == 'hotels') {
                             var hotelData = getHotelData();
                             hotelData = filterHotelData(hotelData);
-                            if (hotelData && hotelData.length)
+                            if (hotelData && hotelData.length) {                                
                                 markerList.push({ results: hotelData, type: type });
+                            }
 
                             renderMap(hotelData, type);
                             $scope.mapLoaded = true;
@@ -96,7 +92,6 @@
                         }
                     }
                 };
-
                 // set airport marker on map
                 function setAirportMarkerOnMap() {
                     airportMarkerLatLog = new google.maps.LatLng($scope.attractionParams.DestinationAirport.airport_Lat, $scope.attractionParams.DestinationAirport.airport_Lng);
@@ -194,12 +189,24 @@
                                 vicinity: (itemData.Address[0] + ', ' + itemData.Address[1]).toLowerCase(),
                                 rating: rating,
                                 type: 'hotels',
-                                details: { FreeWifiInRooms: itemData.PropertyOptionInfo.FreeWifiInRooms, RateRange: itemData.RateRange, Rating: rating }
+                                details: { FreeWifiInRooms: itemData.PropertyOptionInfo.FreeWifiInRooms, RateRange: hotelrangeRate(itemData.RateRange), Rating: rating }
                             }
-                        }).compact().sortBy(function (item) { return item.details.RateRange ? parseFloat(item.details.RateRange.Min) : Infinity; }).value();
+                        }).compact().sortBy(function (item) { return item.details.RateRange ? parseFloat(item.details.RateRange.Min.BeforeDecimal) : Infinity; }).value();
                     }
                     return object;
                 }
+
+
+                function hotelrangeRate(rateRange) {
+                    if (rateRange) {
+                        return {
+                            CurrencyCode: $rootScope.currencyInfo.currencyCode,
+                            Min: $scope.amountBifurcation((rateRange.Min * $rootScope.currencyInfo.rate).toFixed(2)),
+                            Max: $scope.amountBifurcation((rateRange.Max * $rootScope.currencyInfo.rate).toFixed(2))
+                        }
+                    }
+                }
+                $scope.amountBifurcation = function (value) { return UtilFactory.amountBifurcation(value); };
             },
             link: function ($scope, elem, attr) {
                 $scope.attractionPopup = function (attractionData) {
@@ -213,6 +220,9 @@
                         }
                     });
                 };
+                $scope.$on('setExchangeRate', function (event, args) {
+                    $scope.loadAttractionInfo("hotels");
+                });
             }
         }
     }]);

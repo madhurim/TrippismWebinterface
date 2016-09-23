@@ -94,7 +94,7 @@ function ($rootScope,$timeout,$filter,$modal, GoogleAttractionFactory, Destinati
                                 }
                             });
                         }
-		    renderMap(markerObj.results, type);
+		                renderMap(markerObj.results, type);
                         return;
                     }
 
@@ -251,10 +251,6 @@ function ($rootScope,$timeout,$filter,$modal, GoogleAttractionFactory, Destinati
                     }
                 });
             };
-            $scope.$on('setExchangeRate', function (event, args) {
-                $scope.loadgoogleattractionInfo("hotels");
-            });
-            
         }
     }
 }]);

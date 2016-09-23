@@ -75,7 +75,7 @@
                         DestinationFactory.DestinationDataStorage.currentPage.hotel = {
                             CurrencyCode: $scope.HotelRangeData.CurrencyCode,
                             CurrencySymbol: $scope.HotelRangeData.CurrencySymbol,
-                            Fare: $scope.amountBifurcation((hotelRange.RateRange.Min * $rootScope.currencyInfo.rate).toFixed(2)),
+                            Fare: $scope.amountBifurcation((hotelRange.RateRange.Min * $rootScope.currencyInfo.rate).toFixed(2))
                         };
                     }
                     else

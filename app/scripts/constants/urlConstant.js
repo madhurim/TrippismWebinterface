@@ -28,7 +28,8 @@
         apiURLForFeedback: hostName + '/api/Email/SendFeedback',
         apiURLForInstaFlightSearch: hostName + '/api/instaflight',
         apiURLForConstant: hostName + '/api/Constants/',
-        apiURLForHotelRange: hostName + '/api/sabre/hotels'
+        apiURLForHotelRange: hostName + '/api/sabre/hotels',
+        apiURLForTripAdvisor: hostName + '/api/tripadvisor/',
     };
     angular.module('TrippismUIApp').constant('urlConstant', constants);
 })();

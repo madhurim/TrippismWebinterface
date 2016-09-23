@@ -2,11 +2,13 @@
             '$location',
             '$timeout',
             '$filter',
+            '$locale',
             '$stateParams',
             'UtilFactory',
             'dataConstant',
             'urlConstant',
-function ($location, $timeout, $filter, $stateParams, UtilFactory, dataConstant, urlConstant) {
+            'LocalStorageFactory',
+function ($location, $timeout, $filter, $locale, $stateParams, UtilFactory, dataConstant, urlConstant, LocalStorageFactory) {
     return {
         restrict: 'E',
         scope: {
@@ -19,12 +21,10 @@ function ($location, $timeout, $filter, $stateParams, UtilFactory, dataConstant,
             $scope.KnowSearchbuttonText = 'Get Destination Details';
             $scope.SearchbuttonIsLoading = false;
             $scope.KnowSearchbuttonIsLoading = false;
-            $scope.Origin = '';
-            $scope.Destination = '';
+            $scope.Origin;
+            $scope.Destination;
             $scope.FromDate;
             $scope.ToDate;
-            $scope.formats = Dateformat();
-            $scope.format = $scope.formats[5];
             $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
             $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
 
@@ -64,8 +64,8 @@ function ($location, $timeout, $filter, $stateParams, UtilFactory, dataConstant,
                     });
 
                     var dates = UtilFactory.GetValidDates($scope.FromDate, $scope.ToDate);
-                    $scope.FromDate = dates.FromDate;
-                    $scope.ToDate = dates.ToDate;
+                    $scope.FromDate = new Date(dates.FromDate);
+                    $scope.ToDate = new Date(dates.ToDate);
 
                     $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
                     $scope.urlParam.FromDate = $scope.FromDate;
@@ -91,13 +91,15 @@ function ($location, $timeout, $filter, $stateParams, UtilFactory, dataConstant,
 
             function SetFromDate() {
                 if ($scope.FromDate == "" || $scope.FromDate == undefined || $scope.FromDate == null) {
-                    $scope.FromDate = ConvertToRequiredDate(GetFromDate(), 'UI');
+                    //$scope.FromDate = ConvertToRequiredDate(GetFromDate(), 'UI');
+                    $scope.FromDate = GetFromDate();
                     $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
                 }
             };
             function SetToDate() {
                 if (($scope.ToDate == "" || $scope.ToDate == undefined || $scope.ToDate == null) && $scope.FromDate != null) {
-                    $scope.ToDate = ConvertToRequiredDate(GetToDate($scope.FromDate), 'UI');
+                    //$scope.ToDate = ConvertToRequiredDate(GetToDate($scope.FromDate), 'UI');
+                    $scope.ToDate = GetToDate($scope.FromDate);
                     $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
                 }
             };
@@ -162,7 +164,6 @@ function ($location, $timeout, $filter, $stateParams, UtilFactory, dataConstant,
             });
 
             $scope.$watch('Origin', function (newValue, oldval) {
-
                 // return if new value same as url's origin.
                 // fix for FromDate and ToDate do not get null value because of $scope.setSearchCriteria()
                 if (oldval == '' && newValue == $scope.urlParam.Origin)
@@ -305,49 +306,54 @@ function ($location, $timeout, $filter, $stateParams, UtilFactory, dataConstant,
                 document.getElementById('txtToDate').select();
             };
 
-            // for solving ToDate datepicker render issue
-            $scope.$watch('openedToDate', function (newVal, oldVal) {
-                if (newVal && !oldVal && $scope.ToDate)
-                    $timeout(function () { $scope.$broadcast('refreshDatepickers', new Date($scope.ToDate)); }, 0, false);
-            });
+
+            //// for solving ToDate datepicker render issue
+            //$scope.$watch('openedToDate', function (newVal, oldVal) {
+            //    if (newVal && !oldVal && $scope.ToDate)
+            //        $timeout(function () { $scope.$broadcast('refreshDatepickers', new Date($scope.ToDate)); }, 0, false);
+            //});
 
             // watch FromDate textbox value
             $scope.$watch('frmdestfinder.FromDate.$viewValue', function (newVal, OldVal) {
-                var frmdate = newVal;
-                if (frmdate != "" && frmdate != null && frmdate != undefined) {
-                    if (frmdate.length == 10) {
-                        if (frmdate.indexOf("-") != -1 || frmdate.indexOf(".") != -1) {
-                            var dtStr = frmdate;
-                            var mm = dtStr.substring(0, 2);
-                            var dd = dtStr.substring(3, 5);
-                            var yyyy = dtStr.substring(6, 11);
-                            var newDt = mm + "/" + dd + "/" + yyyy;
-                            $scope.FromDate = newDt;
-                            $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
-                            if ($scope.FromDateDisplay == "Invalid Date !!") {
-                                $scope.FromDate = ConvertToRequiredDate(GetFromDate(), 'UI');
-                                $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
-                            }
-                        }
-                    }
-                    if (!isNaN(frmdate)) {
-                        if (frmdate.length == 8) {
-                            var dtStr = frmdate;
-                            var mm = dtStr.substring(0, 2);
-                            var dd = dtStr.substring(2, 4);
-                            var yyyy = dtStr.substring(4, 8);
-                            var newDt = mm + "/" + dd + "/" + yyyy;
-                            $scope.FromDate = newDt;
-                            $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
-                            if ($scope.FromDateDisplay == "Invalid Date !!") {
-                                $scope.FromDate = ConvertToRequiredDate(GetFromDate(), 'UI');
-                                $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
-                            }
-                        }
-                    }
+                $scope.FromDate = $scope.frmdestfinder.FromDate.$modelValue;
+                if (angular.isDate($scope.FromDate)) {
+                    $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
                 }
                 else {
-                    $scope.FromDateDisplay = "";
+                    var frmdate = newVal;
+                    if (frmdate != "" && frmdate != null && frmdate != undefined) {
+                        if (frmdate.length == 10) {
+                            if (frmdate.indexOf("-") != -1 || frmdate.indexOf(".") != -1) {
+                                var dtStr = frmdate;
+                                var mm = dtStr.substring(0, 2);
+                                var dd = dtStr.substring(3, 5);
+                                var yyyy = dtStr.substring(6, 11);
+                                $scope.FromDate = new Date(yyyy, mm, dd);
+                                $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
+                                if ($scope.FromDateDisplay == "Invalid Date !!") {
+                                    $scope.FromDate = GetFromDate();
+                                    $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
+                                }
+                            }
+                        }
+                        if (!isNaN(frmdate)) {
+                            if (frmdate.length == 8) {
+                                var dtStr = frmdate;
+                                var mm = parseInt(dtStr.substring(0, 2));
+                                var dd = parseInt(dtStr.substring(2, 4));
+                                var yyyy = parseInt(dtStr.substring(4, 8));
+                                $scope.FromDate = new Date(yyyy, mm, dd);
+                                $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
+                                if ($scope.FromDateDisplay == "Invalid Date !!") {
+                                    $scope.FromDate = GetFromDate();
+                                    $scope.FromDateDisplay = GetDateDisplay($scope.FromDate);
+                                }
+                            }
+                        }
+                    }
+                    else {
+                        $scope.FromDateDisplay = "";
+                    }
                 }
 
                 var newValue = $scope.FromDate;
@@ -400,52 +406,60 @@ function ($location, $timeout, $filter, $stateParams, UtilFactory, dataConstant,
                 maxToDate.setHours(0, 0, 0, 0);
 
                 if (newDt >= todate) {
-                    $scope.ToDate = ConvertToRequiredDate(GetToDate(newDt), 'UI');
+                    //$scope.ToDate = ConvertToRequiredDate(GetToDate(newDt), 'UI');
+                    $scope.ToDate = GetToDate(newDt);
                     $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
                 }
                 else if (todate > maxToDate) {
-                    $scope.ToDate = ConvertToRequiredDate(GetToDate(newDt), 'UI');
+                    //$scope.ToDate = ConvertToRequiredDate(GetToDate(newDt), 'UI');
+                    $scope.ToDate = GetToDate(newDt);
                     $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
                 }
             })
 
             // watch ToDate textbox value
             $scope.$watch('frmdestfinder.ToDate.$viewValue', function (newVal) {
-                var todate = newVal;
-                if (todate != "" && todate != null && todate != undefined) {
-                    if (todate.length == 10) {
-                        if (todate.indexOf("-") != -1 || todate.indexOf(".") != -1) {
-                            var dtStr = todate;
-                            var mm = dtStr.substring(0, 2);
-                            var dd = dtStr.substring(3, 5);
-                            var yyyy = dtStr.substring(6, 11);
-                            var newDt = mm + "/" + dd + "/" + yyyy;
-                            $scope.ToDate = newDt;
-                            $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
-                            if ($scope.ToDateDisplay == "Invalid Date !!") {
-                                $scope.ToDate = ConvertToRequiredDate(GetToDate($scope.FromDate), 'UI');
-                                $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
-                            }
-                        }
-                    }
-                    if (!isNaN(todate)) {
-                        if (todate.length == 8) {
-                            var dtStr = todate;
-                            var mm = dtStr.substring(0, 2);
-                            var dd = dtStr.substring(2, 4);
-                            var yyyy = dtStr.substring(4, 8);
-                            var newDt = mm + "/" + dd + "/" + yyyy;
-                            $scope.ToDate = newDt;
-                            $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
-                            if ($scope.ToDateDisplay == "Invalid Date !!") {
-                                $scope.ToDate = ConvertToRequiredDate(GetToDate($scope.FromDate), 'UI');
-                                $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
-                            }
-                        }
-                    }
+                $scope.ToDate = $scope.frmdestfinder.ToDate.$modelValue;
+                if (angular.isDate($scope.ToDate)) {
+                    $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
                 }
                 else {
-                    $scope.ToDateDisplay = "";
+                    var todate = newVal;
+                    if (todate != "" && todate != null && todate != undefined) {
+                        if (todate.length == 10) {
+                            if (todate.indexOf("-") != -1 || todate.indexOf(".") != -1) {
+                                var dtStr = todate;
+                                var mm = dtStr.substring(0, 2);
+                                var dd = dtStr.substring(3, 5);
+                                var yyyy = dtStr.substring(6, 11);
+                                $scope.ToDate = new Date(yyyy, mm, dd);
+                                $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
+                                if ($scope.ToDateDisplay == "Invalid Date !!") {
+                                    //$scope.ToDate = ConvertToRequiredDate(GetToDate($scope.FromDate), 'UI');
+                                    $scope.ToDate = GetToDate($scope.FromDate);
+                                    $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
+                                }
+                            }
+                        }
+                        if (!isNaN(todate)) {
+                            if (todate.length == 8) {
+                                var dtStr = todate;
+                                var mm = parseInt(dtStr.substring(0, 2));
+                                var dd = parseInt(dtStr.substring(2, 4));
+                                var yyyy = parseInt(dtStr.substring(4, 8));
+                                $scope.ToDate = new Date(yyyy, mm, dd);
+                                $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
+                                if ($scope.ToDateDisplay == "Invalid Date !!") {
+                                    //$scope.ToDate = ConvertToRequiredDate(GetToDate($scope.FromDate), 'UI');
+                                    $scope.ToDate = GetToDate($scope.FromDate);
+                                    $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
+                                }
+                            }
+                        }
+                    }
+                    else {
+                        $scope.ToDateDisplay = "";
+                    }
                 }
 
                 var newValue = $scope.ToDate;
@@ -462,13 +476,8 @@ function ($location, $timeout, $filter, $stateParams, UtilFactory, dataConstant,
                 var mxToDate = new Date($scope.MaximumToDate);
                 mxToDate.setHours(0, 0, 0, 0);
 
-                if (newDt < minToDt) {
-                    $scope.ToDate = ConvertToRequiredDate(GetToDate($scope.FromDate), 'UI');
-                    $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
-                    return;
-                }
-                else if (newDt > mxToDate) {
-                    $scope.ToDate = ConvertToRequiredDate(GetToDate($scope.FromDate), 'UI');
+                if (newDt < minToDt || newDt > mxToDate) {
+                    $scope.ToDate = GetToDate(newDt);
                     $scope.ToDateDisplay = GetDateDisplay($scope.ToDate);
                     return;
                 }
@@ -516,11 +525,18 @@ function ($location, $timeout, $filter, $stateParams, UtilFactory, dataConstant,
             }
 
             $scope.CallDestiantionsview = function (path, origin, fromDate, toDate, destination) {
+          
                 if ($scope.selectedform == "SuggestDestination") {
+                    if (!$scope.isPopup) {
+                        LocalStorageFactory.clear(dataConstant.refineSearchLocalStorage);
+                    }
                     $location.path(path + '/f=' + origin + ';d=' + ConvertToRequiredDate(fromDate, 'API') + ';r=' + ConvertToRequiredDate(toDate, 'API'));
                     destination = null;
                 }
                 else {
+                    if (!$scope.isPopup) {
+                        LocalStorageFactory.clear(dataConstant.refineSearchLocalStorage);
+                    }
                     $location.path(path + '/f=' + origin + ';t=' + destination + ';d=' + ConvertToRequiredDate(fromDate, 'API') + ';r=' + ConvertToRequiredDate(toDate, 'API'));
                 }
                 UtilFactory.LastSearch = { origin: origin, fromDate: fromDate, toDate: toDate, destination: destination };

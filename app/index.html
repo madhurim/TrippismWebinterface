@@ -31,6 +31,7 @@
     <link href="styles/font-awesome.css" rel="stylesheet" />
     <!-- endbuild -->
     <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900' rel='stylesheet' type='text/css'>
+    
 </head>
 <body ng-controller="BaseController" class="{{bodyClass}}">
     <script>
@@ -67,6 +68,16 @@
                                 </ul>
                             </li>
                         </ul>
+                    </div>
+                    <div class="col-md-1 col-sm-2 col-xs-2 pull-right top-5 z-999">
+                        <div class="form-group">
+                            <select class="form-control"
+                                    style="color:black;padding:0px;background-color:whitesmoke;"
+                                    ng-model="currencyCode"
+                                    id="currencyCode"
+                                    ng-options="currency.code as currency.symbol for currency in currencyList"
+                                    ng-change="currencyCodeChange()"></select>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -151,6 +162,7 @@
     <script src="scripts/libs/underscore.js"></script>
     <script src="scripts/libs/jquery.mCustomScrollbar.concat.min.js"></script>
     <script src="scripts/libs/utility.js"></script>
+    <script src="scripts/libs/tmhDynamicLocale.js"></script>
 
     <script src="scripts/factories/youTubeFactory.js"></script>
     <script src="scripts/factories/destinationFactory.js"></script>
@@ -166,6 +178,7 @@
     <script src="scripts/factories/seasonalityFactory.js"></script>
     <script src="scripts/factories/utilFactory.js"></script>
     <script src="scripts/factories/weatherFactory.js"></script>
+    <script src="scripts/factories/baseFactory.js"></script>
 
     <script src="scripts/controllers/youTubeController.js"></script>
     <script src="scripts/controllers/attractionPopupController.js"></script>
@@ -195,6 +208,8 @@
     <script src="scripts/directives/seasonalityDirective.js"></script>
     <script src="scripts/directives/videoPopupDirective.js"></script>
     <script src="scripts/directives/weatherDirective.js"></script>
+
+
     <!-- endbuild -->
 
 </body>

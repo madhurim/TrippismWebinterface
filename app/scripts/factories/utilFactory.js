@@ -1,9 +1,9 @@
 ﻿(function () {
     'use strict';
     var serviceId = 'UtilFactory';
-    angular.module('TrippismUIApp').factory(serviceId, ['$http', '$location', '$anchorScroll', 'urlConstant', '$q', 'dataConstant', '$sce', UtilFactory]);
+    angular.module('TrippismUIApp').factory(serviceId, ['$http', '$location', '$anchorScroll', 'urlConstant', '$q', 'dataConstant', '$sce', '$rootScope', 'LocalStorageFactory', UtilFactory]);
 
-    function UtilFactory($http, $location, $anchorScroll, urlConstant, $q, dataConstant, $sce) {
+    function UtilFactory($http, $location, $anchorScroll, urlConstant, $q, dataConstant, $sce, $rootScope, LocalStorageFactory) {
         var LastSearch;
         var highRankedAirportsPromise;
         var CurrencySymbolsPromise;
@@ -31,7 +31,10 @@
             ReadAirportsCurrency: ReadAirportsCurrency,
             GetAirportCurrency: GetAirportCurrency,
             amountBifurcation: amountBifurcation,
-            Device: Device
+            Device: Device,
+            getExchangeRate: getExchangeRate,
+            getCurrencyConversion: getCurrencyConversion,
+            GetCurrecyCode: GetCurrecyCode
         };
         return service;
 
@@ -124,14 +127,20 @@
         }
 
         function GetCurrencySymbols() {
-            if (CurrencySymbolsPromise)
-                return;
-            CurrencySymbolsPromise = $http.get(urlConstant.apiURLForConstant + 'GetCurrencySymbols').then(function (data) {
-                if (data.status == 200)
-                    service.currencySymbol.currencySymbolsList = data.data.Currency;
-            });
+            if (CurrencySymbolsPromise) {
+                return $q.when(CurrencySymbolsPromise).then(function (value) {
+                    return value;
+                });
+            }
+            else {
+                return CurrencySymbolsPromise = $http.get(urlConstant.apiURLForConstant + 'GetCurrencySymbols').then(function (data) {
+                    if (data.status == 200)
+                        return service.currencySymbol.currencySymbolsList = data.data.Currency;
+                });
+            }
         }
         function GetCurrencySymbol(currencyCode) {
+            var cacheResult = _.findWhere(service.currencySymbol.currencySymbolsListCache, { code: currencyCode });
             var cacheResult = _.findWhere(service.currencySymbol.currencySymbolsListCache, { code: currencyCode });
             if (cacheResult)
                 return cacheResult.symbol;
@@ -144,6 +153,21 @@
             else {
                 service.currencySymbol.currencySymbolsListCache.push({ symbol: currencyCode, code: currencyCode });
                 return currencyCode;
+            }
+        }
+        function GetCurrecyCode(currencySymbol) {
+            var cacheResult = _.findWhere(service.currencySymbol.currencySymbolsListCache, { symbol: currencySymbol });
+            if (cacheResult)
+                return cacheResult.code;
+
+            var result = _.findWhere(service.currencySymbol.currencySymbolsList, { symbol: currencySymbol });
+            if (result) {
+                service.currencySymbol.currencySymbolsListCache.push({ symbol: result.symbol, code: result.code });
+                return result.code;
+            }
+            else {
+                service.currencySymbol.currencySymbolsListCache.push({ symbol: currencySymbol, code: currencySymbol });
+                return currencySymbol;
             }
         }
         function GetLowFareForMap(destination) {
@@ -249,5 +273,96 @@
             };
             return result;
         }
+
+        // start Code Getting currency Exchange Rate
+        function getExchangeRate(fromCurrency, toCurrency) {
+
+            //Free API call 
+            ///var url = "https://openexchangerates.org/api/latest.json?app_id=abf70ba2e328428c9cef7e4f058ffc21";
+
+            //premium API call
+            //var url = "https://openexchangerates.org/api/latest.json?app_id=abf70ba2e328428c9cef7e4f058ffc21&base=" + existCurrency + "&symbols=" + convertCurrency;
+
+            var url = urlConstant.apiURLForCurrencyConversion + "?Base=" + fromCurrency + "&Target=" + toCurrency;
+            return $http.get(url)
+                    .then(function (data) {
+                        return data;
+                    },
+                    function (e) {
+                        return e;
+                    });
+        }
+
+        function getCurrencyConversion(currencyConversionDetail) {
+            if ((currencyConversionDetail.base == currencyConversionDetail.target) || currencyConversionDetail.base == undefined || currencyConversionDetail.target == undefined || currencyConversionDetail.target == "Default") {
+                var defer = $q.defer();
+                defer.resolve({
+                    currencyCode: currencyConversionDetail.base,
+                    currencySymbol: GetCurrencySymbol(currencyConversionDetail.base),
+                    rate: 1
+                });
+                return defer.promise;
+            }
+
+            var getLocalStorageCurrencyInfo = LocalStorageFactory.get(dataConstant.currencyConversion, { base: currencyConversionDetail.base, target: currencyConversionDetail.target });
+            if (!getLocalStorageCurrencyInfo) {
+                return saveRate(currencyConversionDetail).then(function (result) {
+                    return {
+                        currencyCode: result.target,
+                        currencySymbol: GetCurrencySymbol(result.target),
+                        rate: result.rate
+                    };
+                });
+            }
+            else {
+                var timestamp = new Date(getLocalStorageCurrencyInfo.timestamp).getTime();
+                var currentTime = (new Date()).getTime();
+                var dateDiffInHours = (currentTime - timestamp) / 6000000;
+                if (dateDiffInHours > 1) {
+                    return saveRate(currencyConversionDetail).then(function (result) {
+                        return {
+                            currencyCode: result.target,
+                            currencySymbol: GetCurrencySymbol(result.target),
+                            rate: result.rate
+                        };
+                    });
+                }
+                else {
+                    var defer = $q.defer();
+                    defer.resolve({
+                        currencyCode: getLocalStorageCurrencyInfo.target,
+                        currencySymbol: GetCurrencySymbol(getLocalStorageCurrencyInfo.target),
+                        rate: getLocalStorageCurrencyInfo.rate
+                    });
+                    return defer.promise;
+                }
+            }
+        }
+
+        function saveRate(currencyConversionDetail) {
+            return getExchangeRate(currencyConversionDetail.base, currencyConversionDetail.target).then(function (data) {
+                if (data.status == 200) {
+                    currencyConversionDetail = {
+                        base: data.data.Base,
+                        target: data.data.Target,
+                        rate: data.data.Rate,
+                        timestamp: new Date()
+                    };
+                    LocalStorageFactory.save(dataConstant.currencyConversion, currencyConversionDetail, { base: currencyConversionDetail.base, target: currencyConversionDetail.target });
+                }
+                else
+                {
+                    currencyConversionDetail = {
+                        base: currencyConversionDetail.base,
+                        target: currencyConversionDetail.base,
+                        rate: 1
+                    };
+                }
+                
+                return currencyConversionDetail;
+            });
+        }
+        
+        // End Code Getting currency Exchange Rate        
     }
 })();

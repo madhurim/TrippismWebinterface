@@ -5,10 +5,11 @@ var TrippismUIApp = angular.module('TrippismUIApp',
   'ui.map',
   'cgBusy',
   'ngRoute',
-  'ui-rangeSlider'
+  'ui-rangeSlider',
+  'tmh.dynamicLocale'
 ]);
 
-TrippismUIApp.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+TrippismUIApp.config(['$stateProvider', '$urlRouterProvider', 'tmhDynamicLocaleProvider', function ($stateProvider, $urlRouterProvider, tmhDynamicLocaleProvider) {
     $urlRouterProvider.when('', '/home').otherwise('/home');
     $stateProvider
         .state('home', {
@@ -27,6 +28,8 @@ TrippismUIApp.config(['$stateProvider', '$urlRouterProvider', function ($statePr
             url: '/FAQs',
             templateUrl: 'views/faqs.html'
         });
+
+    tmhDynamicLocaleProvider.localeLocationPattern('/bower_components/angular-i18n/angular-locale_{{locale}}.js');
 }]);
 
 TrippismUIApp.run(['$route', '$rootScope', '$location', function ($route, $rootScope, $location) {

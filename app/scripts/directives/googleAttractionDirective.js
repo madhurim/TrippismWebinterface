@@ -7,7 +7,9 @@
                                                 'DestinationFactory',
                                                 '$modal',
                                                 'urlConstant',
-function ($rootScope, GoogleAttractionFactory, $timeout, $filter, dataConstant, DestinationFactory, $modal, urlConstant) {
+                                                '$rootScope',
+                                                'UtilFactory',
+function ($rootScope, GoogleAttractionFactory, $timeout, $filter, dataConstant, DestinationFactory, $modal, urlConstant, $rootScope,UtilFactory) {
     return {
         restrict: 'E',
         scope: { googleattractionParams: '=', isOpen: '=' },
@@ -20,6 +22,7 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, dataConstant, 
                         $scope.loadgoogleattractionInfo(defaultAttractionTab.name);
                 }
             });
+            $scope.amountBifurcation = function (value) { return UtilFactory.amountBifurcation(value); };
 
             $scope.RenderMap = RenderMap;
             $scope.setAirportMarkerOnMap = setAirportMarkerOnMap;
@@ -94,6 +97,16 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, dataConstant, 
 
                     var markerObj = _(markerList).find(function (item) { return item.type == type });
                     if (markerObj) {
+                        if (markerObj.type == 'hotels')
+                        {
+                            _.each(markerObj.results, function (item) {
+                                if (item.details.RateRange != undefined) {
+                                    item.details.RateRange.Min = $scope.amountBifurcation((item.details.RateRange.OriginalMin * $rootScope.currencyInfo.rate).toFixed(2));
+                                    item.details.RateRange.Max = $scope.amountBifurcation((item.details.RateRange.OriginalMax * $rootScope.currencyInfo.rate).toFixed(2));
+                                    item.details.RateRange.CurrencyCode = $rootScope.currencyInfo.currencyCode;
+                                }
+                            });
+                        }
                         RenderMap(markerObj.results, type);
                         return;
                     }
@@ -120,9 +133,9 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, dataConstant, 
                                     vicinity: (itemData.Address[0] + ', ' + itemData.Address[1]).toLowerCase(),
                                     rating: rating,
                                     type: 'hotels',
-                                    details: { FreeWifiInRooms: itemData.PropertyOptionInfo.FreeWifiInRooms, RateRange: itemData.RateRange, Rating: rating }
+                                    details: { FreeWifiInRooms: itemData.PropertyOptionInfo.FreeWifiInRooms, RateRange: hotelrangeRate(itemData.RateRange), Rating: rating }
                                 }
-                            }).compact().sortBy(function (item) { return item.details.RateRange ? parseFloat(item.details.RateRange.Min) : Infinity; }).value();
+                            }).compact().sortBy(function (item) { return item.details.RateRange ? parseFloat(item.details.RateRange.Min.BeforeDecimal) : Infinity; }).value();
                             if (object && object.length)
                                 markerList.push({ results: object, type: type });
                         }
@@ -131,6 +144,19 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, dataConstant, 
                         $scope.MapLoaded = true;
                         $scope.attractionsplaces = { type: type, next_page_token: null, results: object && object.length > 0 ? object : null };
                         return;
+                    }
+                    function hotelrangeRate(rateRange)
+                    {
+                        if(rateRange)
+                        {
+                           return{
+                               CurrencyCode: $rootScope.currencyInfo.currencyCode,
+                               Min: $scope.amountBifurcation((rateRange.Min * $rootScope.currencyInfo.rate).toFixed(2)),
+                               Max: $scope.amountBifurcation((rateRange.Max * $rootScope.currencyInfo.rate).toFixed(2)),
+                               OriginalMin: rateRange.Min,
+                               OriginalMax: rateRange.Max,
+                            }
+                        }
                     }
 
                     var attractionDetail = _.find(attractionsData, function (item) { return type === item.name; });
@@ -283,6 +309,10 @@ function ($rootScope, GoogleAttractionFactory, $timeout, $filter, dataConstant, 
                     }
                 });
             };
+            $scope.$on('setExchangeRate', function (event, args) {
+                $scope.loadgoogleattractionInfo("hotels");
+            });
+            
         }
     }
 }]);

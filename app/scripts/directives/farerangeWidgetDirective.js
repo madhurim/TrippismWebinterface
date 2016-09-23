@@ -1,6 +1,6 @@
 ﻿angular.module('TrippismUIApp').directive('farerangewidgetInfo',
-                ['FareRangeFactory', '$filter', '$timeout', 'UtilFactory', 'FareforecastFactory', 'urlConstant', 'DestinationFactory',
-function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory, urlConstant, DestinationFactory) {
+                ['FareRangeFactory', '$filter', '$timeout', 'UtilFactory', 'FareforecastFactory', 'urlConstant', 'DestinationFactory','$rootScope',
+function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory, urlConstant, DestinationFactory, $rootScope) {
     return {
         restrict: 'E',
         scope: {
@@ -45,15 +45,26 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory,
                     $scope.$emit('widgetLoaded', { name: "fareforcastinfo", isVisible: true });
                     $scope.FareNoDataFound = false;
                     $scope.FareforecastData = data;
-                    DestinationFactory.DestinationDataStorage.currentPage.fareForecast = {
-                        HighestPredictedFare: $scope.amountBifurcation(data.Forecast.HighestPredictedFare),
-                        LowestPredictedFare: $scope.amountBifurcation(data.Forecast.LowestPredictedFare),
-                        CurrencySymbol: GetCurrencySymbol(data.Forecast.CurrencyCode),
-                        Recommendation: data.Recommendation
-                    };
+                    if ($scope.FareforecastData.Forecast != undefined && $scope.FareforecastData.Forecast != undefined) {
+                        $rootScope.changeRate($scope.FareforecastData.Forecast.CurrencyCode).then(function (currency) {
+                            $scope.FareforecastData.Forecast.LowRateAmountBifurcation = $scope.amountBifurcation(($scope.FareforecastData.Forecast.LowestPredictedFare * $rootScope.currencyInfo.rate).toFixed(2));
+                            $scope.FareforecastData.CurrencyCode = $rootScope.currencyInfo.currencyCode;
+                            $scope.FareforecastData.Forecast.HigestRateAmountBifurcation = $scope.amountBifurcation(($scope.FareforecastData.Forecast.HighestPredictedFare * $rootScope.currencyInfo.rate).toFixed(2));
+
+                            $scope.storeDestinationFactory(data);
+                        });                        
+                    }
                 });
             }
-
+            $scope.storeDestinationFactory = function(data)
+            {
+                DestinationFactory.DestinationDataStorage.currentPage.fareForecast = {
+                    HighestPredictedFare: $scope.amountBifurcation((data.Forecast.LowestPredictedFare * $rootScope.currencyInfo.rate).toFixed(2)) ,
+                    LowestPredictedFare: $scope.amountBifurcation((data.Forecast.HighestPredictedFare * $rootScope.currencyInfo.rate).toFixed(2)),
+                    CurrencySymbol: GetCurrencySymbol($rootScope.currencyInfo.currencyCode),
+                    Recommendation: data.Recommendation
+                };
+            }
             $scope.loadfareRangeInfo = function () {
                 $scope.fareRangeInfoLoaded = false;
                 $scope.FareRangeWidgetDataFound = false;
@@ -166,11 +177,18 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory,
                         scope.isFareFound = true;
                     else if (newValue[1].LowestNonStopFare && !isNaN(newValue[1].LowestNonStopFare.Fare))
                         scope.isFareFound = true;
-
                     PreparHtmldata();
                 }
             })
-
+            scope.$on('setExchangeRate', function (event, args) {
+                PreparHtmldata();
+                if (scope.FareforecastData != undefined) {                    
+                    scope.FareforecastData.Forecast.LowRateAmountBifurcation = scope.amountBifurcation((scope.FareforecastData.Forecast.LowestPredictedFare * $rootScope.currencyInfo.rate).toFixed(2));
+                    scope.FareforecastData.CurrencyCode = $rootScope.currencyInfo.currencyCode;
+                    scope.FareforecastData.Forecast.HigestRateAmountBifurcation = scope.amountBifurcation((scope.FareforecastData.Forecast.HighestPredictedFare * $rootScope.currencyInfo.rate).toFixed(2));
+                    scope.storeDestinationFactory(scope.FareforecastData);
+                }                
+            });
             function PreparHtmldata() {
                 if (scope.fareRangeData != undefined && scope.fareRangeData != "") {
                     // replace(/-/g, "/") used because of safari date convert problem
@@ -184,10 +202,11 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory,
                                 break;
 
                             scope.FareRangeWidgetData = {
-                                MinimumFare: scope.fareRangeData.FareData[i].MinimumFare,
-                                MaximumFare: scope.fareRangeData.FareData[i].MaximumFare,
-                                MedianFare: scope.fareRangeData.FareData[i].MedianFare,
-                                CurrencyCode: UtilFactory.GetCurrencySymbol(scope.fareRangeData.FareData[i].CurrencyCode),
+                                MinimumFare: (scope.fareRangeData.FareData[i].MinimumFare) * $rootScope.currencyInfo.rate,
+                                MaximumFare: (scope.fareRangeData.FareData[i].MaximumFare) * $rootScope.currencyInfo.rate,
+                                MedianFare: (scope.fareRangeData.FareData[i].MedianFare) * $rootScope.currencyInfo.rate,
+                                //CurrencyCode: UtilFactory.GetCurrencySymbol(scope.fareRangeData.FareData[i].CurrencyCode),
+                                CurrencyCode: $rootScope.currencyInfo.symbol,
                                 Count: scope.fareRangeData.FareData[i].Count,
                                 IsMacOrigin: scope.fareRangeData.IsMacOrigin,
                                 IsMacDestination: scope.fareRangeData.IsMacDestination,

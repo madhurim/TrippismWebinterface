@@ -1,6 +1,6 @@
 ﻿(function () {
-    angular.module('TrippismUIApp').directive('destinationCardDirective', ['urlConstant', DestinationMaterialCardsDirective]);
-    function DestinationMaterialCardsDirective(urlConstant) {
+    angular.module('TrippismUIApp').directive('destinationCardDirective', ['urlConstant', '$rootScope',DestinationMaterialCardsDirective]);
+    function DestinationMaterialCardsDirective(urlConstant, $rootScope) {
         return {
             restrict: 'E',
             scope: {
@@ -12,7 +12,9 @@
             templateUrl: urlConstant.partialViewsPath + 'destinationCard.html',
             controller: ['$scope', '$parse', '$filter', 'UtilFactory', 'InstaFlightSearchFactory', 'DestinationFactory', 'urlConstant', function ($scope, $parse, $filter, UtilFactory, InstaFlightSearchFactory, DestinationFactory, urlConstant) {
                 UtilFactory.GetCurrencySymbols();
+                
                 init();
+
                 function init() {
                     $scope.url = 'f=' + $scope.origin + ';t=' + $scope.destination + ';d=' + $scope.departureDate + ';r=' + $scope.returnDate;
                     DestinationFactory.DestinationDataStorage.fare.clear();
@@ -57,8 +59,8 @@
                             $scope.isDataFound = true;
                             if (data && data.PricedItineraries && data.PricedItineraries.length) {
                                 $scope.destinationData.lowestFare = getLowestFare(data.PricedItineraries[0]);
-                                $scope.destinationData.departureDate = ConvertToRequiredDate(data.DepartureDateTime, 'UI'),
-                                $scope.destinationData.returnDate = ConvertToRequiredDate(data.ReturnDateTime, 'UI'),
+                                $scope.destinationData.departureDate = data.DepartureDateTime,
+                                $scope.destinationData.returnDate = data.ReturnDateTime,
                                 $scope.destinationData.currencyCode = getCurrencyCode(data.PricedItineraries[0])
                                 $scope.destinationData.currencySymbol = UtilFactory.GetCurrencySymbol($scope.destinationData.currencyCode);
                                 DestinationFactory.DestinationDataStorage.fare.set(
@@ -66,8 +68,12 @@
                                        Origin: $scope.origin,
                                        Destination: $scope.destination,
                                        DepartureDate: $scope.departureDate,
-                                       ReturnDate: $scope.returnDate
-                                   }, data);
+                                       ReturnDate: $scope.returnDate,
+                                   }, data);                                
+                            }
+                            else
+                            {
+                                $scope.isDataFound = true;
                             }
                         });
                     });

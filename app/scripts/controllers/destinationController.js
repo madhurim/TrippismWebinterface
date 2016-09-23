@@ -9,6 +9,9 @@
             'InstaFlightSearchFactory',
             '$window',
             'urlConstant',
+            '$rootScope',
+            'LocalStorageFactory',
+            'dataConstant',
              DestinationController]);
     function DestinationController(
         $scope,
@@ -17,7 +20,10 @@
         UtilFactory,
         InstaFlightSearchFactory,
         $window,
-        urlConstant) {
+        urlConstant,
+        $rootScope,
+        LocalStorageFactory,
+        dataConstant) {
 
         $scope.$emit('bodyClass', 'otherpage destination-page');
         DestinationFactory.DestinationDataStorage.currentPage.clear();
@@ -62,6 +68,8 @@
                             $scope.ToDate = ConvertToRequiredDate(para[1].trim(), 'UI');
                         }
                     });
+
+                    storeSearchData();
 
                     $scope.OriginairportName = _.find($scope.AvailableAirports, function (airport) {
                         return airport.airport_Code == $scope.Origin.toUpperCase()
@@ -128,6 +136,31 @@
                 });
             });
         }
+        function storeSearchData()
+        {
+            $scope.lastselectedcurrency = ($rootScope.currencyCode) ? $rootScope.currencyCode : "Default";
+
+            var data = {
+                f: $scope.Origin
+            };
+
+            var data = LocalStorageFactory.get(dataConstant.refineSearchLocalStorage, data);
+            if (data) {
+                $scope.lastselectedcurrency = (data.ncu) ? data.ncu : $scope.lastselectedcurrency;
+                $rootScope.setdefaultcurrency($scope.lastselectedcurrency);
+            }
+            else {
+                data = {
+                    f: $scope.Origin,
+                    d: $scope.FromDate,
+                    r: $scope.ToDate,
+                    ncu: "Default"
+                };
+                $scope.lastselectedcurrency = "Default";
+                LocalStorageFactory.save(dataConstant.refineSearchLocalStorage, data);
+                $rootScope.setdefaultcurrency($scope.lastselectedcurrency);
+            }
+        }
         $scope.PageName = "Destination Page";
 
         $scope.$on('showHotelDetails', function () {
@@ -139,6 +172,24 @@
                 angular.element('#divhotel').remove();
             else
                 $scope.$broadcast('HotelData', data);
+        });
+        $scope.$on('setExchangeRate', function (event, args) {
+
+            var data = LocalStorageFactory.get(dataConstant.refineSearchLocalStorage, { f: $scope.Origin });
+            var updateData = {
+                f: data.f,
+                d: data.d,
+                r: data.r,
+                th: data.th,
+                a: data.a,
+                lf: data.lf,
+                hf: data.hf,
+                pcu: data.pcu,
+                ncu: $rootScope.currencyCode
+            };
+            LocalStorageFactory.save(dataConstant.refineSearchLocalStorage, updateData, {
+                f: $scope.Origin
+            });
         });
     }
 

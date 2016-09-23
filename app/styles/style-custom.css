@@ -1605,6 +1605,40 @@ ul .stop-line {
     margin-left: 10px;
 }
 
+.z-999 {
+    z-index: 999;
+}
+
+.top-5 {
+    top: 5px;
+}
+
+#select-i18n {
+    width: 105px !important;
+}
+
+    #select-i18n img.dd-selected-image, #select-i18n .dd-option-image, .dd-selected-image {
+        width: 30px;
+        height: auto !important;
+        margin-left: 5px;
+        margin-top: 2px;
+    }
+
+    #select-i18n .dd-select {
+        background: rgb(245, 245, 245) !important;
+    }
+
+.homepage #select-i18n .dd-select, .destination-page #select-i18n .dd-select {
+    background: none !important;
+    border: none !important;
+}
+.homepage #currencyCode {
+    visibility:hidden;
+}
+#select-i18n .dd-options {
+    box-shadow: none;
+}
+
 /*#region Media queries */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {

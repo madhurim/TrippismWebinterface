@@ -83,17 +83,7 @@ function ($rootScope,$timeout,$filter,$modal, GoogleAttractionFactory, Destinati
                     };
 
                     var markerObj = _(markerList).find(function (item) { return item.type == type });
-                    if (markerObj) {
-                        if (markerObj.type == 'hotels')
-                        {
-                            _.each(markerObj.results, function (item) {
-                                if (item.details.RateRange != undefined) {
-                                    item.details.RateRange.Min = $scope.amountBifurcation((item.details.RateRange.OriginalMin * $rootScope.currencyInfo.rate).toFixed(2));
-                                    item.details.RateRange.Max = $scope.amountBifurcation((item.details.RateRange.OriginalMax * $rootScope.currencyInfo.rate).toFixed(2));
-                                    item.details.RateRange.CurrencyCode = $rootScope.currencyInfo.currencyCode;
-                                }
-                            });
-                        }
+                    if (markerObj) {                        
 		                renderMap(markerObj.results, type);
                         return;
                     }

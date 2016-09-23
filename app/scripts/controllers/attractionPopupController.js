@@ -1,15 +1,21 @@
 ﻿(function () {
-    angular.module('TrippismUIApp').controller('AttractionPopupController', ['$scope', 'attractionData', 'UtilFactory', 'GoogleAttractionFactory', '$sce', AttractionPopupController]);
-    function AttractionPopupController($scope, attractionData, UtilFactory, GoogleAttractionFactory, $sce) {
+    angular.module('TrippismUIApp').controller('AttractionPopupController', ['$scope', '$sce', '$timeout', 'attractionData', 'UtilFactory', 'GoogleAttractionFactory', 'TripAdvisorAttractionFactory', 'dataConstant', AttractionPopupController]);
+    function AttractionPopupController($scope, $sce, $timeout, attractionData, UtilFactory, GoogleAttractionFactory, TripAdvisorAttractionFactory, dataConstant) {
         $scope.IsMapPopupLoading = false;
         $scope.slides = [];
         $scope.addSlides = addSlides;
+        $scope.provider = "Google+";
+        $scope.isPhotoLoading = false;
+        $scope.year = new Date().getFullYear();
+        $scope.attractionProviders = dataConstant.attractionProviders;
+        var service = new google.maps.places.PlacesService($scope.attractionsMap);
+        init(attractionData);
         function addSlides(photos) {
-            for (var photoidex = 0; photoidex < photos.length; photoidex++)
-                $scope.slides.push(photos[photoidex]);
+            for (var i = 0; i < photos.length; i++)
+                $scope.slides.push(photos[i]);
         };
 
-        function SetMarkerSlider(attractionData) {
+        function init(attractionData) {
             $scope.slides = [];
             $scope.IsMapPopupLoading = true;
             $scope.isAttrDataFound = true;
@@ -21,8 +27,7 @@
                         radius: 200,
                         name: attractionData.name
                     };
-                    $scope.attractionMessage = 'Getting hotel details';
-                    $scope.googleattractionpromise = GoogleAttractionFactory.googleAttraction(data).then(function (data) {
+                    GoogleAttractionFactory.googleAttraction(data).then(function (data) {
                         if (data && data.results && data.results.length) {
                             attractionData.place_id = data.results[0].place_id;
                             getPlaceDetails(attractionData);
@@ -34,8 +39,75 @@
                 else
                     setDefaultPopupDetails(attractionData);
             }
+            else if (attractionData.provider == dataConstant.attractionProviders.TripAdvisor) {
+                $scope.provider = dataConstant.attractionProviders.TripAdvisor;
+                var request = {
+                    LocationId: attractionData.locationId,
+                    Name: attractionData.name,
+                    Latitude: attractionData.geometry.location.lat,
+                    Longitude: attractionData.geometry.location.lng
+                };
+                $scope.isPhotoLoading = true;
+                TripAdvisorAttractionFactory.getLocation(request).then(function (data) {
+                    $scope.IsMapPopupLoading = false;
+                    if (data) {
+                        if (data.GooglePlaceId) {
+                            var request = { placeId: data.GooglePlaceId };
+                            service.getDetails(request, function (place, status) {
+                                $timeout(function () {
+                                    $scope.isPhotoLoading = false;
+                                    if (status == google.maps.places.PlacesServiceStatus.OK) {
+                                        if (place.photos != null && place.photos.length > 0) {
+                                            var photos = [];
+
+                                            for (var i = 0; i < place.photos.length; i++) {
+                                                var Imgsrc = place.photos[i].getUrl({ 'maxWidth': 570, 'maxHeight': 400 });
+                                                var objtopush = { image: Imgsrc, text: "" };
+                                                photos.push(objtopush);
+                                            }
+                                            $scope.addSlides(photos);
+                                        }
+                                    }
+                                }, 0, true);
+                            });
+                        }
+                        else
+                            $scope.isPhotoLoading = false;
+
+                        $timeout(function () {
+                            $scope.locationDetail = {};
+                            $scope.attractionReviews = [];
+                            $scope.locationDetail.PlaceName = data.Name.toLowerCase();
+                            var street2 = data.Address.Street2;
+                            var address = data.Address.Street1 + (street2 ? ', ' + street2 : '');
+                            $scope.locationDetail.Placeaddress = $sce.trustAsHtml(address + ', ' + data.LocationDetail);
+                            $scope.locationDetail.raitingToAppend = data.RatingImageUrl;
+                            $scope.locationDetail.NumReviews = data.NumReviews;
+                            $scope.locationDetail.WebUrl = data.WebUrl;
+                            for (var i = 0; i < data.Reviews.length; i++) {
+                                var review = data.Reviews[i];
+                                $scope.attractionReviews.push({
+                                    author_name: null,
+                                    text: review.Text,
+                                    rating: $sce.trustAsHtml(getRatings(review.Rating)),
+                                    time: review.PublishedDate,
+                                    raitingToAppend: review.RatingImageUrl,
+                                    author_name: review.User.UserName,
+                                    reviewURL: review.Url
+                                });
+                            }
+                        }, 0, true);
+                        window.setTimeout(function () { loadScrollbars(); }, 0);
+                    }
+                    else {
+                        setDefaultPopupDetails(attractionData);
+                        $scope.isPhotoLoading = false;
+                    }
+                });
+            }
             else
                 getPlaceDetails(attractionData);
+            window.setTimeout(function () { angular.element('.modal-content').css('border', 'none'); }, 0);
         }
 
         function setDefaultPopupDetails(attractionData) {
@@ -48,6 +120,11 @@
                 $scope.locationDetail.RateRange = attractionData.details.RateRange;
                 $scope.locationDetail.PlaceName = attractionData.name.toLowerCase();
                 $scope.locationDetail.Placeaddress = $sce.trustAsHtml(attractionData.Placeaddress);
+            }
+            else if (attractionData.provider == dataConstant.attractionProviders.TripAdvisor) {
+                $scope.locationDetail.PlaceName = attractionData.name.toLowerCase();
+                $scope.locationDetail.Placeaddress = $sce.trustAsHtml(attractionData.vicinity);
+                $scope.locationDetail.raitingToAppend = attractionData.raitingToAppend;
             }
         }
 
@@ -65,15 +142,14 @@
             }
 
             $scope.attractionReviews = [];
-            var service = new google.maps.places.PlacesService($scope.googleattractionsMap);
             var request = { placeId: attractionData.place_id };
             service.getDetails(request, function (place, status) {
                 $scope.IsMapPopupLoading = false;
                 if (status == google.maps.places.PlacesServiceStatus.OK) {
                     if (place.photos != null && place.photos.length > 0) {
                         var photos = [];
-                        for (var photoidx = 0; photoidx < place.photos.length; photoidx++) {
-                            var Imgsrc = place.photos[photoidx].getUrl({ 'maxWidth': 570, 'maxHeight': 400 });
+                        for (var i = 0; i < place.photos.length; i++) {
+                            var Imgsrc = place.photos[i].getUrl({ 'maxWidth': 570, 'maxHeight': 400 });
                             var objtopush = { image: Imgsrc, text: "" };
                             photos.push(objtopush);
                         }
@@ -111,7 +187,8 @@
 
                                 $scope.attractionReviews.push({
                                     author_name: place.reviews[i].author_name, text: place.reviews[i].text,
-                                    rating: $sce.trustAsHtml(getRatings(place.reviews[i].rating)), time: place.reviews[i].time
+                                    rating: $sce.trustAsHtml(getRatings(place.reviews[i].rating)),
+                                    time: place.reviews[i].time
                                 });
                             }
                         }
@@ -144,19 +221,17 @@
 
                 ratingDiv += "<ul class='rating background' class='readonly'>";
 
-                for (var starIdx = 0; starIdx < stars.length; starIdx++)
+                for (var i = 0; i < stars.length; i++)
                     ratingDiv += "<li class='star'><i class='fa fa-star'></i></li>";
 
                 ratingDiv += "</ul>";
                 ratingDiv += "<ul class='rating foreground readonly'  style='width:" + filledInStarsContainerWidth + "%'>";
 
-                for (var starIdx = 0; starIdx < stars.length; starIdx++)
+                for (var i = 0; i < stars.length; i++)
                     ratingDiv += "<li class='star filled'><i class='fa fa-star'></i></li>";
             }
             ratingDiv += "  </ul></div>";
             return ratingDiv;
         }
-
-        SetMarkerSlider(attractionData);
     }
 })();

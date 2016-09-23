@@ -37,12 +37,13 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory,
                 //Coding for get fareforcast data
                 $scope.fareinfopromise = FareforecastFactory.fareforecast($scope.widgetParams.Fareforecastdata).then(function (data) {
                     $scope.IsRequestCompleted = true;
-                    if (data.status == 404 || data.status == 400) {
+                    if (data.status != 200) {
                         $scope.FareNoDataFound = true;
                         $scope.$emit('widgetLoaded', { name: "fareforcastinfo", isVisible: false });
                         return;
                     }
-                    $scope.$emit('widgetLoaded', { name: "fareforcastinfo", isVisible: true });
+                    data = data.data;
+                    $scope.$emit('widgetLoaded', { name: "fareforcastinfo", isVisible: data.LowestFare ? true : false });
                     $scope.FareNoDataFound = false;
                     $scope.FareforecastData = data;
                     if ($scope.FareforecastData.Forecast != undefined && $scope.FareforecastData.Forecast != undefined) {
@@ -79,11 +80,12 @@ function (FareRangeFactory, $filter, $timeout, UtilFactory, FareforecastFactory,
                     };
 
                     $scope.farerangepromise = FareRangeFactory.fareRange(data).then(function (data) {
-                        if (data.status == 404 || data.status == 400) {
+                        if (data.status != 200) {
                             ////No Data Found then return                            
                             $scope.$emit('widgetLoaded', { name: "farerangeInfo", isVisible: false });
                             return;
                         }
+                        data = data.data;
                         var originairport = _.find($scope.widgetParams.AvailableAirports, function (airport) { return airport.airport_Code == $scope.widgetParams.Fareforecastdata.Origin });
                         var destinationairport = _.find($scope.widgetParams.AvailableAirports, function (airport) { return airport.airport_Code == $scope.widgetParams.Fareforecastdata.Destination });
 

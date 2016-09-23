@@ -28,7 +28,107 @@
                           }
         ],
         currencyConversion: "currencyConversion",
-        selectedCurrencyCode: "selectedCurrencyCode"
+        selectedCurrencyCode: "selectedCurrencyCode",
+ // if you want to remove or add new attraction tab just change into this object.
+        // need to add class name into 'htmlClass' element and create css
+        // (isDefault: true) used for setting attraction as default active and fetch it's data first when destination tab page is opened.
+        attractionList: [
+            {
+                rank: 5,
+                name: 'Restaurants',
+                attractionText: 'Food',
+                Types: '&types=restaurant|cafe',
+                ExcludeTypes: ["lodging"],
+                subCategory: 'Food & Drink',
+                Keywords: null,
+                markerImage: 'images/attraction-marker/mapicon-restaurant.png',
+                isDefault: false,
+                htmlClass: 'attr-foods'
+            },
+            {
+                rank: 6,
+                name: 'beaches',
+                attractionText: 'Beaches',
+                Types: '&keyword=beach',
+                ExcludeTypes: ["store"],
+                subCategory: 'Beaches',
+                Keywords: null,
+                markerImage: 'images/attraction-marker/palm-tree-icon.png',
+                isDefault: false,
+                htmlClass: 'attr-beaches'
+            },
+            {
+                rank: 7,
+                name: 'casinos',
+                attractionText: 'Casinos',
+                Types: '&types=casino',
+                ExcludeTypes: ["store"],
+                subCategory: 'Casinos',
+                Keywords: null,
+                markerImage: 'images/attraction-marker/dice-icon.png',
+                isDefault: false,
+                htmlClass: 'attr-casinos'
+            },
+            {
+                rank: 1,
+                name: 'outdoors',
+                attractionText: 'Outdoors',
+                Types: '&types=park|zoo|campground',
+                ExcludeTypes: ["store"],
+                subCategory: 'Outdoors',
+                Keywords: null,
+                markerImage: 'images/attraction-marker/climbing-icon.png',
+                isDefault: true,
+                htmlClass: 'attr-outdoors'
+            },
+            {
+                rank: 3,
+                name: 'shopping',
+                attractionText: 'Shops and Spas',
+                Types: '&types=spa|shopping_mall',
+                ExcludeTypes: null,
+                subCategory: 'Shopping',
+                Keywords: null,
+                markerImage: 'images/attraction-marker/full-icon.png',
+                isDefault: false,
+                htmlClass: 'attr-shops'
+            },
+            {
+                rank: 4,
+                name: 'themeparks',
+                attractionText: 'Theme Parks',
+                Types: '&types=amusement_park',
+                ExcludeTypes: ["store"],
+                subCategory: 'Amusement',
+                Keywords: null,
+                markerImage: 'images/attraction-marker/cruise-icon.png',
+                isDefault: false,
+                htmlClass: 'attr-theme-parks'
+            },
+            {
+                rank: 2,
+                name: 'historical',
+                attractionText: 'History and Culture',
+                Types: '&types=art_gallery|church|mosque|hindu_temple|synagogue|museum',
+                ExcludeTypes: ["store"],
+                subCategory: 'Cultural,Landmarks,Museums',
+                Keywords: null,
+                markerImage: 'images/attraction-marker/bank-icon.png',
+                isDefault: false,
+                htmlClass: 'attr-history'
+            }
+        ],
+        hotelsAttractionList: [
+            {
+                rank: 1,
+                name: 'hotels',
+                attractionText: 'Hotels',
+                markerImage: 'images/attraction-marker/hotels-icon.png',
+                isDefault: true,
+                htmlClass: 'attr-hotels'
+            }
+        ],
+        attractionProviders: { Google: 'Google', TripAdvisor: 'TripAdvisor' }
     };
     angular.module('TrippismUIApp').constant('dataConstant', constants);
 })();

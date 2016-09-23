@@ -20,11 +20,11 @@
     <div class="attractions-found" collapse="!isAttractionCollapsed">
         <div id="examples">
             <div class="content contentHorizontal">
-                <div ng-click="SelectPlace(item)" ng-repeat="item in attractionstoDisp" class="destinations-list {{::item.type}}">
+                <div ng-click="selectPlace(item)" ng-repeat="item in attractionstoDisp" class="destinations-list {{::item.type}}">
                     <h6 class="text-capitalize">{{::item.name}}</h6>
                     <div class="placeaddress-list">
                         <!--<span ng-bind-html="item.Placeaddress"></span>-->
-                        <span ng-hide="::item.type=='hotels'" class="text-capitalize">{{::item.vicinity}}</span>
+                        <span ng-hide="::(item.type=='hotels' || item.provider == attractionProviders.TripAdvisor)" class="text-capitalize">{{::item.vicinity}}</span>
                         <h6 class="margin-0 line-20 font-14" ng-if="::item.type=='hotels'">
                             <span ng-if="item.details.RateRange">
                                 <span>
@@ -38,11 +38,21 @@
                                 </span>
                             </span>
                         </h6>
-                        <div ng-bind-html="item.raitingToAppend"></div>
+                        <div ng-if="provider != attractionProviders.TripAdvisor" ng-bind-html="item.raitingToAppend"></div>
+                        <div ng-if="provider == attractionProviders.TripAdvisor && item.ratingImage" class="margin-top-5">
+                            <p class="font-13 margin-0 font-imp" style="color:#cfcfcf">TripAdvisor Traveller Rating</p>
+                            <img class="pull-left" style="opacity:0.7;" width="90" height="16" ng-src="{{item.ratingImage}}" />
+                            <span class="margin-left-5 font-light pull-left" style="color:white;margin-top:1px;">
+                                <span class="font-11">based on</span>
+                                <a ng-href="{{item.WebUrl}}" target="_blank" class="underline" style="color:#cfcfcf" onclick="event.stopPropagation();">{{item.NumReviews}} reviews</a>
+                            </span>
+                        </div>
                     </div>
                 </div>  
                 <div ng-show="isAttractionFound == false" style="color: #ccc;">Sorry, we did not find anything in this category!</div>
             </div>
+
+            <a ng-if="provider == attractionProviders.TripAdvisor" class="trip-copy hover-line" href="http://www.tripadvisor.com/pages/terms.html" target="_blank">© TripAdvisor {{::year}}</a>
         </div>
     </div>
 </div>

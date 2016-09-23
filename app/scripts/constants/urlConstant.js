@@ -29,7 +29,8 @@
         apiURLForInstaFlightSearch: hostName + '/api/instaflight',
         apiURLForConstant: hostName + '/api/Constants/',
         apiURLForHotelRange: hostName + '/api/sabre/hotels',
-        apiURLForCurrencyConversion: hostName + '/api/CurrencyConversion/Convert'
+        apiURLForCurrencyConversion: hostName + '/api/CurrencyConversion/Convert',
+	apiURLForTripAdvisor: hostName + '/api/tripadvisor/'
     };
     angular.module('TrippismUIApp').constant('urlConstant', constants);
 })();

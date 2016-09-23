@@ -69,21 +69,20 @@
                         }
                     });
 
-                    storeSearchData();
-
-                    $scope.OriginairportName = _.find($scope.AvailableAirports, function (airport) {
+                    storeSearchData();                 
+   $scope.OriginAirport = _.find($scope.AvailableAirports, function (airport) {
                         return airport.airport_Code == $scope.Origin.toUpperCase()
                     });
-                    $scope.DestinationairportName = _.find($scope.AvailableAirports, function (airport) {
+                    $scope.DestinationAirport = _.find($scope.AvailableAirports, function (airport) {
                         return airport.airport_Code == $scope.DestinationLocation
                     });
 
-                    $scope.DestinationCity = $scope.DestinationairportName ? $scope.DestinationairportName.airport_CityCode : 'default.jpg';
+                    $scope.DestinationCity = $scope.DestinationAirport ? $scope.DestinationAirport.airport_CityCode : 'default.jpg';
                     var dates = UtilFactory.GetValidDates($scope.FromDate, $scope.ToDate);
                     $scope.FromDate = dates.FromDate;
                     $scope.ToDate = dates.ToDate;
 
-                    if ($scope.OriginairportName == undefined || $scope.DestinationairportName == undefined) {
+                    if ($scope.OriginAirport == undefined || $scope.DestinationAirport == undefined) {
                         alertify.alert("Destination Finder", "");
                         alertify.alert('We could not find any destination that matches your request. Please make sure you have entered valid airport codes and dates.');
                         $scope.fareParams = readyfareParams();
@@ -101,8 +100,8 @@
 
                 function readyfareParams() {
                     return {
-                        OriginAirport: $scope.OriginairportName,
-                        DestinationAirport: $scope.DestinationairportName,
+                        OriginAirport: $scope.OriginAirport,
+                        DestinationAirport: $scope.DestinationAirport,
                         FareInfo: $scope.FareInfo,
                         Fareforecastdata: param,
                         AvailableAirports: $scope.AvailableAirports,
@@ -116,8 +115,8 @@
                             OriginAirportName: $scope.Origin,
                             DestinationaArportName: $scope.DestinationLocation,
                             FromDate: $scope.FromDate,
-                            ToDate: $scope.ToDate,
-                            PointOfSaleCountry: $scope.OriginairportName.airport_CountryCode
+                            ToDate: $scope.ToDate,                           
+                            PointOfSaleCountry: $scope.OriginAirport.airport_CountryCode
                         },
                         AvailableAirline: $scope.airlineJsonData
                     }
@@ -136,7 +135,12 @@
                 });
             });
         }
-        function storeSearchData()
+
+        $scope.attractionProviders = dataConstant.attractionProviders;
+        $scope.attractionTabs = [{ title: 'Hotels', isActive: false }, { title: $scope.attractionProviders.Google, isActive: true },
+                                { title: $scope.attractionProviders.TripAdvisor, isActive: false }];
+
+  function storeSearchData()
         {
             $scope.lastselectedcurrency = ($rootScope.currencyCode) ? $rootScope.currencyCode : "Default";
 
@@ -164,14 +168,19 @@
         $scope.PageName = "Destination Page";
 
         $scope.$on('showHotelDetails', function () {
-            $scope.$broadcast('showHotelDetailsOnMap');
+            _.each($scope.attractionTabs, function (i) {
+                if (i.title == "Hotels")
+                    i.isActive = true;
+            });
         });
 
         $scope.$on('hotelDataFound', function (event, data) {
             if (!data)
                 angular.element('#divhotel').remove();
-            else
+            else {
+                $scope.isHotelFound = true;
                 $scope.$broadcast('HotelData', data);
+            }
         });
         $scope.$on('setExchangeRate', function (event, args) {
 

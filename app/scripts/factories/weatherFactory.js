@@ -1,45 +1,37 @@
 ﻿(function () {
     'use strict';
     var serviceId = 'WeatherFactory';
-    angular.module('TrippismUIApp').factory(serviceId, ['$http', 'urlConstant', '$filter', WeatherFactory]);
+    angular.module('TrippismUIApp').factory(serviceId, ['$http', '$filter', '$q', 'urlConstant', WeatherFactory]);
 
-    function WeatherFactory($http, urlConstant, $filter) {
-        var storedata = [];
+    function WeatherFactory($http, $filter, $q, urlConstant) {
+        var weatherStorage = [];
         var service = {
-            GetData: GetData,
-             ResultData: ResultData,
-             WeatherData : {WeatherData : []}
+            GetData: GetData
         };
         return service;
 
         function GetData(paramdata) {
+            var cache = $filter('filter')(weatherStorage, { WeatherFor: paramdata.WeatherFor })[0];
+            if (cache != null) {
+                var d = $q.defer();
+                d.resolve(angular.copy(cache.data));//angular.copy used because at directive side we manipulate into data so second time when we call data method then return original result which was return from api
+                return d.promise;
+            }
             var dataURL = '?' + serialize(paramdata);
             var url = (paramdata.CountryCode == 'US' ? urlConstant.apiURLForUSWeather : urlConstant.apiURLForWeather) + dataURL;
             return $http.get(url)
                 .then(function (data) {
-                    //If response with okay status but data not found then no required to save that data
-                    if (data.data != "" && data.data.WeatherChances.length != 0) {
-                        var finaldata = {
-                            WeatherFor: paramdata.WeatherFor,
-                            data: data.data
-                        }
-                        var finddata = $filter('filter')(storedata, { WeatherFor: paramdata.WeatherFor })[0];
-                        if (finddata == undefined)
-                            storedata.push(finaldata);
-
-                        service.WeatherData = data.data;
+                    var object = {
+                        WeatherFor: paramdata.WeatherFor,
+                        data: angular.copy(data)
                     }
-                    return data.data;
+                    var weatherData = $filter('filter')(weatherStorage, { WeatherFor: object.WeatherFor })[0];
+                    if (weatherData == undefined)
+                        weatherStorage.push(object);
+                    return data;
                 }, function (e) {
                     return e;
                 });
-        }
-        function ResultData(WeatherFor)
-        {
-            if (storedata == undefined)
-                return null;
-            var data = $filter('filter')(storedata, { WeatherFor: WeatherFor })[0];
-            return data;
         }
     }
 })();

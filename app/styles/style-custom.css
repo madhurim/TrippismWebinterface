@@ -770,7 +770,11 @@ ul .stop-line {
     content: 'Hotels';
 }
 
-.attr-foods, .attr-beaches, .attr-casinos, .attr-outdoors, .attr-shops, .attr-theme-parks, .attr-history {
+.attr-tours:before {
+    content: 'Tours';
+}
+
+.attr-foods, .attr-beaches, .attr-casinos, .attr-outdoors, .attr-shops, .attr-theme-parks, .attr-history, .attr-tours {
     width: auto;
     height: auto;
 }
@@ -979,6 +983,15 @@ ul .stop-line {
     margin-top: 5px;
 }
 
+.margin-tb-5 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.margin-bottom-5 {
+    margin-bottom: 5px;
+}
+
 .gauge-label {
     text-align: center;
     word-spacing: -2px;
@@ -1117,7 +1130,7 @@ ul .stop-line {
 }
 /*#endregion Jassor image slider */
 
-.footer-blog-wp ul li {
+.footer-blog-2 ul li {
     display: inline-block;
     margin: 0 3px;
     vertical-align: top;
@@ -1639,7 +1652,79 @@ ul .stop-line {
     box-shadow: none;
 }
 
-/*#region Media queries */
+/*#region attraction tabs*/
+.attr-container {
+    border: 1px solid #ccc;
+    border-top: none;
+    padding: 5px;
+    background: whitesmoke;
+    margin-bottom: 14px;
+    border-radius: 3px;
+}
+
+.cust-tab .nav-tabs {
+    border-radius: 3px;
+    padding-left: 23px;
+}
+
+.attr-loader {
+    text-align: center;
+    float: left;
+    height: 400px;
+    overflow: hidden;
+    color: #aaa;
+    margin-top: 30px;
+}
+
+.padding-left-23 {
+    padding-left: 23px;
+}
+
+.attr-tab-hotel {
+    height: 25px;
+    font-weight: 500;
+    color: #333;
+    font-size: 16px;
+    padding: 2px 0px;
+}
+
+.margin-right-0 {
+    margin-right: 0px;
+}
+
+.trip-review-link {
+    background: #599642;
+    float: right;
+    border-bottom: 1px solid #ccc;
+    border-radius: 2px;
+    color: white;
+}
+
+    .trip-review-link a {
+        padding: 5px;
+        color: inherit;
+    }
+
+        .trip-review-link a:hover {
+            text-decoration: underline;
+        }
+
+.margin-bottom-3 {
+    margin-bottom: 3px !important;
+}
+
+.trip-copy {
+    position: absolute;
+    font-size: 10px;
+    color: #cfcfcf !important;
+    bottom: 0px;
+    right: 15px;
+    cursor: pointer;
+}
+
+/*#endregion attraction tabs*/
+
+/* #region Media queries ------------------------------------------------ */
 @media only screen and (max-width: 991px) {
     .panel-header-insta, .header-text {
         text-align: center;
@@ -1663,6 +1748,10 @@ ul .stop-line {
     .menu-btn {
         top: 15px;
     }
+
+    .footer-blog-3 {
+        float: right;
+    }
 }
 
 @media only screen and (max-width:1199px) {
@@ -1677,7 +1766,7 @@ ul .stop-line {
     }
 
     /* #region attraction */
-    .attr-foods:before, .attr-beaches:before, .attr-casinos:before, .attr-outdoors:before, .attr-shops:before, .attr-theme-parks:before, .attr-history:before, .attr-hotels:before {
+    .attr-foods:before, .attr-beaches:before, .attr-casinos:before, .attr-outdoors:before, .attr-shops:before, .attr-theme-parks:before, .attr-history:before, .attr-hotels:before, .attr-tours:before {
         content: '';
     }
 
@@ -1718,7 +1807,11 @@ ul .stop-line {
         background-image: url("/images/attraction-marker/hotels-icon.png");
     }
 
-    .attr-foods, .attr-beaches, .attr-casinos, .attr-outdoors, .attr-shops, .attr-theme-parks, .attr-history, .attr-hotels {
+    .attr-tours {
+        background-image: url("/images/attraction-marker/camera-icon-1.png");
+    }
+
+    .attr-foods, .attr-beaches, .attr-casinos, .attr-outdoors, .attr-shops, .attr-theme-parks, .attr-history, .attr-hotels, .attr-tours {
         background-repeat: no-repeat;
         background-position: center;
         width: 42px;
@@ -1749,8 +1842,12 @@ ul .stop-line {
         float: right;
     }
 
-    .footer-blog-wp {
+    .footer-blog-2 {
         width: auto;
+        float: left;
+    }
+
+    .footer-blog-3 {
         float: right;
     }
 
@@ -1914,5 +2011,14 @@ ul .stop-line {
     .gauge-label .font-imp {
         font-size: 12px;
     }
+}
+.Beta-Tripadvisor-logo{
+    -ms-transform: rotate(7deg);
+    font-size: 8px;
+    display: inline-block;
+    vertical-align: super;
+    position: absolute;
+    right: 93px;
+    top: 5px;
 }
 /*#endregion Media queries */

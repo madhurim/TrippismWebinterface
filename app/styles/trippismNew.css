@@ -125,10 +125,10 @@ row.PickerClickCheck {
     margin-left: 10px;
 }
 
-.nav > li > a:hover, .nav > li > a:focus {
+/*.nav > li > a:hover, .nav > li > a:focus {
     background: none;
     color: #0097a9;
-}
+}*/
 
 .nav > li > a {
     font-weight: 500;

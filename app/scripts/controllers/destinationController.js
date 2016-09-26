@@ -69,8 +69,8 @@
                         }
                     });
 
-                    storeSearchData();                 
-   $scope.OriginAirport = _.find($scope.AvailableAirports, function (airport) {
+                    storeSearchData("Default");                 
+                    $scope.OriginAirport = _.find($scope.AvailableAirports, function (airport) {
                         return airport.airport_Code == $scope.Origin.toUpperCase()
                     });
                     $scope.DestinationAirport = _.find($scope.AvailableAirports, function (airport) {
@@ -140,7 +140,7 @@
         $scope.attractionTabs = [{ title: 'Hotels', isActive: false }, { title: $scope.attractionProviders.Google, isActive: true },
                                 { title: $scope.attractionProviders.TripAdvisor, isActive: false }];
 
-  function storeSearchData()
+        function storeSearchData(currencyCode)
         {
             $scope.lastselectedcurrency = ($rootScope.currencyCode) ? $rootScope.currencyCode : "Default";
 
@@ -158,7 +158,7 @@
                     f: $scope.Origin,
                     d: $scope.FromDate,
                     r: $scope.ToDate,
-                    ncu: "Default"
+                    ncu: currencyCode
                 };
                 $scope.lastselectedcurrency = "Default";
                 LocalStorageFactory.save(dataConstant.refineSearchLocalStorage, data);
@@ -185,20 +185,26 @@
         $scope.$on('setExchangeRate', function (event, args) {
 
             var data = LocalStorageFactory.get(dataConstant.refineSearchLocalStorage, { f: $scope.Origin });
-            var updateData = {
-                f: data.f,
-                d: data.d,
-                r: data.r,
-                th: data.th,
-                a: data.a,
-                lf: data.lf,
-                hf: data.hf,
-                pcu: data.pcu,
-                ncu: $rootScope.currencyCode
-            };
-            LocalStorageFactory.save(dataConstant.refineSearchLocalStorage, updateData, {
-                f: $scope.Origin
-            });
+            if (data) {
+                var updateData = {
+                    f: data.f,
+                    d: data.d,
+                    r: data.r,
+                    th: data.th,
+                    a: data.a,
+                    lf: data.lf,
+                    hf: data.hf,
+                    pcu: data.pcu,
+                    ncu: $rootScope.currencyCode
+                };
+                LocalStorageFactory.save(dataConstant.refineSearchLocalStorage, updateData, {
+                    f: $scope.Origin
+                });
+            }
+            else
+            {
+                storeSearchData($rootScope.currencyCode);
+            }
         });
     }
 

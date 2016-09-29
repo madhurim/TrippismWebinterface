@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
-    angular.module('TrippismUIApp').directive('destinationsCard', ['urlConstant', destinationsCard]);
-    function destinationsCard(urlConstant) {
+    angular.module('TrippismUIApp').directive('destinationsCard', ['urlConstant', '$rootScope', destinationsCard]);
+    function destinationsCard(urlConstant, $rootScope) {
         return {
             restrict: 'E',
             scope: {
@@ -36,6 +36,10 @@
                 scope.getlink = function (data) {
                     return '/#/destination/f=' + scope.Origin.toUpperCase() + ';t=' + data.DestinationLocation + ';d=' + ConvertToRequiredDate(data.DepartureDateTime, 'API') + ';r=' + ConvertToRequiredDate(data.ReturnDateTime, 'API');
                 };
+                scope.addFevDestination = function ($event) {
+                    $event.preventDefault();
+                    $rootScope.loginPoupup();
+                }
             }
         }
     }

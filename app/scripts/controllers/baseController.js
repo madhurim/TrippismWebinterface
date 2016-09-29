@@ -12,6 +12,7 @@
             UtilFactory.ReadAirportJson();
             UtilFactory.GetCurrencySymbols();
             UtilFactory.ReadHighRankedAirportsJson();
+            setauthenticationLabel();
         }
 
         $scope.aboutUs = function () {
@@ -28,6 +29,11 @@
             });
         }
 
+        function setauthenticationLabel() {
+            var userInfo = LocalStorageFactory.get(dataConstant.GuidLocalstorage);
+            $scope.authenticationLabel = (userInfo) ? ((userInfo.IsLogin && userInfo.IsLogin == 1) ? "Sign out" : "Sign in") : "Sign in";
+        }
+
         // also used to stop image slider [HomeController]
         $scope.$on('bodyClass', function (event, args) {
             $scope.bodyClass = args;
@@ -36,14 +42,31 @@
         // Create and store Guid into Localstorage
         function storeGuid() {
             var guid = LocalStorageFactory.get(dataConstant.GuidLocalstorage);
-            if (!guid) {
+            var exits = (guid) ? ((!guid.Guid) ? true: false):true;
+            if (exits) {
                 baseFactory.storeAnonymousData().then(function (data) {
-                    LocalStorageFactory.save(dataConstant.GuidLocalstorage, data + "");
-                    
+                    LocalStorageFactory.save(dataConstant.GuidLocalstorage, { Guid: data + "" });
                 });
             }
         }
-        storeGuid();       
+        storeGuid();
+
+        $rootScope.loginPoupup = function () {
+            var userInfo = LocalStorageFactory.get(dataConstant.GuidLocalstorage);
+            if (userInfo && userInfo.IsLogin && userInfo.IsLogin == 1) {
+                LocalStorageFactory.update(dataConstant.GuidLocalstorage, { IsLogin: 0 });
+                $scope.authenticationLabel = "Sign in";
+                return;
+            }
+
+            var GetEmailDetPopupInstance = $modal.open({
+                templateUrl: urlConstant.partialViewsPath + 'loginPopUp.html',
+                controller: 'loginController'
+            });
+            GetEmailDetPopupInstance.result.finally(function () {
+                setauthenticationLabel();
+            })
+        }
     }
 })();
 

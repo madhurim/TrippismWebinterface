@@ -6,7 +6,8 @@
             save: save,
             get: get,
             remove: remove,
-            clear: clear
+            clear: clear,
+            update: update
         };
 
         function save(storageName, data, where) {
@@ -22,6 +23,18 @@
             else
                 obj = [data];
             localStorage.setItem(storageName, JSON.stringify(obj));
+        }
+
+        function update(storageName,data)
+        {
+            var obj = localStorage.getItem(storageName);
+            if(obj)
+            {
+                obj = JSON.parse(obj);
+                obj = angular.merge(obj[0], data);
+                obj = [obj];
+                localStorage.setItem(storageName, JSON.stringify(obj));
+            }
         }
 
         function get(storageName, data) {

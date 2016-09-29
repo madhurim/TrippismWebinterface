@@ -33,7 +33,8 @@
         apiURLForConstant: hostName + '/api/Constants/',
         apiURLForHotelRange: hostName + '/api/sabre/hotels',
         apiURLforProfileAnonymous: profileHostname + '/api/profiles/anonymous',
-        apiURLforProfileActivity: profileHostname + '/api/profile/activity'
+        apiURLforProfileActivity: profileHostname + '/api/profile/activity',
+        apiURLforProfileAuthentication: profileHostname + '/api/profiles/authentication',
     };
     angular.module('TrippismUIApp').constant('urlConstant', constants);
 })();

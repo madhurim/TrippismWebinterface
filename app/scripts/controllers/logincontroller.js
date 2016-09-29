@@ -15,17 +15,18 @@
 
             var signIn = {
                 CustomerGuid: LocalStorageFactory.get(dataConstant.GuidLocalstorage),
-                UserName: emailId,
-                Password: password
+                UserName: $scope.emailid,
+                Password: $scope.password
             }
             $scope.createAccountPromise = LoginFactory.LoginUser(signIn).then(function (data) {
                 if (data.status == 200) {
                     $scope.dismiss();
                     var userInfo = LocalStorageFactory.get(dataConstant.GuidLocalstorage);
-
                     LocalStorageFactory.update(dataConstant.GuidLocalstorage, { IsLogin: 1 });
                 }
                 else if (data.status == 403) {
+                    $scope.emailid = null;
+                    $scope.password = null;
                     alertify.alert("Alert", "");
                     alertify.alert('Incorrect UserName or Password').set('onok', function (closeEvent) { });
                 }

@@ -1,8 +1,9 @@
-﻿<div class="panel panel-default panel-margin">
-    <div cg-busy="{promise:createAccountPromise,message:'Please wait...'}">
+﻿
+<div cg-busy="{promise:createAccountPromise,message:'Please wait...'}">
+    <div class="panel panel-default panel-margin">
         <div class="panel-heading">
             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 padleft0" ng-show="!IsUserlogin">Sign in</div>
-            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 padleft0" ng-show="IsUserlogin">Sign p</div>
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 padleft0" ng-show="IsUserlogin">Create Account</div>
             <div class="pull-right">
                 <a class="close-panel-button pull-right" ng-click="dismiss()" role="button" tabindex="0">X</a>
             </div>

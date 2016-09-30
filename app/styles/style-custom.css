@@ -31,7 +31,13 @@ img {
     padding-right: 0px !important;
 }
 
+.padding-top-5{
+    padding-top:5px;
+}
 
+.margin-left-15{
+    margin-left:15px;
+}
 
 #elevator_item {
     width: 60px;
@@ -1651,6 +1657,22 @@ ul .stop-line {
 #select-i18n .dd-options {
     box-shadow: none;
 }
+.currencyCode .btn .caret{
+    margin-left:10px;
+}
+.currencyCode .btn{
+    background:whitesmoke;
+}
+.currencyCode .dropdown-menu{
+    min-width:60px;
+    margin:1px;
+}
+.currencyCode .dropdown-menu li a{
+    padding:5px 10px;
+}
+.currencyCode .dropdown-menu:before{
+    display:none;
+}	
 
 /*#region attraction tabs*/
 .attr-container {

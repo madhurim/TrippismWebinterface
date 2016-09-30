@@ -85,8 +85,9 @@
         }
 
         $rootScope.base;
-        $scope.currencyCodeChange = function () {
+        $scope.currencyCodeChange = function (code) {
             $rootScope.currencypromise = '';
+            $scope.currencyCode = code;
 
             $rootScope.currencypromise = $rootScope.changeRate($rootScope.base).then(function (data) {
                 $scope.$broadcast('setExchangeRate');

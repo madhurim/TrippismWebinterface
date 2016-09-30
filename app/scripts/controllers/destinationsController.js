@@ -514,6 +514,7 @@
                 filterDestinations(destinationlistOriginal);
                 $scope.fareCurrencySymbol = $rootScope.currencyInfo.symbol;
 
+                $scope.destinationCardListDisp = null;
                 var minMaxFare = getMinMaxFare(destinationlistOriginal);
                 var Maxfare = 0, Minfare = 0;
                 if (minMaxFare.MaxFare && minMaxFare.MaxFare != 0)

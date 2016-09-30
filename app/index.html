@@ -73,7 +73,7 @@
                             <div class="pull-right top-10 z-999" ng-show="currencyList">
                                 <div id="currencyCode" class="currencyCode btn-group z-999" dropdown is-open="status.isopen">
                                     <button type="button" class="btn dropdown-toggle" dropdown-toggle ng-disabled="disabled">
-                                        {{$root.currencyInfo.currencyCode}} - {{$root.currencyInfo.symbol}}<span class="caret margin-left-10"></span>
+                                        <span ng-bind="$root.currencyInfo.currencyCode + ' - ' + $root.currencyInfo.symbol"></span><span class="caret margin-left-10"></span>
                                     </button>
                                     <ul class="dropdown-menu" role="menu">
                                         <li ng-repeat="currency in currencyList"><a href="javascript:void(0)" ng-click="currencyCodeChange(currency.code)">{{currency.symbol}}</a></li>

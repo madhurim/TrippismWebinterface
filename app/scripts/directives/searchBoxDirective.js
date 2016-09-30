@@ -41,6 +41,7 @@ function ($location, $timeout, $filter, $locale, $stateParams, UtilFactory, data
             function activate() {
                 UtilFactory.ReadAirportJson().then(function (data) {
                     $scope.AvailableAirports = data;
+                    setDefaultAirport(data);
                 });
 
                 if ($stateParams.path != undefined) {
@@ -88,6 +89,35 @@ function ($location, $timeout, $filter, $locale, $stateParams, UtilFactory, data
 
             }
             activate();
+
+            function setDefaultAirport(airportList) {
+                // get user locale detail
+                var userlocale = LocalStorageFactory.get(dataConstant.userLocaleLocalStorage);
+
+                if (userlocale && userlocale.city && !$scope.Origin) {
+                    var nearestAirport = _.where(airportList, { airport_CityName: userlocale.city});    // get Airport list on based  CityName
+
+                    if (nearestAirport.length) { // For multiple Airport get nearest Airport
+                        if (nearestAirport.length > 1) {
+                            var userPosition = new google.maps.LatLng(userlocale.location.lat, userlocale.location.lng);
+                            var distance = [];
+                            for (var i = 0; i < nearestAirport.length; i++) {
+                                var airportDetail = nearestAirport[i];
+                                var airportPosition = new google.maps.LatLng(airportDetail.airport_Lat, airportDetail.airport_Lng);
+                                var countDistance = google.maps.geometry.spherical.computeDistanceBetween(userPosition, airportPosition);
+                                nearestAirport[i].distanceFromOrigin = countDistance;
+                                distance.push(nearestAirport[i]);
+                            }
+                            nearestAirport[0] = _.min(distance, function (d) { return d.distanceFromOrigin; });
+                        }
+                        // set selected Airport into Origin Textbox
+                        $scope.Origin = nearestAirport[0].airport_Code;
+                        $scope.OriginCityName = nearestAirport[0].airport_CityName;
+                        $scope.FromDate = GetFromDate();
+                        $scope.ToDate = GetToDate($scope.FromDate);
+                    }
+                }
+            }
 
             function SetFromDate() {
                 if ($scope.FromDate == "" || $scope.FromDate == undefined || $scope.FromDate == null) {
@@ -525,7 +555,7 @@ function ($location, $timeout, $filter, $locale, $stateParams, UtilFactory, data
             }
 
             $scope.CallDestiantionsview = function (path, origin, fromDate, toDate, destination) {
-          
+
                 if ($scope.selectedform == "SuggestDestination") {
                     if (!$scope.isPopup) {
                         LocalStorageFactory.clear(dataConstant.refineSearchLocalStorage);

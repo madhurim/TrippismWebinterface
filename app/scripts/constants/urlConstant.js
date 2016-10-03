@@ -10,12 +10,12 @@
     }
 
     var constants = {
-        destinationImagePath: 'http://content.trippism.com/images/destinations/',
-        destinationSmallImagePath: 'http://content.trippism.com/images/destination-small/',
-        destinationMediumImagePath: 'http://content.trippism.com/images/destination-medium/',
-        //destinationImagePath: '../images/destination/',
-        //destinationSmallImagePath: '../images/destination-small/',
-        //destinationMediumImagePath: '../images/destination-medium/',
+        //destinationImagePath: 'http://content.trippism.com/images/destinations/',
+        //destinationSmallImagePath: 'http://content.trippism.com/images/destination-small/',
+        //destinationMediumImagePath: 'http://content.trippism.com/images/destination-medium/',
+        destinationImagePath: '../images/destination/',
+        destinationSmallImagePath: '../images/destination-small/',
+        destinationMediumImagePath: '../images/destination-medium/',
         viewsPath: '/views/',
         partialViewsPath: '/views/partials/',
         apiURL: hostName + '/api/Sabre/',
@@ -29,7 +29,8 @@
         apiURLForInstaFlightSearch: hostName + '/api/instaflight',
         apiURLForConstant: hostName + '/api/Constants/',
         apiURLForHotelRange: hostName + '/api/sabre/hotels',
-        apiURLForTripAdvisor: hostName + '/api/tripadvisor/',
+        apiURLForCurrencyConversion: hostName + '/api/CurrencyConversion/Convert',
+	apiURLForTripAdvisor: hostName + '/api/tripadvisor/'
     };
     angular.module('TrippismUIApp').constant('urlConstant', constants);
 })();

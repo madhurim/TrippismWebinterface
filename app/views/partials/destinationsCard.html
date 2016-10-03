@@ -3,7 +3,7 @@
     <div class="thumbnail_img img-responsive">
         <div>
             <img class="thumb-img" ng-src="{{::destinationImagePath}}{{::Destination.CityCode}}.jpg" src-error="{{::destinationImagePath}}default.jpg" />
-            <span class="Price_list" ng-click="::sortCardsByPrice($event);">{{::GetCurrencySymbol(Destination.CurrencyCode)}} {{::GetLowFare(Destination)}}</span>
+            <span class="Price_list" ng-click="::sortCardsByPrice($event);">{{Destination.CurrencySymbol}} {{Destination.LowRate}}</span>
             <img title="Show on map" alt="map" class="ico-map hidden-sm hidden-xs" src="../images/map.png" width="26" height="26" ng-click="::gotoMap($event,Destination);" />
         </div>
         <div class="city_name text-ellipsis">

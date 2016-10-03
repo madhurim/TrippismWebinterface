@@ -31,7 +31,13 @@ img {
     padding-right: 0px !important;
 }
 
+.padding-top-5{
+    padding-top:5px;
+}
 
+.margin-left-15{
+    margin-left:15px;
+}
 
 #elevator_item {
     width: 60px;
@@ -980,7 +986,7 @@ ul .stop-line {
 }
 
 .margin-top-5 {
-    margin-top: 5px;
+    margin-top: 5px !important;
 }
 
 .margin-tb-5 {
@@ -1617,6 +1623,56 @@ ul .stop-line {
 .margin-left-10 {
     margin-left: 10px;
 }
+
+.z-999 {
+    z-index: 999;
+}
+
+.top-5 {
+    top: 5px;
+}
+
+#select-i18n {
+    width: 105px !important;
+}
+
+    #select-i18n img.dd-selected-image, #select-i18n .dd-option-image, .dd-selected-image {
+        width: 30px;
+        height: auto !important;
+        margin-left: 5px;
+        margin-top: 2px;
+    }
+
+    #select-i18n .dd-select {
+        background: rgb(245, 245, 245) !important;
+    }
+
+.homepage #select-i18n .dd-select, .destination-page #select-i18n .dd-select {
+    background: none !important;
+    border: none !important;
+}
+.homepage #currencyCode {
+    visibility:hidden;
+}
+#select-i18n .dd-options {
+    box-shadow: none;
+}
+.currencyCode .btn .caret{
+    margin-left:10px;
+}
+.currencyCode .btn{
+    background:whitesmoke;
+}
+.currencyCode .dropdown-menu{
+    min-width:60px;
+    margin:1px;
+}
+.currencyCode .dropdown-menu li a{
+    padding:5px 10px;
+}
+.currencyCode .dropdown-menu:before{
+    display:none;
+}	
 
 /*#region attraction tabs*/
 .attr-container {

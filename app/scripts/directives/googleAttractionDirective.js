@@ -1,12 +1,15 @@
 ﻿(function () {
     angular.module('TrippismUIApp').directive('googleAttractions', ['$rootScope',
                                                 '$timeout',
+                                                '$filter',
                                                 '$modal',
                                                 'GoogleAttractionFactory',
                                                 'DestinationFactory',
                                                 'dataConstant',
                                                 'urlConstant',
-function ($rootScope, $timeout, $modal, GoogleAttractionFactory, DestinationFactory, dataConstant, urlConstant) {
+                                                '$rootScope',
+                                                'UtilFactory',
+function ($rootScope,$timeout,$filter,$modal, GoogleAttractionFactory, DestinationFactory,dataConstant,urlConstant, $rootScope,UtilFactory) {
     return {
         restrict: 'E',
         scope: { attractionParams: '=' },
@@ -19,6 +22,7 @@ function ($rootScope, $timeout, $modal, GoogleAttractionFactory, DestinationFact
                         $scope.loadAttractionInfo(defaultAttractionTab.name);
                 }
             });
+            $scope.amountBifurcation = function (value) { return UtilFactory.amountBifurcation(value); };
 
             $scope.renderMap = renderMap;
             $scope.setAirportMarkerOnMap = setAirportMarkerOnMap;
@@ -79,8 +83,8 @@ function ($rootScope, $timeout, $modal, GoogleAttractionFactory, DestinationFact
                     };
 
                     var markerObj = _(markerList).find(function (item) { return item.type == type });
-                    if (markerObj) {
-                        renderMap(markerObj.results, type);
+                    if (markerObj) {                        
+		                renderMap(markerObj.results, type);
                         return;
                     }
 

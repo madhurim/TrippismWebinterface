@@ -73,6 +73,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                <!--<div class="row">
+                                    <div style="color:red;font-weight:bold;" class="pull-left">{{FromDate}}</div>
+                                    <div style="color:red;font-weight:bold;" class="pull-right">{{ToDate}}</div>
+                                </div>-->
                                 <div class="row">
                                     <div class="col-xs-6 pr7px">
                                         <div class="input-group">
@@ -83,7 +87,8 @@
                                                        ng-click="openFromDate($event)"
                                                        class="input-control input-novalidate"
                                                        ng-model="FromDate"
-                                                       datepicker-popup="{{format}}"
+                                                       ng-model-options="{ allowInvalid: true }"
+                                                       datepicker-popup="{{$root.format}}"
                                                        ng-disabled="false"
                                                        min-date="minTodayDate"
                                                        max-date="MaximumFromDate"
@@ -95,7 +100,6 @@
                                                        close-text="Close"
                                                        placeholder="Start date"
                                                        tabindex="3"
-                                                       maxlength="10"
                                                        allow-only-date-inputs
                                                        autocomplete="off"
                                                        ng-blur="SetFromDate()"
@@ -105,7 +109,6 @@
                                         <span class="dateDisplay">{{FromDateDisplay}}</span>
                                         <div class="alert alert-danger" role="alert" ng-show="!isSearchbuttonClicked"></div>
                                     </div>
-
                                     <div class="col-xs-6 pl7px">
                                         <div class="input-group">
                                             <div class="input-group-addon"><img src="images/calendar.png" alt="#" ng-click="openToDate($event)" /></div>
@@ -114,10 +117,11 @@
                                                        id="txtToDate"
                                                        ng-click="openToDate($event)"
                                                        class="input-control input-novalidate"
-                                                       datepicker-popup="{{format}}"
+                                                       datepicker-popup="{{$root.format}}"
                                                        min-date="minFromDate"
                                                        max-date="MaximumToDate"
                                                        ng-model="ToDate"
+                                                       ng-model-options="{ allowInvalid: true }"
                                                        name="ToDate"
                                                        is-open="openedToDate"
                                                        on-open-focus="true"
@@ -126,7 +130,6 @@
                                                        placeholder="End date "
                                                        ng-disabled="false"
                                                        tabindex="4"
-                                                       maxlength="10"
                                                        allow-only-date-inputs
                                                        autocomplete="off"
                                                        ng-blur="SetToDate()"

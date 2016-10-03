@@ -10,9 +10,9 @@
             <div class="ibox-box fare-box">
                 <div class="fare-box-inner text-right">
                     <div class="pull-left">
-                        <h4 class="fare-font" ng-init="::amtbifercation=amountBifurcation(HotelRangeData.Fare);">
-                            <span class="cursor-help" data-toggle="tooltip" popover="{{HotelRangeData.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{HotelRangeData.CurrencySymbol}}</span>
-                            {{amtbifercation.BeforeDecimal}}<span class="text-super vertical-top">{{amtbifercation.AfterDecimal}}</span>
+                        <h4 class="fare-font"> 
+                            <span class="cursor-help" data-toggle="tooltip" popover="{{$root.currencyInfo.currencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{HotelRangeData.CurrencySymbol}}</span>
+                            {{HotelRangeData.Fare.BeforeDecimal | number : 0}}<span class="text-super vertical-top">{{HotelRangeData.Fare.AfterDecimal}}</span>
                         </h4>
                         <p><span class="invisible">Non Stop </span> Lowest</p>
                         <!--<h4 title="3 star hotels" ng-if="HotelRangeData.Star == '3'"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></h4>

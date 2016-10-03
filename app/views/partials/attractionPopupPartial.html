@@ -37,14 +37,14 @@
                                 <div class="row">
                                     <div class="col-md-7 col-sm-6" ng-if="::locationDetail.RateRange">
                                         <h4>
-                                            <span ng-init="amtbifercation1=amountBifurcation(locationDetail.RateRange.Min);">
+                                            <span>
                                                 <span class="cursor-help" data-toggle="tooltip" popover="{{::locationDetail.RateRange.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{::GetCurrencySymbol(locationDetail.RateRange.CurrencyCode)}}</span>
-                                                {{amtbifercation1.BeforeDecimal}}<span class="text-super vertical-top">{{amtbifercation1.AfterDecimal}}</span>
+                                                {{locationDetail.RateRange.Min.BeforeDecimal | number : 0}}<span class="text-super vertical-top">{{locationDetail.RateRange.Min.AfterDecimal}}</span>
                                             </span>
                                             -
-                                            <span ng-init="amtbifercation=amountBifurcation(locationDetail.RateRange.Max);">
+                                            <span>
                                                 <span class="cursor-help" data-toggle="tooltip" popover="{{::locationDetail.RateRange.CurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{::GetCurrencySymbol(locationDetail.RateRange.CurrencyCode)}}</span>
-                                                {{amtbifercation.BeforeDecimal}}<span class="text-super vertical-top">{{amtbifercation.AfterDecimal}}</span>
+                                                {{locationDetail.RateRange.Max.BeforeDecimal | number : 0}}<span class="text-super vertical-top">{{locationDetail.RateRange.Max.AfterDecimal}}</span>
                                             </span>
                                         </h4>
                                     </div>

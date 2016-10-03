@@ -48,7 +48,7 @@
         }
 
         function clear(storageName) {
-            localStorage.clear(storageName);
+            delete window.localStorage[storageName];
         }
     }
 })();

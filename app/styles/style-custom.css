@@ -986,7 +986,7 @@ ul .stop-line {
 }
 
 .margin-top-5 {
-    margin-top: 5px;
+    margin-top: 5px !important;
 }
 
 .margin-tb-5 {

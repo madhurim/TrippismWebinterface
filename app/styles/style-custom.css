@@ -1354,7 +1354,7 @@ ul .stop-line {
 }
 /*#endregion md-card*/
 
-.ico-youtube {
+/*.ico-youtube {
     background-image: url("../images/youtube.png");
     height: 50px;
     width: 85px;
@@ -1365,7 +1365,7 @@ ul .stop-line {
     margin-bottom: 23px;
     cursor: pointer;
     opacity: 0.8;
-}
+}*/
 
     .ico-youtube:hover {
         background-position: 0px -58px;

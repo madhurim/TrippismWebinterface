@@ -95,26 +95,35 @@ function ($location, $timeout, $filter, $locale, $stateParams, UtilFactory, data
                 var userlocale = LocalStorageFactory.get(dataConstant.userLocaleLocalStorage);
 
                 if (userlocale && userlocale.city && !$scope.Origin) {
-                    var nearestAirport = _.where(airportList, { airport_CityName: userlocale.city});    // get Airport list on based  CityName
 
-                    if (nearestAirport.length) { // For multiple Airport get nearest Airport
-                        if (nearestAirport.length > 1) {
-                            var userPosition = new google.maps.LatLng(userlocale.location.lat, userlocale.location.lng);
-                            var distance = [];
-                            for (var i = 0; i < nearestAirport.length; i++) {
-                                var airportDetail = nearestAirport[i];
-                                var airportPosition = new google.maps.LatLng(airportDetail.airport_Lat, airportDetail.airport_Lng);
-                                var countDistance = google.maps.geometry.spherical.computeDistanceBetween(userPosition, airportPosition);
-                                nearestAirport[i].distanceFromOrigin = countDistance;
-                                distance.push(nearestAirport[i]);
+                    $scope.FromDate = GetFromDate();
+                    $scope.ToDate = GetToDate($scope.FromDate);
+
+                    if (userlocale.nearestAirport && userlocale.airportCityName) {
+                        $scope.Origin = userlocale.nearestAirport;
+                        $scope.OriginCityName = userlocale.airportCityName;
+                    }
+                    else {
+                        var nearestAirport = _.where(airportList, { airport_CityName: userlocale.city });    // get Airport list on based  CityName
+
+                        if (nearestAirport.length) { // For multiple Airport get nearest Airport
+                            if (nearestAirport.length > 1) {
+                                var userPosition = new google.maps.LatLng(userlocale.location.lat, userlocale.location.lng);
+                                var distance = [];
+                                for (var i = 0; i < nearestAirport.length; i++) {
+                                    var airportDetail = nearestAirport[i];
+                                    var airportPosition = new google.maps.LatLng(airportDetail.airport_Lat, airportDetail.airport_Lng);
+                                    var countDistance = google.maps.geometry.spherical.computeDistanceBetween(userPosition, airportPosition);
+                                    nearestAirport[i].distanceFromOrigin = countDistance;
+                                    distance.push(nearestAirport[i]);
+                                }
+                                nearestAirport[0] = _.min(distance, function (d) { return d.distanceFromOrigin; });
                             }
-                            nearestAirport[0] = _.min(distance, function (d) { return d.distanceFromOrigin; });
+                            // set selected Airport into Origin Textbox
+                            LocalStorageFactory.update(dataConstant.userLocaleLocalStorage, { nearestAirport: nearestAirport[0].airport_Code, airportCityName: nearestAirport[0].airport_CityName });
+                            $scope.Origin = nearestAirport[0].airport_Code;
+                            $scope.OriginCityName = nearestAirport[0].airport_CityName;
                         }
-                        // set selected Airport into Origin Textbox
-                        $scope.Origin = nearestAirport[0].airport_Code;
-                        $scope.OriginCityName = nearestAirport[0].airport_CityName;
-                        $scope.FromDate = GetFromDate();
-                        $scope.ToDate = GetToDate($scope.FromDate);
                     }
                 }
             }

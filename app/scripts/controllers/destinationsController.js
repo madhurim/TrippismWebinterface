@@ -226,7 +226,7 @@
                 googleMapPassinglist = arr;
                 updateSearchCriteria();
                 if (isSelected) {
-
+                    $timeout(function () { updaterefineSearch(); }, 0, true);
                 }
                 if (!arr.length) setDestinationCards([]), $scope.isDestinations = false;
                 setMapMarker('setMarkerOnMap',arr,sortByPrice);

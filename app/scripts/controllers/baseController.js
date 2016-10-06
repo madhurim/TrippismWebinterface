@@ -89,9 +89,12 @@
             $rootScope.currencypromise = '';
             $scope.currencyCode = code;
 
-            $rootScope.currencypromise = $rootScope.changeRate($rootScope.base).then(function (data) {
-                $scope.$broadcast('setExchangeRate');
-            });
+            var IsSameCurrency = (code == $rootScope.currencyInfo.currencyCode) ? false : ((code == "Default") ? (($rootScope.base == $rootScope.currencyInfo.currencyCode) ? false : true) : true);
+            if (IsSameCurrency) {
+                $rootScope.currencypromise = $rootScope.changeRate($rootScope.base).then(function (data) {
+                    $scope.$broadcast('setExchangeRate');
+                });
+            }
 
             $rootScope.currencyCode = $scope.currencyCode;
         }

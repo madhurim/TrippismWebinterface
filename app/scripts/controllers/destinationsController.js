@@ -29,7 +29,6 @@
         $scope.$emit('bodyClass', 'mappage');   // for changing <body> class    
         $scope.isSearching = true;
         $scope.activate = activate;
-        var IsCurrencyChange = false;
         $scope.findDestinations = findDestinations;
         var highRankedAirportlist = [], AvailableAirports = [];
         var OriginAirport;
@@ -38,6 +37,7 @@
         $scope.AvailableRegions = AvailableRegions();
         var limitDestinationCards = 15;
         $scope.PointOfsalesCountry;
+        var googleMapPassinglist = [];
         $scope.isModified = false;
         var sortByPrice = 'dsc';
         var destinationCardList = [];
@@ -144,7 +144,7 @@
             $scope.airlineJsonData = [];
         }
 
-        function filterDestinations(destinations, IsFirstTime) {
+        function filterDestinations(destinations) {
             var destinationsToDisp = [];
             var filterDestinationsList = [];
             for (var x = 0; x < destinations.length; x++) {
@@ -170,23 +170,18 @@
             }
 
             // filter destinations for same city code on based their LowRate
-            if (IsFirstTime) {
-                filterDestinationsList = _.groupBy(filterDestinationsList, function (destinations) { return destinations.CityCode });
-                _.each(filterDestinationsList, function (dest) {
-                    destinationsToDisp.push(_.min(dest, function (d) { return d.LowRate; }))
-                });
-            }
-            else {
-                destinationsToDisp = filterDestinationsList;
-            }
+
+            filterDestinationsList = _.groupBy(filterDestinationsList, function (destinations) { return destinations.CityCode });
+            _.each(filterDestinationsList, function (dest) {
+                destinationsToDisp.push(_.min(dest, function (d) { return d.LowRate; }))
+            });
+
             return destinationsToDisp;
         }
 
         $scope.refineDestinations = function (isSelected, sortByPrice) {
             if (stopEvent) return;
             if (destinationlistOriginal && destinationlistOriginal.length > 0) {
-                if (!IsCurrencyChange)
-                    $scope.destinationCardListDisp = null;
                 $scope.isReset = true;
                 var arr = [];
                 for (var i = 0; i < destinationlistOriginal.length; i++) {
@@ -228,31 +223,13 @@
                             arr.push(destination);
                     }
                 }
+                googleMapPassinglist = arr;
                 updateSearchCriteria();
                 if (isSelected) {
-                    var data = {
-                        f: $scope.Origin,
-                        d: $scope.FromDate,
-                        r: $scope.ToDate,
-                        th: $scope.Theme,
-                        a: $scope.Region,
-                        lf: $scope.Minfare,
-                        hf: $scope.Maxfare,
-                        pcu: $scope.lastselectedcurrency,
-                        ncu: $scope.lastselectedcurrency
-                    };
-                    LocalStorageFactory.save(dataConstant.refineSearchLocalStorage, data, {
-                        f: $scope.Origin
-                    });
+
                 }
                 if (!arr.length) setDestinationCards([]), $scope.isDestinations = false;
-                $rootScope.$broadcast('setMarkerOnMap', {
-                    destinationlist: arr,
-                    Region: $scope.Region,
-                    Theme: $scope.Theme,
-                    Price: $scope.priceSliderValues.values.max != $scope.priceSliderValues.range.max || $scope.priceSliderValues.values.min != $scope.priceSliderValues.range.min,
-                    sortByPrice: sortByPrice
-                });
+                setMapMarker('setMarkerOnMap',arr,sortByPrice);
             }
         }
 
@@ -274,7 +251,7 @@
                 if (data.FareInfo != null) {
                     var destinationCurrencyCode = _.find(data.FareInfo, function (item) { return item.CurrencyCode && item.CurrencyCode != 'N/A'; });
                     $rootScope.changeRate(destinationCurrencyCode.CurrencyCode).then(function (currency) {
-                        destinationlistOriginal = filterDestinations(data.FareInfo, true);
+                        destinationlistOriginal = filterDestinations(data.FareInfo);
                         $scope.fareCurrencySymbol = $rootScope.currencyInfo.symbol;
 
                         // for displaying default min/max fare values into refine search
@@ -333,7 +310,6 @@
                     $scope.refineDestinations();
                 }
             });
-
             $scope.selectedform = 'SuggestDestination';
             loadScrollbars();
         }
@@ -402,7 +378,22 @@
             };
             return data;
         }
-
+        function updaterefineSearch() {
+            var data = {
+                f: $scope.Origin,
+                d: $scope.FromDate,
+                r: $scope.ToDate,
+                th: $scope.Theme,
+                a: $scope.Region,
+                lf: $scope.Minfare,
+                hf: $scope.Maxfare,
+                pcu: $scope.lastselectedcurrency,
+                ncu: $scope.lastselectedcurrency
+            };
+            LocalStorageFactory.save(dataConstant.refineSearchLocalStorage, data, {
+                f: $scope.Origin
+            });
+        }
         function GetCurrencySymbols() {
             UtilFactory.GetCurrencySymbols();
         }
@@ -499,10 +490,7 @@
         $scope.$on('redrawMarkers', function (event, data) {
             $scope.isDestinations = data.isDestinations;
             data = _.map(data.markers, function (i) { return i.markerInfo; });
-            if (!IsCurrencyChange)
-                setDestinationCards(data);
-            else
-                IsCurrencyChange = false;
+            setDestinationCards(data);
         });
 
         $scope.$on('displayOnMap', function (event, data) {
@@ -526,23 +514,48 @@
             setFareSliderValues($scope.priceSliderValues.range.min, $scope.priceSliderValues.range.max, $scope.priceSliderValues.range.min, $scope.priceSliderValues.range.max);
             $timeout(function () { stopEvent = false; $scope.refineDestinations(true); }, 0, false);
         }
+
+        function setMinMaxfare(destinationlistOriginal) {
+            var minMaxFare = getMinMaxFare(destinationlistOriginal);
+            var Maxfare = 0, Minfare = 0;
+            if (minMaxFare.MaxFare && minMaxFare.MaxFare != 0)
+                Maxfare = Math.ceil(minMaxFare.MaxFare * $rootScope.currencyInfo.rate);
+            if (minMaxFare.MinFare && minMaxFare.MinFare != 0)
+                Minfare = Math.floor(minMaxFare.MinFare * $rootScope.currencyInfo.rate);
+            return {
+                Minfare: Minfare,
+                Maxfare: Maxfare
+            }
+        }
+
+        function setMapMarker(handlerName,destinationlist,sortByPrice)
+        {
+            $rootScope.$broadcast(handlerName, {
+                destinationlist: destinationlist,
+                Region: $scope.Region,
+                Theme: $scope.Theme,
+                Price: $scope.priceSliderValues.values.max != $scope.priceSliderValues.range.max || $scope.priceSliderValues.values.min != $scope.priceSliderValues.range.min,
+                sortByPrice: sortByPrice
+            });
+        }
+
         $scope.$on('setExchangeRate', function (event, args) {
             if (destinationlistOriginal) {
-                filterDestinations(destinationlistOriginal, false);
+                for (var x = 0; x < destinationlistOriginal.length; x++) {
+                    var destination = destinationlistOriginal[x];
+                    destinationlistOriginal[x].LowRate = parseFloat(UtilFactory.GetLowFareForMap(destination) * $rootScope.currencyInfo.rate).toFixed();
+                    destinationlistOriginal[x].CurrencySymbol = $rootScope.currencyInfo.symbol;
+                }
                 $scope.fareCurrencySymbol = $rootScope.currencyInfo.symbol;
 
-                //$scope.destinationCardListDisp = null;
-                var minMaxFare = getMinMaxFare(destinationlistOriginal);
-                var Maxfare = 0, Minfare = 0;
-                if (minMaxFare.MaxFare && minMaxFare.MaxFare != 0)
-                    Maxfare = Math.ceil(minMaxFare.MaxFare * $rootScope.currencyInfo.rate);
-                if (minMaxFare.MinFare && minMaxFare.MinFare != 0)
-                    Minfare = Math.floor(minMaxFare.MinFare * $rootScope.currencyInfo.rate);
+                var Fare = setMinMaxfare(destinationlistOriginal);
 
-                IsCurrencyChange = true;
                 loadScrollbars();
-                setFareSliderValues(Minfare, Maxfare, Minfare, Maxfare);
-                $timeout(function () { stopEvent = false; $scope.refineDestinations(true); }, 0, true);
+                setFareSliderValues(Fare.Minfare, Fare.Maxfare, Fare.Minfare, Fare.Maxfare);
+
+                setMapMarker('currencyChangeSetMarkerOnMap',googleMapPassinglist);
+
+                $timeout(function () { updaterefineSearch(); }, 0, true);
                 $scope.lastselectedcurrency = $rootScope.currencyCode;
             }
         });

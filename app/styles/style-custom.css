@@ -1115,7 +1115,21 @@ ul .stop-line {
     background-position: 60% top;
     background-size: cover;
 }
-
+.destination-image-7 {
+    background-image: url("../images/home-images/Mainpagebg8.jpg");
+    background-position: 60% top;
+    background-size: cover;
+}
+.destination-image-8 {
+    background-image: url("../images/home-images/Mainpagebg9.jpg");
+    background-position: 60% top;
+    background-size: cover;
+}
+.destination-image-9 {
+    background-image: url("../images/home-images/Mainpagebg10.jpg");
+    background-position: 60% top;
+    background-size: cover;
+}
 /*#region Jassor image slider */
 
 #jssor_slider {

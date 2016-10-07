@@ -69,7 +69,7 @@
                         }
                     });
 
-                    storeSearchData("Default");                 
+                    storeSearchData();
                     $scope.OriginAirport = _.find($scope.AvailableAirports, function (airport) {
                         return airport.airport_Code == $scope.Origin.toUpperCase()
                     });
@@ -115,7 +115,7 @@
                             OriginAirportName: $scope.Origin,
                             DestinationaArportName: $scope.DestinationLocation,
                             FromDate: $scope.FromDate,
-                            ToDate: $scope.ToDate,                           
+                            ToDate: $scope.ToDate,
                             PointOfSaleCountry: $scope.OriginAirport.airport_CountryCode
                         },
                         AvailableAirline: $scope.airlineJsonData
@@ -140,9 +140,8 @@
         $scope.attractionTabs = [{ title: 'Hotels', isActive: false }, { title: $scope.attractionProviders.Google, isActive: true },
                                 { title: $scope.attractionProviders.TripAdvisor, isActive: false }];
 
-        function storeSearchData(currencyCode)
-        {
-            $scope.lastselectedcurrency = ($rootScope.currencyCode) ? $rootScope.currencyCode : "Default";
+        function storeSearchData(currencyCode) {
+            $scope.lastselectedcurrency = $rootScope.currencyCode;
 
             var data = {
                 f: $scope.Origin
@@ -160,7 +159,6 @@
                     r: $scope.ToDate,
                     ncu: currencyCode
                 };
-                $scope.lastselectedcurrency = "Default";
                 LocalStorageFactory.save(dataConstant.refineSearchLocalStorage, data);
                 $rootScope.setdefaultcurrency($scope.lastselectedcurrency);
             }
@@ -201,8 +199,7 @@
                     f: $scope.Origin
                 });
             }
-            else
-            {
+            else {
                 storeSearchData($rootScope.currencyCode);
             }
         });

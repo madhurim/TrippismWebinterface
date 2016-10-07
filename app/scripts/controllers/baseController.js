@@ -15,10 +15,9 @@
             getLocale();
         }
 
-        function buidCurrencyDropDown()
-        {
+        function buidCurrencyDropDown() {
             UtilFactory.GetCurrencySymbols().then(function (data) {
-                getfilterCurrencyInfo(data);                
+                getfilterCurrencyInfo(data);
             });
         }
 
@@ -30,10 +29,10 @@
                 }
                 else {
                     $rootScope.format = 'MM/dd/yyyy';
-                }                
-            });            
-        }      
-        
+                }
+            });
+        }
+
 
         // filter Currecncy data on based Currency List
         function getfilterCurrencyInfo(currencyData) {
@@ -51,23 +50,24 @@
                 // Find currencuCode from CurrencyData
                 var currency = _.find(currencyData, function (i) { return i.code == currencyCode; });
                 var symbol = (currency) ? (currency.code + " - " + currency.symbol) : currencyCode;
+
                 $scope.currencyList.push({
-                    code: 'Default',
+                    code: (currency) ? currency.code : currencyCode,
                     symbol: symbol
-                })                
+                });
             }
 
             // Bind CurrencyList into CurrencyCode DropDown
             _.each(currencyList, function (item) {
-                var currencycode = (item.CurrencyCode == $rootScope.base) ? "Default" : item.CurrencyCode;
+
                 $scope.currencyList.push({
-                    code: currencycode,
+                    code: item.CurrencyCode,
                     symbol: item.CurrencyCode + " - " + item.CurrencySymbol
                 });
             });
 
             // Set Selected CurrencyCode
-            $scope.currencyCode = (currencyCode == $rootScope.currencyInfo.currencyCode) ? "Default" : $rootScope.currencyInfo.currencyCode;
+            $scope.currencyCode = $rootScope.currencyInfo.currencyCode;
         }
 
         $scope.aboutUs = function () {
@@ -89,14 +89,14 @@
             $rootScope.currencypromise = '';
             $scope.currencyCode = code;
 
-            var IsSameCurrency = (code == $rootScope.currencyInfo.currencyCode) ? false : ((code == "Default") ? (($rootScope.base == $rootScope.currencyInfo.currencyCode) ? false : true) : true);
+            $rootScope.currencyCode = code;
+
+            var IsSameCurrency = (code == $rootScope.currencyInfo.currencyCode) ? false : true;
             if (IsSameCurrency) {
                 $rootScope.currencypromise = $rootScope.changeRate($rootScope.base).then(function (data) {
                     $scope.$broadcast('setExchangeRate');
                 });
             }
-
-            $rootScope.currencyCode = $scope.currencyCode;
         }
 
         $scope.$on('currencyChange', function (event, args) {
@@ -122,14 +122,14 @@
 
         $rootScope.changeRate = function (baseCode) {
             $rootScope.base = baseCode;
-            var target = $scope.currencyCode;
+            var target = ($rootScope.currencyCode) ? $rootScope.currencyCode : baseCode;
             return getConversionRate($rootScope.base, target).then(function (data) {
                 var currencyConversionRate = data;
                 $rootScope.currencyInfo = {
                     rate: currencyConversionRate.rate,
                     symbol: currencyConversionRate.currencySymbol,
                     currencyCode: currencyConversionRate.currencyCode
-                }                
+                }
                 buidCurrencyDropDown();
                 return currencyConversionRate;
             });
@@ -139,9 +139,8 @@
             $rootScope.format = $locale.DATETIME_FORMATS.mediumDate;
         });
 
-        $rootScope.setdefaultcurrency = function(target)
-        {
-            $scope.currencyCode = (target) ? target : "Default";
+        $rootScope.setdefaultcurrency = function (target) {
+            $scope.currencyCode = target;
             $rootScope.currencyCode = $scope.currencyCode;
         }
     }

@@ -76,7 +76,7 @@
                 var data = {
                     f: $scope.Origin
                 };
-                $scope.lastselectedcurrency = ($rootScope.currencyCode) ? $rootScope.currencyCode : "Default";
+                $scope.lastselectedcurrency = $rootScope.currencyCode;
 
                 var data = LocalStorageFactory.get(dataConstant.refineSearchLocalStorage, data);
                 if (data) {
@@ -94,10 +94,8 @@
                         f: $scope.Origin,
                         d: $scope.FromDate,
                         r: $scope.ToDate,
-                        pcu: "Default",
-                        ncu: "Default"
                     };
-                    $scope.lastselectedcurrency = "Default";
+                    $scope.lastselectedcurrency = undefined;
                     LocalStorageFactory.save(dataConstant.refineSearchLocalStorage, data);
                     $rootScope.setdefaultcurrency($scope.lastselectedcurrency);
                 }
@@ -229,7 +227,7 @@
                     $timeout(function () { updaterefineSearch(); }, 0, true);
                 }
                 if (!arr.length) setDestinationCards([]), $scope.isDestinations = false;
-                setMapMarker('setMarkerOnMap',arr,sortByPrice);
+                setMapMarker('setMarkerOnMap', arr, sortByPrice);
             }
         }
 
@@ -528,34 +526,10 @@
             }
         }
 
-        function setMapMarker(handlerName,destinationlist,sortByPrice)
-        {
-            $rootScope.$broadcast(handlerName, {
-                destinationlist: destinationlist,
-                Region: $scope.Region,
-                Theme: $scope.Theme,
-                Price: $scope.priceSliderValues.values.max != $scope.priceSliderValues.range.max || $scope.priceSliderValues.values.min != $scope.priceSliderValues.range.min,
-                sortByPrice: sortByPrice
-            });
-        }
-
-        $scope.$on('setExchangeRate', function (event, args) {
-            if (destinationlistOriginal) {
-                for (var x = 0; x < destinationlistOriginal.length; x++) {
-                    var destination = destinationlistOriginal[x];
-                    destinationlistOriginal[x].LowRate = parseFloat(UtilFactory.GetLowFareForMap(destination) * $rootScope.currencyInfo.rate).toFixed();
-                    destinationlistOriginal[x].CurrencySymbol = $rootScope.currencyInfo.symbol;
-                }
-                $scope.fareCurrencySymbol = $rootScope.currencyInfo.symbol;
-
-                var Fare = setMinMaxfare(destinationlistOriginal);
-
+                IsCurrencyChange = true;
                 loadScrollbars();
-                setFareSliderValues(Fare.Minfare, Fare.Maxfare, Fare.Minfare, Fare.Maxfare);
-
-                setMapMarker('currencyChangeSetMarkerOnMap',googleMapPassinglist);
-
-                $timeout(function () { updaterefineSearch(); }, 0, true);
+                setFareSliderValues(Minfare, Maxfare, Minfare, Maxfare);
+                $timeout(function () { stopEvent = false; $scope.refineDestinations(true); }, 0, true);
                 $scope.lastselectedcurrency = $rootScope.currencyCode;
             }
         });

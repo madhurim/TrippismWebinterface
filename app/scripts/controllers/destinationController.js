@@ -159,6 +159,7 @@
                     r: $scope.ToDate,
                     ncu: currencyCode
                 };
+                $scope.lastselectedcurrency = undefined;
                 LocalStorageFactory.save(dataConstant.refineSearchLocalStorage, data);
                 $rootScope.setdefaultcurrency($scope.lastselectedcurrency);
             }

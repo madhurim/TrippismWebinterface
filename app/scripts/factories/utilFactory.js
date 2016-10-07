@@ -294,7 +294,7 @@
         }
 
         function getCurrencyConversion(currencyConversionDetail) {
-            if ((currencyConversionDetail.base == currencyConversionDetail.target) || currencyConversionDetail.base == undefined || currencyConversionDetail.target == undefined || currencyConversionDetail.target == "Default") {
+            if ((currencyConversionDetail.base == currencyConversionDetail.target) || currencyConversionDetail.base == undefined || currencyConversionDetail.target == undefined) {
                 var defer = $q.defer();
                 defer.resolve({
                     currencyCode: currencyConversionDetail.base,

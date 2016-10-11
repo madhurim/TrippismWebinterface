@@ -35,6 +35,7 @@
         apiURLforProfileAnonymous: profileHostname + '/api/profiles/anonymous',
         apiURLforProfileActivity: profileHostname + '/api/profile/activity',
         apiURLforProfileAuthentication: profileHostname + '/api/profiles/authentication',
+        apiURLforProfileAccount: profileHostname + '/api/profiles/account',
     };
     angular.module('TrippismUIApp').constant('urlConstant', constants);
 })();

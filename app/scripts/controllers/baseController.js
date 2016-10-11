@@ -67,6 +67,12 @@
                 setauthenticationLabel();
             })
         }
+        $scope.changePwd = function () {
+            var GetEmailDetPopupInstance = $modal.open({
+                templateUrl: urlConstant.partialViewsPath + 'changePasswordPartial.html',
+                controller: 'changePasswordController'
+            });
+        }
     }
 })();
 

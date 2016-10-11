@@ -1,9 +1,9 @@
 ﻿(function () {
     'use strict';
     var controllerId = 'loginController';
-    angular.module('TrippismUIApp').controller(controllerId, ['$scope', '$modal', 'LoginFactory', 'LocalStorageFactory', 'dataConstant', '$rootScope', LoginController]);
+    angular.module('TrippismUIApp').controller(controllerId, ['$scope', '$modal', 'accountFactory', 'LocalStorageFactory', 'dataConstant', '$rootScope', 'urlConstant', LoginController]);
 
-    function LoginController($scope, $modal, LoginFactory, LocalStorageFactory, dataConstant, $rootScope) {
+    function LoginController($scope, $modal, AccountFactory, LocalStorageFactory, dataConstant, $rootScope, urlConstant) {
         $scope.IsUserlogin = false;
         $scope.submitModal = function () {
             validate();
@@ -18,10 +18,11 @@
                 UserName: $scope.emailid,
                 Password: $scope.password
             }
-            $scope.createAccountPromise = LoginFactory.LoginUser(signIn).then(function (data) {
+            $scope.createAccountPromise = AccountFactory.LoginUser(signIn).then(function (data) {
                 if (data.status == 200) {
                     $scope.dismiss();
-                    var userInfo = LocalStorageFactory.get(dataConstant.GuidLocalstorage);
+                    debugger;
+                    var userInfo = data.AuthDetailsViewModel.CustomerGuid;
                     LocalStorageFactory.update(dataConstant.GuidLocalstorage, { IsLogin: 1 });
                 }
                 else if (data.status == 403) {
@@ -38,9 +39,10 @@
         }
         function validate() {
             $scope.hasError = false;
-            if ($scope.username && $scope.username.length > 0 && !checkEmail($scope.username)) {
+            if ($scope.emailid && $scope.emailid.length > 0 && !checkEmail($scope.emailid)) {
                 $scope.hasError = true;
                 $scope.isValidFromEmail = false;
+                return;
             }
             else
                 $scope.isValidFromEmail = true;
@@ -58,7 +60,7 @@
                 CustomerGuid: LocalStorageFactory.get(dataConstant.GuidLocalstorage),
                 UserName: emailId
             }
-            $scope.createAccountPromise = LoginFactory.CreateAccount(signUp).then(function (data) {
+            $scope.createAccountPromise = AccountFactory.CreateAccount(signUp).then(function (data) {
                 if (data.status == 200) {
                     $scope.dismiss();
                     alertify.alert("Success", "");
@@ -75,7 +77,13 @@
                 }
             });
         }
-
+        $scope.forgotpassword = function () {
+            $scope.dismiss();
+            var GetEmailDetPopupInstance = $modal.open({
+                templateUrl: urlConstant.partialViewsPath + 'forgotPasswordPartial.html',
+                controller: 'forgotPasswordController'
+            });
+        }
         $scope.signUp = function () {
             $scope.IsUserlogin = true;
         }

@@ -311,9 +311,31 @@
                     removeMarkers();
 
                     if (scope.airportList.length > 0) {
-                        if (args.Region || (!args.sortByPrice && !args.Price))
+                        if (args.Region || (!args.sortByPrice && !args.Price) || !args.currencyChange)
                             centerMap(args);
 
+                        if (args.destinationlist != undefined && args.destinationlist.length > 0) {
+                            scope.renderMap(args);
+                            destinations = args.destinationlist;
+                            sortByPrice = args.sortByPrice;
+                            if ($rootScope.isShowAlerityMessage && UtilFactory.Device.medium()) {
+                                $timeout(function () {
+                                    showMessage();
+                                }, 0, false);
+                            }
+                        }
+                    }
+                });
+                scope.$on('currencyChangeSetMarkerOnMap', function (event, args) {
+                    if (!args) {
+                        displayBlankMap();
+                        return;
+                    }
+
+                    // remove all markers from map
+                    removeMarkers();
+
+                    if (scope.airportList.length > 0) {
                         if (args.destinationlist != undefined && args.destinationlist.length > 0) {
                             scope.renderMap(args);
                             destinations = args.destinationlist;
@@ -360,7 +382,7 @@
                             });
                             airportLoc = new google.maps.LatLng(originairport.airport_Lat, originairport.airport_Lng); break;
                         }
-                    }
+                    }                    
 
                     $timeout(function () {
                         scope.destinationMap.setZoom(3);

@@ -1081,41 +1081,55 @@ ul .stop-line {
 }
 
 .destination-image-1 {
-    background-image: url("../images/home-images/Mainpagebg2.jpg");
+    background-image: url("../images/home-images/Mainpagebg1.jpg");
     background-position: 60% top;
     background-size: cover;
 }
 
 .destination-image-2 {
-    background-image: url("../images/home-images/Mainpagebg3.jpg");
+    background-image: url("../images/home-images/Mainpagebg2.jpg");
     background-position: 60% top;
     background-size: cover;
 }
 
 .destination-image-3 {
-    background-image: url("../images/home-images/Mainpagebg4.jpg");
+    background-image: url("../images/home-images/Mainpagebg3.jpg");
     background-position: 60% top;
     background-size: cover;
 }
 
 .destination-image-4 {
-    background-image: url("../images/home-images/Mainpagebg5.jpg");
+    background-image: url("../images/home-images/Mainpagebg4.jpg");
     background-position: 60% top;
     background-size: cover;
 }
 
 .destination-image-5 {
-    background-image: url("../images/home-images/Mainpagebg6.jpg");
+    background-image: url("../images/home-images/Mainpagebg5.jpg");
     background-position: 60% top;
     background-size: cover;
 }
 
 .destination-image-6 {
+    background-image: url("../images/home-images/Mainpagebg6.jpg");
+    background-position: 60% top;
+    background-size: cover;
+}
+.destination-image-7 {
     background-image: url("../images/home-images/Mainpagebg7.jpg");
     background-position: 60% top;
     background-size: cover;
 }
-
+.destination-image-8 {
+    background-image: url("../images/home-images/Mainpagebg8.jpg");
+    background-position: 60% top;
+    background-size: cover;
+}
+.destination-image-9 {
+    background-image: url("../images/home-images/Mainpagebg9.jpg");
+    background-position: 60% top;
+    background-size: cover;
+}
 /*#region Jassor image slider */
 
 #jssor_slider {
@@ -1354,7 +1368,7 @@ ul .stop-line {
 }
 /*#endregion md-card*/
 
-.ico-youtube {
+/*.ico-youtube {
     background-image: url("../images/youtube.png");
     height: 50px;
     width: 85px;
@@ -1365,7 +1379,7 @@ ul .stop-line {
     margin-bottom: 23px;
     cursor: pointer;
     opacity: 0.8;
-}
+}*/
 
     .ico-youtube:hover {
         background-position: 0px -58px;

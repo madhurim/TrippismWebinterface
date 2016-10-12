@@ -181,54 +181,59 @@
             if (stopEvent) return;
             if (destinationlistOriginal && destinationlistOriginal.length > 0) {
                 $scope.isReset = true;
-                var arr = [];
-                for (var i = 0; i < destinationlistOriginal.length; i++) {
-                    var destination = destinationlistOriginal[i];
-                    var airport = $filter('filter')(AvailableAirports, { airport_Code: destination.DestinationLocation });
-                    if (airport.length > 1)
-                        airport = _.find(airport, function (item) { return item.airport_IsMAC == false; });
-                    else
-                        airport = airport[0];
-                    if (airport) {
-                        var isFound = true;
-                        // [S] theme                        
-                        if ($scope.Theme) {
-                            var themes = airport.themes.map(function (element) { return element.toLowerCase(); });
-                            if (themes.indexOf($scope.Theme.toLowerCase()) > -1)
-                                isFound = true;
-                            else
-                                isFound = false;
-                        }
-                        // [E] theme
-                        // [S] region                 
-                        if (isFound && $scope.Region) {
-                            if ($scope.Region.toLowerCase() == airport.region.toLowerCase())
-                                isFound = true;
-                            else
-                                isFound = false;
-                        }
-                        // [E] region
-                        // [S] min-max fare
-                        if (isFound && $scope.Minfare > 0 && $scope.Maxfare > 0) {
-                            var fare = Math.ceil(destination.LowRate);
-                            if (fare >= $scope.Minfare && fare <= $scope.Maxfare)
-                                isFound = true;
-                            else
-                                isFound = false;
-                        }
-                        // [E] min-max fare
-                        if (isFound)
-                            arr.push(destination);
-                    }
-                }
-                googleMapPassinglist = arr;
+
+                googleMapPassinglist = filter(destinationlistOriginal);
                 updateSearchCriteria();
                 if (isSelected) {
                     $timeout(function () { updaterefineSearch(); }, 0, true);
                 }
-                if (!arr.length) setDestinationCards([]), $scope.isDestinations = false;
-                setMapMarker('setMarkerOnMap', arr, sortByPrice);
+                if (!googleMapPassinglist.length) setDestinationCards([]), $scope.isDestinations = false;
+                setMapMarker('setMarkerOnMap', googleMapPassinglist, sortByPrice);
             }
+        }
+
+        function filter(destinationlistOriginal) {
+            var arr = [];
+            for (var i = 0; i < destinationlistOriginal.length; i++) {
+                var destination = destinationlistOriginal[i];
+                var airport = $filter('filter')(AvailableAirports, { airport_Code: destination.DestinationLocation });
+                if (airport.length > 1)
+                    airport = _.find(airport, function (item) { return item.airport_IsMAC == false; });
+                else
+                    airport = airport[0];
+                if (airport) {
+                    var isFound = true;
+                    // [S] theme                        
+                    if ($scope.Theme) {
+                        var themes = airport.themes.map(function (element) { return element.toLowerCase(); });
+                        if (themes.indexOf($scope.Theme.toLowerCase()) > -1)
+                            isFound = true;
+                        else
+                            isFound = false;
+                    }
+                    // [E] theme
+                    // [S] region                 
+                    if (isFound && $scope.Region) {
+                        if ($scope.Region.toLowerCase() == airport.region.toLowerCase())
+                            isFound = true;
+                        else
+                            isFound = false;
+                    }
+                    // [E] region
+                    // [S] min-max fare
+                    if (isFound && $scope.Minfare > 0 && $scope.Maxfare > 0) {
+                        var fare = Math.ceil(destination.LowRate);
+                        if (fare >= $scope.Minfare && fare <= $scope.Maxfare)
+                            isFound = true;
+                        else
+                            isFound = false;
+                    }
+                    // [E] min-max fare
+                    if (isFound)
+                        arr.push(destination);
+                }
+            }
+            return arr;
         }
 
         function findDestinations() {
@@ -506,6 +511,7 @@
                 $scope.destinationCardListDisp = $filter('limitTo')(data, limitDestinationCards);
             }, 0, true)
         }
+        
         $scope.resetFilter = function () {
             stopEvent = true;
             $('#select-theme,#select-region').ddslick('select', { index: 0 });
@@ -546,14 +552,19 @@
                 $scope.fareCurrencySymbol = $rootScope.currencyInfo.symbol;
 
                 var Fare = setMinMaxfare(destinationlistOriginal);
-
-                loadScrollbars();
                 setFareSliderValues(Fare.Minfare, Fare.Maxfare, Fare.Minfare, Fare.Maxfare);
 
-                setMapMarker('currencyChangeSetMarkerOnMap', googleMapPassinglist);
+                $timeout(function () {
+                    googleMapPassinglist = filter(destinationlistOriginal);
+                    loadScrollbars();
 
-                $timeout(function () { updaterefineSearch(); }, 0, true);
-                $scope.lastselectedcurrency = $rootScope.currencyCode;
+                    setMapMarker('currencyChangeSetMarkerOnMap', googleMapPassinglist);
+
+                    $scope.lastselectedcurrency = $rootScope.currencyCode;
+                    $timeout(function () {
+                        updateSearchCriteria(); updaterefineSearch();
+                    }, 0, true);
+                }, 0, true);
             }
         });
     }

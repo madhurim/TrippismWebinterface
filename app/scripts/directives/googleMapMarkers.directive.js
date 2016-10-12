@@ -336,7 +336,6 @@
                     removeMarkers();
 
                     if (scope.airportList.length > 0) {
-                        debugger;
                         if (args.destinationlist != undefined && args.destinationlist.length > 0) {
                             scope.renderMap(args);
                             destinations = args.destinationlist;

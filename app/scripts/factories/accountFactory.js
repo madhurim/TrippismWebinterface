@@ -26,8 +26,7 @@
             });
         }
 
-        function LoginUser(data)
-        {
+        function LoginUser(data) {
             var url = urlConstant.apiURLforProfileAuthentication + "/signin";
             return $http({
                 method: 'POST',
@@ -41,8 +40,7 @@
             });
         }
 
-        function ForgotPassword(emailid)
-        {
+        function ForgotPassword(emailid) {
             var url = urlConstant.apiURLforProfileAccount + "/forgotpassword";
 
             return $http({
@@ -61,14 +59,11 @@
 
         function ChangePassword(data) {
             var url = urlConstant.apiURLforProfileAccount + "/changepassword";
-
             return $http({
                 method: 'POST',
                 url: url,
                 data: serialize(data),
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             }).then(function (data) {
                 return data;
             }, function (e) {

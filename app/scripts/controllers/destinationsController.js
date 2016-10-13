@@ -228,9 +228,9 @@
                         d: $scope.FromDate,
                         r: $scope.ToDate
                     });
-
+                    var CustomerGuid =  LocalStorageFactory.get(dataConstant.GuidLocalstorage)
                     var serachData = {
-                        RefGuid: LocalStorageFactory.get(dataConstant.GuidLocalstorage),
+                        RefGuid: CustomerGuid.Guid,
                         Origin: $scope.Origin,
                         FromDate: ConvertToRequiredDate($scope.FromDate, 'API'),
                         ToDate: ConvertToRequiredDate($scope.ToDate, 'API'),

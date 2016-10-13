@@ -36,7 +36,8 @@
                 scope.getlink = function (data) {
                     return '/#/destination/f=' + scope.Origin.toUpperCase() + ';t=' + data.DestinationLocation + ';d=' + ConvertToRequiredDate(data.DepartureDateTime, 'API') + ';r=' + ConvertToRequiredDate(data.ReturnDateTime, 'API');
                 };
-                scope.addFevDestination = function ($event) {
+                scope.addFevDestination = function ($event, CityCode) {
+                    var code = CityCode;
                     $event.preventDefault();
                     $rootScope.loginPoupup();
                 }

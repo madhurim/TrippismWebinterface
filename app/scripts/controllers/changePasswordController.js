@@ -27,13 +27,11 @@
             validate();
             if ($scope.hasError)
                 return;
-            debugger;
-            var Guid = LocalStorageFactory.get(dataConstant.GuidLocalstorage);
+            var CustomerGuid = LocalStorageFactory.get(dataConstant.GuidLocalstorage);
             var details = {
                 OldPassword: $scope.oldpassword,
                 NewPassword: $scope.newpassword,
-                ConfirmPassword: $scope.conformpassword
-                //Guid : Guid.
+                CustomerGuid: CustomerGuid.Guid
             }
             $scope.updatePassword = AccountFactory.ChangePassword(details).then(function (data) {
                 if (data.status == 200) {

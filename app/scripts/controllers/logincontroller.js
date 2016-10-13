@@ -14,16 +14,14 @@
             var password = $scope.password;
 
             var signIn = {
-                CustomerGuid: LocalStorageFactory.get(dataConstant.GuidLocalstorage),
-                UserName: $scope.emailid,
+                Email: $scope.emailid,
                 Password: $scope.password
             }
             $scope.createAccountPromise = AccountFactory.LoginUser(signIn).then(function (data) {
                 if (data.status == 200) {
+                    var userInfo = data.data.AuthDetailsViewModel.CustomerGuid;
+                    LocalStorageFactory.update(dataConstant.GuidLocalstorage, { Guid: userInfo, IsLogin: 1 });
                     $scope.dismiss();
-                    debugger;
-                    var userInfo = data.AuthDetailsViewModel.CustomerGuid;
-                    LocalStorageFactory.update(dataConstant.GuidLocalstorage, { IsLogin: 1 });
                 }
                 else if (data.status == 403) {
                     $scope.emailid = null;
@@ -55,10 +53,10 @@
             if ($scope.hasError)
                 return;
             var emailId = $scope.emailid;
-
+            var CustomerGuid = LocalStorageFactory.get(dataConstant.GuidLocalstorage);
             var signUp = {
-                CustomerGuid: LocalStorageFactory.get(dataConstant.GuidLocalstorage),
-                UserName: emailId
+                CustomerGuid: CustomerGuid.Guid,
+                Email: emailId
             }
             $scope.createAccountPromise = AccountFactory.CreateAccount(signUp).then(function (data) {
                 if (data.status == 200) {

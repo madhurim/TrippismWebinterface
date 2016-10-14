@@ -1,8 +1,8 @@
-(function () {
+﻿(function () {
     'use strict';
-    angular.module('TrippismUIApp').factory('baseFactory', ['$http', '$filter',$q', 'LocalStorageFactory', 'dataConstant', 'urlConstant', 'UtilFactory', 'tmhDynamicLocale', '$locale', baseFactory]);
+    angular.module('TrippismUIApp').factory('BaseFactory', ['$http', '$filter', '$q', 'LocalStorageFactory', 'dataConstant', 'urlConstant', 'UtilFactory', 'tmhDynamicLocale', '$locale', BaseFactory]);
 
-    function baseFactory($http, $filter,$q, LocalStorageFactory, dataConstant, urlConstant, UtilFactory, tmhDynamicLocale, $locale) {
+    function BaseFactory($http, $filter, $q, LocalStorageFactory, dataConstant, urlConstant, UtilFactory, tmhDynamicLocale, $locale) {
         var service = {
             storeAnonymousData: storeAnonymousData,
             storeSerachCriteria: storeSerachCriteria,

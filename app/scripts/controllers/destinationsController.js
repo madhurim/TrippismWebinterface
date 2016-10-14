@@ -12,6 +12,7 @@
             'dataConstant',
             'LocalStorageFactory',
             '$location',
+            'BaseFactory',
              DestinationsController]);
     function DestinationsController(
         $scope,
@@ -23,7 +24,8 @@
         UtilFactory,
         dataConstant,
         LocalStorageFactory,
-        $location
+        $location,
+        BaseFactory
         ) {
 
         $scope.$emit('bodyClass', 'mappage');   // for changing <body> class    
@@ -40,6 +42,7 @@
         $scope.isModified = false;
         var sortByPrice = 'dsc';
         var destinationCardList = [];
+        var googleMapPassinglist = [];
         var stopEvent = false;  // flag for stopping refineDestinations call
 
         initFareSliderValues();
@@ -72,18 +75,30 @@
 
                 // store into local storage
                 var data = {
-                    f: $scope.Origin,
-                    d: $scope.FromDate,
-                    r: $scope.ToDate
+                    f: $scope.Origin
                 };
-
+                $scope.lastselectedcurrency = $rootScope.currencyCode;
 
                 var data = LocalStorageFactory.get(dataConstant.refineSearchLocalStorage, data);
                 if (data) {
                     $scope.previousTheme = $scope.Theme = data.th;
                     $scope.previousRegion = $scope.Region = data.a;
-                    $scope.Minfare = data.lf;
-                    $scope.Maxfare = data.hf;
+                    $scope.lastselectedcurrency = (data.ncu) ? data.ncu : $scope.lastselectedcurrency;
+                    if (data.pcu == data.ncu && data.lf && data.hf) {
+                        $scope.Minfare = data.lf;
+                        $scope.Maxfare = data.hf;
+                    }
+                    $rootScope.setdefaultcurrency($scope.lastselectedcurrency);
+                }
+                else {
+                    data = {
+                        f: $scope.Origin,
+                        d: $scope.FromDate,
+                        r: $scope.ToDate,
+                    };
+                    $scope.lastselectedcurrency = undefined;
+                    LocalStorageFactory.save(dataConstant.refineSearchLocalStorage, data);
+                    $rootScope.setdefaultcurrency($scope.lastselectedcurrency);
                 }
 
                 angular.element('#select-theme').val($scope.Theme);
@@ -244,15 +259,15 @@
                         destinationlistOriginal = filterDestinations(data.FareInfo);
                         $scope.fareCurrencySymbol = $rootScope.currencyInfo.symbol;
 
-                    // for displaying default min/max fare values into refine search
-                    var minMaxFare = getMinMaxFare(destinationlistOriginal);
-                    var Maxfare = 0, Minfare = 0;
-                    if (minMaxFare.MaxFare && minMaxFare.MaxFare != 0)
-                        Maxfare = Math.ceil(minMaxFare.MaxFare);
-                    if (minMaxFare.MinFare && minMaxFare.MinFare != 0)
-                        Minfare = Math.floor(minMaxFare.MinFare);
+                        // for displaying default min/max fare values into refine search
+                        var minMaxFare = getMinMaxFare(destinationlistOriginal);
+                        var Maxfare = 0, Minfare = 0;
+                        if (minMaxFare.MaxFare && minMaxFare.MaxFare != 0)
+                            Maxfare = Math.ceil(minMaxFare.MaxFare);
+                        if (minMaxFare.MinFare && minMaxFare.MinFare != 0)
+                            Minfare = Math.floor(minMaxFare.MinFare);
 
-                    setFareSliderValues(Minfare, Maxfare, $scope.Minfare || Minfare, $scope.Maxfare || Maxfare);
+                        setFareSliderValues(Minfare, Maxfare, $scope.Minfare || Minfare, $scope.Maxfare || Maxfare);
 
                         UtilFactory.MapscrollTo('wrapper');
                         $scope.isRefineSeachCollapsed = true;
@@ -384,18 +399,18 @@
             LocalStorageFactory.save(dataConstant.refineSearchLocalStorage, data, {
                 f: $scope.Origin
             });
-var CustomerGuid =  LocalStorageFactory.get(dataConstant.GuidLocalstorage)
-                    var serachData = {
-                        RefGuid: CustomerGuid.Guid,
-                        Origin: $scope.Origin,
-                        FromDate: ConvertToRequiredDate($scope.FromDate, 'API'),
-                        ToDate: ConvertToRequiredDate($scope.ToDate, 'API'),
-                        Theme: $scope.Theme,
-                        Region: $scope.Region,
-                        MinFate: $scope.Minfare,
-                        MaxFare: $scope.Maxfare
-                    }
-                    baseFactory.storeSerachCriteria(serachData);
+            var CustomerGuid = LocalStorageFactory.get(dataConstant.GuidLocalstorage)
+            var serachData = {
+                RefGuid: CustomerGuid.Guid,
+                Origin: $scope.Origin,
+                FromDate: ConvertToRequiredDate($scope.FromDate, 'API'),
+                ToDate: ConvertToRequiredDate($scope.ToDate, 'API'),
+                Theme: $scope.Theme,
+                Region: $scope.Region,
+                MinFate: $scope.Minfare,
+                MaxFare: $scope.Maxfare
+            }
+            BaseFactory.storeSerachCriteria(serachData);
         }
         function GetCurrencySymbols() {
             UtilFactory.GetCurrencySymbols();

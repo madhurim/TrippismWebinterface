@@ -2,9 +2,9 @@
     'use strict';
     var controllerId = 'BaseController';
     angular.module('TrippismUIApp').controller(controllerId,
-        ['$scope', '$modal', '$rootScope', 'UtilFactory', 'urlConstant', BaseController]);
+        ['$scope', '$modal', '$rootScope', 'UtilFactory', 'urlConstant', 'LocalStorageFactory', 'dataConstant', 'BaseFactory', 'tmhDynamicLocale', '$locale', BaseController]);
 
-    function BaseController($scope, $modal, $rootScope, UtilFactory, urlConstant) {
+    function BaseController($scope, $modal, $rootScope, UtilFactory, urlConstant, LocalStorageFactory, dataConstant, BaseFactory, tmhDynamicLocale, $locale) {
         $rootScope.isShowAlerityMessage = true;
         $scope.currencyList;
         init();
@@ -115,9 +115,16 @@
         $scope.$on('bodyClass', function (event, args) {
             $scope.bodyClass = args;
         });
-    }
-})();
-
+        function getConversionRate(currentCurrencyCode, exchangeCurrencyCode) {
+            var currencyConversionDetail = {
+                base: currentCurrencyCode,
+                target: exchangeCurrencyCode,
+                timestamp: new Date()
+            };
+            return UtilFactory.getCurrencyConversion(currencyConversionDetail).then(function (data) {
+                return data;
+            });
+        }
         $rootScope.changeRate = function (baseCode) {
             $rootScope.base = baseCode;
             var target = ($rootScope.currencyCode) ? $rootScope.currencyCode : baseCode;
@@ -141,12 +148,12 @@
             $scope.currencyCode = target;
             $rootScope.currencyCode = $scope.currencyCode;
         }
-// Create and store Guid into Localstorage
+        // Create and store Guid into Localstorage
         function storeGuid() {
             var guid = LocalStorageFactory.get(dataConstant.GuidLocalstorage);
             var exits = (guid) ? ((!guid.Guid) ? true : false) : true;
             if (exits) {
-                baseFactory.storeAnonymousData().then(function (data) {
+                BaseFactory.storeAnonymousData().then(function (data) {
                     LocalStorageFactory.save(dataConstant.GuidLocalstorage, { Guid: data + "" });
                 });
             }
@@ -175,6 +182,7 @@
                 });
             }
         }
+
         $scope.logOut = function () {
             var userInfo = LocalStorageFactory.get(dataConstant.GuidLocalstorage);
             if (userInfo && userInfo.IsLogin && userInfo.IsLogin == 1) {
@@ -190,5 +198,7 @@
                 controller: 'changePasswordController'
             });
 
+        }
     }
 })();
+

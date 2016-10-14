@@ -8,8 +8,8 @@
             'dataConstant',
             'urlConstant',
             'LocalStorageFactory',
-            'baseFactory',
-function ($location, $timeout, $filter,$locale, $stateParams, UtilFactory, dataConstant, urlConstant, LocalStorageFactory, baseFactory) {
+            'BaseFactory',
+function ($location, $timeout, $filter,$locale, $stateParams, UtilFactory, dataConstant, urlConstant, LocalStorageFactory, BaseFactory) {
     return {
         restrict: 'E',
         scope: {
@@ -596,7 +596,7 @@ function ($location, $timeout, $filter,$locale, $stateParams, UtilFactory, dataC
                     FromDate: ConvertToRequiredDate(fromDate, 'API'),
                     ToDate: ConvertToRequiredDate(toDate, 'API')
                 }
-                baseFactory.storeSerachCriteria(data);
+                BaseFactory.storeSerachCriteria(data);
             }
         }
     }

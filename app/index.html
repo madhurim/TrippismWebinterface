@@ -62,7 +62,8 @@
                                     <span class="fa fa-bars" aria-hidden="true" style="font-size: 21px"></span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="" ng-click="loginPoupup()">{{authenticationLabel}}</a></li>
+                                    <li ng-if="(!IsUserLogin)"><a href="" ng-click="loginPoupup()">Sign in</a></li>
+                                    <li ng-if="(IsUserLogin)"><a href="" ng-click="logOut()">Sign out</a></li>
                                     <li><a href="" ng-click="changePwd()">Change Password</a></li>
                                     <li><a href="" ng-click="feedback()">Feedback</a></li>
                                     <li><a href="" ng-click="aboutUs()">About Us</a></li>

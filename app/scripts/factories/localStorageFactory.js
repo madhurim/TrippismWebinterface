@@ -25,15 +25,16 @@
             localStorage.setItem(storageName, JSON.stringify(obj));
         }
 
-        function update(storageName,data)
-        {
+        function update(storageName, data) {
             var obj = localStorage.getItem(storageName);
-            if(obj)
-            {
+            if (obj) {
                 obj = JSON.parse(obj);
                 obj = angular.merge(obj[0], data);
                 obj = [obj];
                 localStorage.setItem(storageName, JSON.stringify(obj));
+            }
+            else {
+                save(storageName, data);
             }
         }
 

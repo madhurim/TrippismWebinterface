@@ -7,7 +7,8 @@
             storeAnonymousData: storeAnonymousData,
             storeSerachCriteria: storeSerachCriteria,
             //getGuid: getGuid,
-            getSerachCriteria: getSerachCriteria
+            getSerachCriteria: getSerachCriteria,
+            storeDestinationsLikes: storeDestinationsLikes
         }
         return service;
 
@@ -46,6 +47,22 @@
                 .then(function (data) {
                     return data.data;
                 },
+            function (e) {
+                return e;
+            });
+        }
+
+        function storeDestinationsLikes(data)
+        {
+            var url = urlConstant.apiURLforProfileActivity + "/destinationLikes";
+            return $http({
+                method: 'POST',
+                url: url,
+                data: serialize(data),
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            }).then(function (data) {
+                return data;
+            },
             function (e) {
                 return e;
             });

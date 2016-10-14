@@ -1,9 +1,9 @@
 ﻿(function () {
     'use strict';
     var controllerId = 'loginController';
-    angular.module('TrippismUIApp').controller(controllerId, ['$scope', '$modal', 'accountFactory', 'LocalStorageFactory', 'dataConstant', '$rootScope', 'urlConstant', LoginController]);
+    angular.module('TrippismUIApp').controller(controllerId, ['$scope', '$modal', '$modalInstance','accountFactory', 'LocalStorageFactory', 'dataConstant', '$rootScope', 'urlConstant', LoginController]);
 
-    function LoginController($scope, $modal, AccountFactory, LocalStorageFactory, dataConstant, $rootScope, urlConstant) {
+    function LoginController($scope, $modal, $modalInstance, AccountFactory, LocalStorageFactory, dataConstant, $rootScope, urlConstant) {
         $scope.IsUserlogin = false;
         $scope.submitModal = function () {
             validate();
@@ -21,7 +21,7 @@
                 if (data.status == 200) {
                     var userInfo = data.data.AuthDetailsViewModel.CustomerGuid;
                     LocalStorageFactory.update(dataConstant.GuidLocalstorage, { Guid: userInfo, IsLogin: 1 });
-                    $scope.dismiss();
+                    $modalInstance.close(data);
                 }
                 else if (data.status == 403) {
                     $scope.emailid = null;
@@ -60,6 +60,7 @@
             }
             $scope.createAccountPromise = AccountFactory.CreateAccount(signUp).then(function (data) {
                 if (data.status == 200) {
+                    LocalStorageFactory.update(dataConstant.GuidLocalstorage, { Guid: data.data.CustomerGuid, IsLogin: 1 });
                     $scope.dismiss();
                     alertify.alert("Success", "");
                     alertify.alert('Check your email for getting password.').set('onok', function (closeEvent) { });
@@ -89,7 +90,7 @@
             $scope.IsUserlogin = false;
         }
         $scope.dismiss = function () {
-            $scope.$dismiss('cancel');
+            $modalInstance.dismiss('cancel');
             return 1;
         };
     }

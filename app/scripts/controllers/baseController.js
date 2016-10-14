@@ -2,9 +2,9 @@
     'use strict';
     var controllerId = 'BaseController';
     angular.module('TrippismUIApp').controller(controllerId,
-        ['$scope', '$modal', '$rootScope', 'UtilFactory', 'urlConstant', 'dataConstant', 'LocalStorageFactory', 'baseFactory', BaseController]);
+        ['$scope', '$modal', '$rootScope', 'UtilFactory', 'urlConstant', 'dataConstant', 'LocalStorageFactory', 'baseFactory', '$q', BaseController]);
 
-    function BaseController($scope, $modal, $rootScope, UtilFactory, urlConstant, dataConstant, LocalStorageFactory, baseFactory) {
+    function BaseController($scope, $modal, $rootScope, UtilFactory, urlConstant, dataConstant, LocalStorageFactory, baseFactory, $q) {
         $rootScope.isShowAlerityMessage = true;
 
         init();
@@ -31,7 +31,8 @@
 
         function setauthenticationLabel() {
             var userInfo = LocalStorageFactory.get(dataConstant.GuidLocalstorage);
-            $scope.authenticationLabel = (userInfo) ? ((userInfo.IsLogin && userInfo.IsLogin == 1) ? "Sign out" : "Sign in") : "Sign in";
+            $scope.IsUserLogin = (userInfo) ? ((userInfo.IsLogin && userInfo.IsLogin == 1) ? true : false) : false;
+            return $scope.IsUserLogin;
         }
 
         // also used to stop image slider [HomeController]
@@ -42,7 +43,7 @@
         // Create and store Guid into Localstorage
         function storeGuid() {
             var guid = LocalStorageFactory.get(dataConstant.GuidLocalstorage);
-            var exits = (guid) ? ((!guid.Guid) ? true: false):true;
+            var exits = (guid) ? ((!guid.Guid) ? true : false) : true;
             if (exits) {
                 baseFactory.storeAnonymousData().then(function (data) {
                     LocalStorageFactory.save(dataConstant.GuidLocalstorage, { Guid: data + "" });
@@ -53,19 +54,34 @@
 
         $rootScope.loginPoupup = function () {
             var userInfo = LocalStorageFactory.get(dataConstant.GuidLocalstorage);
+
+            if (userInfo && userInfo.IsLogin && userInfo.IsLogin == 1) {
+                var d = $q.defer();
+                d.resolve(true);
+                return d.promise;
+            }
+            else {
+                var d = $q.defer();
+                return $modal.open({
+                    templateUrl: urlConstant.partialViewsPath + 'loginPopUp.html',
+                    controller: 'loginController'
+                }).result.then(function (data) {
+                    d.resolve(data);
+                    return d.promise;
+                }, function () {
+                    d.resolve(false);
+                    return d.promise
+                });
+            }
+        }
+        $scope.logOut = function () {
+            var userInfo = LocalStorageFactory.get(dataConstant.GuidLocalstorage);
             if (userInfo && userInfo.IsLogin && userInfo.IsLogin == 1) {
                 LocalStorageFactory.update(dataConstant.GuidLocalstorage, { IsLogin: 0 });
-                $scope.authenticationLabel = "Sign in";
-                return;
+                $scope.IsUserLogin = false;
+                var IsLogin = setauthenticationLabel();
+                return IsLogin;
             }
-
-            var GetEmailDetPopupInstance = $modal.open({
-                templateUrl: urlConstant.partialViewsPath + 'loginPopUp.html',
-                controller: 'loginController'
-            });
-            GetEmailDetPopupInstance.result.finally(function () {
-                setauthenticationLabel();
-            })
         }
         $scope.changePwd = function () {
             var GetEmailDetPopupInstance = $modal.open({

@@ -8,7 +8,8 @@
             'dataConstant',
             'urlConstant',
             'LocalStorageFactory',
-function ($location, $timeout, $filter, $locale, $stateParams, UtilFactory, dataConstant, urlConstant, LocalStorageFactory) {
+            'baseFactory',
+function ($location, $timeout, $filter,$locale, $stateParams, UtilFactory, dataConstant, urlConstant, LocalStorageFactory, baseFactory) {
     return {
         restrict: 'E',
         scope: {
@@ -566,6 +567,7 @@ function ($location, $timeout, $filter, $locale, $stateParams, UtilFactory, data
             $scope.CallDestiantionsview = function (path, origin, fromDate, toDate, destination) {
 
                 if ($scope.selectedform == "SuggestDestination") {
+                    SaveSearchCriteria(path, origin, fromDate, toDate, destination);
                     if (!$scope.isPopup) {
                         LocalStorageFactory.clear(dataConstant.refineSearchLocalStorage);
                     }
@@ -573,6 +575,7 @@ function ($location, $timeout, $filter, $locale, $stateParams, UtilFactory, data
                     destination = null;
                 }
                 else {
+                    SaveSearchCriteria(path, origin, fromDate, toDate, destination);
                     if (!$scope.isPopup) {
                         LocalStorageFactory.clear(dataConstant.refineSearchLocalStorage);
                     }
@@ -580,6 +583,20 @@ function ($location, $timeout, $filter, $locale, $stateParams, UtilFactory, data
                 }
                 UtilFactory.LastSearch = { origin: origin, fromDate: fromDate, toDate: toDate, destination: destination };
                 $scope.isPopup = false;
+            }
+
+            function SaveSearchCriteria(path,origin,fromDate,toDate,destination)
+            {
+                var guid = LocalStorageFactory.get(dataConstant.GuidLocalstorage);
+                
+                var data = {
+                    RefGuid: guid,
+                    Origin: origin,
+                    Destination: destination,
+                    FromDate: ConvertToRequiredDate(fromDate, 'API'),
+                    ToDate: ConvertToRequiredDate(toDate, 'API')
+                }
+                baseFactory.storeSerachCriteria(data);
             }
         }
     }

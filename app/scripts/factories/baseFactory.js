@@ -1,13 +1,58 @@
-﻿(function () {
+(function () {
     'use strict';
-    angular.module('TrippismUIApp').factory('BaseFactory', ['$http', '$q', 'LocalStorageFactory', 'dataConstant', 'urlConstant', 'UtilFactory', 'tmhDynamicLocale', '$locale', BaseFactory]);
-    function BaseFactory($http, $q, LocalStorageFactory, dataConstant, urlConstant, UtilFactory, tmhDynamicLocale, $locale) {
-        var localPromise;
-        return {
-            getLocale: getLocale
+    angular.module('TrippismUIApp').factory('baseFactory', ['$http', '$filter',$q', 'LocalStorageFactory', 'dataConstant', 'urlConstant', 'UtilFactory', 'tmhDynamicLocale', '$locale', baseFactory]);
+
+    function baseFactory($http, $filter,$q, LocalStorageFactory, dataConstant, urlConstant, UtilFactory, tmhDynamicLocale, $locale) {
+        var service = {
+            storeAnonymousData: storeAnonymousData,
+            storeSerachCriteria: storeSerachCriteria,
+            //getGuid: getGuid,
+	    getLocale: getLocale,
+            getSerachCriteria: getSerachCriteria,
+            storeDestinationsLikes: storeDestinationsLikes
+        }
+        return service;
+
+        function storeAnonymousData() {
+            var url = urlConstant.apiURLforProfileAnonymous;
+            return $http({
+                method: 'POST',
+                url: url,
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            }).then(function (data) {
+                return data.data;
+            },
+            function (e) {
+                return e;
+            });
         }
 
-        function getLocale() {
+        function storeSerachCriteria(data) {
+            var url = urlConstant.apiURLforProfileActivity + "/save";
+            return $http({
+                method: 'POST',
+                url: url,
+                data: serialize(data),
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            }).then(function (data) {
+                return data.data;
+            },
+            function (e) {
+                return e;
+            });
+        }
+
+        function getSerachCriteria(guid) {
+            var url = urlConstant.apiURLforProfileActivity + "/search/all?customerId=" + guid;
+            return $http.get(url)
+                .then(function (data) {
+                    return data.data;
+                },
+            function (e) {
+                return e;
+            });
+        }
+ function getLocale() {
             // if already in local storage then return data
             var localData = LocalStorageFactory.get(dataConstant.userLocaleLocalStorage);
             if (localData) {
@@ -47,5 +92,20 @@
             }, function () { return null; });
         }
 
+        function storeDestinationsLikes(data)
+        {
+            var url = urlConstant.apiURLforProfileActivity + "/destinationLikes";
+            return $http({
+                method: 'POST',
+                url: url,
+                data: serialize(data),
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            }).then(function (data) {
+                return data;
+            },
+            function (e) {
+                return e;
+            });
+        }
     }
 })();

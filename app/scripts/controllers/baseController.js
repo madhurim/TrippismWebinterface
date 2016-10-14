@@ -2,9 +2,9 @@
     'use strict';
     var controllerId = 'BaseController';
     angular.module('TrippismUIApp').controller(controllerId,
-        ['$scope', '$modal', '$rootScope', '$timeout', 'tmhDynamicLocale', 'UtilFactory', 'urlConstant', '$locale', 'dataConstant', 'BaseFactory', 'LocalStorageFactory', BaseController]);
+        ['$scope', '$modal', '$rootScope', 'UtilFactory', 'urlConstant', BaseController]);
 
-    function BaseController($scope, $modal, $rootScope, $timeout, tmhDynamicLocale, UtilFactory, urlConstant, $locale, dataConstant, BaseFactory, LocalStorageFactory) {
+    function BaseController($scope, $modal, $rootScope, UtilFactory, urlConstant) {
         $rootScope.isShowAlerityMessage = true;
         $scope.currencyList;
         init();
@@ -12,6 +12,7 @@
             UtilFactory.ReadAirportJson();
             UtilFactory.GetCurrencySymbols();
             UtilFactory.ReadHighRankedAirportsJson();
+            setauthenticationLabel();
             getLocale();
         }
 
@@ -84,6 +85,12 @@
             });
         }
 
+        function setauthenticationLabel() {
+            var userInfo = LocalStorageFactory.get(dataConstant.GuidLocalstorage);
+            $scope.IsUserLogin = (userInfo) ? ((userInfo.IsLogin && userInfo.IsLogin == 1) ? true : false) : false;
+            return $scope.IsUserLogin;
+        }
+
         $rootScope.base;
         $scope.currencyCodeChange = function (code) {
             $rootScope.currencypromise = '';
@@ -108,17 +115,8 @@
         $scope.$on('bodyClass', function (event, args) {
             $scope.bodyClass = args;
         });
-
-        function getConversionRate(currentCurrencyCode, exchangeCurrencyCode) {
-            var currencyConversionDetail = {
-                base: currentCurrencyCode,
-                target: exchangeCurrencyCode,
-                timestamp: new Date()
-            };
-            return UtilFactory.getCurrencyConversion(currencyConversionDetail).then(function (data) {
-                return data;
-            });
-        }
+    }
+})();
 
         $rootScope.changeRate = function (baseCode) {
             $rootScope.base = baseCode;
@@ -143,5 +141,54 @@
             $scope.currencyCode = target;
             $rootScope.currencyCode = $scope.currencyCode;
         }
+// Create and store Guid into Localstorage
+        function storeGuid() {
+            var guid = LocalStorageFactory.get(dataConstant.GuidLocalstorage);
+            var exits = (guid) ? ((!guid.Guid) ? true : false) : true;
+            if (exits) {
+                baseFactory.storeAnonymousData().then(function (data) {
+                    LocalStorageFactory.save(dataConstant.GuidLocalstorage, { Guid: data + "" });
+                });
+            }
+        }
+        storeGuid();
+
+        $rootScope.loginPoupup = function () {
+            var userInfo = LocalStorageFactory.get(dataConstant.GuidLocalstorage);
+
+            if (userInfo && userInfo.IsLogin && userInfo.IsLogin == 1) {
+                var d = $q.defer();
+                d.resolve(true);
+                return d.promise;
+            }
+            else {
+                var d = $q.defer();
+                return $modal.open({
+                    templateUrl: urlConstant.partialViewsPath + 'loginPopUp.html',
+                    controller: 'loginController'
+                }).result.then(function (data) {
+                    d.resolve(data);
+                    return d.promise;
+                }, function () {
+                    d.resolve(false);
+                    return d.promise
+                });
+            }
+        }
+        $scope.logOut = function () {
+            var userInfo = LocalStorageFactory.get(dataConstant.GuidLocalstorage);
+            if (userInfo && userInfo.IsLogin && userInfo.IsLogin == 1) {
+                LocalStorageFactory.update(dataConstant.GuidLocalstorage, { IsLogin: 0 });
+                $scope.IsUserLogin = false;
+                var IsLogin = setauthenticationLabel();
+                return IsLogin;
+            }
+        }
+        $scope.changePwd = function () {
+            var GetEmailDetPopupInstance = $modal.open({
+                templateUrl: urlConstant.partialViewsPath + 'changePasswordPartial.html',
+                controller: 'changePasswordController'
+            });
+
     }
 })();

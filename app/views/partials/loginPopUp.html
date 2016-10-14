@@ -1,0 +1,60 @@
+﻿
+<div cg-busy="{promise:createAccountPromise,message:'Please wait...'}">
+    <div class="panel panel-default panel-margin">
+        <div class="panel-heading">
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 padleft0" ng-show="!IsUserlogin">Sign in</div>
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 padleft0" ng-show="IsUserlogin">Create Account</div>
+            <div class="pull-right">
+                <a class="close-panel-button pull-right" ng-click="dismiss()" role="button" tabindex="0">X</a>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div ng-show="hasError">
+            <div class="alert alert-danger triperror" role="alert" ng-show="FromLogin.emailid.$error.required">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                Please enter email address
+            </div>
+            <div class="alert alert-danger triperror" role="alert" ng-show="FromLogin.password.$error.required && !IsUserlogin">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                Please enter password
+            </div>
+            <div class="alert alert-danger triperror" role="alert" ng-show="!FromLogin.emailid.$error.required && !FromLogin.password.$error.required && isValidFromEmail == false">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                Please enter valid email
+            </div>
+        </div>
+        <div class="panel-body">
+            <form name="FromLogin" novalidate="novalidate" class="sharenow-form form-box form-box-new">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="text" ng-model="emailid" class="form-control" style="color:black !important;" id="emailid" name="emailid" placeholder="Enter username" required autocomplete="off" />
+                </div>
+                <div ng-show="!IsUserlogin">
+                    <div class="form-group pul">
+                        <label for="password">Password</label>
+                        <input type="password" ng-model="password" class="form-control" style="color:black !important;" id="password" name="password" placeholder="Enter Password" required autocomplete="off" />
+                    </div>
+                    <div class="form-group pull-left">
+                        <button type="submit" class="btn btn-danger" ng-click="submitModal()">Sign in</button>
+                    </div>
+                    <div class="form-group pull-left margin-left-10 margin-top-5">
+                        <a ng-click="forgotpassword()">Forgot password?</a>
+                    </div>
+                    <div class="form-group pull-right margin-top-10">
+                        <span>Not Member?</span>
+                        <a ng-click="signUp()">Sign up</a>
+                    </div>
+                </div>
+                <div ng-show="IsUserlogin">
+                    <div class="form-group pull-left">
+                        <button type="submit" class="btn btn-danger" ng-click="createAccount()">Sign up</button>
+                    </div>
+                    <div class="form-group pull-right margin-top-10">
+                        <span>Already Member?</span>
+                        <a ng-click="alreadyAccount()">Sign in</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

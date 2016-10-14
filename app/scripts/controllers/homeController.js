@@ -77,11 +77,11 @@
             var jQslide = angular.element('> *', element);
 
             window.setTimeout(function () {
-                element.prepend("<li style='opacity:0;'><div class='destination-image destination-image-1'></div></li>" +
-                                "<li style='opacity:0;'><div class='destination-image destination-image-2'></div></li>" +
-                                "<li style='opacity:0;'><div class='destination-image destination-image-3'></div></li>" +
+                element.prepend("<li style='opacity:0;'><div class='destination-image destination-image-7'></div></li>" +
+                                "<li style='opacity:0;'><div class='destination-image destination-image-6'></div></li>" +
+                                "<li style='opacity:0;'><div class='destination-image destination-image-5'></div></li>" +
                                 "<li style='opacity:0;'><div class='destination-image destination-image-4'></div></li>" +
-                                "<li style='opacity:0;'><div class='destination-image destination-image-5'></div></li>");
+                                "<li style='opacity:0;'><div class='destination-image destination-image-3'></div></li>");
 
                 jQslide = angular.element('> *', element);
                 jQslide.css({

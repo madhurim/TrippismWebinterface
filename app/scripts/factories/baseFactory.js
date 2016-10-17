@@ -3,21 +3,22 @@
     angular.module('TrippismUIApp').factory('BaseFactory', ['$http', '$filter', '$q', 'LocalStorageFactory', 'dataConstant', 'urlConstant', 'UtilFactory', 'tmhDynamicLocale', '$locale', BaseFactory]);
 
     function BaseFactory($http, $filter, $q, LocalStorageFactory, dataConstant, urlConstant, UtilFactory, tmhDynamicLocale, $locale) {
+        var localPromise;
         var service = {
             storeAnonymousData: storeAnonymousData,
             storeSerachCriteria: storeSerachCriteria,
-            //getGuid: getGuid,
-	    getLocale: getLocale,
+            getLocale: getLocale,
             getSerachCriteria: getSerachCriteria,
             storeDestinationsLikes: storeDestinationsLikes
         }
         return service;
 
-        function storeAnonymousData() {
+        function storeAnonymousData(anonoymousdata) {
             var url = urlConstant.apiURLforProfileAnonymous;
             return $http({
                 method: 'POST',
                 url: url,
+                data: serialize(anonoymousdata),
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             }).then(function (data) {
                 return data.data;
@@ -52,7 +53,7 @@
                 return e;
             });
         }
- function getLocale() {
+        function getLocale() {
             // if already in local storage then return data
             var localData = LocalStorageFactory.get(dataConstant.userLocaleLocalStorage);
             if (localData) {
@@ -68,7 +69,7 @@
             if (localPromise) {
                 return $q.when(localPromise).then(function (data) { return data });
             }
-            return localPromise = $http.get('http://ipinfo.io', { timeout: 1000 }).then(function (data) {
+            return localPromise = $http.get('http://ipinfo.io', { timeout: 2000 }).then(function (data) {
                 if (data.status == 200) {
                     //var expireDate = new Date();
                     data = data.data;
@@ -92,8 +93,7 @@
             }, function () { return null; });
         }
 
-        function storeDestinationsLikes(data)
-        {
+        function storeDestinationsLikes(data) {
             var url = urlConstant.apiURLforProfileActivity + "/destinationLikes";
             return $http({
                 method: 'POST',

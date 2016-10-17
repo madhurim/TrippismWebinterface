@@ -26,6 +26,13 @@
         function getLocale() {
             BaseFactory.getLocale().then(function (data) {
                 if (data) {
+                    var anonoymousdata = {
+                        City: data.city,
+                        Region: data.region,
+                        Country: data.country,
+                        Ipaddress: data.ip
+                    }
+                    storeGuid(anonoymousdata)
                     tmhDynamicLocale.set("en-" + (data.country).toLowerCase());
                 }
                 else {
@@ -33,7 +40,16 @@
                 }
             });
         }
-
+        // Create and store Guid into Localstorage
+        function storeGuid(anonoymousdata) {
+            var guid = LocalStorageFactory.get(dataConstant.GuidLocalstorage);
+            var exits = (guid) ? ((!guid.Guid) ? true : false) : true;
+            if (exits) {
+                BaseFactory.storeAnonymousData(anonoymousdata).then(function (data) {
+                    LocalStorageFactory.save(dataConstant.GuidLocalstorage, { Guid: data + "" });
+                });
+            }
+        }
 
         // filter Currecncy data on based Currency List
         function getfilterCurrencyInfo(currencyData) {
@@ -148,17 +164,6 @@
             $scope.currencyCode = target;
             $rootScope.currencyCode = $scope.currencyCode;
         }
-        // Create and store Guid into Localstorage
-        function storeGuid() {
-            var guid = LocalStorageFactory.get(dataConstant.GuidLocalstorage);
-            var exits = (guid) ? ((!guid.Guid) ? true : false) : true;
-            if (exits) {
-                BaseFactory.storeAnonymousData().then(function (data) {
-                    LocalStorageFactory.save(dataConstant.GuidLocalstorage, { Guid: data + "" });
-                });
-            }
-        }
-        storeGuid();
 
         $rootScope.loginPoupup = function () {
             var userInfo = LocalStorageFactory.get(dataConstant.GuidLocalstorage);

@@ -263,9 +263,9 @@
                         var minMaxFare = getMinMaxFare(destinationlistOriginal);
                         var Maxfare = 0, Minfare = 0;
                         if (minMaxFare.MaxFare && minMaxFare.MaxFare != 0)
-                            Maxfare = Math.ceil(minMaxFare.MaxFare);
+                            Maxfare = Math.ceil(minMaxFare.MaxFare * $rootScope.currencyInfo.rate);
                         if (minMaxFare.MinFare && minMaxFare.MinFare != 0)
-                            Minfare = Math.floor(minMaxFare.MinFare);
+                            Minfare = Math.floor(minMaxFare.MinFare * $rootScope.currencyInfo.rate);
 
                         setFareSliderValues(Minfare, Maxfare, $scope.Minfare || Minfare, $scope.Maxfare || Maxfare);
 

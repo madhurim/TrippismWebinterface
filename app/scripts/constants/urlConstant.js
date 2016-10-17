@@ -37,7 +37,7 @@
         apiURLforProfileAuthentication: profileHostname + '/api/profiles/authentication',
         apiURLforProfileAccount: profileHostname + '/api/profiles/account',
         apiURLForCurrencyConversion: hostName + '/api/CurrencyConversion/Convert',
-	apiURLForTripAdvisor: hostName + '/api/tripadvisor/'
+	    apiURLForTripAdvisor: hostName + '/api/tripadvisor/'
        
     };
     angular.module('TrippismUIApp').constant('urlConstant', constants);

@@ -23,7 +23,7 @@
                             <!--<div class="btn btn-danger" video-popup-directive>Help</div>-->
                         </div>
                         <div class="Modify margin-left-5" ng-show="IsUserLogin">
-                            <div class="btn btn-danger" ng-disabled="!isDestinations" ng-click="myDestination();">{{displayMydestination}}</div>
+                            <div class="btn btn-danger" ng-disabled="destinationCardListDisp.length == 0" ng-click="myDestination();">{{displayMydestination}}</div>
                         </div>
                     </div>
                     <div class="clear"></div>

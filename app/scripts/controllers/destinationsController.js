@@ -173,7 +173,6 @@
                 var airport = _.find(highRankedAirportlist, function (airport) {
                     return airport.airport_Code == destination.DestinationLocation
                 });
-                debugger;
                 if (airport != undefined) {
                     var LowRate = UtilFactory.GetLowFareForMap(destination);
                     if (LowRate != "N/A") {
@@ -483,7 +482,7 @@
         }
 
         $scope.myDestination = function () {
-            if (isDestinations) {
+            if (destinationlistOriginal && destinationlistOriginal.length > 0) {
                 if (viewMyDestination) {
                     viewMyDestination = false;
                     $scope.displayMydestination = "View My Destination";
@@ -648,20 +647,22 @@
             }
         });
         $scope.$on('setLogin', function (event, args) {
-            if (destinationlistOriginal) {
-                if (!args.IsLogin) {
-                    viewMyDestination = false;
+            if (!args.IsLogin) {
+                $scope.IsUserLogin = false;
+                viewMyDestination = false;
+                if (destinationlistOriginal) {
                     setDestinationLikes(destinationlistOriginal, null);
-                    $scope.IsUserLogin = false;
                     $scope.refineDestinations(true);
                 }
-                else {
+            }
+            else {
+                $scope.IsUserLogin = true;
+                if (destinationlistOriginal) {
                     var userDetail = getUserDetail();
                     if (userDetail) {
                         BaseFactory.getDestinationLikes(userDetail).then(function (data) {
                             setDestinationLikes(destinationlistOriginal, data);
                         });
-                        $scope.IsUserLogin = true;
                     }
                 }
             }

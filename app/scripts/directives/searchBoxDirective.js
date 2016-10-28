@@ -9,7 +9,8 @@
             'urlConstant',
             'LocalStorageFactory',
             'BaseFactory',
-function ($location, $timeout, $filter,$locale, $stateParams, UtilFactory, dataConstant, urlConstant, LocalStorageFactory, BaseFactory) {
+            '$rootScope',
+function ($location, $timeout, $filter, $locale, $stateParams, UtilFactory, dataConstant, urlConstant, LocalStorageFactory, BaseFactory, $rootScope) {
     return {
         restrict: 'E',
         scope: {
@@ -585,18 +586,19 @@ function ($location, $timeout, $filter,$locale, $stateParams, UtilFactory, dataC
                 $scope.isPopup = false;
             }
 
-            function SaveSearchCriteria(path,origin,fromDate,toDate,destination)
-            {
-                var guid = LocalStorageFactory.get(dataConstant.GuidLocalstorage);
-                
-                var data = {
-                    RefGuid: guid,
-                    Origin: origin,
-                    Destination: destination,
-                    FromDate: ConvertToRequiredDate(fromDate, 'API'),
-                    ToDate: ConvertToRequiredDate(toDate, 'API')
-                }
-                BaseFactory.storeSerachCriteria(data);
+            function SaveSearchCriteria(path, origin, fromDate, toDate, destination) {
+                var guid = $rootScope.getGuid().then(function (data) {
+                    if (data) {
+                        var serachData = {
+                            RefGuid: data.Guid,
+                            Origin: origin,
+                            Destination: destination,
+                            FromDate: ConvertToRequiredDate(fromDate, 'API'),
+                            ToDate: ConvertToRequiredDate(toDate, 'API')
+                        }
+                        BaseFactory.storeSerachCriteria(serachData);
+                    }
+                });
             }
         }
     }

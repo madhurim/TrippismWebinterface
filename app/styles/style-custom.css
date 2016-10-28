@@ -392,6 +392,9 @@ a {
 .position-abs {
     position: absolute;
 }
+.position-rel {
+    position: relative;
+}
 
 .top-0 {
     top: 0;
@@ -1543,6 +1546,9 @@ ul .stop-line {
 
 .margin-right-3 {
     margin-right: 3px;
+}
+.margin-right-10 {
+    margin-right: 10px;
 }
 
 .font-700 {

@@ -8,7 +8,8 @@
             CreateAccount: CreateAccount,
             LoginUser: LoginUser,
             ForgotPassword: ForgotPassword,
-            ChangePassword: ChangePassword
+            ChangePassword: ChangePassword,
+            ResetPassword: ResetPassword
         };
         return service;
 
@@ -40,25 +41,32 @@
             });
         }
 
-        function ForgotPassword(emailid) {
-            var url = urlConstant.apiURLforProfileAccount + "/forgotpassword";
-
-            return $http({
-                method: 'POST',
-                url: url,
-                data: serialize(emailid),
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
-            }).then(function (data) {
-                return data;
-            }, function (e) {
+        function ForgotPassword(emailid, url) {
+            var url = urlConstant.apiURLforProfileAccount + "/forgotpassword?Emailid=" + emailid + "&Url=" + url;
+            return $http.get(url)
+                .then(function (data) {
+                    return data;
+                },
+            function (e) {
                 return e;
             });
         }
 
         function ChangePassword(data) {
             var url = urlConstant.apiURLforProfileAccount + "/changepassword";
+            return $http({
+                method: 'POST',
+                url: url,
+                data: serialize(data),
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            }).then(function (data) {
+                return data;
+            }, function (e) {
+                return e;
+            });
+        }
+        function ResetPassword(data) {
+            var url = urlConstant.apiURLforProfileAccount + "/resetPassword";
             return $http({
                 method: 'POST',
                 url: url,

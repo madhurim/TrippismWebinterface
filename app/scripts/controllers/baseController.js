@@ -2,12 +2,14 @@
     'use strict';
     var controllerId = 'BaseController';
     angular.module('TrippismUIApp').controller(controllerId,
-        ['$scope', '$modal', '$rootScope', 'UtilFactory', 'urlConstant', 'LocalStorageFactory', 'dataConstant', 'BaseFactory', 'tmhDynamicLocale', '$locale', BaseController]);
+        ['$scope', '$modal', '$rootScope', 'UtilFactory', 'urlConstant', 'LocalStorageFactory', 'dataConstant', 'BaseFactory', 'tmhDynamicLocale', '$locale', '$q', BaseController]);
 
-    function BaseController($scope, $modal, $rootScope, UtilFactory, urlConstant, LocalStorageFactory, dataConstant, BaseFactory, tmhDynamicLocale, $locale) {
+    function BaseController($scope, $modal, $rootScope, UtilFactory, urlConstant, LocalStorageFactory, dataConstant, BaseFactory, tmhDynamicLocale, $locale, $q) {
         $rootScope.isShowAlerityMessage = true;
         $scope.currencyList;
+
         init();
+
         function init() {
             UtilFactory.ReadAirportJson();
             UtilFactory.GetCurrencySymbols();
@@ -22,9 +24,10 @@
             });
         }
 
-        // Gettinh user loacle
+
+        // Getting user loacle
         function getLocale() {
-            BaseFactory.getLocale().then(function (data) {
+            return BaseFactory.getLocale().then(function (data) {
                 if (data) {
                     var anonoymousdata = {
                         City: data.city,
@@ -32,21 +35,36 @@
                         Country: data.country,
                         Ipaddress: data.ip
                     }
-                    storeGuid(anonoymousdata)
                     tmhDynamicLocale.set("en-" + (data.country).toLowerCase());
+                    var guidDetail = LocalStorageFactory.get(dataConstant.GuidLocalstorage);
+                    guidDetail = (guidDetail) ? ((guidDetail.Guid) ? guidDetail.Guid : false) : false;
+                    if (!guidDetail) {
+                        return BaseFactory.storeAnonymousData(anonoymousdata).then(function (data) {
+                            if (data) {
+                                LocalStorageFactory.save(dataConstant.GuidLocalstorage, { Guid: data });
+                                return data;
+                            }
+                        });
+                    }
+                    return guidDetail;
                 }
                 else {
                     $rootScope.format = 'MM/dd/yyyy';
+                    return null;
                 }
             });
         }
-        // Create and store Guid into Localstorage
-        function storeGuid(anonoymousdata) {
-            var guid = LocalStorageFactory.get(dataConstant.GuidLocalstorage);
-            var exits = (guid) ? ((!guid.Guid) ? true : false) : true;
-            if (exits) {
-                BaseFactory.storeAnonymousData(anonoymousdata).then(function (data) {
-                    LocalStorageFactory.save(dataConstant.GuidLocalstorage, { Guid: data + "" });
+
+        $rootScope.getGuid = function () {
+            var objguid = LocalStorageFactory.get(dataConstant.GuidLocalstorage);
+            if (objguid && objguid.Guid) {
+                var defer = $q.defer();
+                defer.resolve({ Guid: objguid.Guid });
+                return defer.promise;
+            }
+            else {
+                return getLocale.then(function (data) {
+                    return objguid = data.Guid;
                 });
             }
         }
@@ -103,7 +121,10 @@
 
         function setauthenticationLabel() {
             var userInfo = LocalStorageFactory.get(dataConstant.GuidLocalstorage);
-            $scope.IsUserLogin = (userInfo) ? ((userInfo.IsLogin && userInfo.IsLogin == 1) ? true : false) : false;
+            $scope.IsUserLogin = (userInfo) ? ((userInfo.IsLogin && userInfo.IsLogin == 1) ? ((userInfo.Username) ? true : false) : false) : false;
+            if ($scope.IsUserLogin)
+                $scope.userName = userInfo.Username;
+
             return $scope.IsUserLogin;
         }
 
@@ -165,10 +186,10 @@
             $rootScope.currencyCode = $scope.currencyCode;
         }
 
-        $rootScope.loginPoupup = function () {
+        $rootScope.loginPoupup = function (AddLike) {
             var userInfo = LocalStorageFactory.get(dataConstant.GuidLocalstorage);
-
-            if (userInfo && userInfo.IsLogin && userInfo.IsLogin == 1) {
+            var ForAddLike = (AddLike) ? true : false;
+            if (userInfo && userInfo.IsLogin && userInfo.IsLogin == 1 && userInfo.Username) {
                 var d = $q.defer();
                 d.resolve(true);
                 return d.promise;
@@ -177,32 +198,46 @@
                 var d = $q.defer();
                 return $modal.open({
                     templateUrl: urlConstant.partialViewsPath + 'loginPopUp.html',
-                    controller: 'loginController'
+                    controller: 'loginController',
+                    scope: $scope,
+                    resolve: {
+                        AddLike: ForAddLike
+                    }
                 }).result.then(function (data) {
+                    setauthenticationLabel();
+                    $scope.$broadcast('setLogin', { IsLogin: true });
                     d.resolve(data);
                     return d.promise;
                 }, function () {
+                    setauthenticationLabel();
                     d.resolve(false);
-                    return d.promise
+                    return d.promise;
                 });
             }
         }
-
         $scope.logOut = function () {
             var userInfo = LocalStorageFactory.get(dataConstant.GuidLocalstorage);
             if (userInfo && userInfo.IsLogin && userInfo.IsLogin == 1) {
-                LocalStorageFactory.update(dataConstant.GuidLocalstorage, { IsLogin: 0 });
+                LocalStorageFactory.update(dataConstant.GuidLocalstorage, { IsLogin: 0, Username: undefined });
                 $scope.IsUserLogin = false;
-                var IsLogin = setauthenticationLabel();
-                return IsLogin;
+                $scope.$broadcast('setLogin', { IsLogin: false });
             }
+            var IsLogin = setauthenticationLabel();
+            return IsLogin;
         }
         $scope.changePwd = function () {
-            var GetEmailDetPopupInstance = $modal.open({
-                templateUrl: urlConstant.partialViewsPath + 'changePasswordPartial.html',
-                controller: 'changePasswordController'
-            });
-
+            var userInfo = LocalStorageFactory.get(dataConstant.GuidLocalstorage);
+            if (userInfo && userInfo.IsLogin && userInfo.IsLogin == 1) {
+                var GetEmailDetPopupInstance = $modal.open({
+                    templateUrl: urlConstant.partialViewsPath + 'changePasswordPartial.html',
+                    controller: 'changePasswordController'
+                });
+            }
+            else {
+                $rootScope.loginPoupup().then(function (data) {
+                    setauthenticationLabel();
+                });
+            }
         }
     }
 })();

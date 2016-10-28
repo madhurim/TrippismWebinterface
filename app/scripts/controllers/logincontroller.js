@@ -1,10 +1,11 @@
 ﻿(function () {
     'use strict';
     var controllerId = 'loginController';
-    angular.module('TrippismUIApp').controller(controllerId, ['$scope', '$modal', '$modalInstance','accountFactory', 'LocalStorageFactory', 'dataConstant', '$rootScope', 'urlConstant', LoginController]);
+    angular.module('TrippismUIApp').controller(controllerId, ['$scope', '$modal', '$modalInstance', 'accountFactory', 'LocalStorageFactory', 'dataConstant', '$rootScope', 'urlConstant', 'AddLike', LoginController]);
 
-    function LoginController($scope, $modal, $modalInstance, AccountFactory, LocalStorageFactory, dataConstant, $rootScope, urlConstant) {
+    function LoginController($scope, $modal, $modalInstance, AccountFactory, LocalStorageFactory, dataConstant, $rootScope, urlConstant, AddLike) {
         $scope.IsUserlogin = false;
+        $scope.IsForAddLike = AddLike;
         $scope.submitModal = function () {
             validate();
             if ($scope.hasError)
@@ -12,7 +13,6 @@
 
             var emailId = $scope.emailid;
             var password = $scope.password;
-
             var signIn = {
                 Email: $scope.emailid,
                 Password: $scope.password
@@ -20,7 +20,8 @@
             $scope.createAccountPromise = AccountFactory.LoginUser(signIn).then(function (data) {
                 if (data.status == 200) {
                     var userInfo = data.data.AuthDetailsViewModel.CustomerGuid;
-                    LocalStorageFactory.update(dataConstant.GuidLocalstorage, { Guid: userInfo, IsLogin: 1 });
+                    var username = emailId.substring(0, emailId.lastIndexOf("@"));
+                    LocalStorageFactory.update(dataConstant.GuidLocalstorage, { Guid: userInfo, IsLogin: 1, Username: username });
                     $modalInstance.close(data);
                 }
                 else if (data.status == 403) {
@@ -31,13 +32,13 @@
                 }
                 else {
                     alertify.alert("Error", "");
-                    alertify.alert(data.e.status).set('onok', function (closeEvent) { });
+                    alertify.alert("Something went wrong.Please try again!").set('onok', function (closeEvent) { });
                 }
             });
         }
         function validate() {
             $scope.hasError = false;
-            if ($scope.emailid && $scope.emailid.length > 0 && !checkEmail($scope.emailid)) {
+            if ($scope.emailid && $scope.emailid.length > 6 && !checkEmail($scope.emailid)) {
                 $scope.hasError = true;
                 $scope.isValidFromEmail = false;
                 return;
@@ -60,19 +61,18 @@
             }
             $scope.createAccountPromise = AccountFactory.CreateAccount(signUp).then(function (data) {
                 if (data.status == 200) {
-                    LocalStorageFactory.update(dataConstant.GuidLocalstorage, { Guid: data.data.CustomerGuid, IsLogin: 1 });
+                    LocalStorageFactory.update(dataConstant.GuidLocalstorage, { Guid: data.data.CustomerGuid, IsLogin: 0 });
                     $scope.dismiss();
                     alertify.alert("Success", "");
-                    alertify.alert('Check your email for getting password.').set('onok', function (closeEvent) { });
+                    alertify.alert('A verification email has been sent to you. please get the password from the email.').set('onok', function (closeEvent) { });
                 }
                 else if (data.status == 302) {
-                    $scope.dismiss();
                     alertify.alert("Success", "");
                     alertify.alert('Customer already exist on this email address.').set('onok', function (closeEvent) { });
                 }
                 else {
                     alertify.alert("Error", "");
-                    alertify.alert(data.status).set('onok', function (closeEvent) { });
+                    alertify.alert("Something went wrong.Please try again!").set('onok', function (closeEvent) { });
                 }
             });
         }

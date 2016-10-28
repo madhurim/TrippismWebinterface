@@ -13,6 +13,7 @@
             'LocalStorageFactory',
             '$location',
             'BaseFactory',
+            '$q',
              DestinationsController]);
     function DestinationsController(
         $scope,
@@ -25,7 +26,8 @@
         dataConstant,
         LocalStorageFactory,
         $location,
-        BaseFactory
+        BaseFactory,
+        $q
         ) {
 
         $scope.$emit('bodyClass', 'mappage');   // for changing <body> class    
@@ -38,7 +40,10 @@
         $scope.AvailableThemes = AvailableTheme();
         $scope.AvailableRegions = AvailableRegions();
         var limitDestinationCards = 15;
+        $scope.IsUserLogin = false;
+        var viewMyDestination = false;
         $scope.PointOfsalesCountry;
+        $scope.destinationLikes = null;
         $scope.isModified = false;
         var sortByPrice = 'dsc';
         var destinationCardList = [];
@@ -135,6 +140,22 @@
             }
         }
 
+        function getUserDetail() {
+            var userInfo = LocalStorageFactory.get(dataConstant.GuidLocalstorage);
+
+            if (userInfo && userInfo.IsLogin && userInfo.IsLogin == 1 && userInfo.Username) {
+                var destinationsLikesDetail = {
+                    CustomerGuid: userInfo.Guid
+                }
+                $scope.IsUserLogin = true;
+                $scope.displayMydestination = "View My Destination";
+                return destinationsLikesDetail;
+            }
+            else {
+                $scope.IsUserLogin = false;
+                return null;
+            }
+        }
         function LoadAirlineJson() {
             // commented for the time being
             //UtilFactory.ReadAirlinesJson().then(function (data) {
@@ -152,7 +173,7 @@
                 var airport = _.find(highRankedAirportlist, function (airport) {
                     return airport.airport_Code == destination.DestinationLocation
                 });
-
+                debugger;
                 if (airport != undefined) {
                     var LowRate = UtilFactory.GetLowFareForMap(destination);
                     if (LowRate != "N/A") {
@@ -230,6 +251,12 @@
                         else
                             isFound = false;
                     }
+                    if (isFound && viewMyDestination) {
+                        if (destination.like)
+                            isFound = true;
+                        else
+                            isFound = false;
+                    }
                     // [E] min-max fare
                     if (isFound)
                         arr.push(destination);
@@ -247,12 +274,21 @@
             updateSearchCriteria();
             var paramdata = CreateSearchCriteria();
             $scope.inProgress = true;
+
             $scope.mappromise = DestinationFactory.findDestinations(paramdata).then(function (data) {
                 $scope.isSearching = false;
                 $scope.SearchbuttonText = "Suggest Destinations";
                 $scope.SearchbuttonCheapestText = "Top 10 Cheapest";
                 $scope.SearchbuttonIsLoading = false;
                 $scope.fareCurrencySymbol = undefined;
+
+                var userDetail = getUserDetail();
+                if (userDetail) {
+                    BaseFactory.getDestinationLikes(userDetail).then(function (data) {
+                        $scope.destinationLikes = data;
+                    });
+                }
+
                 if (data.FareInfo != null) {
                     var destinationCurrencyCode = _.find(data.FareInfo, function (item) { return item.CurrencyCode && item.CurrencyCode != 'N/A'; });
                     $rootScope.changeRate(destinationCurrencyCode.CurrencyCode).then(function (currency) {
@@ -314,11 +350,24 @@
                 $scope.inProgress = false;
                 loadScrollbars();
                 $scope.refineDestinations();
-            });
-
+            })
             $scope.selectedform = 'SuggestDestination';
             loadScrollbars();
         }
+        function setDestinationLikes(destinationlistOriginal, destinationLikes) {
+            for (var x = 0; x < destinationlistOriginal.length; x++) {
+                var destination = destinationlistOriginal[x];
+                var destinationLikeStatus = _.find(destinationLikes, function (item) { return item.Destination == destination.CityCode; });
+                destinationlistOriginal[x].like = (destinationLikeStatus) ? destinationLikeStatus.LikeStatus : false;
+            }
+        }
+        $scope.$watchCollection('destinationLikes', function (newValue, oldValue) {
+            if (newValue != undefined) {
+                if (destinationlistOriginal) {
+                    setDestinationLikes(destinationlistOriginal, newValue);
+                }
+            }
+        });
 
         function updateSearchCriteria() {
             $scope.refineSearchValues = {
@@ -399,18 +448,21 @@
             LocalStorageFactory.save(dataConstant.refineSearchLocalStorage, data, {
                 f: $scope.Origin
             });
-            var CustomerGuid = LocalStorageFactory.get(dataConstant.GuidLocalstorage)
-            var serachData = {
-                RefGuid: CustomerGuid.Guid,
-                Origin: $scope.Origin,
-                FromDate: ConvertToRequiredDate($scope.FromDate, 'API'),
-                ToDate: ConvertToRequiredDate($scope.ToDate, 'API'),
-                Theme: $scope.Theme,
-                Region: $scope.Region,
-                MinFate: $scope.Minfare,
-                MaxFare: $scope.Maxfare
-            }
-            BaseFactory.storeSerachCriteria(serachData);
+            var CustomerGuid = $rootScope.getGuid().then(function (data) {
+                if (data) {
+                    var serachData = {
+                        RefGuid: data.Guid,
+                        Origin: $scope.Origin,
+                        FromDate: ConvertToRequiredDate($scope.FromDate, 'API'),
+                        ToDate: ConvertToRequiredDate($scope.ToDate, 'API'),
+                        Theme: $scope.Theme,
+                        Region: $scope.Region,
+                        MinFate: $scope.Minfare,
+                        MaxFare: $scope.Maxfare
+                    }
+                    BaseFactory.storeSerachCriteria(serachData);
+                }
+            });
         }
         function GetCurrencySymbols() {
             UtilFactory.GetCurrencySymbols();
@@ -428,6 +480,20 @@
                 $scope.Region = name;
             }
             $scope.refineDestinations(true);
+        }
+
+        $scope.myDestination = function () {
+            if (isDestinations) {
+                if (viewMyDestination) {
+                    viewMyDestination = false;
+                    $scope.displayMydestination = "View My Destination";
+                }
+                else {
+                    viewMyDestination = true;
+                    $scope.displayMydestination = "View All Destination";
+                }
+                $scope.resetFilter();
+            }
         }
 
         // used for max/min refine search slider
@@ -579,6 +645,25 @@
                         updateSearchCriteria(); updaterefineSearch();
                     }, 0, true);
                 }, 0, true);
+            }
+        });
+        $scope.$on('setLogin', function (event, args) {
+            if (destinationlistOriginal) {
+                if (!args.IsLogin) {
+                    viewMyDestination = false;
+                    setDestinationLikes(destinationlistOriginal, null);
+                    $scope.IsUserLogin = false;
+                    $scope.refineDestinations(true);
+                }
+                else {
+                    var userDetail = getUserDetail();
+                    if (userDetail) {
+                        BaseFactory.getDestinationLikes(userDetail).then(function (data) {
+                            setDestinationLikes(destinationlistOriginal, data);
+                        });
+                        $scope.IsUserLogin = true;
+                    }
+                }
             }
         });
     }

@@ -9,24 +9,24 @@
             </div>
             <div class="clear"></div>
         </div>
+        <div ng-show="hasError">
+            <div class="alert alert-danger triperror" role="alert" ng-show="FromLogin.emailid.$error.required">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                Please enter email address
+            </div>
+            <div class="alert alert-danger triperror" role="alert" ng-show="FromLogin.password.$error.required && !IsUserlogin">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                Please enter password
+            </div>
+            <div class="alert alert-danger triperror" role="alert" ng-show="!FromLogin.emailid.$error.required && !FromLogin.password.$error.required && isValidFromEmail == false">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                Please enter valid email
+            </div>
+        </div>
         <div class="panel-body">
             <div class="margin-bottom-5 text-muted" ng-show="IsForAddLike">
                 <span> Sign in for Like/Dislike Destination.</span>
-            </div>
-            <div ng-show="hasError">
-                <div class="alert alert-danger triperror" role="alert" ng-show="FromLogin.emailid.$error.required">
-                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                    Please enter email address
-                </div>
-                <div class="alert alert-danger triperror" role="alert" ng-show="FromLogin.password.$error.required && !IsUserlogin">
-                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                    Please enter password
-                </div>
-                <div class="alert alert-danger triperror" role="alert" ng-show="!FromLogin.emailid.$error.required && !FromLogin.password.$error.required && isValidFromEmail == false">
-                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                    Please enter valid email
-                </div>
-            </div>
+            </div>            
             <form name="FromLogin" novalidate="novalidate" class="sharenow-form form-box form-box-new">
                 <div class="form-group">
                     <label for="email">Email Address</label>

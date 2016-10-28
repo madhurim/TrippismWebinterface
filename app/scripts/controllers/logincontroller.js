@@ -80,7 +80,8 @@
             $scope.dismiss();
             var GetEmailDetPopupInstance = $modal.open({
                 templateUrl: urlConstant.partialViewsPath + 'forgotPasswordPartial.html',
-                controller: 'forgotPasswordController'
+                controller: 'forgotPasswordController',
+                windowClass: 'width-modal'
             });
         }
         $scope.signUp = function () {

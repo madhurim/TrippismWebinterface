@@ -2064,3 +2064,8 @@ ul .stop-line {
     top: 5px;
 }
 /*#endregion Media queries */
+
+/*Popup model*/
+.width-modal .modal-dialog{
+    max-width:400px;
+}

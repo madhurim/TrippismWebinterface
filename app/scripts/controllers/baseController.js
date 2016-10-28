@@ -200,6 +200,7 @@
                     templateUrl: urlConstant.partialViewsPath + 'loginPopUp.html',
                     controller: 'loginController',
                     scope: $scope,
+                    windowClass: 'width-modal',
                     resolve: {
                         AddLike: ForAddLike
                     }
@@ -230,7 +231,8 @@
             if (userInfo && userInfo.IsLogin && userInfo.IsLogin == 1) {
                 var GetEmailDetPopupInstance = $modal.open({
                     templateUrl: urlConstant.partialViewsPath + 'changePasswordPartial.html',
-                    controller: 'changePasswordController'
+                    controller: 'changePasswordController',
+                    windowClass: 'width-modal',
                 });
             }
             else {

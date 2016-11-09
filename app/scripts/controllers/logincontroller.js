@@ -12,9 +12,10 @@
                 return;
 
             var emailId = ($scope.emailid).toLowerCase();
+            debugger;
             var password = $scope.password;
             var signIn = {
-                Email: $scope.emailid,
+                Email: emailId,
                 Password: $scope.password
             }
             $scope.createAccountPromise = AccountFactory.LoginUser(signIn).then(function (data) {

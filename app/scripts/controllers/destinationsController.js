@@ -49,6 +49,7 @@
         var destinationCardList = [];
         var googleMapPassinglist = [];
         var stopEvent = false;  // flag for stopping refineDestinations call
+        $scope.likeDestinations = false;
 
         initFareSliderValues();
         LoadAirlineJson();
@@ -148,7 +149,7 @@
                     CustomerGuid: userInfo.Guid
                 }
                 $scope.IsUserLogin = true;
-                $scope.displayMydestination = "View My Destination";
+                $scope.displayMydestination = "My Destinations";
                 return destinationsLikesDetail;
             }
             else {
@@ -359,10 +360,11 @@
                 var destinationLikeStatus = _.find(destinationLikes, function (item) { return item.Destination == destination.CityCode; });
                 destinationlistOriginal[x].like = (destinationLikeStatus) ? destinationLikeStatus.LikeStatus : false;
             }
+            $scope.likeDestinations = _.some(destinationlistOriginal, function (item) { return item.like == true; });
         }
         $scope.$watchCollection('destinationLikes', function (newValue, oldValue) {
             if (newValue != undefined) {
-                if (destinationlistOriginal) {
+                if (destinationlistOriginal && newValue && newValue.length > 0) {
                     setDestinationLikes(destinationlistOriginal, newValue);
                 }
             }
@@ -485,11 +487,11 @@
             if (destinationlistOriginal && destinationlistOriginal.length > 0) {
                 if (viewMyDestination) {
                     viewMyDestination = false;
-                    $scope.displayMydestination = "View My Destination";
+                    $scope.displayMydestination = "My Destinations";
                 }
                 else {
                     viewMyDestination = true;
-                    $scope.displayMydestination = "View All Destination";
+                    $scope.displayMydestination = "All Destinations";
                 }
                 $scope.resetFilter();
             }
@@ -665,6 +667,14 @@
                         });
                     }
                 }
+            }
+        });
+        $scope.$on('likeStatus', function (event, args) {
+            $scope.likeDestinations = _.some(destinationlistOriginal, function (item) { return item.like == true; });
+            if (!$scope.likeDestinations) {
+                viewMyDestination = false;
+                $scope.displayMydestination = "My Destinations";
+                $scope.resetFilter();
             }
         });
     }

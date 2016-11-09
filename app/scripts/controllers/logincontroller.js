@@ -11,7 +11,7 @@
             if ($scope.hasError)
                 return;
 
-            var emailId = $scope.emailid;
+            var emailId = ($scope.emailid).toLowerCase();
             var password = $scope.password;
             var signIn = {
                 Email: $scope.emailid,
@@ -32,7 +32,7 @@
                 }
                 else {
                     alertify.alert("Error", "");
-                    alertify.alert("Something went wrong.Please try again!").set('onok', function (closeEvent) { });
+                    alertify.alert("Something went wrong. Please try again!").set('onok', function (closeEvent) { });
                 }
             });
         }
@@ -53,7 +53,7 @@
             validate();
             if ($scope.hasError)
                 return;
-            var emailId = $scope.emailid;
+            var emailId = ($scope.emailid).toLowerCase();
             var CustomerGuid = LocalStorageFactory.get(dataConstant.GuidLocalstorage);
             var signUp = {
                 CustomerGuid: CustomerGuid.Guid,
@@ -64,7 +64,7 @@
                     LocalStorageFactory.update(dataConstant.GuidLocalstorage, { Guid: data.data.CustomerGuid, IsLogin: 0 });
                     $scope.dismiss();
                     alertify.alert("Success", "");
-                    alertify.alert('A verification email has been sent to you. please get the password from the email.').set('onok', function (closeEvent) { });
+                    alertify.alert('A verification email has been sent to you. Please get the password from the email.').set('onok', function (closeEvent) { });
                 }
                 else if (data.status == 302) {
                     alertify.alert("Success", "");
@@ -72,7 +72,7 @@
                 }
                 else {
                     alertify.alert("Error", "");
-                    alertify.alert("Something went wrong.Please try again!").set('onok', function (closeEvent) { });
+                    alertify.alert("Something went wrong. Please try again!").set('onok', function (closeEvent) { });
                 }
             });
         }

@@ -8,17 +8,17 @@
             if ($scope.hasError)
                 return;
 
-            var Emailid = $scope.emailid;
+            var Emailid = ($scope.emailid).toLowerCase();
             var url = window.location.host;
             $scope.forgotPasswordPromise = AccountFactory.ForgotPassword(Emailid, url).then(function (data) {
                 if (data.status == 200) {
                     $scope.dismiss();
-                    alertify.alert("Success", "");
-                    alertify.alert('Link to reset your password has been emailed to you.').set('onok', function (closeEvent) { });
+                    alertify.alert("Forgot Password", "");
+                    alertify.alert('A link to reset your password has been emailed to you. Please click on emailed link to change password.').set('onok', function (closeEvent) { });
                 }
                 else {
                     alertify.alert("Alert", "");
-                    alertify.alert("Incorrect email address.Try again!").set('onok', function (closeEvent) { });
+                    alertify.alert("Incorrect email address. Try again!").set('onok', function (closeEvent) { });
                 }
             });
         }

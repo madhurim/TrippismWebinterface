@@ -605,7 +605,13 @@ i.calendar.active, .input-box:hover i.calendar {
 .homepage .footer-box, .otherpage .footer-box {
     display: block;
 }
-
+.changepassword .footer-box{
+    position:fixed;
+    display:block;
+}
+.changepassword .well{
+    /*box-shadow:2px 3px 148px -15px rgba(0,0,0,1)*/
+}
 .mappage .footer-box {
     position: fixed;
 }

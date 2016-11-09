@@ -44,13 +44,11 @@
                                 CustomerGuid: userInfo.Guid,
                                 Destination: Destination.CityCode,
                                 LikeStatus: true
-                            }
+                            };
                             BaseFactory.storeDestinationsLikes(destinationsLikesDetail).then(function (data) {
                                 Destination.like = (data.status == 200) ? data.data.LikeStatus : false;
-                            })
-                        }
-                        else {
-                            scope.$emit('setLogin', { IsLogin: false });
+                                scope.$emit('likeStatus', { IsLogin: false });
+                            });
                         }
                     });
                 }

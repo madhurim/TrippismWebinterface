@@ -3,7 +3,7 @@
     angular.module('TrippismUIApp').controller('changePasswordController', ['$scope', '$modal', 'accountFactory', 'LocalStorageFactory', 'dataConstant', '$stateParams', '$location', ChangePasswordController]);
 
     function ChangePasswordController($scope, $modal, AccountFactory, LocalStorageFactory, dataConstant, $stateParams, $location) {
-
+        $scope.$emit('bodyClass', 'changepassword');
         $scope.dismiss = function () {
             $scope.$dismiss('cancel');
             return 1;
@@ -53,7 +53,16 @@
 
         $scope.resetPassword = function () {
             $scope.hasError = false;
+            $scope.PasswordLength = true;
+
             if ($scope.newpassword && $scope.confirmpassword) {
+
+                if ($scope.newpassword.length < 6) {
+                    $scope.hasError = true;
+                    $scope.PasswordLength = false;
+                    return;
+                }
+
                 if ($scope.newpassword != $scope.confirmpassword) {
                     $scope.hasError = true;
                     $scope.isPasswordSame = false;
@@ -61,12 +70,6 @@
                 }
                 else
                     $scope.isPasswordSame = true;
-
-                if ($scope.newpassword.length < 6) {
-                    $scope.hasError = true;
-                    $scope.PasswordLength = false;
-                    return;
-                }
 
                 if ($stateParams.path != undefined) {
 
@@ -92,7 +95,7 @@
 
                     $scope.updatePassword = AccountFactory.ResetPassword(details).then(function (data) {
                         if (data.status == 200) {
-                            alertify.alert("Success", "");
+                            alertify.alert("Forgot Password", "");
                             alertify.alert('Password change successfully!').set('onok', function () { });
                             $location.path('/home');
                         }

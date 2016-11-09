@@ -2,8 +2,14 @@
 <div cg-busy="{promise:createAccountPromise,message:'Please wait...'}">
     <div class="panel panel-default panel-margin">
         <div class="panel-heading">
-            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 padleft0" ng-show="!IsUserlogin"><strong>Sign in</strong></div>
-            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 padleft0" ng-show="IsUserlogin"><strong>Create Account</strong></div>
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 padleft0" ng-show="!IsUserlogin">
+                <span ng-if="IsForAddLike"><strong>Sign in to Like or Dislike Destinations.</strong></span>
+                <span ng-if="!IsForAddLike"><strong>Sign in</strong></span>
+            </div>
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 padleft0" ng-show="IsUserlogin">
+                <span ng-if="IsForAddLike"><strong>Sign Up to Like or Dislike Destinations.</strong></span>
+                <span ng-if="!IsForAddLike"><strong>Create Account</strong></span>                
+            </div>
             <div class="pull-right">
                 <a class="close-panel-button pull-right" ng-click="dismiss()" role="button" tabindex="0">X</a>
             </div>
@@ -24,9 +30,6 @@
             </div>
         </div>
         <div class="panel-body">
-            <div class="margin-bottom-5 text-muted" ng-show="IsForAddLike">
-                <span> Sign in for Like/Dislike Destination.</span>
-            </div>            
             <form name="FromLogin" novalidate="novalidate" class="sharenow-form form-box form-box-new">
                 <div class="form-group">
                     <label for="email">Email Address</label>

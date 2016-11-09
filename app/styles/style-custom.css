@@ -316,7 +316,7 @@ a {
 }
 
 .margin-top-10 {
-    margin-top: 10px;
+    margin-top: 10px !important;
 }
 
 .acc-heading {
@@ -1679,7 +1679,7 @@ ul .stop-line {
 
 .homepage #currencyCode {
     visibility: hidden;
-    width:0px;
+    width: 0px;
 }
 
 #select-i18n .dd-options {
@@ -2080,9 +2080,18 @@ ul .stop-line {
 /*#endregion Media queries */
 
 /*Popup model*/
+
+.width-modal:before {
+    content: '';
+    display: inline-block;
+    height: 15%;
+    vertical-align: middle;
+}
+
 .width-modal .modal-dialog {
     max-width: 400px;
 }
+
 
 .btn-group.open .dropdown-toggle {
     box-shadow: 1px 1px 7px -1px rgba(0, 0, 0, .125);
@@ -2132,6 +2141,11 @@ ul .stop-line {
     background-image: none;
 }
 
+.form-changepwd .form-control {
+    background-color: white;
+    border: 1px solid darkgrey;
+}
+
 .form-group label {
     color: #464a5b;
     display: inline-block;
@@ -2149,4 +2163,18 @@ ul .stop-line {
 .btn-danger:hover {
     background-color: #6e717e !important;
     border-color: #6e717e !important;
+}
+
+.changepwd-title {
+    color: brown;
+    border-bottom-style: ridge;
+    border-width: .5px;
+    border-color: brown;
+    padding-bottom: 20px;
+}
+
+.changepwd-title-bottom-img {
+    margin-top: -40px;
+    padding: 0 10px;
+    background-color: #fff;
 }

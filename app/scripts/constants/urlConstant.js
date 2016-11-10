@@ -13,12 +13,12 @@
     }
 
     var constants = {
-        destinationImagePath: 'http://content.trippism.com/images/destinations/',
-        destinationSmallImagePath: 'http://content.trippism.com/images/destination-small/',
-        destinationMediumImagePath: 'http://content.trippism.com/images/destination-medium/',
-        //destinationImagePath: '../images/destination/',
-        //destinationSmallImagePath: '../images/destination-small/',
-        //destinationMediumImagePath: '../images/destination-medium/',
+        //destinationImagePath: 'http://content.trippism.com/images/destinations/',
+        //destinationSmallImagePath: 'http://content.trippism.com/images/destination-small/',
+        //destinationMediumImagePath: 'http://content.trippism.com/images/destination-medium/',
+        destinationImagePath: '../images/destination/',
+        destinationSmallImagePath: '../images/destination-small/',
+        destinationMediumImagePath: '../images/destination-medium/',
         viewsPath: '/views/',
         partialViewsPath: '/views/partials/',
         apiURL: hostName + '/api/Sabre/',

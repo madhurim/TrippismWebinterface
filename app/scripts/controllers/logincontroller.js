@@ -12,7 +12,6 @@
                 return;
 
             var emailId = ($scope.emailid).toLowerCase();
-            debugger;
             var password = $scope.password;
             var signIn = {
                 Email: emailId,
@@ -39,7 +38,7 @@
         }
         function validate() {
             $scope.hasError = false;
-            if ($scope.emailid && $scope.emailid.length > 6 && !checkEmail($scope.emailid)) {
+            if ($scope.emailid && !checkEmail($scope.emailid)) {
                 $scope.hasError = true;
                 $scope.isValidFromEmail = false;
                 return;
@@ -64,12 +63,12 @@
                 if (data.status == 200) {
                     LocalStorageFactory.update(dataConstant.GuidLocalstorage, { Guid: data.data.CustomerGuid, IsLogin: 0 });
                     $scope.dismiss();
-                    alertify.alert("Success", "");
+                    alertify.alert("Sign Up", "");
                     alertify.alert('A verification email has been sent to you. Please get the password from the email.').set('onok', function (closeEvent) { });
                 }
                 else if (data.status == 302) {
-                    alertify.alert("Success", "");
-                    alertify.alert('Customer already exist on this email address.').set('onok', function (closeEvent) { });
+                    alertify.alert("User Exist", "");
+                    alertify.alert('Customer already exist on this email address. Try another.').set('onok', function (closeEvent) { });
                 }
                 else {
                     alertify.alert("Error", "");

@@ -22,7 +22,7 @@
                     var userInfo = data.data.AuthDetailsViewModel.CustomerGuid;
                     var username = emailId.substring(0, emailId.lastIndexOf("@"));
                     LocalStorageFactory.update(dataConstant.GuidLocalstorage, { Guid: userInfo, IsLogin: 1, Username: username });
-                    $modalInstance.close(data);
+                    $modalInstance.close(userInfo);
                 }
                 else if (data.status == 403) {
                     $scope.emailid = null;

@@ -46,7 +46,7 @@
                                 LikeStatus: true
                             };
                             BaseFactory.storeDestinationsLikes(destinationsLikesDetail).then(function (data) {
-                                Destination.like = (data.status == 200) ? data.data.LikeStatus : false;
+                                Destination.LikeStatus = (data.status == 200) ? data.data.LikeStatus : false;
                                 scope.$emit('likeStatus', { IsLogin: false });
                             });
                         }

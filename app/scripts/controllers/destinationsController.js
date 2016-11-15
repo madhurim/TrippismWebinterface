@@ -41,7 +41,7 @@
         $scope.AvailableRegions = AvailableRegions();
         var limitDestinationCards = 15;
         $scope.IsUserLogin = false;
-        var viewMyDestination = false;
+        $scope.viewMyDestination = false;
         $scope.PointOfsalesCountry;
         $scope.destinationLikes = null;
         $scope.isModified = false;
@@ -50,6 +50,7 @@
         var googleMapPassinglist = [];
         var stopEvent = false;  // flag for stopping refineDestinations call
         $scope.likeDestinations = false;
+        $scope.likeDestinationsToDisp = [];
 
         initFareSliderValues();
         LoadAirlineJson();
@@ -87,6 +88,8 @@
 
                 var data = LocalStorageFactory.get(dataConstant.refineSearchLocalStorage, data);
                 if (data) {
+                    $scope.viewMyDestination = (data.md && data.md == true) ? data.md : false;
+                    $scope.Mydestination = ($scope.viewMyDestination) ? "All Destinations" : "My Destinations";
                     $scope.previousTheme = $scope.Theme = data.th;
                     $scope.previousRegion = $scope.Region = data.a;
                     $scope.lastselectedcurrency = (data.ncu) ? data.ncu : $scope.lastselectedcurrency;
@@ -97,6 +100,7 @@
                     $rootScope.setdefaultcurrency($scope.lastselectedcurrency);
                 }
                 else {
+                    $scope.Mydestination = "My Destinations";
                     data = {
                         f: $scope.Origin,
                         d: $scope.FromDate,
@@ -251,8 +255,8 @@
                         else
                             isFound = false;
                     }
-                    if (isFound && viewMyDestination) {
-                        if (destination.like)
+                    if (isFound && $scope.viewMyDestination) {
+                        if (destination.LikeStatus)
                             isFound = true;
                         else
                             isFound = false;
@@ -287,7 +291,7 @@
                     BaseFactory.getDestinationLikes(userDetail).then(function (data) {
                         $scope.destinationLikes = data;
                     });
-                }
+                }                
 
                 if (data.FareInfo != null) {
                     var destinationCurrencyCode = _.find(data.FareInfo, function (item) { return item.CurrencyCode && item.CurrencyCode != 'N/A'; });
@@ -310,6 +314,8 @@
                         $scope.inProgress = false;
                         loadScrollbars();
                         $scope.refineDestinations(true);
+                        if(!userDetail)
+                            setDestinationLikes(destinationlistOriginal, null);
                     });
 
                 }
@@ -355,12 +361,38 @@
             loadScrollbars();
         }
         function setDestinationLikes(destinationlistOriginal, destinationLikes) {
+            var likeDestinations = [];
             for (var x = 0; x < destinationlistOriginal.length; x++) {
                 var destination = destinationlistOriginal[x];
                 var destinationLikeStatus = _.find(destinationLikes, function (item) { return item.Destination == destination.CityCode; });
-                destinationlistOriginal[x].like = (destinationLikeStatus) ? destinationLikeStatus.LikeStatus : false;
+                destinationlistOriginal[x].LikeStatus = (destinationLikeStatus) ? destinationLikeStatus.LikeStatus : false;
             }
-            $scope.likeDestinations = _.some(destinationlistOriginal, function (item) { return item.like == true; });
+
+            if (destinationLikes) {
+                for (var x = 0; x < destinationLikes.length; x++) {
+                    var destination = destinationLikes[x];
+                    var destinationExist = _.find(destinationlistOriginal, function (item) { return item.CityCode == destination.Destination; });
+                    if (!destinationExist) {
+                        var destinationExist = _.find(highRankedAirportlist, function (airport) {
+                            return airport.airport_CityCode == destination.Destination
+                        });
+                        if (destinationExist != undefined) {
+                            destination.DestinationLocation = destinationExist.airport_CityCode;
+                            destination.DepartureDateTime = $scope.FromDate;
+                            destination.ReturnDateTime = $scope.ToDate;
+                            destination.CityName = destinationExist.airport_CityName;
+                            destination.CityCode = destinationExist.airport_CityCode;
+                            destination.FullName = destinationExist.airport_FullName;
+                            likeDestinations.push(destination);
+                        }
+                    }
+                }
+                $scope.likeDestinationsToDisp = likeDestinations;
+            }
+            else {
+                $scope.likeDestinationsToDisp = [];
+            }
+            $scope.likeDestinations = (destinationLikes) ? true : false;
         }
         $scope.$watchCollection('destinationLikes', function (newValue, oldValue) {
             if (newValue != undefined) {
@@ -412,7 +444,6 @@
         }
 
         function CreateSearchCriteria() {
-
             var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
             var secondDate = new Date($scope.ToDate);
             var firstDate = new Date($scope.FromDate);
@@ -444,7 +475,8 @@
                 lf: $scope.Minfare,
                 hf: $scope.Maxfare,
                 pcu: $scope.lastselectedcurrency,
-                ncu: $scope.lastselectedcurrency
+                ncu: $scope.lastselectedcurrency,
+                md: $scope.viewMyDestination
             };
             LocalStorageFactory.save(dataConstant.refineSearchLocalStorage, data, {
                 f: $scope.Origin
@@ -485,15 +517,18 @@
 
         $scope.myDestination = function () {
             if (destinationlistOriginal && destinationlistOriginal.length > 0) {
-                if (viewMyDestination) {
-                    viewMyDestination = false;
-                    $scope.displayMydestination = "My Destinations";
+                if ($scope.viewMyDestination) {
+                    $scope.viewMyDestination = false;
+                    $scope.Mydestination = "My Destinations";
                 }
                 else {
-                    viewMyDestination = true;
-                    $scope.displayMydestination = "All Destinations";
+                    $scope.viewMyDestination = true;
+                    $scope.Mydestination = "All Destinations";
                 }
                 $scope.resetFilter();
+                updaterefineSearch();
+                if ($scope.likeDestinationsToDisp && $scope.likeDestinationsToDisp.length > 0)
+                    $scope.likeDestinationsToDisp = _.where($scope.likeDestinationsToDisp, { LikeStatus: true });
             }
         }
 
@@ -651,28 +686,31 @@
         $scope.$on('setLogin', function (event, args) {
             if (!args.IsLogin) {
                 $scope.IsUserLogin = false;
-                viewMyDestination = false;
+                $scope.viewMyDestination = false;
                 if (destinationlistOriginal) {
                     setDestinationLikes(destinationlistOriginal, null);
+                    updaterefineSearch();
                     $scope.refineDestinations(true);
                 }
             }
             else {
                 $scope.IsUserLogin = true;
+                $scope.Mydestination = "My Destinations";
                 if (destinationlistOriginal) {
                     var userDetail = getUserDetail();
                     if (userDetail) {
                         BaseFactory.getDestinationLikes(userDetail).then(function (data) {
                             setDestinationLikes(destinationlistOriginal, data);
+                            $scope.refineDestinations(true);
                         });
                     }
                 }
             }
         });
         $scope.$on('likeStatus', function (event, args) {
-            $scope.likeDestinations = _.some(destinationlistOriginal, function (item) { return item.like == true; });
+            $scope.likeDestinations = ($scope.likeDestinationsToDisp && $scope.likeDestinationsToDisp.length > 0) ? true : false;
             if (!$scope.likeDestinations) {
-                viewMyDestination = false;
+                $scope.viewMyDestination = false;
                 $scope.displayMydestination = "My Destinations";
                 $scope.resetFilter();
             }

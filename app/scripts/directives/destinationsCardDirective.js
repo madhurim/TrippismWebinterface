@@ -47,7 +47,6 @@
                             };
                             BaseFactory.storeDestinationsLikes(destinationsLikesDetail).then(function (data) {
                                 Destination.LikeStatus = (data.status == 200) ? data.data.LikeStatus : false;
-                                scope.$emit('likeStatus', { IsLogin: false });
                             });
                         }
                     });

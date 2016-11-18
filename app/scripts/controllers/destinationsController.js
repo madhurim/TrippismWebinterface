@@ -14,6 +14,8 @@
             '$location',
             'BaseFactory',
             '$q',
+            '$modal',
+            'urlConstant',
              DestinationsController]);
     function DestinationsController(
         $scope,
@@ -27,7 +29,9 @@
         LocalStorageFactory,
         $location,
         BaseFactory,
-        $q
+        $q,
+        $modal,
+        urlConstant
         ) {
 
         $scope.$emit('bodyClass', 'mappage');   // for changing <body> class    
@@ -41,16 +45,14 @@
         $scope.AvailableRegions = AvailableRegions();
         var limitDestinationCards = 15;
         $scope.IsUserLogin = false;
-        $scope.viewMyDestination = false;
         $scope.PointOfsalesCountry;
-        $scope.destinationLikes = null;
+        $scope.destinationLikes = [];
         $scope.isModified = false;
         var sortByPrice = 'dsc';
         var destinationCardList = [];
         var googleMapPassinglist = [];
         var stopEvent = false;  // flag for stopping refineDestinations call
-        $scope.likeDestinations = false;
-        $scope.likeDestinationsToDisp = [];
+        var likeDestinationsList = [];
 
         initFareSliderValues();
         LoadAirlineJson();
@@ -88,8 +90,6 @@
 
                 var data = LocalStorageFactory.get(dataConstant.refineSearchLocalStorage, data);
                 if (data) {
-                    $scope.viewMyDestination = (data.md && data.md == true) ? data.md : false;
-                    $scope.Mydestination = ($scope.viewMyDestination) ? "All Destinations" : "My Destinations";
                     $scope.previousTheme = $scope.Theme = data.th;
                     $scope.previousRegion = $scope.Region = data.a;
                     $scope.lastselectedcurrency = (data.ncu) ? data.ncu : $scope.lastselectedcurrency;
@@ -100,7 +100,6 @@
                     $rootScope.setdefaultcurrency($scope.lastselectedcurrency);
                 }
                 else {
-                    $scope.Mydestination = "My Destinations";
                     data = {
                         f: $scope.Origin,
                         d: $scope.FromDate,
@@ -153,7 +152,6 @@
                     CustomerGuid: userInfo.Guid
                 }
                 $scope.IsUserLogin = true;
-                $scope.displayMydestination = "My Destinations";
                 return destinationsLikesDetail;
             }
             else {
@@ -255,12 +253,6 @@
                         else
                             isFound = false;
                     }
-                    if (isFound && $scope.viewMyDestination) {
-                        if (destination.LikeStatus)
-                            isFound = true;
-                        else
-                            isFound = false;
-                    }
                     // [E] min-max fare
                     if (isFound)
                         arr.push(destination);
@@ -291,7 +283,7 @@
                     BaseFactory.getDestinationLikes(userDetail).then(function (data) {
                         $scope.destinationLikes = data;
                     });
-                }                
+                }
 
                 if (data.FareInfo != null) {
                     var destinationCurrencyCode = _.find(data.FareInfo, function (item) { return item.CurrencyCode && item.CurrencyCode != 'N/A'; });
@@ -314,8 +306,8 @@
                         $scope.inProgress = false;
                         loadScrollbars();
                         $scope.refineDestinations(true);
-                        if(!userDetail)
-                            setDestinationLikes(destinationlistOriginal, null);
+                        if (!userDetail)
+                            updateCardWithLike(destinationlistOriginal, null);
                     });
 
                 }
@@ -360,44 +352,20 @@
             $scope.selectedform = 'SuggestDestination';
             loadScrollbars();
         }
-        function setDestinationLikes(destinationlistOriginal, destinationLikes) {
+        function updateCardWithLike(destinationlistOriginal, destinationLikes) {
             var likeDestinations = [];
             for (var x = 0; x < destinationlistOriginal.length; x++) {
                 var destination = destinationlistOriginal[x];
                 var destinationLikeStatus = _.find(destinationLikes, function (item) { return item.Destination == destination.CityCode; });
                 destinationlistOriginal[x].LikeStatus = (destinationLikeStatus) ? destinationLikeStatus.LikeStatus : false;
             }
-
-            if (destinationLikes) {
-                for (var x = 0; x < destinationLikes.length; x++) {
-                    var destination = destinationLikes[x];
-                    var destinationExist = _.find(destinationlistOriginal, function (item) { return item.CityCode == destination.Destination; });
-                    if (!destinationExist) {
-                        var destinationExist = _.find(highRankedAirportlist, function (airport) {
-                            return airport.airport_CityCode == destination.Destination
-                        });
-                        if (destinationExist != undefined) {
-                            destination.DestinationLocation = destinationExist.airport_CityCode;
-                            destination.DepartureDateTime = $scope.FromDate;
-                            destination.ReturnDateTime = $scope.ToDate;
-                            destination.CityName = destinationExist.airport_CityName;
-                            destination.CityCode = destinationExist.airport_CityCode;
-                            destination.FullName = destinationExist.airport_FullName;
-                            likeDestinations.push(destination);
-                        }
-                    }
-                }
-                $scope.likeDestinationsToDisp = likeDestinations;
-            }
-            else {
-                $scope.likeDestinationsToDisp = [];
-            }
-            $scope.likeDestinations = (destinationLikes) ? true : false;
         }
+
         $scope.$watchCollection('destinationLikes', function (newValue, oldValue) {
             if (newValue != undefined) {
                 if (destinationlistOriginal && newValue && newValue.length > 0) {
-                    setDestinationLikes(destinationlistOriginal, newValue);
+                    likeDestinationsList = newValue;
+                    updateCardWithLike(destinationlistOriginal, newValue);
                 }
             }
         });
@@ -475,8 +443,7 @@
                 lf: $scope.Minfare,
                 hf: $scope.Maxfare,
                 pcu: $scope.lastselectedcurrency,
-                ncu: $scope.lastselectedcurrency,
-                md: $scope.viewMyDestination
+                ncu: $scope.lastselectedcurrency
             };
             LocalStorageFactory.save(dataConstant.refineSearchLocalStorage, data, {
                 f: $scope.Origin
@@ -517,18 +484,19 @@
 
         $scope.myDestination = function () {
             if (destinationlistOriginal && destinationlistOriginal.length > 0) {
-                if ($scope.viewMyDestination) {
-                    $scope.viewMyDestination = false;
-                    $scope.Mydestination = "My Destinations";
+                var userDetail = getUserDetail();
+                if (userDetail) {
+                    var d = $q.defer();
+                    return $modal.open({
+                        templateUrl: urlConstant.partialViewsPath + 'myDestinationsPartial.html',
+                        controller: 'MyDestinationController',
+                        scope: $scope,
+                        size: "lg",
+                        backdrop: 'static'
+                    }).result.then(function (data) {
+                        updateCardWithLike(destinationlistOriginal, data);
+                    }, function () { });
                 }
-                else {
-                    $scope.viewMyDestination = true;
-                    $scope.Mydestination = "All Destinations";
-                }
-                $scope.resetFilter();
-                updaterefineSearch();
-                if ($scope.likeDestinationsToDisp && $scope.likeDestinationsToDisp.length > 0)
-                    $scope.likeDestinationsToDisp = _.where($scope.likeDestinationsToDisp, { LikeStatus: true });
             }
         }
 
@@ -686,33 +654,23 @@
         $scope.$on('setLogin', function (event, args) {
             if (!args.IsLogin) {
                 $scope.IsUserLogin = false;
-                $scope.viewMyDestination = false;
                 if (destinationlistOriginal) {
-                    setDestinationLikes(destinationlistOriginal, null);
-                    updaterefineSearch();
-                    $scope.refineDestinations(true);
+                    updateCardWithLike(destinationlistOriginal, null);
+                    likeDestinationsList = [];
+                    $scope.destinationLikes = [];
                 }
             }
             else {
                 $scope.IsUserLogin = true;
-                $scope.Mydestination = "My Destinations";
                 if (destinationlistOriginal) {
                     var userDetail = getUserDetail();
                     if (userDetail) {
                         BaseFactory.getDestinationLikes(userDetail).then(function (data) {
-                            setDestinationLikes(destinationlistOriginal, data);
-                            $scope.refineDestinations(true);
+                            $scope.destinationLikes = data;
+                            updateCardWithLike(destinationlistOriginal, data);
                         });
                     }
                 }
-            }
-        });
-        $scope.$on('likeStatus', function (event, args) {
-            $scope.likeDestinations = ($scope.likeDestinationsToDisp && $scope.likeDestinationsToDisp.length > 0) ? true : false;
-            if (!$scope.likeDestinations) {
-                $scope.viewMyDestination = false;
-                $scope.displayMydestination = "My Destinations";
-                $scope.resetFilter();
             }
         });
     }

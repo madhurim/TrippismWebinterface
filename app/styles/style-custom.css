@@ -2185,3 +2185,10 @@ ul .stop-line {
     border: 0;
     border-top: 2px solid cornflowerblue;
 }
+
+#myDestination{
+    overflow: auto;
+    height: 80vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}

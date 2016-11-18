@@ -118,7 +118,7 @@
                     return data.data;
                 },
             function (e) {
-                return e;
+                return null;
             });
         }
 

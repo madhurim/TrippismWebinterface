@@ -45,7 +45,6 @@ function ($location, $timeout, $filter, $locale, $stateParams, UtilFactory, data
                     $scope.AvailableAirports = data;
                     setDefaultAirport(data);
                 });
-
                 if ($stateParams.path != undefined) {
                     var params = $stateParams.path.split(";");
                     angular.forEach(params, function (item) {
@@ -56,6 +55,7 @@ function ($location, $timeout, $filter, $locale, $stateParams, UtilFactory, data
                         }
                         if (para[0].trim() === "t") {
                             $scope.KnownDestinationAirport = para[1].trim().toUpperCase();
+                            $scope.selectedform = "KnowMyDestination";
                             $scope.urlParam.KnownDestinationAirport = $scope.KnownDestinationAirport;
                         }
                         if (para[0].trim() === "d") {

@@ -124,8 +124,8 @@
                         }
                         else {
                             DestinationFactory.findInstFlightDestination(apiparam).then(function (response) {
+                                $scope.fareInfoPromise = true;
                                 if (response.FareInfo != null) {
-                                    $scope.fareInfoPromise = true;
                                     $scope.destinationlist = FilterDestinations(response.FareInfo);
                                     var DestinationairportName = _.find($scope.AvailableAirports, function (airport) { return airport.airport_Code == $scope.DestinationLocation.toUpperCase() });
 

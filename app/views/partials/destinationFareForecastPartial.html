@@ -21,16 +21,23 @@
                 </div>
                 <div class="col-md-12">
                     <div class="row">
-                        <div class="ibox-box searched search-det font-light">
-                            <p>
-                                <span ng-show="search">{{search}} {{fareParams.SearchCriteria.FromDate | date: $root.format}} To {{fareParams.SearchCriteria.ToDate | date: $root.format}}</span>
-                            </p>
-                            <div class="clear"></div>
+                        <div class="col-md-5">
+                            <div class="ibox-box searched search-det font-light">
+                                <p>
+                                    <span ng-show="search">{{search}} {{fareParams.SearchCriteria.FromDate | date: $root.format}} To {{fareParams.SearchCriteria.ToDate | date: $root.format}}</span>
+                                </p>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="ibox-title ibox-title-new font-light">
+                                <h4>
+                                    {{airportDetail}}
+                                </h4>
+                            </div>
                         </div>
-                        <div class="ibox-title ibox-title-new font-light">
-                            <h4>
-                                {{airportDetail}}
-                            </h4>
+                        <div class="col-md-6">
+                            <label class="search_list">
+                                <span class="btn btn-danger" ng-click="isModified=!isModified;">Modify</span>
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -87,10 +94,7 @@
                                 </h5>
                             </div>
                         </div>
-                        <div class="col-md-12 col-sm-12 col-xs-12" ng-show="!LowestNonStopFare || !LowestFare">
-                            <label class="search_list">
-                                <span class="btn btn-danger" ng-click="isModified=!isModified;">Modify</span>
-                            </label>
+                        <div class="col-md-12 col-sm-12 col-xs-12" ng-show="isModified">
                             <div ng-show="isModified" style="top:100px;">
                                 <search-box is-popup="isModified"></search-box>
                             </div>

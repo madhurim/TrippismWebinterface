@@ -61,7 +61,10 @@
 
         function getAttractionList() {
             var list = angular.copy(dataConstant.attractionList);
-            list = _(list).reject(function (i) { return (i.name == 'casinos' || i.name == 'beaches') });
+            //list = _(list).reject(function (i) { return (i.name == 'casinos' || i.name == 'beaches') });
+            list = _.filter(list, function (i) { return (i.name == 'Restaurants') })
+            list[0].isDefault = true;
+
             var tours = {
                 rank: 8,
                 name: 'Tours',

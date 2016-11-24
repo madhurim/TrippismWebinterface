@@ -1077,6 +1077,8 @@ i.calendar.active, .input-box:hover i.calendar {
 
 .destination-box-popup.destination-popup {
     width: 100%;
+    position:fixed;
+    max-height:300px;
 }
 /*Main page Popup CSS start */
 .destination-boxwrap {

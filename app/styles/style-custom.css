@@ -2179,16 +2179,27 @@ ul .stop-line {
     background-color: #fff;
 }
 
-.destinationsCard-hr{    
+.destinationsCard-hr {
     margin-top: 20px;
     margin-bottom: 20px;
     border: 0;
     border-top: 2px solid cornflowerblue;
 }
 
-#myDestination{
+#myDestination {
     overflow: auto;
     height: 80vh;
     overflow-y: scroll;
     overflow-x: hidden;
+}
+
+.search-destination-info {
+    float: left;
+    padding-left: 15px;
+}
+
+.modify-serach {
+    float: left;
+    margin-top: 15px;
+    padding-left: 15px;
 }

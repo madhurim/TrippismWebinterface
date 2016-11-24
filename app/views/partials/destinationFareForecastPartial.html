@@ -21,7 +21,7 @@
                 </div>
                 <div class="col-md-12">
                     <div class="row">
-                        <div class="col-md-5">
+                        <div class="search-destination-info">
                             <div class="ibox-box searched search-det font-light">
                                 <p>
                                     <span ng-show="search">{{search}} {{fareParams.SearchCriteria.FromDate | date: $root.format}} To {{fareParams.SearchCriteria.ToDate | date: $root.format}}</span>
@@ -34,8 +34,8 @@
                                 </h4>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <label class="search_list">
+                        <div class="modify-serach">
+                            <label>
                                 <span class="btn btn-danger" ng-click="isModified=!isModified;">Modify</span>
                             </label>
                         </div>

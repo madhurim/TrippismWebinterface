@@ -53,12 +53,12 @@
                                 {{::amtbifercation.BeforeDecimal | number : 0}}<span class="text-super">{{amtbifercation.AfterDecimal}}</span>
                             </div>
                             <div class="col-md-8 insta-padding">
-                                <div class="col-md-12" ng-repeat="originDestinationOption in ::pricedItineraries.OriginDestinationOption">
-                                    <div ng-if="originDestinationOption.FlightSegment.length == 1">
+                                <div class="row col-md-12" ng-repeat="originDestinationOption in ::pricedItineraries.OriginDestinationOption">
+                                    <div class="row" ng-if="originDestinationOption.FlightSegment.length == 1">
                                         <div class="col-md-12 font-15 margin-bottom-15 padding-0" ng-repeat="flightSegment in originDestinationOption.FlightSegment">
                                             <div class="col-md-12">
                                                 <div class="col-xs-2 col-sm-2 col-md-2"><b>{{flightSegment.DepartureDateTime | date : 'HH:mm'}}</b></div>
-                                                <div class="col-xs-6 col-sm-6 col-md-6 text-center">{{flightSegment.ElapsedTime / 60 | floor | twoDigit}} h {{flightSegment.ElapsedTime % 60 | twoDigit}}</div>
+                                                <div class="col-xs-6 col-sm-6 col-md-6 text-center">{{flightSegment.ElapsedTime / 60 | floor | twoDigit}} h {{flightSegment.ElapsedTime % 60 | twoDigit}} min</div>
                                                 <div class="col-xs-2 col-sm-2 col-md-2"><b>{{flightSegment.ArrivalDateTime | date : 'HH:mm'}}</b></div>
                                             </div>
                                             <div class="clear"></div>
@@ -82,11 +82,11 @@
                                             <div class="clear"></div>
                                         </div>
                                     </div>
-                                    <div ng-if="originDestinationOption.FlightSegment.length > 1">
+                                    <div class="row" ng-if="originDestinationOption.FlightSegment.length > 1">
                                         <div class="col-md-12 font-15 margin-bottom-15 padding-0">
                                             <div class="col-md-12">
                                                 <div class="col-xs-2 col-sm-2 col-md-2"><b>{{originDestinationOption.FlightSegment[0].DepartureDateTime | date : 'HH:mm'}}</b></div>
-                                                <div class="col-xs-6 col-sm-6 col-md-6 text-center">{{originDestinationOption.ElapsedTime / 60 | floor | twoDigit}} h {{originDestinationOption.ElapsedTime % 60 | twoDigit}}</div>
+                                                <div class="col-xs-6 col-sm-6 col-md-6 text-center">{{originDestinationOption.ElapsedTime / 60 | floor | twoDigit}} h {{originDestinationOption.ElapsedTime % 60 | twoDigit}} min</div>
                                                 <div class="col-xs-2 col-sm-2 col-md-2"><b>{{originDestinationOption.FlightSegment[originDestinationOption.FlightSegment.length - 1].ArrivalDateTime | date : 'HH:mm'}}</b></div>
                                             </div>
                                             <div class="clear"></div>
@@ -104,7 +104,7 @@
                                                 <div class="col-xs-6 col-sm-6 col-md-6 leg-stops text-center font-13" ng-init="::stopslist = getStopsFromFlightSegment(originDestinationOption.FlightSegment)">
                                                     <span class="leg-stops-red">{{originDestinationOption.FlightSegment.length - 1}} stop</span>
                                                     <span class="leg-stops-station cursor-help" ng-repeat="stop in stopslist" data-toggle="tooltip" data-placement="top" popover="{{stop.title}}" popover-trigger="mouseenter" popover-placement="left">
-                                                        {{stop.locationCode}}<i ng-if="stopslist.indexOf(stop) < (stopslist.length-1)">,</i>
+                                                        {{stop.locationCode}}<i ng-if="$index < (stopslist.length-1)">,</i>
                                                     </span>
                                                 </div>
                                                 <div class="col-xs-2 col-sm-2 col-md-2 leg-stops leg-stops-1 cursor-help" data-toggle="tooltip" data-placement="top" popover="{{::getHTMLTooltip(originDestinationOption.FlightSegment[originDestinationOption.FlightSegment.length - 1].ArrivalAirport.LocationCode);}}" popover-trigger="mouseenter" popover-placement="left">
@@ -122,54 +122,49 @@
                         </div>
                         <div class="clear"></div>
                     </accordion-heading>
-                    <div class="col-md-12 insta-details">                        
-                        <div class="col-md-12 margin-bottom-15" ng-repeat="originDestinationOption in pricedItineraries.OriginDestinationOption">
-                            <div class="col-md-12 insta-location text-center margin-bottom-15">
-                                <span class="cursor-help" data-toggle="tooltip" data-placement="top" popover="{{::getHTMLTooltip(originDestinationOption.FlightSegment[0].DepartureAirport.LocationCode);}}" popover-trigger="mouseenter"> {{originDestinationOption.FlightSegment[0].DepartureAirport.LocationCode}} </span>
-                                -
-                                <span class="cursor-help" data-toggle="tooltip" data-placement="top" popover="{{::getHTMLTooltip(originDestinationOption.FlightSegment[originDestinationOption.FlightSegment.length - 1].ArrivalAirport.LocationCode);}}" popover-trigger="mouseenter"> {{originDestinationOption.FlightSegment[originDestinationOption.FlightSegment.length - 1].ArrivalAirport.LocationCode}} </span>
+
+                    <div class="row insta-details margin-bottom-15" ng-repeat="originDestinationOption in pricedItineraries.OriginDestinationOption">
+                        <div class="col-md-12 insta-location text-center margin-bottom-15">
+                            <span class="cursor-help" data-toggle="tooltip" data-placement="top" popover="{{::getHTMLTooltip(originDestinationOption.FlightSegment[0].DepartureAirport.LocationCode);}}" popover-trigger="mouseenter"> {{originDestinationOption.FlightSegment[0].DepartureAirport.LocationCode}} </span>
+                            -
+                            <span class="cursor-help" data-toggle="tooltip" data-placement="top" popover="{{::getHTMLTooltip(originDestinationOption.FlightSegment[originDestinationOption.FlightSegment.length - 1].ArrivalAirport.LocationCode);}}" popover-trigger="mouseenter"> {{originDestinationOption.FlightSegment[originDestinationOption.FlightSegment.length - 1].ArrivalAirport.LocationCode}} </span>
+                        </div>
+                        <div class="col-md-12" ng-repeat="flightSegment in originDestinationOption.FlightSegment">
+                            <div class="col-xs-12 col-sm-3 col-md-3 instaflight-center">
+                                <img ng-src="http://pics.avs.io/100/30/{{flightSegment.OperatingAirline.Code}}.png" />
+                                <div>{{flightSegment.OperatingAirline.Code}}{{flightSegment.OperatingAirline.FlightNumber}}</div>
                             </div>
-                            <div ng-repeat="flightSegment in originDestinationOption.FlightSegment">
-                                <div class="col-md-12">
-                                    <div class="col-xs-12 col-sm-3 col-md-3 instaflight-center">
-                                        <!-- commented for the time being -->
-                                        <!--<img class="cursor-help" ng-src="http://pics.avs.io/100/30/{{flightSegment.OperatingAirline.Code}}.png" data-toggle="tooltip" data-placement="top" popover="{{::getAirlineName(flightSegment.OperatingAirline.Code);}}" popover-trigger="mouseenter" />-->
-                                        <img ng-src="http://pics.avs.io/100/30/{{flightSegment.OperatingAirline.Code}}.png" />
-                                        <div>{{flightSegment.OperatingAirline.Code}}{{flightSegment.OperatingAirline.FlightNumber}}</div>
+                            <div class="col-xs-12 col-md-9">
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-3 col-md-3">
+                                        <p class="font-details insta-title" ng-if="$index == 0">Departure</p>
+                                        <b>{{flightSegment.DepartureDateTime | date : 'HH:mm'}}</b>
+                                        <span class="cursor-help" data-toggle="tooltip" data-placement="top" popover="{{::getHTMLTooltip(flightSegment.DepartureAirport.LocationCode);}}" popover-trigger="mouseenter"> {{flightSegment.DepartureAirport.LocationCode}}</span>
                                     </div>
-                                    <div class="col-md-9">
-                                        <div class="font-details insta-title" ng-if="$index == 0">
-                                            <div class="col-xs-3 col-sm-3 col-md-3">Departure</div>
-                                            <div class="col-xs-3 col-sm-3 col-md-3">Arrival</div>
-                                            <div class="clear"></div>
-                                        </div>
-                                        <div class="font-details">
-                                            <div class="col-xs-3 col-sm-3 col-md-3">
-                                                <b>{{flightSegment.DepartureDateTime | date : 'HH:mm'}}</b>
-                                                <span class="cursor-help" data-toggle="tooltip" data-placement="top" popover="{{::getHTMLTooltip(flightSegment.DepartureAirport.LocationCode);}}" popover-trigger="mouseenter"> {{flightSegment.DepartureAirport.LocationCode}}</span>
-                                            </div>
-                                            <div class="col-xs-3 col-sm-3 col-md-3">
-                                                <b>{{flightSegment.ArrivalDateTime | date : 'HH:mm'}}</b>
-                                                <span class="cursor-help" data-toggle="tooltip" data-placement="top" popover="{{::getHTMLTooltip(flightSegment.ArrivalAirport.LocationCode);}}" popover-trigger="mouseenter"> {{flightSegment.ArrivalAirport.LocationCode}}</span>
-                                            </div>
-                                            <div class="col-xs-3 col-sm-3 col-md-3">{{flightSegment.ElapsedTime / 60 | floor | twoDigit}} h {{flightSegment.ElapsedTime % 60 | twoDigit}} min</div>
-                                            <div class="clear"></div>
-                                        </div>
+                                    <div class="col-xs-6 col-sm-3 col-md-3">
+                                        <p class="font-details insta-title" ng-if="$index == 0">Arrival</p>
+                                        <b>{{flightSegment.ArrivalDateTime | date : 'HH:mm'}}</b>
+                                        <span class="cursor-help" data-toggle="tooltip" data-placement="top" popover="{{::getHTMLTooltip(flightSegment.ArrivalAirport.LocationCode);}}" popover-trigger="mouseenter"> {{flightSegment.ArrivalAirport.LocationCode}}</span>
                                     </div>
-                                    <div class="col-md-9 connect-detail" ng-if="originDestinationOption.FlightSegment.indexOf(flightSegment) != originDestinationOption.FlightSegment.length - 1" ng-init="::airportConnectionDetails = airportConnectionData(originDestinationOption.FlightSegment, flightSegment);">
-                                        <div class="col-md-8 col-sm-offset-3">
-                                            <span ng-if="airportConnectionDetails.isAirportChanged"> Change airport </span>
-                                            <span ng-if="airportConnectionDetails.isLongWait"> Long </span>
-                                            <span ng-if="airportConnectionDetails.isConnectInAirport"> Layover </span>
-                                            <span> {{airportConnectionDetails.waitingTime}}</span>
-                                        </div>
+                                    <div class="col-xs-12 col-sm-3 col-md-3">
+                                        <p class="font-details hidden-xs insta-title" ng-if="$index == 0">&nbsp;</p>
+                                        <p>{{flightSegment.ElapsedTime / 60 | floor | twoDigit}} h {{flightSegment.ElapsedTime % 60 | twoDigit}} min</p>
                                     </div>
                                 </div>
+                                <div class="clear"></div>
                             </div>
-                            <div class="clear"></div>
+                            <div class="col-md-9 connect-detail" ng-if="$index != originDestinationOption.FlightSegment.length - 1" ng-init="::airportConnectionDetails = airportConnectionData(originDestinationOption.FlightSegment, flightSegment);">
+                                <div class="col-md-8 col-sm-offset-3">
+                                    <span ng-if="airportConnectionDetails.isAirportChanged"> Change airport </span>
+                                    <span ng-if="airportConnectionDetails.isLongWait"> Long </span>
+                                    <span ng-if="airportConnectionDetails.isConnectInAirport"> Layover </span>
+                                    <span> {{airportConnectionDetails.waitingTime}}</span>
+                                </div>
+                            </div>
                         </div>
-
+                        <div class="clear"></div>
                     </div>
+
                     <div class="clear"></div>
                 </accordion-group>
             </div>

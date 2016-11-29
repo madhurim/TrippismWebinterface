@@ -472,11 +472,7 @@ ul .stop-line {
     color: #80828b;
 }
 
-.insta-arrow {
-    text-align: center;
-    margin: 0 auto;
-    margin-left: 16%;
-}
+
 
 .leg-stops-1 {
     padding-left: 17px;
@@ -1972,6 +1968,19 @@ ul .stop-line {
         box-shadow: none;
     }
 }
+
+@media only screen and (max-width:400px) {
+    .insta-arrow {
+        text-align: center;
+        margin: 0 auto;
+        margin-left: 22% !important;
+    }
+}
+.insta-arrow {
+        text-align: center;
+        margin: 0 auto;
+        margin-left: 16%;
+    }
 
 @media only screen and (min-width:481px) and (max-width:736px) {
     .destination-form .col-xs-6, .destination-form .col-xs-6 .input-group, .destination-popup .destination-form .input-group {

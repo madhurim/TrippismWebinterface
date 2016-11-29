@@ -60,18 +60,14 @@
         }
 
         function getAttractionList() {
-            var list = angular.copy(dataConstant.attractionList);
-            //list = _(list).reject(function (i) { return (i.name == 'casinos' || i.name == 'beaches') });
-            list = _.filter(list, function (i) { return (i.name == 'Restaurants') })
-            list[0].isDefault = true;
-
+            var list = [];
             var tours = {
                 rank: 8,
                 name: 'Tours',
                 attractionText: 'Tours',
                 subCategory: 'sightseeing_tours',
                 markerImage: 'images/attraction-marker/camera-icon-1.png',
-                isDefault: false,
+                isDefault: true,
                 htmlClass: 'attr-tours'
             };
             list.push(tours);

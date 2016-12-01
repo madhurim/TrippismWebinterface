@@ -111,7 +111,6 @@
         }
 
         function getDestinationLikes(data) {
-            var url = urlConstant.apiURLforProfileActivity + "/getdestinationLikes?";
             var url = urlConstant.apiURLforProfileActivity + "/getdestinationLikes?customerId=" + data.CustomerGuid;
             return $http.get(url)
                 .then(function (data) {

@@ -309,7 +309,6 @@
                         if (!userDetail)
                             updateCardWithLike(destinationlistOriginal, null);
                     });
-
                 }
                 else if (data != null && typeof data == 'string') {
                     var POSCountriesList = [];
@@ -363,9 +362,14 @@
 
         $scope.$watchCollection('destinationLikes', function (newValue, oldValue) {
             if (newValue != undefined) {
-                if (destinationlistOriginal && newValue && newValue.length > 0) {
-                    likeDestinationsList = newValue;
-                    updateCardWithLike(destinationlistOriginal, newValue);
+                if (destinationlistOriginal) {
+                    if (newValue && newValue.length > 0) {
+                        likeDestinationsList = newValue;
+                        updateCardWithLike(destinationlistOriginal, newValue);
+                    }
+                    else {
+                        updateCardWithLike(destinationlistOriginal, null);
+                    }
                 }
             }
         });
@@ -483,20 +487,18 @@
         }
 
         $scope.myDestination = function () {
-            if (destinationlistOriginal && destinationlistOriginal.length > 0) {
-                var userDetail = getUserDetail();
-                if (userDetail) {
-                    var d = $q.defer();
-                    return $modal.open({
-                        templateUrl: urlConstant.partialViewsPath + 'myDestinationsPartial.html',
-                        controller: 'MyDestinationController',
-                        scope: $scope,
-                        size: "lg",
-                        backdrop: 'static'
-                    }).result.then(function (data) {
-                        updateCardWithLike(destinationlistOriginal, data);
-                    }, function () { });
-                }
+            var userDetail = getUserDetail();
+            if (userDetail) {
+                var d = $q.defer();
+                return $modal.open({
+                    templateUrl: urlConstant.partialViewsPath + 'myDestinationsPartial.html',
+                    controller: 'MyDestinationController',
+                    scope: $scope,
+                    size: "lg",
+                    backdrop: 'static'
+                }).result.then(function (data) {
+                    updateCardWithLike(destinationlistOriginal, data);
+                }, function () { });
             }
         }
 

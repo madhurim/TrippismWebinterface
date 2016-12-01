@@ -605,7 +605,13 @@ i.calendar.active, .input-box:hover i.calendar {
 .homepage .footer-box, .otherpage .footer-box {
     display: block;
 }
-
+.changepassword .footer-box{
+    position:fixed;
+    display:block;
+}
+.changepassword .well{
+    /*box-shadow:2px 3px 148px -15px rgba(0,0,0,1)*/
+}
 .mappage .footer-box {
     position: fixed;
 }
@@ -1071,6 +1077,8 @@ i.calendar.active, .input-box:hover i.calendar {
 
 .destination-box-popup.destination-popup {
     width: 100%;
+    position:fixed;
+    max-height:445px;
 }
 /*Main page Popup CSS start */
 .destination-boxwrap {
@@ -1362,7 +1370,7 @@ i.calendar.active, .input-box:hover i.calendar {
 
 
 .destination-box-popup.destination-popup {
-    display: table;
+    display: block;
     height: 100%;
     top: 0;
 }

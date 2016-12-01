@@ -21,26 +21,37 @@
                 </div>
                 <div class="col-md-12">
                     <div class="row">
-                        <div class="ibox-box searched search-det font-light">
-                            <p>
-                                <span ng-show="search">{{search}} {{fareParams.SearchCriteria.FromDate | date: $root.format}} To {{fareParams.SearchCriteria.ToDate | date: $root.format}}</span>
-                            </p>
-                            <div class="clear"></div>
+                        <div class="search-destination-info">
+                            <div class="ibox-box searched search-det font-light">
+                                <p>
+                                    <span ng-show="search">{{search}} {{fareParams.SearchCriteria.FromDate | date: $root.format}} To {{fareParams.SearchCriteria.ToDate | date: $root.format}}</span>
+                                </p>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="ibox-title ibox-title-new font-light">
+                                <h4>
+                                    {{airportDetail}}
+                                </h4>
+                            </div>
                         </div>
-                        <div class="ibox-title ibox-title-new font-light">
-                            <h4>
-                                {{airportDetail}} 
-                            </h4>
+                        <div class="modify-serach">
+                            <label>
+                                <span class="btn btn-danger" ng-click="isModified=!isModified;">Modify</span>
+                            </label>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-8" ng-show="LowestNonStopFare || LowestFare">
-                    <div class="row">
+                <div class="col-md-8">
+                    <div class="row" ng-show="!fareInfoPromise" style="text-align:center;float:left;">
+                        <h4 class="glyphicon glyphicon-refresh glyphicon-spin"></h4>
+                        <h4>Getting flights prices...</h4>
+                    </div>
+                    <div class="row" ng-show="fareInfoPromise">
                         <div class="col-fare-title col-dest-title"><h4><i class="fa fa-plane"></i>Flights</h4></div>
                         <div class="col-md-6 col-sm-6 col-xs-12 col-fare padleft0" ng-if="::LowestNonStopFare">
                             <div class="ibox-box fare-box">
                                 <div class="fare-box-inner text-right">
-                                    <h4 class="fare-font">                                        
+                                    <h4 class="fare-font">
                                         <span class="cursor-help" data-toggle="tooltip" popover="{{fareCurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{fareCurrencySymbol}}</span>
                                         {{LowestNonStopFare.amountBifurcation.BeforeDecimal | number :0}}<span class="text-super vertical-top">{{LowestNonStopFare.amountBifurcation.AfterDecimal}}</span>
                                     </h4>
@@ -59,7 +70,7 @@
                         <div class="col-md-6 col-sm-6 col-xs-12 col-fare padleft0" ng-if="::LowestFare">
                             <div class="ibox-box fare-box">
                                 <div class="fare-box-inner text-right">
-                                    <h4 class="fare-font" >
+                                    <h4 class="fare-font">
                                         <span class="cursor-help" data-toggle="tooltip" popover="{{fareCurrencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{fareCurrencySymbol}}<!--{{GetCurrencySymbol(fareParams.FareInfo.CurrencyCode)}}--></span>
                                         {{LowestFare.amountBifurcation.BeforeDecimal | number :0}}<span class="text-super vertical-top">{{LowestFare.amountBifurcation.AfterDecimal}}</span>
                                     </h4>
@@ -73,6 +84,19 @@
                                     </p>
                                 </div>
                                 <div class="clear"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 form" ng-show="!LowestNonStopFare || !LowestFare">
+                            <div class="margin-top-10">
+                                <h5 class="margin-0">
+                                    We didn't get flight price based on your current search.<br />
+                                    Please try searching with different parameters.
+                                </h5>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12" ng-show="isModified">
+                            <div ng-show="isModified" style="top:100px;">
+                                <search-box is-popup="isModified"></search-box>
                             </div>
                         </div>
                     </div>

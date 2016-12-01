@@ -230,11 +230,38 @@ i.fa.fa-caret-down {
     }
 
 .search_list {
-    display: inline-block;
+    display: block;
     max-width: 100%;
     margin-top: 10px;
     font-weight: normal;
     color: #333;
+}
+
+.serach-criteria {
+    float: left;
+    max-width: 65%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.MyDestination {
+    float: right;
+}
+
+.Modify {
+    float: left;
+    margin-left: 5px;
+}
+
+@media only screen and (max-width:767px) {
+    .serach-criteria {
+        max-width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .Modify {
+        margin-left: 0px;
+    }
 }
 
 #select-region option, #select-theme option {
@@ -347,11 +374,6 @@ section#Modification {
     width: 100%;
 }
 
-.Modify {
-    float: right;
-    margin-top: 5px;
-}
-
 .btn {
     transition: all .3s ease-in-out;
 }
@@ -418,7 +440,7 @@ section#Modification {
 
 .ico-map {
     position: absolute;
-    right: 1px;
+    right: 30px;
     bottom: 1px;
     cursor: pointer;
     width: 26px;
@@ -432,8 +454,8 @@ section#Modification {
 
 /*#region media queries*/
 @media only screen and (max-width:769px) {
-    .Modify {
+    /*.Modify {
         float: left;
-    }
+    }*/
 }
 /*#endregion media queries*/

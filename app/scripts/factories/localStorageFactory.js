@@ -34,6 +34,9 @@
                 obj = [obj];
                 localStorage.setItem(storageName, JSON.stringify(obj));
             }
+            else {
+                save(storageName, data);
+            }
         }
 
         function get(storageName, data) {
@@ -61,6 +64,7 @@
 
         function clear(storageName) {
             delete window.localStorage[storageName];
+            //localStorage.clear(storageName);
         }
     }
 })();

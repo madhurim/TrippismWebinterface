@@ -65,7 +65,7 @@
                     $timeout(function () {
                         var bounds = new google.maps.LatLngBounds();
                         $scope.destinationMarkers = [];
-                        
+
                         for (var x = 0; x < destinations.length; x++) {
                             var destination = destinations[x];
                             var latlng1 = new google.maps.LatLng(destination.lat, destination.lng);
@@ -158,7 +158,7 @@
 
                     // sort markers by rank or price
                     if (sortByPrice) {
-                        highRankedMarkers = sortByPrice == 'asc' ? _.sortBy(highRankedMarkers, function (i) { return i.markerInfo.LowRate }) : _.sortBy(highRankedMarkers, function (i) { return i.markerInfo.LowRate * -1; });
+                        highRankedMarkers = sortByPrice == 'asc' ? _.sortBy(highRankedMarkers, function (i) { return parseFloat(i.markerInfo.LowRate) }) : _.sortBy(highRankedMarkers, function (i) { return i.markerInfo.LowRate * -1; });
                     }
                     else {
                         highRankedMarkers = _.sortBy(highRankedMarkers, function (i) {
@@ -248,7 +248,7 @@
 
                 var maxZindex = google.maps.Marker.MAX_ZINDEX;
                 // used to highlight a perticular marker on the map
-                var selectedMarker;                
+                var selectedMarker;
                 $scope.$on('gotoMap', function (event, data) {
                     isStopRedrawMarkers = true;
                     // get distance by zoom level                          
@@ -382,7 +382,7 @@
                             });
                             airportLoc = new google.maps.LatLng(originairport.airport_Lat, originairport.airport_Lng); break;
                         }
-                    }                    
+                    }
 
                     $timeout(function () {
                         scope.destinationMap.setZoom(3);

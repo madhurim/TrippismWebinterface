@@ -1,12 +1,15 @@
 ﻿(function () {
-    'use strict';
-    //var hostName = "http://api.trippism.com";
-    //var hostName = "http://www.trippism.com";
-    //var hostName = 'http://dev.trippism.com';
+    'use strict';   
 
-    var hostName = 'http://' + window.location.host;
+    //var hostName = 'http://' + window.location.host;
+    //var profileHostname = 'http://profiles.trippism.com';
+
+    var hostName = 'http://api.trippism.com';    
+    var profileHostname = 'http://visitors.trippism.com';    
+
     if (angular.lowercase(window.location.host) == "localhost:9000") {
-        hostName = 'http://localhost:14606';
+        //hostName = 'http://localhost:14606';
+        //profileHostname = 'http://localhost:1161';
     }
 
     var constants = {
@@ -29,8 +32,13 @@
         apiURLForInstaFlightSearch: hostName + '/api/instaflight',
         apiURLForConstant: hostName + '/api/Constants/',
         apiURLForHotelRange: hostName + '/api/sabre/hotels',
+        apiURLforProfileAnonymous: profileHostname + '/api/profiles/anonymous',
+        apiURLforProfileActivity: profileHostname + '/api/profile/activity',
+        apiURLforProfileAuthentication: profileHostname + '/api/profiles/authentication',
+        apiURLforProfileAccount: profileHostname + '/api/profiles/account',
         apiURLForCurrencyConversion: hostName + '/api/CurrencyConversion/Convert',
-	apiURLForTripAdvisor: hostName + '/api/tripadvisor/'
+	    apiURLForTripAdvisor: hostName + '/api/tripadvisor/'
+       
     };
     angular.module('TrippismUIApp').constant('urlConstant', constants);
 })();

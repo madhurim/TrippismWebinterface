@@ -40,7 +40,7 @@
 
                 function activate() {
                     var param = $scope.fareParams.Fareforecastdata;
-
+                    $scope.fareInfoPromise = false;
                     $scope.Origin = $scope.fareParams.SearchCriteria.Origin;
                     $scope.DestinationLocation = $scope.fareParams.SearchCriteria.DestinationLocation;
                     $scope.FromDate = $scope.fareParams.SearchCriteria.FromDate;
@@ -56,7 +56,6 @@
                         airportDetail: $scope.airportDetail,
                         search: $scope.search
                     }
-
                     // Check on currecnyCode selection change
                     if (!$scope.FareInfo) {
                         $scope.FareInfo = DestinationFactory.GetDestinationFareInfo(param); // store From destinations Page
@@ -78,6 +77,7 @@
                         }
                         var destinationData = DestinationFactory.DestinationDataStorage.fare.get(param);
                         if (destinationData) {
+                            $scope.fareInfoPromise = true;
                             var FareInfo =
                               {
                                   OriginLocation: destinationData.data.OriginLocation,
@@ -124,6 +124,7 @@
                         }
                         else {
                             DestinationFactory.findInstFlightDestination(apiparam).then(function (response) {
+                                $scope.fareInfoPromise = true;
                                 if (response.FareInfo != null) {
                                     $scope.destinationlist = FilterDestinations(response.FareInfo);
                                     var DestinationairportName = _.find($scope.AvailableAirports, function (airport) { return airport.airport_Code == $scope.DestinationLocation.toUpperCase() });
@@ -136,7 +137,7 @@
                                             $scope.FareInfo = response.FareInfo[0];
                                             $scope.airlineJsonData = [];
                                             $scope.fareParams.FareInfo = $scope.FareInfo;
-                                            initFares($scope.FareInfo,false);
+                                            initFares($scope.FareInfo, false);
                                             UtilFactory.MapscrollTo('wrapper');
                                             $scope.$emit('destinationFare', $scope.FareInfo);
                                         });
@@ -146,6 +147,7 @@
                                     }
                                 }
                                 else if (typeof response == 'string') {
+                                    $scope.fareInfoPromise = true;
                                     var POSCountriesList = [];
                                     var CList = "Selected origin country is not among the countries we support. We currently support the below countries. We will continue to add support for more countries. <br/><br/><div class='pos_List'>";
                                     var POSList = JSON.parse(response);
@@ -174,33 +176,34 @@
                     else {
                         $scope.airlineJsonData = [];
                         $scope.fareParams.FareInfo = $scope.FareInfo;
-                        initFares($scope.FareInfo,true);
+                        $scope.fareInfoPromise = true;
+                        initFares($scope.FareInfo, true);
                         $timeout(function () { $scope.$emit('destinationFare', $scope.FareInfo) }, 0, false);
                     }
                 };
 
-                function initFares(FareInfo,IsMultiply) {
+                function initFares(FareInfo, IsMultiply) {
                     if (FareInfo.LowestNonStopFare && FareInfo.LowestNonStopFare.Fare != 'N/A' && FareInfo.LowestNonStopFare.Fare != 0) {
                         $scope.LowestNonStopFare = FareInfo.LowestNonStopFare;
-                        if (!IsMultiply) 
-                            $scope.LowestNonStopFare.amountBifurcation = $scope.amountBifurcation((FareInfo.LowestNonStopFare.Fare * $rootScope.currencyInfo.rate).toFixed(2));                        
-                        else 
+                        if (!IsMultiply)
+                            $scope.LowestNonStopFare.amountBifurcation = $scope.amountBifurcation((FareInfo.LowestNonStopFare.Fare * $rootScope.currencyInfo.rate).toFixed(2));
+                        else
                             $scope.LowestNonStopFare.amountBifurcation = $scope.amountBifurcation(($scope.LowestNonStopFare.Fare * $rootScope.currencyInfo.rate).toFixed(2));
-                        
+
 
                         $scope.LowestNonStopFare.outboundflightstops = 0;
                         $scope.LowestNonStopFare.inboundflightstops = 0;
                     }
                     else if (FareInfo.LowestFare && FareInfo.LowestFare.Fare != 'N/A' && FareInfo.LowestFare.Fare != 0) {
                         $scope.LowestNonStopFare = FareInfo.LowestFare;
-                        if (!IsMultiply)                         
+                        if (!IsMultiply)
                             $scope.LowestNonStopFare.amountBifurcation = $scope.amountBifurcation((FareInfo.LowestFare.Fare * $rootScope.currencyInfo.rate).toFixed(2));
-                        else 
+                        else
                             $scope.LowestNonStopFare.amountBifurcation = $scope.amountBifurcation(($scope.LowestNonStopFare.Fare * $rootScope.currencyInfo.rate).toFixed(2));
                     }
                     if (FareInfo.LowestFare && FareInfo.LowestFare.Fare != 'N/A' && FareInfo.LowestFare.Fare != 0) {
                         $scope.LowestFare = FareInfo.LowestFare;
-                        if (!IsMultiply)                            
+                        if (!IsMultiply)
                             $scope.LowestFare.amountBifurcation = $scope.amountBifurcation((FareInfo.LowestFare.Fare * $rootScope.currencyInfo.rate).toFixed(2));
                         else
                             $scope.LowestFare.amountBifurcation = $scope.amountBifurcation((FareInfo.LowestFare.Fare * $rootScope.currencyInfo.rate).toFixed(2));

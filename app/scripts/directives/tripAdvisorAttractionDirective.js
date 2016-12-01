@@ -110,9 +110,9 @@
                                 // set airport marker only first time.
                                 if (isSetCenter)
                                     setAirportMarkerOnMap();
-
+                                var attraction;
                                 if (data && data.Attractions && data.Attractions.length > 0) {
-                                    data.Attractions = _.chain(data.Attractions).map(function (i) {
+                                    attraction = _.chain(data.Attractions).map(function (i) {
                                         return {
                                             geometry: { location: { lat: i.Latitude, lng: i.Longitude } },
                                             id: i.Ranking ? i.Ranking.GeoLocationId : null,
@@ -128,11 +128,11 @@
                                         };
                                     }).sortBy(function (i) { return parseFloat(i.rating) * -1; }).value();
 
-                                    markerList.push({ results: data.Attractions, type: type });
+                                    markerList.push({ results: attraction, type: type });
                                 }
-                                renderMap(data.Attractions, type);
+                                renderMap(attraction, type);
                                 $scope.mapLoaded = true;
-                                $scope.attractionsplaces = { type: type, results: data.Attractions };
+                                $scope.attractionsplaces = { type: type, results: attraction };
                             });
                         }
                     }

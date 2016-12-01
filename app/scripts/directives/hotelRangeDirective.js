@@ -7,13 +7,16 @@
                 origin: '=',
                 destination: '=',
                 departureDate: '=',
-                returnDate: '=',
-                templateUrl: '@?'
+                returnDate: '='
+                //templateUrl: '@?'
             },
             template: '<ng-include src="getsrc();" />',
+            //template: '<ng-include src="views/partials/hotelRangePartial.html" />',
             controller: ['$scope', function ($scope) {
+                
                 $scope.getsrc = function () {
-                    return $scope.templateUrl || 'views/partials/hotelRangePartial.html';
+                    //return $scope.templateUrl || 'views/partials/hotelRangePartial.html';
+                    return 'views/partials/hotelRangePartial.html';
                 }
                 $scope.hotelRequestComplete = false;
                 $scope.activate = function () {

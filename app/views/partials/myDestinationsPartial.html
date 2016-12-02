@@ -17,8 +17,14 @@
                                 <span>Getting your destinations...</span>
                             </div>
                             <div class="divloader" ng-show="!error && likeDestinationsToDisp.length == 0">
-                                <div>
-                                    You haven't like any Destination..<br />
+                                <div style="text-align:center;">
+                                    <h4>
+                                        You do not have favorite destinations.
+                                    </h4>
+                                    <h4 style="padding-top:10x;">
+                                        Create favorite destinations by clicking
+                                        <img ng-src="../../images/unlike.png" width="26" height="26" /> button from destinations.
+                                    </h4>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6 animate-card" ng-repeat="item in likeDestinationsToDisp">

@@ -27,8 +27,8 @@
                 else if (data.status == 403) {
                     $scope.emailid = null;
                     $scope.password = null;
-                    alertify.alert("Alert", "");
-                    alertify.alert('Incorrect UserName or Password').set('onok', function (closeEvent) { });
+                    alertify.alert("Incorrect Credentials", "");
+                    alertify.alert("Incorrect UserName or Password. You can use forgot password feature if you don't remember").set('onok', function (closeEvent) { });
                 }
                 else {
                     alertify.alert("Error", "");
@@ -67,8 +67,8 @@
                     alertify.alert('A verification email has been sent to you. Please get the password from the email.').set('onok', function (closeEvent) { });
                 }
                 else if (data.status == 302) {
-                    alertify.alert("User Exist", "");
-                    alertify.alert('Customer already exist on this email address. Try another.').set('onok', function (closeEvent) { });
+                    alertify.alert("User Already Exists", "");
+                    alertify.alert("We already have a user by this email address. Try Signing in.<br />You can use forgot password feature if you don't remember.").set('onok', function (closeEvent) { });                    
                 }
                 else {
                     alertify.alert("Error", "");

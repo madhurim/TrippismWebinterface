@@ -42,7 +42,7 @@
                 if (data.status == 200) {
                     $scope.dismiss();
                     alertify.alert("Change Password", "");
-                    alertify.alert('Password change successfully!').set('onok', function (closeEvent) { });
+                    alertify.alert('Your password has been changed successfully!').set('onok', function (closeEvent) { });
                 }
                 else {
                     alertify.alert("Alert", "");
@@ -96,7 +96,7 @@
                     $scope.updatePassword = AccountFactory.ResetPassword(details).then(function (data) {
                         if (data.status == 200) {
                             alertify.alert("Forgot Password", "");
-                            alertify.alert('Password change successfully!').set('onok', function () { });
+                            alertify.alert('Your password has been changed successfully!').set('onok', function () { });
                             $location.path('/home');
                         }
                         else {

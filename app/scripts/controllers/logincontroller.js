@@ -25,10 +25,9 @@
                     $modalInstance.close(userInfo);
                 }
                 else if (data.status == 403) {
-                    $scope.emailid = null;
                     $scope.password = null;
                     alertify.alert("Incorrect Credentials", "");
-                    alertify.alert("Incorrect UserName or Password. You can use forgot password feature if you don't remember").set('onok', function (closeEvent) { });
+                    alertify.alert("Incorrect UserName or Password. You can use forgot password feature if you don't remember.").set('onok', function (closeEvent) { });
                 }
                 else {
                     alertify.alert("Error", "");

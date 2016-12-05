@@ -5,11 +5,11 @@
     //var profileHostname = 'http://profiles.trippism.com';
 
     var hostName = 'http://api.trippism.com';    
-    var profileHostname = 'http://visitors.trippism.com';    
+    var profileHostname = 'https://visitors.trippism.com';
 
     if (angular.lowercase(window.location.host) == "localhost:9000") {
-        //hostName = 'http://localhost:14606';
-        //profileHostname = 'http://localhost:1161';
+        hostName = 'http://localhost:14606';
+        profileHostname = 'http://localhost:1161';
     }
 
     var constants = {

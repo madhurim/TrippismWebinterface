@@ -318,7 +318,9 @@ a {
 .margin-top-10 {
     margin-top: 10px !important;
 }
-
+.padding-top-13{
+    padding-top:13px !important;
+}
 .acc-heading {
     padding: 0;
 }

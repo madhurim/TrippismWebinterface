@@ -63,8 +63,8 @@
                 return defer.promise;
             }
             else {
-                return getLocale.then(function (data) {
-                    return objguid = data.Guid;
+                return getLocale().then(function (data) {
+                    return objguid = data;
                 });
             }
         }

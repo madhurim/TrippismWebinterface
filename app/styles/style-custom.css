@@ -31,12 +31,12 @@ img {
     padding-right: 0px !important;
 }
 
-.padding-top-5{
-    padding-top:5px;
+.padding-top-5 {
+    padding-top: 5px;
 }
 
-.margin-left-15{
-    margin-left:15px;
+.margin-left-15 {
+    margin-left: 15px;
 }
 
 #elevator_item {
@@ -316,9 +316,11 @@ a {
 }
 
 .margin-top-10 {
-    margin-top: 10px;
+    margin-top: 10px !important;
 }
-
+.padding-top-13{
+    padding-top:13px !important;
+}
 .acc-heading {
     padding: 0;
 }
@@ -391,6 +393,10 @@ a {
 
 .position-abs {
     position: absolute;
+}
+
+.position-rel {
+    position: relative;
 }
 
 .top-0 {
@@ -468,11 +474,7 @@ ul .stop-line {
     color: #80828b;
 }
 
-.insta-arrow {
-    text-align: center;
-    margin: 0 auto;
-    margin-left: 16%;
-}
+
 
 .leg-stops-1 {
     padding-left: 17px;
@@ -1081,52 +1083,55 @@ ul .stop-line {
 }
 
 .destination-image-1 {
-    background-image: url("../images/home-images/Mainpagebg1.jpg");
+    background-image: url("http://content.trippism.com/images/home-images/Mainpagebg1.jpg");
     background-position: 60% top;
     background-size: cover;
 }
 
 .destination-image-2 {
-    background-image: url("../images/home-images/Mainpagebg2.jpg");
+    background-image: url("http://content.trippism.com/images/home-images/Mainpagebg2.jpg");
     background-position: 60% top;
     background-size: cover;
 }
 
 .destination-image-3 {
-    background-image: url("../images/home-images/Mainpagebg3.jpg");
+    background-image: url("http://content.trippism.com/images/home-images/Mainpagebg3.jpg");
     background-position: 60% top;
     background-size: cover;
 }
 
 .destination-image-4 {
-    background-image: url("../images/home-images/Mainpagebg4.jpg");
+    background-image: url("http://content.trippism.com/images/home-images/Mainpagebg4.jpg");
     background-position: 60% top;
     background-size: cover;
 }
 
 .destination-image-5 {
-    background-image: url("../images/home-images/Mainpagebg5.jpg");
+    background-image: url("http://content.trippism.com/images/home-images/Mainpagebg5.jpg");
     background-position: 60% top;
     background-size: cover;
 }
 
 .destination-image-6 {
-    background-image: url("../images/home-images/Mainpagebg6.jpg");
+    background-image: url("http://content.trippism.com/images/home-images/Mainpagebg6.jpg");
     background-position: 60% top;
     background-size: cover;
 }
+
 .destination-image-7 {
-    background-image: url("../images/home-images/Mainpagebg7.jpg");
+    background-image: url("http://content.trippism.com/images/home-images/Mainpagebg7.jpg");
     background-position: 60% top;
     background-size: cover;
 }
+
 .destination-image-8 {
-    background-image: url("../images/home-images/Mainpagebg8.jpg");
+    background-image: url("http://content.trippism.com/images/home-images/Mainpagebg8.jpg");
     background-position: 60% top;
     background-size: cover;
 }
+
 .destination-image-9 {
-    background-image: url("../images/home-images/Mainpagebg9.jpg");
+    background-image: url("http://content.trippism.com/images/home-images/Mainpagebg9.jpg");
     background-position: 60% top;
     background-size: cover;
 }
@@ -1381,10 +1386,10 @@ ul .stop-line {
     opacity: 0.8;
 }*/
 
-    .ico-youtube:hover {
-        background-position: 0px -58px;
-        opacity: 1;
-    }
+.ico-youtube:hover {
+    background-position: 0px -58px;
+    opacity: 1;
+}
 
 /*#region Hotels*/
 .col-hotel .popup-content {
@@ -1545,6 +1550,10 @@ ul .stop-line {
     margin-right: 3px;
 }
 
+.margin-right-10 {
+    margin-right: 10px;
+}
+
 .font-700 {
     font-weight: 700;
 }
@@ -1665,28 +1674,36 @@ ul .stop-line {
     background: none !important;
     border: none !important;
 }
+
 .homepage #currencyCode {
-    visibility:hidden;
+    visibility: hidden;
+    width: 0px;
 }
+
 #select-i18n .dd-options {
     box-shadow: none;
 }
-.currencyCode .btn .caret{
-    margin-left:10px;
+
+.currencyCode .btn .caret {
+    margin-left: 10px;
 }
-.currencyCode .btn{
-    background:whitesmoke;
+
+.currencyCode .btn {
+    background: whitesmoke;
 }
-.currencyCode .dropdown-menu{
-    min-width:60px;
-    margin:1px;
+
+.currencyCode .dropdown-menu {
+    min-width: 60px;
+    margin: 1px;
 }
-.currencyCode .dropdown-menu li a{
-    padding:5px 10px;
-}
-.currencyCode .dropdown-menu:before{
-    display:none;
-}	
+
+    .currencyCode .dropdown-menu li a {
+        padding: 5px 10px;
+    }
+
+    .currencyCode .dropdown-menu:before {
+        display: none;
+    }
 
 /*#region attraction tabs*/
 .attr-container {
@@ -1954,6 +1971,19 @@ ul .stop-line {
     }
 }
 
+@media only screen and (max-width:400px) {
+    .insta-arrow {
+        text-align: center;
+        margin: 0 auto;
+        margin-left: 22% !important;
+    }
+}
+.insta-arrow {
+        text-align: center;
+        margin: 0 auto;
+        margin-left: 16%;
+    }
+
 @media only screen and (min-width:481px) and (max-width:736px) {
     .destination-form .col-xs-6, .destination-form .col-xs-6 .input-group, .destination-popup .destination-form .input-group {
         position: static;
@@ -2048,7 +2078,8 @@ ul .stop-line {
         font-size: 12px;
     }
 }
-.Beta-Tripadvisor-logo{
+
+.Beta-Tripadvisor-logo {
     -ms-transform: rotate(7deg);
     font-size: 8px;
     display: inline-block;
@@ -2058,3 +2089,128 @@ ul .stop-line {
     top: 5px;
 }
 /*#endregion Media queries */
+
+/*Popup model*/
+
+.width-modal:before {
+    content: '';
+    display: inline-block;
+    height: 15%;
+    vertical-align: middle;
+}
+
+.width-modal .modal-dialog {
+    max-width: 400px;
+}
+
+
+.btn-group.open .dropdown-toggle {
+    box-shadow: 1px 1px 7px -1px rgba(0, 0, 0, .125);
+}
+
+.modal-content {
+    box-shadow: none;
+}
+
+.close-panel-button:after {
+    border-left: 2px solid #333;
+    content: "";
+    height: 14px;
+    left: 8px;
+    position: absolute;
+    top: 2px;
+    transform: rotate(45deg);
+    transition: 0.3s;
+}
+
+.close-panel-button:hover, .close-panel-button:hover:after, .close-panel-button:hover:before {
+    border-color: #c9302c;
+}
+
+.close-panel-button:before {
+    border-left: 2px solid #333;
+    content: "";
+    height: 14px;
+    left: 8px;
+    position: absolute;
+    top: 2px;
+    transform: rotate(-45deg);
+    transition: 0.3s;
+}
+
+.close-panel-button {
+    border: 1px solid #333;
+    border-radius: 50%;
+    font-size: 0;
+    height: 20px;
+    position: relative;
+    width: 20px;
+    transition: 0.3s;
+}
+
+.sharenow-form .form-control {
+    background-image: none;
+}
+
+.form-changepwd .form-control {
+    background-color: white;
+    border: 1px solid darkgrey;
+}
+
+.form-group label {
+    color: #464a5b;
+    display: inline-block;
+    font-weight: 500;
+    margin-bottom: 5px;
+    max-width: 100%;
+}
+
+.panel-heading strong {
+    color: #464a5b;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.btn-danger:hover {
+    background-color: #6e717e !important;
+    border-color: #6e717e !important;
+}
+
+.changepwd-title {
+    color: brown;
+    border-bottom-style: ridge;
+    border-width: .5px;
+    border-color: brown;
+    padding-bottom: 20px;
+}
+
+.changepwd-title-bottom-img {
+    margin-top: -40px;
+    padding: 0 10px;
+    background-color: #fff;
+}
+
+.destinationsCard-hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 2px solid cornflowerblue;
+}
+
+#myDestination {
+    overflow: auto;
+    height: 80vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.search-destination-info {
+    float: left;
+    padding-left: 15px;
+}
+
+.modify-serach {
+    float: left;
+    margin-top: 15px;
+    padding-left: 15px;
+}

@@ -10,7 +10,7 @@
             <div class="ibox-box fare-box">
                 <div class="fare-box-inner text-right">
                     <div class="pull-left">
-                        <h4 class="fare-font"> 
+                        <h4 class="fare-font">
                             <span class="cursor-help" data-toggle="tooltip" popover="{{$root.currencyInfo.currencyCode}}" popover-trigger="mouseenter" popover-placement="top">{{HotelRangeData.CurrencySymbol}}</span>
                             {{HotelRangeData.Fare.BeforeDecimal | number : 0}}<span class="text-super vertical-top">{{HotelRangeData.Fare.AfterDecimal}}</span>
                         </h4>
@@ -19,6 +19,11 @@
                         <h4 title="4 star hotels" ng-if="HotelRangeData.Star == '4'"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></h4>
                         <h4 title="5 star hotels" ng-if="HotelRangeData.Star == '5'"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></h4>-->
                         <a href="javascript:void(0)" class="hidden-xs" ng-click="showHotelDetails();"><h5 class="margin-0 font-15">Show more!</h5></a>
+                        <div class="ibox-box searched margin-top-10">
+                            <h6 class="margin-0 font-normal font-light">
+                                Price is 2 persons / night
+                            </h6>
+                        </div>
                     </div>
                 </div>
                 <div class="fare-box-inner invisible">

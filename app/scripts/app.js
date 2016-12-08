@@ -27,8 +27,11 @@ TrippismUIApp.config(['$stateProvider', '$urlRouterProvider', 'tmhDynamicLocaleP
         .state('FAQs', {
             url: '/FAQs',
             templateUrl: 'views/faqs.html'
+        })
+        .state('changepassword', {
+            url: '/changepassword/*path',
+            templateUrl: 'views/changePassword.html'
         });
-
     tmhDynamicLocaleProvider.localeLocationPattern('/bower_components/angular-i18n/angular-locale_{{locale}}.js');
 }]);
 

@@ -8,7 +8,9 @@
             'dataConstant',
             'urlConstant',
             'LocalStorageFactory',
-function ($location, $timeout, $filter, $locale, $stateParams, UtilFactory, dataConstant, urlConstant, LocalStorageFactory) {
+            'BaseFactory',
+            '$rootScope',
+function ($location, $timeout, $filter, $locale, $stateParams, UtilFactory, dataConstant, urlConstant, LocalStorageFactory, BaseFactory, $rootScope) {
     return {
         restrict: 'E',
         scope: {
@@ -43,7 +45,6 @@ function ($location, $timeout, $filter, $locale, $stateParams, UtilFactory, data
                     $scope.AvailableAirports = data;
                     setDefaultAirport(data);
                 });
-
                 if ($stateParams.path != undefined) {
                     var params = $stateParams.path.split(";");
                     angular.forEach(params, function (item) {
@@ -54,6 +55,7 @@ function ($location, $timeout, $filter, $locale, $stateParams, UtilFactory, data
                         }
                         if (para[0].trim() === "t") {
                             $scope.KnownDestinationAirport = para[1].trim().toUpperCase();
+                            $scope.selectedform = "KnowMyDestination";
                             $scope.urlParam.KnownDestinationAirport = $scope.KnownDestinationAirport;
                         }
                         if (para[0].trim() === "d") {
@@ -566,6 +568,7 @@ function ($location, $timeout, $filter, $locale, $stateParams, UtilFactory, data
             $scope.CallDestiantionsview = function (path, origin, fromDate, toDate, destination) {
 
                 if ($scope.selectedform == "SuggestDestination") {
+                    SaveSearchCriteria(path, origin, fromDate, toDate, destination);
                     if (!$scope.isPopup) {
                         LocalStorageFactory.clear(dataConstant.refineSearchLocalStorage);
                     }
@@ -573,6 +576,7 @@ function ($location, $timeout, $filter, $locale, $stateParams, UtilFactory, data
                     destination = null;
                 }
                 else {
+                    SaveSearchCriteria(path, origin, fromDate, toDate, destination);
                     if (!$scope.isPopup) {
                         LocalStorageFactory.clear(dataConstant.refineSearchLocalStorage);
                     }
@@ -580,6 +584,21 @@ function ($location, $timeout, $filter, $locale, $stateParams, UtilFactory, data
                 }
                 UtilFactory.LastSearch = { origin: origin, fromDate: fromDate, toDate: toDate, destination: destination };
                 $scope.isPopup = false;
+            }
+
+            function SaveSearchCriteria(path, origin, fromDate, toDate, destination) {
+                var guid = $rootScope.getGuid().then(function (data) {
+                    if (data) {
+                        var serachData = {
+                            RefGuid: data.Guid,
+                            Origin: origin,
+                            Destination: destination,
+                            FromDate: ConvertToRequiredDate(fromDate, 'API'),
+                            ToDate: ConvertToRequiredDate(toDate, 'API')
+                        }
+                        BaseFactory.storeSerachCriteria(serachData);
+                    }
+                });
             }
         }
     }

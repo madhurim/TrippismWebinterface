@@ -1,25 +1,25 @@
-﻿<div id="content-wrapper" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 destinations-wrapper" ng-controller="DestinationsController"  cg-busy="{promise: $root.currencypromise,message:'Please wait...'}">
+﻿<div id="content-wrapper" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 destinations-wrapper" ng-controller="DestinationsController" cg-busy="{promise: $root.currencypromise,message:'Please wait...'}">
     <section id="container_1" class="col-lg-7 col-md-7 col-sm-12 col-xs-12" scroll scroll-callback="loadMoreDestinations();">
         <div class="container-fluid padding-0">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="row1 margin-top-5">
-                    <div class="col-lg-9 col-md-9 col-sm-7 col-xs-12">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                         <div class="form" style="">
                             <label class="search_list">
-                                <span ng-show="refineSearchValues && refineSearchValues.OrigintoDisp">{{refineSearchValues.OrigintoDisp}} </span>
-                                <span ng-show="refineSearchValues && refineSearchValues.FromDate">{{refineSearchValues.FromDate | date : $root.format}} </span>
-                                <span ng-show="refineSearchValues && refineSearchValues.ToDate">To {{refineSearchValues.ToDate | date : $root.format}}</span>
-                                <span ng-show="refineSearchValues && refineSearchValues.Minfare > 0">{{fareCurrencySymbol}} {{refineSearchValues.Minfare}}</span>
-                                <span ng-show="refineSearchValues && refineSearchValues.Maxfare > 0"> To {{fareCurrencySymbol}} {{refineSearchValues.Maxfare}}</span>
-                                <span ng-show="refineSearchValues && refineSearchValues.Theme"> {{refineSearchValues.Theme}}</span>
-                                <span ng-show="refineSearchValues && refineSearchValues.Region"> {{refineSearchValues.Region}} </span>
+                                <div class="serach-criteria">
+                                    <span ng-show="refineSearchValues && refineSearchValues.OrigintoDisp">{{refineSearchValues.OrigintoDisp}} </span>
+                                    <span ng-show="refineSearchValues && refineSearchValues.FromDate">{{refineSearchValues.FromDate | date : $root.format}} </span>
+                                    <span ng-show="refineSearchValues && refineSearchValues.ToDate">To {{refineSearchValues.ToDate | date : $root.format}}</span>
+                                    <span ng-show="refineSearchValues && refineSearchValues.Minfare > 0">{{fareCurrencySymbol}} {{refineSearchValues.Minfare}}</span>
+                                    <span ng-show="refineSearchValues && refineSearchValues.Maxfare > 0"> To {{fareCurrencySymbol}} {{refineSearchValues.Maxfare}}</span>
+                                    <span ng-show="refineSearchValues && refineSearchValues.Theme"> {{refineSearchValues.Theme}}</span>
+                                    <span ng-show="refineSearchValues && refineSearchValues.Region"> {{refineSearchValues.Region}}</span>
+                                    <span class="margin-left-5 margin-right-5" ng-show="$root.currencyInfo.currencyCode"> {{$root.currencyInfo.currencyCode}}</span>
+                                </div>
+                                <span class="btn btn-danger Modify" style="" ng-click="isModified=!isModified;isRefineSeachCollapsed=false;">Modify</span>
+                                <span class="MyDestination btn btn-danger margin-left-5" ng-show="IsUserLogin" ng-click="myDestination();">My Destinations</span>
+                                <div class="clearfix"></div>
                             </label>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-3 col-sm-5 col-xs-12">
-                        <div class="Modify">
-                            <div class="btn btn-danger" ng-click="isModified=!isModified;isRefineSeachCollapsed=false;">Modify</div>
-                            <!--<div class="btn btn-danger" video-popup-directive>Help</div>-->
                         </div>
                     </div>
                     <div class="clear"></div>
@@ -94,7 +94,7 @@
                             <span class="glyphicon glyphicon-refresh glyphicon-spin margin-lr-3"></span>
                             <span>Getting destinations...</span>
                         </div>
-                        <div class="divloader" ng-show="destinationCardListDisp.length == 0">
+                        <div class="divloader" ng-show="destinationCardListDisp.length == 0 && likedestinationstodisp.length == 0">
                             <div ng-show="!isDestinations">
                                 We didn't find any destinations based on your current search.<br />
                                 Please try searching with different parameters.
@@ -107,6 +107,13 @@
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 animate-card" ng-repeat="item in destinationCardListDisp">
                             <destinations:card destination="::item" origin="::Origin"></destinations:card>
+                        </div>
+                        <div class="clear"></div>
+                        <div ng-show="viewMyDestination && likeDestinationsToDisp.length > 0">
+                            <hr class="destinationsCard-hr" ng-show="destinationCardListDisp.length > 0">
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6 animate-card" ng-repeat="item in likeDestinationsToDisp">
+                                <destinations:card destination="::item" origin="::Origin"></destinations:card>
+                            </div>
                         </div>
                     </div>
                 </div>

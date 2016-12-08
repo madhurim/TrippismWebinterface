@@ -357,7 +357,8 @@
                         target: currencyConversionDetail.base,
                         rate: 1
                     };
-                }                
+                }
+                
                 return currencyConversionDetail;
             });
         }

@@ -489,17 +489,32 @@
         $scope.myDestination = function () {
             var userDetail = getUserDetail();
             if (userDetail) {
-                var d = $q.defer();
-                return $modal.open({
-                    templateUrl: urlConstant.partialViewsPath + 'myDestinationsPartial.html',
-                    controller: 'MyDestinationController',
-                    scope: $scope,
-                    size: "lg",
-                    backdrop: 'static'
-                }).result.then(function (data) {
-                    updateCardWithLike(destinationlistOriginal, data);
-                }, function () { });
+                openDestinationPopUp();
             }
+            else {
+                $rootScope.loginPoupup().then(function (data) {
+                    if (data) {
+                        var userInfo = LocalStorageFactory.get(dataConstant.GuidLocalstorage);
+                        var userDetail = getUserDetail();
+                        if (userDetail)
+                            openDestinationPopUp();
+                    }
+                    else
+                        updateCardWithLike(destinationlistOriginal, null);
+                });
+            }
+        }
+
+        function openDestinationPopUp() {
+            return $modal.open({
+                templateUrl: urlConstant.partialViewsPath + 'myDestinationsPartial.html',
+                controller: 'MyDestinationController',
+                scope: $scope,
+                size: "lg",
+                backdrop: 'static'
+            }).result.then(function (data) {
+                updateCardWithLike(destinationlistOriginal, data);
+            }, function () { });
         }
 
         // used for max/min refine search slider
